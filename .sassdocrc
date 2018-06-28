@@ -1,0 +1,20 @@
+theme: 'herman'
+dest: docs/
+src: sass/
+
+herman:
+  sass:
+    includepaths: ['sass']
+    includes: ['tools']
+  extraDocs:
+    - name: 'Changelog'
+      path: CHANGELOG.md
+    - name: 'Contributing'
+      path: CONTRIBUTING.md
+    - name: 'MIT License'
+      path: LICENSE
+  extraLinks:
+    - name: 'Accoutrement Site'
+      url: 'http://oddbird.net/accoutrement/'
+    - name: 'OddBird'
+      url: 'http://oddbird.net/'

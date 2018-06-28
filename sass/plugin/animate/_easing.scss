@@ -1,0 +1,175 @@
+/// # Easing & Steps
+/// Whether you are using CSS-named easing,
+/// like `ease-in-out` and `linear`,
+/// or defining your own easing
+/// with `cubic-bezier()` and `steps()`/`frames()` --
+/// we'll help you organize and standardize your values
+/// in a single location.
+/// We also provide a classic set of built-in easing functions,
+/// which you can rename, access, or override as desired.
+/// @group ease
+
+
+// Deafalt Easings
+// ---------------
+/// A classic set of built-in easing functions,
+/// if you don't want to define your own.
+/// Don't edit this map directly,
+/// but feel free to reference these values
+/// from the user-defined `$easing` map.
+/// @group ease
+/// @access public
+$_a_EASING: ( // sass-lint:disable-line variable-name-format
+  'in': ease-in,
+  'out': ease-out,
+  'in-out': ease-in-out,
+  'in-quad': cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  'in-cubic': cubic-bezier(0.55, 0.055, 0.675, 0.19),
+  'in-quart': cubic-bezier(0.895, 0.03, 0.685, 0.22),
+  'in-quint': cubic-bezier(0.755, 0.05, 0.855, 0.06),
+  'in-sine': cubic-bezier(0.47, 0, 0.745, 0.715),
+  'in-expo': cubic-bezier(0.95, 0.05, 0.795, 0.035),
+  'in-circ': cubic-bezier(0.6, 0.04, 0.98, 0.335),
+  'in-back': cubic-bezier(0.6, -0.28, 0.735, 0.045),
+  'out-quad': cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  'out-cubic': cubic-bezier(0.215, 0.61, 0.355, 1),
+  'out-quart': cubic-bezier(0.165, 0.84, 0.44, 1),
+  'out-quint': cubic-bezier(0.23, 1, 0.32, 1),
+  'out-sine': cubic-bezier(0.39, 0.575, 0.565, 1),
+  'out-expo': cubic-bezier(0.19, 1, 0.22, 1),
+  'out-circ': cubic-bezier(0.075, 0.82, 0.165, 1),
+  'out-back': cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  'in-out-quad': cubic-bezier(0.455, 0.03, 0.515, 0.955),
+  'in-out-cubic': cubic-bezier(0.645, 0.045, 0.355, 1),
+  'in-out-quart': cubic-bezier(0.77, 0, 0.175, 1),
+  'in-out-quint': cubic-bezier(0.86, 0, 0.07, 1),
+  'in-out-sine': cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  'in-out-expo': cubic-bezier(1, 0, 0, 1),
+  'in-out-circ': cubic-bezier(0.785, 0.135, 0.15, 0.86),
+  'in-out-back': cubic-bezier(0.68, -0.55, 0.265, 1.55),
+);
+
+
+// Easing Map
+// ----------
+/// A variable storing the map of
+/// all easing globally-avialble on your project.
+/// Any easing added to the `$easing` map will be accesible
+/// to the `ease()` function by default.
+///
+/// Define each easing with a `name` and `value`…
+///
+/// ```
+/// $easing: (
+///   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///   'sidebar-in': ease-out,
+///   'sidebar-out': 'in-back',
+///   'modal-in': 'sidebar-in',
+/// );
+/// ```
+///
+/// - Name your easing anything –
+///   from abstractions like `elastic`,
+///   to concrete patterns like `sidebar-in`.
+/// - Values can be CSS-ready easing functions,
+///   or references other easings in the map.
+///
+/// @group ease
+/// @see {function} ease
+$easing: () !default;
+
+
+// Ease [function]
+// ---------------
+/// Access a named easing function in your `$easing` map.
+///
+/// @group ease
+///
+/// @param {string} $name [ease] -
+///   The name of an easing in your configuration (e.g. `elastic`).
+/// @return {length} -
+///   The pre-defined easing
+@function ease(
+  $name: ease
+) {
+  @return _a_animate-get-easing($name);
+}
+@include _a_register-function('ease');
+
+
+// Add Easing
+// ----------
+/// Merge individual time maps into the global `$easing` variable,
+/// in case you want to define functions in smaller groups
+/// such as `fade-easing`, `slide-easing`, etc
+/// before merging them into a single global easing-palette.
+///
+/// @group ease
+///
+/// @parameter {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$easing` variable,
+///   with new maps merged in.
+@mixin add-easing(
+  $maps...
+) {
+  $easing: merge-easing($easing, $maps...) !global;
+}
+
+
+// Merge Easing
+// ------------
+/// Merge multiple easing maps into a single map,
+/// in case you want to define easing in smaller groups –
+/// such as `fade-easing`, `slide-easing`, etc. –
+/// before merging them into a single map.
+///
+/// This is like `add-ease`,
+/// but returns the combined map
+/// without assigning it to the `$easing` variable.
+///
+/// @group ease
+///
+/// @parameter {maps...} $maps -
+///   Pass any number of maps to be merged.
+/// @return {map} -
+///   The merged map of easings.
+@function merge-easing(
+  $maps...
+) {
+  $return: ();
+
+  @each $map in $maps {
+    $return: map-merge($return, $map);
+  }
+
+  @return $return;
+}
+@include _a_register-function('merge-easing');
+
+
+// Get Easing
+// ----------
+/// Access a named easing in your `$easing` map.
+///
+/// @access private
+///
+/// @param {string | length | list} $name -
+///   The name of an easing in your configuration (e.g. `elastic`).
+/// @return {length} -
+///   The calculated easing
+@function _a_animate-get-easing(
+  $name
+) {
+  // Merge defaults
+  $all: map-merge($_a_EASING, $easing); // sass-lint:disable-line variable-name-format
+
+  // Recursive check
+  $name: map-get($all, $name) or $name;
+  $name: if(map-has-key($all, $name), _a_animate-get-easing($name), $name);
+
+  // Return
+  @return unquote($name);
+}
+@include _a_register-function('_a_animate-get-easing');

@@ -1,0 +1,122 @@
+// Ratios
+// ------
+
+
+// Default Aspect Ratios
+// ---------------------
+/// Some default named ratios you can use,
+/// but shouldn't edit.
+///
+/// @group fluid-ratios
+/// @access public
+$_a_ASPECT-RATIOS: (  // sass-lint:disable-line variable-name-format
+  'octave': 2,
+  'major-seventh': 15 / 8,
+  'minor-seventh': 16 / 9,
+  'major-sixth': 5 / 3,
+  'minor-sixth': 8 / 5,
+  'fifth': 3 / 2,
+  'augmented-fourth': 45 / 32,
+  'fourth': 4 / 3,
+  'major-third': 5 / 4,
+  'minor-third': 6 / 5,
+  'major-second': 9 / 8,
+  'minor-second': 16 / 15,
+
+  'photo': 'fifth',
+  'classic': 'fourth',
+  'widescreen': 'minor-seventh',
+  'cinima': 2.39,
+  'golden': 1.618,
+);
+
+
+// Aspect Ratios
+// -------------
+/// Name your own aspect ratios!
+///
+/// @group fluid-ratios
+$aspect-ratios: () !default;
+
+
+// Get Aspect Ratio
+// ----------------
+/// Retrieve an aspect ratio from the maps.
+///
+/// @access private
+///
+/// @param {string | float} $ratio -
+///   A ratio or ratio keyword to be resolved
+/// @return {float} -
+///   The ratio associated with a keyword, if available.
+@function _get-aspect-ratio(
+  $ratio
+) {
+  $options: map-merge($_a_ASPECT-RATIOS, $aspect-ratios);  // sass-lint:disable-line variable-name-format
+  $ratio: map-get($options, $ratio) or $ratio;
+
+  @if map-has-key($options, $ratio) {
+    $ratio: _get-aspect-ratio($ratio);
+  }
+
+  @return $ratio;
+}
+
+
+// Fluid Ratio [mixin]
+// -------------------
+/// Establsih a fluid-height container based on an aspect ratio.
+///
+/// @group fluid-ratios
+///
+/// @param {float | string} $ratio ['widescreen'] -
+///   The ratio of width over height, or a ratio keyword.
+/// @param {perentage} $width [100%] -
+///   The established fluid width of the element.
+/// @param {relative | absolute | fixed | null} $position [relative] -
+///   Establish a positioning context, so children can be stretched to fit.
+///
+/// @example scss
+///   .media {
+///     @include fluid-ratio('widescreen');
+///   }
+@mixin fluid-ratio(
+  $ratio: 'widescreen',
+  $width: 100%,
+  $position: relative
+) {
+  height: 0;
+  padding-top: fluid-ratio($ratio, $width);
+  position: $position;
+  width: $width;
+}
+
+
+
+// Fluid Ratio [function]
+// ----------------------
+/// Return a padding-height
+/// based on a given ratio and fluid width.
+///
+/// @group fluid-ratios
+///
+/// @param {float | string} $ratio ['widescreen'] -
+///   The ratio of width over height, or a ratio keyword.
+/// @param {perentage} $width [100%] -
+///   The established fluid width of the element.
+/// @return {percentage} -
+///   A fluid height, based on the width and ratio.
+///
+/// @example scss
+///   .media {
+///     width: 100%;
+///     padding-top: fluid-ratio('widescreen');
+///   }
+@function fluid-ratio(
+  $ratio: 'widescreen',
+  $width: 100%
+) {
+  $ratio: _get-aspect-ratio($ratio);
+
+  @return (1 / $ratio) * $width;
+}

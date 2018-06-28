@@ -1,0 +1,221 @@
+// Sass Utilities
+// ==============
+@include test-module('core/parser') {
+
+
+// Accoutrement Get
+// ----------------
+@include describe('Accoutrement Get [function]') {
+  $haystack: (
+    'slow': 3s,
+    'delay': 0.5s,
+    'key': 'value',
+    '*': 'times',
+    'two': 2,
+  );
+
+  @include it('Returns the value of a simple map key') {
+    @include assert-equal(
+      accoutrement-get('slow', $haystack),
+      3s
+    );
+  }
+
+  @include it('Replaces the value of any #alias tag') {
+    $needle: ('delay': 'is #delay', '#key': 3) '#key';
+    $expect: ('delay': 'is 0.5s', 'value': 3) 'value';
+    @include assert-equal(
+      accoutrement-get($needle, $haystack),
+      $expect
+    );
+  }
+
+  @include it('Handles todo-maps at the end of a list') {
+    @include assert-equal(
+      accoutrement-get('#slow' ('times': 2), $haystack),
+      6
+    );
+  }
+
+  @include it('Handles explicit todo-maps') {
+    $needle: (
+      'value': '#slow or #whatever',
+      'do': ('str-replace': 'or' 'with'),
+    );
+    @include assert-equal(
+      accoutrement-get($needle, $haystack),
+      '3s with #whatever'
+    );
+  }
+
+  @include it('Allows #alias tags in todo map') {
+    $needle: (
+      'value': '#slow',
+      'do': ('#*': '#two'),
+    );
+    @include assert-equal(
+      accoutrement-get($needle, $haystack),
+      6s
+    );
+  }
+
+  @include it('Handles common calc use-case') {
+    @include assert-equal(
+      accoutrement-get(calc(#slow + #delay), $haystack),
+      calc(3s + 0.5s)
+    );
+  }
+}
+
+
+// Replace Alias
+// -------------
+@include describe('Parse Alias [function]') {
+  $haystack: (
+    'one': 'original value',
+    'two': '#one',
+    'three': '#two',
+    'four': 'and a new value',
+  );
+
+  @include it('Replaces a hashtag key with the associated value') {
+    @include assert-equal(
+      _a_parse-alias('#one', $haystack),
+      'original value'
+    );
+  }
+
+  @include it('Handles basic hash recursion') {
+    @include assert-equal(
+      _a_parse-alias('#three', $haystack),
+      'original value'
+    );
+  }
+
+  @include it('Handles multiple values with basic recursion') {
+    @include assert-equal(
+      _a_parse-alias('#three #four', $haystack),
+      'original value and a new value'
+    );
+  }
+
+  @include it('Handles list values') {
+    @include assert-equal(
+      _a_parse-alias('#three' 7 '#four', $haystack),
+      ('original value' 7 'and a new value')
+    );
+  }
+
+  @include it('Handles calc use-case') {
+    @include assert-equal(
+      _a_parse-alias('#three' 7 '#four', $haystack),
+      ('original value' 7 'and a new value')
+    );
+  }
+
+  @include it('Maintains list style') {
+    $list: ['#three #four#three', 7, '#four'];
+    $expect: [
+      'original value and a new valueoriginal value',
+      7,
+      'and a new value'
+    ];
+    @include assert-equal(
+      _a_parse-alias($list, $haystack),
+      $expect
+    );
+  }
+
+  @include it('Handles map values') {
+    $map: (
+      '#one' '#two': '#two' 7 '#four',
+      'and': '#one#one',
+    );
+    $expect: (
+      'original value' 'original value': 'original value' 7 'and a new value',
+      'and': 'original valueoriginal value',
+    );
+    @include assert-equal(
+      _a_parse-alias($map, $haystack),
+      $expect
+    );
+  }
+}
+
+
+// Get Alias Name
+// --------------
+@include describe('Get Alias Names [function]') {
+  @include it('Returns a #name alias from a string (space-delimited)') {
+    @include assert-equal(
+      _a_get-alias-names('Returns a #name alias from a string'),
+      join((), 'name')
+    );
+  }
+
+  @include it('Ends alias names on "("') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this-name(some thing'),
+      join((), 'this-name')
+    );
+  }
+
+  @include it('Ends alias names on ")"') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this_name)some thing'),
+      join((), 'this_name')
+    );
+  }
+
+  @include it('Ends alias names on "["') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this-name[some thing'),
+      join((), 'this-name')
+    );
+  }
+
+  @include it('Ends alias names on "]"') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this_name]some thing'),
+      join((), 'this_name')
+    );
+  }
+
+  @include it('Ends alias names on "\\"') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this_name\\some thing'),
+      join((), 'this_name')
+    );
+  }
+
+  @include it('Ends alias names on "/"') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this_name/some thing'),
+      join((), 'this_name')
+    );
+  }
+
+  @include it('Ends alias, and returns multiple on "#"') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this_name#some thing'),
+      ('this_name' 'some')
+    );
+  }
+
+  @include it('Only returns each alias once') {
+    @include assert-equal(
+      _a_get-alias-names('what)#this_name#some #this_name/thing'),
+      ('this_name' 'some')
+    );
+  }
+
+  @include it('Handles a lonely hashtag') {
+    @include assert-equal(
+      _a_get-alias-names('#thing'),
+      join((), 'thing')
+    );
+  }
+}
+
+
+} // end module

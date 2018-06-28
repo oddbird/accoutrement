@@ -1,0 +1,1623 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <title>ease | OddBird&#39;s Sass Accoutrement Documentation</title>
+
+  <link href="assets/img/favicon.ico" rel="shortcut icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  
+
+  
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+  <symbol id="icon-logo" viewBox="0 0 16 16">
+    <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 28">
+    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
+  </symbol>
+</svg>
+
+  <div data-region="app">
+    <header data-region="banner">
+      
+  <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" type="button" data-toggle-synced="false">
+    
+  <svg data-icon="menu" data-icon-size="nav-icon" ><title>menu</title><use xlink:href="#icon-menu" />
+  </svg>
+
+  </button>
+
+
+      <div class="project-title">
+        <a href="index.html" rel="home" class="project-name">OddBird&#39;s Sass Accoutrement</a>
+        
+          <span class="project-version">0.1.0</span>
+        
+      </div>
+    </header>
+
+    <div data-region="container">
+      
+  <nav data-region="nav" data-toggle="target" id="nav" data-target-id="nav" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
+
+    <div class="nav-subsection">
+      <h3 class="nav-home">
+        
+        <a href="index.html" data-nav="is-not-active">OddBird&#39;s Sass<span class="widont">&nbsp;</span>Accoutrement</a>
+      </h3>
+
+      
+      
+        <ul>
+          
+            
+            <li class="nav-item">
+              <a href="CHANGELOG.html" data-nav="is-not-active">Changelog</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="CONTRIBUTING.html" data-nav="is-not-active">Contributing</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="LICENSE.html" data-nav="is-not-active">MIT License</a>
+            </li>
+          
+        </ul>
+      
+    </div>
+
+    
+    <div class="nav-subsection">
+      <ul>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">General</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="a-config.html" data-nav="is-not-active">a-config</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="a11y.html" data-nav="is-not-active">a11y</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="box-sizing.html" data-nav="is-not-active">box-sizing</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="change.html" data-nav="is-not-active">change</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="clearfix.html" data-nav="is-not-active">clearfix</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="colors.html" data-nav="is-not-active">colors</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="config.html" data-nav="is-not-active">config</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="contrast.html" data-nav="is-not-active">contrast</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-functions.html" data-nav="is-not-active">core-functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">core-lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-math.html" data-nav="is-not-active">core-math</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ease.html" data-nav="is-active">ease</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="fluid-ratios.html" data-nav="is-not-active">fluid-ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="font-helpers.html" data-nav="is-not-active">font-helpers</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="fonts.html" data-nav="is-not-active">fonts</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="forms.html" data-nav="is-not-active">forms</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="functions.html" data-nav="is-not-active">functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="general.html" data-nav="is-not-active">general</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="math.html" data-nav="is-not-active">math</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="media.html" data-nav="is-not-active">media</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="position.html" data-nav="is-not-active">position</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="pseudo.html" data-nav="is-not-active">pseudo</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="queries.html" data-nav="is-not-active">queries</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="sizes.html" data-nav="is-not-active">sizes</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="times.html" data-nav="is-not-active">times</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type.html" data-nav="is-not-active">type</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="units.html" data-nav="is-not-active">units</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="util.html" data-nav="is-not-active">util</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="utils-strings.html" data-nav="is-not-active">utils-strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="z-index.html" data-nav="is-not-active">z-index</a>
+    </li>
+  </ul>
+    </div>
+
+    
+    
+      <div class="nav-subsection">
+        <h3 class="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement Site</a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/" data-nav="is-not-active">OddBird</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          
+  <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
+  </svg>
+
+        </a>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
+    
+  </nav>
+
+
+      <main data-region="main">
+        
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >OddBird&#39;s Sass Accoutrement</a> »
+    <strong>ease</strong>
+  </nav>
+
+
+        <div data-page="ease">
+          
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="easing-steps">Easing &amp; Steps</h1>
+<p>Whether you are using CSS-named easing,
+like <code>ease-in-out</code> and <code>linear</code>,
+or defining your own easing
+with <code>cubic-bezier()</code> and <code>steps()</code>/<code>frames()</code> –
+we’ll help you organize and standardize your values
+in a single location.
+We also provide a classic set of built-in easing functions,
+which you can rename, access, or override as<span class="widont">&nbsp;</span>desired.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--_a_EASING">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--_a_EASING" class="item-name">$_a_EASING</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$_a_EASING: ( // sass-lint:disable-line variable-name-format
+  &#39;in&#39;: ease-in,
+  &#39;out&#39;: ease-out,
+  &#39;in-out&#39;: ease-in-out,
+  &#39;in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  &#39;in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
+  &#39;in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+  &#39;in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
+  &#39;in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
+  &#39;in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
+  &#39;in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
+  &#39;in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
+  &#39;out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  &#39;out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
+  &#39;out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
+  &#39;out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
+  &#39;out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
+  &#39;out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
+  &#39;out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
+  &#39;out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  &#39;in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
+  &#39;in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
+  &#39;in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
+  &#39;in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
+  &#39;in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  &#39;in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
+  &#39;in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
+  &#39;in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+);</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A classic set of built-in easing functions,
+if you don’t want to define your own.
+Don’t edit this map directly,
+but feel free to reference these values
+from the user-defined <code>$easing</code> map.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  undefined.html#function--_a_animate-get-easing" class="item-name">_a_animate-get-easing()</a>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--easing">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--easing" class="item-name">$easing</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$easing: () !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A variable storing the map of
+all easing globally-avialble on your project.
+Any easing added to the <code>$easing</code> map will be accesible
+to the <code>ease()</code> function by<span class="widont">&nbsp;</span>default.</p>
+<p>Define each easing with a <code>name</code> and <code>value</code>…</p>
+<pre><code>$easing: (
+  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  'sidebar-in': ease-out,
+  'sidebar-out': 'in-back',
+  'modal-in': 'sidebar-in',
+);
+</code></pre>
+<ul>
+<li>Name your easing anything –
+from abstractions like <code>elastic</code>,
+to concrete patterns like <code>sidebar-in</code>.</li>
+<li>Values can be CSS-ready easing functions,
+or references other easings in the<span class="widont">&nbsp;</span>map.</li>
+</ul>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  ease.html#function--ease" class="item-name">ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ease.html#mixin--add-easing" class="item-name">add-easing()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  undefined.html#function--_a_animate-get-easing" class="item-name">_a_animate-get-easing()</a>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--ease">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--ease" class="item-name">ease()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access a named easing function in your <code>$easing</code> map.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$name:</span>
+      
+      <span class="item-value">ease</span>
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of an easing in your configuration (e.g. <code>elastic</code>).</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The pre-defined easing</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  undefined.html#function--_a_animate-get-easing" class="item-name">_a_animate-get-easing()</a>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--add-easing">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--add-easing" class="item-name">add-easing()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge individual time maps into the global <code>$easing</code> variable,
+in case you want to define functions in smaller groups
+such as <code>fade-easing</code>, <code>slide-easing</code>, etc
+before merging them into a single global<span class="widont">&nbsp;</span>easing-palette.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$maps:</span>
+      
+      
+      <span class="value-type">(map...)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>An updated global <code>$easing</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  ease.html#function--merge-easing" class="item-name">merge-easing()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ease.html#variable--easing" class="item-name">$easing</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--merge-easing">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--merge-easing" class="item-name">merge-easing()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge multiple easing maps into a single map,
+in case you want to define easing in smaller groups –
+such as <code>fade-easing</code>, <code>slide-easing</code>, etc. –
+before merging them into a single<span class="widont">&nbsp;</span>map.</p>
+<p>This is like <code>add-ease</code>,
+but returns the combined map
+without assigning it to the <code>$easing</code> variable.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$maps:</span>
+      
+      
+      <span class="value-type">(maps...)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The merged map of<span class="widont">&nbsp;</span>easings.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ease.html#mixin--add-easing" class="item-name">add-easing()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
+</body>
+</html>

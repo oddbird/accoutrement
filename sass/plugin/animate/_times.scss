@@ -1,0 +1,181 @@
+/// # Durations & Delays
+/// Manage all your duration & delay patterns
+/// in a single place -
+/// with explicitly documented relationships.
+/// @group times
+
+
+// Timing Map
+// ----------
+/// A variable storing the map of
+/// all timing globally-avialble on your project.
+/// Any times added to the `$times` map will be accesible
+/// to the `time()` function by default.
+///
+/// Define each time with a `name`, `base-value`,
+/// and optional `adjustments`…
+///
+/// ```
+/// $times: (
+///   'fast': <base-value>,
+///   'slow': <base-value> ('<function-name>': '<arguments>'),
+///   // will return: function-name($base-value, $arguments...)
+/// );
+/// ```
+///
+/// - Name your times anything – from abstractions like `fast`,
+///   to concrete patterns like `button-background-hover`.
+/// - Base-values can be CSS-ready times,
+///   or references other times in the map.
+/// - Adjustments are a nested map of functions and arguments,
+///   for adjusting times directly in your palette.
+///
+/// @group times
+/// @see {function} time
+$times: () !default;
+
+
+// Time [function]
+// ---------------
+/// Access a named time in your `$times` map.
+///
+/// @group times
+///
+/// @param {string | length | list} $time -
+///   The name of a time in your configuration (e.g. `fast`),
+///   or a base-time and adjustments to be made
+///   (e.g. `'fast' ('times': 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @return {length} -
+///   The calculated length of time
+@function time(
+  $time
+) {
+  @return _a_animate-get-time($time);
+}
+@include _a_register-function('time');
+
+
+// Add Times
+// ---------
+/// Merge individual time maps into the global `$times` variable,
+/// in case you want to define times in smaller groups
+/// such as `duration-times`, `delay-times`, etc
+/// before merging them into a single global times-palette.
+///
+/// @group times
+///
+/// @parameter {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$times` variable,
+///   with new maps merged in.
+@mixin add-times(
+  $maps...
+) {
+  $times: merge-times($times, $maps...) !global;
+}
+
+
+// Merge Times
+// -----------
+/// Merge multiple time maps into a single map,
+/// in case you want to define times in smaller groups –
+/// such as `duration-times`, `delay-times`, etc. –
+/// before merging them into a single map.
+///
+/// This is like `add-times`,
+/// but returns the combined map
+/// without assigning it to the `$times` variable.
+///
+/// @group times
+///
+/// @parameter {maps...} $maps -
+///   Pass any number of maps to be merged.
+/// @return {map} -
+///   The merged map of times.
+@function merge-times(
+  $maps...
+) {
+  $return: ();
+
+  @each $map in $maps {
+    $return: map-merge($return, $map);
+  }
+
+  @return $return;
+}
+@include _a_register-function('merge-times');
+
+
+// Get Time
+// --------
+/// Access a named times in your `$times` map.
+///
+/// @access private
+///
+/// @param {string | length | list} $time -
+///   The name of a time in your configuration (e.g. `fast`),
+///   or a base-time and adjustments to be made
+///   (e.g. `'fast' ('times': 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @throw -
+///   The calculated value is not a valid CSS length.
+/// @return {length} -
+///   The calculated length of time
+@function _a_animate-get-time(
+  $time
+) {
+  // Parse arguments
+  $time: map-get($times, $time) or $time;
+  $base: nth($time, 1);
+  $adjust: if(length($time) > 1, nth($time, 2), null);
+
+  // Recursive check
+  $time: if(map-has-key($times, $base), _a_animate-get-time($base), $base);
+
+  // Adjustments
+  @if $adjust {
+    @each $key, $value in $adjust {
+      $time: _a_animate-adjust-time($time, $key, $value...);
+    }
+  }
+
+  // Validation
+  @if (type-of($time) == 'number') and comparable($time, 1s) {
+    @return $time;
+  }
+
+  @error '#{$time} is not a valid time value for CSS.';
+}
+@include _a_register-function('_a_animate-get-time');
+
+
+// Adjust Time
+// -----------
+/// Calculate time adjustments.
+///
+/// @access private
+///
+/// @param {number} $time -
+///   The original time to perform adjusments on
+/// @param {string | number} $key -
+///   The adjustment function name to call.
+/// @param {arglist} $value… -
+///   Any required arguments for the given function.
+/// @return {number} -
+///   Results of the adjustment.
+@function _a_animate-adjust-time(
+  $time,
+  $key,
+  $value...
+) {
+  $function: _a_get-function($key);
+  $args: if($value, join($time, $value), $time);
+  @return call($function, $args...);
+}
+@include _a_register-function('_a_animate-adjust-time');

@@ -1,0 +1,36 @@
+// Arrow Tests
+// ===========
+
+@import '../../node_modules/sass-true/sass/true';
+@import '../../sass/animate';
+
+$easing: (
+  'sidebar-in': 'in-out-quad',
+  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+);
+
+$times: (
+  'fast': 150ms,
+  'math-tests': 2,
+
+  'add-name': 'fast' ('add': 'math-tests'),
+  'plus-name': 'fast' ('plus': 'math-tests'),
+  'minus-name': 'fast' ('minus': 'math-tests'),
+  'subtract-name': 'fast' ('subtract': 'math-tests'),
+  'times-name': 'fast' ('times': 'math-tests'),
+  'multiply-name': 'fast' ('multiply': 'math-tests'),
+  'divide-name': 'fast' ('divide': 'math-tests'),
+
+  'add-number': 'fast' ('add': 2),
+  'plus-number': 'fast' ('plus': 2),
+  'minus-number': 'fast' ('minus': 2),
+  'subtract-number': 'fast' ('subtract': 2),
+  'times-number': 'fast' ('times': 2),
+  'multiply-number': 'fast' ('multiply': 2),
+  'divide-number': 'fast' ('divide': 2),
+);
+
+@import 'utility';
+@import 'math';
+@import 'times';
+@import 'easing';

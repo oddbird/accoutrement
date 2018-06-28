@@ -1,0 +1,21 @@
+// Clearfix
+// ========
+
+
+// Cleafix
+// -------
+/// A small, unobtrusive clearfix for float containers.
+///
+/// @group clearfix
+///
+/// @example scss
+///   body {
+///     @include clearfix;
+///   }
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: ' ';
+    display: block;
+  }
+}

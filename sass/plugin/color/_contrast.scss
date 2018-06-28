@@ -1,0 +1,241 @@
+/// # Managing Contrast & Accessibility
+/// @group contrast
+
+
+// WCAG Contrast
+// -------------
+/// These named contrast-ratios are defined by the [WCAG][WCAG].
+///
+/// [WCAG]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
+///
+/// @access private
+$WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
+  'AA-large': 3,
+  'AA': 4.5,
+  'AAA': 7,
+);
+
+
+// Contrast
+// --------
+/// For any color, select the best contrast among a set of options.
+/// For best results, pass in a combination of light and dark colors
+/// to contrast against – 
+/// or define default `contrast-light` and `contrast-dark` values
+/// in your global `$colors` map.
+///
+/// @group contrast
+///
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {arglist} $options [#000, #fff] -
+///   Two or more colors to contrast against.
+///   This function will choose the best contrast of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   if they are defined in your color palette,
+///   otherwise `white` and `black` are the default options.
+/// @return {color} -
+///   Whichever color-option has the highest contrast-ratio to `$color`.
+///
+/// @example scss - default options
+///   $background: #333;
+///   html {
+///     background: $background;
+///     color: contrast($background);
+///   }
+/// @example scss - explicit options
+///   $background: #333;
+///   html {
+///     background: $background;
+///     color: contrast($background, red, orange, yellow, green, blue, indigo);
+///   }
+@function contrast(
+  $color,
+  $options...
+) {
+  // Establish default options if they are missing
+  @if length($options) == 0 {
+    $options: append($options, map-get($colors, 'contrast-light') or #fff);
+    $options: append($options, map-get($colors, 'contrast-dark') or #000);
+  } @else if length($options) == 1 {
+    @error 'Provide at least two contrasting color options for `contrast()`';
+  }
+
+  // Get the colors and their contrasts
+  $color-val: color($color);
+  $color-lum: luminance($color-val);
+  $color-list: ();
+  $contrast-list: ();
+
+  @each $item in $options {
+    $item: color($item);
+    $luminance: luminance($item);
+    $contrast: contrast-ratio($color-lum, $luminance);
+
+    $color-list: append($color-list, $item);
+    $contrast-list: append($contrast-list, $contrast);
+  }
+
+  // Find the best results
+  $best-ratio: max($contrast-list...);
+  $best-color: nth($color-list, index($contrast-list, $best-ratio));
+
+  @return $best-color;
+}
+
+
+// Contrasted
+// ----------
+/// Apply any background color,
+/// along with the highest-contraast text color from a set of options.
+/// This works the same as the `contrast` function,
+/// but applies the resulting values to `background-color`
+/// and text `color` properties.
+///
+/// @group contrast
+///
+/// @param {string | list} $background -
+///   The name or value of your desired background color.
+/// @param {arglist} $options [#fff, #000] -
+///   A list of colors to contrast against,
+///   defaulting to `white` and `black`
+///   or your `contrast-light` and `contrast-dark` settings
+///   if they are prodided in the global `$colors` map.
+/// @output -
+///   Sets the `background-color` to `$background`
+///   and the foreground `color` to
+///   whichever option has better contrast against the given background.
+///
+/// @example scss - default options
+///   $background: #333;
+///   html {
+///     @include contrasted($background);
+///   }
+/// @example scss - explicit options
+///   $background: #333;
+///   html {
+///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
+///   }
+@mixin contrasted(
+  $background,
+  $options...
+) {
+  $background: color($background);
+
+  background-color: $background;
+  color: contrast($background, $options...);
+}
+
+
+// Contrast Ratio
+// --------------
+/// Compare two colors using the WCAG comparison algorythm,
+/// and return the resulting contrast-ratio.
+/// Optionally pass in a standard (AA, AAA, AA-large)
+/// and return `false` when the contrast-check fails.
+///
+/// - 'AA-large' == `3:1`
+/// - 'AA' == `4.5:1`
+/// - 'AAA' == `7:1`
+///
+/// @group contrast
+/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
+///
+/// @param {string | list | number} $color -
+///   The name of a color in your palette,
+///   any other color value,
+///   or even a pre-calculated numeric luminance.
+/// @param {string | list | number} $contrast -
+///   The name or value of a color to contrast against the first.
+/// @param {'AA' | 'AA-large' | 'AAA' | number | false} $require [false] -
+///   An optional WCAG contrast ratio to require.
+///   The function will return `false` if the required ratio is not met.
+/// @return {number} -
+///   The WCAG-defined contrast-ratio of two colors.
+///
+/// @example scss
+///   /* black and white: #{contrast-ratio(white, black)} */
+///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
+@function contrast-ratio(
+  $base,
+  $contrast,
+  $require: false
+) {
+  $is-lumins: (type-of($base) == 'number');
+  $uppercase: (
+    'aaa': 'AAA',
+    'aa': 'AA',
+    'aa-large': 'AA-large'
+  );
+
+  $base-lumin: if($is-lumins, $base, luminance($base));
+  $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
+
+  $darker: min($base-lumin, $contrast-lumin);
+  $lighter: max($base-lumin, $contrast-lumin);
+
+  $ratio: ($lighter + 0.05) / ($darker + 0.05);
+
+  @if (type-of($require) != 'number') {
+    $require: map-get($uppercase, $require) or $require;
+    $require: map-get($WCAG-CONTRAST, $require); // sass-lint:disable-line variable-name-format
+  }
+
+  @if $require and ($ratio < $require) {
+    @return false;
+  }
+
+  @return $ratio;
+}
+
+
+// Luminance
+// ---------
+/// Get the WCAG luminance of a color in your palette.
+///
+/// @group contrast
+/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
+///
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @return {number} -
+///   WCAG-defined numeric luminance value.
+@function luminance(
+  $color
+) {
+  $color: color($color);
+  $luminance: 0;
+
+  @if (type-of($color) != 'color') {
+    @error '`#{$color}` is not a color.';
+  }
+
+  @each $component in 'red' 'green' 'blue' {
+    $function: $component;
+
+    @if function-exists('get-function') {
+      $function: get-function($component);
+    }
+
+    $value: call($function, $color) / 255;
+
+    @if ($value < 0.03928) {
+      $value: $value / 12.92;
+    } @else {
+      $base: ($value + 0.055) / 1.055;
+      $value: _acc-pow($base, 2.4);
+    }
+
+    @if ($component == 'red') {
+      $value: $value * 0.2126;
+    } @else if ($component == 'green') {
+      $value: $value * 0.7152;
+    } @else {
+      $value: $value * 0.0722;
+    }
+
+    $luminance: $luminance + $value;
+  }
+
+  @return $luminance;
+}

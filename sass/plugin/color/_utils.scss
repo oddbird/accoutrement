@@ -1,0 +1,94 @@
+/// # Tint & Shade Utilities
+/// @group util
+
+
+// Tint
+// ----
+/// Mix a color with `white` to get a lighter tint.
+///
+/// @group util
+///
+/// @param {String | list} $color -
+///   The name of a color in your palette,
+///   with optional adjustments in the form of `(<function-name>: <args>)`.
+/// @param {Percentage} $percentage -
+///   The percentage of white to mix in.
+///   Higher percentages will result in a lighter tint.
+/// @return {Color} -
+///   A calculated css-ready color-value based on your global color palette.
+@function tint(
+  $color,
+  $percentage
+) {
+  $color: color($color);
+
+  @return mix(#fff, $color, $percentage);
+}
+
+
+// Shade
+// -----
+/// Mix a color with `black` to get a darker shade.
+///
+/// @group util
+///
+/// @param {String | list} $color -
+///   The name of a color in your palette,
+///   with optional adjustments in the form of `(<function-name>: <args>)`.
+/// @param {Percentage} $percentage -
+///   The percentage of black to mix in.
+///   Higher percentages will result in a darker shade.
+/// @return {Color} -
+///   A calculated css-ready color-value based on your global color palette.
+@function shade(
+  $color,
+  $percentage
+) {
+  $color: color($color);
+
+  @return mix(#000, $color, $percentage);
+}
+
+
+// Get Function
+// ------------
+/// Get a first-class function in Sass 3.5+,
+/// or the function name string (unchanged)
+/// in older Sass versions.
+/// This is safe to use internally,
+/// as it allows users to pass in
+/// either a string, or a previously-captured function.
+///
+/// @access private
+///
+/// @param {String | Function} $function -
+///   The name (string) of a function,
+///   or the function to be called.
+/// @return {String | Function} -
+///   Returns a first-class function in Sass 3.5+,
+///   or the function name string in older Sass versions.
+@function _a_color-get-function(
+  $function
+) {
+  $type: type-of($function);
+
+  @if ($type == 'function') {
+    @return $function;
+  }
+
+  @if function-exists('get-function') {
+    // sass-lint:disable variable-name-format
+    @if index($_LOCAL-COLOR-FUNCTIONS, $function) {
+      @return get-function($function);
+    }
+
+    @if map-has-key($functions, $function) {
+      $function: map-get($functions, $function);
+      @return _a_color-get-function($function);
+    }
+
+    @error '[#{$type}] `#{$function}` must be a first-class function';
+  }
+
+  @return $function;
+}

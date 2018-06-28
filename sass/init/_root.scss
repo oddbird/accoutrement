@@ -1,0 +1,95 @@
+// Root Init
+// =========
+
+
+/// Prevent iOS and IE text size adjust after device orientation change.
+///
+/// - Overflow-style: Edge 12+, Internet Explorer 11-
+/// @group general
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar; // sass-lint:disable-line no-vendor-prefixes
+  text-size-adjust: 100%;
+}
+
+
+/// - Android 4.3-
+/// - Internet Explorer 11-
+/// - Windows Phone 8.1+
+/// @group general
+main {
+  display: block;
+}
+
+
+/// - Edge 12+
+/// - Firefox 40+
+/// - Internet Explorer 11-
+/// - Windows Phone 8.1+
+/// @group general
+details {
+  display: block;
+}
+
+
+/// Internet Explorer 11-
+/// @group general
+pre {
+  overflow: auto;
+}
+
+
+/// - Internet Explorer 11-
+/// - Windows Phone 8.1+
+/// @group general
+progress {
+  display: inline-block;
+}
+
+
+/// - Firefox 40+
+/// - Internet Explorer 11-
+/// - Windows Phone 8.1+
+/// @group general
+summary {
+  display: block;
+}
+
+
+/// - Android 4.3-
+/// - Internet Explorer 11-
+/// - iOS 7-
+/// - Safari 7-
+/// - Windows Phone 8.1+
+/// @group general
+template {
+  display: none;
+}
+
+
+/// Specify the border style, width, and box-sizing of all elements.
+/// @group general
+*,
+::before,
+::after {
+  border-style: solid;
+  border-width: 0;
+  box-sizing: border-box;
+}
+
+
+/// Specify the core styles of all elements.
+/// @group general
+* {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+
+/// Specify the border styling of tables.
+/// @group general
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

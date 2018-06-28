@@ -1,0 +1,1119 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <title>core-functions | OddBird&#39;s Sass Accoutrement Documentation</title>
+
+  <link href="assets/img/favicon.ico" rel="shortcut icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  
+
+  
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+  <symbol id="icon-logo" viewBox="0 0 16 16">
+    <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 28">
+    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
+  </symbol>
+</svg>
+
+  <div data-region="app">
+    <header data-region="banner">
+      
+  <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" type="button" data-toggle-synced="false">
+    
+  <svg data-icon="menu" data-icon-size="nav-icon" ><title>menu</title><use xlink:href="#icon-menu" />
+  </svg>
+
+  </button>
+
+
+      <div class="project-title">
+        <a href="index.html" rel="home" class="project-name">OddBird&#39;s Sass Accoutrement</a>
+        
+          <span class="project-version">0.1.0</span>
+        
+      </div>
+    </header>
+
+    <div data-region="container">
+      
+  <nav data-region="nav" data-toggle="target" id="nav" data-target-id="nav" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
+
+    <div class="nav-subsection">
+      <h3 class="nav-home">
+        
+        <a href="index.html" data-nav="is-not-active">OddBird&#39;s Sass<span class="widont">&nbsp;</span>Accoutrement</a>
+      </h3>
+
+      
+      
+        <ul>
+          
+            
+            <li class="nav-item">
+              <a href="CHANGELOG.html" data-nav="is-not-active">Changelog</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="CONTRIBUTING.html" data-nav="is-not-active">Contributing</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="LICENSE.html" data-nav="is-not-active">MIT License</a>
+            </li>
+          
+        </ul>
+      
+    </div>
+
+    
+    <div class="nav-subsection">
+      <ul>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">General</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="a-config.html" data-nav="is-not-active">a-config</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="a11y.html" data-nav="is-not-active">a11y</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="box-sizing.html" data-nav="is-not-active">box-sizing</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="change.html" data-nav="is-not-active">change</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="clearfix.html" data-nav="is-not-active">clearfix</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="colors.html" data-nav="is-not-active">colors</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="config.html" data-nav="is-not-active">config</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="contrast.html" data-nav="is-not-active">contrast</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-functions.html" data-nav="is-active">core-functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">core-lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-math.html" data-nav="is-not-active">core-math</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ease.html" data-nav="is-not-active">ease</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="fluid-ratios.html" data-nav="is-not-active">fluid-ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="font-helpers.html" data-nav="is-not-active">font-helpers</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="fonts.html" data-nav="is-not-active">fonts</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="forms.html" data-nav="is-not-active">forms</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="functions.html" data-nav="is-not-active">functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="general.html" data-nav="is-not-active">general</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="math.html" data-nav="is-not-active">math</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="media.html" data-nav="is-not-active">media</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="position.html" data-nav="is-not-active">position</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="pseudo.html" data-nav="is-not-active">pseudo</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="queries.html" data-nav="is-not-active">queries</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="sizes.html" data-nav="is-not-active">sizes</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="times.html" data-nav="is-not-active">times</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type.html" data-nav="is-not-active">type</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="units.html" data-nav="is-not-active">units</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="util.html" data-nav="is-not-active">util</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="utils-strings.html" data-nav="is-not-active">utils-strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="z-index.html" data-nav="is-not-active">z-index</a>
+    </li>
+  </ul>
+    </div>
+
+    
+    
+      <div class="nav-subsection">
+        <h3 class="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement Site</a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/" data-nav="is-not-active">OddBird</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          
+  <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
+  </svg>
+
+        </a>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
+    
+  </nav>
+
+
+      <main data-region="main">
+        
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >OddBird&#39;s Sass Accoutrement</a> »
+    <strong>core-functions</strong>
+  </nav>
+
+
+        <div data-page="core-functions">
+          
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--functions">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--functions" class="item-name">$functions</a>
+      
+
+      
+        <span class="value-type">(map)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Define any third-party functions required
+by your various accoutrement maps.
+This is only necessary for newer versions of Sass,
+where functions are first-class,
+and can be captured using <code>get-function($name)</code>.</p>
+<pre><code class="lang-scss">$functions: (
+  'times': get-function('times'),
+  'rgba': get-function('rgba'),
+);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--%2F%2F%20sass-lint%3Adisable%20variable-name-format%0A%24_ACCOUTREMENT_FUNCTIONS%3A%20()%20!default%3B%0A%0A%0A%2F%2F%20Register%20Function%0A%2F%2F%20-----------------%0A%2F%2F%2F%20Register%20internal%20accoutrement%20functions%2C%0A%2F%2F%2F%20that%20can%20be%20safely%20captured%20using%20%60function-get()%60%0A%2F%2F%2F%20in%20the%20latest%20versions%20of%20Sass.%0A%2F%2F%2F%0A%2F%2F%2F%20Functions%20only%20need%20to%20be%20registered%0A%2F%2F%2F%20if%20they%20will%20be%20used%20inside%20accoutrement%20maps.%0A%2F%2F%2F%0A%2F%2F%2F%20%40access%20private%0A%2F%2F%2F%20%40group%20core-functions%0A%2F%2F%2F%20%40see">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--%2F%2F%20sass-lint%3Adisable%20variable-name-format%0A%24_ACCOUTREMENT_FUNCTIONS%3A%20()%20!default%3B%0A%0A%0A%2F%2F%20Register%20Function%0A%2F%2F%20-----------------%0A%2F%2F%2F%20Register%20internal%20accoutrement%20functions%2C%0A%2F%2F%2F%20that%20can%20be%20safely%20captured%20using%20%60function-get()%60%0A%2F%2F%2F%20in%20the%20latest%20versions%20of%20Sass.%0A%2F%2F%2F%0A%2F%2F%2F%20Functions%20only%20need%20to%20be%20registered%0A%2F%2F%2F%20if%20they%20will%20be%20used%20inside%20accoutrement%20maps.%0A%2F%2F%2F%0A%2F%2F%2F%20%40access%20private%0A%2F%2F%2F%20%40group%20core-functions%0A%2F%2F%2F%20%40see" class="item-name">// sass-lint:disable variable-name-format
+$_ACCOUTREMENT_FUNCTIONS: () !default;
+
+
+// Register Function
+// -----------------
+/// Register internal accoutrement functions,
+/// that can be safely captured using `function-get()`
+/// in the latest versions of Sass.
+///
+/// Functions only need to be registered
+/// if they will be used inside accoutrement maps.
+///
+/// @access private
+/// @group core-functions
+/// @see</a>
+      
+
+      
+
+      
+        <span class="item-note">[private]</span>
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">// sass-lint:disable variable-name-format
+$_ACCOUTREMENT_FUNCTIONS: () !default;
+
+
+// Register Function
+// -----------------
+/// Register internal accoutrement functions,
+/// that can be safely captured using `function-get()`
+/// in the latest versions of Sass.
+///
+/// Functions only need to be registered
+/// if they will be used inside accoutrement maps.
+///
+/// @access private
+/// @group core-functions
+/// @see {
+  function
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>These functions are defined internally,
+and can be called by name without first being captured
+using the Sass <code>get-function()</code> approach.
+User should not make changes to this<span class="widont">&nbsp;</span>map.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--%2F%2F%20sass-lint%3Adisable%20variable-name-format%0A%40mixin%20_a_register-function(%0A%20%20%24function%2C%0A%20%20%24names...%0A)">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--%2F%2F%20sass-lint%3Adisable%20variable-name-format%0A%40mixin%20_a_register-function(%0A%20%20%24function%2C%0A%20%20%24names...%0A)" class="item-name">// sass-lint:disable variable-name-format
+@mixin _a_register-function(
+  $function,
+  $names...
+)</a>
+      
+
+      
+
+      
+        <span class="item-note">[private]</span>
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">// sass-lint:disable variable-name-format
+@mixin _a_register-function(
+  $function,
+  $names...
+) {
+  @if function-exists($function) {
+    $register: $_ACCOUTREMENT_FUNCTIONS;
+
+    @if (str-index($function, &#39;_&#39;) != 1) {
+      $names: join($function, $names);
+    }
+
+    @if function-exists(&#39;get-function&#39;) and (type-of($function) == &#39;string&#39;) {
+      $function: get-function($function);
+    }
+
+    @each $name in $names {
+      $name: ($name: $function);
+      $register: map-merge($register, $name);
+    }
+
+    $_ACCOUTREMENT_FUNCTIONS: $register !global;
+  } @else {
+    @error &#39;#{$function}() is not available to register with Accoutrement&#39;;
+  }
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Register internal accoutrement functions,
+that can be safely captured using <code>function-get()</code>
+in the latest versions of<span class="widont">&nbsp;</span>Sass.</p>
+<p>Functions only need to be registered
+if they will be used inside accoutrement<span class="widont">&nbsp;</span>maps.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--_a_get-function">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--_a_get-function" class="item-name">_a_get-function()</a>
+      
+
+      
+
+      
+        <span class="item-note">[private]</span>
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Get a first-class function in Sass 3.5+,
+or the function name string (unchanged)
+in older Sass versions.
+This is safe to use internally,
+as it allows users to pass in
+either a string, or a previously-captured<span class="widont">&nbsp;</span>function.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$function:</span>
+      
+      
+      <span class="value-type">(String |<span class="widont">&nbsp;</span>Function)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name (string) of a registered function,
+or the first-class function to be<span class="widont">&nbsp;</span>called</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$app:</span>
+      
+      
+      <span class="value-type">(String)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The accoutrement app that a function is associated<span class="widont">&nbsp;</span>with</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(String |<span class="widont">&nbsp;</span>Function)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Returns a first-class function in Sass 3.5+,
+or the function name string in older Sass<span class="widont">&nbsp;</span>versions</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>[#{$type}] <code>#{$function}</code> must be a first-class<span class="widont">&nbsp;</span>function</p>
+
+      </div>
+    
+  </div>
+
+    
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  a-config.html#variable--functions" class="item-name">$functions</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  undefined.html#function--_a_animate-adjust-time" class="item-name">_a_animate-adjust-time()</a>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
+</body>
+</html>

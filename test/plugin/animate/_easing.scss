@@ -1,0 +1,63 @@
+// Easing Tests
+// ============
+
+
+// Ease [function]
+// ---------------
+@include describe('ease [function]') {
+  @include it('Get easing from defaults') {
+    @include assert-equal(
+      ease('in-out-quad'),
+      cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    );
+  }
+
+  @include it('Get easing from user') {
+    @include assert-equal(
+      ease('elastic'),
+      cubic-bezier(0.5, -0.4, 0.5, 1.4)
+    );
+  }
+
+  @include it('Get easing from recursion') {
+    @include assert-equal(
+      ease('sidebar-in'),
+      cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    );
+  }
+}
+
+
+// Merge Ease [function]
+// ----------------------
+@include describe('Merge Ease [function]') {
+  $a: ('sidebar-in': 'in-out-quad');
+  $b: ('elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4));
+
+  @include it('Merges easings into a single map') {
+    @include assert-equal(
+      merge-easing($a, $b),
+      map-merge($a, $b)
+    );
+  }
+}
+
+
+// Add Times [mixin]
+// -----------------
+@include describe('Add Ease [mixin]') {
+  $old: $easing;
+  $a: ('sidebar-in': 'in-out-quad');
+  $b: ('elastic': 'in-out-back');
+
+  @include add-easing($a, $b);
+
+  @include it('Merges times, and updates global variable') {
+    @include assert-equal(
+      $easing,
+      map-merge($easing, map-merge($a, $b))
+    );
+  }
+
+  $easing: $old !global;
+}

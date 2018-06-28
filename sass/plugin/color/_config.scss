@@ -1,0 +1,181 @@
+/// # Color Configuration
+/// @group a-config
+
+
+// Local Functions
+// ---------------
+/// These functions are defined internally,
+/// and can be called by name without first being captured
+/// using the Sass `get-function()` approach.
+///
+/// Don't make changes to this map directly.
+/// You can add your own named functions in the `$functions` map.
+///
+/// @access public
+/// @group a-config
+/// @see $functions
+///
+/// @type map
+$_LOCAL-COLOR-FUNCTIONS: ( // sass-lint:disable-line variable-name-format
+  'tint',
+  'shade',
+  'contrast',
+);
+
+
+// Functions
+// ---------
+/// Define any additional color functions required
+/// to generate relataionships in the `$colors` map.
+/// This is only necessary for newer versions of Sass,
+/// where functions are first-class,
+/// and can be captured using `get-function($name)`.
+///
+/// ```scss
+/// $functions: (
+///   'darken': get-function('darken'),
+///   'lighten': get-function('lighten'),
+/// );
+/// ```
+///
+/// @group a-config
+/// @type map
+/// @see $_LOCAL-COLOR-FUNCTIONS
+$functions: () !default;
+
+
+// Color Map
+// ---------
+/// A variable storing the map of
+/// all colors globally-avialble on your project.
+/// Any colors added to the `$colors` map will be accesible
+/// to the `color()` function by default.
+///
+/// Define each color with a `name`, `base-value`,
+/// and optional `adjustments`…
+///
+/// ```
+/// $colors: (
+///   'color-name': <base-value>,
+///   'color-two': <base-value> ('<color-function>': '<arguments>'),
+///   // will return: function-name($base-value, $arguments...)
+/// );
+/// ```
+///
+/// - Name your colors anything – from abstractions like `brand-pink`,
+///   to concrete patterns like `button` or `widget-background`.
+/// - Base-values can be CSS-ready colors (hex, rgb, hsla),
+///   or references other colors in the map.
+/// - Adjustments are a nested map of color functions and arguments,
+///   for adjusting colors directly in your palette.
+///
+/// The color-names `contrast-light` and `contrast-dark` are special.
+/// Use those names to define the default light-and-dark options
+/// for our color-contrast tools.
+/// They default to `white` and `black` respectively.
+///
+/// @group a-config
+/// @see {function} color
+/// @see {function} contrast
+///
+/// @example scss - simple color definitions
+///   $colors: (
+///     'brand-pink': hsl(330, 85%, 62%),
+///     'brand-light': #fff,
+///     'brand-dark': #222,
+///   );
+/// @example scss - reference other colors
+///   $colors: (
+///     'background': 'brand-light',
+///     'text': 'brand-dark',
+///     'link': 'brand-pink',
+///   );
+/// @example scss - adjust referenced colors with any color function
+///   $colors: (
+///     'focus': 'link' ('darken': 15%, 'desaturate': 15%),
+///   );
+$colors: () !default;
+
+
+// Add Colors
+// ----------
+/// Merge individual color maps into the global `$colors` variable,
+/// in case you want to define colors in smaller groups
+/// such as `brand-colors`, `link-colors`, etc
+/// before merging them into a single global color-palette.
+/// This can be useful for internal organization,
+/// documentation with [SassDoc][SassDoc],
+/// or integration with our pattern-library generator:
+/// [Herman][Herman].
+///
+/// [SassDoc]: http://sassdoc.com/
+/// [Herman]: http://oddbird.net/herman/
+///
+/// @group a-config
+///
+/// @parameter {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$colors` variable,
+///   with new maps merged in.
+///
+/// @example scss
+///   $brand-colors: (
+///     'brand-dark': #222,
+///     'brand-pink': hsl(330, 85%, 62%),
+///   );
+///
+///   $text-colors: (
+///     'text': 'brand-dark',
+///     'link': 'brand-pink',
+///   );
+///
+///   @include add-colors($brand-colors, $text-colors);
+@mixin add-colors (
+  $maps...
+) {
+  $colors: merge-colors($colors, $maps...) !global;
+}
+
+
+
+// Merge Colors
+// ------------
+/// Merge multiple color maps into a single map,
+/// in case you want to define colors in smaller groups –
+/// such as `brand-colors`, `link-colors`, etc. –
+/// before merging them into a single map.
+///
+/// This is like `add-colors`,
+/// but returns the combined map
+/// without assigning it to the `$colors` variable.
+///
+/// @group a-config
+///
+/// @parameter {maps...} $maps -
+///   Pass any number of maps to be merged.
+/// @return {map} -
+///   The merged map of colors.
+/// @example scss
+///   $brand-colors: (
+///     'brand-dark': #222,
+///     'brand-pink': hsl(330, 85%, 62%),
+///   );
+///
+///   $text-colors: (
+///     'text': 'brand-dark',
+///     'link': 'brand-pink',
+///   );
+///
+///   $colors: merge-colors($brand-colors, $text-colors);
+@function merge-colors(
+  $maps...
+) {
+  $return: ();
+
+  @each $map in $maps {
+    $return: map-merge($return, $map);
+  }
+
+  @return $return;
+}

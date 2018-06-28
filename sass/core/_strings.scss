@@ -1,0 +1,46 @@
+/// # Core String Utilities
+/// Functions for basic Sass-string manipulation.
+
+
+// String Replace
+// --------------
+/// Replace a substring inside a larger string,
+/// or replace the entirety of the string.
+///
+/// @access private
+/// @group utils-strings
+///
+/// @param {string} $string -
+///   The original string to be edited
+/// @param {string} $old -
+///   A sub-string to replace
+/// @param {string} $new -
+///   A new sub-string to replace the old
+/// @return {string} -
+///   Original string, with substring replaced
+@function _a_str-replace(
+  $string,
+  $old,
+  $new: null,
+  $replace-all: false
+) {
+  $return: $string;
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+
+    @if $replace-all {
+      $z: _a_str-replace($z, $old, $new, true);
+    }
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
+@include _a_register-function('_a_str-replace', 'str-replace');

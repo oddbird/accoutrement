@@ -1,0 +1,158 @@
+// Core Map Parsing
+// ================
+
+
+// Get
+// ---
+@function accoutrement-get(
+  $needle,
+  $haystack
+) {
+  // simplest case…
+  @if map-get($haystack, $needle) {
+    @return map-get($haystack, $needle);
+  }
+
+  $type: type-of($needle);
+  $do: null;
+
+  // break out `do` maps…
+  @if ($type == 'map') {
+    $value: map-get($needle, 'value');
+    $do: map-get($needle, 'do');
+
+    @if ($value) {
+      $needle: $value;
+    }
+  } @else if ($type == 'list') {
+    $final: nth($needle, -1);
+
+    @if (length($needle) > 1) and (type-of($final) == 'map') {
+      $do: $final;
+      $needle: _a_remove-nth($needle, -1);
+    }
+  }
+
+  // resolve any #alias tags…
+  $needle: _a_parse-alias($needle, $haystack);
+  $do: _a_parse-alias($do, $haystack);
+
+  // make any necessary adjustments…
+  @if ($do) {
+    @each $function, $args in $do {
+      $function: _a_get-function($function);
+      $args: if($args, join($needle, $args), $needle);
+      $needle: call($function, $args...);
+    }
+  }
+
+  @return $needle;
+}
+
+
+// Parse Alias
+// -----------
+/// This provides the basis for recursively parsing
+/// origin values of any kind,
+/// and replacing any `#alias` tags
+/// with the (parsed) values they represent.
+///
+/// @access private
+///
+/// @param {*} $needle -
+///   The original value to be parsed for `#alias` tags
+/// @param {map} $haystack -
+///   A map of terms to reference tags against
+/// @param {string | function} $recursion -
+///   A function or function-name to use in recursive calls,
+///   in case values need pre-processing before `_a_parse-alias` is called
+/// @return {*} -
+///   Updated `$needle` value
+///   in the same format as the original,
+///   but with all `#alias` tags replaced
+@function _a_parse-alias(
+  $needle,
+  $haystack
+) {
+  // handle list values…
+  @if (type-of($needle) == 'list') {
+    $new: _a_list-template($needle);
+
+    // handle each item in the list…
+    @each $bit in $needle {
+      $new: append($new, _a_parse-alias($bit, $haystack));
+    }
+
+    @return $new;
+  }
+
+  // handle map values…
+  @if (type-of($needle) == 'map') {
+    $new: ();
+
+    // handle each value in the map…
+    @each $key, $value in $needle {
+      $key: _a_parse-alias($key, $haystack);
+      $value: _a_parse-alias($value, $haystack);
+      $needle: ($key: $value);
+      $new: map-merge($new, $needle);
+    }
+
+    @return $new;
+  }
+
+  // recursively parse alias strings…
+  @if (type-of($needle) == 'string') and str-index($needle, '#') {
+    $alias-list: _a_get-alias-names($needle);
+
+    @each $alias in $alias-list {
+      @if map-has-key($haystack, $alias) {
+        $reference: map-get($haystack, $alias);
+        $reference: accoutrement-get($reference, $haystack);
+        $needle: _a_str-replace($needle, '##{$alias}', $reference, true);
+      }
+    }
+  }
+
+  @return $needle;
+}
+@include _a_register-function('_a_parse-alias');
+
+
+// Get Alias Names
+// ---------------
+/// Search for `#alias` mentions within a string,
+/// and return a list of unique mentions with `#` removed.
+///
+/// @access private
+///
+/// @param {string} $string -
+///   The original string to be parsed for `#alias` tags
+/// @return {list} -
+///   List of unique `#alias` mentions with the `#` removed
+@function _a_get-alias-names(
+  $string
+) {
+  $found: ();
+  $ends: (' ', '(', ')', '/', '\\', '#', '[', ']');
+  $remainder: str-slice($string, str-index($string, '#') + 1);
+  $end: str-length($remainder);
+
+  @each $char in $ends {
+    $n: str-index($remainder, $char);
+    $end: if(($n) and ($n - 1 < $end), $n - 1, $end);
+  }
+
+  $found: append($found, str-slice($remainder, 1, $end));
+  $remainder: str-slice($remainder, $end);
+
+  @if str-index($remainder, '#') {
+    @each $alias in _a_get-alias-names($remainder) {
+      $found: if(index($found, $alias), $found, join($found, $alias));
+    }
+  }
+
+  @return $found;
+}
+@include _a_register-function('_a_get-alias-names');
+

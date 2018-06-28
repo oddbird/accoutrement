@@ -1,0 +1,184 @@
+// Fonts API
+// =========
+
+
+/// # Using WebFonts
+///
+/// Once you've configured your webfont data into a map,
+/// these tools will help you access the data in various ways:
+/// from creating `@font-face` imports,
+/// to calling font-families by any given alias.
+///
+/// @group fonts
+
+
+// Font-URL [function]
+// -------------------
+/// This is a wrapper for the CSS `url()` function,
+/// which simply prepends the global `$font-path` when appropriate.
+///
+/// @since 4.0.0 -
+///   Supports Base64 data URI's, without prepending font-path.
+///
+/// @group fonts
+///
+/// @param {string} $path -
+///   A path relative to the fonts directory.
+/// @return {string} -
+///   The full path to a font file, in CSS `url('my/path')` format.
+///
+/// @example scss
+///   $font-path: '../fonts/';
+///   $src: font-url('sans/my-sans-font.woff2');
+///   /* #{$src} */
+@function font-url(
+  $path
+) {
+  @if not str-index($path, 'data:') {
+    $path: $font-path + $path;
+  }
+
+  @return url(quote($path));
+}
+
+
+// Font Family [function]
+// ----------------------
+/// Access a font-family from your `$fonts` map,
+/// with name and font-stack.
+///
+/// @since 4.0.0 -
+///   Provides the correct name for fonts when an alias is given.
+///
+/// @group fonts
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @return {String} -
+///   The full font-stack for the given font,
+///   ready for output with the `font-family` property.
+/// @example scss
+///   $fonts: (
+///     'sans': (
+///       'name': 'FranklinGothic',
+///       'stack': (Helvetica, Arial, sans-serif),
+///     ),
+///   );
+///
+///   html {
+///     font-family: font-family('sans');
+///   }
+@function font-family(
+  $key
+) {
+  $font: _font-get($key);
+  $name: _font-name($key);
+  @return join($name, map-get($font, 'stack'), 'comma');
+}
+
+
+// Font Family [mixin]
+// -------------------
+/// Output a font-stack to font-family based on your `$fonts` configuration.
+///
+/// @group fonts
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @example scss
+///   $fonts: (
+///     'FranklinGothic': (
+///       'stack': (Helvetica, Arial, sans-serif),
+///     ),
+///     'sans': 'FranklinGothic',
+///   );
+///
+///   html {
+///     @include font-family('sans');
+///   }
+@mixin font-family(
+  $key
+) {
+  font-family: font-family($key);
+}
+
+
+// Font Face [mixin]
+// -----------------
+/// Import any local webfont defined in your `$fonts` configuration
+/// (variants without a path will not be imported).
+///
+/// @since 4.0.0 -
+///   No longer accepts the `$formats` parameter.
+///
+/// @group fonts
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @output `@font-face` import blocks for any defined font-variants.
+/// @example scss
+///   $fonts: (
+///     'body-font': (
+///       'name': 'Source Sans Pro',
+///       'formats': 'woff2' 'woff' 'eot',
+///       'normal': 'sans/sourcesanspro-regular-webfont',
+///       'italic': 'sans/sourcesanspro-italic-webfont',
+///       'bold': 'sans/sourcesanspro-bold-webfont',
+///     ),
+///   );
+///   @include font-face('body-font');
+@mixin font-face(
+  $key
+) {
+  $font: _font-get($key);
+  $name: _font-name($key);
+  $variants: _font-get-variants($font);
+  $formats: map-get($font, 'formats') or ();
+  $unicode: map-get($font, 'unicode-range');
+
+  @if (length($variants) > 0) {
+    @each $variant, $data in $variants {
+      @include _import-font-face($name, $variant, $data, $formats, $unicode);
+    }
+  }
+}
+
+
+// Import WebFonts [mixin]
+// -----------------------
+/// Find all the fonts that include data for imports,
+/// and generate `@font-face` blocks for each individual font and variant.
+///
+/// @since 4.0.0 -
+///   No longer accepts the `$formats` parameter.
+///
+/// @group fonts
+///
+/// @param {map} $fonts [$fonts] -
+///   A map of your font configuration.
+/// @output Any number of `@font-face` blocks.
+/// @example scss
+///   $fonts: (
+///     'body-font': (
+///       'name': 'Source Sans Pro',
+///       'formats': 'woff2' 'woff' 'eot',
+///       'normal': 'sans/sourcesanspro-regular-webfont',
+///       'italic': 'sans/sourcesanspro-italic-webfont',
+///       'bold': 'sans/sourcesanspro-bold-webfont',
+///     ),
+///     // alias keys, and fonts without path data will be ignored…
+///     'alias': 'body-font',
+///     'google-font': (
+///       'source': 'http://fonts.google.com/',
+///     ),
+///   );
+///   @include import-webfonts;
+@mixin import-webfonts(
+  $fonts: $fonts
+) {
+  @each $key, $value in $fonts {
+    @if (type-of($value) == 'map') {
+      @include font-face($key);
+    }
+  }
+}

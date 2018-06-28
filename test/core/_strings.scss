@@ -1,0 +1,43 @@
+// String Utilities
+// ================
+@include test-module('core/strings') {
+
+
+// String Replace
+// --------------
+@include describe('String Replace [function]') {
+
+  @include it('Replacing a sub-string with another string') {
+    @include assert-equal(
+      _a_str-replace('hello terrible world!', 'terrible', 'beautiful'),
+      'hello beautiful world!'
+    );
+  }
+
+  @include it('Replacing a full string') {
+    @include assert-equal(
+      _a_str-replace('hello', 'hello', 'world'),
+      'world'
+    );
+  }
+
+  @include it('Replacing a sub-string with nothing') {
+    @include assert-equal(
+      _a_str-replace('hello world', 'hello ', false),
+      'world'
+    );
+
+    @include assert-equal(
+      _a_str-replace('hello world', 'hello ', null),
+      'world'
+    );
+  }
+
+  @include it('Replacing all instances of a sub-string') {
+    @include assert-equal(
+      _a_str-replace('hello world', 'o', '000', true),
+      'hell000 w000rld');
+  }
+}
+
+} // end module

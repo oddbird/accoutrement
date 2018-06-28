@@ -1,0 +1,71 @@
+/// # Core List Utilities
+/// Functions for basic Sass-string manipulation.
+
+
+// Remove Nth
+// ----------
+/// Remove any item (1-indexed) from a list.
+///
+/// @group core-lists
+///
+/// @param {list} $list -
+///   The original list to be edited
+/// @param {number} $index -
+///   The 1-indexed item to remove from the list
+/// @return {list} -
+///   The original list, with item removed
+@function _a_remove-nth(
+  $list,
+  $index
+) {
+  $result: _a_list-template($list);
+
+  @if (type-of($index) != 'number') {
+    @error '$index: #{quote($index)} is not a number for `_a_remove-nth`.';
+  } @else if $index == 0 {
+    @error 'List index 0 must be a non-zero integer for `_a_remove-nth`.';
+  } @else if abs($index) > length($list) {
+    $state: 'List index for `_a_remove-nth` is #{$index}';
+    @error '#{$state} but list is only #{length($list)} item long.';
+  }
+
+  $index: if(($index < 0), length($list) + $index + 1, $index);
+
+  @for $i from 1 through length($list) {
+    @if ($i != $index) {
+      $result: append($result, nth($list, $i));
+    }
+  }
+
+  @return $result;
+}
+@include _a_register-function('_a_remove-nth', 'remove-nth');
+
+
+// List From Template
+// ------------------
+/// Return a new (empty) list using the same delimiter
+/// and bracket settings as the template list.
+///
+/// @access private
+/// @group core-lists
+///
+/// @param {list} $template [()] -
+///   The original list to be matched
+/// @return {list} -
+///   An empty list that matches the template
+@function _a_list-template(
+  $template: ()
+) {
+  $new: ();
+
+  // return the same type of list we were given…
+  @if function-exists('is-bracketed') {
+    $new: join($new, $new, list-separator($template), is-bracketed($template));
+  } @else {
+    $new: join($new, $new, list-separator($template));
+  }
+
+  @return $new;
+}
+@include _a_register-function('_a_list-template', 'list-template');

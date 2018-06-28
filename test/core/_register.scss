@@ -1,0 +1,79 @@
+// Sass Utilities
+// ==============
+@include test-module('core/functions') {
+
+
+// Register Function
+// -----------------
+// sass-lint:disable variable-name-format
+@include describe('Register Function [mixin]') {
+  @include it('Adds to the list of registered functions') {
+    // reset the global, for a clean testing environment
+    $old: $_ACCOUTREMENT_FUNCTIONS;
+    $_ACCOUTREMENT_FUNCTIONS: () !global;
+
+    // register two functions
+    @include _a_register-function('rgba', '_c', '_a_');
+
+    // legacy Sass app-functions map
+    $expect: (
+      'rgba': 'rgba',
+      '_c': 'rgba',
+      '_a_': 'rgba',
+    );
+
+    // first-class Sass app-functions map
+    @if (function-exists('get-function')) {
+      $expect: (
+        'rgba': get-function('rgba'),
+        '_c': get-function('rgba'),
+        '_a_': get-function('rgba'),
+      );
+    }
+
+    @include assert-equal(
+      $_ACCOUTREMENT_FUNCTIONS,
+      $expect
+    );
+    $_ACCOUTREMENT_FUNCTIONS: $old !global;
+  }
+}
+
+
+// Get Function
+// ------------
+@include describe('Get Function [function]') {
+  @include _a_register-function('rgba');
+  $test: _a_get-function('rgba');
+
+  @include it('Returns a function or function-name') {
+    $expect: 'rgba';
+
+    @if (function-exists('get-function')) {
+      $expect: get-function('rgba');
+    }
+
+    @include assert-equal(
+      $test,
+      $expect
+    );
+  }
+
+  @include it('Returned function or name is callable') {
+    @include assert-equal(
+      call($test, blue, 0.5),
+      rgba(blue, 0.5)
+    );
+  }
+
+  @if function-exists('get-function') {
+    @include it('Functions are returned without change') {
+      @include assert-equal(
+        _a_get-function(get-function('rgba')),
+        get-function('rgba')
+      );
+    }
+  }
+}
+
+} // end module
