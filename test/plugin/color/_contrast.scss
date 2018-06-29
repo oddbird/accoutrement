@@ -1,0 +1,160 @@
+// Contrast Tests
+// ==============
+@include test-module('Color: Contrast') {
+
+
+// Luminance [function]
+// --------------------
+@include describe('Luminance [function]') {
+  @include it('Returns proper luminance of a color') {
+    @include assert-equal(
+      luminance(#fff),
+      1,
+      'white',
+      $inspect: true
+    );
+
+    @include assert-equal(
+      luminance(#000),
+      0,
+      'black',
+      $inspect: true
+    );
+
+    @include assert-equal(
+      luminance(#ff0),
+      0.9278,
+      'yellow',
+      $inspect: true
+    );
+
+    @include assert-equal(
+      luminance(#0f0),
+      0.7152,
+      'green',
+      $inspect: true
+    );
+
+    @include assert-equal(
+      luminance(#3492a1),
+      0.23861,
+      'blue',
+      $inspect: true
+    );
+  }
+}
+
+
+// Contrast Ratio [function]
+// -------------------------
+@include describe('Contrast Ratio [function]') {
+  @include it('Returns contrast ratio between two colors') {
+    @include assert-equal(
+      contrast-ratio(#fff, #fff),
+      1
+    );
+
+    @include assert-equal(
+      contrast-ratio(#000, #fff),
+      21
+    );
+  }
+
+  @include it('Returns contrast ratio if test is met') {
+    @include assert-equal(
+      contrast-ratio(#333, #999, 'aa-large'),
+      4.43472,
+      $inspect: true
+    );
+  }
+
+  @include it('Returns false if test is not met') {
+    @include assert-equal(
+      contrast-ratio(#333, #999, 'AAA'),
+      false
+    );
+  }
+}
+
+
+// Contrast [function]
+// -------------------
+@include describe('Contrast [function]') {
+  @include it('Dark on light') {
+    @include assert-equal(
+      contrast(#eee),
+      color('contrast-dark'),
+      'Returns a dark color to contrast a light one.'
+    );
+  }
+
+  @include it('Light on dark') {
+    @include assert-equal(
+      contrast('dark'),
+      color('contrast-light'),
+      'Returns a light color to contrast a dark one.'
+    );
+  }
+
+  $original-colors: $colors;
+  $colors: () !global;
+
+  @include it('Default light fallback') {
+    @include assert-equal(
+      contrast(#000),
+      #fff,
+      'Returns white for light contrast when none is given.'
+    );
+  }
+
+  @include it('Default dark fallback') {
+    @include assert-equal(
+      contrast(#fff),
+      #000,
+      'Returns black for dark contrast when none is given.'
+    );
+  }
+
+  $colors: $original-colors !global;
+
+  @include it('Multiple contrast options') {
+    @include assert-equal(
+      contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
+      #003,
+      'Returns the best option from the list.'
+    );
+  }
+}
+
+
+// Contrasted [mixin]
+// ------------------
+@include describe('contrasted [mixin]') {
+  @include it('Dark on light') {
+    @include assert('Use a dark color on a light background.') {
+      @include output {
+        @include contrasted(#eee);
+      }
+
+      @include expect {
+        background-color: #eee;
+        color: color('contrast-dark');
+      }
+    }
+  }
+
+  @include it('Light on dark') {
+    @include assert('Use a light color on a dark background.') {
+      @include output {
+        @include contrasted('dark');
+      }
+
+      @include expect {
+        background-color: color('dark');
+        color: color('contrast-light');
+      }
+    }
+  }
+}
+
+} // end module

@@ -1,0 +1,68 @@
+// Color API Tests
+// ===============
+@include test-module('Color: API') {
+
+
+// Color [function]
+// ----------------
+@include describe('Color [function]') {
+  @include it('Named color') {
+    @include assert-equal(
+      color('simple'),
+      map-get($colors, 'simple'),
+      'Returns simple color based on styleguide keyword'
+    );
+  }
+
+  @include it('Referenced color') {
+    @include assert-equal(
+      color('primary'),
+      map-get($colors, 'red'),
+      'Returns color based on referential styleguide keyword'
+    );
+  }
+
+  @include it('Adjusted color') {
+    @include assert-equal(
+      color('secondary'),
+      desaturate(tint(map-get($colors, 'red'), 30%), 25%),
+      'Returns color based on self-referential keyword and adjustments'
+    );
+  }
+
+  @include it('Complex nesting of colors') {
+    @include assert-equal(
+      color('wtf'),
+      adjust-hue(desaturate(tint(map-get($colors, 'red'), 30%), 25%), 24deg),
+      'Returns color based on multiple keywords and adjustments'
+    );
+  }
+
+  @include it('Multiple adjustment function arguments') {
+    $adjust: (
+      'contrast': (#999, #666, #333),
+    );
+    @include assert-equal(
+      color(#fcc $adjust),
+      #333,
+      'Handles multiple arguments to color-adjustment function'
+    );
+  }
+
+  @include it('Works with a custom palette') {
+    $my-palette: (
+      'my-base': #393,
+      'my-adjustment': '#my-base' ('shade': 10%),
+    );
+
+    $expect: map-get($my-palette, 'my-base');
+    $expect: shade($expect, 10%);
+
+    @include assert-equal(
+      color('my-adjustment', $my-palette),
+      $expect
+    );
+  }
+}
+
+} // end module

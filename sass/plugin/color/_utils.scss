@@ -24,6 +24,7 @@
 
   @return mix(#fff, $color, $percentage);
 }
+@include _a_register-function('tint');
 
 
 // Shade
@@ -48,47 +49,4 @@
 
   @return mix(#000, $color, $percentage);
 }
-
-
-// Get Function
-// ------------
-/// Get a first-class function in Sass 3.5+,
-/// or the function name string (unchanged)
-/// in older Sass versions.
-/// This is safe to use internally,
-/// as it allows users to pass in
-/// either a string, or a previously-captured function.
-///
-/// @access private
-///
-/// @param {String | Function} $function -
-///   The name (string) of a function,
-///   or the function to be called.
-/// @return {String | Function} -
-///   Returns a first-class function in Sass 3.5+,
-///   or the function name string in older Sass versions.
-@function _a_color-get-function(
-  $function
-) {
-  $type: type-of($function);
-
-  @if ($type == 'function') {
-    @return $function;
-  }
-
-  @if function-exists('get-function') {
-    // sass-lint:disable variable-name-format
-    @if index($_LOCAL-COLOR-FUNCTIONS, $function) {
-      @return get-function($function);
-    }
-
-    @if map-has-key($functions, $function) {
-      $function: map-get($functions, $function);
-      @return _a_color-get-function($function);
-    }
-
-    @error '[#{$type}] `#{$function}` must be a first-class function';
-  }
-
-  @return $function;
-}
+@include _a_register-function('shade');

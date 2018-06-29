@@ -25,18 +25,6 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 /// in your global `$colors` map.
 ///
 /// @group color-contrast
-///
-/// @param {string | list} $color -
-///   The name or value of a color.
-/// @param {arglist} $options [#000, #fff] -
-///   Two or more colors to contrast against.
-///   This function will choose the best contrast of all the options provided,
-///   or the `contrast-light` and `contrast-dark` defaults
-///   if they are defined in your color palette,
-///   otherwise `white` and `black` are the default options.
-/// @return {color} -
-///   Whichever color-option has the highest contrast-ratio to `$color`.
-///
 /// @example scss - default options
 ///   $background: #333;
 ///   html {
@@ -49,6 +37,17 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 ///     background: $background;
 ///     color: contrast($background, red, orange, yellow, green, blue, indigo);
 ///   }
+///
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {arglist} $options [#000, #fff] -
+///   Two or more colors to contrast against.
+///   This function will choose the best contrast of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   if they are defined in your color palette,
+///   otherwise `white` and `black` are the default options.
+/// @return {color} -
+///   Whichever color-option has the highest contrast-ratio to `$color`.
 @function contrast(
   $color,
   $options...
@@ -82,6 +81,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 
   @return $best-color;
 }
+@include _a_register-function('contrast');
 
 
 // Contrasted
@@ -93,6 +93,16 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 /// and text `color` properties.
 ///
 /// @group color-contrast
+/// @example scss - default options
+///   $background: #333;
+///   html {
+///     @include contrasted($background);
+///   }
+/// @example scss - explicit options
+///   $background: #333;
+///   html {
+///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
+///   }
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
@@ -105,17 +115,6 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 ///   Sets the `background-color` to `$background`
 ///   and the foreground `color` to
 ///   whichever option has better contrast against the given background.
-///
-/// @example scss - default options
-///   $background: #333;
-///   html {
-///     @include contrasted($background);
-///   }
-/// @example scss - explicit options
-///   $background: #333;
-///   html {
-///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
-///   }
 @mixin contrasted(
   $background,
   $options...
@@ -140,6 +139,9 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 ///
 /// @group color-contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
+/// @example scss
+///   /* black and white: #{contrast-ratio(white, black)} */
+///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
 ///
 /// @param {string | list | number} $color -
 ///   The name of a color in your palette,
@@ -152,10 +154,6 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 ///   The function will return `false` if the required ratio is not met.
 /// @return {number} -
 ///   The WCAG-defined contrast-ratio of two colors.
-///
-/// @example scss
-///   /* black and white: #{contrast-ratio(white, black)} */
-///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
 @function contrast-ratio(
   $base,
   $contrast,
@@ -178,7 +176,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 
   @if (type-of($require) != 'number') {
     $require: map-get($uppercase, $require) or $require;
-    $require: map-get($WCAG-CONTRAST, $require); // sass-lint:disable-line variable-name-format
+    $require: map-get($WCAG-CONTRAST, $require);
   }
 
   @if $require and ($ratio < $require) {
@@ -223,7 +221,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
       $value: $value / 12.92;
     } @else {
       $base: ($value + 0.055) / 1.055;
-      $value: _acc-pow($base, 2.4);
+      $value: _a_pow($base, 2.4);
     }
 
     @if ($component == 'red') {

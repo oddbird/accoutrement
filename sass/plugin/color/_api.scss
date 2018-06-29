@@ -43,19 +43,5 @@
   $color,
   $palette: $colors
 ) {
-  // Parse arguments
-  $color: map-get($palette, $color) or $color;
-  $base: nth($color, 1);
-  $adjust: if(length($color) > 1, nth($color, 2), ());
-
-  // Recursive check
-  $color: if(map-has-key($palette, $base), color($base, $palette), $base);
-
-  // Adjustments
-  @each $function, $value in $adjust {
-    $function: _a_color-get-function($function);
-    $color: call($function, $color, $value...);
-  }
-
-  @return $color;
+  @return get-token($palette, $color);
 }

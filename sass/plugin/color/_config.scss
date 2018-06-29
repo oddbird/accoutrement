@@ -2,48 +2,6 @@
 /// @group color-api
 
 
-// Local Functions
-// ---------------
-/// These functions are defined internally,
-/// and can be called by name without first being captured
-/// using the Sass `get-function()` approach.
-///
-/// Don't make changes to this map directly.
-/// You can add your own named functions in the `$functions` map.
-///
-/// @access public
-/// @group color-api
-/// @see $functions
-///
-/// @type map
-$_LOCAL-COLOR-FUNCTIONS: ( // sass-lint:disable-line variable-name-format
-  'tint',
-  'shade',
-  'contrast',
-);
-
-
-// Functions
-// ---------
-/// Define any additional color functions required
-/// to generate relataionships in the `$colors` map.
-/// This is only necessary for newer versions of Sass,
-/// where functions are first-class,
-/// and can be captured using `get-function($name)`.
-///
-/// ```scss
-/// $functions: (
-///   'darken': get-function('darken'),
-///   'lighten': get-function('lighten'),
-/// );
-/// ```
-///
-/// @group color-api
-/// @type map
-/// @see $_LOCAL-COLOR-FUNCTIONS
-$functions: () !default;
-
-
 // Color Map
 // ---------
 /// A variable storing the map of
@@ -86,13 +44,13 @@ $functions: () !default;
 ///   );
 /// @example scss - reference other colors
 ///   $colors: (
-///     'background': 'brand-light',
-///     'text': 'brand-dark',
-///     'link': 'brand-pink',
+///     'background': '#brand-light',
+///     'text': '#brand-dark',
+///     'link': '#brand-pink',
 ///   );
 /// @example scss - adjust referenced colors with any color function
 ///   $colors: (
-///     'focus': 'link' ('darken': 15%, 'desaturate': 15%),
+///     'focus': '#link' ('darken': 15%, 'desaturate': 15%),
 ///   );
 $colors: () !default;
 
@@ -134,48 +92,5 @@ $colors: () !default;
 @mixin add-colors (
   $maps...
 ) {
-  $colors: merge-colors($colors, $maps...) !global;
-}
-
-
-
-// Merge Colors
-// ------------
-/// Merge multiple color maps into a single map,
-/// in case you want to define colors in smaller groups –
-/// such as `brand-colors`, `link-colors`, etc. –
-/// before merging them into a single map.
-///
-/// This is like `add-colors`,
-/// but returns the combined map
-/// without assigning it to the `$colors` variable.
-///
-/// @group color-api
-///
-/// @parameter {maps...} $maps -
-///   Pass any number of maps to be merged.
-/// @return {map} -
-///   The merged map of colors.
-/// @example scss
-///   $brand-colors: (
-///     'brand-dark': #222,
-///     'brand-pink': hsl(330, 85%, 62%),
-///   );
-///
-///   $text-colors: (
-///     'text': 'brand-dark',
-///     'link': 'brand-pink',
-///   );
-///
-///   $colors: merge-colors($brand-colors, $text-colors);
-@function merge-colors(
-  $maps...
-) {
-  $return: ();
-
-  @each $map in $maps {
-    $return: map-merge($return, $map);
-  }
-
-  @return $return;
+  $colors: _a_map-multimerge($colors, $maps...) !global;
 }
