@@ -3,7 +3,7 @@
 /// to create entire transitions and animations --
 /// all stored in one place and easy to access
 /// for consistent "changes" across your project.
-/// @group change
+/// @group animate-change
 
 
 // Changes Map
@@ -45,7 +45,7 @@
 ///   references other changes in the map,
 ///   or format strings to interpolate.
 ///
-/// @group change
+/// @group animate-change
 /// @see {function} change
 $changes: () !default;
 
@@ -54,7 +54,7 @@ $changes: () !default;
 // -----------------
 /// Access a named change in your `$changes` map.
 ///
-/// @group change
+/// @group animate-change
 ///
 /// @param {string} $name -
 ///   The name of a change in your configuration (e.g. `fade-in`).
@@ -75,7 +75,7 @@ $changes: () !default;
 /// such as `fade-easing`, `slide-easing`, etc
 /// before merging them into a single global easing-palette.
 ///
-/// @group change
+/// @group animate-change
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -100,7 +100,7 @@ $changes: () !default;
 /// but returns the combined map
 /// without assigning it to the `$changes` variable.
 ///
-/// @group change
+/// @group animate-change
 ///
 /// @parameter {maps...} $maps -
 ///   Pass any number of maps to be merged.

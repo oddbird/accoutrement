@@ -1,6 +1,6 @@
 /// # Scale Configuration
 ///
-/// @group config
+/// @group scale-sizes
 /// @access public
 
 
@@ -23,7 +23,7 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 /// Don't make changes to this map directly.
 /// You can add your own named ratios in the `$ratios` map.
 ///
-/// @group config
+/// @group scale-sizes
 /// @access public
 /// @see $ratios
 ///
@@ -52,7 +52,7 @@ $_DEFAULT-RATIOS: (
 /// Any ratios that resolve to `linear`
 /// will not use any exponential scale.
 ///
-/// @group config
+/// @group scale-sizes
 /// @type map
 /// @see $_DEFAULT-RATIOS
 ///
@@ -87,7 +87,7 @@ $ratios: () !default;
 /// to store captured functions in one place,
 /// where we can continue to retrieve them by name.
 ///
-/// @group config
+/// @group scale-sizes
 /// @type map
 /// @see $ratios
 /// @see $functions
@@ -118,7 +118,7 @@ $sizes: (
 /// Don't make changes to this map directly.
 /// You can add your own named functions in the `$functions` map.
 ///
-/// @group config
+/// @group scale-sizes
 /// @access public
 /// @see $functions
 ///
@@ -147,7 +147,7 @@ $_LOCAL-SCALE-FUNCTIONS: (
 /// );
 /// ```
 ///
-/// @group config
+/// @group scale-sizes
 /// @type map
 /// @see $_LOCAL-SCALE-FUNCTIONS
 $functions: () !default;
@@ -167,7 +167,7 @@ $functions: () !default;
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group config
+/// @group scale-sizes
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -200,7 +200,7 @@ $functions: () !default;
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group config
+/// @group scale-sizes
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -221,7 +221,7 @@ $functions: () !default;
 /// but returns the combined map
 /// without assigning it to the `$sizes` variable.
 ///
-/// @group config
+/// @group scale-sizes
 /// @access private
 ///
 /// @parameter {maps...} $maps -

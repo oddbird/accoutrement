@@ -7,7 +7,7 @@
 /// in a single location.
 /// We also provide a classic set of built-in easing functions,
 /// which you can rename, access, or override as desired.
-/// @group ease
+/// @group animate-ease
 
 
 // Deafalt Easings
@@ -17,7 +17,7 @@
 /// Don't edit this map directly,
 /// but feel free to reference these values
 /// from the user-defined `$easing` map.
-/// @group ease
+/// @group animate-ease
 /// @access public
 $_a_EASING: ( // sass-lint:disable-line variable-name-format
   'in': ease-in,
@@ -74,7 +74,7 @@ $_a_EASING: ( // sass-lint:disable-line variable-name-format
 /// - Values can be CSS-ready easing functions,
 ///   or references other easings in the map.
 ///
-/// @group ease
+/// @group animate-ease
 /// @see {function} ease
 $easing: () !default;
 
@@ -83,7 +83,7 @@ $easing: () !default;
 // ---------------
 /// Access a named easing function in your `$easing` map.
 ///
-/// @group ease
+/// @group animate-ease
 ///
 /// @param {string} $name [ease] -
 ///   The name of an easing in your configuration (e.g. `elastic`).
@@ -104,7 +104,7 @@ $easing: () !default;
 /// such as `fade-easing`, `slide-easing`, etc
 /// before merging them into a single global easing-palette.
 ///
-/// @group ease
+/// @group animate-ease
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -129,7 +129,7 @@ $easing: () !default;
 /// but returns the combined map
 /// without assigning it to the `$easing` variable.
 ///
-/// @group ease
+/// @group animate-ease
 ///
 /// @parameter {maps...} $maps -
 ///   Pass any number of maps to be merged.

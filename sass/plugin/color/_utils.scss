@@ -1,12 +1,12 @@
 /// # Tint & Shade Utilities
-/// @group util
+/// @group color-utils
 
 
 // Tint
 // ----
 /// Mix a color with `white` to get a lighter tint.
 ///
-/// @group util
+/// @group color-utils
 ///
 /// @param {String | list} $color -
 ///   The name of a color in your palette,
@@ -30,7 +30,7 @@
 // -----
 /// Mix a color with `black` to get a darker shade.
 ///
-/// @group util
+/// @group color-utils
 ///
 /// @param {String | list} $color -
 ///   The name of a color in your palette,

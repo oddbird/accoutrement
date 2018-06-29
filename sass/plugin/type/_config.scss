@@ -2,7 +2,7 @@
 // ==================
 
 
-/// # Configuring WebFonts
+/// # WebFonts
 ///
 /// Webfont configuration is most useful
 /// for handling any font that requires `@font-face` importing --
@@ -21,7 +21,7 @@
 ///
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group config
+/// @group type-fonts
 
 
 // Font Path
@@ -38,7 +38,7 @@
 ///   The default changed from `'../fonts/'` to `''` --
 ///   so that no path is added unless explicity requested.
 ///
-/// @group config
+/// @group type-fonts
 /// @type string
 ///
 /// @example scss
@@ -80,7 +80,7 @@ $font-path: '' !default;
 ///   - Supports `unicode-range` CSS property,
 ///     as [described on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range).
 ///
-/// @group config
+/// @group type-fonts
 /// @type Map
 ///
 /// @prop {map} <key> -
@@ -201,7 +201,7 @@ $fonts: () !default;
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group config
+/// @group type-fonts
 ///
 /// @parameter {map} $key -
 ///   Give your font a semantic access-key

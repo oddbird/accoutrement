@@ -1,5 +1,5 @@
 /// # Converting Units
-/// @group units
+/// @group scale-units
 
 
 // Get PX [function]
@@ -70,7 +70,7 @@
 /// relative to the browser default rather than the site root –
 /// useful for media queries.
 ///
-/// @group units
+/// @group scale-units
 ///
 /// @param {length | string} $length -
 ///   The length or named size to be converted.

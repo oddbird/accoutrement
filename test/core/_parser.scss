@@ -1,7 +1,30 @@
 // Sass Utilities
 // ==============
-@include test-module('core/parser') {
+@include test-module('Core Parser') {
 
+// Token Get
+// ---------
+@include describe('Token Get [function]') {
+  $haystack: (
+    'slow': 3s,
+    'delay': 0.5s,
+    'key': '#slow',
+  );
+
+  @include it('Can start with a simple map key') {
+    @include assert-equal(
+      token-get($haystack, 'delay'),
+      0.5
+    );
+  }
+
+  @include it('Handles recursion with accoutrement-get') {
+    @include assert-equal(
+      token-get($haystack, 'key'),
+      3
+    );
+  }
+}
 
 // Accoutrement Get
 // ----------------
@@ -14,25 +37,18 @@
     'two': 2,
   );
 
-  @include it('Returns the value of a simple map key') {
-    @include assert-equal(
-      accoutrement-get('slow', $haystack),
-      3s
-    );
-  }
-
   @include it('Replaces the value of any #alias tag') {
     $needle: ('delay': 'is #delay', '#key': 3) '#key';
     $expect: ('delay': 'is 0.5s', 'value': 3) 'value';
     @include assert-equal(
-      accoutrement-get($needle, $haystack),
+      _a_get($haystack, $needle),
       $expect
     );
   }
 
   @include it('Handles todo-maps at the end of a list') {
     @include assert-equal(
-      accoutrement-get('#slow' ('times': 2), $haystack),
+      _a_get($haystack, '#slow' ('times': 2)),
       6
     );
   }
@@ -40,10 +56,10 @@
   @include it('Handles explicit todo-maps') {
     $needle: (
       'value': '#slow or #whatever',
-      'do': ('str-replace': 'or' 'with'),
+      'str-replace': 'or' 'with',
     );
     @include assert-equal(
-      accoutrement-get($needle, $haystack),
+      _a_get($haystack, $needle),
       '3s with #whatever'
     );
   }
@@ -51,18 +67,36 @@
   @include it('Allows #alias tags in todo map') {
     $needle: (
       'value': '#slow',
-      'do': ('#*': '#two'),
+      '#*': '#two',
     );
     @include assert-equal(
-      accoutrement-get($needle, $haystack),
+      _a_get($haystack, $needle),
       6s
     );
   }
 
   @include it('Handles common calc use-case') {
     @include assert-equal(
-      accoutrement-get(calc(#slow + #delay), $haystack),
+      _a_get($haystack, calc(#slow + #delay)),
       calc(3s + 0.5s)
+    );
+  }
+
+  @include it('Handles list values in function calls') {
+    $map: (
+      "main-start": ["nav-end" "main-start" "footer-start"],
+      "small-start": (
+        "value": "#main-start",
+        "remove-nth": 1
+      ),
+      "small-end": (
+        "value": "#small-start",
+        "str-replace": "-start" "-end" true
+      )
+    );
+    @include assert-equal(
+      _a_get($map, '#small-end'),
+      ["main-end" "footer-end"]
     );
   }
 }

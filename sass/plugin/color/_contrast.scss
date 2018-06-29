@@ -1,5 +1,5 @@
 /// # Managing Contrast & Accessibility
-/// @group contrast
+/// @group color-contrast
 
 
 // WCAG Contrast
@@ -24,7 +24,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 /// or define default `contrast-light` and `contrast-dark` values
 /// in your global `$colors` map.
 ///
-/// @group contrast
+/// @group color-contrast
 ///
 /// @param {string | list} $color -
 ///   The name or value of a color.
@@ -92,7 +92,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 /// but applies the resulting values to `background-color`
 /// and text `color` properties.
 ///
-/// @group contrast
+/// @group color-contrast
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
@@ -138,7 +138,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 /// - 'AA' == `4.5:1`
 /// - 'AAA' == `7:1`
 ///
-/// @group contrast
+/// @group color-contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
 ///
 /// @param {string | list | number} $color -
@@ -193,7 +193,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
 // ---------
 /// Get the WCAG luminance of a color in your palette.
 ///
-/// @group contrast
+/// @group color-contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
 ///
 /// @param {string | list} $color -

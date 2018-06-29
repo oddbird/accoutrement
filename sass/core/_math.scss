@@ -12,8 +12,11 @@
 // ----
 /// Add two values together in accoutrement maps.
 ///
-/// Alias strings: `plus` | `add` | `+`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'plus'`, `'add'`, or `'+'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -42,8 +45,11 @@
 // -----
 /// Subtract one value from another in accoutrement maps.
 ///
-/// Alias strings: `minus` | `subtract` | `-`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'minus'`, `'subtract'`, or `'-'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -72,8 +78,11 @@
 // -----
 /// Multiplty two values in accoutrement maps.
 ///
-/// Alias strings: `times` | `multiply` | `*`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'times'`, `'multiply'`, or `'*'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -101,8 +110,11 @@
 // ------
 /// Divide two values in accoutrement maps.
 ///
-/// Alias strings: `divide` | `/`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'divide'`, or `'/'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -131,8 +143,11 @@
 /// Divide two values in accoutrement maps,
 /// and return the remainder.
 ///
-/// Alias strings: `modulo` | `remainder` | `mod` | `%`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'modulo'`, `'remainder'`, `'mod'`, or `'%'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss -
 ///   $sizes: (

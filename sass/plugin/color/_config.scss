@@ -1,5 +1,5 @@
 /// # Color Configuration
-/// @group a-config
+/// @group color-api
 
 
 // Local Functions
@@ -12,7 +12,7 @@
 /// You can add your own named functions in the `$functions` map.
 ///
 /// @access public
-/// @group a-config
+/// @group color-api
 /// @see $functions
 ///
 /// @type map
@@ -38,7 +38,7 @@ $_LOCAL-COLOR-FUNCTIONS: ( // sass-lint:disable-line variable-name-format
 /// );
 /// ```
 ///
-/// @group a-config
+/// @group color-api
 /// @type map
 /// @see $_LOCAL-COLOR-FUNCTIONS
 $functions: () !default;
@@ -74,7 +74,7 @@ $functions: () !default;
 /// for our color-contrast tools.
 /// They default to `white` and `black` respectively.
 ///
-/// @group a-config
+/// @group color-api
 /// @see {function} color
 /// @see {function} contrast
 ///
@@ -111,7 +111,7 @@ $colors: () !default;
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group a-config
+/// @group color-api
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -150,7 +150,7 @@ $colors: () !default;
 /// but returns the combined map
 /// without assigning it to the `$colors` variable.
 ///
-/// @group a-config
+/// @group color-api
 ///
 /// @parameter {maps...} $maps -
 ///   Pass any number of maps to be merged.

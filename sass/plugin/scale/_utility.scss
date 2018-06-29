@@ -2,105 +2,18 @@
 // =========
 
 
-// Get Function
-// ------------
-/// Get a first-class function in Sass 3.5+,
-/// or the function name string (unchanged)
-/// in older Sass versions.
-/// This is safe to use internally,
-/// as it allows users to pass in
-/// either a string, or a previously-captured function.
-/// Users can also add captured functions
-/// to the provided `$functions` map
-/// in order to call them by name.
-///
-/// @access private
-/// @see $functions
-///
-/// @param {string | function} $function -
-///   The name (string) of a function,
-///   or the function to be called.
-/// @return {string | function} -
-///   Returns a first-class function in Sass 3.5+,
-///   or the function name string in older Sass versions.
-@function _a_scale-get-function(
-  $function
-) {
-  $type: type-of($function);
-
-  @if ($type == 'function') {
-    @return $function;
-  }
-
-  @if function-exists('get-function') {
-    @if index($_LOCAL-SCALE-FUNCTIONS, $function) {
-      @return get-function($function);
-    }
-
-    @if map-has-key($functions, $function) {
-      $function: map-get($functions, $function);
-      @return _a_scale-get-function($function);
-    }
-
-    @error '[#{$type}] `#{$function}` must be a first-class function';
-  }
-
-  @return $function;
-}
-
-
 // Format String
 // -------------
 /// Define your own format-string
 /// for building `calc(%s + %s) ('root', 'rhythm')` recipies.
 ///
+/// @access private
 /// @group config
 /// @type string
 ///
 /// @example scss -
 ///   $ac-format-string: '@@@';
 $ac-format-string: '%s';
-
-
-// String Replace
-// --------------
-/// Return a string, with a substring replaced
-///
-/// @access private
-///
-/// @param {string} $string -
-///   The original string to be edited
-/// @param {string} $old -
-///   A sub-string to replace
-/// @param {string} $new -
-///   A new sub-string to replace the old
-/// @return {string} -
-///   Original string, with substring replaced
-@function _a_str-replace(
-  $string,
-  $old,
-  $new: null,
-  $replace-all: false
-) {
-  $return: $string;
-  $i: str-index($string, $old);
-  $n: str-length($old);
-
-  @if $string == $old {
-    $return: $new;
-  } @else if $i {
-    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
-    $z: str-slice($string, $i + $n);
-
-    @if $replace-all {
-      $z: _a_str-replace($z, $old, $new, true);
-    }
-
-    $return: $a + if($new, $new, '') + $z;
-  }
-
-  @return $return;
-}
 
 
 // Interpolate

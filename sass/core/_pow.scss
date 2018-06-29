@@ -17,8 +17,11 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 // ---
 /// Returns base to the exponent power.
 ///
-/// Alias strings: `pow` | `^`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'pow'` or `'^'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss
 ///   /* #{ _a_pow(4, 2)   } */
@@ -67,9 +70,13 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 // ---
 /// A good approximation for $x close to 0.
 ///
-/// Alias string: `exp`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'exp'`.
 ///
 /// @group core-math
+///
+/// @param {number} $x
 @function _a_exp(
   $x
 ) {
@@ -88,8 +95,11 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 // ---
 /// Returns the natural logarithm of a number.
 ///
-/// Alias string: `log`
+/// Direct access to this function is prefixed,
+/// but it is available in all accoutrement maps as
+/// `'log'`.
 ///
+/// @access public
 /// @group core-math
 /// @example scss
 ///   /* #{ _a_log(2)     } */
@@ -196,7 +206,7 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 }
 
 
-/// ## [Copyright (C) 2013 Takeru Suzuki][MathSass]
+/// ## MathSass Functions: [Copyright (C) 2013 Takeru Suzuki][MathSass]
 ///
 /// Permission is hereby granted, free of charge,
 /// to any person obtaining a copy of this software

@@ -12,7 +12,7 @@
 /// and even reference `$sizes` as though they are `$breakpoints`.
 /// Otherwise, the map should contain only valid CSS length values.
 ///
-/// @group queries
+/// @group layout-queries
 ///
 /// @example scss - defining breakpoints
 ///   $breakpoints: (
@@ -36,7 +36,7 @@ $breakpoints: () !default;
 /// we remove `1px` (or `0.01em`) from every max value
 /// to avoid media-query overlap.
 ///
-/// @group queries
+/// @group layout-queries
 ///
 /// @link https://zellwk.com/blog/media-query-units/ PX, EM, or REM Media Queries?
 /// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints
@@ -77,7 +77,7 @@ $breakpoints: () !default;
 /// Generate a min-<`width`/`height`> query,
 /// for styling elements above the given viewport width.
 ///
-/// @group queries
+/// @group layout-queries
 ///
 /// @param {length | string} $min -
 ///   The name of a documented breakpoint/size,
@@ -117,7 +117,7 @@ $breakpoints: () !default;
 /// we remove `1px` (or `0.01em`) from every max value
 /// to avoid media-query overlap.
 ///
-/// @group queries
+/// @group layout-queries
 ///
 /// @link https://zellwk.com/blog/media-query-units/ PX, EM, or REM Media Queries?
 /// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints

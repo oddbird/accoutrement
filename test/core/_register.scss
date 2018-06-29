@@ -1,19 +1,62 @@
 // Sass Utilities
 // ==============
-@include test-module('core/functions') {
+@include test-module('Core Function Registration') {
 
 
-// Register Function
-// -----------------
+// Registration
+// ------------
+@include describe('_a_registration [function]') {
+  $rgba: if(function-exists('get-function'), get-function('rgba'), 'rgba');
+
+  @include it('Adds functions to a registration map') {
+    @include assert-equal(
+      _a_registration('rgba', $register: ('already': 'here')),
+      (
+        'already': 'here',
+        'rgba': $rgba
+      )
+    );
+  }
+
+  @include it('Registers alias names for functions') {
+    @include assert-equal(
+      _a_registration('rgba', ('alpha', 'a')),
+      (
+        'rgba': $rgba,
+        'alpha': $rgba,
+        'a': $rgba,
+      )
+    );
+  }
+
+  @include it('Prefers the alias for private functions') {
+    $exp: if(
+      function-exists('get-function'),
+      get-function('_a_registration'),
+      '_a_registration'
+    );
+    @include assert-equal(
+      _a_registration('_a_registration', 'register'),
+      ('register': $exp)
+    );
+  }
+}
+
+
+// Register Function [mixins]
+// --------------------------
 // sass-lint:disable variable-name-format
-@include describe('Register Function [mixin]') {
+@include describe('Register Function [mixins]') {
   @include it('Adds to the list of registered functions') {
-    // reset the global, for a clean testing environment
-    $old: $_ACCOUTREMENT_FUNCTIONS;
+    // reset the globals, for a clean testing environment
+    $old-int: $_ACCOUTREMENT_FUNCTIONS;
     $_ACCOUTREMENT_FUNCTIONS: () !global;
+    $old-user: $functions;
+    $functions: () !global;
 
-    // register two functions
+    // register internal and user functions
     @include _a_register-function('rgba', '_c', '_a_');
+    @include register-function('rgba', '_c', '_a_');
 
     // legacy Sass app-functions map
     $expect: (
@@ -35,7 +78,14 @@
       $_ACCOUTREMENT_FUNCTIONS,
       $expect
     );
-    $_ACCOUTREMENT_FUNCTIONS: $old !global;
+
+    @include assert-equal(
+      $functions,
+      $expect
+    );
+
+    $_ACCOUTREMENT_FUNCTIONS: $old-int !global;
+    $functions: $old-user !global;
   }
 }
 

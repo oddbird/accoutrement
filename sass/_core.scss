@@ -1,10 +1,15 @@
 // Core Partials
 // =============
 
+// function registration
 @import 'core/register';
+@import 'core/config';
+
+// utilities and helpers
 @import 'core/lists';
 @import 'core/math';
 @import 'core/pow';
 @import 'core/strings';
 
+// the parser relies on all of that
 @import 'core/parser';

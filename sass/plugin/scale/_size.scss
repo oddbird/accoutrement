@@ -1,5 +1,5 @@
 /// # Accessing Sizes
-/// @group sizes
+/// @group scale-sizes
 
 
 // Size [function]
@@ -7,7 +7,7 @@
 /// Access a named size in your `$sizes` map,
 /// using any comparable units.
 ///
-/// @group sizes
+/// @group scale-sizes
 ///
 /// @param {string | length | list} $size -
 ///   The name of a size in your configuration (e.g. `line-height`),
@@ -40,7 +40,7 @@
 /// Return the inverse value of any length,
 /// in comparable units.
 ///
-/// @group sizes
+/// @group scale-sizes
 ///
 /// @param {string | length | list} $size -
 ///   The name of a size in your configuration (e.g. `line-height`),
@@ -77,7 +77,7 @@
 /// from either the `$_DEFAULT-RATIOS`
 /// or user `$ratios` configurations.
 ///
-/// @group sizes
+/// @group scale-sizes
 ///
 /// @param {string | number} $ratio -
 ///   The key-name or value of a ratio
@@ -105,7 +105,7 @@
 /// Create a square by setting equal CSS `height` and `width` properties
 /// with the given size & unit value.
 ///
-/// @group sizes
+/// @group scale-sizes
 ///
 /// @param {string | length | list} $size -
 ///   The name of a size in your configuration (e.g. `line-height`),
@@ -228,7 +228,7 @@
     @return $size * $multiplier;
   }
 
-  $function: _a_scale-get-function($key);
+  $function: _a_get-function($key);
   $args: if($value, join($size, $value), $size);
   @return call($function, $args...);
 }

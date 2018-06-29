@@ -1,6 +1,6 @@
 // String Utilities
 // ================
-@include test-module('core/strings') {
+@include test-module('Core String Utils') {
 
 
 // String Replace
@@ -37,6 +37,12 @@
     @include assert-equal(
       _a_str-replace('hello world', 'o', '000', true),
       'hell000 w000rld');
+  }
+
+  @include it('Replaces sub-strings in a list of strings') {
+    @include assert-equal(
+      _a_str-replace('hello' 'world', 'o', '000', true),
+      'hell000' 'w000rld');
   }
 }
 

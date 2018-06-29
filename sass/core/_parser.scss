@@ -1,52 +1,126 @@
-// Core Map Parsing
-// ================
+/// # Core Map API
+/// The Accoutrement tools rely on a map syntax
+/// inspired by functional programming:
+///
+/// ```scss
+/// $map: (
+///   'original-value': 3em,
+///
+///   // explicit sub-map with 'value' and function properties:
+///   'new-value': (
+///     'value': '#original-value' ,
+///     'times': 2,
+///     'minus': 0.5,
+///   ),
+///
+///   // implicit value/function shorthand:
+///   'new-value-2': '#original-value' ('times': 2, 'minus': 0.5),
+/// );
+/// ```
+///
+/// Each function in the function map
+/// (e.g. `times` and `minus` above)
+/// will be run in order --
+/// with any associated arguments
+/// (`e.g. minus(times(#original-value, 2), 0.5)`) --
+/// to create a new value based on the base `value`.
+///
+/// @group core-api
+
+
+// Token Get
+// ---------
+/// The primary function for accessing and parsing
+/// accoutrement map values.
+/// Each accoutrement plugin creates a shortcut wrapper function
+/// for the specific map associated with that data-type.
+/// You can do the same, or use it directly
+/// to turn any arbitrary map into an accoutrement map.
+///
+/// @group core-api
+/// @example scss - Access a map directly
+///   $map: (
+///     'original-value': 3em,
+///     'new-value': '#original-value' ('times': 2, 'minus': 0.5),
+///   );
+///   /*! #{token-get($map, 'new-value')} */
+/// @example scss - Write your own shortcut plugin for specific maps
+///   $my-map: ('main': 32em);
+///   @function get($key) { @return token-get($my-map, $key); }
+///   /*! #{get('main')} */
+///
+/// @param {map} $map -
+///   A map of token definitions to reference against
+/// @param {*} $key -
+///   The original key or value to be parsed for `#alias` tags
+/// @return {*} -
+///   Updated `$needle` value
+///   in the same format as the original,
+///   but with all `#alias` tags replaced
+@function token-get(
+  $map,
+  $key
+) {
+  $key: map-get($map, $key) or $key;
+  @return _a_get($map, $key);
+}
 
 
 // Get
 // ---
-@function accoutrement-get(
-  $needle,
-  $haystack
+/// Adds value/do functionality
+/// to the value-parsing power of `_a_parse-alias()`.
+/// Functions can be added as a map at the end of a value --
+/// but some use-cases may confuse the parser,
+/// so we provide a more explicit map option with a `value` key,
+/// forllowed by functions and args.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   A map of token definitions to reference against
+/// @param {*} $key -
+///   Map access key for parsing
+/// @return {*} -
+///   Final parsed and adjusted value from the original map
+@function _a_get(
+  $map,
+  $key
 ) {
-  // simplest case…
-  @if map-get($haystack, $needle) {
-    @return map-get($haystack, $needle);
-  }
-
-  $type: type-of($needle);
+  $type: type-of($key);
   $do: null;
 
   // break out `do` maps…
   @if ($type == 'map') {
-    $value: map-get($needle, 'value');
-    $do: map-get($needle, 'do');
+    $value: map-get($key, 'value');
+    $do: map-remove($key, 'value');
 
     @if ($value) {
-      $needle: $value;
+      $key: $value;
     }
   } @else if ($type == 'list') {
-    $final: nth($needle, -1);
+    $final: nth($key, -1);
 
-    @if (length($needle) > 1) and (type-of($final) == 'map') {
+    @if (length($key) > 1) and (type-of($final) == 'map') {
       $do: $final;
-      $needle: _a_remove-nth($needle, -1);
+      $key: _a_remove-nth($key, -1);
+      $key: if(length($key) == 1, nth($key, 1), $key);
     }
   }
 
   // resolve any #alias tags…
-  $needle: _a_parse-alias($needle, $haystack);
-  $do: _a_parse-alias($do, $haystack);
+  $key: _a_parse-alias($key, $map);
+  $do: _a_parse-alias($do, $map);
 
   // make any necessary adjustments…
   @if ($do) {
     @each $function, $args in $do {
       $function: _a_get-function($function);
-      $args: if($args, join($needle, $args), $needle);
-      $needle: call($function, $args...);
+      $key: call($function, $key, $args...);
     }
   }
 
-  @return $needle;
+  @return $key;
 }
 
 
@@ -63,9 +137,6 @@
 ///   The original value to be parsed for `#alias` tags
 /// @param {map} $haystack -
 ///   A map of terms to reference tags against
-/// @param {string | function} $recursion -
-///   A function or function-name to use in recursive calls,
-///   in case values need pre-processing before `_a_parse-alias` is called
 /// @return {*} -
 ///   Updated `$needle` value
 ///   in the same format as the original,
@@ -108,7 +179,7 @@
     @each $alias in $alias-list {
       @if map-has-key($haystack, $alias) {
         $reference: map-get($haystack, $alias);
-        $reference: accoutrement-get($reference, $haystack);
+        $reference: _a_get($haystack, $reference);
         $needle: _a_str-replace($needle, '##{$alias}', $reference, true);
       }
     }

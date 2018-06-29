@@ -2,7 +2,7 @@
 /// Manage all your duration & delay patterns
 /// in a single place -
 /// with explicitly documented relationships.
-/// @group times
+/// @group animate-times
 
 
 // Timing Map
@@ -30,7 +30,7 @@
 /// - Adjustments are a nested map of functions and arguments,
 ///   for adjusting times directly in your palette.
 ///
-/// @group times
+/// @group animate-times
 /// @see {function} time
 $times: () !default;
 
@@ -39,7 +39,7 @@ $times: () !default;
 // ---------------
 /// Access a named time in your `$times` map.
 ///
-/// @group times
+/// @group animate-times
 ///
 /// @param {string | length | list} $time -
 ///   The name of a time in your configuration (e.g. `fast`),
@@ -65,7 +65,7 @@ $times: () !default;
 /// such as `duration-times`, `delay-times`, etc
 /// before merging them into a single global times-palette.
 ///
-/// @group times
+/// @group animate-times
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -90,7 +90,7 @@ $times: () !default;
 /// but returns the combined map
 /// without assigning it to the `$times` variable.
 ///
-/// @group times
+/// @group animate-times
 ///
 /// @parameter {maps...} $maps -
 ///   Pass any number of maps to be merged.

@@ -1,30 +1,6 @@
 /// # Core Function Registration
-/// Sass 3.5+ provides first-class functions,
-/// and 4.0 is expected to include module namespacing features.
-/// Since we want to integrate with user-defined functions,
-/// we provide a tools for storing first-class functions
-/// and making them accessible to all the accoutrment plugins.
-
-
-// User Functions
-// ---------
-/// Define any third-party functions required
-/// by your various accoutrement maps.
-/// This is only necessary for newer versions of Sass,
-/// where functions are first-class,
-/// and can be captured using `get-function($name)`.
-///
-/// ```scss
-/// $functions: (
-///   'times': get-function('times'),
-///   'rgba': get-function('rgba'),
-/// );
-/// ```
-///
-/// @group core-functions
-/// @type map
-$functions: () !default;
-
+/// @group core-register
+/// @access private
 
 
 // Internal Functions
@@ -35,10 +11,9 @@ $functions: () !default;
 /// User should not make changes to this map.
 ///
 /// @access private
-/// @group core-functions
+/// @group core-register
 /// @see {mixin} _a_register-function()
 /// @type map
-// sass-lint:disable variable-name-format
 $_ACCOUTREMENT_FUNCTIONS: () !default;
 
 
@@ -48,30 +23,61 @@ $_ACCOUTREMENT_FUNCTIONS: () !default;
 /// that can be safely captured using `function-get()`
 /// in the latest versions of Sass.
 ///
-/// Functions only need to be registered
-/// if they will be used inside accoutrement maps.
-///
 /// @access private
-/// @group core-functions
+/// @group core-register
 /// @see {function} _a_get-function()
 ///
-/// @param {String} $function -
+/// @param {string | function} $function -
 ///   The function-name to be registered
-/// @param {Strings} $names... [$function] -
+///   or a first-class function previously captured
+/// @param {strings} $names... [$function] -
 ///   One or more alias names (strings)
 ///   to use for map-access to the function
-/// @output {Map} $_ACCOUTREMENT_APP -
+/// @output {map} $_ACCOUTREMENT_APP -
 ///   Functions are registered in a map
 ///   under any number of aliases
-// sass-lint:disable variable-name-format
 @mixin _a_register-function(
   $function,
   $names...
 ) {
-  @if function-exists($function) {
-    $register: $_ACCOUTREMENT_FUNCTIONS;
+  $register: _a_registration($function, $names, $_ACCOUTREMENT_FUNCTIONS);
+  $_ACCOUTREMENT_FUNCTIONS: $register !global;
+}
 
-    @if (str-index($function, '_') != 1) {
+
+// Registration
+// ------------
+/// This function provides the shared logic used by
+/// `register-function()` (for user registration)
+/// and `_a_register-function()` (for internal use).
+///
+/// @access private
+/// @group core-register
+/// @see {mixin} register-function()
+/// @see {mixin} _a_register-function()
+///
+/// @param {string | function} $function -
+///   The function-name to be registered,
+///   or a first-class function previously captured
+/// @param {list} $names [$function] -
+///   One or more alias names (strings)
+///   to use for map-access to the function
+/// @param {map} $register [true] -
+///   Toggle between user registration
+///   and internal registration
+/// @return {map} -
+///   Updated registration map
+/// @throw -
+///   '#{$function}() is not available to register with Accoutrement'
+@function _a_registration(
+  $function,
+  $names: (),
+  $register: ()
+) {
+  @if not function-exists($function) {
+    @warn '#{$function}() is not available to register with Accoutrement';
+  } @else {
+    @if (length($names) == 0) or (str-index($function, '_') != 1) {
       $names: join($function, $names);
     }
 
@@ -83,11 +89,9 @@ $_ACCOUTREMENT_FUNCTIONS: () !default;
       $name: ($name: $function);
       $register: map-merge($register, $name);
     }
-
-    $_ACCOUTREMENT_FUNCTIONS: $register !global;
-  } @else {
-    @error '#{$function}() is not available to register with Accoutrement';
   }
+
+  @return $register;
 }
 
 
@@ -101,14 +105,14 @@ $_ACCOUTREMENT_FUNCTIONS: () !default;
 /// either a string, or a previously-captured function.
 ///
 /// @access private
-/// @group core-functions
+/// @group core-register
 ///
-/// @param {String | Function} $function -
+/// @param {string | function} $function -
 ///   The name (string) of a registered function,
 ///   or the first-class function to be called
-/// @param {String} $app -
+/// @param {string} $app -
 ///   The accoutrement app that a function is associated with
-/// @return {String | Function} -
+/// @return {string | function} -
 ///   Returns a first-class function in Sass 3.5+,
 ///   or the function name string in older Sass versions
 @function _a_get-function(

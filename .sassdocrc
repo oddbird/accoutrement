@@ -2,6 +2,46 @@ theme: 'herman'
 dest: docs/
 src: sass/
 
+display:
+  access: 'public'
+
+groups:
+  'Core (Parser)':
+    core-api: 'Core Map API'
+    core-config: 'User Configuration'
+    core-math: 'Math Helpers'
+    core-utils: 'Sass Utilities'
+  'Init (Normalization)':
+    init-root: 'General'
+    init-a11y: 'Accessibility'
+    init-forms: 'Forms'
+    init-media: 'Media'
+    init-type: 'Type'
+  'Plugin: Animate':
+    animate-times: 'Timing'
+    animate-ease: 'Easing'
+    animate-change: 'Changes'
+  'Plugin: Color':
+    color-api: 'Colors'
+    color-contrast: 'Contrast'
+    color-utils: 'Color Utils'
+  'Plugin: Layout':
+    layout-box: 'Box-Sizing'
+    layout-clearfix: 'Clearfix'
+    layout-position: 'Positioning'
+    layout-queries: 'Media Queries'
+    layout-ratios: 'Fluid Ratios'
+    layout-z-index: 'Z-Index'
+  'Plugin: Scale':
+    scale-sizes: 'Sizes'
+    scale-units: 'Unit Conversion'
+    type-pseudo: 'Pseudo Elements'
+  'Plugin: Type':
+    type-a11y: 'Accessibility'
+    type-fonts: 'Webfonts'
+    type-pseudo: 'Pseudo Elements'
+
+
 herman:
   sass:
     includepaths: ['sass']

@@ -5,7 +5,7 @@
 /// Prevent iOS and IE text size adjust after device orientation change.
 ///
 /// - Overflow-style: Edge 12+, Internet Explorer 11-
-/// @group general
+/// @group init-root
 html {
   -ms-overflow-style: -ms-autohiding-scrollbar; // sass-lint:disable-line no-vendor-prefixes
   text-size-adjust: 100%;
@@ -15,7 +15,7 @@ html {
 /// - Android 4.3-
 /// - Internet Explorer 11-
 /// - Windows Phone 8.1+
-/// @group general
+/// @group init-root
 main {
   display: block;
 }
@@ -25,14 +25,14 @@ main {
 /// - Firefox 40+
 /// - Internet Explorer 11-
 /// - Windows Phone 8.1+
-/// @group general
+/// @group init-root
 details {
   display: block;
 }
 
 
 /// Internet Explorer 11-
-/// @group general
+/// @group init-root
 pre {
   overflow: auto;
 }
@@ -40,7 +40,7 @@ pre {
 
 /// - Internet Explorer 11-
 /// - Windows Phone 8.1+
-/// @group general
+/// @group init-root
 progress {
   display: inline-block;
 }
@@ -49,7 +49,7 @@ progress {
 /// - Firefox 40+
 /// - Internet Explorer 11-
 /// - Windows Phone 8.1+
-/// @group general
+/// @group init-root
 summary {
   display: block;
 }
@@ -60,14 +60,14 @@ summary {
 /// - iOS 7-
 /// - Safari 7-
 /// - Windows Phone 8.1+
-/// @group general
+/// @group init-root
 template {
   display: none;
 }
 
 
 /// Specify the border style, width, and box-sizing of all elements.
-/// @group general
+/// @group init-root
 *,
 ::before,
 ::after {
@@ -78,7 +78,7 @@ template {
 
 
 /// Specify the core styles of all elements.
-/// @group general
+/// @group init-root
 * {
   font-size: inherit;
   line-height: inherit;
@@ -88,7 +88,7 @@ template {
 
 
 /// Specify the border styling of tables.
-/// @group general
+/// @group init-root
 table {
   border-collapse: collapse;
   border-spacing: 0;

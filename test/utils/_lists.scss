@@ -1,0 +1,81 @@
+// Sass Utilities
+// ==============
+@include test-module('utils/lists') {
+
+
+// Remove Nth
+// ----------
+@include describe('Remove Nth [function]') {
+  @include it('Returns a list with item removed') {
+    @include assert-equal(
+      _a_remove-nth('one' 'two' 3, 2),
+      'one' 3
+    );
+  }
+
+  @include it('Returns a list with negative-indexed item removed') {
+    @include assert-equal(
+      _a_remove-nth('one' 'two' 3, -1),
+      'one' 'two'
+    );
+  }
+}
+
+
+// List Template
+// -------------
+@include describe('List Template [function]') {
+  $space: 'one' 'two';
+  $comma: ('one', 'two');
+  $b-space: ['one' 'two'];
+  $b-comma: ['one', 'two'];
+
+  @include it('Returns an empty list') {
+    @include assert-equal(
+      type-of(_a_list-template($space)),
+      'list',
+      'should be a list'
+    );
+    @include assert-equal(
+      length(_a_list-template($b-comma)),
+      0,
+      'should be empty'
+    );
+  }
+
+  @include it('Keeps the original space list-separator') {
+    @include assert-equal(
+      list-separator(_a_list-template($space)),
+      'space'
+    );
+
+    @include assert-equal(
+      list-separator(_a_list-template($b-space)),
+      'space'
+    );
+  }
+
+  @include it('Keeps the original comma list-separator') {
+    @include assert-equal(
+      list-separator(_a_list-template($b-comma)),
+      'comma'
+    );
+
+    @include assert-equal(
+      list-separator(_a_list-template($comma)),
+      'comma'
+    );
+  }
+
+  @include it('Keeps the original brackets or lack-of') {
+    @include assert-false(
+      is-bracketed(_a_list-template($comma))
+    );
+
+    @include assert-true(
+      is-bracketed(_a_list-template($b-space))
+    );
+  }
+}
+
+} // end module

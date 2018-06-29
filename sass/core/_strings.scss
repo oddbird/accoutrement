@@ -1,17 +1,27 @@
-/// # Core String Utilities
-/// Functions for basic Sass-string manipulation.
+// String Utilities
 
 
 // String Replace
 // --------------
 /// Replace a substring inside a larger string,
 /// or replace the entirety of the string.
+/// The function itself is prefixed & should not be used directly,
+/// but it's available in all accoutrement maps
+/// under the `'str-replace'` alias.
 ///
-/// @access private
-/// @group utils-strings
+/// @access public
+/// @group core-utils
+/// @example scss
+///   // sass treats calc() as a string,
+///   // so we can use string-functions to manipulate calc values…
+///   $map: (
+///     'text-size': calc(1em + 1vw),
+///     'large-text': '#text-size' ('str-replace': '1vw' '3vw'),
+///   );
+///   /*! #{token_get($map, 'large-text')} */
 ///
-/// @param {string} $string -
-///   The original string to be edited
+/// @param {string | list} $string -
+///   The original string (or list of strings) to edit
 /// @param {string} $old -
 ///   A sub-string to replace
 /// @param {string} $new -
@@ -25,6 +35,16 @@
   $replace-all: false
 ) {
   $return: $string;
+
+  @if (type-of($string) == 'list') {
+    $return: _a_list-template($string);
+    @each $item in $string {
+      $item: _a_str-replace($item, $old, $new, $replace-all);
+      $return: append($return, $item);
+    }
+    @return $return;
+  }
+
   $i: str-index($string, $old);
   $n: str-length($old);
 

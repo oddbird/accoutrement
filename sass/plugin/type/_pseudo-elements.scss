@@ -6,13 +6,13 @@
 ///
 /// Some shortcuts for creating `::before` and `::after` pseudo-elements.
 ///
-/// @group pseudo
+/// @group type-pseudo
 
 
 // Before
 // ------
 /// Add generated content `:before` an element.
-/// @group pseudo
+/// @group type-pseudo
 /// @param {String} $content -
 ///   A value for the `content` property.
 @mixin before(
@@ -28,7 +28,7 @@
 // After
 // -----
 /// Add generated content `:after` an element.
-/// @group pseudo
+/// @group type-pseudo
 /// @param {String} $content -
 ///   A value for the `content` property.
 @mixin after(
@@ -44,7 +44,7 @@
 // Wrap Content
 // ------------
 /// Add generated content `:before` and `:after` an element.
-/// @group pseudo
+/// @group type-pseudo
 /// @param {List} $content -
 ///   One or two values to be used for the `content` property.
 ///   A single string will be used `:before` and `:after`.

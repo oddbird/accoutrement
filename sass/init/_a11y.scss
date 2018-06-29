@@ -3,7 +3,7 @@
 
 
 /// Chrome 44-, iOS 8+, Safari 9+
-/// @group a11y
+/// @group init-a11y
 audio {
   :not([controls]) {
     display: none;
@@ -12,14 +12,14 @@ audio {
 
 
 /// Specify the progress cursor of updating elements.
-/// @group a11y
+/// @group init-a11y
 [aria-busy='true'] {
   cursor: progress;
 }
 
 
 /// Specify the pointer cursor of trigger elements.
-/// @group a11y
+/// @group init-a11y
 [aria-controls] {
   cursor: pointer;
 }
@@ -27,14 +27,14 @@ audio {
 
 /// Specify the unstyled cursor of disabled,
 /// not-editable, or otherwise inoperable elements.
-/// @group a11y
+/// @group init-a11y
 [aria-disabled] {
   cursor: default;
 }
 
 
 /// Internet Explorer 10-
-/// @group a11y
+/// @group init-a11y
 [hidden] {
   display: none;
 }

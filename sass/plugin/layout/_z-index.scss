@@ -10,7 +10,7 @@
 /// while additional values are indexed
 /// by their position in the nested list.
 ///
-/// @group z-index
+/// @group layout-z-index
 /// @type list
 ///
 /// @example scss -
@@ -28,7 +28,7 @@ $z-index: ();
 // ------------------
 /// Return the numeric index of a named layer in your `$z-index` variable.
 ///
-/// @group z-index
+/// @group layout-z-index
 ///
 /// @param {string} $layer -
 ///   The name of a z-index layer in your configuration.
@@ -71,7 +71,7 @@ $z-index: ();
 // ---------------
 /// Output the `z-index` property and value of a given layer
 /// in your `$z-index` configuration.
-/// @group z-index
+/// @group layout-z-index
 /// @param {string} $layer -
 ///   The name of a z-index layer in your configuration.
 /// @output -

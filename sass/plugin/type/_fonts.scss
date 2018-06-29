@@ -2,14 +2,14 @@
 // =========
 
 
-/// # Using WebFonts
+/// ### Using WebFonts
 ///
 /// Once you've configured your webfont data into a map,
 /// these tools will help you access the data in various ways:
 /// from creating `@font-face` imports,
 /// to calling font-families by any given alias.
 ///
-/// @group fonts
+/// @group type-fonts
 
 
 // Font-URL [function]
@@ -20,7 +20,7 @@
 /// @since 4.0.0 -
 ///   Supports Base64 data URI's, without prepending font-path.
 ///
-/// @group fonts
+/// @group type-fonts
 ///
 /// @param {string} $path -
 ///   A path relative to the fonts directory.
@@ -50,7 +50,7 @@
 /// @since 4.0.0 -
 ///   Provides the correct name for fonts when an alias is given.
 ///
-/// @group fonts
+/// @group type-fonts
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
@@ -81,7 +81,7 @@
 // -------------------
 /// Output a font-stack to font-family based on your `$fonts` configuration.
 ///
-/// @group fonts
+/// @group type-fonts
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
@@ -111,7 +111,7 @@
 /// @since 4.0.0 -
 ///   No longer accepts the `$formats` parameter.
 ///
-/// @group fonts
+/// @group type-fonts
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
@@ -152,7 +152,7 @@
 /// @since 4.0.0 -
 ///   No longer accepts the `$formats` parameter.
 ///
-/// @group fonts
+/// @group type-fonts
 ///
 /// @param {map} $fonts [$fonts] -
 ///   A map of your font configuration.
