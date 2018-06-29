@@ -1,0 +1,25 @@
+// Map MultiMerge
+// --------------
+/// Merge multiple \maps into a single map,
+/// in case you want to define tokens in smaller groups –
+/// such as `brand-colors`, `text-colors`, etc. –
+/// before merging them into a single map.
+///
+/// @group core-utils
+/// @access private
+///
+/// @parameter {maps...} $maps -
+///   Pass any number of maps to be merged.
+/// @return {map} -
+///   The merged map of easings.
+@function _a_map-multimerge(
+  $maps...
+) {
+  $return: ();
+
+  @each $map in $maps {
+    $return: map-merge($return, $map);
+  }
+
+  @return $return;
+}

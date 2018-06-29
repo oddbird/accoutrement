@@ -1,10 +1,11 @@
 // Time Tests
 // ==========
+@include test-module('Animate: Times') {
 
 
 // Time [function]
 // ---------------
-@include describe('time [function]') {
+@include describe('Time [function]') {
   @include it('Get time from map setting') {
     @include assert-equal(
       time('fast'),
@@ -16,21 +17,6 @@
     @include assert-equal(
       time('plus-name'),
       152ms
-    );
-  }
-}
-
-
-// Merge Times [function]
-// ----------------------
-@include describe('Merge Times [function]') {
-  $a: ('short': 150ms);
-  $b: ('long': 2s);
-
-  @include it('Merges times into a single map') {
-    @include assert-equal(
-      merge-times($a, $b),
-      map-merge($a, $b)
     );
   }
 }
@@ -48,9 +34,11 @@
   @include it('Merges times, and updates global variable') {
     @include assert-equal(
       $times,
-      map-merge($times, map-merge($a, $b))
+      map-merge($old, map-merge($a, $b))
     );
   }
 
   $times: $old !global;
 }
+
+} // end module

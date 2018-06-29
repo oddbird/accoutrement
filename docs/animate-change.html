@@ -603,10 +603,10 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-change.html#mixin--add-change" class="item-name">add-change()</a>
+  animate-change.html#function--change" class="item-name">change()</a>
       
       
       
@@ -616,10 +616,6 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
     
   </div>
 
-
-        
-      
-        
 
         
       
@@ -638,13 +634,14 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
-        <span class="item-name">_a_animate-get-change()</span>
+        <a href="
+  animate-change.html#mixin--add-changes" class="item-name">add-changes()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -875,11 +872,47 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_animate-get-change()</span>
+        <a href="
+  core-api.html#function--get-token" class="item-name">get-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-change.html#variable--changes" class="item-name">$changes</a>
+      
+      
+      
+      
     </h4>
 
     
@@ -922,7 +955,7 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
 
 
 
-<section class="item" id="mixin--add-change">
+<section class="item" id="mixin--add-changes">
   
     
   
@@ -940,7 +973,7 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
       
 
       
-        <a href="#mixin--add-change" class="item-name">add-change()</a>
+        <a href="#mixin--add-changes" class="item-name">add-changes()</a>
       
 
       
@@ -961,10 +994,10 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
 
   
     <div class="text-block">
-      <p>Merge individual time maps into the global <code>$changes</code> variable,
-in case you want to define functions in smaller groups
-such as <code>fade-easing</code>, <code>slide-easing</code>, etc
-before merging them into a single global<span class="widont">&nbsp;</span>easing-palette.</p>
+      <p>Merge individual change maps into the global <code>$changes</code> variable,
+in case you want to define changes in smaller groups –
+such as <code>button-changes</code>, <code>page-changes</code>, etc –
+before merging them into a single global<span class="widont">&nbsp;</span>changes-palette.</p>
 
       
   
@@ -1020,7 +1053,7 @@ before merging them into a single global<span class="widont">&nbsp;</span>easing
     
       
       <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+        <p>Pass any number of maps to be merged and<span class="widont">&nbsp;</span>added</p>
 
       </div>
     
@@ -1114,12 +1147,11 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  animate-change.html#function--merge-change" class="item-name">merge-change()</a>
+        <span class="item-name">_a_map-multimerge()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -1174,242 +1206,6 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
 
   
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--merge-change">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--merge-change" class="item-name">merge-change()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Merge multiple easing maps into a single map,
-in case you want to define easing in smaller groups –
-such as <code>fade-easing</code>, <code>slide-easing</code>, etc. –
-before merging them into a single<span class="widont">&nbsp;</span>map.</p>
-<p>This is like <code>add-ease</code>,
-but returns the combined map
-without assigning it to the <code>$changes</code> variable.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(maps...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The merged map of<span class="widont">&nbsp;</span>easings.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-change.html#mixin--add-change" class="item-name">add-change()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
   
 
   

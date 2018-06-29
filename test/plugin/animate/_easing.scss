@@ -1,10 +1,11 @@
 // Easing Tests
 // ============
+@include test-module('Animate: Easing') {
 
 
 // Ease [function]
 // ---------------
-@include describe('ease [function]') {
+@include describe('Ease [function]') {
   @include it('Get easing from defaults') {
     @include assert-equal(
       ease('in-out-quad'),
@@ -28,23 +29,8 @@
 }
 
 
-// Merge Ease [function]
-// ----------------------
-@include describe('Merge Ease [function]') {
-  $a: ('sidebar-in': 'in-out-quad');
-  $b: ('elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4));
-
-  @include it('Merges easings into a single map') {
-    @include assert-equal(
-      merge-easing($a, $b),
-      map-merge($a, $b)
-    );
-  }
-}
-
-
-// Add Times [mixin]
-// -----------------
+// Add Ease [mixin]
+// ----------------
 @include describe('Add Ease [mixin]') {
   $old: $easing;
   $a: ('sidebar-in': 'in-out-quad');
@@ -55,9 +41,11 @@
   @include it('Merges times, and updates global variable') {
     @include assert-equal(
       $easing,
-      map-merge($easing, map-merge($a, $b))
+      map-merge($old, map-merge($a, $b))
     );
   }
 
   $easing: $old !global;
 }
+
+} // end module

@@ -1,0 +1,40 @@
+// Change Tests
+// ============
+@include test-module('Animate: Changes') {
+
+
+// Change [function]
+// -----------------
+@include describe('Change [function]') {
+  @include it('Get change from map setting') {
+    @include assert-equal(
+      change('modal-in'),
+      (
+        (transform time('fast')) ease('out-back'),
+        (opacity time('fade') ease('out-quad')) time('delay'),
+      )
+    );
+  }
+}
+
+
+// Add Changes [mixin]
+// -------------------
+@include describe('Add Changes [mixin]') {
+  $old: $changes;
+  $a: ('glow': glow time('slow') ease('in') infinite alternate);
+  $b: ('slide-out': '#slide' ease('in'));
+
+  @include add-changes($a, $b);
+
+  @include it('Merges changes, and updates global variable') {
+    @include assert-equal(
+      $changes,
+      map-merge($old, map-merge($a, $b))
+    );
+  }
+
+  $changes: $old !global;
+}
+
+} // end module

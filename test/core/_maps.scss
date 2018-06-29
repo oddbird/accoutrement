@@ -1,0 +1,24 @@
+// Map Utility Tests
+// =================
+@include test-module('Core Map Utils') {
+  @include describe('Map MultiMerge [function]') {
+    @include it('Merges multiple maps') {
+      $a: (
+        'one': 1,
+        'two': 2,
+      );
+      $b: ('two': 'tooooo');
+      $c: ('three': 3);
+      $expect: (
+        'one': 1,
+        'two': 'tooooo',
+        'three': 3,
+      );
+
+      @include assert-equal(
+        _a_map-multimerge($a, $b, $c),
+        $expect
+      );
+    }
+  }
+}

@@ -10,6 +10,35 @@
 /// @group animate-ease
 
 
+// Easing Map
+// ----------
+/// A variable storing the map of
+/// all easing globally-avialble on your project.
+/// Any easing added to the `$easing` map will be accesible
+/// to the `ease()` function by default.
+///
+/// Define each easing with a `name` and `value`…
+///
+/// ```
+/// $easing: (
+///   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///   'sidebar-in': ease-out,
+///   'sidebar-out': 'in-back',
+///   'modal-in': '#sidebar-in',
+/// );
+/// ```
+///
+/// - Name your easing anything –
+///   from abstractions like `elastic`,
+///   to concrete patterns like `sidebar-in`.
+/// - Values can be CSS-ready easing functions,
+///   or references other easings in the map.
+///
+/// @group animate-ease
+/// @see {function} ease
+$easing: () !default;
+
+
 // Deafalt Easings
 // ---------------
 /// A classic set of built-in easing functions,
@@ -19,7 +48,7 @@
 /// from the user-defined `$easing` map.
 /// @group animate-ease
 /// @access public
-$_a_EASING: ( // sass-lint:disable-line variable-name-format
+$_a_EASING: (
   'in': ease-in,
   'out': ease-out,
   'in-out': ease-in-out,
@@ -50,35 +79,6 @@ $_a_EASING: ( // sass-lint:disable-line variable-name-format
 );
 
 
-// Easing Map
-// ----------
-/// A variable storing the map of
-/// all easing globally-avialble on your project.
-/// Any easing added to the `$easing` map will be accesible
-/// to the `ease()` function by default.
-///
-/// Define each easing with a `name` and `value`…
-///
-/// ```
-/// $easing: (
-///   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
-///   'sidebar-in': ease-out,
-///   'sidebar-out': 'in-back',
-///   'modal-in': 'sidebar-in',
-/// );
-/// ```
-///
-/// - Name your easing anything –
-///   from abstractions like `elastic`,
-///   to concrete patterns like `sidebar-in`.
-/// - Values can be CSS-ready easing functions,
-///   or references other easings in the map.
-///
-/// @group animate-ease
-/// @see {function} ease
-$easing: () !default;
-
-
 // Ease [function]
 // ---------------
 /// Access a named easing function in your `$easing` map.
@@ -86,21 +86,23 @@ $easing: () !default;
 /// @group animate-ease
 ///
 /// @param {string} $name [ease] -
-///   The name of an easing in your configuration (e.g. `elastic`).
+///   The name of an easing in your configuration
 /// @return {length} -
 ///   The pre-defined easing
 @function ease(
   $name: ease
 ) {
-  @return _a_animate-get-easing($name);
+  $map: map-merge($_a_EASING, $easing);
+  $name: get-token($map, $name);
+  @return unquote($name);
 }
 @include _a_register-function('ease');
 
 
 // Add Easing
 // ----------
-/// Merge individual time maps into the global `$easing` variable,
-/// in case you want to define functions in smaller groups
+/// Merge individual easing maps into the global `$easing` variable,
+/// in case you want to define easings in smaller groups
 /// such as `fade-easing`, `slide-easing`, etc
 /// before merging them into a single global easing-palette.
 ///
@@ -114,62 +116,5 @@ $easing: () !default;
 @mixin add-easing(
   $maps...
 ) {
-  $easing: merge-easing($easing, $maps...) !global;
+  $easing: _a_map-multimerge($easing, $maps...) !global;
 }
-
-
-// Merge Easing
-// ------------
-/// Merge multiple easing maps into a single map,
-/// in case you want to define easing in smaller groups –
-/// such as `fade-easing`, `slide-easing`, etc. –
-/// before merging them into a single map.
-///
-/// This is like `add-ease`,
-/// but returns the combined map
-/// without assigning it to the `$easing` variable.
-///
-/// @group animate-ease
-///
-/// @parameter {maps...} $maps -
-///   Pass any number of maps to be merged.
-/// @return {map} -
-///   The merged map of easings.
-@function merge-easing(
-  $maps...
-) {
-  $return: ();
-
-  @each $map in $maps {
-    $return: map-merge($return, $map);
-  }
-
-  @return $return;
-}
-@include _a_register-function('merge-easing');
-
-
-// Get Easing
-// ----------
-/// Access a named easing in your `$easing` map.
-///
-/// @access private
-///
-/// @param {string | length | list} $name -
-///   The name of an easing in your configuration (e.g. `elastic`).
-/// @return {length} -
-///   The calculated easing
-@function _a_animate-get-easing(
-  $name
-) {
-  // Merge defaults
-  $all: map-merge($_a_EASING, $easing); // sass-lint:disable-line variable-name-format
-
-  // Recursive check
-  $name: map-get($all, $name) or $name;
-  $name: if(map-has-key($all, $name), _a_animate-get-easing($name), $name);
-
-  // Return
-  @return unquote($name);
-}
-@include _a_register-function('_a_animate-get-easing');

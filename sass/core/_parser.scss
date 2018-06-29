@@ -43,10 +43,10 @@
 ///     'original-value': 3em,
 ///     'new-value': '#original-value' ('times': 2, 'minus': 0.5),
 ///   );
-///   /*! #{token-get($map, 'new-value')} */
+///   /*! #{get-token($map, 'new-value')} */
 /// @example scss - Write your own shortcut plugin for specific maps
 ///   $my-map: ('main': 32em);
-///   @function get($key) { @return token-get($my-map, $key); }
+///   @function get($key) { @return get-token($my-map, $key); }
 ///   /*! #{get('main')} */
 ///
 /// @param {map} $map -
@@ -57,7 +57,7 @@
 ///   Updated `$needle` value
 ///   in the same format as the original,
 ///   but with all `#alias` tags replaced
-@function token-get(
+@function get-token(
   $map,
   $key
 ) {

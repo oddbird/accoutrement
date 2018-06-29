@@ -406,210 +406,6 @@ which you can rename, access, or override as<span class="widont">&nbsp;</span>de
 
 
 
-<section class="item" id="variable--_a_EASING">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--_a_EASING" class="item-name">$_a_EASING</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$_a_EASING: ( // sass-lint:disable-line variable-name-format
-  &#39;in&#39;: ease-in,
-  &#39;out&#39;: ease-out,
-  &#39;in-out&#39;: ease-in-out,
-  &#39;in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
-  &#39;in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
-  &#39;in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
-  &#39;in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
-  &#39;in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
-  &#39;in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
-  &#39;in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
-  &#39;in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
-  &#39;out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
-  &#39;out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
-  &#39;out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
-  &#39;out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
-  &#39;out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
-  &#39;out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
-  &#39;out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
-  &#39;out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
-  &#39;in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
-  &#39;in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
-  &#39;in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
-  &#39;in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
-  &#39;in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
-  &#39;in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
-  &#39;in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
-  &#39;in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
-);</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>A classic set of built-in easing functions,
-if you don’t want to define your own.
-Don’t edit this map directly,
-but feel free to reference these values
-from the user-defined <code>$easing</code> map.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_animate-get-easing()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
 <section class="item" id="variable--easing">
   
     
@@ -678,7 +474,7 @@ to the <code>ease()</code> function by<span class="widont">&nbsp;</span>default.
   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
   'sidebar-in': ease-out,
   'sidebar-out': 'in-back',
-  'modal-in': 'sidebar-in',
+  'modal-in': '#sidebar-in',
 );
 </code></pre>
 <ul>
@@ -796,6 +592,37 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       <span class="item-type">@mixin</span>
       
         <a href="
@@ -816,6 +643,180 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
 
         
       
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--_a_EASING">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--_a_EASING" class="item-name">$_a_EASING</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$_a_EASING: (
+  &#39;in&#39;: ease-in,
+  &#39;out&#39;: ease-out,
+  &#39;in-out&#39;: ease-in-out,
+  &#39;in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  &#39;in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
+  &#39;in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+  &#39;in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
+  &#39;in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
+  &#39;in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
+  &#39;in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
+  &#39;in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
+  &#39;out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  &#39;out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
+  &#39;out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
+  &#39;out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
+  &#39;out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
+  &#39;out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
+  &#39;out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
+  &#39;out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  &#39;in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
+  &#39;in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
+  &#39;in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
+  &#39;in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
+  &#39;in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  &#39;in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
+  &#39;in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
+  &#39;in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+);</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A classic set of built-in easing functions,
+if you don’t want to define your own.
+Don’t edit this map directly,
+but feel free to reference these values
+from the user-defined <code>$easing</code> map.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
         
 
         
@@ -833,11 +834,12 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_animate-get-easing()</span>
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -973,7 +975,7 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
     
       
       <div class="param-details text-block">
-        <p>The name of an easing in your configuration (e.g. <code>elastic</code>).</p>
+        <p>The name of an easing in your<span class="widont">&nbsp;</span>configuration</p>
 
       </div>
     
@@ -1064,11 +1066,82 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_animate-get-easing()</span>
+        <a href="
+  core-api.html#function--get-token" class="item-name">get-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--_a_EASING" class="item-name">$_a_EASING</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--easing" class="item-name">$easing</a>
+      
+      
+      
+      
     </h4>
 
     
@@ -1150,8 +1223,8 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
 
   
     <div class="text-block">
-      <p>Merge individual time maps into the global <code>$easing</code> variable,
-in case you want to define functions in smaller groups
+      <p>Merge individual easing maps into the global <code>$easing</code> variable,
+in case you want to define easings in smaller groups
 such as <code>fade-easing</code>, <code>slide-easing</code>, etc
 before merging them into a single global<span class="widont">&nbsp;</span>easing-palette.</p>
 
@@ -1303,12 +1376,11 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  animate-ease.html#function--merge-easing" class="item-name">merge-easing()</a>
+        <span class="item-name">_a_map-multimerge()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -1363,242 +1435,6 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
 
   
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--merge-easing">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--merge-easing" class="item-name">merge-easing()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Merge multiple easing maps into a single map,
-in case you want to define easing in smaller groups –
-such as <code>fade-easing</code>, <code>slide-easing</code>, etc. –
-before merging them into a single<span class="widont">&nbsp;</span>map.</p>
-<p>This is like <code>add-ease</code>,
-but returns the combined map
-without assigning it to the <code>$easing</code> variable.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(maps...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The merged map of<span class="widont">&nbsp;</span>easings.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-ease.html#mixin--add-easing" class="item-name">add-easing()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
   
 
   

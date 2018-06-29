@@ -420,7 +420,7 @@ to create a new value based on the base <code>value</code>.</p>
 
 
 
-<section class="item" id="function--token-get">
+<section class="item" id="function--get-token">
   
     
   
@@ -438,7 +438,7 @@ to create a new value based on the base <code>value</code>.</p>
       
 
       
-        <a href="#function--token-get" class="item-name">token-get()</a>
+        <a href="#function--get-token" class="item-name">get-token()</a>
       
 
       
@@ -648,7 +648,7 @@ but with all <code>#alias</code> tags replaced</p>
   &#39;original-value&#39;: 3em,
   &#39;new-value&#39;: &#39;#original-value&#39; (&#39;times&#39;: 2, &#39;minus&#39;: 0.5),
 );
-/*! #{token-get($map, &#39;new-value&#39;)} */</code></pre>
+/*! #{get-token($map, &#39;new-value&#39;)} */</code></pre>
     </div>
   
 
@@ -718,7 +718,7 @@ but with all <code>#alias</code> tags replaced</p>
       
       
       <pre class="hljs-pre"><code class="lang-scss">$my-map: (&#39;main&#39;: 32em);
-@function get($key) { @return token-get($my-map, $key); }
+@function get($key) { @return get-token($my-map, $key); }
 /*! #{get(&#39;main&#39;)} */</code></pre>
     </div>
   
@@ -760,7 +760,8 @@ but with all <code>#alias</code> tags replaced</p>
   
   
   
-    
+    <div class="requires-wrapper">
+      
     
   <div data-item-section="requires">
     
@@ -811,9 +812,119 @@ but with all <code>#alias</code> tags replaced</p>
   </div>
 
   
+      
+  
     
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
   
 
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-change.html#function--change" class="item-name">change()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-times.html#function--time" class="item-name">time()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
   
 
   

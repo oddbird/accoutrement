@@ -588,10 +588,10 @@ for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-times.html#mixin--add-times" class="item-name">add-times()</a>
+  animate-times.html#function--time" class="item-name">time()</a>
       
       
       
@@ -601,10 +601,6 @@ for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</
     
   </div>
 
-
-        
-      
-        
 
         
       
@@ -623,13 +619,14 @@ for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
-        <span class="item-name">_a_animate-get-time()</span>
+        <a href="
+  animate-times.html#mixin--add-times" class="item-name">add-times()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -762,19 +759,14 @@ for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</
         <span class="item-name">$time:</span>
       
       
-      <span class="value-type">(string | length |<span class="widont">&nbsp;</span>list)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name of a time in your configuration (e.g. <code>fast</code>),
-or a base-time and adjustments to be made
-(e.g. <code>'fast' ('times': 2)</code>).
-For the sake of consistent documentation,
-I recommend keeping adjustments in the configuration
-whenever<span class="widont">&nbsp;</span>possible.</p>
+        <p>The name of a time in your<span class="widont">&nbsp;</span>configuration</p>
 
       </div>
     
@@ -865,11 +857,47 @@ whenever<span class="widont">&nbsp;</span>possible.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_animate-get-time()</span>
+        <a href="
+  core-api.html#function--get-token" class="item-name">get-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-times.html#variable--times" class="item-name">$times</a>
+      
+      
+      
+      
     </h4>
 
     
@@ -1104,12 +1132,11 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  animate-times.html#function--merge-times" class="item-name">merge-times()</a>
+        <span class="item-name">_a_map-multimerge()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -1164,242 +1191,6 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
 
   
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--merge-times">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--merge-times" class="item-name">merge-times()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Merge multiple time maps into a single map,
-in case you want to define times in smaller groups –
-such as <code>duration-times</code>, <code>delay-times</code>, etc. –
-before merging them into a single<span class="widont">&nbsp;</span>map.</p>
-<p>This is like <code>add-times</code>,
-but returns the combined map
-without assigning it to the <code>$times</code> variable.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(maps...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The merged map of<span class="widont">&nbsp;</span>times.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-times.html#mixin--add-times" class="item-name">add-times()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
   
 
   
