@@ -1,0 +1,31 @@
+// Query Util Tests
+// ================
+@include test-module('Layout: Query Utils') {
+
+
+// Fix Max
+// -------
+@include describe('Fix Max [function]') {
+  @include it('Removes 1px from px values') {
+    @include assert-equal(
+      _a_fix-max(20px),
+      19px
+    );
+  }
+
+  @include it('Removes 0.01em from em values') {
+    @include assert-equal(
+      _a_fix-max(20em),
+      19.99em
+    );
+  }
+
+  @include it('Returns non-em/px values unchanged') {
+    @include assert-equal(
+      _a_fix-max(20ch),
+      20ch
+    );
+  }
+}
+
+} // end module

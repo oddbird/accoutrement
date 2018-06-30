@@ -23,9 +23,9 @@ $_a_ASPECT-RATIOS: (  // sass-lint:disable-line variable-name-format
   'major-second': 9 / 8,
   'minor-second': 16 / 15,
 
-  'photo': 'fifth',
-  'classic': 'fourth',
-  'widescreen': 'minor-seventh',
+  'photo': '#fifth',
+  'classic': '#fourth',
+  'widescreen': '#minor-seventh',
   'cinima': 2.39,
   'golden': 1.618,
 );
@@ -39,27 +39,21 @@ $_a_ASPECT-RATIOS: (  // sass-lint:disable-line variable-name-format
 $aspect-ratios: () !default;
 
 
-// Get Aspect Ratio
+// Aspect Ratio
 // ----------------
 /// Retrieve an aspect ratio from the maps.
 ///
-/// @access private
+/// @group layout-ratios
 ///
 /// @param {string | float} $ratio -
 ///   A ratio or ratio keyword to be resolved
 /// @return {float} -
 ///   The ratio associated with a keyword, if available.
-@function _get-aspect-ratio(
+@function aspect-ratio(
   $ratio
 ) {
-  $options: map-merge($_a_ASPECT-RATIOS, $aspect-ratios);  // sass-lint:disable-line variable-name-format
-  $ratio: map-get($options, $ratio) or $ratio;
-
-  @if map-has-key($options, $ratio) {
-    $ratio: _get-aspect-ratio($ratio);
-  }
-
-  @return $ratio;
+  $options: map-merge($_a_ASPECT-RATIOS, $aspect-ratios);
+  @return get-token($options, $ratio);
 }
 
 
@@ -116,7 +110,7 @@ $aspect-ratios: () !default;
   $ratio: 'widescreen',
   $width: 100%
 ) {
-  $ratio: _get-aspect-ratio($ratio);
+  $ratio: aspect-ratio($ratio);
 
   @return (1 / $ratio) * $width;
 }

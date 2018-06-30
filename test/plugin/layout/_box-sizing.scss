@@ -1,0 +1,28 @@
+// Box-Sizing Tests
+// ================
+@include test-module('Layout: Box Sizing') {
+
+
+// Global Box-Sizing
+// -----------------
+@include describe('Global Box-Sizing [mixin]') {
+  @include it('Box-sizing on all elements') {
+    @include assert('Nested items should use border-box model.') {
+      @include output {
+        @include global-box-sizing(border-box);
+      }
+
+      @include expect {
+        * {
+          &,
+          &::before,
+          &::after {
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+  }
+}
+
+} // end module

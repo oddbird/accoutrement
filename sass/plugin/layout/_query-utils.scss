@@ -18,7 +18,7 @@
 ///   The max value to adjust
 /// @return {length} -
 ///   The adjusted value
-@function _fix-max(
+@function _a_fix-max(
   $value
 ) {
   @if comparable($value, 1px) {
@@ -28,44 +28,4 @@
   }
 
   @return $value;
-}
-
-
-// Get Breakpoint [function]
-// -------------------------
-/// Return a breakpoint from the `$breakpoint` map,
-/// or the accoutrement-scale `$sizes` map if it's available.
-///
-/// @access private
-///
-/// @param {string} $break -
-///   The name or value of a breakpoint
-/// @return {length} -
-///   The retrieved value of a named breakpoint
-@function _get-breakpoint(
-  $break
-) {
-  @if (type-of($break) == 'number') and not unitless($break) {
-    @return $break;
-  }
-
-  @if map-get($breakpoints, $break) {
-    $break: map-get($breakpoints, $break) or $break;
-
-    @if map-has-key($breakpoints, $break) {
-      $break: _get-breakpoint($break);
-    }
-  }
-
-  $accoutrement-scale: function-exists('size') and variable-exists('sizes');
-
-  @if $accoutrement-scale and (type-of($break) != 'number') {
-    $break: size($break);
-  }
-
-  @if type-of($break) != 'number' or unitless($break) {
-    @error '"#{$break}" isn’t a valid length or keyword.';
-  }
-
-  @return $break;
 }
