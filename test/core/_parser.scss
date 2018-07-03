@@ -26,9 +26,9 @@
   }
 }
 
-// Accoutrement Get
-// ----------------
-@include describe('Accoutrement Get [function]') {
+// Get
+// ---
+@include describe('Get [function]') {
   $haystack: (
     'slow': 3s,
     'delay': 0.5s,
@@ -55,12 +55,12 @@
 
   @include it('Handles explicit todo-maps') {
     $needle: (
-      'value': '#slow or #whatever',
+      'value': '#slow or whatever',
       'str-replace': 'or' 'with',
     );
     @include assert-equal(
       _a_get($haystack, $needle),
-      '3s with #whatever'
+      '3s with whatever'
     );
   }
 
@@ -99,12 +99,20 @@
       ["main-end" "footer-end"]
     );
   }
+
+  @include it('handles complex nested values') {
+    $int: 'calc(%s + #two)' ('%s': '#two' ('times': '#two'));
+    @include assert-equal(
+      _a_get($haystack, $int),
+      'calc(4 + 2)'
+    );
+  }
 }
 
 
-// Replace Alias
-// -------------
-@include describe('Parse Alias [function]') {
+// Parse
+// -----
+@include describe('Parse [function]') {
   $haystack: (
     'one': 'original value',
     'two': '#one',
@@ -114,35 +122,35 @@
 
   @include it('Replaces a hashtag key with the associated value') {
     @include assert-equal(
-      _a_parse-alias('#one', $haystack),
+      _a_parse($haystack, '#one'),
       'original value'
     );
   }
 
   @include it('Handles basic hash recursion') {
     @include assert-equal(
-      _a_parse-alias('#three', $haystack),
+      _a_parse($haystack, '#three'),
       'original value'
     );
   }
 
   @include it('Handles multiple values with basic recursion') {
     @include assert-equal(
-      _a_parse-alias('#three #four', $haystack),
+      _a_parse($haystack, '#three #four'),
       'original value and a new value'
     );
   }
 
   @include it('Handles list values') {
     @include assert-equal(
-      _a_parse-alias('#three' 7 '#four', $haystack),
+      _a_parse($haystack, '#three' 7 '#four'),
       ('original value' 7 'and a new value')
     );
   }
 
   @include it('Handles calc use-case') {
     @include assert-equal(
-      _a_parse-alias('#three' 7 '#four', $haystack),
+      _a_parse($haystack, '#three' 7 '#four'),
       ('original value' 7 'and a new value')
     );
   }
@@ -155,7 +163,7 @@
       'and a new value'
     ];
     @include assert-equal(
-      _a_parse-alias($list, $haystack),
+      _a_parse($haystack, $list),
       $expect
     );
   }
@@ -170,86 +178,146 @@
       'and': 'original valueoriginal value',
     );
     @include assert-equal(
-      _a_parse-alias($map, $haystack),
+      _a_parse($haystack, $map),
       $expect
     );
   }
 }
 
 
-// Get Alias Name
-// --------------
-@include describe('Get Alias Names [function]') {
-  @include it('Returns a #name alias from a string (space-delimited)') {
+// Replace
+// -------
+@include describe('Replace [function]') {
+  $map: (
+    'name': 'N4M3!',
+    'this-name': 'WTF',
+    'this_name': 'WTF',
+    'find': '#name',
+    'number': 3,
+  );
+
+  @include it('Replaces #name alias (space-delimited)') {
     @include assert-equal(
-      _a_get-alias-names('Returns a #name alias from a string'),
-      join((), 'name')
+      _a_replace($map, 'Replace #name alias'),
+      'Replace N4M3! alias'
     );
   }
 
-  @include it('Ends alias names on "("') {
+  @include it('Handles recursive hash values') {
     @include assert-equal(
-      _a_get-alias-names('what)#this-name(some thing'),
-      join((), 'this-name')
+      _a_replace($map, 'Replace #find alias'),
+      'Replace N4M3! alias'
     );
   }
 
-  @include it('Ends alias names on ")"') {
+  @include it('Ends hash names on "("') {
     @include assert-equal(
-      _a_get-alias-names('what)#this_name)some thing'),
-      join((), 'this_name')
+      _a_replace($map, 'what)#this-name(some thing'),
+      'what)WTF(some thing'
     );
   }
 
-  @include it('Ends alias names on "["') {
+  @include it('Ends hash names on ")"') {
     @include assert-equal(
-      _a_get-alias-names('what)#this-name[some thing'),
-      join((), 'this-name')
+      _a_replace($map, 'what)#this_name)some thing'),
+      'what)WTF)some thing'
     );
   }
 
-  @include it('Ends alias names on "]"') {
+  @include it('Ends hash names on "["') {
     @include assert-equal(
-      _a_get-alias-names('what)#this_name]some thing'),
-      join((), 'this_name')
+      _a_replace($map, 'what)#this-name[some thing'),
+      'what)WTF[some thing'
     );
   }
 
-  @include it('Ends alias names on "\\"') {
+  @include it('Ends hash names on "]"') {
     @include assert-equal(
-      _a_get-alias-names('what)#this_name\\some thing'),
-      join((), 'this_name')
+      _a_replace($map, 'what)#this_name]some thing'),
+      'what)WTF]some thing'
     );
   }
 
-  @include it('Ends alias names on "/"') {
+  @include it('Ends hash names on "\\"') {
     @include assert-equal(
-      _a_get-alias-names('what)#this_name/some thing'),
-      join((), 'this_name')
+      _a_replace($map, 'what)#this_name\\some thing'),
+      'what)WTF\\some thing'
     );
   }
 
-  @include it('Ends alias, and returns multiple on "#"') {
+  @include it('Ends hash names on "/"') {
     @include assert-equal(
-      _a_get-alias-names('what)#this_name#some thing'),
-      ('this_name' 'some')
+      _a_replace($map, 'what)#this_name/some thing'),
+      'what)WTF/some thing'
     );
   }
 
-  @include it('Only returns each alias once') {
+  @include it('Ends hash names on "{"') {
     @include assert-equal(
-      _a_get-alias-names('what)#this_name#some #this_name/thing'),
-      ('this_name' 'some')
+      _a_replace($map, 'what)#this_name{some thing'),
+      'what)WTF{some thing'
+    );
+  }
+
+  @include it('Ends hash names on "}"') {
+    @include assert-equal(
+      _a_replace($map, 'what)#this_name}some thing'),
+      'what)WTF}some thing'
+    );
+  }
+
+  @include it('Replaces multiple hash values') {
+    @include assert-equal(
+      _a_replace($map, 'what)#this_name#name thing'),
+      'what)WTFN4M3! thing'
     );
   }
 
   @include it('Handles a lonely hashtag') {
     @include assert-equal(
-      _a_get-alias-names('#thing'),
-      join((), 'thing')
+      _a_replace($map, '#number'),
+      3
+    );
+  }
+
+  @include it('Ignores unknown hashtags') {
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      'please #ignore'
     );
   }
 }
 
+
+@include describe('Do [function]') {
+  @include it('Adjusts a number based on ratios') {
+    $source: (
+      'two': 2,
+    );
+
+    @include assert-equal(
+      _a_do($source, 'octave', 3, '#two'),
+      12
+    );
+  }
+
+  @include it('Adjusts a value based on functions') {
+    $source: (
+      'r': 'str-replace',
+    );
+
+    @include assert-equal(
+      _a_do($source, '#r', 'hello world', 'o', '000', true),
+      'hell000 w000rld'
+    );
+  }
+
+  @include it('Ignores a single null arg') {
+    @include assert-equal(
+      _a_do(('not': 'needed'), 'round', 2.35, null),
+      2
+    );
+  }
+}
 
 } // end module

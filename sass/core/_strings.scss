@@ -64,3 +64,35 @@
   @return $return;
 }
 @include _a_register-function('_a_str-replace', 'str-replace');
+
+
+// Interpolate
+// -----------
+/// Return a string with interpolated values
+/// replacing `%s` format strings
+///
+/// @access private
+///
+/// @param {string} $string -
+///   The original string to be edited
+/// @param {strings} $values... -
+///   New strings, to replace the `%s` format strings
+/// @return {string} -
+///   Original string, with `%s` format strings replaced
+@function _a_interpolate(
+  $string,
+  $values...
+) {
+  $_return: $string;
+
+  @each $val in $values {
+    @if str-index($_return, '%s') {
+      $_return: _a_str-replace($_return, '%s', $val);
+    } @else {
+      @warn 'Too many values passed for interpolation with "#{$string}".';
+    }
+  }
+
+  @return $_return;
+}
+@include _a_register-function('_a_interpolate', 'interpolate', '%s');

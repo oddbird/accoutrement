@@ -49,8 +49,8 @@
 @include describe('Register Function [mixins]') {
   @include it('Adds to the list of registered functions') {
     // reset the globals, for a clean testing environment
-    $old-int: $_ACCOUTREMENT_FUNCTIONS;
-    $_ACCOUTREMENT_FUNCTIONS: () !global;
+    $old-int: $_a_FUNCTIONS;
+    $_a_FUNCTIONS: () !global;
     $old-user: $functions;
     $functions: () !global;
 
@@ -75,7 +75,7 @@
     }
 
     @include assert-equal(
-      $_ACCOUTREMENT_FUNCTIONS,
+      $_a_FUNCTIONS,
       $expect
     );
 
@@ -84,7 +84,7 @@
       $expect
     );
 
-    $_ACCOUTREMENT_FUNCTIONS: $old-int !global;
+    $_a_FUNCTIONS: $old-int !global;
     $functions: $old-user !global;
   }
 }

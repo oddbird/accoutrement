@@ -69,7 +69,7 @@
 // Get
 // ---
 /// Adds value/do functionality
-/// to the value-parsing power of `_a_parse-alias()`.
+/// to the value-parsing power of `_a_parse()`.
 /// Functions can be added as a map at the end of a value --
 /// but some use-cases may confuse the parser,
 /// so we provide a more explicit map option with a `value` key,
@@ -89,82 +89,76 @@
 ) {
   $type: type-of($key);
   $do: null;
+  $value: $key;
 
   // break out `do` maps…
-  @if ($type == 'map') {
+  @if ($type == 'map') and map-get($key, 'value') {
     $value: map-get($key, 'value');
     $do: map-remove($key, 'value');
-
-    @if ($value) {
-      $key: $value;
-    }
-  } @else if ($type == 'list') {
+  } @else if index('list' 'arglist', $type) {
     $final: nth($key, -1);
 
     @if (length($key) > 1) and (type-of($final) == 'map') {
       $do: $final;
-      $key: _a_remove-nth($key, -1);
-      $key: if(length($key) == 1, nth($key, 1), $key);
+      $value: _a_remove-nth($key, -1);
+      $value: if(length($value) == 1, nth($value, 1), $value);
     }
   }
 
   // resolve any #alias tags…
-  $key: _a_parse-alias($key, $map);
-  $do: _a_parse-alias($do, $map);
+  $value: _a_parse($map, $value);
 
   // make any necessary adjustments…
   @if ($do) {
-    @each $function, $args in $do {
-      $function: _a_get-function($function);
-      $key: call($function, $key, $args...);
+    @each $name, $args in $do {
+      $value: _a_do($map, $name, $value, $args...)
     }
   }
 
-  @return $key;
+  @return $value;
 }
 
 
 // Parse Alias
 // -----------
-/// This provides the basis for recursively parsing
-/// origin values of any kind,
-/// and replacing any `#alias` tags
-/// with the (parsed) values they represent.
+/// Handles recursive parsing for list/map values.
 ///
 /// @access private
 ///
-/// @param {*} $needle -
-///   The original value to be parsed for `#alias` tags
 /// @param {map} $haystack -
 ///   A map of terms to reference tags against
+/// @param {*} $needle -
+///   The original value to be parsed for `#alias` tags
 /// @return {*} -
 ///   Updated `$needle` value
 ///   in the same format as the original,
 ///   but with all `#alias` tags replaced
-@function _a_parse-alias(
-  $needle,
-  $haystack
+@function _a_parse(
+  $haystack,
+  $needle
 ) {
+  $type: type-of($needle);
+
   // handle list values…
-  @if (type-of($needle) == 'list') {
+  @if index('list' 'arglist', $type) {
     $new: _a_list-template($needle);
 
     // handle each item in the list…
     @each $bit in $needle {
-      $new: append($new, _a_parse-alias($bit, $haystack));
+      $new: append($new, _a_get($haystack, $bit));
     }
 
     @return $new;
   }
 
   // handle map values…
-  @if (type-of($needle) == 'map') {
+  @if ($type == 'map') {
     $new: ();
 
     // handle each value in the map…
     @each $key, $value in $needle {
-      $key: _a_parse-alias($key, $haystack);
-      $value: _a_parse-alias($value, $haystack);
+      $key: _a_get($haystack, $key);
+      $value: _a_get($haystack, $value);
       $needle: ($key: $value);
       $new: map-merge($new, $needle);
     }
@@ -172,58 +166,130 @@
     @return $new;
   }
 
-  // recursively parse alias strings…
-  @if (type-of($needle) == 'string') and str-index($needle, '#') {
-    $alias-list: _a_get-alias-names($needle);
-
-    @each $alias in $alias-list {
-      @if map-has-key($haystack, $alias) {
-        $reference: map-get($haystack, $alias);
-        $reference: _a_get($haystack, $reference);
-        $needle: _a_str-replace($needle, '##{$alias}', $reference, true);
-      }
-    }
+  @if ($type == 'string') {
+    $needle: _a_replace($haystack, $needle);
   }
 
   @return $needle;
 }
-@include _a_register-function('_a_parse-alias');
 
 
-// Get Alias Names
-// ---------------
+// Replace
+// -------
 /// Search for `#alias` mentions within a string,
 /// and return a list of unique mentions with `#` removed.
 ///
 /// @access private
 ///
+/// @param {map} $haystack -
+///   A map of terms to reference tags against
 /// @param {string} $string -
 ///   The original string to be parsed for `#alias` tags
 /// @return {list} -
 ///   List of unique `#alias` mentions with the `#` removed
-@function _a_get-alias-names(
+@function _a_replace(
+  $haystack,
   $string
 ) {
-  $found: ();
-  $ends: (' ', '(', ')', '/', '\\', '#', '[', ']');
-  $remainder: str-slice($string, str-index($string, '#') + 1);
-  $end: str-length($remainder);
+  $return: $string;
+  $start: str-index($string, '#');
 
-  @each $char in $ends {
-    $n: str-index($remainder, $char);
-    $end: if(($n) and ($n - 1 < $end), $n - 1, $end);
-  }
+  // replace aliases…
+  @if $start {
+    // define the terms…
+    $ends: (' ', '(', ')', '/', '\\', '#', '[', ']', '{', '}');
 
-  $found: append($found, str-slice($remainder, 1, $end));
-  $remainder: str-slice($remainder, $end);
+    // find the end…
+    $remainder: str-slice($string, $start + 1);
+    $end: str-length($remainder);
 
-  @if str-index($remainder, '#') {
-    @each $alias in _a_get-alias-names($remainder) {
-      $found: if(index($found, $alias), $found, join($found, $alias));
+    @each $char in $ends {
+      $has: str-index($remainder, $char);
+      $end: if($has, min($has - 1, $end), $end);
+    }
+
+    $end: $end - str-length($remainder) - 1;
+
+    // the bits!
+    $before: str-slice($string, 1, $start - 1);
+    $replace: str-slice($string, $start, $end);
+    $after: if(($end < -1), str-slice($string, $end + 1), '');
+
+    // replace the token…
+    $token: str-slice($replace, 2);
+    $got: get-token($haystack, $token);
+    $return: if(($got == $token), $replace, $got);
+
+    // put it back together…
+    @if (str-length($before) > 0) {
+      $return: '#{$before}#{$return}';
+    }
+
+    @if (str-length($after) > 0) {
+      $after: _a_replace($haystack, $after);
+      $return: '#{$return}#{$after}';
     }
   }
 
-  @return $found;
+  @return $return;
 }
-@include _a_register-function('_a_get-alias-names');
 
+
+// Do
+// --
+/// Applies any ratio or function adjustments
+/// to Accoutrement map values
+///
+/// @access private
+///
+/// @param {map} $source -
+///   A map of terms to reference tags against
+/// @param {string | ratio | function} $name -
+///   The ratio or function to use in manipulation
+/// @param {*} $value -
+///   The value to be manipulated
+/// @param {arglist} $args... -
+///   Any arguments required for a function call
+/// @return {*} -
+///   Manipulated value
+@function _a_do(
+  $source,
+  $name,
+  $value,
+  $args...
+) {
+  // Allow internal map references
+  $name: _a_get($source, $name);
+  $args: _a_get($source, $args);
+
+  // Handle null args…
+  @if (length($args) == 1) {
+    $args: nth($args, 1);
+  }
+
+  // Try ratios first
+  @if type-of($value == 'number') {
+    $ratio: ratio($name);
+
+    @if ($ratio == 'linear') {
+      @return $value * $args;
+    } @else if (type-of($ratio) == 'number') {
+      $multiplier: _a_pow($ratio, $args);
+      @return $value * $multiplier;
+    }
+  }
+
+  // Fallback to function calls
+  $function: _a_get-function($name, $error: false);
+
+  @if ($function) {
+    @if ($args) {
+      @return call($function, $value, $args...);
+    } @else {
+      @return call($function, $value);
+    }
+  }
+
+  // error
+  @error 'No ratio or function named #{$name}';
+}

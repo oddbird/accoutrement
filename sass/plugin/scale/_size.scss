@@ -28,9 +28,8 @@
   $size,
   $unit...
 ) {
-  $size: _a_scale-get-size($size);
+  $size: get-token($sizes, $size);
   $size: if(length($unit) > 0, convert-units($size, $unit...), $size);
-
   @return $size;
 }
 
@@ -71,35 +70,6 @@
 }
 
 
-// Ratio [function]
-// ----------------
-/// Retrieve a scale ratio by name
-/// from either the `$_DEFAULT-RATIOS`
-/// or user `$ratios` configurations.
-///
-/// @group scale-sizes
-///
-/// @param {string | number} $ratio -
-///   The key-name or value of a ratio
-/// @return {number} -
-///   The numeric value of a ratio
-/// @example scss
-///   /* Octave: #{ratio('octave')} */
-///   /* Fifth: #{ratio('fifth')} */
-@function ratio(
-  $ratio
-) {
-  $_ratio-options: map-merge($_DEFAULT-RATIOS, $ratios);
-  $_new-ratio: map-get($_ratio-options, $ratio) or $ratio;
-
-  @if ($ratio != $_new-ratio) and map-has-key($_ratio-options, $_new-ratio) {
-    $_new-ratio: ratio($_new-ratio);
-  }
-
-  @return $_new-ratio;
-}
-
-
 // Square [mixin]
 // --------------
 /// Create a square by setting equal CSS `height` and `width` properties
@@ -129,106 +99,4 @@
 
   height: $size;
   width: $size;
-}
-
-
-
-// Get Size
-// --------
-/// Access a named size in your `$sizes` map.
-///
-/// @access private
-///
-/// @param {string | length | list} $size -
-///   The name of a size in your configuration (e.g. `line-height`),
-///   or a length to be converted into different units (e.g. `24px`),
-///   or a base-size and adjustments to be made
-///   (e.g. `24px ('minor-third': 2)`),
-///   or a `calc(%s + %s) ('root', 'rhythm')` recipie
-///   for building `calc` values.
-///   For the sake of consistent documentation,
-///   I recommend keeping adjustments in the configuration
-///   whenever possible.
-/// @throw -
-///   The calculated value is not a valid CSS length.
-/// @return {length} -
-///   The calculated length
-@function _a_scale-get-size(
-  $size
-) {
-  // Parse arguments
-  $size: map-get($sizes, $size) or $size;
-  $base: nth($size, 1);
-  $adjust: if(length($size) > 1, nth($size, 2), null);
-
-  // Recursive check
-  $size: if(map-has-key($sizes, $base), _a_scale-get-size($base), $base);
-
-  // Adjustments
-  $adjust-type: type-of($adjust);
-  $calc: (type-of($size) == 'string') and (str-slice($size, 1, 5) == 'calc(');
-
-  @if (not $calc) and ($adjust-type == 'map') {
-    @each $key, $value in $adjust {
-      $size: _a_scale-adjust-size($size, $key, $value...);
-    }
-  } @else if $calc and ($adjust-type == 'list') {
-    $values: ();
-
-    @each $value in $adjust {
-      $values: append($values, _a_scale-get-size($value));
-    }
-
-    $size: _a_interpolate($base, $values...);
-  }
-
-
-  // Validation
-  @if (type-of($size) == 'number') or $calc {
-    @return $size;
-  }
-
-  @error '#{$size} is not a valid length for CSS.';
-}
-
-
-
-// Adjust Size
-// -----------
-/// Calculate ratio, linear, or arbitrary adjustments
-/// to a base size.
-///
-/// @access private
-///
-/// @param {number} $size -
-///   The original size to perform adjusments on
-/// @param {string | number} $key -
-///   The adjustment to perform,
-///   given as either a numeric ratio,
-///   named ratio keyword,
-///   or function name to call.
-/// @param {arglist} $value… -
-///   Any required arguments,
-///   such as the number of times to apply a ratio,
-///   or additional information to be passed to a function.
-/// @return {number} -
-///   Results of the adjustment.
-@function _a_scale-adjust-size(
-  $size,
-  $key,
-  $value...
-) {
-  $ratio: ratio($key);
-  $value: if(length($value) == 1, nth($value, 1), $value);
-
-  @if ($ratio == 'linear') {
-    @return $size * $value;
-  } @else if (type-of($ratio) == 'number') {
-    $multiplier: _a_pow($ratio, $value);
-    @return $size * $multiplier;
-  }
-
-  $function: _a_get-function($key);
-  $args: if($value, join($size, $value), $size);
-  @return call($function, $args...);
 }

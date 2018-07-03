@@ -11,60 +11,6 @@
 $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 
 
-// Default Ratios
-// --------------
-/// Common pre-defined ratios that you can access by name.
-/// Numeric ratios (like the musical scale) are exponential -
-/// while a 'linear' scale uses simple multipliers.
-/// This variable should not be edited.
-/// Use the `$ratios` variable to add your own ratios,
-/// or aliases for built-in ratios.
-///
-/// Don't make changes to this map directly.
-/// You can add your own named ratios in the `$ratios` map.
-///
-/// @group scale-sizes
-/// @access public
-/// @see $ratios
-///
-/// @type map
-$_DEFAULT-RATIOS: (
-  'octave': 2,
-  'major-seventh': (15 / 8),
-  'minor-seventh': (16 / 9),
-  'major-sixth': (5 / 3),
-  'minor-sixth': (8 / 5),
-  'fifth': (3 / 2),
-  'augmented-fourth': (45 / 32),
-  'fourth': (4 / 3),
-  'major-third': (5 / 4),
-  'minor-third': (6 / 5),
-  'major-second': (9 / 8),
-  'minor-second': (16 / 15),
-  'multiple': 'linear',
-);
-
-
-// Ratios
-// ------
-/// Define your own ratios,
-/// or alias keys for built-in ratios.
-/// Any ratios that resolve to `linear`
-/// will not use any exponential scale.
-///
-/// @group scale-sizes
-/// @type map
-/// @see $_DEFAULT-RATIOS
-///
-/// @example scss -
-///   $ratios: (
-///     'line-height': (1 / 3),
-///     'headings': 'linear',
-///     'golden': 1.61803399,
-///   );
-$ratios: () !default;
-
-
 // Sizes
 // -----
 /// Defined a palette of common sizes to be used across your project,
@@ -109,50 +55,6 @@ $sizes: (
 ) !default;
 
 
-// Local Functions
-// ---------------
-/// These functions are defined internally,
-/// and can be called by name without first being captured
-/// using the Sass `get-function()` approach.
-///
-/// Don't make changes to this map directly.
-/// You can add your own named functions in the `$functions` map.
-///
-/// @group scale-sizes
-/// @access public
-/// @see $functions
-///
-/// @type map
-$_LOCAL-SCALE-FUNCTIONS: (
-  'add', 'plus',
-  'minus', 'subtract',
-  'times', 'multiply',
-  'divide',
-  'convert-units',
-);
-
-
-// Functions
-// ---------
-/// Defined any additional math functions required
-/// to generate relataionships in the `$sizes` map.
-/// This is only necessary for newer versions of Sass,
-/// where functions are first-class,
-/// and can be captured using `get-function($name)`.
-///
-/// ```scss
-/// $functions: (
-///   'pow': get-function('pow'),
-///   'sin': get-function('sin'),
-/// );
-/// ```
-///
-/// @group scale-sizes
-/// @type map
-/// @see $_LOCAL-SCALE-FUNCTIONS
-$functions: () !default;
-
-
 // Add Sizes
 // ---------
 /// Merge individual size maps into the global `$sizes` variable,
@@ -168,74 +70,20 @@ $functions: () !default;
 /// [Herman]: http://oddbird.net/herman/
 ///
 /// @group scale-sizes
+/// @example scss
+///   $text-sizes: (
+///     'root': 24px,
+///     'h1': 'root' ('times': 2),
+///   );
+///   @include add-sizes($text-sizes);
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
 /// @output -
 ///   An updated global `$sizes` variable,
 ///   with new maps merged in.
-///
-/// @example scss
-///   $text-sizes: (
-///     'root': 24px,
-///     'h1': 'root' ('times': 2),
-///   );
-///
-///   @include add-sizes($text-sizes);
 @mixin add-sizes(
   $maps...
 ) {
-  $sizes: _merge-scale($sizes, $maps...) !global;
-}
-
-
-// Add Ratios
-// ----------
-/// Merge individual ratio maps into the global `$ratio` variable.
-/// This can be useful for internal organization,
-/// documentation with [SassDoc][SassDoc],
-/// or integration with our pattern-library generator:
-/// [Herman][Herman].
-///
-/// [SassDoc]: http://sassdoc.com/
-/// [Herman]: http://oddbird.net/herman/
-///
-/// @group scale-sizes
-///
-/// @parameter {map...} $maps -
-///   Pass any number of maps to be merged.
-/// @output -
-///   An updated global `$ratios` variable,
-///   with new maps merged in.
-@mixin add-ratios(
-  $maps...
-) {
-  $ratios: _merge-scale($ratios, $maps...) !global;
-}
-
-
-// Merge maps
-// ----------
-/// Merge multiple maps into a single map.
-/// This is like `add-sizes`,
-/// but returns the combined map
-/// without assigning it to the `$sizes` variable.
-///
-/// @group scale-sizes
-/// @access private
-///
-/// @parameter {maps...} $maps -
-///   Pass any number of maps to be merged.
-/// @return {map} -
-///   The merged map.
-@function _merge-scale(
-  $maps...
-) {
-  $return: ();
-
-  @each $map in $maps {
-    $return: map-merge($return, $map);
-  }
-
-  @return $return;
+  $sizes: _a_map-multimerge($sizes, $maps...) !global;
 }

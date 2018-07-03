@@ -12,7 +12,7 @@
 ///   The number to be converted to px if comparable.
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
-@function _get-px(
+@function _a_get-px(
   $length
 ) {
   @return if(comparable($length, 1px), 0px + $length, false);
@@ -29,7 +29,7 @@
 ///   The unit to return as a number.
 /// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
-@function _get-number(
+@function _a_get-number(
   $unit,
   $relative: false
 ) {
@@ -69,6 +69,8 @@
 /// You can also convert to `browser-ems`,
 /// relative to the browser default rather than the site root –
 /// useful for media queries.
+/// Aliased as `convert-units`, `convert`, or `units`
+/// in all Accoutrement maps.
 ///
 /// @group scale-units
 ///
@@ -94,9 +96,9 @@
 ) {
   $_convertable: ('in', 'mm', 'cm', 'pt', 'pc', 'px', 'em', 'rem', '%', 'ex');
 
-  $length: _a_scale-get-size($length);
-  $from-context: _a_scale-get-size($from-context);
-  $to-context: _a_scale-get-size($to-context);
+  $length: size($length);
+  $from-context: size($from-context);
+  $to-context: size($to-context);
 
   $from-unit: unit($length);
 
@@ -112,7 +114,7 @@
   }
 
   @if ($from-unit == '') {
-    @return _get-number($to-unit, 'allow-relative') + $length;
+    @return _a_get-number($to-unit, 'allow-relative') + $length;
   } @else if ($to-unit == '') {
     @return $length / ($length * 0 + 1);
   }
@@ -126,7 +128,7 @@
   }
 
   // Optomize comparable (non-relative) units
-  $absolute-output: _get-number($to-unit);
+  $absolute-output: _a_get-number($to-unit);
 
   @if $absolute-output and comparable($length, $absolute-output)  {
     @return $absolute-output + $length;
@@ -134,10 +136,10 @@
 
   // Establish relative context
   $root-size: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE;
-  $root-size: _a_scale-get-size($root-size);
-  $root-size: _get-px($root-size);
-  $from-context: _get-px($from-context);
-  $to-context: _get-px($to-context);
+  $root-size: size($root-size);
+  $root-size: _a_get-px($root-size);
+  $from-context: _a_get-px($from-context);
+  $to-context: _a_get-px($to-context);
 
   // Context values must be in px
   @if (not $from-context) or (not $to-context) {
@@ -145,7 +147,7 @@
   }
 
   // Convert relative length to pixels
-  $px-length: _get-px($length) or $length;
+  $px-length: _a_get-px($length) or $length;
   $from-unit: unit($px-length);
 
   // Convert relative units using the from-context parameter.
@@ -174,3 +176,4 @@
 
   @error 'Failed to convert #{$length} into #{$to-units}.';
 }
+@include _a_register-function('convert-units', 'convert', 'units');

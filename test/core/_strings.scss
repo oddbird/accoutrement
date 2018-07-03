@@ -46,4 +46,16 @@
   }
 }
 
+
+// Interpolate
+// -----------
+@include describe('interpolate [function]') {
+  @include it('Replace any number of interpolation strings with values') {
+    @include assert-equal(
+      _a_interpolate('hello %s%s', 'world', '!'),
+      'hello world!'
+    );
+  }
+}
+
 } // end module

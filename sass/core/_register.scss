@@ -14,7 +14,7 @@
 /// @group core-register
 /// @see {mixin} _a_register-function()
 /// @type map
-$_ACCOUTREMENT_FUNCTIONS: () !default;
+$_a_FUNCTIONS: () !default;
 
 
 // Register Function
@@ -40,8 +40,8 @@ $_ACCOUTREMENT_FUNCTIONS: () !default;
   $function,
   $names...
 ) {
-  $register: _a_registration($function, $names, $_ACCOUTREMENT_FUNCTIONS);
-  $_ACCOUTREMENT_FUNCTIONS: $register !global;
+  $register: _a_registration($function, $names, $_a_FUNCTIONS);
+  $_a_FUNCTIONS: $register !global;
 }
 
 
@@ -110,13 +110,14 @@ $_ACCOUTREMENT_FUNCTIONS: () !default;
 /// @param {string | function} $function -
 ///   The name (string) of a registered function,
 ///   or the first-class function to be called
-/// @param {string} $app -
-///   The accoutrement app that a function is associated with
+/// @param {boolean} $error [true] -
+///   Optionally error when function isn't found
 /// @return {string | function} -
 ///   Returns a first-class function in Sass 3.5+,
 ///   or the function name string in older Sass versions
 @function _a_get-function(
-  $function
+  $function,
+  $error: true
 ) {
   $type: type-of($function);
 
@@ -125,14 +126,17 @@ $_ACCOUTREMENT_FUNCTIONS: () !default;
   }
 
   @if function-exists('get-function') {
-    // sass-lint:disable variable-name-format
-    $registered: map-merge($_ACCOUTREMENT_FUNCTIONS, $functions);
+    $registered: map-merge($_a_FUNCTIONS, $functions);
 
     @if map-has-key($registered, $function) {
       @return map-get($registered, $function);
     }
 
-    @error '[#{$type}] `#{$function}` must be a first-class function';
+    @if ($error) {
+      @error '[#{$type}] `#{$function}` must be a first-class function';
+    } @else {
+      @return null;
+    }
   }
 
   @return $function;

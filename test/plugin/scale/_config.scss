@@ -1,0 +1,25 @@
+// Scale Config Tests
+// ==================
+@include test-module('Scale: Config') {
+
+
+@include describe('Add Sizes [mixin]') {
+  $old: $sizes;
+  $new1: (
+    'test': 3em,
+    'other': 1vw,
+    );
+  $new2: (
+    'test': 4em
+  );
+  @include add-sizes($new1, $new2);
+  @include it('Adds maps to the $sizes global') {
+    @include assert-equal(
+      $sizes,
+      _a_map-multimerge($old, $new1, $new2)
+    );
+  }
+  $sizes: $old !global;
+}
+
+} // end module
