@@ -1,0 +1,96 @@
+// Pseudo-Element Tests
+// ====================
+@include test-module('Type: Pseudo Elements') {
+
+$red: #fcc;
+
+
+// Before
+// ------
+@include describe('before [mixin]') {
+  @include it('Generate and style pseudo-element') {
+    @include assert('Content is generated') {
+      @include output {
+        @include before('hello world') {
+          background: $red;
+        }
+      }
+
+      @include expect {
+        &::before {
+          content: "hello world";
+          background: $red;
+        }
+      }
+    }
+  }
+}
+
+
+// After
+// -----
+@include describe('after [mixin]') {
+  @include it('Generate and style pseudo-element') {
+    @include assert('Content is generated') {
+      @include output {
+        @include after('goodbye world') {
+          background: $red;
+        }
+      }
+
+      @include expect {
+        &::after {
+          content: "goodbye world";
+          background: $red;
+        }
+      }
+    }
+  }
+}
+
+
+// Wrap Content
+// ------------
+@include describe('wrap-content [mixin]') {
+  @include it('Generate default wrappers') {
+    @include assert('Smart quotes are generated and styled') {
+      @include output {
+        @include wrap-content {
+          color: $red;
+        }
+      }
+
+      @include expect {
+        &::before,
+        &::after {
+          content: "“";
+          color: $red;
+        }
+
+        &::after {
+          content: "”";
+        }
+      }
+    }
+  }
+
+  @include it('Generate identical wrappers') {
+    @include assert('Identical bullets are generated and styled') {
+      @include output {
+        @include wrap-content('•') {
+          color: $red;
+        }
+      }
+
+      @include expect {
+        &::before,
+        &::after {
+          content: "•";
+          color: $red;
+        }
+      }
+    }
+  }
+}
+
+} // end module

@@ -1,0 +1,43 @@
+// A11y Tests
+// ==========
+@include test-module('Type: A11y') {
+
+
+// Is Hidden
+// ---------
+@include describe('is-hidden [mixin]') {
+  @include it('clip method') {
+    @include assert('Hides content with clip property') {
+      @include output {
+        @include is-hidden('clip');
+      }
+
+      @include expect {
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(1px 1px 1px 1px);
+        height: 1px;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        width: 1px;
+      }
+    }
+  }
+
+  @include it('position method') {
+    @include assert('Hides content with position property') {
+      @include output {
+        @include is-hidden('position');
+      }
+
+      @include expect {
+        left: -9999px;
+        pointer-events: none;
+        position: absolute;
+        top: -9999px;
+      }
+    }
+  }
+}
+
+} // end module
