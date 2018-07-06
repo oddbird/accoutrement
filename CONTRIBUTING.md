@@ -8,6 +8,19 @@ In all cases,
 we ask you to follow the
 [Sass community guidelines](http://sass-lang.com/community-guidelines).
 
+Issues
+------
+
+You are welcome to ask support questions
+or file bug reports.
+In either case,
+please provide:
+
+- A minimum code sample that demonstrates the issue,
+  and steps to reporoduce
+- Excpected behavior and actual results
+- How you've attempted to solve the problem
+
 
 Development
 -----------
@@ -21,13 +34,14 @@ yarn
 
 As you work...
 
-- Add or update any appropriate unit tests
+- Add or update any appropriate unit tests --
+  using [True](http://oddbird.net/true) --
   in the `test` directory,
-  and make sure all tests are passing with `npm test`
+  and make sure all tests are passing with `yarn test`
 - Add your changes to the [changelog](CHANGELOG.md)
 - Update or add inline documentation
   using [SassDoc][sassdoc] as appropriate,
-  and compile the docs with `gulp sassdoc`
+  and compile the docs with `yarn docs`
 
 [sassdoc]: http://sassdoc.com/
 
@@ -39,24 +53,21 @@ Linting, testing, and documentation
 should be done before every commit:
 
 ```
-npm run commit
+yarn commit
 ```
 
 They can also be triggered individually:
 
 ```
 # lint
-gulp sasslint
+yarn lint
 
-# test with mocha/true, and compile ag-test CSS
-npm test
+# test with mocha/true
+yarn test
 
 # compile docs
-gulp sassdoc
+yarn docs
 ```
-
-Optionally use `npm run test-libsass` for js-only tests,
-or `rake test` for ruby-only environments.
 
 Once you've fixed any final errors or typos,
 commit your changes, and submit a pull request!

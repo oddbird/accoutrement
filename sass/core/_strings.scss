@@ -27,7 +27,9 @@
 ///   The original string (or list of strings) to edit
 /// @param {string} $old -
 ///   A sub-string to replace
-/// @param {string} $new -
+/// @param {string} $new [null] -
+///   A new sub-string to replace the old
+/// @param {boolean} $replace-all [false] -
 ///   A new sub-string to replace the old
 /// @return {string} -
 ///   Original string, with substring replaced

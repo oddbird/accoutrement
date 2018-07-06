@@ -10,6 +10,11 @@ by both humans and parsers --
 improving readability and automation
 across your styles.
 
+- [Official Site](http://oddbird.net/accoutrement/)
+- [Online Docs](http://oddbird.net/accoutrement/docs/)
+- [Source](https://github.com/oddbird/accoutrement/)
+- [Issues](https://github.com/oddbird/accoutrement/issues)
+
 *Brought to you by [OddBird][oddbird] --
 the creators of [Susy][susy],
 [True][true],
@@ -111,21 +116,22 @@ setup and syntax parsing:
 ## [Init](http://oddbird.net/accoutrement/docs/init.html)
 
 We provide light-weight browser-normalization,
-as a distinct include
-(not part of the `accoutrement/sass/tools` package)
-because this is the only module to produce
+as a distinct include.
+This is not part of the `accoutrement/sass/tools` package
+because it is the only module to produce
 direct CSS output.
+
 
 ## Plugins…
 
 While the core module handles generic data-management,
 we also provide plugins for a few common data types:
 
-- [Animate](http://oddbird.net/accoutrement/docs/animate.html)
+- **[Animate](http://oddbird.net/accoutrement/docs/animate.html)** --
   Tools for managing CSS transitions and animations
-- [Color](http://oddbird.net/accoutrement/docs/color.html)
+- **[Color](http://oddbird.net/accoutrement/docs/color.html)** --
   Tools for managing CSS colors and contrast-ratios
-- [Scale](http://oddbird.net/accoutrement/docs/scale.html)
+- **[Scale](http://oddbird.net/accoutrement/docs/scale.html)** --
   Tools for managing CSS sizes: typographic scales, spacing, etc.
-- [Type](http://oddbird.net/accoutrement/docs/type.html)
+- **[Type](http://oddbird.net/accoutrement/docs/type.html)** --
   Tools for managing webfonts, generated content, and other text needs

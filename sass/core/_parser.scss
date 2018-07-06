@@ -163,53 +163,26 @@
 ///   A map of terms to reference tags against
 /// @param {string} $string -
 ///   The original string to be parsed for `#alias` tags
-/// @return {list} -
-///   List of unique `#alias` mentions with the `#` removed
+/// @return {any} -
+///   Input $string, with #alias mentions replaced
 @function _a_replace(
   $haystack,
   $string
 ) {
-  $return: $string;
-  $start: str-index($string, '#');
-
   // replace aliases…
-  @if $start {
-    // define the terms…
-    $ends: (' ', '(', ')', '/', '\\', '#', '[', ']', '{', '}');
+  @if str-index($string, '#') {
+    // check longest keys first, in case of overlap
+    @each $key in _a_str-length-sort(map-keys($haystack)) {
+      $hash: '##{$key}';
 
-    // find the end…
-    $remainder: str-slice($string, $start + 1);
-    $end: str-length($remainder);
-
-    @each $char in $ends {
-      $has: str-index($remainder, $char);
-      $end: if($has, min($has - 1, $end), $end);
-    }
-
-    $end: $end - str-length($remainder) - 1;
-
-    // the bits!
-    $before: str-slice($string, 1, $start - 1);
-    $replace: str-slice($string, $start, $end);
-    $after: if(($end < -1), str-slice($string, $end + 1), '');
-
-    // replace the token…
-    $token: str-slice($replace, 2);
-    $got: get-token($haystack, $token);
-    $return: if(($got == $token), $replace, $got);
-
-    // put it back together…
-    @if (str-length($before) > 0) {
-      $return: '#{$before}#{$return}';
-    }
-
-    @if (str-length($after) > 0) {
-      $after: _a_replace($haystack, $after);
-      $return: '#{$return}#{$after}';
+      @if (type-of($string) == 'string') and str-index($string, $hash) {
+        $new: get-token($haystack, $key);
+        $string: _a_str-replace($string, $hash, $new, 'all');
+      }
     }
   }
 
-  @return $return;
+  @return $string;
 }
 
 

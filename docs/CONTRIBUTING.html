@@ -271,12 +271,7 @@
       <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
     </li>
   </ul>
-            </li>
-  
-    <li class="nav-item">
-      <a href="undefined.html" data-nav="is-not-active">undefined</a>
-    </li>
-  </ul>
+            </li></ul>
     </div>
 
     
@@ -343,6 +338,17 @@ but code is even<span class="widont">&nbsp;</span>better!</p>
 <p>In all cases,
 we ask you to follow the
 <a href="http://sass-lang.com/community-guidelines">Sass community<span class="widont">&nbsp;</span>guidelines</a>.</p>
+<h2 id="issues">Issues</h2>
+<p>You are welcome to ask support questions
+or file bug reports.
+In either case,
+please<span class="widont">&nbsp;</span>provide:</p>
+<ul>
+<li>A minimum code sample that demonstrates the issue,
+and steps to<span class="widont">&nbsp;</span>reporoduce</li>
+<li>Excpected behavior and actual<span class="widont">&nbsp;</span>results</li>
+<li>How you’ve attempted to solve the<span class="widont">&nbsp;</span>problem</li>
+</ul>
 <h2 id="development">Development</h2>
 <p>Set up your environment
 with the appropriate development<span class="widont">&nbsp;</span>dependencies:</p>
@@ -350,31 +356,30 @@ with the appropriate development<span class="widont">&nbsp;</span>dependencies:<
 </code></pre>
 <p>As you work…</p>
 <ul>
-<li>Add or update any appropriate unit tests
+<li>Add or update any appropriate unit tests –
+using <a href="http://oddbird.net/true">True</a> –
 in the <code>test</code> directory,
-and make sure all tests are passing with <code>npm test</code></li>
+and make sure all tests are passing with <code>yarn test</code></li>
 <li>Add your changes to the <a href="CHANGELOG.md">changelog</a></li>
 <li>Update or add inline documentation
 using <a href="http://sassdoc.com/">SassDoc</a> as appropriate,
-and compile the docs with <code>gulp sassdoc</code></li>
+and compile the docs with <code>yarn docs</code></li>
 </ul>
 <h2 id="committing">Committing</h2>
 <p>Linting, testing, and documentation
 should be done before every<span class="widont">&nbsp;</span>commit:</p>
-<pre><code>npm run commit
+<pre><code>yarn commit
 </code></pre>
 <p>They can also be triggered<span class="widont">&nbsp;</span>individually:</p>
 <pre><code># lint
-gulp sasslint
+yarn lint
 
-# test with mocha/true, and compile ag-test CSS
-npm test
+# test with mocha/true
+yarn test
 
 # compile docs
-gulp sassdoc
+yarn docs
 </code></pre>
-<p>Optionally use <code>npm run test-libsass</code> for js-only tests,
-or <code>rake test</code> for ruby-only<span class="widont">&nbsp;</span>environments.</p>
 <p>Once you’ve fixed any final errors or typos,
 commit your changes, and submit a pull<span class="widont">&nbsp;</span>request!</p>
 <h2 id="pull-requests">Pull Requests</h2>

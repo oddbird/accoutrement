@@ -66,7 +66,6 @@
 /// and bracket settings as the template list.
 ///
 /// @access private
-/// @group core-lists
 ///
 /// @param {list} $template [()] -
 ///   The original list to be matched
@@ -87,3 +86,48 @@
   @return $new;
 }
 @include _a_register-function('_a_list-template', 'list-template');
+
+
+// String Length Sort
+// ------------------
+/// Sort a list (long-to-short)
+/// by the (stringified) length of each item.
+///
+/// @access private
+///
+/// @param {list} $list -
+///   Items to sort
+/// @return {any} -
+///   Sorted list, long to short
+@function _a_str-length-sort(
+  $list
+) {
+  // return the same type of list we started with…
+  $less: _a_list-template($list);
+  $equal: $less;
+  $large: $less;
+
+  @if length($list) > 1 {
+    $seed: nth($list, ceil(length($list) / 2));
+    $seed-length: str-length('#{$seed}');
+
+    @each $item in $list {
+      $item-length: str-length('#{$item}');
+
+      @if ($item-length == $seed-length) {
+        $equal: append($equal, $item);
+      } @else if ($item-length < $seed-length) {
+        $less: append($less, $item);
+      } @else if ($item-length > $seed-length) {
+        $large: append($large, $item);
+      }
+    }
+
+    $less: _a_str-length-sort($less);
+    $large: _a_str-length-sort($large);
+
+    @return join($large, join($equal, $less));
+  }
+
+  @return $list;
+}

@@ -78,4 +78,32 @@
   }
 }
 
+
+// String Length Sort
+// ------------------
+@include describe('String Length Sort [function]') {
+  $test: ['one' 'seven' 'two' 'a' blue 'something longer' 23 0.2754];
+  $test: _a_str-length-sort($test);
+  $expect: ['something longer' 0.2754 'seven' blue 'one' 'two' 23 'a'];
+
+  @include it('Sorts a list of any items by string length') {
+    @include assert-equal(
+      $test,
+      $expect
+    );
+  }
+
+  @include it('Retains the initial list type') {
+    @include assert-equal(
+      list-separator($test),
+      list-separator($expect)
+    );
+
+    @include assert-equal(
+      is-bracketed($test),
+      is-bracketed($expect)
+    );
+  }
+}
+
 } // end module

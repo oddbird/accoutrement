@@ -189,8 +189,9 @@
 // -------
 @include describe('Replace [function]') {
   $map: (
+    'na': 'nope',
     'name': 'N4M3!',
-    'this-name': 'WTF',
+    'this-name': 'nah',
     'this_name': 'WTF',
     'find': '#name',
     'number': 3,
@@ -207,62 +208,6 @@
     @include assert-equal(
       _a_replace($map, 'Replace #find alias'),
       'Replace N4M3! alias'
-    );
-  }
-
-  @include it('Ends hash names on "("') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this-name(some thing'),
-      'what)WTF(some thing'
-    );
-  }
-
-  @include it('Ends hash names on ")"') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this_name)some thing'),
-      'what)WTF)some thing'
-    );
-  }
-
-  @include it('Ends hash names on "["') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this-name[some thing'),
-      'what)WTF[some thing'
-    );
-  }
-
-  @include it('Ends hash names on "]"') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this_name]some thing'),
-      'what)WTF]some thing'
-    );
-  }
-
-  @include it('Ends hash names on "\\"') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this_name\\some thing'),
-      'what)WTF\\some thing'
-    );
-  }
-
-  @include it('Ends hash names on "/"') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this_name/some thing'),
-      'what)WTF/some thing'
-    );
-  }
-
-  @include it('Ends hash names on "{"') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this_name{some thing'),
-      'what)WTF{some thing'
-    );
-  }
-
-  @include it('Ends hash names on "}"') {
-    @include assert-equal(
-      _a_replace($map, 'what)#this_name}some thing'),
-      'what)WTF}some thing'
     );
   }
 
@@ -284,6 +229,20 @@
     @include assert-equal(
       _a_replace($map, 'please #ignore'),
       'please #ignore'
+    );
+  }
+
+  @include it('Can distinguish between overlapping keys') {
+    @include assert-equal(
+      _a_replace($map, '#name#na'),
+      'N4M3!nope'
+    );
+  }
+
+  @include it('Finds an alias without explicit ending') {
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      'N4M3!ofthething'
     );
   }
 }
