@@ -18,6 +18,7 @@ input {
 }
 
 
+// stylelint-disable declaration-no-important
 /// Appearance, cursors, and inner-focus
 /// for buttons and button-like inputs.
 ///
@@ -35,6 +36,7 @@ button,
     padding: 0 !important;
   }
 }
+// stylelint-enable
 
 
 /// Address box sizing set to `content-box` in IE 8/9/10.

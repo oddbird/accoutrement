@@ -37,7 +37,7 @@
     $path: $font-path + $path;
   }
 
-  @return url(quote($path));
+  @return url(quote($path)); // stylelint-disable-line function-url-quotes
 }
 
 

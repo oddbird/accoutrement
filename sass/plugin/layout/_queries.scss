@@ -103,7 +103,6 @@ $breakpoints: () !default;
 }
 
 
-
 // Above [mixin]
 // -------------
 /// Generate a min-<`width`/`height`> query,
@@ -138,7 +137,6 @@ $breakpoints: () !default;
     @content;
   }
 }
-
 
 
 // Between [mixin]

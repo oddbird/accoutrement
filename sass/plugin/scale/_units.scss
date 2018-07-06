@@ -15,6 +15,7 @@
 @function _a_get-px(
   $length
 ) {
+  // stylelint-disable-next-line length-zero-no-unit
   @return if(comparable($length, 1px), 0px + $length, false);
 }
 
@@ -33,6 +34,7 @@
   $unit,
   $relative: false
 ) {
+  // stylelint-disable length-zero-no-unit
   $_absolute: (
     'in': 0in,
     'mm': 0mm,
@@ -54,6 +56,7 @@
     'vmax': 0vmax,
     'fr': 0fr,
   );
+  // stylelint-enable
 
   @if $relative {
     @return map-get($_absolute, $unit) or map-get($_relative, $unit);

@@ -131,6 +131,7 @@ $_a_FONT-FORMATS: (
 }
 
 
+// stylelint-disable function-url-quotes
 // Font URL
 // --------
 /// Interpolate a font path and format-type
@@ -191,6 +192,7 @@ $_a_FONT-FORMATS: (
   // compile and return
   @return $path + $ext + $suffix;
 }
+// stylelint-enable
 
 
 // Font Src
@@ -222,6 +224,7 @@ $_a_FONT-FORMATS: (
   $format-name: map-get($_a_FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
+  // stylelint-disable-next-line function-url-quotes
   $path: _a_font-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
@@ -418,7 +421,6 @@ $_a_FONT-FORMATS: (
 }
 
 
-
 // Import Font-Face [mixin]
 // ------------------------
 /// Compile provided font-variant data into a
@@ -506,7 +508,7 @@ $_a_FONT-FORMATS: (
       @each $format, $url in $data {
         $has-data: (($format != 'local') and str-index($url, 'data:'));
 
-        @if  ($format == 'local') or $has-data {
+        @if ($format == 'local') or $has-data {
           $double: true;
         }
       }

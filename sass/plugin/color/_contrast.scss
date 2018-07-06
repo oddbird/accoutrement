@@ -40,7 +40,7 @@ $WCAG-CONTRAST: (
 ///
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {arglist} $options [#000, #fff] -
+/// @param {arglist} $options [black, white] -
 ///   Two or more colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
 ///   or the `contrast-light` and `contrast-dark` defaults
@@ -54,8 +54,8 @@ $WCAG-CONTRAST: (
 ) {
   // Establish default options if they are missing
   @if length($options) == 0 {
-    $options: append($options, map-get($colors, 'contrast-light') or #fff);
-    $options: append($options, map-get($colors, 'contrast-dark') or #000);
+    $options: append($options, map-get($colors, 'contrast-light') or white);
+    $options: append($options, map-get($colors, 'contrast-dark') or black);
   } @else if length($options) == 1 {
     @error 'Provide at least two contrasting color options for `contrast()`';
   }
@@ -106,7 +106,7 @@ $WCAG-CONTRAST: (
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
-/// @param {arglist} $options [#fff, #000] -
+/// @param {arglist} $options [white, black] -
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
 ///   or your `contrast-light` and `contrast-dark` settings
