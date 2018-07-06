@@ -21,16 +21,15 @@
 ///   Supports Base64 data URI's, without prepending font-path.
 ///
 /// @group type-fonts
+/// @example scss
+///   $font-path: '../fonts/';
+///   $src: font-url('sans/my-sans-font.woff2');
+///   /* #{$src} */
 ///
 /// @param {string} $path -
 ///   A path relative to the fonts directory.
 /// @return {string} -
 ///   The full path to a font file, in CSS `url('my/path')` format.
-///
-/// @example scss
-///   $font-path: '../fonts/';
-///   $src: font-url('sans/my-sans-font.woff2');
-///   /* #{$src} */
 @function font-url(
   $path
 ) {
@@ -51,12 +50,6 @@
 ///   Provides the correct name for fonts when an alias is given.
 ///
 /// @group type-fonts
-///
-/// @param {string} $key -
-///   The key-name of a font in your `$fonts` map.
-/// @return {String} -
-///   The full font-stack for the given font,
-///   ready for output with the `font-family` property.
 /// @example scss
 ///   $fonts: (
 ///     'sans': (
@@ -68,11 +61,17 @@
 ///   html {
 ///     font-family: font-family('sans');
 ///   }
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @return {String} -
+///   The full font-stack for the given font,
+///   ready for output with the `font-family` property.
 @function font-family(
   $key
 ) {
-  $font: _font-get($key);
-  $name: _font-name($key);
+  $font: _a_font-get($key);
+  $name: _a_font-name($key);
   @return join($name, map-get($font, 'stack'), 'comma');
 }
 
@@ -112,10 +111,6 @@
 ///   No longer accepts the `$formats` parameter.
 ///
 /// @group type-fonts
-///
-/// @param {string} $key -
-///   The key-name of a font in your `$fonts` map.
-/// @output `@font-face` import blocks for any defined font-variants.
 /// @example scss
 ///   $fonts: (
 ///     'body-font': (
@@ -127,18 +122,22 @@
 ///     ),
 ///   );
 ///   @include font-face('body-font');
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @output `@font-face` import blocks for any defined font-variants.
 @mixin font-face(
   $key
 ) {
-  $font: _font-get($key);
-  $name: _font-name($key);
-  $variants: _font-get-variants($font);
+  $font: _a_font-get($key);
+  $name: _a_font-name($key);
+  $variants: _a_font-get-variants($font);
   $formats: map-get($font, 'formats') or ();
   $unicode: map-get($font, 'unicode-range');
 
   @if (length($variants) > 0) {
     @each $variant, $data in $variants {
-      @include _import-font-face($name, $variant, $data, $formats, $unicode);
+      @include _a_import-font-face($name, $variant, $data, $formats, $unicode);
     }
   }
 }
@@ -153,10 +152,6 @@
 ///   No longer accepts the `$formats` parameter.
 ///
 /// @group type-fonts
-///
-/// @param {map} $fonts [$fonts] -
-///   A map of your font configuration.
-/// @output Any number of `@font-face` blocks.
 /// @example scss
 ///   $fonts: (
 ///     'body-font': (
@@ -173,6 +168,10 @@
 ///     ),
 ///   );
 ///   @include import-webfonts;
+///
+/// @param {map} $fonts [$fonts] -
+///   A map of your font configuration.
+/// @output Any number of `@font-face` blocks.
 @mixin import-webfonts(
   $fonts: $fonts
 ) {

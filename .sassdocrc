@@ -7,25 +7,32 @@ display:
 
 groups:
   'Core (Parser)':
-    core-api: 'Core Map API'
-    core-config: 'User Configuration'
+    core: 'Getting Started'
+    core-get: 'Accessing Maps'
     core-math: 'Math Helpers'
-    core-utils: 'Sass Utilities'
+    core-scale: 'Modular Scales'
+    core-lists: 'Sass Lists'
+    core-strings: 'Sass Strings'
+    core-register: 'Function Registration'
   'Init (Normalization)':
-    init-root: 'General'
+    init: 'Getting Started'
+    init-root: 'General Reset'
     init-a11y: 'Accessibility'
     init-forms: 'Forms'
     init-media: 'Media'
     init-type: 'Type'
   'Plugin: Animate':
+    animate: 'Getting Started'
     animate-times: 'Timing'
     animate-ease: 'Easing'
     animate-change: 'Changes'
   'Plugin: Color':
+    color: 'Getting Started'
     color-api: 'Colors'
     color-contrast: 'Contrast'
     color-utils: 'Color Utils'
   'Plugin: Layout':
+    layout: 'Getting Started'
     layout-box: 'Box-Sizing'
     layout-clearfix: 'Clearfix'
     layout-position: 'Positioning'
@@ -33,10 +40,11 @@ groups:
     layout-ratios: 'Fluid Ratios'
     layout-z-index: 'Z-Index'
   'Plugin: Scale':
+    scale: 'Getting Started'
     scale-sizes: 'Sizes'
     scale-units: 'Unit Conversion'
-    type-pseudo: 'Pseudo Elements'
   'Plugin: Type':
+    type: 'Getting Started'
     type-a11y: 'Accessibility'
     type-fonts: 'Webfonts'
     type-pseudo: 'Pseudo Elements'

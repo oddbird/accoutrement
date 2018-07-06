@@ -92,12 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="core-api.html" data-nav="is-not-active">Core Map<span class="widont">&nbsp;</span>API</a>
+      <a href="core.html" data-nav="is-not-active">Getting Started</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-config.html" data-nav="is-not-active">User Configuration</a>
+      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
     </li>
   
   
@@ -107,7 +107,22 @@
   
   
     <li class="nav-item">
-      <a href="core-utils.html" data-nav="is-not-active">Sass Utilities</a>
+      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">Sass Lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">Sass Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -116,8 +131,9 @@
               <ul>
                 
   
+  
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General Reset</a>
     </li>
   
   
@@ -146,6 +162,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="animate-times.html" data-nav="is-not-active">Timing</a>
     </li>
@@ -166,6 +183,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="color-api.html" data-nav="is-not-active">Colors</a>
     </li>
@@ -185,6 +203,7 @@
               <h3 class="nav-title">Plugin: Layout</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
@@ -221,6 +240,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
     </li>
@@ -229,17 +249,13 @@
     <li class="nav-item">
       <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
-    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin: Type</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
@@ -249,8 +265,18 @@
     <li class="nav-item">
       <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
     </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -322,8 +348,99 @@
 
   
     <div class="text-block">
-      <h1 id="accoutrement">accoutrement</h1>
-<p>Combined Sass Accoutrement tools, with option for individual module<span class="widont">&nbsp;</span>imports</p>
+      <h1 id="sass-accoutrement">Sass Accoutrement</h1>
+<p>Robbust <strong>design systems</strong> require
+meaningful, readable, reusable code.
+These Sass utilities are designed to
+help define and manage your design tokens
+(colors, fonts, sizes, etc.)
+in a format that can be understood
+by both humans and parsers –
+improving readability and automation
+across your<span class="widont">&nbsp;</span>styles.</p>
+<p><em>Brought to you by <a href="http://oddbird.net/">OddBird</a> –
+the creators of <a href="http://oddbird.net/susy/">Susy</a>,
+<a href="http://oddbird.net/true">True</a>,
+and <a href="http://oddbird.net/herman">Herman</a>.</em></p>
+<h2 id="installation">Installation</h2>
+<p>Install the package with npm or<span class="widont">&nbsp;</span>yarn</p>
+<pre><code class="lang-bash">npm install accoutrement-layout --save-dev
+yarn add accoutrement-layout --dev
+</code></pre>
+<p>Import what you<span class="widont">&nbsp;</span>need:</p>
+<pre><code class="lang-scss">// core and all plugins
+@import '&lt;path-to&gt;/accoutrement/sass/tools';
+
+// init normalization
+@import '&lt;path-to&gt;/accoutrement/sass/init';
+
+// individual plugins (core is required)
+@import '&lt;path-to&gt;/accoutrement/sass/core';
+@import '&lt;path-to&gt;/accoutrement/sass/plugin/&lt;name&gt;';
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>The accoutrement tools are built around
+a shared data-storage syntax
+using Sass “map”<span class="widont">&nbsp;</span>objects:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+  'gutter': 1em,
+);
+</code></pre>
+<p>Using a custom syntax,
+we can extend maps to handle internal reference,
+and functional adjustments –
+capturing meaningful relationships
+between design<span class="widont">&nbsp;</span>tokens:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+
+  // internal reference &amp; adjustments
+  'gutter': '#root' ('major-third': 1, 'convert-units': 'rem'),
+);
+</code></pre>
+<p>Map storage serves a larger<span class="widont">&nbsp;</span>purpose:</p>
+<ul>
+<li>Related data is grouped explicitly,
+making the code more readable and<span class="widont">&nbsp;</span>maintainable</li>
+<li>The “single source of truth”
+encourages reusable design<span class="widont">&nbsp;</span>patterns</li>
+<li>Meaningful structure allows automation,
+from <a href="http://oddbird.net/herman">automated style guides</a>
+to automated functionality
+(provided in the<span class="widont">&nbsp;</span>plugins)</li>
+</ul>
+<h2 id="core"><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a></h2>
+<p>The <strong>Core</strong> module provides the generic
+(non data-specific)
+setup and syntax<span class="widont">&nbsp;</span>parsing:</p>
+<ul>
+<li>Retreive &amp; parse map values
+with the generic <a href="http://oddbird.net/accoutrement/docs/core-get.html"><code>get-token()</code></a> function</li>
+<li>Use our built-in <a href="http://oddbird.net/accoutrement/docs/core-math.html">math</a>, <a href="http://oddbird.net/accoutrement/docs/core-ratios.html">modular-scale</a>,
+<a href="http://oddbird.net/accoutrement/docs/core-lists.html">list</a>, and <a href="http://oddbird.net/accoutrement/docs/core-strings.html">string</a><span class="widont">&nbsp;</span>utilities</li>
+<li>Register your own first class <a href="http://oddbird.net/accoutrement/docs/core-register.html">functions</a>,
+for reference inside data<span class="widont">&nbsp;</span>maps</li>
+</ul>
+<h2 id="init"><a href="http://oddbird.net/accoutrement/docs/init.html">Init</a></h2>
+<p>We provide light-weight browser-normalization,
+as a distinct include
+(not part of the <code>accoutrement/sass/tools</code> package)
+because this is the only module to produce
+direct CSS<span class="widont">&nbsp;</span>output.</p>
+<h2 id="plugins-">Plugins…</h2>
+<p>While the core module handles generic data-management,
+we also provide plugins for a few common data<span class="widont">&nbsp;</span>types:</p>
+<ul>
+<li><a href="http://oddbird.net/accoutrement/docs/animate.html">Animate</a>
+Tools for managing CSS transitions and<span class="widont">&nbsp;</span>animations</li>
+<li><a href="http://oddbird.net/accoutrement/docs/color.html">Color</a>
+Tools for managing CSS colors and<span class="widont">&nbsp;</span>contrast-ratios</li>
+<li><a href="http://oddbird.net/accoutrement/docs/scale.html">Scale</a>
+Tools for managing CSS sizes: typographic scales, spacing,<span class="widont">&nbsp;</span>etc.</li>
+<li><a href="http://oddbird.net/accoutrement/docs/type.html">Type</a>
+Tools for managing webfonts, generated content, and other text<span class="widont">&nbsp;</span>needs</li>
+</ul>
 
     </div>
   

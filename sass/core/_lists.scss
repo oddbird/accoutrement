@@ -4,24 +4,27 @@
 /// they are registered without the prefix for map-access.
 /// Mentions of `'remove-nth'` in an accoutrement map,
 /// will use the `_a_remove-nth()` function.
-/// @group core-utils
+/// @group core-lists
 
 
 // Remove Nth
 // ----------
 /// Remove any item (1-indexed) from a list.
-/// The function itself is prefixed & should not be used directly,
-/// but it's available in all accoutrement maps
+///
+/// This function is prefixed outside maps
+/// & should not be used directly,
+/// but is available in all accoutrement maps
 /// under the `'remove-nth'` alias.
 ///
 /// @access public
-/// @group core-utils
+/// @name remove-nth
+/// @group core-lists
 /// @example scss
 ///   $map: (
 ///     'main-start': ['nav-end' 'main-start' 'footer-start'],
 ///     'small-start': '#main-start' ('remove-nth': 1),
 ///   );
-///   /*! #{inspect(token_get($map, 'small-start'))} */
+///   /*! #{inspect(get-token($map, 'small-start'))} */
 ///
 /// @param {list} $list -
 ///   The original list to be edited
@@ -63,7 +66,7 @@
 /// and bracket settings as the template list.
 ///
 /// @access private
-/// @group core-utils
+/// @group core-lists
 ///
 /// @param {list} $template [()] -
 ///   The original list to be matched

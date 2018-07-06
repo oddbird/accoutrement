@@ -23,8 +23,8 @@
       _a_registration('rgba', ('alpha', 'a')),
       (
         'rgba': $rgba,
-        'alpha': $rgba,
-        'a': $rgba,
+        'alpha': '#rgba',
+        'a': '#rgba',
       )
     );
   }
@@ -45,7 +45,6 @@
 
 // Register Function [mixins]
 // --------------------------
-// sass-lint:disable variable-name-format
 @include describe('Register Function [mixins]') {
   @include it('Adds to the list of registered functions') {
     // reset the globals, for a clean testing environment
@@ -61,16 +60,16 @@
     // legacy Sass app-functions map
     $expect: (
       'rgba': 'rgba',
-      '_c': 'rgba',
-      '_a_': 'rgba',
+      '_c': '#rgba',
+      '_a_': '#rgba',
     );
 
     // first-class Sass app-functions map
     @if (function-exists('get-function')) {
       $expect: (
         'rgba': get-function('rgba'),
-        '_c': get-function('rgba'),
-        '_a_': get-function('rgba'),
+        '_c': '#rgba',
+        '_a_': '#rgba',
       );
     }
 
@@ -93,8 +92,9 @@
 // Get Function
 // ------------
 @include describe('Get Function [function]') {
-  @include _a_register-function('rgba');
+  @include _a_register-function('rgba', 'a');
   $test: _a_get-function('rgba');
+  $alias: _a_get-function('a');
 
   @include it('Returns a function or function-name') {
     $expect: 'rgba';
@@ -109,9 +109,27 @@
     );
   }
 
+  @include it('Returns a function via alias') {
+    $expect: 'rgba';
+
+    @if (function-exists('get-function')) {
+      $expect: get-function('rgba');
+    }
+
+    @include assert-equal(
+      $alias,
+      $expect
+    );
+  }
+
   @include it('Returned function or name is callable') {
     @include assert-equal(
       call($test, blue, 0.5),
+      rgba(blue, 0.5)
+    );
+
+    @include assert-equal(
+      call($alias, blue, 0.5),
       rgba(blue, 0.5)
     );
   }

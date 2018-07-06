@@ -92,12 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="core-api.html" data-nav="is-not-active">Core Map<span class="widont">&nbsp;</span>API</a>
+      <a href="core.html" data-nav="is-not-active">Getting Started</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-config.html" data-nav="is-not-active">User Configuration</a>
+      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
     </li>
   
   
@@ -107,7 +107,22 @@
   
   
     <li class="nav-item">
-      <a href="core-utils.html" data-nav="is-not-active">Sass Utilities</a>
+      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">Sass Lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">Sass Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -116,8 +131,9 @@
               <ul>
                 
   
+  
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General Reset</a>
     </li>
   
   
@@ -146,6 +162,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="animate-times.html" data-nav="is-not-active">Timing</a>
     </li>
@@ -166,6 +183,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="color-api.html" data-nav="is-active">Colors</a>
     </li>
@@ -185,6 +203,7 @@
               <h3 class="nav-title">Plugin: Layout</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
@@ -221,6 +240,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
     </li>
@@ -229,17 +249,13 @@
     <li class="nav-item">
       <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
-    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin: Type</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
@@ -249,8 +265,18 @@
     <li class="nav-item">
       <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
     </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -653,8 +679,8 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background: color(&quot;background&quot;);
-  color: color(&quot;text&quot;);
+  background: #eee;
+  color: #222;
 }
 </code></pre>
     </div>
@@ -709,11 +735,12 @@ html {
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_color-get-function()</span>
+        <a href="
+  core-get.html#function--get-token" class="item-name">get-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -1007,526 +1034,6 @@ html {
 
 
 
-<section class="item" id="variable--_LOCAL-COLOR-FUNCTIONS">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--_LOCAL-COLOR-FUNCTIONS" class="item-name">$_LOCAL-COLOR-FUNCTIONS</a>
-      
-
-      
-        <span class="value-type">(map)</span>
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$_LOCAL-COLOR-FUNCTIONS: ( // sass-lint:disable-line variable-name-format
-  &#39;tint&#39;,
-  &#39;shade&#39;,
-  &#39;contrast&#39;,
-);</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>These functions are defined internally,
-and can be called by name without first being captured
-using the Sass <code>get-function()</code> approach.</p>
-<p>Don’t make changes to this map directly.
-You can add your own named functions in the <code>$functions</code> map.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  color-api.html#variable--functions" class="item-name">$functions</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-    
-  </div>
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_color-get-function()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--functions">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--functions" class="item-name">$functions</a>
-      
-
-      
-        <span class="value-type">(map)</span>
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Define any additional color functions required
-to generate relataionships in the <code>$colors</code> map.
-This is only necessary for newer versions of Sass,
-where functions are first-class,
-and can be captured using <code>get-function($name)</code>.</p>
-<pre><code class="lang-scss">$functions: (
-  'darken': get-function('darken'),
-  'lighten': get-function('lighten'),
-);
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  color-api.html#variable--_LOCAL-COLOR-FUNCTIONS" class="item-name">$_LOCAL-COLOR-FUNCTIONS</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-    
-  </div>
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  core-config.html#mixin--register-function" class="item-name">register-function()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_get-function()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_color-get-function()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
 <section class="item" id="variable--colors">
   
     
@@ -1734,9 +1241,9 @@ They default to <code>white</code> and <code>black</code> respectively.</p>
       
       
       <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;background&#39;: &#39;brand-light&#39;,
-  &#39;text&#39;: &#39;brand-dark&#39;,
-  &#39;link&#39;: &#39;brand-pink&#39;,
+  &#39;background&#39;: &#39;#brand-light&#39;,
+  &#39;text&#39;: &#39;#brand-dark&#39;,
+  &#39;link&#39;: &#39;#brand-pink&#39;,
 );</code></pre>
     </div>
   
@@ -1784,7 +1291,7 @@ They default to <code>white</code> and <code>black</code> respectively.</p>
       
       
       <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;focus&#39;: &#39;link&#39; (&#39;darken&#39;: 15%, &#39;desaturate&#39;: 15%),
+  &#39;focus&#39;: &#39;#link&#39; (&#39;darken&#39;: 15%, &#39;desaturate&#39;: 15%),
 );</code></pre>
     </div>
   
@@ -1798,74 +1305,6 @@ They default to <code>white</code> and <code>black</code> respectively.</p>
     </div>
   
 
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-api.html#function--color" class="item-name">color()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-contrast.html#function--contrast" class="item-name">contrast()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-    
-  </div>
 
   
   
@@ -2246,12 +1685,11 @@ $text-colors: (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  color-api.html#function--merge-colors" class="item-name">merge-colors()</a>
+        <span class="item-name">_a_map-multimerge()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -2306,304 +1744,6 @@ $text-colors: (
 
   
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--merge-colors">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--merge-colors" class="item-name">merge-colors()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Merge multiple color maps into a single map,
-in case you want to define colors in smaller groups –
-such as <code>brand-colors</code>, <code>link-colors</code>, etc. –
-before merging them into a single<span class="widont">&nbsp;</span>map.</p>
-<p>This is like <code>add-colors</code>,
-but returns the combined map
-without assigning it to the <code>$colors</code> variable.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(maps...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The merged map of<span class="widont">&nbsp;</span>colors.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
-  &#39;brand-dark&#39;: #222,
-  &#39;brand-pink&#39;: hsl(330, 85%, 62%),
-);
-
-$text-colors: (
-  &#39;text&#39;: &#39;brand-dark&#39;,
-  &#39;link&#39;: &#39;brand-pink&#39;,
-);
-
-$colors: merge-colors($brand-colors, $text-colors);</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  color-api.html#mixin--add-colors" class="item-name">add-colors()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
   
 
   

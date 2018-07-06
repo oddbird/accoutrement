@@ -1,34 +1,8 @@
-/// # Core Map API
-/// The Accoutrement tools rely on a map syntax
-/// inspired by functional programming:
-///
-/// ```scss
-/// $map: (
-///   'original-value': 3em,
-///
-///   // explicit sub-map with 'value' and function properties:
-///   'new-value': (
-///     'value': '#original-value' ,
-///     'times': 2,
-///     'minus': 0.5,
-///   ),
-///
-///   // implicit value/function shorthand:
-///   'new-value-2': '#original-value' ('times': 2, 'minus': 0.5),
-/// );
-/// ```
-///
-/// Each function in the function map
-/// (e.g. `times` and `minus` above)
-/// will be run in order --
-/// with any associated arguments
-/// (`e.g. minus(times(#original-value, 2), 0.5)`) --
-/// to create a new value based on the base `value`.
-///
-/// @group core-api
+/// # Accessing Maps
+/// @group core-get
 
 
-// Token Get
+// Get Token
 // ---------
 /// The primary function for accessing and parsing
 /// accoutrement map values.
@@ -37,26 +11,30 @@
 /// You can do the same, or use it directly
 /// to turn any arbitrary map into an accoutrement map.
 ///
-/// @group core-api
+/// @group core-get
 /// @example scss - Access a map directly
 ///   $map: (
 ///     'original-value': 3em,
-///     'new-value': '#original-value' ('times': 2, 'minus': 0.5),
+///     'new-value': '#original-value' (
+///       'times': 2,
+///       'minus': 0.5
+///     ),
 ///   );
-///   /*! #{get-token($map, 'new-value')} */
+///   /*! New Value: #{get-token($map, 'new-value')} */
 /// @example scss - Write your own shortcut plugin for specific maps
+///   @function get($key) {
+///     @return get-token($my-map, $key);
+///   }
+///
 ///   $my-map: ('main': 32em);
-///   @function get($key) { @return get-token($my-map, $key); }
-///   /*! #{get('main')} */
+///   /*! Main: #{get('main')} */
 ///
 /// @param {map} $map -
 ///   A map of token definitions to reference against
 /// @param {*} $key -
 ///   The original key or value to be parsed for `#alias` tags
 /// @return {*} -
-///   Updated `$needle` value
-///   in the same format as the original,
-///   but with all `#alias` tags replaced
+///   The parsed value of any key in a given map
 @function get-token(
   $map,
   $key
@@ -119,8 +97,8 @@
 }
 
 
-// Parse Alias
-// -----------
+// Parse
+// -----
 /// Handles recursive parsing for list/map values.
 ///
 /// @access private

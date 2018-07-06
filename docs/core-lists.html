@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Core Map API | Accoutrement Documentation</title>
+  <title>Sass Lists | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,12 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="core-api.html" data-nav="is-active">Core Map<span class="widont">&nbsp;</span>API</a>
+      <a href="core.html" data-nav="is-not-active">Getting Started</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-config.html" data-nav="is-not-active">User Configuration</a>
+      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
     </li>
   
   
@@ -107,7 +107,22 @@
   
   
     <li class="nav-item">
-      <a href="core-utils.html" data-nav="is-not-active">Sass Utilities</a>
+      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-active">Sass Lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">Sass Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -116,8 +131,9 @@
               <ul>
                 
   
+  
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General Reset</a>
     </li>
   
   
@@ -146,6 +162,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="animate-times.html" data-nav="is-not-active">Timing</a>
     </li>
@@ -166,6 +183,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="color-api.html" data-nav="is-not-active">Colors</a>
     </li>
@@ -185,6 +203,7 @@
               <h3 class="nav-title">Plugin: Layout</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
@@ -221,6 +240,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
     </li>
@@ -229,17 +249,13 @@
     <li class="nav-item">
       <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
-    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin: Type</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
@@ -249,8 +265,18 @@
     <li class="nav-item">
       <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
     </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -304,11 +330,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Core Map API</strong>
+    <strong>Sass Lists</strong>
   </nav>
 
 
-        <div data-page="core-api">
+        <div data-page="core-lists">
           
   
     
@@ -333,29 +359,12 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="core-map-api">Core Map API</h1>
-<p>The Accoutrement tools rely on a map syntax
-inspired by functional<span class="widont">&nbsp;</span>programming:</p>
-<pre><code class="lang-scss">$map: (
-  'original-value': 3em,
-
-  // explicit sub-map with 'value' and function properties:
-  'new-value': (
-    'value': '#original-value' ,
-    'times': 2,
-    'minus': 0.5,
-  ),
-
-  // implicit value/function shorthand:
-  'new-value-2': '#original-value' ('times': 2, 'minus': 0.5),
-);
-</code></pre>
-<p>Each function in the function map
-(e.g. <code>times</code> and <code>minus</code> above)
-will be run in order –
-with any associated arguments
-(<code>e.g. minus(times(#original-value, 2), 0.5)</code>) –
-to create a new value based on the base <code>value</code>.</p>
+      <h1 id="sass-utilities">Sass Utilities</h1>
+<p>Functions for basic Sass manipulation.
+While these functions are defined with private prefixes,
+they are registered without the prefix for map-access.
+Mentions of <code>'remove-nth'</code> in an accoutrement map,
+will use the <code>_a_remove-nth()</code> function.</p>
 
       
   
@@ -420,7 +429,7 @@ to create a new value based on the base <code>value</code>.</p>
 
 
 
-<section class="item" id="function--get-token">
+<section class="item" id="function--remove-nth">
   
     
   
@@ -438,7 +447,7 @@ to create a new value based on the base <code>value</code>.</p>
       
 
       
-        <a href="#function--get-token" class="item-name">get-token()</a>
+        <a href="#function--remove-nth" class="item-name">remove-nth()</a>
       
 
       
@@ -459,12 +468,11 @@ to create a new value based on the base <code>value</code>.</p>
 
   
     <div class="text-block">
-      <p>The primary function for accessing and parsing
-accoutrement map values.
-Each accoutrement plugin creates a shortcut wrapper function
-for the specific map associated with that data-type.
-You can do the same, or use it directly
-to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>map.</p>
+      <p>Remove any item (1-indexed) from a<span class="widont">&nbsp;</span>list.</p>
+<p>This function is prefixed outside maps
+&amp; should not be used directly,
+but is available in all accoutrement maps
+under the <code>'remove-nth'</code> alias.</p>
 
       
   
@@ -510,17 +518,17 @@ to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$list:</span>
       
       
-      <span class="value-type">(map)</span>
+      <span class="value-type">(list)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A map of token definitions to reference<span class="widont">&nbsp;</span>against</p>
+        <p>The original list to be<span class="widont">&nbsp;</span>edited</p>
 
       </div>
     
@@ -537,17 +545,17 @@ to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$key:</span>
+        <span class="item-name">$index:</span>
       
       
-      <span class="value-type">(*)</span>
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The original key or value to be parsed for <code>#alias</code> tags</p>
+        <p>The 1-indexed item to remove from the<span class="widont">&nbsp;</span>list</p>
 
       </div>
     
@@ -569,16 +577,14 @@ to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(*)</span>
+      <span class="value-type">(list)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Updated <code>$needle</code> value
-in the same format as the original,
-but with all <code>#alias</code> tags replaced</p>
+        <p>The original list, with item<span class="widont">&nbsp;</span>removed</p>
 
       </div>
     
@@ -590,6 +596,74 @@ but with all <code>#alias</code> tags replaced</p>
   
 
       
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>$index: #{quote($index)} is not a number for <code>_a_remove-nth</code>.</p>
+
+      </div>
+    
+  </div>
+
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>List index 0 must be a non-zero integer for <code>_a_remove-nth</code>.</p>
+
+      </div>
+    
+  </div>
+
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>#{$state} but list is only #{length($list)} item<span class="widont">&nbsp;</span>long.</p>
+
+      </div>
+    
+  </div>
+
+    
   
 
     
@@ -604,7 +678,7 @@ but with all <code>#alias</code> tags replaced</p>
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Examples</span>
+        <span class="item-subtitle-main">Example</span>
       </h3>
 
       
@@ -635,20 +709,16 @@ but with all <code>#alias</code> tags replaced</p>
           </span>
 
           
-            <span class='code-description'>
-              Access a map directly
-            </span>
-          
         </div>
       
 
       
       
       <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;original-value&#39;: 3em,
-  &#39;new-value&#39;: &#39;#original-value&#39; (&#39;times&#39;: 2, &#39;minus&#39;: 0.5),
+  &#39;main-start&#39;: [&#39;nav-end&#39; &#39;main-start&#39; &#39;footer-start&#39;],
+  &#39;small-start&#39;: &#39;#main-start&#39; (&#39;remove-nth&#39;: 1),
 );
-/*! #{get-token($map, &#39;new-value&#39;)} */</code></pre>
+/*! #{inspect(get-token($map, &#39;small-start&#39;))} */</code></pre>
     </div>
   
 
@@ -670,78 +740,7 @@ but with all <code>#alias</code> tags replaced</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! 5.5em */
-</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-            <span class='code-description'>
-              Write your own shortcut plugin for specific maps
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$my-map: (&#39;main&#39;: 32em);
-@function get($key) { @return get-token($my-map, $key); }
-/*! #{get(&#39;main&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! 32em */
+      <pre class="hljs-pre"><code class="lang-css">/*! [&quot;main-start&quot; &quot;footer-start&quot;] */
 </code></pre>
     </div>
   
@@ -760,8 +759,7 @@ but with all <code>#alias</code> tags replaced</p>
   
   
   
-    <div class="requires-wrapper">
-      
+    
     
   <div data-item-section="requires">
     
@@ -795,7 +793,7 @@ but with all <code>#alias</code> tags replaced</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get()</span>
+        <span class="item-name">_a_list-template()</span>
       
       
       
@@ -812,119 +810,9 @@ but with all <code>#alias</code> tags replaced</p>
   </div>
 
   
-      
-  
     
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
   
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-change.html#function--change" class="item-name">change()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease.html#function--ease" class="item-name">ease()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-times.html#function--time" class="item-name">time()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
   
 
   

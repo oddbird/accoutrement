@@ -22,9 +22,9 @@
   $method: 'clip'
 ) {
   @if $method == 'position' {
-    @include _is-hidden--position;
+    @include _a_is-hidden--position;
   } @else {
-    @include _is-hidden--clip;
+    @include _a_is-hidden--clip;
   }
 }
 
@@ -34,7 +34,7 @@
 /// Hide an element by positioning it off the page.
 /// @group type-a11y
 /// @access private
-@mixin _is-hidden--position {
+@mixin _a_is-hidden--position {
   left: -9999px;
   pointer-events: none;
   position: absolute;
@@ -47,7 +47,7 @@
 /// Hide an element by clipping it in place.
 /// @group type-a11y
 /// @access private
-@mixin _is-hidden--clip {
+@mixin _a_is-hidden--clip {
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(1px 1px 1px 1px);
   height: 1px;

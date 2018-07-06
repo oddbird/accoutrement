@@ -9,7 +9,7 @@
 /// [WCAG]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 ///
 /// @access private
-$WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
+$WCAG-CONTRAST: (
   'AA-large': 3,
   'AA': 4.5,
   'AAA': 7,

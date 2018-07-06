@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Changes | Accoutrement Documentation</title>
+  <title>Getting Started | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,7 +92,7 @@
                 
   
     <li class="nav-item">
-      <a href="core.html" data-nav="is-not-active">Getting Started</a>
+      <a href="core.html" data-nav="is-active">Getting Started</a>
     </li>
   
   
@@ -174,7 +174,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-change.html" data-nav="is-active">Changes</a>
+      <a href="animate-change.html" data-nav="is-not-active">Changes</a>
     </li>
   </ul>
             </li>
@@ -330,11 +330,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Changes</strong>
+    <strong>Getting Started</strong>
   </nav>
 
 
-        <div data-page="animate-change">
+        <div data-page="core">
           
   
     
@@ -359,168 +359,17 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="animations-transitions">Animations &amp; Transitions</h1>
-<p>Combine your <code>$times</code> and <code>$changes</code> values
-to create entire transitions and animations –
-all stored in one place and easy to access
-for consistent “changes” across your<span class="widont">&nbsp;</span>project.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--changes">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--changes" class="item-name">$changes</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$changes: () !default;</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>A variable storing the map of
-all your standardized changes (transitions and animations).
-Any changes added to the <code>$changes</code> map will be accesible
-to the <code>change()</code> function by<span class="widont">&nbsp;</span>default.</p>
-<p>Define each change with a <code>name</code> and <code>value</code>,
-or use interpolation to compose more complex<span class="widont">&nbsp;</span>changes.</p>
-<pre><code>$changes: (
-  // single animation
-  'glow': glow time('slow') ease('in-out-quad') infinite alternate,
-
-  // single transitions
-  'slide': transform time('fast'),
-  'fade': opacity time('fade') ease('out-quad'),
-
-  // interolate using '#name' (quotes optional)
-  // to build on existing &quot;changes&quot;
-  'slide-in': #slide ease('out-back'),
-  'slide-out': '#slide' ease('in'),
-
-  // or string together multiple &quot;changes&quot;
-  'sidebar-in': ('#slide-in', '#fade' time('delay')),
-
-  // or create a 1-to-1 alias
-  'modal-in': #sidebar-in,
+      <h1 id="core-getting-started">Core: Getting Started</h1>
+<p>The accoutrement tools are built around
+a shared data-storage syntax
+using Sass “map” objects.
+We can use maps to store and name
+our design<span class="widont">&nbsp;</span>tokens:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+  'gutter': 1em,
 );
 </code></pre>
-<ul>
-<li>Name your changes anything –
-from abstractions like <code>fade</code>,
-to concrete patterns like <code>sidebar-in</code>.</li>
-<li>Values can be CSS-ready values,
-references other changes in the map,
-or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
-</ul>
 
       
   
@@ -534,8 +383,6 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
     </div>
   
 
-  </div>
-
   
 
   
@@ -557,357 +404,6 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
   
   
     
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-change.html#function--change" class="item-name">change()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-change.html#mixin--add-changes" class="item-name">add-changes()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--change">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--change" class="item-name">change()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Access a named change in your <code>$changes</code> map.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$name:</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of a change in your configuration (e.g. <code>fade-in</code>).</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The change value<span class="widont">&nbsp;</span>requested</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  core-get.html#function--get-token" class="item-name">get-token()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
     
   
 
@@ -938,49 +434,39 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
 
 
 
-<section class="item" id="mixin--add-changes">
+<section class="item" >
   
     
   
   
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@mixin</span>
-      
-
-      
-        <a href="#mixin--add-changes" class="item-name">add-changes()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
   
   
 
   
-    <div class="text-block">
-      <p>Merge individual change maps into the global <code>$changes</code> variable,
-in case you want to define changes in smaller groups –
-such as <code>button-changes</code>, <code>page-changes</code>, etc –
-before merging them into a single global<span class="widont">&nbsp;</span>changes-palette.</p>
+    <div data-item-section="prose" class="text-block">
+      <h2 id="internal-reference">Internal Reference</h2>
+<p>The core module provides a generic map-parsing syntax,
+for internal reference &amp; adjustments –
+establishing dynamic relationships between map values.
+To refernce another key in the same map,
+use the <code>#key</code> hashtag format:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+
+  // 'gutter' == 16px
+  'gutter': '#root',
+);
+</code></pre>
+<p>Reference hashtags can also be embeded inside a<span class="widont">&nbsp;</span>string:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+  'scale': 1vw,
+
+  // 'responsive' == calc(16px + 1vw)
+  'responsive': calc(#root + #scale),
+);
+</code></pre>
+<p>(Sass treats CSS-native functions (like <code>calc()</code>) as a<span class="widont">&nbsp;</span>string)</p>
 
       
   
@@ -994,8 +480,6 @@ before merging them into a single global<span class="widont">&nbsp;</span>change
     </div>
   
 
-  </div>
-
   
 
   
@@ -1004,86 +488,6 @@ before merging them into a single global<span class="widont">&nbsp;</span>change
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(map...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be merged and<span class="widont">&nbsp;</span>added</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <ul>
-<li>An updated global <code>$changes</code> variable,
-with new maps merged<span class="widont">&nbsp;</span>in.</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -1098,96 +502,660 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
   
     
     
-  <div data-item-section="requires">
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
     
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
     
 
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
     
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
   
   
   
   
 
   
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_map-multimerge()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
+    <div data-item-section="prose" class="text-block">
+      <h2 id="functional-adjustments">Functional Adjustments</h2>
+<p>In many cases, we’ll want to reference a value
+and then make adjustments to it.
+The explicit long-hand syntax uses a map
+with <code>'value'</code> as the first key.
+Each additional key provides a function name
+along with arguments for that<span class="widont">&nbsp;</span>function:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
 
+  // convert-units(16px, 'rem')
+  'gutter': (
+    'value': '#root',
+    'times': 1.5,
+    'convert-units': 'rem',
+  ),
+);
+</code></pre>
+<p>You can also string together multiple functions,
+to create more complex<span class="widont">&nbsp;</span>relationships:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+
+  // convert-units(times(16px, 1.5), 'rem')
+  'gutter': (
+    'value': '#root',
+    'times': 1.5,
+    'convert-units': 'rem',
+  ),
+);
+</code></pre>
+<p>Each function in the function map
+(e.g. <code>times</code> &amp; <code>convert-units</code> above)
+will be run in order –
+with any associated arguments included.
+The <code>value</code> is always passed as the first<span class="widont">&nbsp;</span>argument.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
     
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
-      
-      
-      
-      
-    </h4>
-
     
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
+  
 
   
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="modular-scale-adjustments">Modular-Scale Adjustments</h2>
+<p>When managing numbers,
+you can also move up and down exponential <a href="core-scale.html">modular-scales</a>
+by calling a named ratio
+in place of a function name.
+Scales are<span class="widont">&nbsp;</span>exponential:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+
+  // manipulating a 'value' with function &amp; scale adjustments:
+  'gutter': (
+    'value': '#root',
+    'convert-units': 'rem',
+
+    // one step up a 'major third' scale (5 / 4)
+    'major-third': 1,
+  ),
+);
+</code></pre>
+<p>Multiple functions/ratios
+will be applied in the order they are<span class="widont">&nbsp;</span>given.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="adjustment-shorthand">Adjustment Shorthand</h2>
+<p>We also provide a shorhand syntax
+to simplify adjustments in most cases.
+Here, the value is written first (any data type),
+and a map of adjustments can be provided
+at the end of the<span class="widont">&nbsp;</span>definition:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+
+  // shorthand for value/adjustments
+  'gutter': '#root' ('major-third': 1, 'convert-units': 'rem'),
+);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="adjustments-with-references">Adjustments with #References</h2>
+<p>Adjustment-function and ratio arguments
+can also refernce keys in the<span class="widont">&nbsp;</span>map:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+  'line-height': 1.4,
+
+  // multiply by line-height (linear)
+  'rhythm': '#root' ('times': '#line-height'),
+
+  // 2-steps up the (exponential) line-height scale
+  'gutter': '#root' ('#line-height': 2),
+);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="string-interpolation">String Interpolation</h2>
+<p>For CSS features like <code>calc()</code>
+you can also create format-strings
+and interpolate values into the string.
+Use <code>%s</code> as a placeholder in Sass strings,
+then call the <code>%s</code> adjustment function
+with values for each<span class="widont">&nbsp;</span>placeholder:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+  'scale': 1vw,
+  'responsive': (
+    'value': calc(%s + %s),
+    '%s': '#root' '#scale',
+  ),
+);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="nested-adjustments">Nested Adjustments</h2>
+<p>Since adjustment formats and values
+are parsed the same as any other value,
+it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustments:</p>
+<pre><code class="lang-scss">$map: (
+  'root': 16px,
+  'scale': 1vw,
+  'responsive': (
+    'value': calc(%s + %s),
+    '%s': (
+      '#root' ('convert-units': 'rem'),
+      '#scale' ('times': 2),
+    ),
+  ),
+);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="included-third-party-functions">Included &amp; Third-Party<span class="widont">&nbsp;</span>Functions</h2>
+<p>We provide a core set of
+<a href="core-math.html">math utilities</a>,
+named <a href="core-scale.html">scales</a>,
+and <a href="core-lists.html">list</a>/<a href="./core-strings.html">string</a> helpers –
+prefixed to avoid conflict,
+but available unprefixed inside data<span class="widont">&nbsp;</span>maps.</p>
+<p>You can also <a href="core-register.html">register functons</a> of your own,
+or pass along functions from other Sass modules –
+giving them any alias you<span class="widont">&nbsp;</span>like.</p>
+<pre><code>$functions: (
+  // register any functions…
+  'my-function': get-function('my-function'),
+
+  // including Sass core functions…
+  'rgba': get-function('rgba'),
+
+  // provide alias names…
+  'mine': '#my-function',
+);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
     
   
 

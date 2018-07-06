@@ -7,7 +7,7 @@
 /// - Overflow-style: Edge 12+, Internet Explorer 11-
 /// @group init-root
 html {
-  -ms-overflow-style: -ms-autohiding-scrollbar; // sass-lint:disable-line no-vendor-prefixes
+  -ms-overflow-style: -ms-autohiding-scrollbar;
   text-size-adjust: 100%;
 }
 

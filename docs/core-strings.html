@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>User Configuration | Accoutrement Documentation</title>
+  <title>Sass Strings | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,12 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="core-api.html" data-nav="is-not-active">Core Map<span class="widont">&nbsp;</span>API</a>
+      <a href="core.html" data-nav="is-not-active">Getting Started</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-config.html" data-nav="is-active">User Configuration</a>
+      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
     </li>
   
   
@@ -107,7 +107,22 @@
   
   
     <li class="nav-item">
-      <a href="core-utils.html" data-nav="is-not-active">Sass Utilities</a>
+      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">Sass Lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-active">Sass Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -116,8 +131,9 @@
               <ul>
                 
   
+  
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General Reset</a>
     </li>
   
   
@@ -146,6 +162,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="animate-times.html" data-nav="is-not-active">Timing</a>
     </li>
@@ -166,6 +183,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="color-api.html" data-nav="is-not-active">Colors</a>
     </li>
@@ -185,6 +203,7 @@
               <h3 class="nav-title">Plugin: Layout</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
@@ -221,6 +240,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
     </li>
@@ -229,17 +249,13 @@
     <li class="nav-item">
       <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
-    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin: Type</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
@@ -249,8 +265,18 @@
     <li class="nav-item">
       <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
     </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -304,11 +330,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>User Configuration</strong>
+    <strong>Sass Strings</strong>
   </nav>
 
 
-        <div data-page="core-config">
+        <div data-page="core-strings">
           
   
     
@@ -323,117 +349,7 @@
 
 
 
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h1 id="core-configuration">Core Configuration</h1>
-<p>The Accoutrement tools rely on a map syntax
-inspired by functional<span class="widont">&nbsp;</span>programming:</p>
-<pre><code class="lang-scss">$map: (
-  'original-value': 3em,
-
-  // explicit sub-map with 'value' and function properties:
-  'new-value': (
-    'value': '#original-value' ,
-    'times': 2,
-    'minus': 0.5,
-  ),
-
-  // implicit value/function shorthand:
-  'new-value-2': '#original-value' ('times': 2, 'minus': 0.5),
-);
-</code></pre>
-<p>Each function in the function map
-(e.g. <code>times</code> and <code>minus</code> above)
-will be run in order –
-with any associated arguments
-(<code>e.g. minus(times(#original-value, 2), 0.5)</code>) –
-to create a new value based on the base <code>value</code>.</p>
-<p>Sass 3.5+ provides first-class functions,
-and 4.0 is expected to include module namespacing features.
-Since we want to integrate with user-defined functions,
-we provide tools for storing first-class functions
-and making them accessible to all the accoutrment<span class="widont">&nbsp;</span>plugins.</p>
-<p>We provide a standard set of
-<a href="./math.html">math utilities</a> that you can use,
-along with a few
-<a href="./lists.html">list</a> and <a href="./strings.html">string</a> helpers
-that we use<span class="widont">&nbsp;</span>internally.</p>
-<p>The tools below will allow you
-to register first-class functions of your own,
-making them available to all Accoutrement<span class="widont">&nbsp;</span>maps.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--functions">
+<section class="item" id="function--str-replace">
   
     
   
@@ -447,208 +363,11 @@ making them available to all Accoutrement<span class="widont">&nbsp;</span>maps.
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type"></span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
-      
-
-      
-        <span class="value-type">(map)</span>
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>You can also use third-party (or Sass-native) functions.
-Because Sass 3.5+ requires first-class functions,
-we provide a single place to store &amp; manage functions
-that you would like to use with Accoutrement<span class="widont">&nbsp;</span>Animate.</p>
-<p>Define any third-party functions required
-by your <code>$times</code>, <code>$easing</code>, or <code>$changes</code> maps.
-This is only necessary for newer versions of Sass,
-where functions are first-class,
-and can be captured using <code>get-function($name)</code>.</p>
-<pre><code class="lang-scss">$functions: (
-  'times': get-function('times'),
-  'divide': get-function('divide'),
-);
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="property">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">&lt;alias&gt;:</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Each alias key in the map
-should refer to a captured<span class="widont">&nbsp;</span>function</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="mixin--register-function">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@mixin</span>
-      
-
-      
-        <a href="#mixin--register-function" class="item-name">register-function()</a>
+        <a href="#function--str-replace" class="item-name">str-replace()</a>
       
 
       
@@ -669,15 +388,12 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
   
     <div class="text-block">
-      <p>In addition to managing the <code>$functions</code> map directly,
-you can also register new functions on the<span class="widont">&nbsp;</span>fly:</p>
-<pre><code class="lang-scss">  // the first value is the function name,
-  // any additional values provide alias names for the same function
-  @include register-function('rgba', 'alpha');
-</code></pre>
-<p>Functions only need to be registered
-if they will be used inside accoutrement maps.
-That includes core Sass<span class="widont">&nbsp;</span>functions.</p>
+      <p>Replace a substring inside a larger string,
+or replace the entirety of the<span class="widont">&nbsp;</span>string.</p>
+<p>This function is prefixed outside maps
+&amp; should not be used directly,
+but is available in all accoutrement maps
+under the <code>'str-replace'</code> alias.</p>
 
       
   
@@ -707,7 +423,7 @@ That includes core Sass<span class="widont">&nbsp;</span>functions.</p>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
@@ -723,18 +439,17 @@ That includes core Sass<span class="widont">&nbsp;</span>functions.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$function:</span>
+        <span class="item-name">$string:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>function)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The function-name to be registered
-or a first-class function previously<span class="widont">&nbsp;</span>captured</p>
+        <p>The original string (or list of strings) to<span class="widont">&nbsp;</span>edit</p>
 
       </div>
     
@@ -751,18 +466,17 @@ or a first-class function previously<span class="widont">&nbsp;</span>captured</
     <h4 class="param-title">
       
       
-        <span class="item-name">$names...:</span>
+        <span class="item-name">$old:</span>
       
-      <span class="item-value">$function</span>
-      <span class="value-type">(strings)</span>
+      
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>One or more alias names (strings)
-to use for map-access to the<span class="widont">&nbsp;</span>function</p>
+        <p>A sub-string to<span class="widont">&nbsp;</span>replace</p>
 
       </div>
     
@@ -770,9 +484,33 @@ to use for map-access to the<span class="widont">&nbsp;</span>function</p>
 
 
       
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$new:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A new sub-string to replace the<span class="widont">&nbsp;</span>old</p>
+
+      </div>
+    
+  </div>
+
 
       
-  
 
       
   
@@ -784,19 +522,17 @@ to use for map-access to the<span class="widont">&nbsp;</span>function</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">{CSS output}</span>
+        <span class="item-name">@return</span>
       
       
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>{map} $_ACCOUTREMENT_APP -
-Functions are registered in a map
-under any number of<span class="widont">&nbsp;</span>aliases</p>
+        <p>Original string, with substring<span class="widont">&nbsp;</span>replaced</p>
 
       </div>
     
@@ -807,6 +543,9 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
       
   
 
+      
+  
+
     
   </div>
 
@@ -814,6 +553,87 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
 
 
   
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
+// so we can use string-functions to manipulate calc values…
+$map: (
+  &#39;text-size&#39;: calc(1em + 1vw),
+  &#39;large-text&#39;: &#39;#text-size&#39; (&#39;str-replace&#39;: &#39;1vw&#39; &#39;3vw&#39;),
+);
+/*! #{get-token($map, &#39;large-text&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! calc(1em + 3vw) */
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
   
 
 
@@ -855,7 +675,7 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_registration()</span>
+        <span class="item-name">_a_list-template()</span>
       
       
       
@@ -868,19 +688,122 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
 
         
       
-        
-        
-        
+    
+  </div>
 
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--interpolate">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--interpolate" class="item-name">interpolate()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Return a string with interpolated values
+replacing <code>%s</code> placeholders in a format<span class="widont">&nbsp;</span>string.</p>
+<p>This function is prefixed outside maps
+&amp; should not be used directly,
+but is available in all accoutrement maps
+under the <code>'interpolate'</code> or <code>'%s'</code> aliases.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
-          
-          
-  
-  
-  
-  
-  
-  
+      </h3>
+    
+
+    
+      
+        
   
   
 
@@ -889,30 +812,182 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
     <h4 class="param-title">
       
       
-        <a href="
-  color-api.html#variable--functions" class="item-name">$functions</a>
+        <span class="item-name">$string:</span>
       
       
-      <span class="value-type">(map)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>The original string to be<span class="widont">&nbsp;</span>edited</p>
+
+      </div>
+    
   </div>
 
 
-        
       
         
-        
-        
+  
+  
 
-        
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
+      
+        <span class="item-name">$values...:</span>
+      
+      
+      <span class="value-type">(strings)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>New strings, to replace the <code>%s</code> format strings</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Original string, with <code>%s</code> format strings<span class="widont">&nbsp;</span>replaced</p>
+
+      </div>
     
   </div>
 
   
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
+// so we can use string-functions to manipulate calc values…
+$map: (
+  &#39;root&#39;: 16px,
+  &#39;responsive&#39;: calc(%s + %s) (&#39;%s&#39;: #root 0.5vw),
+);
+/*! #{get-token($map, &#39;responsive&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! calc(16px + 0.5vw) */
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
     
   
 

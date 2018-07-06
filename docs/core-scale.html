@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Sass Utilities | Accoutrement Documentation</title>
+  <title>Modular Scales | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,12 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="core-api.html" data-nav="is-not-active">Core Map<span class="widont">&nbsp;</span>API</a>
+      <a href="core.html" data-nav="is-not-active">Getting Started</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-config.html" data-nav="is-not-active">User Configuration</a>
+      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
     </li>
   
   
@@ -107,7 +107,22 @@
   
   
     <li class="nav-item">
-      <a href="core-utils.html" data-nav="is-active">Sass Utilities</a>
+      <a href="core-scale.html" data-nav="is-active">Modular Scales</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">Sass Lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">Sass Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -116,8 +131,9 @@
               <ul>
                 
   
+  
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General Reset</a>
     </li>
   
   
@@ -146,6 +162,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="animate-times.html" data-nav="is-not-active">Timing</a>
     </li>
@@ -166,6 +183,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="color-api.html" data-nav="is-not-active">Colors</a>
     </li>
@@ -185,6 +203,7 @@
               <h3 class="nav-title">Plugin: Layout</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
@@ -221,6 +240,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
     </li>
@@ -229,17 +249,13 @@
     <li class="nav-item">
       <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
-    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin: Type</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
@@ -249,8 +265,18 @@
     <li class="nav-item">
       <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
     </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -304,11 +330,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Sass Utilities</strong>
+    <strong>Modular Scales</strong>
   </nav>
 
 
-        <div data-page="core-utils">
+        <div data-page="core-scale">
           
   
     
@@ -333,12 +359,10 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="sass-utilities">Sass Utilities</h1>
-<p>Functions for basic Sass manipulation.
-While these functions are defined with private prefixes,
-they are registered without the prefix for map-access.
-Mentions of <code>'remove-nth'</code> in an accoutrement map,
-will use the <code>_a_remove-nth()</code> function.</p>
+      <h1 id="modular-scale-ratios">Modular Scale Ratios</h1>
+<p>Ratios are useful for both modular-scales
+and fluid media layouts –
+so we’ve moved them into the<span class="widont">&nbsp;</span>core.</p>
 
       
   
@@ -403,7 +427,7 @@ will use the <code>_a_remove-nth()</code> function.</p>
 
 
 
-<section class="item" id="function--_a_remove-nth">
+<section class="item" id="variable--ratios">
   
     
   
@@ -417,13 +441,15 @@ will use the <code>_a_remove-nth()</code> function.</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type"></span>
       
 
       
-        <a href="#function--_a_remove-nth" class="item-name">_a_remove-nth()</a>
+        <a href="#variable--ratios" class="item-name">$ratios</a>
       
 
+      
+        <span class="value-type">(map)</span>
       
 
       
@@ -435,6 +461,26 @@ will use the <code>_a_remove-nth()</code> function.</p>
 
     
     
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$ratios: () !default;</code></pre>
+    </div>
+  
+
+    
   
   
   
@@ -442,10 +488,10 @@ will use the <code>_a_remove-nth()</code> function.</p>
 
   
     <div class="text-block">
-      <p>Remove any item (1-indexed) from a list.
-The function itself is prefixed &amp; should not be used directly,
-but it’s available in all accoutrement maps
-under the <code>'remove-nth'</code> alias.</p>
+      <p>Define your own ratios,
+or alias keys for built-in ratios.
+Any ratios that resolve to <code>linear</code>
+will not use any exponential<span class="widont">&nbsp;</span>scale.</p>
 
       
   
@@ -469,178 +515,6 @@ under the <code>'remove-nth'</code> alias.</p>
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$list:</span>
-      
-      
-      <span class="value-type">(list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original list to be<span class="widont">&nbsp;</span>edited</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$index:</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The 1-indexed item to remove from the<span class="widont">&nbsp;</span>list</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original list, with item<span class="widont">&nbsp;</span>removed</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>$index: #{quote($index)} is not a number for <code>_a_remove-nth</code>.</p>
-
-      </div>
-    
-  </div>
-
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>List index 0 must be a non-zero integer for <code>_a_remove-nth</code>.</p>
-
-      </div>
-    
-  </div>
-
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>#{$state} but list is only #{length($list)} item<span class="widont">&nbsp;</span>long.</p>
-
-      </div>
-    
-  </div>
-
-    
-  
-
-    
-  </div>
 
   
 
@@ -687,34 +561,11 @@ under the <code>'remove-nth'</code> alias.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;main-start&#39;: [&#39;nav-end&#39; &#39;main-start&#39; &#39;footer-start&#39;],
-  &#39;small-start&#39;: &#39;#main-start&#39; (&#39;remove-nth&#39;: 1),
-);
-/*! #{inspect(token_get($map, &#39;small-start&#39;))} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! token_get((&quot;main-start&quot;: [&quot;nav-end&quot; &quot;main-start&quot; &quot;footer-start&quot;], &quot;small-start&quot;: &quot;#main-start&quot; (&quot;remove-nth&quot;: 1)), &quot;small-start&quot;) */
-</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$ratios: (
+  &#39;line-height&#39;: (1 / 3),
+  &#39;headings&#39;: &#39;linear&#39;,
+  &#39;golden&#39;: 1.61803399,
+);</code></pre>
     </div>
   
 
@@ -729,33 +580,21 @@ under the <code>'remove-nth'</code> alias.</p>
 
 
   
-  
-  
-  
-    <div class="requires-wrapper">
-      
+
     
-  <div data-item-section="requires">
+  <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
 
     
       
+
       
         
-        
-        
-
-        
-          
-          
-  
-  
-  
   
   
   
@@ -765,26 +604,30 @@ under the <code>'remove-nth'</code> alias.</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_list-template()</span>
       
       
+        <a href="
+  core-scale.html#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
       
-      <span class="item-note">[private]</span>
+      
+      
+      
     </h4>
 
     
   </div>
 
 
-        
       
     
   </div>
 
   
-      
+  
+  
+  
+    
+    
   
     
   <div data-item-section="used-by">
@@ -815,11 +658,12 @@ under the <code>'remove-nth'</code> alias.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get()</span>
+        <a href="
+  core-scale.html#function--ratio" class="item-name">ratio()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -828,12 +672,46 @@ under the <code>'remove-nth'</code> alias.</p>
 
         
       
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-scale.html#mixin--add-ratios" class="item-name">add-ratios()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
     
   </div>
 
   
 
-    </div>
   
 
   
@@ -861,7 +739,7 @@ under the <code>'remove-nth'</code> alias.</p>
 
 
 
-<section class="item" id="function--_a_str-replace">
+<section class="item" id="function--ratio">
   
     
   
@@ -879,7 +757,7 @@ under the <code>'remove-nth'</code> alias.</p>
       
 
       
-        <a href="#function--_a_str-replace" class="item-name">_a_str-replace()</a>
+        <a href="#function--ratio" class="item-name">ratio()</a>
       
 
       
@@ -900,11 +778,9 @@ under the <code>'remove-nth'</code> alias.</p>
 
   
     <div class="text-block">
-      <p>Replace a substring inside a larger string,
-or replace the entirety of the string.
-The function itself is prefixed &amp; should not be used directly,
-but it’s available in all accoutrement maps
-under the <code>'str-replace'</code> alias.</p>
+      <p>Retrieve a scale ratio by name
+from either the <code>$_DEFAULT-RATIOS</code>
+or user <code>$ratios</code> configurations.</p>
 
       
   
@@ -950,71 +826,17 @@ under the <code>'str-replace'</code> alias.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$string:</span>
+        <span class="item-name">$ratio:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original string (or list of strings) to<span class="widont">&nbsp;</span>edit</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$old:</span>
-      
-      
-      <span class="value-type">(string)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A sub-string to<span class="widont">&nbsp;</span>replace</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$new:</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A new sub-string to replace the<span class="widont">&nbsp;</span>old</p>
+        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
 
       </div>
     
@@ -1036,14 +858,14 @@ under the <code>'str-replace'</code> alias.</p>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Original string, with substring<span class="widont">&nbsp;</span>replaced</p>
+        <p>The numeric value of a<span class="widont">&nbsp;</span>ratio</p>
 
       </div>
     
@@ -1105,13 +927,8 @@ under the <code>'str-replace'</code> alias.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
-// so we can use string-functions to manipulate calc values…
-$map: (
-  &#39;text-size&#39;: calc(1em + 1vw),
-  &#39;large-text&#39;: &#39;#text-size&#39; (&#39;str-replace&#39;: &#39;1vw&#39; &#39;3vw&#39;),
-);
-/*! #{token_get($map, &#39;large-text&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">/* Octave: #{ratio(&#39;octave&#39;)} */
+/* Fifth: #{ratio(&#39;fifth&#39;)} */</code></pre>
     </div>
   
 
@@ -1133,7 +950,8 @@ $map: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! token_get((&quot;text-size&quot;: calc(1em + 1vw), &quot;large-text&quot;: &quot;#text-size&quot; (&quot;str-replace&quot;: &quot;1vw&quot; &quot;3vw&quot;)), &quot;large-text&quot;) */
+      <pre class="hljs-pre"><code class="lang-css">/* Octave: 2 */
+/* Fifth: 1.5 */
 </code></pre>
     </div>
   
@@ -1187,11 +1005,82 @@ $map: (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_list-template()</span>
+        <a href="
+  core-get.html#function--get-token" class="item-name">get-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  core-scale.html#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  core-scale.html#variable--ratios" class="item-name">$ratios</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
     </h4>
 
     
@@ -1236,7 +1125,7 @@ $map: (
       <span class="item-type">@function</span>
       
         <a href="
-  scale-sizes.html#function--negative" class="item-name">negative()</a>
+  layout-ratios.html#function--fluid-ratio" class="item-name">fluid-ratio()</a>
       
       
       
@@ -1266,37 +1155,7 @@ $map: (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_parse-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_interpolate()</span>
+        <span class="item-name">_a_do()</span>
       
       
       
@@ -1315,6 +1174,523 @@ $map: (
   
 
     </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--add-ratios">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--add-ratios" class="item-name">add-ratios()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge individual ratio maps into the global <code>$ratio</code> variable.
+This can be useful for internal organization,
+documentation with <a href="http://sassdoc.com/">SassDoc</a>,
+or integration with our pattern-library generator:
+<a href="http://oddbird.net/herman/">Herman</a>.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$maps:</span>
+      
+      
+      <span class="value-type">(map...)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>An updated global <code>$ratios</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_map-multimerge()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  core-scale.html#variable--ratios" class="item-name">$ratios</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--_a_RATIOS">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$_a_RATIOS: (
+  &#39;octave&#39;: 2,
+  &#39;major-seventh&#39;: (15 / 8),
+  &#39;minor-seventh&#39;: (16 / 9),
+  &#39;major-sixth&#39;: (5 / 3),
+  &#39;minor-sixth&#39;: (8 / 5),
+  &#39;fifth&#39;: (3 / 2),
+  &#39;augmented-fourth&#39;: (45 / 32),
+  &#39;fourth&#39;: (4 / 3),
+  &#39;major-third&#39;: (5 / 4),
+  &#39;minor-third&#39;: (6 / 5),
+  &#39;major-second&#39;: (9 / 8),
+  &#39;minor-second&#39;: (16 / 15),
+
+  &#39;photo&#39;: &#39;#fifth&#39;,
+  &#39;classic&#39;: &#39;#fourth&#39;,
+  &#39;widescreen&#39;: &#39;#minor-seventh&#39;,
+  &#39;cinima&#39;: 2.39,
+  &#39;golden&#39;: 1.618,
+);</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Some default named ratios you can use,
+but shouldn’t edit<span class="widont">&nbsp;</span>directly.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  core-scale.html#variable--ratios" class="item-name">$ratios</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  core-scale.html#function--ratio" class="item-name">ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
   
 
   

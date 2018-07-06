@@ -30,7 +30,6 @@ button,
   appearance: button;
   cursor: pointer;
 
-  // sass-lint:disable no-vendor-prefixes, no-important
   &::-moz-focus-inner {
     border: 0 none !important;
     padding: 0 !important;

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Changes | Accoutrement Documentation</title>
+  <title>Accessing Maps | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -97,7 +97,7 @@
   
   
     <li class="nav-item">
-      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
+      <a href="core-get.html" data-nav="is-active">Accessing Maps</a>
     </li>
   
   
@@ -174,7 +174,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-change.html" data-nav="is-active">Changes</a>
+      <a href="animate-change.html" data-nav="is-not-active">Changes</a>
     </li>
   </ul>
             </li>
@@ -330,11 +330,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Changes</strong>
+    <strong>Accessing Maps</strong>
   </nav>
 
 
-        <div data-page="animate-change">
+        <div data-page="core-get">
           
   
     
@@ -359,11 +359,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="animations-transitions">Animations &amp; Transitions</h1>
-<p>Combine your <code>$times</code> and <code>$changes</code> values
-to create entire transitions and animations –
-all stored in one place and easy to access
-for consistent “changes” across your<span class="widont">&nbsp;</span>project.</p>
+      <h1 id="accessing-maps">Accessing Maps</h1>
 
       
   
@@ -428,7 +424,7 @@ for consistent “changes” across your<span class="widont">&nbsp;</span>projec
 
 
 
-<section class="item" id="variable--changes">
+<section class="item" id="function--get-token">
   
     
   
@@ -442,11 +438,11 @@ for consistent “changes” across your<span class="widont">&nbsp;</span>projec
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type"></span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#variable--changes" class="item-name">$changes</a>
+        <a href="#function--get-token" class="item-name">get-token()</a>
       
 
       
@@ -460,26 +456,6 @@ for consistent “changes” across your<span class="widont">&nbsp;</span>projec
 
     
     
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$changes: () !default;</code></pre>
-    </div>
-  
-
-    
   
   
   
@@ -487,40 +463,12 @@ for consistent “changes” across your<span class="widont">&nbsp;</span>projec
 
   
     <div class="text-block">
-      <p>A variable storing the map of
-all your standardized changes (transitions and animations).
-Any changes added to the <code>$changes</code> map will be accesible
-to the <code>change()</code> function by<span class="widont">&nbsp;</span>default.</p>
-<p>Define each change with a <code>name</code> and <code>value</code>,
-or use interpolation to compose more complex<span class="widont">&nbsp;</span>changes.</p>
-<pre><code>$changes: (
-  // single animation
-  'glow': glow time('slow') ease('in-out-quad') infinite alternate,
-
-  // single transitions
-  'slide': transform time('fast'),
-  'fade': opacity time('fade') ease('out-quad'),
-
-  // interolate using '#name' (quotes optional)
-  // to build on existing &quot;changes&quot;
-  'slide-in': #slide ease('out-back'),
-  'slide-out': '#slide' ease('in'),
-
-  // or string together multiple &quot;changes&quot;
-  'sidebar-in': ('#slide-in', '#fade' time('delay')),
-
-  // or create a 1-to-1 alias
-  'modal-in': #sidebar-in,
-);
-</code></pre>
-<ul>
-<li>Name your changes anything –
-from abstractions like <code>fade</code>,
-to concrete patterns like <code>sidebar-in</code>.</li>
-<li>Values can be CSS-ready values,
-references other changes in the map,
-or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
-</ul>
+      <p>The primary function for accessing and parsing
+accoutrement map values.
+Each accoutrement plugin creates a shortcut wrapper function
+for the specific map associated with that data-type.
+You can do the same, or use it directly
+to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>map.</p>
 
       
   
@@ -546,18 +494,333 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
   
 
   
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
 
-
+    
+      
+        
   
   
 
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$map:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A map of token definitions to reference<span class="widont">&nbsp;</span>against</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
 
   
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$key:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original key or value to be parsed for <code>#alias</code> tags</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
   
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The parsed value of any key in a given<span class="widont">&nbsp;</span>map</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
   
   
     
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              Access a map directly
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$map: (
+  &#39;original-value&#39;: 3em,
+  &#39;new-value&#39;: &#39;#original-value&#39; (
+    &#39;times&#39;: 2,
+    &#39;minus&#39;: 0.5
+  ),
+);
+/*! New Value: #{get-token($map, &#39;new-value&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! New Value: 5.5em */
+</code></pre>
+    </div>
+  
+
+    </div>
+
     
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              Write your own shortcut plugin for specific maps
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">@function get($key) {
+  @return get-token($my-map, $key);
+}
+
+$my-map: (&#39;main&#39;: 32em);
+/*! Main: #{get(&#39;main&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! Main: 32em */
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
   
     
   <div data-item-section="used-by">
@@ -617,10 +880,10 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-change.html#mixin--add-changes" class="item-name">add-changes()</a>
+  animate-ease.html#function--ease" class="item-name">ease()</a>
       
       
       
@@ -633,216 +896,11 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
 
         
       
-        
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--change">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--change" class="item-name">change()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Access a named change in your <code>$changes</code> map.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$name:</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of a change in your configuration (e.g. <code>fade-in</code>).</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The change value<span class="widont">&nbsp;</span>requested</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
         
 
         
           
           
-  
-  
   
   
   
@@ -856,7 +914,7 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
       <span class="item-type">@function</span>
       
         <a href="
-  core-get.html#function--get-token" class="item-name">get-token()</a>
+  animate-times.html#function--time" class="item-name">time()</a>
       
       
       
@@ -870,254 +928,10 @@ or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
         
       
         
-        
-        
 
         
           
           
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="mixin--add-changes">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@mixin</span>
-      
-
-      
-        <a href="#mixin--add-changes" class="item-name">add-changes()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Merge individual change maps into the global <code>$changes</code> variable,
-in case you want to define changes in smaller groups –
-such as <code>button-changes</code>, <code>page-changes</code>, etc –
-before merging them into a single global<span class="widont">&nbsp;</span>changes-palette.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(map...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be merged and<span class="widont">&nbsp;</span>added</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <ul>
-<li>An updated global <code>$changes</code> variable,
-with new maps merged<span class="widont">&nbsp;</span>in.</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
   
   
   
@@ -1130,7 +944,38 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_map-multimerge()</span>
+        <a href="
+  color-api.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_get-function()</span>
       
       
       
@@ -1144,14 +989,10 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
         
       
         
-        
-        
 
         
           
           
-  
-  
   
   
   
@@ -1162,10 +1003,10 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
   
   <div class="param-list">
     <h4 class="param-title">
-      
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
+  core-scale.html#function--ratio" class="item-name">ratio()</a>
       
       
       
@@ -1179,8 +1020,64 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
         
       
         
+
         
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  layout-queries.html#function--break" class="item-name">break()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
         
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  scale-sizes.html#function--size" class="item-name">size()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
       
@@ -1188,9 +1085,8 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
   </div>
 
   
-    
-  
 
+    </div>
   
 
   

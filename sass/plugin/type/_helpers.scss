@@ -18,7 +18,7 @@
 /// (not including `normal`, which is also a valid weight).
 /// @access private
 /// @group font-helpers
-$_font-style-options: (
+$_a_FONT-STYLES: (
   'italic',
   'oblique',
 );
@@ -30,7 +30,7 @@ $_font-style-options: (
 /// (not including `normal`, which is also a valid style).
 /// @access private
 /// @group font-helpers
-$_font-weight-options: (
+$_a_FONT-WEIGHTS: (
   '100',
   '200',
   '300',
@@ -53,7 +53,7 @@ $_font-weight-options: (
 /// The order given here will also be used in defining font-face src order.
 /// @access private
 /// @group font-helpers
-$_font-format-options: (
+$_a_FONT-FORMATS: (
   'local': null,
   'eot': 'embedded-opentype',
   'woff2': 'woff2',
@@ -82,7 +82,7 @@ $_font-format-options: (
 ///   or an alias key that redirects to the appropriate font.
 /// @return {map} -
 ///   Map of all the font-data associated with the given key.
-@function _font-get(
+@function _a_font-get(
   $key
 ) {
   $font: map-get($fonts, $key);
@@ -90,7 +90,7 @@ $_font-format-options: (
   @if not $font {
     @error '#{$key} is not defined in your `$fonts` configuration map.';
   } @else if map-has-key($fonts, $font) {
-    $font: _font-get($font);
+    $font: _a_font-get($font);
   }
 
   @return $font;
@@ -101,7 +101,7 @@ $_font-format-options: (
 // ---------
 /// Get a font-name from the `$fonts` map,
 /// based on font access-key.
-/// This is similar to the `_font-get()` function,
+/// This is similar to the `_a_font-get()` function,
 /// but returns only the name of the font.
 ///
 /// @since 4.0.0 -
@@ -115,7 +115,7 @@ $_font-format-options: (
 ///   or an alias key that redirects to the appropriate font.
 /// @return {string} -
 ///   The font-name associated with the given key.
-@function _font-name(
+@function _a_font-name(
   $key
 ) {
   $font: map-get($fonts, $key);
@@ -123,7 +123,7 @@ $_font-format-options: (
   @if not $font {
     @error '#{$key} is not defined in your `$fonts` configuration map.';
   } @else if map-has-key($fonts, $font) {
-    $font: _font-name($font);
+    $font: _a_font-name($font);
   }
 
   $font-name: if((type-of($font) == 'map'), map-get($font, 'name'), $font);
@@ -161,7 +161,7 @@ $_font-format-options: (
 ///   Optionally append an `?#iefix` suffix to `eot` fonts.
 /// @return {string} -
 ///   Font-format URL for importing.
-@function _font-url(
+@function _a_font-url(
   $path,
   $format,
   $svgid: null,
@@ -215,14 +215,14 @@ $_font-format-options: (
 ///   SVG or EOT-iefix suffix to be added to font url.
 /// @return {list} -
 ///   CSS-ready `url() format()` combination for font-face `src` output.
-@function _font-src(
+@function _a_font-src(
   $path,
   $format
 ) {
-  $format-name: map-get($_font-format-options, $format);
+  $format-name: map-get($_a_FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
-  $path: _font-url($path, $format, $iefix: true);
+  $path: _a_font-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
 
@@ -244,13 +244,13 @@ $_font-format-options: (
 /// @return {list} -
 ///   Compiled list of `url() format()` pairs,
 ///   ready to apply in the `src` property.
-@function _font-src-list(
+@function _a_font-src-list(
   $data
 ) {
   $src: ();
 
   // Use best-practice format order
-  @each $format in map-keys($_font-format-options) {
+  @each $format in map-keys($_a_FONT-FORMATS) {
     $url: map-get($data, $format);
 
     @if $url {
@@ -262,7 +262,7 @@ $_font-format-options: (
           $item: append($item, $li, 'comma');
         }
       } @else {
-        $li: _font-src($url, $format);
+        $li: _a_font-src($url, $format);
         $item: append($item, $li, 'comma');
       }
 
@@ -290,10 +290,10 @@ $_font-format-options: (
 ///   A map of all the data for a single font.
 /// @return {map} -
 ///   Only the variants provided in the given font-map.
-@function _font-get-variants(
+@function _a_font-get-variants(
   $font
 ) {
-  $var-options: join($_font-style-options, $_font-weight-options);
+  $var-options: join($_a_FONT-STYLES, $_a_FONT-WEIGHTS);
   $var-options: append($var-options, 'normal');
   $variants: ();
 
@@ -326,7 +326,7 @@ $_font-format-options: (
 ///   A list of font variants, such as `('bold', 'italic')`.
 /// @return {$map} -
 ///   A map of `style` and `weight` values.
-@function _parse-variant-name(
+@function _a_parse-variant-name(
   $variant
 ) {
   $return: (
@@ -335,9 +335,9 @@ $_font-format-options: (
   );
 
   @each $item in $variant {
-    @if index($_font-style-options, $item) {
+    @if index($_a_FONT-STYLES, $item) {
       $return: map-merge($return, ('style': $item));
-    } @else if index($_font-weight-options, '' + $item) {
+    } @else if index($_a_FONT-WEIGHTS, '' + $item) {
       $return: map-merge($return, ('weight': $item));
     }
   }
@@ -376,7 +376,7 @@ $_font-format-options: (
 ///   A map of formats and urls for the given font-variant,
 ///   merging interpolated and explicit format/paths
 ///   into a single map.
-@function _normalize-variant-data(
+@function _a_normalize-variant-data(
   $data,
   $formats: ()
 ) {
@@ -395,7 +395,7 @@ $_font-format-options: (
   @if $path {
     @if (length($formats) > 0) {
       @each $format in $formats {
-        $url: _font-url($path, $format, $svgid);
+        $url: _a_font-url($path, $format, $svgid);
         $implicit: map-merge($implicit, ($format: $url));
       }
     } @else {
@@ -407,8 +407,8 @@ $_font-format-options: (
   $explicit: ();
 
   @each $key, $value in $data {
-    @if map-has-key($_font-format-options, $key) {
-      $url: _font-url($value, $key, $svgid);
+    @if map-has-key($_a_FONT-FORMATS, $key) {
+      $url: _a_font-url($value, $key, $svgid);
       $explicit: map-merge($explicit, ($key: $url));
     }
   }
@@ -458,14 +458,14 @@ $_font-format-options: (
 ///   without formats for interpolation.
 ///
 /// @example scss - string `$data`
-///   @include _import-font-face(
+///   @include _a_import-font-face(
 ///     $name: 'Franklin Gothic',
 ///     $variant: ('bold' 'italic'),
 ///     $data: 'path/to/franklin-bolditalic-font',
 ///     $formats: ('woff2' 'woff')
 ///   );
 /// @example scss - map `$data`
-///   @include _import-font-face(
+///   @include _a_import-font-face(
 ///     $name: 'Franklin Gothic',
 ///     $variant: 'normal',
 ///     $data: (
@@ -474,15 +474,15 @@ $_font-format-options: (
 ///       'ttf': 'path/to/franklin-bolditalic-font.ttf',
 ///     )
 ///   );
-@mixin _import-font-face(
+@mixin _a_import-font-face(
   $name,
   $variant,
   $data,
   $formats: (),
   $unicode: null
 ) {
-  $variant: _parse-variant-name($variant);
-  $data: _normalize-variant-data($data, $formats);
+  $variant: _a_parse-variant-name($variant);
+  $data: _a_normalize-variant-data($data, $formats);
   $style: map-get($variant, 'style');
   $weight: map-get($variant, 'weight');
 
@@ -499,7 +499,7 @@ $_font-format-options: (
   $double: false;
 
   @if $eot {
-    $eot: _font-url($eot, 'eot');
+    $eot: _a_font-url($eot, 'eot');
     $eot: font-url($eot);
 
     @if (not str-index($eot, 'data:')) {
@@ -548,18 +548,17 @@ $_font-format-options: (
       font-family: $name;
       font-style: $style;
       font-weight: $weight;
-      src: _font-src-list($data);
+      src: _a_font-src-list($data);
       unicode-range: $unicode;
     }
   } @else {
     // combined output
-    // sass-lint:disable no-duplicate-properties
     @font-face {
       font-family: $name;
       font-style: $style;
       font-weight: $weight;
       src: $eot;
-      src: _font-src-list($data);
+      src: _a_font-src-list($data);
       unicode-range: $unicode;
     }
   }

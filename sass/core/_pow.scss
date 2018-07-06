@@ -9,8 +9,8 @@
 
 // Constants
 // ---------
-$_LN2: 0.6931471805599453; // sass-lint:disable-line variable-name-format
-$_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
+$_LN2: 0.6931471805599453;
+$_SQRT2: 1.4142135623730951;
 
 
 // Pow
@@ -22,6 +22,7 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 /// `'pow'` or `'^'`.
 ///
 /// @access public
+/// @name pow
 /// @group core-math
 /// @example scss
 ///   /* #{ _a_pow(4, 2)   } */
@@ -100,6 +101,7 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 /// `'log'`.
 ///
 /// @access public
+/// @name log
 /// @group core-math
 /// @example scss
 ///   /* #{ _a_log(2)     } */
@@ -119,10 +121,10 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
   @if $x <= 0 {
     @return 0 / 0;
   }
-  $k: nth(_a_frexp($x / $_SQRT2), 2); // sass-lint:disable-line variable-name-format
+  $k: nth(_a_frexp($x / $_SQRT2), 2);
   $x: $x / _a_ldexp(1, $k);
 
-  @return $_LN2 * $k + _a_log-approx($x); // sass-lint:disable-line variable-name-format
+  @return $_LN2 * $k + _a_log-approx($x);
 }
 @include _a_register-function('_a_log', 'log');
 

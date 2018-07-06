@@ -92,12 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="core-api.html" data-nav="is-not-active">Core Map<span class="widont">&nbsp;</span>API</a>
+      <a href="core.html" data-nav="is-not-active">Getting Started</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-config.html" data-nav="is-not-active">User Configuration</a>
+      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
     </li>
   
   
@@ -107,7 +107,22 @@
   
   
     <li class="nav-item">
-      <a href="core-utils.html" data-nav="is-not-active">Sass Utilities</a>
+      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">Sass Lists</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">Sass Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -116,8 +131,9 @@
               <ul>
                 
   
+  
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General Reset</a>
     </li>
   
   
@@ -146,6 +162,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="animate-times.html" data-nav="is-not-active">Timing</a>
     </li>
@@ -166,6 +183,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="color-api.html" data-nav="is-not-active">Colors</a>
     </li>
@@ -185,6 +203,7 @@
               <h3 class="nav-title">Plugin: Layout</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
@@ -221,6 +240,7 @@
               <ul>
                 
   
+  
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
     </li>
@@ -229,17 +249,13 @@
     <li class="nav-item">
       <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
-    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin: Type</h3>
               <ul>
                 
+  
   
     <li class="nav-item">
       <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
@@ -249,8 +265,18 @@
     <li class="nav-item">
       <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
     </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -311,33 +337,21 @@
         <div data-page="CHANGELOG">
           
   <div class="text-block">
-    <h1 id="accoutrement-animate-changelog">Accoutrement-Animate Changelog</h1>
-<h2 id="v0-2-0-unreleased">v0.2.0 - UNRELEASED</h2>
+    <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
+<h2 id="v0-1-0-unreleased">v0.1.0 - UNRELEASED</h2>
 <ul>
-<li>NEW: Add support for managed easing functions
-using the <code>$easing</code> variable for storage,
-and <code>ease()</code> function for<span class="widont">&nbsp;</span>access.</li>
-<li>NEW: <code>add-easing()</code> and <code>merge-easing()</code> functions
-help with more detailed easing-map<span class="widont">&nbsp;</span>manipulations.</li>
-<li>NEW: Provide a classic set of cubic-bezier easing functions by<span class="widont">&nbsp;</span>default.</li>
-<li>NEW: Store transitions and animations in the <code>$changes</code> map,
-use string interpolation to create composite changes,
-and access them all through the <code>change()</code> function.</li>
-<li>NEW: <code>transition()</code> and <code>animate()</code> mixins provide
-apply stored change values to the coresponding CSS<span class="widont">&nbsp;</span>property.</li>
-</ul>
-<h2 id="v0-1-1-06-11-2018">v0.1.1 - 06/11/2018</h2>
-<ul>
-<li>BUGFIX: Documentation typos…</li>
-</ul>
-<h2 id="v0-1-0-06-11-2018">v0.1.0 - 06/11/2018</h2>
-<ul>
-<li>NEW: Initial setup, tests, docs, and function-handling<span class="widont">&nbsp;</span>utilities</li>
-<li>NEW: <code>$times</code> map allows naming, reference, and adjustment of<span class="widont">&nbsp;</span>times</li>
-<li>NEW: <code>add</code>/<code>plus</code>, <code>subtract</code>/<code>minus</code>, <code>times</code>/<code>multiply</code>, and <code>divide</code>
-functions provided for time<span class="widont">&nbsp;</span>adjustments</li>
-<li>NEW: <code>time()</code> function provides access to calculated <code>$times</code></li>
-<li>NEW: <code>merge-times()</code> and <code>add-times()</code> for time-map<span class="widont">&nbsp;</span>management</li>
+<li>Merges all existing Accoutrement plugins:
+<a href="http://oddbird.net/accoutrement-color/">Color</a>,
+<a href="http://oddbird.net/accoutrement-init/">Init</a>,
+<a href="http://oddbird.net/accoutrement-layout/">Layout</a>,
+<a href="http://oddbird.net/accoutrement-scale/">Scale</a>,
+and <a href="http://oddbird.net/accoutrement-type/">Type</a></li>
+<li>NEW: <a href="http://oddbird.net/accoutrement/docs/animate.html">Animate</a> plugin</li>
+<li>NEW: <a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>
+functionality and<span class="widont">&nbsp;</span>utilities</li>
+<li>BREAKING: All modules now use a shared map syntax,
+with explicit <code>#tag</code> references
+and the option for explicit value/adjustment<span class="widont">&nbsp;</span>maps.</li>
 </ul>
 
   </div>

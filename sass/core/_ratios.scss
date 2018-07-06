@@ -1,37 +1,8 @@
-/// # Core Ratio Management
+/// # Modular Scale Ratios
 /// Ratios are useful for both modular-scales
 /// and fluid media layouts --
 /// so we've moved them into the core.
-/// @group core-ratios
-
-
-// Default Ratios
-// --------------
-/// Some default named ratios you can use,
-/// but shouldn't edit directly.
-///
-/// @group core-ratios
-/// @access public
-$_a_RATIOS: (  // sass-lint:disable-line variable-name-format
-  'octave': 2,
-  'major-seventh': (15 / 8),
-  'minor-seventh': (16 / 9),
-  'major-sixth': (5 / 3),
-  'minor-sixth': (8 / 5),
-  'fifth': (3 / 2),
-  'augmented-fourth': (45 / 32),
-  'fourth': (4 / 3),
-  'major-third': (5 / 4),
-  'minor-third': (6 / 5),
-  'major-second': (9 / 8),
-  'minor-second': (16 / 15),
-
-  'photo': '#fifth',
-  'classic': '#fourth',
-  'widescreen': '#minor-seventh',
-  'cinima': 2.39,
-  'golden': 1.618,
-);
+/// @group core-scale
 
 
 // Ratios
@@ -41,9 +12,9 @@ $_a_RATIOS: (  // sass-lint:disable-line variable-name-format
 /// Any ratios that resolve to `linear`
 /// will not use any exponential scale.
 ///
-/// @group core-ratios
+/// @group core-scale
+/// @see $_a_RATIOS
 /// @type map
-/// @see $_DEFAULT-RATIOS
 ///
 /// @example scss -
 ///   $ratios: (
@@ -60,7 +31,7 @@ $ratios: () !default;
 /// from either the `$_DEFAULT-RATIOS`
 /// or user `$ratios` configurations.
 ///
-/// @group core-ratios
+/// @group core-scale
 /// @example scss
 ///   /* Octave: #{ratio('octave')} */
 ///   /* Fifth: #{ratio('fifth')} */
@@ -88,7 +59,7 @@ $ratios: () !default;
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group core-ratios
+/// @group core-scale
 ///
 /// @parameter {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -100,3 +71,35 @@ $ratios: () !default;
 ) {
   $ratios: _a_map-multimerge($ratios, $maps...) !global;
 }
+
+
+// Default Ratios
+// --------------
+/// Some default named ratios you can use,
+/// but shouldn't edit directly.
+///
+/// @group core-scale
+/// @see $ratios
+/// @access public
+$_a_RATIOS: (
+  'octave': 2,
+  'major-seventh': (15 / 8),
+  'minor-seventh': (16 / 9),
+  'major-sixth': (5 / 3),
+  'minor-sixth': (8 / 5),
+  'fifth': (3 / 2),
+  'augmented-fourth': (45 / 32),
+  'fourth': (4 / 3),
+  'major-third': (5 / 4),
+  'minor-third': (6 / 5),
+  'major-second': (9 / 8),
+  'minor-second': (16 / 15),
+
+  'photo': '#fifth',
+  'classic': '#fourth',
+  'widescreen': '#minor-seventh',
+  'cinima': 2.39,
+  'golden': 1.618,
+);
+
+

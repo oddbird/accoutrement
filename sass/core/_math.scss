@@ -17,6 +17,7 @@
 /// `'plus'`, `'add'`, or `'+'`.
 ///
 /// @access public
+/// @name plus
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -50,6 +51,7 @@
 /// `'minus'`, `'subtract'`, or `'-'`.
 ///
 /// @access public
+/// @name minus
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -83,6 +85,7 @@
 /// `'times'`, `'multiply'`, or `'*'`.
 ///
 /// @access public
+/// @name times
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -115,6 +118,7 @@
 /// `'divide'`, or `'/'`.
 ///
 /// @access public
+/// @name divide
 /// @group core-math
 /// @example scss -
 ///   $sizes: (
@@ -148,6 +152,7 @@
 /// `'modulo'`, `'remainder'`, `'mod'`, or `'%'`.
 ///
 /// @access public
+/// @name modulo
 /// @group core-math
 /// @example scss -
 ///   $sizes: (

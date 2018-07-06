@@ -5,12 +5,15 @@
 // --------------
 /// Replace a substring inside a larger string,
 /// or replace the entirety of the string.
-/// The function itself is prefixed & should not be used directly,
-/// but it's available in all accoutrement maps
+///
+/// This function is prefixed outside maps
+/// & should not be used directly,
+/// but is available in all accoutrement maps
 /// under the `'str-replace'` alias.
 ///
 /// @access public
-/// @group core-utils
+/// @name str-replace
+/// @group core-strings
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -18,7 +21,7 @@
 ///     'text-size': calc(1em + 1vw),
 ///     'large-text': '#text-size' ('str-replace': '1vw' '3vw'),
 ///   );
-///   /*! #{token_get($map, 'large-text')} */
+///   /*! #{get-token($map, 'large-text')} */
 ///
 /// @param {string | list} $string -
 ///   The original string (or list of strings) to edit
@@ -69,9 +72,24 @@
 // Interpolate
 // -----------
 /// Return a string with interpolated values
-/// replacing `%s` format strings
+/// replacing `%s` placeholders in a format string.
 ///
-/// @access private
+/// This function is prefixed outside maps
+/// & should not be used directly,
+/// but is available in all accoutrement maps
+/// under the `'interpolate'` or `'%s'` aliases.
+///
+/// @access public
+/// @name interpolate
+/// @group core-strings
+/// @example scss
+///   // sass treats calc() as a string,
+///   // so we can use string-functions to manipulate calc values…
+///   $map: (
+///     'root': 16px,
+///     'responsive': calc(%s + %s) ('%s': #root 0.5vw),
+///   );
+///   /*! #{get-token($map, 'responsive')} */
 ///
 /// @param {string} $string -
 ///   The original string to be edited
