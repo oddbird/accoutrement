@@ -11,8 +11,8 @@ groups:
     core-get: 'Accessing Maps'
     core-math: 'Math Helpers'
     core-scale: 'Modular Scales'
-    core-lists: 'Sass Lists'
-    core-strings: 'Sass Strings'
+    core-lists: 'Sass List Utils'
+    core-strings: 'Sass Strings Utils'
     core-register: 'Function Registration'
   'Init (Normalization)':
     init: 'Getting Started'

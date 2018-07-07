@@ -112,12 +112,12 @@
   
   
     <li class="nav-item">
-      <a href="core-lists.html" data-nav="is-not-active">Sass Lists</a>
+      <a href="core-lists.html" data-nav="is-not-active">Sass List<span class="widont">&nbsp;</span>Utils</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-strings.html" data-nav="is-not-active">Sass Strings</a>
+      <a href="core-strings.html" data-nav="is-not-active">Sass Strings<span class="widont">&nbsp;</span>Utils</a>
     </li>
   
   
@@ -355,6 +355,10 @@
   
     <div data-item-section="prose" class="text-block">
       <h1 id="function-registration">Function Registration</h1>
+<p>Because Sass 3.5+ requires first-class functions,
+we provide tools for capturing functions
+and making them available to the Accoutrement map parser.
+This also provides the ability to alias functions as you<span class="widont">&nbsp;</span>like.</p>
 
       
   
@@ -480,8 +484,7 @@
 
   
     <div class="text-block">
-      <p>Because Sass 3.5+ requires first-class functions,
-we provide a single place to store &amp; manage functions
+      <p>We provide a single map to store &amp; manage functions
 that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>maps.</p>
 <pre><code class="lang-scss">$functions: (
   'times': get-function('times'),
@@ -489,7 +492,8 @@ that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>
 );
 </code></pre>
 <p>Functions can be registered multiple times,
-and under any alias<span class="widont">&nbsp;</span>key:</p>
+under any aliases,
+using our standard hashtag reference<span class="widont">&nbsp;</span>syntax:</p>
 <pre><code class="lang-scss">$functions: (
   'times': get-function('times'),
   '*': '#times',
@@ -543,7 +547,7 @@ and under any alias<span class="widont">&nbsp;</span>key:</p>
         <span class="item-name">&lt;alias&gt;:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(function)</span>
       
     </h4>
 

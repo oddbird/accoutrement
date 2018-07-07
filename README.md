@@ -1,18 +1,19 @@
 # Sass Accoutrement
 
-Robbust **design systems** require
-meaningful, readable, reusable code.
+**Robbust design systems** require
+*meaningful*, *readable*, *reusable* code.
 These Sass utilities are designed to
 help define and manage your design tokens
 (colors, fonts, sizes, etc.)
 in a format that can be understood
 by both humans and parsers --
 improving readability and automation
+(from [font-imports][fonts] to [style guide generators][herman])
 across your styles.
 
 - [Official Site](http://oddbird.net/accoutrement/)
-- [Online Docs](http://oddbird.net/accoutrement/docs/)
-- [Source](https://github.com/oddbird/accoutrement/)
+- [Documentation](http://oddbird.net/accoutrement/docs/)
+- [Source Code](https://github.com/oddbird/accoutrement/)
 - [Issues](https://github.com/oddbird/accoutrement/issues)
 
 *Brought to you by [OddBird][oddbird] --
@@ -24,6 +25,7 @@ and [Herman][herman].*
 [susy]: http://oddbird.net/susy/
 [true]: http://oddbird.net/true
 [herman]: http://oddbird.net/herman
+[fonts]: http://oddbird.net/accoutrement/docs/type.html
 
 
 ## Installation
@@ -31,8 +33,8 @@ and [Herman][herman].*
 Install the package with npm or yarn
 
 ```bash
-npm install accoutrement-layout --save-dev
-yarn add accoutrement-layout --dev
+npm install accoutrement [--save-dev]
+yarn add accoutrement [--dev]
 ```
 
 Import what you need:

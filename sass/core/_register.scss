@@ -1,11 +1,14 @@
 /// # Function Registration
+/// Because Sass 3.5+ requires first-class functions,
+/// we provide tools for capturing functions
+/// and making them available to the Accoutrement map parser.
+/// This also provides the ability to alias functions as you like.
 /// @group core-register
 
 
 // Functions
 // ---------
-/// Because Sass 3.5+ requires first-class functions,
-/// we provide a single place to store & manage functions
+/// We provide a single map to store & manage functions
 /// that you would like to use inside Accoutrement maps.
 ///
 /// ```scss
@@ -16,7 +19,8 @@
 /// ```
 ///
 /// Functions can be registered multiple times,
-/// and under any alias key:
+/// under any aliases,
+/// using our standard hashtag reference syntax:
 ///
 /// ```scss
 /// $functions: (
@@ -28,7 +32,7 @@
 /// @group core-register
 /// @type map
 ///
-/// @prop {string} <alias> -
+/// @prop {function} <alias> -
 ///   Each alias key in the map
 ///   should refer to a captured function
 $functions: () !default;

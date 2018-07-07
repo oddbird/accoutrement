@@ -3,7 +3,6 @@ Contributing to Accoutrement
 
 Bug reports and feature requests are welcome,
 but code is even better!
-
 In all cases,
 we ask you to follow the
 [Sass community guidelines](http://sass-lang.com/community-guidelines).
@@ -12,7 +11,8 @@ Issues
 ------
 
 You are welcome to ask support questions
-or file bug reports.
+and file bug reports
+via [Github Issues][issues].
 In either case,
 please provide:
 
@@ -20,6 +20,8 @@ please provide:
   and steps to reporoduce
 - Excpected behavior and actual results
 - How you've attempted to solve the problem
+
+[issues]: https://github.com/oddbird/accoutrement/issues
 
 
 Development
@@ -59,13 +61,8 @@ yarn commit
 They can also be triggered individually:
 
 ```
-# lint
 yarn lint
-
-# test with mocha/true
 yarn test
-
-# compile docs
 yarn docs
 ```
 
