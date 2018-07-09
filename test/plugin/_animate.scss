@@ -18,6 +18,8 @@ $changes: (
   'slide-in': '#slide' ease('out-back'),
   'sidebar-in': ('#slide-in', '#fade' time('delay')),
   'modal-in': '#sidebar-in',
+  'animation': slide-frames 1 time('fast') ease('out-back'),
+  'animation-ref': '#animation' both,
 );
 
 @import 'animate/easing';

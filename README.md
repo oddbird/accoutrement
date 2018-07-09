@@ -7,9 +7,14 @@ help define and manage your design tokens
 (colors, fonts, sizes, etc.)
 in a format that can be understood
 by both humans and parsers --
-improving readability and automation
-(from [font-imports][fonts] to [style guide generators][herman])
-across your styles.
+opening the door for automation,
+while improving consistency and readability.
+These tools also integrate with [Herman][Herman],
+our automated living pattern-library generator
+built on [SassDoc][SassDoc].
+
+[Herman]: http://oddbird.net/herman/
+[SassDoc]: http://sassdoc.com/
 
 - [Official Site](http://oddbird.net/accoutrement/)
 - [Documentation](http://oddbird.net/accoutrement/docs/)

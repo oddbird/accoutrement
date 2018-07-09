@@ -1,5 +1,5 @@
 /// # Animations & Transitions
-/// Combine your `$times` and `$changes` values
+/// Combine your `$times` and `$easing` values
 /// to create entire transitions and animations --
 /// all stored in one place and easy to access
 /// for consistent "changes" across your project.
@@ -85,4 +85,66 @@ $changes: () !default;
   $maps...
 ) {
   $changes: _a_map-multimerge($changes, $maps...) !global;
+}
+
+
+// Animate [mixin]
+// ---------------
+/// Access named animations in your `$changes` map,
+/// and apply them to the `animation` property.
+///
+/// @group animate-change
+/// @example scss
+///   $changes: (
+///     'fade-in': fade-in 300ms ease-out both,
+///   );
+///   .example {
+///     @include animate('fade-in');
+///   }
+///
+/// @param {string} $names -
+///   Named animations to apply
+/// @output -
+///   The requested animations, applied in CSS
+@mixin animate(
+  $names...
+) {
+  $animation: join((), (), 'comma');
+
+  @each $name in $names {
+    $animation: append($animation, change($name));
+  }
+
+  animation: $animation;
+}
+
+
+// Transition [mixin]
+// ------------------
+/// Access named transitions in your `$changes` map,
+/// and apply them to the `transition` property.
+///
+/// @group animate-change
+/// @example scss
+///   $changes: (
+///     'fade': opacity 300ms ease-out,
+///   );
+///   .example {
+///     @include transition('fade');
+///   }
+///
+/// @param {string} $names -
+///   Named transitions to apply
+/// @output -
+///   The requested transitions, applied in CSS
+@mixin transition(
+  $names...
+) {
+  $transition: join((), (), 'comma');
+
+  @each $name in $names {
+    $transition: append($transition, change($name));
+  }
+
+  transition: $transition;
 }

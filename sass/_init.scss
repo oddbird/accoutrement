@@ -1,8 +1,20 @@
-// Init Toolkit
-// ============
+/// # QuickStart: Init
+/// @group init
 
 @import 'init/root';
 @import 'init/a11y';
 @import 'init/forms';
 @import 'init/media';
 @import 'init/typography';
+
+/// ## Import
+///
+/// **WARNING**: This module writes CSS directly to your stylesheets.
+/// There is no configuration, no mixins, no variables, and no functions.
+/// This module is not imported by default,
+/// and does not require the core.
+///
+/// ```scss
+///   @import '<path-to>/accoutrement/sass/init';
+/// ```
+/// @group init
