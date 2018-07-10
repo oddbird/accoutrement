@@ -33,7 +33,6 @@
 
 
 /// ## Internal Reference
-///
 /// The core module provides a generic map-parsing syntax,
 /// for internal reference & adjustments --
 /// establishing dynamic relationships between map values.
@@ -66,7 +65,6 @@
 
 
 /// ## Functional Adjustments
-///
 /// In many cases, we'll want to reference a value
 /// and then make adjustments to it.
 /// The explicit long-hand syntax uses a map
@@ -112,7 +110,6 @@
 
 
 /// ## Modular-Scale Adjustments
-///
 /// When managing numbers,
 /// you can also move up and down exponential [modular-scales][scale]
 /// by calling a named ratio
@@ -138,11 +135,12 @@
 ///
 /// Multiple functions/ratios
 /// will be applied in the order they are given.
+/// @see $ratios
+/// @see ratio()
 /// @group core
 
 
 /// ## Adjustment Shorthand
-///
 /// We also provide a shorhand syntax
 /// to simplify adjustments in most cases.
 /// Here, the value is written first (any data type),
@@ -161,7 +159,6 @@
 
 
 /// ## Adjustments with #References
-///
 /// Adjustment-function and ratio arguments
 /// can also refernce keys in the map:
 ///
@@ -181,7 +178,6 @@
 
 
 /// ## String Interpolation
-///
 /// For CSS features like `calc()`
 /// you can also create format-strings
 /// and interpolate values into the string.
@@ -199,11 +195,11 @@
 ///   ),
 /// );
 /// ```
+/// @see interpolate()
 /// @group core
 
 
 /// ## Nested Adjustments
-///
 /// Since adjustment formats and values
 /// are parsed the same as any other value,
 /// it's possible to build quite complex adjustments:
@@ -225,7 +221,6 @@
 
 
 /// ## Included & Third-Party Functions
-///
 /// We provide a core set of
 /// [math utilities](core-math.html),
 /// named [scales](core-scale.html),
@@ -248,4 +243,6 @@
 ///   // provide alias names…
 ///   'mine': '#my-function',
 /// );
+/// @see $functions
+/// @see register-function()
 /// @group core

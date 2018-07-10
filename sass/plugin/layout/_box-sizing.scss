@@ -7,10 +7,6 @@
 /// Establish gloabl box-sizing within any scope.
 ///
 /// @group layout-box
-///
-/// @param {border-box | content-box} $box [border-box] -
-///   The box-sizing model to establish globally.
-///
 /// @example scss
 ///   @include global-box-sizing;
 ///
@@ -19,6 +15,9 @@
 ///     box-sizing: content-box;
 ///     @include global-box-sizing(inherit);
 ///   }
+///
+/// @param {border-box | content-box} $box [border-box] -
+///   The box-sizing model to establish globally.
 @mixin global-box-sizing(
   $box: border-box
 ) {

@@ -39,10 +39,10 @@
 ///   so that no path is added unless explicity requested.
 ///
 /// @group type-fonts
-/// @type string
-///
 /// @example scss
 ///   $font-path: '../fonts/';
+///
+/// @type string
 $font-path: '' !default;
 
 
@@ -81,8 +81,58 @@ $font-path: '' !default;
 ///     as [described on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range).
 ///
 /// @group type-fonts
-/// @type Map
+/// @example scss - Defining a font for import
+///   $fonts: (
+///     'sans': (
+///       'name': 'Museo Sans',
+///       'stack': ('Helvetica', 'Arial', 'sans-serif'),
+///       'formats': ('woff2', 'woff', 'ttf'),
+///       'normal': 'museosans-regular-filename',
+///       'bold': 'museosans-bold-filename',
+///       'bold' 'italic': 'museosans-bolditalic-filename',
+///       'unicode-range': (U+0000-00FF, U+0131, U+0152-0153, U+02C6),
+///       // safely document any additional font data you want…
+///       'source': 'https://www.fontspring.com/fonts/exljbris/museo-sans',
+///     ),
+///   );
+/// @example scss - Creating a secondary font alias
+///   // Create alias keys to provide more semantic naming as-needed.
+///   $fonts: (
+///     'body-font': '#sans',
+///   );
+/// @example scss - Setting explicit format-paths
+///   $fonts: (
+///     'sans': (
+///       'name': 'Museo Sans',
+///       'stack': ('Helvetica', 'Arial', 'sans-serif'),
+///       'bold': (
+///         'woff2': 'museosans-bold-woff2-path',
+///         'svg': 'museosans-bold-svg-path',
+///         'svgid': '#museosans',
+///       ),
+///       'bold' 'italic': (
+///         'woff2': 'museosans-bolditalic-woff2-path',
+///         'svg': 'museosans-bolditalic-svg-path.svg#museosans-bolditalic',
+///       ),
+///     ),
+///   );
+/// @example scss - Base64 data-uri's and `local()` src
+///   $fonts: (
+///     'uri-font': (
+///       'name': 'My Font',
+///       'stack': ('Helvetica', 'Arial', 'sans-serif'),
+///       'normal': (
+///         'local': ('My Font', 'my-font-regular'),
+///         'woff2': 'data:application/font-woff2;charset=utf-8;base64,…',
+///       ),
+///       'bold': (
+///         'local': ('My Font Bold', 'my-font-bold'),
+///         'woff2': 'data:application/font-woff2;charset=utf-8;base64,…',
+///       ),
+///     ),
+///   );
 ///
+/// @type map
 /// @prop {map} <key> -
 ///   Give each font a key for access in the code,
 ///   with a nested map defining the font details.
@@ -132,56 +182,6 @@ $font-path: '' !default;
 /// @prop {list} <key>.<variant>.<format> -
 ///   Optionally provide individual font-path overrides,
 ///   or base64 data-URIs for specific formats.
-/// @example scss - Defining a font for import
-///   $fonts: (
-///     'sans': (
-///       'name': 'Museo Sans',
-///       'stack': ('Helvetica', 'Arial', 'sans-serif'),
-///       'formats': ('woff2', 'woff', 'ttf'),
-///       'normal': 'museosans-regular-filename',
-///       'bold': 'museosans-bold-filename',
-///       'bold' 'italic': 'museosans-bolditalic-filename',
-///       'unicode-range': (U+0000-00FF, U+0131, U+0152-0153, U+02C6),
-///       // safely document any additional font data you want…
-///       'source': 'https://www.fontspring.com/fonts/exljbris/museo-sans',
-///     ),
-///   );
-/// @example scss - Creating a secondary font alias
-///   // Create alias keys to provide more semantic naming as-needed.
-///   $fonts: (
-///     'body-font': 'sans',
-///   );
-/// @example scss - Setting explicit format-paths
-///   $fonts: (
-///     'sans': (
-///       'name': 'Museo Sans',
-///       'stack': ('Helvetica', 'Arial', 'sans-serif'),
-///       'bold': (
-///         'woff2': 'museosans-bold-woff2-path',
-///         'svg': 'museosans-bold-svg-path',
-///         'svgid': '#museosans',
-///       ),
-///       'bold' 'italic': (
-///         'woff2': 'museosans-bolditalic-woff2-path',
-///         'svg': 'museosans-bolditalic-svg-path.svg#museosans-bolditalic',
-///       ),
-///     ),
-///   );
-/// @example scss - Base64 data-uri's and `local()` src
-///   $fonts: (
-///     'uri-font': (
-///       'name': 'My Font',
-///       'stack': ('Helvetica', 'Arial', 'sans-serif'),
-///       'normal': (
-///         'local': ('My Font', 'my-font-regular'),
-///         'woff2': 'data:application/font-woff2;charset=utf-8;base64,…',
-///       ),
-///       'bold': (
-///         'local': ('My Font Bold', 'my-font-bold'),
-///         'woff2': 'data:application/font-woff2;charset=utf-8;base64,…',
-///       ),
-///     ),
-///   );
 $fonts: () !default;
 
 
@@ -201,6 +201,13 @@ $fonts: () !default;
 /// [Herman]: http://oddbird.net/herman/
 ///
 /// @group type-fonts
+/// @example scss
+///   $franklin: (
+///     'name': 'FranklinGothic',
+///     'stack': ('Helvetica', 'Arial', 'sans-serif'),
+///   );
+///
+///   @include add-font('heading', $franklin);
 ///
 /// @parameter {map} $key -
 ///   Give your font a semantic access-key
@@ -209,14 +216,6 @@ $fonts: () !default;
 ///   Map of font-data to be added at the given key.
 /// @output An updated global `$fonts` variable,
 ///   with new maps merged in.
-///
-/// @example scss
-///   $franklin: (
-///     'name': 'FranklinGothic',
-///     'stack': ('Helvetica', 'Arial', 'sans-serif'),
-///   );
-///
-///   @include add-font('heading', $franklin);
 @mixin add-font (
   $key,
   $map,

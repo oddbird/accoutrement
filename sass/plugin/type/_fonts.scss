@@ -81,20 +81,20 @@
 /// Output a font-stack to font-family based on your `$fonts` configuration.
 ///
 /// @group type-fonts
-///
-/// @param {string} $key -
-///   The key-name of a font in your `$fonts` map.
 /// @example scss
 ///   $fonts: (
 ///     'FranklinGothic': (
 ///       'stack': (Helvetica, Arial, sans-serif),
 ///     ),
-///     'sans': 'FranklinGothic',
+///     'sans': '#FranklinGothic',
 ///   );
 ///
 ///   html {
 ///     @include font-family('sans');
 ///   }
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
 @mixin font-family(
   $key
 ) {
@@ -162,7 +162,7 @@
 ///       'bold': 'sans/sourcesanspro-bold-webfont',
 ///     ),
 ///     // alias keys, and fonts without path data will be ignored…
-///     'alias': 'body-font',
+///     'alias': '#body-font',
 ///     'google-font': (
 ///       'source': 'http://fonts.google.com/',
 ///     ),

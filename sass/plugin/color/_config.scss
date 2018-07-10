@@ -49,6 +49,8 @@
 ///   $colors: (
 ///     'focus': '#link' ('darken': 15%, 'desaturate': 15%),
 ///   );
+///
+/// @type map
 $colors: () !default;
 
 
@@ -67,13 +69,6 @@ $colors: () !default;
 /// [Herman]: http://oddbird.net/herman/
 ///
 /// @group color-api
-///
-/// @parameter {map...} $maps -
-///   Pass any number of maps to be merged.
-/// @output -
-///   An updated global `$colors` variable,
-///   with new maps merged in.
-///
 /// @example scss
 ///   $brand-colors: (
 ///     'brand-dark': #222,
@@ -81,11 +76,17 @@ $colors: () !default;
 ///   );
 ///
 ///   $text-colors: (
-///     'text': 'brand-dark',
-///     'link': 'brand-pink',
+///     'text': '#brand-dark',
+///     'link': '#brand-pink',
 ///   );
 ///
 ///   @include add-colors($brand-colors, $text-colors);
+///
+/// @parameter {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$colors` variable,
+///   with new maps merged in.
 @mixin add-colors (
   $maps...
 ) {

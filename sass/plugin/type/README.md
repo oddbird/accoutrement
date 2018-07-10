@@ -68,7 +68,7 @@ $fonts: (
   ),
 
   // provide aliases for any font you need
-  'alias': 'body', // create aliases when useful
+  'alias': '#body', // create aliases when useful
 );
 ```
 

@@ -16,3 +16,4 @@ v0.1.0 - UNRELEASED
 - BREAKING: All modules now use a shared map syntax,
   with explicit `#tag` references
   and the option for explicit value/adjustment maps.
+  [Learn the new syntax](http://oddbird.net/accoutrement/docs/core.html).

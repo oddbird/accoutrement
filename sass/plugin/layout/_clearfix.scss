@@ -7,11 +7,13 @@
 /// A small, unobtrusive clearfix for float containers.
 ///
 /// @group layout-clearfix
-///
 /// @example scss
 ///   body {
 ///     @include clearfix;
 ///   }
+///
+/// @output -
+///   Micro-clearfix hack to help with floated elements
 @mixin clearfix {
   &::after {
     clear: both;

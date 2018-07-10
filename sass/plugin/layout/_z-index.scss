@@ -11,8 +11,6 @@
 /// by their position in the nested list.
 ///
 /// @group layout-z-index
-/// @type list
-///
 /// @example scss -
 ///   $z-index: (
 ///     'main', // 1
@@ -21,6 +19,8 @@
 ///     'message', // 4
 ///     'modal', // 5
 ///   );
+///
+/// @type list
 $z-index: ();
 
 

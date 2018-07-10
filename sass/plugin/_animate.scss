@@ -11,7 +11,6 @@
 
 
 /// ## Import
-///
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
 /// If you want to import individual plugins,
 /// make sure you first import the shared core:
@@ -24,7 +23,6 @@
 
 
 /// ## Timing & Easing
-///
 /// Establish your timing and easing palettes,
 /// with the standard [Accoutrement syntax](core.html):
 ///
@@ -50,11 +48,14 @@
 ///   transition-timing-function: ease('elastic');
 /// }
 /// ```
+/// @see $times
+/// @see time()
+/// @see $easing
+/// @see ease()
 /// @group animate
 
 
 /// ## Transitions & Animations
-///
 /// Use your timing and easing patterns
 /// to compose reusable "changes" --
 /// including transitions and animations:
@@ -85,4 +86,8 @@
 ///   @include transition('fade-colors');
 /// }
 /// ```
+/// @see $changes
+/// @see change()
+/// @see animate()
+/// @see transition()
 /// @group animate

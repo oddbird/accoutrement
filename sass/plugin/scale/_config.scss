@@ -34,20 +34,20 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 /// where we can continue to retrieve them by name.
 ///
 /// @group scale-sizes
+/// @example scss -
+///   $sizes: (
+///     'root': 24px,
+///     'text': '#root' ('convert-units': 'em'),
+///     'h1': '#root' ('times': 2),
+///     'calc': calc(%s + %s) ('%s': '#root' 2vw),
+///   );
+///
 /// @type map
 ///
 /// @property 'root' [16px] -
 ///   Include a root font-size for your document,
 ///   used for calculating relative sizes.
 ///   This should match the size applied to your html element.
-///
-/// @example scss -
-///   $sizes: (
-///     'root': 24px,
-///     'text': 'root' ('convert-units': 'em'),
-///     'h1': 'root' ('times': 2),
-///     'calc': calc(%s + %s) ('root', 2vw),
-///   );
 $sizes: (
   'root': $_BROWSER-DEFAULT-FONT-SIZE,
 ) !default;
@@ -71,7 +71,7 @@ $sizes: (
 /// @example scss
 ///   $text-sizes: (
 ///     'root': 24px,
-///     'h1': 'root' ('times': 2),
+///     'h1': '#root' ('times': 2),
 ///   );
 ///   @include add-sizes($text-sizes);
 ///

@@ -436,6 +436,23 @@ $_a_FONT-FORMATS: (
 ///
 /// @access private
 /// @group font-helpers
+/// @example scss - string `$data`
+///   @include _a_import-font-face(
+///     $name: 'Franklin Gothic',
+///     $variant: ('bold' 'italic'),
+///     $data: 'path/to/franklin-bolditalic-font',
+///     $formats: ('woff2' 'woff')
+///   );
+/// @example scss - map `$data`
+///   @include _a_import-font-face(
+///     $name: 'Franklin Gothic',
+///     $variant: 'normal',
+///     $data: (
+///       'local': 'Franklin Gothic' ('franklin-gothic'),
+///       'woff2': 'path/to/franklin-bolditalic-font.woff2',
+///       'ttf': 'path/to/franklin-bolditalic-font.ttf',
+///     )
+///   );
 ///
 /// @param {string} $name -
 ///   The font name.
@@ -458,24 +475,6 @@ $_a_FONT-FORMATS: (
 /// @output `@font-face` CSS-block for importing a given font variant.
 /// @throws When a generic variant-path is provided
 ///   without formats for interpolation.
-///
-/// @example scss - string `$data`
-///   @include _a_import-font-face(
-///     $name: 'Franklin Gothic',
-///     $variant: ('bold' 'italic'),
-///     $data: 'path/to/franklin-bolditalic-font',
-///     $formats: ('woff2' 'woff')
-///   );
-/// @example scss - map `$data`
-///   @include _a_import-font-face(
-///     $name: 'Franklin Gothic',
-///     $variant: 'normal',
-///     $data: (
-///       'local': 'Franklin Gothic' ('franklin-gothic'),
-///       'woff2': 'path/to/franklin-bolditalic-font.woff2',
-///       'ttf': 'path/to/franklin-bolditalic-font.ttf',
-///     )
-///   );
 @mixin _a_import-font-face(
   $name,
   $variant,

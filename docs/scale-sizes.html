@@ -195,12 +195,20 @@
       <a href="animate-change.html" data-nav="is-not-active">Animations &amp;<span class="widont">&nbsp;</span>Transitions</a>
     </li>
   
+  
+    <li class="nav-item">
+      <a href="animate-changelog.html" data-nav="is-not-active">Changelog (animate)</a>
+    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin/Color</h3>
               <ul>
                 
+  
+    <li class="nav-item">
+      <a href="color.html" data-nav="is-not-active">QuickStart (color)</a>
+    </li>
   
   
     <li class="nav-item">
@@ -217,6 +225,10 @@
       <a href="color-utils.html" data-nav="is-not-active">Color Utils</a>
     </li>
   
+  
+    <li class="nav-item">
+      <a href="color-changelog.html" data-nav="is-not-active">Changelog (color)</a>
+    </li>
   </ul>
             </li>
             <li class="nav-subsection">
@@ -294,7 +306,12 @@
     </li>
   
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -650,9 +667,9 @@ This should match the size applied to your html<span class="widont">&nbsp;</span
       
       <pre class="hljs-pre"><code class="lang-scss">$sizes: (
   &#39;root&#39;: 24px,
-  &#39;text&#39;: &#39;root&#39; (&#39;convert-units&#39;: &#39;em&#39;),
-  &#39;h1&#39;: &#39;root&#39; (&#39;times&#39;: 2),
-  &#39;calc&#39;: calc(%s + %s) (&#39;root&#39;, 2vw),
+  &#39;text&#39;: &#39;#root&#39; (&#39;convert-units&#39;: &#39;em&#39;),
+  &#39;h1&#39;: &#39;#root&#39; (&#39;times&#39;: 2),
+  &#39;calc&#39;: calc(%s + %s) (&#39;%s&#39;: &#39;#root&#39; 2vw),
 );</code></pre>
     </div>
   
@@ -1048,7 +1065,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
       
       <pre class="hljs-pre"><code class="lang-scss">$text-sizes: (
   &#39;root&#39;: 24px,
-  &#39;h1&#39;: &#39;root&#39; (&#39;times&#39;: 2),
+  &#39;h1&#39;: &#39;#root&#39; (&#39;times&#39;: 2),
 );
 @include add-sizes($text-sizes);</code></pre>
     </div>

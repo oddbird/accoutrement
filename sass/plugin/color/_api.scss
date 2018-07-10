@@ -15,6 +15,16 @@
 /// but you can also pass in arbitrary color-palette maps as well.
 ///
 /// @group color-api
+/// @example scss
+///   $colors: (
+///     'background': #eee,
+///     'text': #222,
+///   );
+///
+///   html {
+///     background: color('background');
+///     color: color('text');
+///   }
 ///
 /// @parameter {string | list} $color -
 ///   The name of a color in your palette,
@@ -28,17 +38,6 @@
 /// @return {color} -
 ///   A calculated css-ready color,
 ///   based on your global color palette and adjustments.
-///
-/// @example scss
-///   $colors: (
-///     'background': #eee,
-///     'text': #222,
-///   );
-///
-///   html {
-///     background: color('background');
-///     color: color('text');
-///   }
 @function color(
   $color,
   $palette: $colors

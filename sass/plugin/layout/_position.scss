@@ -13,15 +13,6 @@
 /// and `auto` or `initial` to reset a given value.
 ///
 /// @group layout-position
-///
-/// @param {list} $position [null] -
-///   A shorthand-syntax of positioning values
-///   using the common TRBL pattern,
-///   e.g. `absolute 0 0 3em auto` or `fixed 0 2%`.
-///   The position value (absolute, relative, etc)
-///   defaults to `absolute`.
-/// @output `top`, `right`, `bottom`, `left`, and `position` properties
-///
 /// @example scss - stretch over the full viewport
 ///   .overlay {
 ///     @include position(fixed 0);
@@ -34,6 +25,15 @@
 ///   .overlay {
 ///     @include position(2em null);
 ///   }
+///
+/// @param {list} $position [null] -
+///   A shorthand-syntax of positioning values
+///   using the common TRBL pattern,
+///   e.g. `absolute 0 0 3em auto` or `fixed 0 2%`.
+///   The position value (absolute, relative, etc)
+///   defaults to `absolute`.
+/// @output -
+///   `top`, `right`, `bottom`, `left`, and `position` properties
 @mixin position(
   $position: null
 ) {

@@ -195,12 +195,20 @@
       <a href="animate-change.html" data-nav="is-not-active">Animations &amp;<span class="widont">&nbsp;</span>Transitions</a>
     </li>
   
+  
+    <li class="nav-item">
+      <a href="animate-changelog.html" data-nav="is-not-active">Changelog (animate)</a>
+    </li>
   </ul>
             </li>
             <li class="nav-subsection">
               <h3 class="nav-title">Plugin/Color</h3>
               <ul>
                 
+  
+    <li class="nav-item">
+      <a href="color.html" data-nav="is-not-active">QuickStart (color)</a>
+    </li>
   
   
     <li class="nav-item">
@@ -217,6 +225,10 @@
       <a href="color-utils.html" data-nav="is-not-active">Color Utils</a>
     </li>
   
+  
+    <li class="nav-item">
+      <a href="color-changelog.html" data-nav="is-not-active">Changelog (color)</a>
+    </li>
   </ul>
             </li>
             <li class="nav-subsection">
@@ -294,7 +306,12 @@
     </li>
   
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -718,7 +735,7 @@ so that no path is added unless explicity<span class="widont">&nbsp;</span>reque
       
 
       
-        <span class="value-type">(Map)</span>
+        <span class="value-type">(map)</span>
       
 
       
@@ -1257,7 +1274,7 @@ or base64 data-URIs for specific<span class="widont">&nbsp;</span>formats.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">// Create alias keys to provide more semantic naming as-needed.
 $fonts: (
-  &#39;body-font&#39;: &#39;sans&#39;,
+  &#39;body-font&#39;: &#39;#sans&#39;,
 );</code></pre>
     </div>
   
@@ -1895,7 +1912,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</p>
   type-fonts.html#variable--fonts" class="item-name">$fonts</a>
       
       
-      <span class="value-type">(Map)</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
@@ -3008,37 +3025,12 @@ html {
   &#39;FranklinGothic&#39;: (
     &#39;stack&#39;: (Helvetica, Arial, sans-serif),
   ),
-  &#39;sans&#39;: &#39;FranklinGothic&#39;,
+  &#39;sans&#39;: &#39;#FranklinGothic&#39;,
 );
 
 html {
   @include font-family(&#39;sans&#39;);
 }</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  font-family: &quot;FranklinGothic&quot;, Helvetica, Arial, sans-serif;
-}
-</code></pre>
     </div>
   
 
@@ -3841,7 +3833,7 @@ and generate <code>@font-face</code> blocks for each individual font and<span cl
     &#39;bold&#39;: &#39;sans/sourcesanspro-bold-webfont&#39;,
   ),
   // alias keys, and fonts without path data will be ignored…
-  &#39;alias&#39;: &#39;body-font&#39;,
+  &#39;alias&#39;: &#39;#body-font&#39;,
   &#39;google-font&#39;: (
     &#39;source&#39;: &#39;http://fonts.google.com/&#39;,
   ),
@@ -3982,7 +3974,7 @@ and generate <code>@font-face</code> blocks for each individual font and<span cl
   type-fonts.html#variable--fonts" class="item-name">$fonts</a>
       
       
-      <span class="value-type">(Map)</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
