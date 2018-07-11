@@ -2,6 +2,7 @@
 // ==============
 @include test-module('Core Parser') {
 
+
 // Token Get
 // ---------
 @include describe('Token Get [function]') {
@@ -26,6 +27,7 @@
   }
 }
 
+
 // Get
 // ---
 @include describe('Get [function]') {
@@ -38,8 +40,8 @@
   );
 
   @include it('Replaces the value of any #alias tag') {
-    $needle: ('delay': 'is #delay', '#key': 3) '#key';
-    $expect: ('delay': 'is 0.5s', 'value': 3) 'value';
+    $needle: ('has-delay': 'is #delay', '#key': 3) '#key';
+    $expect: ('has-delay': 'is 0.5s', 'value': 3) 'value';
     @include assert-equal(
       _a_get($haystack, $needle),
       $expect
@@ -118,6 +120,11 @@
     'two': '#one',
     'three': '#two',
     'four': 'and a new value',
+    'map': (
+      'one': 'inner value',
+      'second': '#one',
+      'third': '#two',
+    ),
   );
 
   @include it('Replaces a hashtag key with the associated value') {
@@ -138,6 +145,19 @@
     @include assert-equal(
       _a_parse($haystack, '#three #four'),
       'original value and a new value'
+    );
+  }
+
+  @include it('Prefers nested keys in nested maps') {
+    $expect: (
+      'one': 'inner value',
+      'second': 'inner value',
+      'third': 'original value',
+    );
+
+    @include assert-equal(
+      _a_parse($haystack, '#map'),
+      $expect,
     );
   }
 

@@ -37,7 +37,7 @@
 /// for internal reference & adjustments --
 /// establishing dynamic relationships between map values.
 /// To refernce another key in the same map,
-/// use the `#key` hashtag format:
+/// use the `#tag` hashtag format:
 ///
 /// ```scss
 /// $map: (
@@ -48,7 +48,8 @@
 /// );
 /// ```
 ///
-/// Reference hashtags can also be embeded inside a string:
+/// Reference hashtags don't have to stand alone,
+/// but can be embeded inside a longer string:
 ///
 /// ```scss
 /// $map: (
@@ -56,11 +57,24 @@
 ///   'scale': 1vw,
 ///
 ///   // 'responsive' == calc(16px + 1vw)
-///   'responsive': calc(#root + #scale),
+///   'responsive': 'calc(#root + #scale)',
 /// );
 /// ```
 ///
-/// (Sass treats CSS-native functions (like `calc()`) as a string)
+/// Nested maps will compare `#tags` internally,
+/// before looking at the parent keys:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'large-screen': (
+///     'root': 24px,
+///
+///     // 'alias' == 24px
+///     'alias': '#root'
+///   ),
+/// );
+/// ```
 /// @group core
 
 

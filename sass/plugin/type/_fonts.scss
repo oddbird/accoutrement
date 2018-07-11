@@ -1,7 +1,3 @@
-// Fonts API
-// =========
-
-
 /// ### Using WebFonts
 ///
 /// Once you've configured your webfont data into a map,
@@ -70,8 +66,8 @@
 @function font-family(
   $key
 ) {
-  $font: _a_font-get($key);
-  $name: _a_font-name($key);
+  $font: get-token($fonts, $key);
+  $name: _a_font-name($font);
   @return join($name, map-get($font, 'stack'), 'comma');
 }
 
@@ -129,8 +125,8 @@
 @mixin font-face(
   $key
 ) {
-  $font: _a_font-get($key);
-  $name: _a_font-name($key);
+  $font: get-token($fonts, $key);
+  $name: _a_font-name($font);
   $variants: _a_font-get-variants($font);
   $formats: map-get($font, 'formats') or ();
   $unicode: map-get($font, 'unicode-range');

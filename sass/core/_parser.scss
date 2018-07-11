@@ -135,8 +135,13 @@
 
     // handle each value in the map…
     @each $key, $value in $needle {
-      $key: _a_get($haystack, $key);
-      $value: _a_get($haystack, $value);
+      // check maps recursively
+      @each $map in $needle, $haystack {
+        $key: _a_get($map, $key);
+        $value: _a_get($map, $value);
+      }
+
+      // update pair
       $needle: ($key: $value);
       $new: map-merge($new, $needle);
     }

@@ -65,69 +65,29 @@ $_a_FONT-FORMATS: (
 );
 
 
-// Font Get
-// --------
-/// Get a font from the `$fonts` map,
-/// based on font access-key.
-/// This is similar to the Sass `map-get()` function,
-/// but the map is always your global `$fonts` map,
-/// and we allow internal alias references -
-/// so that multiple keys can be used for a single font.
-///
-/// @access private
-/// @group font-helpers
-///
-/// @param $key -
-///   The font access-key defined in your `$fonts` map,
-///   or an alias key that redirects to the appropriate font.
-/// @return {map} -
-///   Map of all the font-data associated with the given key.
-@function _a_font-get(
-  $key
-) {
-  $font: map-get($fonts, $key);
-
-  @if not $font {
-    @error '#{$key} is not defined in your `$fonts` configuration map.';
-  } @else if map-has-key($fonts, $font) {
-    $font: _a_font-get($font);
-  }
-
-  @return $font;
-}
-
-
 // Font Name
 // ---------
 /// Get a font-name from the `$fonts` map,
 /// based on font access-key.
-/// This is similar to the `_a_font-get()` function,
-/// but returns only the name of the font.
-///
-/// @since 4.0.0 -
-///   Added to provide correct name for aliased fonts.
 ///
 /// @access private
 /// @group font-helpers
 ///
-/// @param $key -
-///   The font access-key defined in your `$fonts` map,
-///   or an alias key that redirects to the appropriate font.
+/// @param $font -
+///   The font map
 /// @return {string} -
-///   The font-name associated with the given key.
+///   The font-name associated with the given font map
 @function _a_font-name(
-  $key
+  $font
 ) {
-  $font: map-get($fonts, $key);
+  $name: map-get($font, 'name') or null;
 
-  @if not $font {
-    @error '#{$key} is not defined in your `$fonts` configuration map.';
-  } @else if map-has-key($fonts, $font) {
-    $font: _a_font-name($font);
+  @if not $name {
+    $index: index(map-values($fonts), $font);
+    $name: nth(map-keys($fonts), $index);
   }
 
-  $font-name: if((type-of($font) == 'map'), map-get($font, 'name'), $font);
-  @return $font-name or $key;
+  @return $name;
 }
 
 

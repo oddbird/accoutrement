@@ -3,42 +3,35 @@
 @include test-module('Type: Helpers') {
 
 
-// Font Get
-// --------
-@include describe('Font Get [function]') {
-  $expect: map-get($fonts, 'body-font');
-
-  @include it('Get a font directly') {
-    @include assert-equal(
-      _a_font-get('body-font'),
-      $expect,
-      'Returns a map based on font config key');
-  }
-
-  @include it('Get a font by alias') {
-    @include assert-equal(
-      _a_font-get('kevin bacon'),
-      $expect,
-      'Returns a map based on recursive font config key');
-  }
-}
-
-
 // Font Name
 // ---------
 @include describe('Font Name [function]') {
-  @include it('Get a font directly') {
+  @include it('Get explicit font name directly') {
     @include assert-equal(
-      _a_font-name('TestFont'),
-      'TestFont',
-      'Returns the given key if acts as a font name');
+      _a_font-name(get-token($fonts, 'body-font')),
+      'Source Sans Pro'
+    );
   }
 
-  @include it('Get a font by alias') {
+  @include it('Get implicit font name directly') {
     @include assert-equal(
-      _a_font-name('kevin bacon'),
+      _a_font-name(get-token($fonts, 'TestFont')),
+      'TestFont',
+    );
+  }
+
+  @include it('Get explicit font name by alias') {
+    @include assert-equal(
+      _a_font-name(get-token($fonts, 'kevin bacon')),
       'Source Sans Pro',
-      'Finds the font-name through alias and explicit name properties');
+    );
+  }
+
+  @include it('Get implicit font name by alias') {
+    @include assert-equal(
+      _a_font-name(get-token($fonts, 'tf')),
+      'TestFont',
+     );
   }
 }
 

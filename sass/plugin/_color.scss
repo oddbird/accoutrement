@@ -69,20 +69,20 @@
 /// *once they are both added to the global setting*.
 ///
 /// ```scss
-/// $brand: (
-///   'brand-pink': hsl(330, 85%, 62%),
-///   'brand-light': #ddf,
-///   'brand-dark': #224,
-/// );
+///  $brand: (
+///    'brand-pink': hsl(330, 85%, 62%),
+///    'brand-light': #ddf,
+///    'brand-dark': #224,
+///  );
 ///
-/// $patterns: (
-///   'background': '#brand-light',
-///   'border': '#brand-dark',
-///   'link': '#brand-pink' ('shade': 25%),
-/// );
+///  $patterns: (
+///    'background': '#brand-light',
+///    'border': '#brand-dark',
+///    'link': '#brand-pink' ('shade': 25%),
+///  );
 ///
-/// // merge everything into the main $colors map…
-/// \@include add-colors($brand, $patterns);
+///  // merge everything into the main $colors map…
+///  @include add-colors($brand, $patterns);
 /// ```
 /// @see add-colors()
 /// @group color

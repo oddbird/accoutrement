@@ -8,53 +8,53 @@ display:
 groups:
   'Core (Parser)':
     core: 'QuickStart (core)'
+    core-changelog: 'Changelog (core)'
     core-get: 'Accessing Maps'
     core-math: 'Math Helpers'
     core-scale: 'Modular Scales'
     core-lists: 'Sass List Utils'
     core-strings: 'Sass Strings Utils'
     core-register: 'Function Registration'
-    core-changelog: 'Changelog (core)'
   'Init (Normalization)':
     init: 'QuickStart (init)'
+    init-changelog: 'Changelog (init)'
     init-root: 'General'
     init-a11y: 'Accessibility'
     init-forms: 'Forms'
     init-media: 'Media'
     init-type: 'Type'
-    init-changelog: 'Changelog (init)'
   'Plugin/Animate':
     animate: 'QuickStart (animate)'
+    animate-changelog: 'Changelog (animate)'
     animate-times: 'Durations & Delays'
     animate-ease: 'Easing & Steps'
     animate-change: 'Animations & Transitions'
-    animate-changelog: 'Changelog (animate)'
   'Plugin/Color':
     color: 'QuickStart (color)'
+    color-changelog: 'Changelog (color)'
     color-api: 'Colors'
     color-contrast: 'Contrast'
     color-utils: 'Color Utils'
-    color-changelog: 'Changelog (color)'
   'Plugin/Layout':
     layout: 'QuickStart (layout)'
+    layout-changelog: 'Changelog (layout)'
     layout-box: 'Box-Sizing'
     layout-clearfix: 'Clearfix'
     layout-position: 'Positioning'
     layout-queries: 'Media Queries'
     layout-ratios: 'Fluid Ratios'
     layout-z-index: 'Z-Index'
-    layout-changelog: 'Changelog (layout)'
   'Plugin/Scale':
     scale: 'QuickStart (scale)'
+    scale-changelog: 'Changelog (scale)'
     scale-sizes: 'Sizes'
     scale-units: 'Unit Conversion'
-    scale-changelog: 'Changelog (scale)'
   'Plugin/Type':
     type: 'QuickStart (type)'
+    type-changelog: 'Changelog (type)'
     type-a11y: 'Accessibility'
     type-fonts: 'Webfonts'
     type-pseudo: 'Pseudo Elements'
-    type-changelog: 'Changelog (type)'
 
 
 herman:

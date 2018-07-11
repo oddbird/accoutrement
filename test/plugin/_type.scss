@@ -30,8 +30,10 @@ $fonts: (
     'unicode-range': (U+0000-00FF, U+0131, 'U+0152-0153', 'U+02C6'),
   ),
 
-  'alias': 'body-font',
-  'kevin bacon': 'alias',
+  'alias': '#body-font',
+  'kevin bacon': '#alias',
+  'tf-alias': '#TestFont',
+  'tf': '#tf-alias',
 );
 
 
