@@ -56,7 +56,7 @@
 /// }
 /// ```
 /// @see $colors
-/// @see color()
+/// @see color
 /// @group color
 
 
@@ -84,7 +84,7 @@
 ///  // merge everything into the main $colors map…
 ///  @include add-colors($brand, $patterns);
 /// ```
-/// @see add-colors()
+/// @see add-colors
 /// @group color
 
 
@@ -104,6 +104,6 @@
 ///   border-color: contrast('background', white, rebeccapurple);
 /// }
 /// ```
-/// @see contrast()
-/// @see contrasted()
+/// @see contrast
+/// @see contrasted
 /// @group color
