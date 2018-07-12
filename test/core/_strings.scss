@@ -3,7 +3,7 @@
 @include test-module('Core String Utils') {
 
 
-// String Replace
+  // String Replace
 // --------------
 @include describe('String Replace [function]') {
 
@@ -54,6 +54,72 @@
     @include assert-equal(
       _a_interpolate('hello %s%s', 'world', '!'),
       'hello world!'
+    );
+  }
+}
+
+
+// String Split [function]
+// -----------------------
+@include describe('String Split [function]') {
+  @include it('Splits a string on a given separator') {
+    @include assert-equal(
+      _a_split('hello@world', '@'),
+      'hello' 'world'
+    );
+  }
+
+  @include it('Splits a string on a complex separator') {
+    @include assert-equal(
+      _a_split('hello, this, world', ', '),
+      'hello' 'this' 'world'
+    );
+  }
+
+  @include it('Limits the number of splits') {
+    @include assert-equal(
+      _a_split('he@llo@wor@ld', '@', 2),
+      'he' 'llo'
+    );
+
+    @include assert-equal(
+      _a_split('he@llo@wor@ld', '@', 1),
+      join((), 'he')
+    );
+  }
+
+  @include it('Can fall short of the limit') {
+    @include assert-equal(
+      _a_split('he@llo@wor@ld', '@', 10),
+      'he' 'llo' 'wor' 'ld'
+    );
+  }
+
+  @include it('Returns empty string as single-item list') {
+    @include assert-equal(
+      _a_split('', '@'),
+      join((), '')
+    );
+  }
+
+  @include it('Returns null-separator as single-item list') {
+    @include assert-equal(
+      _a_split('hello world'),
+      join((), 'hello world')
+    );
+  }
+
+  @include it('Returns empty final string on ending-separator') {
+    @include assert-equal(
+      _a_split('hello world ', ' '),
+      'hello' 'world' ''
+    );
+  }
+
+  @include it('Splits every letter on empty-string separator') {
+    @include assert-equal(
+      _a_split('hello world', ''),
+      'h' 'e' 'l' 'l' 'o' ' ' 'w' 'o' 'r' 'l' 'd'
     );
   }
 }

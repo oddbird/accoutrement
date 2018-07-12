@@ -4,9 +4,11 @@
 $font-path: '../fonts/';
 
 $fonts: (
+  'shared-stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
+
   'body-font': (
     'name': 'Source Sans Pro',
-    'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+    'stack': '#shared-stack' ('split': ', '),
     'formats': 'woff' 'svg' 'eot',
     'normal': 'sans/sourcesanspro-regular-webfont',
     'italic': 'sans/sourcesanspro-italic-webfont',

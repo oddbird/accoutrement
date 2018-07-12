@@ -120,3 +120,87 @@
   @return $_return;
 }
 @include _a_register-function('_a_interpolate', 'interpolate', '%s');
+
+
+// Split
+// -----
+/// Splits a string into a list of strings,
+/// using the same logic as JavaScript's `split()` meathod.
+///
+/// This function is prefixed outside maps
+/// & should not be used directly,
+/// but is available in all accoutrement maps
+/// under the `'split'` alias.
+///
+/// @access public
+/// @name interpolate
+/// @group core-strings
+/// @example scss
+///   $map: (
+///     'list': 'hello world' ('split': ' '),
+///   );
+///   /*! #{get-token($map, 'list')} */
+///
+/// @param {string} $string -
+///   The original string to be split
+///   - Empty strings will be returned as a list of one empty string
+/// @param {any} $separator [null] -
+///   The string will be split on any instance of the separator,
+///   and the separators will be removed
+///   - Null or unfound separators will return a single-item list
+///     with the original string
+///   - Empty-string (`''`) separators will return a list of
+///     all characters in the original string
+///   - Non-string separators will be converted to strings before splitting
+/// @param {intiger | null} $limit [null] -
+///   Maximum length of the returned list
+/// @return {list} -
+///   Space-delimited list of string-slices from the original string
+@function _a_split(
+  $string,
+  $separator: null,
+  $limit: null
+) {
+  $list: ();
+
+  @if (type-of($string) != 'string') {
+    @error '$string value in `str-split` must be a string';
+  }
+
+  @if (not $separator) or ($string == '') {
+    @return append($list, $string);
+  }
+
+  $length: str-length($string);
+  $limit: if($limit, min($limit, $length), $length);
+  $separator: if(type-of($separator) != 'string', '#{$separator}', $separator);
+  $index: str-index($string, $separator);
+
+  @for $i from 1 through $limit {
+    @if ($string) {
+      $slice: null;
+
+      @if ($separator == '') {
+        $length: str-length($string);
+
+        @if ($length > 1) {
+          $slice: str-slice($string, 1, 1);
+          $string: str-slice($string, 2);
+        } @else {
+          $slice: if(($length == 1), $string, '');
+          $string: null;
+        }
+      } @else if ($index) {
+        $slice: str-slice($string, 1, $index - 1);
+        $string: str-slice($string, $index + str-length($separator));
+        $index: str-index($string, $separator);
+        $slice: if($string and not $index, $slice $string, $slice);
+      }
+
+      $list: if($slice, join($list, $slice), $list);
+    }
+  }
+
+  @return $list;
+}
+@include _a_register-function('_a_split', 'split');

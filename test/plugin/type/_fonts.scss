@@ -51,7 +51,7 @@
       }
 
       @include expect {
-        font-family: ('Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif');
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
     }
   }

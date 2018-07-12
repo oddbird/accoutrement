@@ -563,7 +563,7 @@ long and repetative paths for every<span class="widont">&nbsp;</span>font.</p>
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><p>The default changed from <code>'../fonts/'</code> to <code>''</code> –
 so that no path is added unless explicity<span class="widont">&nbsp;</span>requested.</p>
 </div>
@@ -811,7 +811,7 @@ it will include <code>source</code> links in the<span class="widont">&nbsp;</spa
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><ul>
 <li>Remove the <code>$font-formats</code> variable,
 and replaced it with a <code>formats</code> property
@@ -1030,14 +1030,12 @@ See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode
       <div class="param-details text-block">
         <p>When describing locally-hosted or data-embedded fonts,
 provide a key for each font-variant to import.
-Multi-word variants should be written as a list
-(<code>'bold' 'italic'</code>),
-rather than a single string
-(<code>'bold italic'</code>).</p>
+Multi-word variants can be written as a list
+(<code>600 'italic'</code>) or a string (<code>'600 italic'</code>).</p>
 <ul>
 <li>
 <p>In the simplest use-case,
-this can be a string:
+this value can be a string:
 a generic path to the appropriate font-files
 (<code>'path/to/my-font-bold'</code>) with file-extensions removed.
 We’ll add extensions for you,
@@ -2132,7 +2130,7 @@ which simply prepends the global <code>$font-path</code> when appropriate.</p>
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><p>Supports Base64 data URI’s, without prepending<span class="widont">&nbsp;</span>font-path.</p>
 </div>
       </section>
@@ -2530,7 +2528,7 @@ with name and<span class="widont">&nbsp;</span>font-stack.</p>
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><p>Provides the correct name for fonts when an alias is<span class="widont">&nbsp;</span>given.</p>
 </div>
       </section>
@@ -2712,7 +2710,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  font-family: &quot;FranklinGothic&quot;, Helvetica, Arial, sans-serif;
+  font-family: FranklinGothic, Helvetica, Arial, sans-serif;
 }
 </code></pre>
     </div>
@@ -3128,7 +3126,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  font-family: &quot;FranklinGothic&quot;, Helvetica, Arial, sans-serif;
+  font-family: FranklinGothic, Helvetica, Arial, sans-serif;
 }
 </code></pre>
     </div>
@@ -3276,7 +3274,7 @@ html {
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><p>No longer accepts the <code>$formats</code> parameter.</p>
 </div>
       </section>
@@ -3811,7 +3809,7 @@ and generate <code>@font-face</code> blocks for each individual font and<span cl
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><p>No longer accepts the <code>$formats</code> parameter.</p>
 </div>
       </section>

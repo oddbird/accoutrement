@@ -101,7 +101,7 @@ $_a_FONT-FORMATS: (
 ///
 /// [font-url]: fonts.html#function--font-url
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   Added to format font-paths correctly, with file extension and suffix.
 ///
 /// @access private
@@ -162,7 +162,7 @@ $_a_FONT-FORMATS: (
 /// This also sorts formats,
 /// organizing them into the proper output order for browser-compatability.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   No longer accepts the `$format` parameter.
 ///
 /// @access private
@@ -195,7 +195,7 @@ $_a_FONT-FORMATS: (
 /// Build a `src` list
 /// for one `@font-face` declaration block.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   Added to sort and compile src lists,
 ///   with local() options and proper format order.
 ///
@@ -243,7 +243,7 @@ $_a_FONT-FORMATS: (
 /// Extract all the variant key/data pairs,
 /// and return a filtered font-map including only font-variants.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   Added to extract variant-data from a font-map.
 ///
 /// @access private
@@ -262,7 +262,8 @@ $_a_FONT-FORMATS: (
 
   @each $key, $value in $font {
     // get the first setting, and make sure it's a string…
-    $first: '' + nth($key, 1);
+    $first: '#{nth($key, 1)}';
+    $first: if(str-index($first, ' '), nth(_a_split($first, ' '), 1), $first);
 
     // if it's a variant, add it to the list…
     @if index($var-options, $first) {
@@ -278,7 +279,7 @@ $_a_FONT-FORMATS: (
 // ------------------
 /// Parse a list of font variants into a map of `style` and `weight` settings.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   - Name changed from `_parse-font-variant` for clarity.
 ///   - Supports both string and number values for font-weight.
 ///
@@ -296,6 +297,10 @@ $_a_FONT-FORMATS: (
     'style': 'normal',
     'weight': 'normal',
   );
+
+  @if (type-of($variant) == 'string') and str-index($variant, ' ') {
+    $variant: _a_split($variant, ' ');
+  }
 
   @each $item in $variant {
     @if index($_a_FONT-STYLES, $item) {
@@ -317,10 +322,6 @@ $_a_FONT-FORMATS: (
 /// Strings are converted to maps,
 /// and format-paths are interpolated
 /// to create a self-contained map of variant data.
-///
-/// @since 4.0.0 -
-///   Added to normalize string and map variant syntaxes
-///   into a single (map) format for internal use.
 ///
 /// @access private
 /// @group font-helpers
@@ -385,14 +386,6 @@ $_a_FONT-FORMATS: (
 // ------------------------
 /// Compile provided font-variant data into a
 /// CSS `@font-face` import.
-///
-/// @since 4.0.0 -
-///   - Changed parameters to handle new syntax
-///     for variant-data and font-formats.
-///   - Errors when `path` is provided without `formats`.
-///   - Outputs updated font-face syntax, based on [fontsquirrel][fs] approach.
-///
-/// [fs]: https://www.fontsquirrel.com/tools/webfont-generator
 ///
 /// @access private
 /// @group font-helpers

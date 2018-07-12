@@ -34,7 +34,7 @@
 /// an optional shortcut to keep from writing
 /// long and repetative paths for every font.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   The default changed from `'../fonts/'` to `''` --
 ///   so that no path is added unless explicity requested.
 ///
@@ -65,7 +65,7 @@ $font-path: '' !default;
 /// If you are using [Herman] to font previews,
 /// it will include `source` links in the output.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   - Remove the `$font-formats` variable,
 ///     and replaced it with a `formats` property
 ///     in each individual font map.
@@ -155,13 +155,11 @@ $font-path: '' !default;
 /// @prop {string | map} <key>.<variant> -
 ///   When describing locally-hosted or data-embedded fonts,
 ///   provide a key for each font-variant to import.
-///   Multi-word variants should be written as a list
-///   (`'bold' 'italic'`),
-///   rather than a single string
-///   (`'bold italic'`).
+///   Multi-word variants can be written as a list
+///   (`600 'italic'`) or a string (`'600 italic'`).
 ///
 ///   - In the simplest use-case,
-///     this can be a string:
+///     this value can be a string:
 ///     a generic path to the appropriate font-files
 ///     (`'path/to/my-font-bold'`) with file-extensions removed.
 ///     We'll add extensions for you,

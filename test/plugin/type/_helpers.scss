@@ -177,6 +177,7 @@
       'rando': 2,
       'normal': 'something',
       'bold' 'italic': ('woff': 'path', 'ttf': 'path'),
+      'bold italic': 'variant list-string',
       '400': 'path-to-font',
       200: 'path-to-font',
     );
@@ -184,6 +185,7 @@
     $expect: (
       'normal': 'something',
       'bold' 'italic': ('woff': 'path', 'ttf': 'path'),
+      'bold italic': 'variant list-string',
       '400': 'path-to-font',
       200: 'path-to-font',
     );
@@ -232,6 +234,18 @@
 
     @include assert-equal(
       _a_parse-variant-name(500 'italic'),
+      $expect
+    );
+  }
+
+  @include it('Splits multi-variant strings') {
+    $expect: (
+      'style': 'italic',
+      'weight': '500',
+    );
+
+    @include assert-equal(
+      _a_parse-variant-name('500 italic'),
       $expect
     );
   }

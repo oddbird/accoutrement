@@ -13,7 +13,7 @@
 /// This is a wrapper for the CSS `url()` function,
 /// which simply prepends the global `$font-path` when appropriate.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   Supports Base64 data URI's, without prepending font-path.
 ///
 /// @group type-fonts
@@ -42,7 +42,7 @@
 /// Access a font-family from your `$fonts` map,
 /// with name and font-stack.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   Provides the correct name for fonts when an alias is given.
 ///
 /// @group type-fonts
@@ -68,7 +68,14 @@
 ) {
   $font: get-token($fonts, $key);
   $name: _a_font-name($font);
-  @return join($name, map-get($font, 'stack'), 'comma');
+  $stack: join((), (), 'comma');
+
+  @each $item in join($name, map-get($font, 'stack')) {
+    $item: if(str-index($item, ' '), quote($item), unquote($item));
+    $stack: append($stack, $item);
+  }
+
+  @return $stack;
 }
 
 
@@ -103,7 +110,7 @@
 /// Import any local webfont defined in your `$fonts` configuration
 /// (variants without a path will not be imported).
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   No longer accepts the `$formats` parameter.
 ///
 /// @group type-fonts
@@ -144,7 +151,7 @@
 /// Find all the fonts that include data for imports,
 /// and generate `@font-face` blocks for each individual font and variant.
 ///
-/// @since 4.0.0 -
+/// @since type-4.0.0 -
 ///   No longer accepts the `$formats` parameter.
 ///
 /// @group type-fonts

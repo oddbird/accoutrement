@@ -102,11 +102,31 @@
     );
   }
 
-  @include it('handles complex nested values') {
+  @include it('handles complex nested adjustments') {
     $int: 'calc(%s + #two)' ('%s': '#two' ('times': '#two'));
     @include assert-equal(
       _a_get($haystack, $int),
       'calc(4 + 2)'
+    );
+  }
+
+  @include it('handles nested map values') {
+    $map: (
+      'shared-stack': 'Neue, Helvetica, Arial',
+      'body-font': (
+        'name': 'Source Sans Pro',
+        'stack': '#shared-stack' ('split': ', '),
+      ),
+    );
+
+    $expect: (
+      'name': 'Source Sans Pro',
+      'stack': 'Neue' 'Helvetica' 'Arial',
+    );
+
+    @include assert-equal(
+      _a_get($map, '#body-font'),
+      $expect
     );
   }
 }
