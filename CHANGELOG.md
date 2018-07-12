@@ -1,9 +1,7 @@
-Accoutrement Changelog
-======================
+# Accoutrement Changelog
 
 
-v0.1.0 - UNRELEASED
--------------------
+## 0.1.0 - 07/12/18
 - Merges all existing Accoutrement plugins:
   [Color](http://oddbird.net/accoutrement-color/),
   [Init](http://oddbird.net/accoutrement-init/),
