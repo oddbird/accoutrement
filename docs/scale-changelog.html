@@ -495,6 +495,10 @@ for a complete list of<span class="widont">&nbsp;</span>releases.</p>
       <h2 id="0-1-0-unreleased">0.1.0 - UNRELEASED</h2>
 <ul>
 <li>NOTICE: Release numbering<span class="widont">&nbsp;</span>reset</li>
+<li>BREAKING: We now use the shared syntax
+defined in <a href="core.html">the core module</a> –
+which requires <code>#tags</code> for internal map reference,
+and provides a number of new<span class="widont">&nbsp;</span>features.</li>
 <li>BREAKING: <code>%s</code> Interpolation uses function-map syntax
 described in the <a href="core.html">Core</a>,
 rather than a stand-alone<span class="widont">&nbsp;</span>list</li>
@@ -654,7 +658,7 @@ with additional<span class="widont">&nbsp;</span>defaults</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="6-0-0-04-03-18">6.0.0 - 04/03/18</h3>
+      <h3 id="scale-6-0-0-04-03-18">scale-6.0.0 - 04/03/18</h3>
 <ul>
 <li>BREAKING: Remove all non-essential default<span class="widont">&nbsp;</span>sizes</li>
 <li>BUGFIX: Add <code>convert-units</code> to local (pre-captured)<span class="widont">&nbsp;</span>functions</li>
@@ -739,7 +743,7 @@ to merge partial maps into the global <code>$sizes</code>/<code>$ratios</code> m
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="5-0-2-12-13-17">5.0.2 - 12/13/17</h3>
+      <h3 id="scale-5-0-2-12-13-17">scale-5.0.2 - 12/13/17</h3>
 <ul>
 <li>BUGFIX: Fix implicit division in map<span class="widont">&nbsp;</span>values</li>
 </ul>
@@ -817,7 +821,7 @@ to merge partial maps into the global <code>$sizes</code>/<code>$ratios</code> m
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="5-0-1-09-13-17">5.0.1 - 09/13/17</h3>
+      <h3 id="scale-5-0-1-09-13-17">scale-5.0.1 - 09/13/17</h3>
 <ul>
 <li>BUGFIX: <code>negative</code> and <code>square</code> functions handle units<span class="widont">&nbsp;</span>properly</li>
 </ul>
@@ -895,7 +899,7 @@ to merge partial maps into the global <code>$sizes</code>/<code>$ratios</code> m
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="5-0-0-09-13-17">5.0.0 - 09/13/17</h3>
+      <h3 id="scale-5-0-0-09-13-17">scale-5.0.0 - 09/13/17</h3>
 <ul>
 <li>BREAKING: <code>$from-context</code> defaults to ‘root’ when<span class="widont">&nbsp;</span>available</li>
 <li>BUGFIX: Browser-em math requires <code>$from-context</code></li>
@@ -978,7 +982,7 @@ for all length<span class="widont">&nbsp;</span>values.</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="4-0-2-09-13-17">4.0.2 - 09/13/17</h3>
+      <h3 id="scale-4-0-2-09-13-17">scale-4.0.2 - 09/13/17</h3>
 <ul>
 <li>Recompile styleguide documentation.</li>
 </ul>
@@ -1056,7 +1060,7 @@ for all length<span class="widont">&nbsp;</span>values.</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="4-0-1-09-13-17">4.0.1 - 09/13/17</h3>
+      <h3 id="scale-4-0-1-09-13-17">scale-4.0.1 - 09/13/17</h3>
 <ul>
 <li>Publish missing styleguide<span class="widont">&nbsp;</span>documentation.</li>
 </ul>
@@ -1134,7 +1138,7 @@ for all length<span class="widont">&nbsp;</span>values.</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="4-0-0-09-12-17">4.0.0 - 09/12/17</h3>
+      <h3 id="scale-4-0-0-09-12-17">scale-4.0.0 - 09/12/17</h3>
 <p><em>Same as 4.0.0-alpha-1 -<span class="widont">&nbsp;</span>09/06/17</em></p>
 <ul>
 <li>BREAKING: Remove overly-opinionated baseline type tools
@@ -1221,7 +1225,7 @@ so that MathSass is no longer a dependency for non-integer<span class="widont">&
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-2-0-08-23-17">3.2.0 - 08/23/17</h3>
+      <h3 id="scale-3-2-0-08-23-17">scale-3.2.0 - 08/23/17</h3>
 <ul>
 <li>NEW: Rename private <code>_get-ratio()</code> to public <code>scale()</code>
 for consistent access to ratios with map-key<span class="widont">&nbsp;</span>references.</li>
@@ -1300,7 +1304,7 @@ for consistent access to ratios with map-key<span class="widont">&nbsp;</span>re
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-1-1-05-27-17">3.1.1 - 05/27/17</h3>
+      <h3 id="scale-3-1-1-05-27-17">scale-3.1.1 - 05/27/17</h3>
 <ul>
 <li>BUGFIX: Resolve problems with referencing <code>calc()</code> values</li>
 </ul>
@@ -1378,7 +1382,7 @@ for consistent access to ratios with map-key<span class="widont">&nbsp;</span>re
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-1-0-05-20-17">3.1.0 - 05/20/17</h3>
+      <h3 id="scale-3-1-0-05-20-17">scale-3.1.0 - 05/20/17</h3>
 <ul>
 <li>Allow <code>calc()</code> values in scale<span class="widont">&nbsp;</span>maps</li>
 <li>Add <code>calc(%s + %s) ('root', 'rhythm')</code> syntax
@@ -1466,7 +1470,7 @@ from external sources, and get local<span class="widont">&nbsp;</span>ones</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-0-0-03-08-17">3.0.0 - 03/08/17</h3>
+      <h3 id="scale-3-0-0-03-08-17">scale-3.0.0 - 03/08/17</h3>
 <ul>
 <li>BREAKING: Don’t convert units unless specifically requested.
 This allows you to define preferred units per-item

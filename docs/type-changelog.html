@@ -495,7 +495,10 @@ for a complete list of<span class="widont">&nbsp;</span>releases.</p>
       <h2 id="0-1-0-unreleased">0.1.0 - UNRELEASED</h2>
 <ul>
 <li>NOTICE: Release numbering<span class="widont">&nbsp;</span>reset</li>
-<li>NEW: Support <a href="core.html">core map syntax</a> in font<span class="widont">&nbsp;</span>maps</li>
+<li>BREAKING: We now use the shared syntax
+defined in <a href="core.html">the core module</a> –
+which requires <code>#tags</code> for internal map reference,
+and provides a number of new<span class="widont">&nbsp;</span>features.</li>
 <li>NEW: Allow space-separated string variants (<code>'500 italic'</code>)
 for weight and style, in addition to lists (<code>500 'italic'</code>)</li>
 </ul>
@@ -648,7 +651,7 @@ for weight and style, in addition to lists (<code>500 'italic'</code>)</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="4-0-1-4-0-2-01-31-18">4.0.1 &amp; 4.0.2 -<span class="widont">&nbsp;</span>01/31/18</h3>
+      <h3 id="type-4-0-1-4-0-2-01-31-18">type-4.0.1 &amp; 4.0.2 -<span class="widont">&nbsp;</span>01/31/18</h3>
 <ul>
 <li><code>local()</code> always comes first in <code>@font-face</code> <code>src</code> order.</li>
 <li>Fix typos in<span class="widont">&nbsp;</span>docs</li>
@@ -727,7 +730,7 @@ for weight and style, in addition to lists (<code>500 'italic'</code>)</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="4-0-0-01-30-18">4.0.0 - 01/30/18</h3>
+      <h3 id="type-4-0-0-01-30-18">type-4.0.0 - 01/30/18</h3>
 <p><em>Compared against 3.1.0 -
 for incremental changes,
 see the 3.2 beta<span class="widont">&nbsp;</span>changelogs…</em></p>
@@ -838,7 +841,7 @@ as <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-2-0-beta-2-01-23-18">3.2.0-beta.2 - 01/23/18</h3>
+      <h3 id="type-3-2-0-beta-2-01-23-18">type-3.2.0-beta.2 - 01/23/18</h3>
 <ul>
 <li>BREAKING: Move <code>svgid</code> and <code>local</code> into font-variant sub-maps,
 since the required names are<span class="widont">&nbsp;</span>variant-specific.</li>
@@ -930,7 +933,7 @@ and handle additional font<span class="widont">&nbsp;</span>options.</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-2-0-beta-1-11-20-17">3.2.0-beta.1 - 11/20/17</h3>
+      <h3 id="type-3-2-0-beta-1-11-20-17">type-3.2.0-beta.1 - 11/20/17</h3>
 <ul>
 <li>NEW: Add <code>svgid</code> (string) option to font maps,
 for defining an id suffix in <code>svg</code> font urls.</li>
@@ -1019,7 +1022,7 @@ especially useful for defining data-uri embedded<span class="widont">&nbsp;</spa
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-1-0-09-28-17">3.1.0 - 09/28/17</h3>
+      <h3 id="type-3-1-0-09-28-17">type-3.1.0 - 09/28/17</h3>
 <ul>
 <li>NEW: <code>add-font</code> mixin makes font-config organization<span class="widont">&nbsp;</span>simpler</li>
 </ul>
@@ -1097,7 +1100,7 @@ especially useful for defining data-uri embedded<span class="widont">&nbsp;</spa
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-0-1-09-13-17">3.0.1 - 09/13/17</h3>
+      <h3 id="type-3-0-1-09-13-17">type-3.0.1 - 09/13/17</h3>
 <ul>
 <li>Update docs.</li>
 </ul>
@@ -1175,7 +1178,7 @@ especially useful for defining data-uri embedded<span class="widont">&nbsp;</spa
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="3-0-0-09-12-17">3.0.0 - 09/12/17</h3>
+      <h3 id="type-3-0-0-09-12-17">type-3.0.0 - 09/12/17</h3>
 <ul>
 <li>BREAKING: Use proper <code>::</code> syntax for<span class="widont">&nbsp;</span>pseudo-elements</li>
 <li>BREAKING: Set <code>pointer-events: none</code> on hidden<span class="widont">&nbsp;</span>text</li>
@@ -1254,7 +1257,7 @@ especially useful for defining data-uri embedded<span class="widont">&nbsp;</spa
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="2-1-0-12-09-16">2.1.0 — 12/09/16</h3>
+      <h3 id="type-2-1-0-12-09-16">type-2.1.0 — 12/09/16</h3>
 <ul>
 <li>Document <code>$font</code> properties</li>
 <li>Add <code>false</code> option for font-variants,
@@ -1336,7 +1339,7 @@ to allow documentation without triggering<span class="widont">&nbsp;</span>impor
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="2-0-0-02-22-16">2.0.0 - 02/22/16</h3>
+      <h3 id="type-2-0-0-02-22-16">type-2.0.0 - 02/22/16</h3>
 <ul>
 <li>NEW: <code>is-hidden()</code> mixin for screen-reader accessible, hidden<span class="widont">&nbsp;</span>text</li>
 <li>NEW: Add pseudo-element helper mixins:

@@ -23,13 +23,13 @@
 /// @group type-changelog
 
 
-/// ### 4.0.1 & 4.0.2 - 01/31/18
+/// ### type-4.0.1 & 4.0.2 - 01/31/18
 /// - `local()` always comes first in `@font-face` `src` order.
 /// - Fix typos in docs
 /// @group type-changelog
 
 
-/// ### 4.0.0 - 01/30/18
+/// ### type-4.0.0 - 01/30/18
 /// *Compared against 3.1.0 -
 /// for incremental changes,
 /// see the 3.2 beta changelogs…*
@@ -64,7 +64,7 @@
 /// @group type-changelog
 
 
-/// ### 3.2.0-beta.2 - 01/23/18
+/// ### type-3.2.0-beta.2 - 01/23/18
 /// - BREAKING: Move `svgid` and `local` into font-variant sub-maps,
 ///   since the required names are variant-specific.
 /// - BREAKING: Remove `$font-formats` global,
@@ -80,7 +80,7 @@
 /// @group type-changelog
 
 
-/// ### 3.2.0-beta.1 - 11/20/17
+/// ### type-3.2.0-beta.1 - 11/20/17
 /// - NEW: Add `svgid` (string) option to font maps,
 ///   for defining an id suffix in `svg` font urls.
 /// - NEW: Add `local` (list) option to font maps,
@@ -96,23 +96,23 @@
 /// @group type-changelog
 
 
-/// ### 3.1.0 - 09/28/17
+/// ### type-3.1.0 - 09/28/17
 /// - NEW: `add-font` mixin makes font-config organization simpler
 /// @group type-changelog
 
 
-/// ### 3.0.1 - 09/13/17
+/// ### type-3.0.1 - 09/13/17
 /// - Update docs.
 /// @group type-changelog
 
 
-/// ### 3.0.0 - 09/12/17
+/// ### type-3.0.0 - 09/12/17
 /// - BREAKING: Use proper `::` syntax for pseudo-elements
 /// - BREAKING: Set `pointer-events: none` on hidden text
 /// @group type-changelog
 
 
-/// ### 2.1.0 — 12/09/16
+/// ### type-2.1.0 — 12/09/16
 /// - Document `$font` properties
 /// - Add `false` option for font-variants,
 ///   to allow documentation without triggering imports
@@ -121,7 +121,7 @@
 /// @group type-changelog
 
 
-/// ### 2.0.0 - 02/22/16
+/// ### type-2.0.0 - 02/22/16
 /// - NEW: `is-hidden()` mixin for screen-reader accessible, hidden text
 /// - NEW: Add pseudo-element helper mixins:
 ///   `before()`, `after()`, and `wrap-content()`

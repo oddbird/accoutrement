@@ -30,7 +30,7 @@
 /// @group scale-changelog
 
 
-/// ### 6.0.0 - 04/03/18
+/// ### scale-6.0.0 - 04/03/18
 /// - BREAKING: Remove all non-essential default sizes
 /// - BUGFIX: Add `convert-units` to local (pre-captured) functions
 /// - NEW: `negative` function can be used with `calc()` values,
@@ -42,17 +42,17 @@
 /// @group scale-changelog
 
 
-/// ### 5.0.2 - 12/13/17
+/// ### scale-5.0.2 - 12/13/17
 /// - BUGFIX: Fix implicit division in map values
 /// @group scale-changelog
 
 
-/// ### 5.0.1 - 09/13/17
+/// ### scale-5.0.1 - 09/13/17
 /// - BUGFIX: `negative` and `square` functions handle units properly
 /// @group scale-changelog
 
 
-/// ### 5.0.0 - 09/13/17
+/// ### scale-5.0.0 - 09/13/17
 /// - BREAKING: `$from-context` defaults to 'root' when available
 /// - BUGFIX: Browser-em math requires `$from-context`
 /// - NEW: Allow `size()` function to accept additional arguments
@@ -62,17 +62,17 @@
 /// @group scale-changelog
 
 
-/// ### 4.0.2 - 09/13/17
+/// ### scale-4.0.2 - 09/13/17
 /// - Recompile styleguide documentation.
 /// @group scale-changelog
 
 
-/// ### 4.0.1 - 09/13/17
+/// ### scale-4.0.1 - 09/13/17
 /// - Publish missing styleguide documentation.
 /// @group scale-changelog
 
 
-/// ### 4.0.0 - 09/12/17
+/// ### scale-4.0.0 - 09/12/17
 /// *Same as 4.0.0-alpha-1 - 09/06/17*
 /// - BREAKING: Remove overly-opinionated baseline type tools
 ///   including `font-size` and `baseline` mixins.
@@ -86,18 +86,18 @@
 /// @group scale-changelog
 
 
-/// ### 3.2.0 - 08/23/17
+/// ### scale-3.2.0 - 08/23/17
 /// - NEW: Rename private `_get-ratio()` to public `scale()`
 ///   for consistent access to ratios with map-key references.
 /// @group scale-changelog
 
 
-/// ### 3.1.1 - 05/27/17
+/// ### scale-3.1.1 - 05/27/17
 /// - BUGFIX: Resolve problems with referencing `calc()` values
 /// @group scale-changelog
 
 
-/// ### 3.1.0 - 05/20/17
+/// ### scale-3.1.0 - 05/20/17
 /// - Allow `calc()` values in scale maps
 /// - Add `calc(%s + %s) ('root', 'rhythm')` syntax
 ///   for building custom calc functions based on other map values
@@ -112,7 +112,7 @@
 /// @group scale-changelog
 
 
-/// ### 3.0.0 - 03/08/17
+/// ### scale-3.0.0 - 03/08/17
 /// - BREAKING: Don't convert units unless specifically requested.
 ///   This allows you to define preferred units per-item
 ///   in the configuration map.
