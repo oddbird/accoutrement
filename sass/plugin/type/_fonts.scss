@@ -14,7 +14,7 @@
 /// which simply prepends the global `$font-path` when appropriate.
 ///
 /// @since type-4.0.0 -
-///   Supports Base64 data URI's, without prepending font-path.
+/// Supports Base64 data URI's, without prepending font-path.
 ///
 /// @group type-fonts
 /// @example scss
@@ -43,7 +43,7 @@
 /// with name and font-stack.
 ///
 /// @since type-4.0.0 -
-///   Provides the correct name for fonts when an alias is given.
+/// Provides the correct name for fonts when an alias is given.
 ///
 /// @group type-fonts
 /// @example scss
@@ -111,7 +111,7 @@
 /// (variants without a path will not be imported).
 ///
 /// @since type-4.0.0 -
-///   No longer accepts the `$formats` parameter.
+/// No longer accepts the `$formats` parameter.
 ///
 /// @group type-fonts
 /// @example scss
@@ -152,7 +152,7 @@
 /// and generate `@font-face` blocks for each individual font and variant.
 ///
 /// @since type-4.0.0 -
-///   No longer accepts the `$formats` parameter.
+/// No longer accepts the `$formats` parameter.
 ///
 /// @group type-fonts
 /// @example scss

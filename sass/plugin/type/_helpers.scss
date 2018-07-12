@@ -102,7 +102,7 @@ $_a_FONT-FORMATS: (
 /// [font-url]: fonts.html#function--font-url
 ///
 /// @since type-4.0.0 -
-///   Added to format font-paths correctly, with file extension and suffix.
+/// Added to format font-paths correctly, with file extension and suffix.
 ///
 /// @access private
 /// @group font-helpers
@@ -163,7 +163,7 @@ $_a_FONT-FORMATS: (
 /// organizing them into the proper output order for browser-compatability.
 ///
 /// @since type-4.0.0 -
-///   No longer accepts the `$format` parameter.
+/// No longer accepts the `$format` parameter.
 ///
 /// @access private
 /// @group font-helpers
@@ -196,8 +196,8 @@ $_a_FONT-FORMATS: (
 /// for one `@font-face` declaration block.
 ///
 /// @since type-4.0.0 -
-///   Added to sort and compile src lists,
-///   with local() options and proper format order.
+/// Added to sort and compile src lists,
+/// with local() options and proper format order.
 ///
 /// @access private
 /// @group font-helpers
@@ -244,10 +244,10 @@ $_a_FONT-FORMATS: (
 /// and return a filtered font-map including only font-variants.
 ///
 /// @since 0.1.0 -
-///   Supports `'bold italic'` weight/style syntax
-///   in addition to `('bold', 'italic')`
+/// Supports `'bold italic'` weight/style syntax
+/// in addition to `('bold', 'italic')`
 /// @since type-4.0.0 -
-///   Added to extract variant-data from a font-map
+/// Added to extract variant-data from a font-map
 ///
 /// @access private
 /// @group font-helpers
@@ -283,11 +283,11 @@ $_a_FONT-FORMATS: (
 /// Parse a list of font variants into a map of `style` and `weight` settings.
 ///
 /// @since 0.1.0 -
-///   Supports `'bold italic'` weight/style syntax
-///   in addition to `('bold', 'italic')`
+/// Supports `'bold italic'` weight/style syntax
+/// in addition to `('bold', 'italic')`
 /// @since type-4.0.0 -
-///   - Name changed from `_parse-font-variant` for clarity.
-///   - Supports both string and number values for font-weight.
+/// - Name changed from `_parse-font-variant` for clarity.
+/// - Supports both string and number values for font-weight.
 ///
 /// @access private
 /// @group font-helpers
