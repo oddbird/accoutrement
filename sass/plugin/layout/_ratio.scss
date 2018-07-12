@@ -6,6 +6,10 @@
 // -------------------
 /// Establsih a fluid-height container based on an aspect ratio.
 ///
+/// @since 0.1.0 -
+///   Uses the new [shared](core.html) map syntax,
+///   and [ratio](core-ratios.html) settings
+///
 /// @group layout-ratios
 ///
 /// @param {float | string} $ratio ['widescreen'] -
@@ -35,6 +39,10 @@
 // ----------------------
 /// Return a padding-height
 /// based on a given ratio and fluid width.
+///
+/// @since 0.1.0 -
+///   Uses the new [shared](core.html) map syntax,
+///   and [ratio](core-ratios.html) settings
 ///
 /// @group layout-ratios
 /// @example scss

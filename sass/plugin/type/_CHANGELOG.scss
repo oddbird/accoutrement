@@ -10,7 +10,10 @@
 
 /// ## 0.1.0 - UNRELEASED
 /// - NOTICE: Release numbering reset
-/// - NEW: Support [core map syntax](core.html) in font maps
+/// - BREAKING: We now use the shared syntax
+///   defined in [the core module](core.html) --
+///   which requires `#tags` for internal map reference,
+///   and provides a number of new features.
 /// - NEW: Allow space-separated string variants (`'500 italic'`)
 ///   for weight and style, in addition to lists (`500 'italic'`)
 /// @group type-changelog

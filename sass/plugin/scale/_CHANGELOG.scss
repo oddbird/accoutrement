@@ -10,6 +10,10 @@
 
 /// ## 0.1.0 - UNRELEASED
 /// - NOTICE: Release numbering reset
+/// - BREAKING: We now use the shared syntax
+///   defined in [the core module](core.html) --
+///   which requires `#tags` for internal map reference,
+///   and provides a number of new features.
 /// - BREAKING: `%s` Interpolation uses function-map syntax
 ///   described in the [Core](core.html),
 ///   rather than a stand-alone list

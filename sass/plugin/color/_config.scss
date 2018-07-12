@@ -32,6 +32,10 @@
 /// for our color-contrast tools.
 /// They default to `white` and `black` respectively.
 ///
+/// @since 0.1.0 -
+///   Uses the new [shared](core.html) map syntax,
+///   for internal references and adjustments
+///
 /// @group color-api
 /// @example scss - simple color definitions
 ///   $colors: (

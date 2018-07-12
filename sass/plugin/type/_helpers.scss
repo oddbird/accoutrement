@@ -243,8 +243,11 @@ $_a_FONT-FORMATS: (
 /// Extract all the variant key/data pairs,
 /// and return a filtered font-map including only font-variants.
 ///
+/// @since 0.1.0 -
+///   Supports `'bold italic'` weight/style syntax
+///   in addition to `('bold', 'italic')`
 /// @since type-4.0.0 -
-///   Added to extract variant-data from a font-map.
+///   Added to extract variant-data from a font-map
 ///
 /// @access private
 /// @group font-helpers
@@ -279,6 +282,9 @@ $_a_FONT-FORMATS: (
 // ------------------
 /// Parse a list of font variants into a map of `style` and `weight` settings.
 ///
+/// @since 0.1.0 -
+///   Supports `'bold italic'` weight/style syntax
+///   in addition to `('bold', 'italic')`
 /// @since type-4.0.0 -
 ///   - Name changed from `_parse-font-variant` for clarity.
 ///   - Supports both string and number values for font-weight.
