@@ -204,3 +204,46 @@
   @return $list;
 }
 @include _a_register-function('_a_split', 'split');
+
+
+// Trim
+// ----
+/// Trims whitespace from the start and end of a string.
+///
+/// This function is prefixed outside maps
+/// & should not be used directly,
+/// but is available in all accoutrement maps
+/// under the `'trim'` alias.
+///
+/// @since 1.0.0 -
+/// Trim whitespace from the start and end of strings
+///
+/// @access public
+/// @name trim
+/// @group core-strings
+/// @example scss
+///   $map: (
+///     // null value is needed for single-argument functions…
+///     'trim': '  hello world     ' ('trim': null),
+///   );
+///   /*! #{get-token($map, 'trim')} */
+///
+/// @param {string} $string -
+///   The original string to be trimmed
+/// @return {string} -
+///   Trimmed string
+@function _a_trim(
+  $string
+) {
+  $first: (str-slice($string, 1, 1) == ' ');
+  $last: (str-slice($string, -1) == ' ');
+
+  @if ($first or $last) {
+    $string: if($first, str-slice($string, 2), $string);
+    $string: if($last, str-slice($string, 1, -2), $string);
+    $string: _a_trim($string);
+  }
+
+  @return $string;
+}
+@include _a_register-function('_a_trim', 'trim');

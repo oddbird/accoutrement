@@ -3,6 +3,44 @@
 @include test-module('Type: Fonts') {
 
 
+// Font [function]
+// ---------------
+@include describe('Font [function]') {
+  @include it('Accesses normalized font-data by key-name') {
+    @include assert-equal(
+      font('TestFont'),
+      (
+        'stack': (TestFont, Georgia, serif),
+        'name': 'TestFont',
+      ),
+      $inspect: true
+    );
+  }
+
+  @include it('Accesses normalized font-data by key alias') {
+    @include assert-equal(
+      font('tf-alias'),
+      (
+        'stack': (TestFont, Georgia, serif),
+        'name': 'TestFont',
+      ),
+      $inspect: true
+    );
+  }
+
+  @include it('Accesses incomplete font-data') {
+    @include assert-equal(
+      font('normal-stack'),
+      (
+        'stack': (normal-stack, 'Helvetica Neue', Helvetica, Arial, sans-serif),
+        'name': 'normal-stack',
+      ),
+      $inspect: true
+    );
+  }
+}
+
+
 // Font URL [function]
 // -------------------
 @include describe('font-url [function]') {

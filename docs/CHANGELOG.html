@@ -92,12 +92,7 @@
                 
   
     <li class="nav-item">
-      <a href="core.html" data-nav="is-not-active">QuickStart (core)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="core-changelog.html" data-nav="is-not-active">Changelog (core)</a>
+      <a href="core.html" data-nav="is-not-active">QuickStart: Core</a>
     </li>
   
   
@@ -137,12 +132,7 @@
                 
   
     <li class="nav-item">
-      <a href="init.html" data-nav="is-not-active">QuickStart (init)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="init-changelog.html" data-nav="is-not-active">Changelog (init)</a>
+      <a href="init.html" data-nav="is-not-active">QuickStart: Init</a>
     </li>
   
   
@@ -177,12 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="animate.html" data-nav="is-not-active">QuickStart (animate)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="animate-changelog.html" data-nav="is-not-active">Changelog (animate)</a>
+      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
     </li>
   
   
@@ -207,12 +192,7 @@
                 
   
     <li class="nav-item">
-      <a href="color.html" data-nav="is-not-active">QuickStart (color)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="color-changelog.html" data-nav="is-not-active">Changelog (color)</a>
+      <a href="color.html" data-nav="is-not-active">QuickStart: Color</a>
     </li>
   
   
@@ -237,12 +217,7 @@
                 
   
     <li class="nav-item">
-      <a href="layout.html" data-nav="is-not-active">QuickStart (layout)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="layout-changelog.html" data-nav="is-not-active">Changelog (layout)</a>
+      <a href="layout.html" data-nav="is-not-active">QuickStart: Layout</a>
     </li>
   
   
@@ -282,12 +257,7 @@
                 
   
     <li class="nav-item">
-      <a href="scale.html" data-nav="is-not-active">QuickStart (scale)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="scale-changelog.html" data-nav="is-not-active">Changelog (scale)</a>
+      <a href="scale.html" data-nav="is-not-active">QuickStart: Scale</a>
     </li>
   
   
@@ -307,12 +277,7 @@
                 
   
     <li class="nav-item">
-      <a href="type.html" data-nav="is-not-active">QuickStart (type)</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="type-changelog.html" data-nav="is-not-active">Changelog (type)</a>
+      <a href="type.html" data-nav="is-not-active">QuickStart: Type</a>
     </li>
   
   
@@ -392,21 +357,94 @@
           
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
+<h2 id="1-0-0-unreleased">1.0.0 - UNRELEASED</h2>
+<ul>
+<li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
+<ul>
+<li>NEW: <code>trim($string)</code> utility now available in map-syntax,
+to trim white-space from the start and end of a<span class="widont">&nbsp;</span>string.</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>
+<ul>
+<li>BREAKING: <code>import-webfonts()</code> mixin no longer accepts any<span class="widont">&nbsp;</span>arguments</li>
+<li>NEW: <code>font()</code> function provides access to parsed<span class="widont">&nbsp;</span>font-data</li>
+<li>NEW: Improved font-normalization handles more font-map<span class="widont">&nbsp;</span>edge-cases</li>
+<li>NEW: Font-stacks can be written as comma-delimited strings,
+e.g. <code>'Helvetica Neue, Helvetica, Arial'</code> or
+<code>'Helvetica Neue, Helvetica, Arial'</code></li>
+</ul>
+</li>
+</ul>
 <h2 id="0-1-0-07-12-18">0.1.0 - 07/12/18</h2>
 <ul>
-<li>Merges all existing Accoutrement plugins:
-<a href="http://oddbird.net/accoutrement-color/">Color</a>,
-<a href="http://oddbird.net/accoutrement-init/">Init</a>,
-<a href="http://oddbird.net/accoutrement-layout/">Layout</a>,
-<a href="http://oddbird.net/accoutrement-scale/">Scale</a>,
-and <a href="http://oddbird.net/accoutrement-type/">Type</a></li>
-<li>NEW: <a href="http://oddbird.net/accoutrement/docs/animate.html">Animate</a> plugin</li>
-<li>NEW: <a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>
-functionality and<span class="widont">&nbsp;</span>utilities</li>
 <li>BREAKING: All modules now use a shared map syntax,
 with explicit <code>#tag</code> references
 and the option for explicit value/adjustment maps.
 <a href="http://oddbird.net/accoutrement/docs/core.html">Learn the new<span class="widont">&nbsp;</span>syntax</a>.</li>
+<li>NEW: Merges all existing Accoutrement<span class="widont">&nbsp;</span>plugins</li>
+<li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
+<ul>
+<li>BREAKING: Internal map-reference now uses <code>#tag</code> syntax</li>
+<li>NEW: Generic map-syntax, access, and parsing tools
+are shared by all plugins,
+and can be used with un-specified data<span class="widont">&nbsp;</span>types</li>
+<li>NEW: Improved function-registration<span class="widont">&nbsp;</span>options</li>
+<li>NEW: Math, modular-scale, string, and list utilities
+combined from the individual<span class="widont">&nbsp;</span>plugins</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/animate.html">Plugin: Animate</a>:
+<ul>
+<li>A totally new<span class="widont">&nbsp;</span>plugin!</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/color.html">Plugin: Color</a>:
+<ul>
+<li>BREAKING: See <a href="http://oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: Removed <code>merge-colors()</code> function</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/layout.html">Plugin: Layout</a>:
+<ul>
+<li>BREAKING: See <a href="http://oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: Ratio functionality merged into <a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>,
+using the shared <code>$ratios</code> map,
+and <code>ratio()</code> function.
+The old <code>$aspect-ratios</code> and <code>aspect-ratio()</code> have been<span class="widont">&nbsp;</span>removed.</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/scale.html">Plugin: Scale</a>:
+<ul>
+<li>BREAKING: See <a href="http://oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: String interpolation has moved into the <a href="http://oddbird.net/accoutrement/docs/core.html">core</a>
+using function syntax <code>'%s and %s' ('%s': 'new1' 'new2')</code>
+rather than list syntax <code>'%s and %s' ('new1', 'new2')</code></li>
+<li>BREAKING: Math functions have moved into the core.
+The actual functions are now prefixed &amp; private,
+but they are made available to Accoutrement maps
+under the additional<span class="widont">&nbsp;</span>aliases</li>
+<li>New: Ratios have moved into the core,
+with additional<span class="widont">&nbsp;</span>defaults</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>:
+<ul>
+<li>BREAKING: See <a href="http://oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>NEW: Allow space-separated string variants (<code>'500 italic'</code>)
+for weight and style, in addition to lists (<code>500 'italic'</code>)</li>
+<li>NEW: Automatically formats font-family stacks
+with proper commas &amp; quotations for CSS<span class="widont">&nbsp;</span>output</li>
+</ul>
+</li>
+</ul>
+<h2 id="older-changelogs-from-individual-modules-">Older Changelogs, from individual<span class="widont">&nbsp;</span>modules:</h2>
+<ul>
+<li><a href="http://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md">Accoutrement Init</a></li>
+<li><a href="http://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md">Accoutrement Color</a></li>
+<li><a href="http://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md">Accoutrement Layout</a></li>
+<li><a href="http://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md">Accoutrement Scale</a></li>
+<li><a href="http://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md">Accoutrement Type</a></li>
 </ul>
 
   </div>

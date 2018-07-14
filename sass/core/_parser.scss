@@ -190,6 +190,27 @@
 }
 
 
+@function _a_origin(
+  $map,
+  $key
+) {
+  $name: null;
+
+  @while map-has-key($map, $key) {
+    $name: $key;
+    $try: map-get($map, $key);
+
+    @if (type-of($try) == 'string') and (str-index($try, '#') == 1) {
+      $try: str-slice($try, 2);
+    }
+
+    $key: $try;
+  }
+
+  @return $name;
+}
+
+
 // Do
 // --
 /// Applies any ratio or function adjustments

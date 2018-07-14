@@ -8,7 +8,7 @@ $fonts: (
 
   'body-font': (
     'name': 'Source Sans Pro',
-    'stack': '#shared-stack' ('split': ', '),
+    'stack': '#shared-stack',
     'formats': 'woff' 'svg' 'eot',
     'normal': 'sans/sourcesanspro-regular-webfont',
     'italic': 'sans/sourcesanspro-italic-webfont',
@@ -32,6 +32,8 @@ $fonts: (
     'unicode-range': (U+0000-00FF, U+0131, 'U+0152-0153', 'U+02C6'),
   ),
 
+  'normal-stack': ('stack': '#shared-stack'),
+  'normal-alias': '#normal-stack',
   'alias': '#body-font',
   'kevin bacon': '#alias',
   'tf-alias': '#TestFont',
@@ -41,6 +43,7 @@ $fonts: (
 
 @import 'type/config';
 @import 'type/helpers';
+@import 'type/normalize';
 @import 'type/a11y';
 @import 'type/fonts';
 @import 'type/pseudo-elements';
