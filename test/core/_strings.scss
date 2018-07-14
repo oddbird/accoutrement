@@ -124,4 +124,16 @@
   }
 }
 
+
+// Trim [function]
+// ---------------
+@include describe('Trim [function]') {
+  @include it('Strips whitespace from start and end of a string') {
+    @include assert-equal(
+      _a_trim('  hello world     '),
+      'hello world'
+    );
+  }
+}
+
 } // end module

@@ -1,17 +1,80 @@
 # Accoutrement Changelog
 
 
+## 1.0.0 - UNRELEASED
+- [Core][core]:
+  - NEW: `trim($string)` utility now available in map-syntax,
+    to trim white-space from the start and end of a string.
+- [Plugin: Type][type]
+  - NEW: `font()` function provides access to parsed font-data
+  - NEW: Improved font-normalization handles more font-map edge-cases
+  - NEW: Font-stacks can be written as comma-delimited strings,
+    e.g. `'Helvetica Neue, Helvetica, Arial'` or
+    `'Helvetica Neue, Helvetica, Arial'`
+
+
 ## 0.1.0 - 07/12/18
-- Merges all existing Accoutrement plugins:
-  [Color](http://oddbird.net/accoutrement-color/),
-  [Init](http://oddbird.net/accoutrement-init/),
-  [Layout](http://oddbird.net/accoutrement-layout/),
-  [Scale](http://oddbird.net/accoutrement-scale/),
-  and [Type](http://oddbird.net/accoutrement-type/)
-- NEW: [Animate](http://oddbird.net/accoutrement/docs/animate.html) plugin
-- NEW: [Core](http://oddbird.net/accoutrement/docs/core.html)
-  functionality and utilities
 - BREAKING: All modules now use a shared map syntax,
   with explicit `#tag` references
   and the option for explicit value/adjustment maps.
-  [Learn the new syntax](http://oddbird.net/accoutrement/docs/core.html).
+  [Learn the new syntax][core].
+- NEW: Merges all existing Accoutrement plugins
+- [Core][core]:
+  - BREAKING: Internal map-reference now uses `#tag` syntax
+  - NEW: Generic map-syntax, access, and parsing tools
+    are shared by all plugins,
+    and can be used with un-specified data types
+  - NEW: Improved function-registration options
+  - NEW: Math, modular-scale, string, and list utilities
+    combined from the individual plugins
+- [Plugin: Animate][animate]:
+  - A totally new plugin!
+- [Plugin: Color][color]:
+  - BREAKING: See [core module][core] syntax changes
+  - BREAKING: Removed `merge-colors()` function
+- [Plugin: Layout][layout]:
+  - BREAKING: See [core module][core] syntax changes
+  - BREAKING: Ratio functionality merged into [Core][core],
+    using the shared `$ratios` map,
+    and `ratio()` function.
+    The old `$aspect-ratios` and `aspect-ratio()` have been removed.
+- [Plugin: Scale][scale]:
+  - BREAKING: See [core module][core] syntax changes
+  - BREAKING: String interpolation has moved into the [core][core]
+    using function syntax `'%s and %s' ('%s': 'new1' 'new2')`
+    rather than list syntax `'%s and %s' ('new1', 'new2')`
+  - BREAKING: Math functions have moved into the core.
+    The actual functions are now prefixed & private,
+    but they are made available to Accoutrement maps
+    under the additional aliases
+  - New: Ratios have moved into the core,
+    with additional defaults
+- [Plugin: Type][type]:
+  - BREAKING: See [core module][core] syntax changes
+  - NEW: Allow space-separated string variants (`'500 italic'`)
+    for weight and style, in addition to lists (`500 'italic'`)
+  - NEW: Automatically formats font-family stacks
+    with proper commas & quotations for CSS output
+
+
+[core]: http://oddbird.net/accoutrement/docs/core.html
+[init]: http://oddbird.net/accoutrement/docs/init.html
+[animate]: http://oddbird.net/accoutrement/docs/animate.html
+[color]: http://oddbird.net/accoutrement/docs/color.html
+[layout]: http://oddbird.net/accoutrement/docs/layout.html
+[scale]: http://oddbird.net/accoutrement/docs/scale.html
+[type]: http://oddbird.net/accoutrement/docs/type.html
+
+
+## Older Changelogs, from individual modules:
+- [Accoutrement Init][IO]
+- [Accoutrement Color][CO]
+- [Accoutrement Layout][LO]
+- [Accoutrement Scale][SO]
+- [Accoutrement Type][TO]
+
+[IO]: http://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
+[CO]: http://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
+[LO]: http://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
+[SO]: http://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
+[TO]: http://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md

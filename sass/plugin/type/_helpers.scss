@@ -1,15 +1,10 @@
-// Internal Font Helpers
-// =====================
-
-
 /// # Internal WebFont Helpers
-///
 /// These internal tools are not safe for public use --
 /// but we've documented the logic for transparency,
 /// and to encourage contributions.
 ///
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 
 
 // Font Style Options
@@ -17,7 +12,7 @@
 /// A constant list of valid font-style settings
 /// (not including `normal`, which is also a valid weight).
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 $_a_FONT-STYLES: (
   'italic',
   'oblique',
@@ -29,7 +24,7 @@ $_a_FONT-STYLES: (
 /// A constant list of valid font-weight settings
 /// (not including `normal`, which is also a valid style).
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 $_a_FONT-WEIGHTS: (
   '100',
   '200',
@@ -52,7 +47,7 @@ $_a_FONT-WEIGHTS: (
 /// with their file extension and full `format()` name.
 /// The order given here will also be used in defining font-face src order.
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 $_a_FONT-FORMATS: (
   'local': null,
   'eot': 'embedded-opentype',
@@ -63,32 +58,6 @@ $_a_FONT-FORMATS: (
   'svg': 'svg',
   'svgz': 'svg',
 );
-
-
-// Font Name
-// ---------
-/// Get a font-name from the `$fonts` map,
-/// based on font access-key.
-///
-/// @access private
-/// @group font-helpers
-///
-/// @param $font -
-///   The font map
-/// @return {string} -
-///   The font-name associated with the given font map
-@function _a_font-name(
-  $font
-) {
-  $name: map-get($font, 'name') or null;
-
-  @if not $name {
-    $index: index(map-values($fonts), $font);
-    $name: nth(map-keys($fonts), $index);
-  }
-
-  @return $name;
-}
 
 
 // stylelint-disable function-url-quotes
@@ -105,7 +74,7 @@ $_a_FONT-FORMATS: (
 /// Added to format font-paths correctly, with file extension and suffix.
 ///
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 ///
 /// @param {string} $path -
 ///   The base path for this font and format.
@@ -166,7 +135,7 @@ $_a_FONT-FORMATS: (
 /// No longer accepts the `$format` parameter.
 ///
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 ///
 /// @param {string | map} $path -
 ///   Path to the font files (leaving off the file format indicator),
@@ -200,7 +169,7 @@ $_a_FONT-FORMATS: (
 /// with local() options and proper format order.
 ///
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 ///
 /// @param {map} $data -
 ///   Normalized map of format/url pairs to import.
@@ -250,7 +219,7 @@ $_a_FONT-FORMATS: (
 /// Added to extract variant-data from a font-map
 ///
 /// @access private
-/// @group font-helpers
+/// @group type-helpers
 ///
 /// @param {map} $font -
 ///   A map of all the data for a single font.
@@ -278,134 +247,18 @@ $_a_FONT-FORMATS: (
 }
 
 
-// Parse Variant Name
-// ------------------
-/// Parse a list of font variants into a map of `style` and `weight` settings.
-///
-/// @since 0.1.0 -
-/// Supports `'bold italic'` weight/style syntax
-/// in addition to `('bold', 'italic')`
-/// @since type-4.0.0 -
-/// - Name changed from `_parse-font-variant` for clarity.
-/// - Supports both string and number values for font-weight.
-///
-/// @access private
-/// @group font-helpers
-///
-/// @param {List} $variant -
-///   A list of font variants, such as `('bold', 'italic')`.
-/// @return {$map} -
-///   A map of `style` and `weight` values.
-@function _a_parse-variant-name(
-  $variant
-) {
-  $return: (
-    'style': 'normal',
-    'weight': 'normal',
-  );
-
-  @if (type-of($variant) == 'string') and str-index($variant, ' ') {
-    $variant: _a_split($variant, ' ');
-  }
-
-  @each $item in $variant {
-    @if index($_a_FONT-STYLES, $item) {
-      $return: map-merge($return, ('style': $item));
-    } @else if index($_a_FONT-WEIGHTS, '' + $item) {
-      $return: map-merge($return, ('weight': $item));
-    }
-  }
-
-  @return $return;
-}
-
-
-// Normalize Variant Data
-// ----------------------
-/// Convert variant values into a consistent format -
-/// to allow shorthand APIs,
-/// while providing consistent data formats to the internal functions.
-/// Strings are converted to maps,
-/// and format-paths are interpolated
-/// to create a self-contained map of variant data.
-///
-/// @access private
-/// @group font-helpers
-///
-/// @param {string | map} $data -
-///   A string path for interpolation,
-///   or a map of explicit format/path pairs for one font-variant.
-/// @param {list} $formats [()] -
-///   A list of formats to interpolate with generic paths,
-///   to create format/path values.
-///   If a path is provided without formats,
-///   we'll return `format-error` -
-///   allowing the function-call origin to provide
-///   a more detailed error message.
-/// @return {map} -
-///   A map of formats and urls for the given font-variant,
-///   merging interpolated and explicit format/paths
-///   into a single map.
-@function _a_normalize-variant-data(
-  $data,
-  $formats: ()
-) {
-
-  @if (type-of($data) == 'string') {
-    $data: (
-      'path': $data
-    );
-  }
-
-  // Interpolate implicit paths
-  $path: map-get($data, 'path');
-  $svgid: map-get($data, 'svgid');
-  $implicit: ();
-
-  @if $path {
-    @if (length($formats) > 0) {
-      @each $format in $formats {
-        $url: _a_font-url($path, $format, $svgid);
-        $implicit: map-merge($implicit, ($format: $url));
-      }
-    } @else {
-      @return 'format-error';
-    }
-  }
-
-  // Extract explicit paths
-  $explicit: ();
-
-  @each $key, $value in $data {
-    @if map-has-key($_a_FONT-FORMATS, $key) {
-      $url: _a_font-url($value, $key, $svgid);
-      $explicit: map-merge($explicit, ($key: $url));
-    }
-  }
-
-  // Merge and return…
-  @return map-merge($implicit, $explicit);
-}
-
-
 // Import Font-Face [mixin]
 // ------------------------
 /// Compile provided font-variant data into a
 /// CSS `@font-face` import.
 ///
 /// @access private
-/// @group font-helpers
-/// @example scss - string `$data`
+/// @group type-helpers
+/// @example scss -
 ///   @include _a_import-font-face(
 ///     $name: 'Franklin Gothic',
-///     $variant: ('bold' 'italic'),
-///     $data: 'path/to/franklin-bolditalic-font',
-///     $formats: ('woff2' 'woff')
-///   );
-/// @example scss - map `$data`
-///   @include _a_import-font-face(
-///     $name: 'Franklin Gothic',
-///     $variant: 'normal',
+///     $weight: 'normal',
+///     $style: 'normal',
 ///     $data: (
 ///       'local': 'Franklin Gothic' ('franklin-gothic'),
 ///       'woff2': 'path/to/franklin-bolditalic-font.woff2',
@@ -415,17 +268,15 @@ $_a_FONT-FORMATS: (
 ///
 /// @param {string} $name -
 ///   The font name.
-/// @param {string | list} $variant -
-///   The font-style and font-weight properties,
-///   e.g. `bold` or `('bold', 'italic')`.
-/// @param {string | map} $data -
+/// @param {string} $weight -
+///   The font-weight property,
+///   e.g. `bold` or `300`.
+/// @param {string} $style -
+///   The font-style property,
+///   e.g. `normal` or `italic`.
+/// @param {map} $data -
 ///   Path to the font files (leaving off the file-format extension),
 ///   or map of format/path pairs.
-/// @param {list} $formats [()] -
-///   Optional list of font formats (e.g. 'ttf', 'otf', 'woff') to import,
-///   in the order given.
-///   If formats are not explicitly given here,
-///   we fallback to formats in a data-map.
 /// @param {list | null} <key>.unicode-range -
 ///   Optionally import only specific unicode ranges.
 ///   See [MDN unicode-range documentation][unicode] for details.
@@ -436,22 +287,15 @@ $_a_FONT-FORMATS: (
 ///   without formats for interpolation.
 @mixin _a_import-font-face(
   $name,
-  $variant,
+  $weight,
+  $style,
   $data,
-  $formats: (),
   $unicode: null
 ) {
-  $variant: _a_parse-variant-name($variant);
-  $data: _a_normalize-variant-data($data, $formats);
-  $style: map-get($variant, 'style');
-  $weight: map-get($variant, 'weight');
-
-
   @if ($data == 'format-error') {
     @error '(#{$name}) Font-path interpolation ' +
     'requires a list of `formats` to import.';
   }
-
 
   // Special handling of eot with local or data
   $eot: map-get($data, 'eot');
@@ -473,7 +317,6 @@ $_a_FONT-FORMATS: (
     }
   }
 
-
   // Format values for CSS
   $name: quote($name);
   $style: unquote($style);
@@ -488,7 +331,6 @@ $_a_FONT-FORMATS: (
 
     $unicode: $new;
   }
-
 
   // Output…
   @if $double {

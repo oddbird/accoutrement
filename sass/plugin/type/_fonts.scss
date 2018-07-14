@@ -8,6 +8,28 @@
 /// @group type-fonts
 
 
+// Font [function]
+// ---------------
+/// Retrieve and normalize font data from the `$fonts` map
+///
+/// @since 1.0.0 -
+/// NEW: Use `font` to access a normalized map of font data
+/// for any key in your global `$fonts` map
+///
+/// @group type-fonts
+/// @param {any} $font -
+///   A key for accessing the desired font in `$fonts`
+/// @return {map} -
+///   A parsed and normalized map of font-data
+@function font(
+  $font
+) {
+  $data: get-token($fonts, $font);
+  $normal: _a_normalize-font($data, $font);
+  @return $normal;
+}
+
+
 // Font-URL [function]
 // -------------------
 /// This is a wrapper for the CSS `url()` function,
@@ -66,16 +88,8 @@
 @function font-family(
   $key
 ) {
-  $font: get-token($fonts, $key);
-  $name: _a_font-name($font);
-  $stack: join((), (), 'comma');
-
-  @each $item in join($name, map-get($font, 'stack')) {
-    $item: if(str-index($item, ' '), quote($item), unquote($item));
-    $stack: append($stack, $item);
-  }
-
-  @return $stack;
+  $font: font($key);
+  @return map-get($font, 'stack');
 }
 
 
@@ -111,7 +125,7 @@
 /// (variants without a path will not be imported).
 ///
 /// @since type-4.0.0 -
-/// No longer accepts the `$formats` parameter.
+/// No longer accepts the `$formats` parameter
 ///
 /// @group type-fonts
 /// @example scss
@@ -127,20 +141,22 @@
 ///   @include font-face('body-font');
 ///
 /// @param {string} $key -
-///   The key-name of a font in your `$fonts` map.
+///   The key-name of a font in your `$fonts` map
 /// @output `@font-face` import blocks for any defined font-variants.
 @mixin font-face(
   $key
 ) {
-  $font: get-token($fonts, $key);
-  $name: _a_font-name($font);
+  $font: font($key);
   $variants: _a_font-get-variants($font);
-  $formats: map-get($font, 'formats') or ();
-  $unicode: map-get($font, 'unicode-range');
+  $name: map-get($font, 'name');
 
   @if (length($variants) > 0) {
+    $unicode: map-get($font, 'unicode-range');
+
     @each $variant, $data in $variants {
-      @include _a_import-font-face($name, $variant, $data, $formats, $unicode);
+      $weight: nth($variant, 1);
+      $style: nth($variant, 2);
+      @include _a_import-font-face($name, $weight, $style, $data, $unicode);
     }
   }
 }
@@ -151,8 +167,11 @@
 /// Find all the fonts that include data for imports,
 /// and generate `@font-face` blocks for each individual font and variant.
 ///
+/// @since 1.0.0 -
+/// No longer accepts the `$fonts` parameter,
+/// variant data should be normalized in advance
 /// @since type-4.0.0 -
-/// No longer accepts the `$formats` parameter.
+/// No longer accepts the `$formats` parameter
 ///
 /// @group type-fonts
 /// @example scss
@@ -172,14 +191,10 @@
 ///   );
 ///   @include import-webfonts;
 ///
-/// @param {map} $fonts [$fonts] -
-///   A map of your font configuration.
 /// @output Any number of `@font-face` blocks.
-@mixin import-webfonts(
-  $fonts: $fonts
-) {
-  @each $key, $value in $fonts {
-    @if (type-of($value) == 'map') {
+@mixin import-webfonts {
+  @each $key, $font in $fonts {
+    @if (type-of($font) == 'map') {
       @include font-face($key);
     }
   }

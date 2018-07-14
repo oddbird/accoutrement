@@ -1,5 +1,5 @@
-// Sass Utilities
-// ==============
+// Core Parser Tests
+// =================
 @include test-module('Core Parser') {
 
 
@@ -283,6 +283,57 @@
     @include assert-equal(
       _a_replace($map, '#nameofthething'),
       'N4M3!ofthething'
+    );
+  }
+}
+
+
+// Origin [function]
+// -----------------
+@include describe('Origin [function]') {
+  $map: (
+    'one': 'hello world',
+    'two': '#one' ('str-replace': 'o' '0'),
+    'three': '#one three',
+    'four': '#two',
+    'five': '#four',
+    'six': '#five',
+    'kevin': '#one',
+    'bacon': '#kevin',
+  );
+
+  @include it('Returns a direct key as origin') {
+    @include assert-equal(
+      _a_origin($map, 'one'),
+      'one'
+    );
+  }
+
+  @include it('Returns direct key of a non-alias') {
+    @include assert-equal(
+      _a_origin($map, 'two'),
+      'two',
+      'with adjustments map'
+    );
+
+    @include assert-equal(
+      _a_origin($map, 'three'),
+      'three',
+      'with additional string'
+    );
+  }
+
+  @include it('Returns the origin key of an alias path') {
+    @include assert-equal(
+      _a_origin($map, 'six'),
+      'two',
+      'with adjustments map'
+    );
+
+    @include assert-equal(
+      _a_origin($map, 'bacon'),
+      'one',
+      'with dead-end string'
     );
   }
 }
