@@ -1,5 +1,7 @@
 # Sass Accoutrement
 
+[![Build Status](https://travis-ci.org/oddbird/accoutrement.svg?branch=master)](https://travis-ci.org/oddbird/accoutrement)
+
 **Robbust design systems** require
 *meaningful*, *readable*, *reusable* code.
 These Sass utilities are designed to
