@@ -6,6 +6,7 @@
   - NEW: `trim($string)` utility now available in map-syntax,
     to trim white-space from the start and end of a string.
 - [Plugin: Type][type]
+  - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data
   - NEW: Improved font-normalization handles more font-map edge-cases
   - NEW: Font-stacks can be written as comma-delimited strings,
