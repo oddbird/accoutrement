@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+  - "6"
+sudo: false
+notifications:
+  slack:
+    rooms:
+      secure: x2ev3OA2zr4tFDemF5D05J1tr0us49Qpf9maJ26C/JGYfRJNYKWnRwTPx7K/ONlMfw4KO4+/kFOWs4V1xoMzWSxHqgvqBVhdQ+v79hZqs7MEqzpTOG5c+5DkkWq2vOG1lfvTdqBG89D7MVsVBKjREzfK450S5HsECelzWh2DlFk=
