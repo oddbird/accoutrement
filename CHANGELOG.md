@@ -17,6 +17,16 @@
   - BREAKING: `color()` functions accept `$do` arg
     for on-the-fly adjustments – 
     *before* existing `$palette` argument
+- [Plugin: Scale][scale]
+  - BREAKING: `size()` function `$units…` vararg
+    has been replaced with `$do` map argument,
+    for flexible on-the-fly adjustments.
+    Non-map `$do` values are converted to
+    `('convert-units': $do)` before processing,
+    to provide a shortcut for unit-conversions.
+    `size('root', 'cm')` will continue to work,
+    but `size('root', 'em', 10px)` should be changed to
+    `size('root', 'em' 10px)` (with all unit args in a single list)
 - [Plugin: Type][type]
   - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data

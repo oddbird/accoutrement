@@ -53,8 +53,7 @@ $ratios: () !default;
   $do: null
 ) {
   $_ratio-options: map-merge($_a_RATIOS, $ratios);
-  $ratio: get-token($_ratio-options, $ratio);
-  @return _a_do-each($_ratio-options, $ratio, $do);
+  @return get-token($_ratio-options, $ratio, $do);
 }
 
 

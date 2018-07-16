@@ -72,8 +72,11 @@
 /// You can also convert to `browser-ems`,
 /// relative to the browser default rather than the site root –
 /// useful for media queries.
-/// Aliased as `convert-units`, `convert`, or `units`
+/// Aliased as `convert-units`, `convert`, `units`, and `to`
 /// in all Accoutrement maps.
+///
+/// @since 1.0.0 -
+/// Aliased as `to` in accoutrement-maps
 ///
 /// @group scale-units
 ///
@@ -179,4 +182,4 @@
 
   @error 'Failed to convert #{$length} into #{$to-units}.';
 }
-@include _a_register-function('convert-units', 'convert', 'units');
+@include _a_register-function('convert-units', 'convert', 'units', 'to');

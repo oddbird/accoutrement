@@ -383,6 +383,19 @@ for on-the-fly adjustments – 
 <em>before</em> existing <code>$palette</code> argument</li>
 </ul>
 </li>
+<li><a href="http://oddbird.net/accoutrement/docs/scale.html">Plugin: Scale</a>
+<ul>
+<li>BREAKING: <code>size()</code> function <code>$units…</code> vararg
+has been replaced with <code>$do</code> map argument,
+for flexible on-the-fly adjustments.
+Non-map <code>$do</code> values are converted to
+<code>('convert-units': $do)</code> before processing,
+to provide a shortcut for unit-conversions.
+<code>size('root', 'cm')</code> will continue to work,
+but <code>size('root', 'em', 10px)</code> should be changed to
+<code>size('root', 'em' 10px)</code> (with all unit args in a single<span class="widont">&nbsp;</span>list)</li>
+</ul>
+</li>
 <li><a href="http://oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>
 <ul>
 <li>BREAKING: <code>import-webfonts()</code> mixin no longer accepts any<span class="widont">&nbsp;</span>arguments</li>

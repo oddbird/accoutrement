@@ -40,17 +40,24 @@
     );
   }
 
-  @include it('Get unit-adjusted size') {
+  @include it('Get unit-adjusted size with string $do') {
     @include assert-equal(
       size(24px, 'rem'),
       1.2rem
     );
   }
 
-  @include it('Get unit-adjusted size with args') {
+  @include it('Get unit-adjusted size with list $do') {
     @include assert-equal(
-      size(24px, 'em', 10px),
+      size(24px, 'em' 10px),
       2.4em
+    );
+  }
+
+  @include it('Run adjustments on the fly with map $do') {
+    @include assert-equal(
+      size(24px, ('to': 'em' 10px, 'times': 2)),
+      4.8em
     );
   }
 
