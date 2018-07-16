@@ -15,6 +15,10 @@
 /// but is available in all accoutrement maps
 /// under the `'str-replace'` alias.
 ///
+/// @since 1.0.0 -
+/// Improved handling of non-string values,
+/// allows you to replace a number within a string, for example
+///
 /// @access public
 /// @name str-replace
 /// @group core-strings
