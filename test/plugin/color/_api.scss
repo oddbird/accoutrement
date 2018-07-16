@@ -49,6 +49,13 @@
     );
   }
 
+  @include it('Handles on-the-fly adjustments argument') {
+    @include assert-equal(
+      color(#fcc, ('contrast': #999 #666 #333)),
+      #333
+    );
+  }
+
   @include it('Works with a custom palette') {
     $my-palette: (
       'my-base': #393,
@@ -59,7 +66,7 @@
     $expect: shade($expect, 10%);
 
     @include assert-equal(
-      color('my-adjustment', $my-palette),
+      color('my-adjustment', $palette: $my-palette),
       $expect
     );
   }

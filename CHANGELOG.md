@@ -13,6 +13,10 @@
 - [Plugin: Animate][animate]
   - NEW: `change()`, `time()`, and `ease()` functions
     all accept `$do` arg for on-the-fly adjustments
+- [Plugin: Color][color]
+  - BREAKING: `color()` functions accept `$do` arg
+    for on-the-fly adjustments – 
+    *before* existing `$palette` argument
 - [Plugin: Type][type]
   - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data
