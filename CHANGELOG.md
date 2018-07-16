@@ -4,7 +4,9 @@
 ## 1.0.0 - UNRELEASED
 - [Core][core]:
   - NEW: `trim($string)` utility now available in map-syntax,
-    to trim white-space from the start and end of a string.
+    to trim white-space from the start and end of a string
+  - NEW: `get-token()` accepts `$do` argument,
+    for final on-the-fly adjustments
 - [Plugin: Type][type]
   - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data

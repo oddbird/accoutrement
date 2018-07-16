@@ -33,14 +33,18 @@
 ///   A map of token definitions to reference against
 /// @param {*} $key -
 ///   The original key or value to be parsed for `#alias` tags
+/// @param {map | null} $do [null] -
+///   A final map of function/ratio adjustments to run on the returned value
 /// @return {*} -
 ///   The parsed value of any key in a given map
 @function get-token(
   $map,
-  $key
+  $key,
+  $do: null
 ) {
   $key: map-get($map, $key) or $key;
-  @return _a_get($map, $key);
+  $key: _a_get($map, $key);
+  @return _a_do-each($map, $key, $do);
 }
 
 
@@ -87,11 +91,7 @@
   $value: _a_parse($map, $value);
 
   // make any necessary adjustments…
-  @if ($do) {
-    @each $name, $args in $do {
-      $value: _a_do($map, $name, $value, $args...)
-    }
-  }
+  $value: _a_do-each($map, $value, $do);
 
   @return $value;
 }
@@ -208,6 +208,34 @@
   }
 
   @return $name;
+}
+
+
+// Do Each
+// -------
+/// A wrapper for calling `_a_do()`
+/// over each item in an adjustments list.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   A map of terms to reference tags against
+/// @param {*} $value -
+///   The value to be manipulated
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+@function _a_do-each(
+  $map,
+  $value,
+  $do: null
+) {
+  @if ($do) {
+    @each $name, $args in $do {
+      $value: _a_do($map, $name, $value, $args...);
+    }
+  }
+
+  @return $value;
 }
 
 
