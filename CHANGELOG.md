@@ -3,8 +3,8 @@
 
 ## 1.0.0 - UNRELEASED
 - [Core][core]:
-  - NEW: `get-token()` accepts `$do` argument,
-    for final on-the-fly adjustments
+  - NEW: `get-token()` and `ratio()` funtions accept `$do` argument,
+    for on-the-fly adjustments
   - NEW: `trim($string)` utility now available in map-syntax,
     to trim white-space from the start and end of a string
   - NEW: `str-replace()` utility now forces arguments
