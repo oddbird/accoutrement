@@ -3,10 +3,16 @@
 
 ## 1.0.0 - UNRELEASED
 - [Core][core]:
-  - NEW: `trim($string)` utility now available in map-syntax,
-    to trim white-space from the start and end of a string
   - NEW: `get-token()` accepts `$do` argument,
     for final on-the-fly adjustments
+  - NEW: `trim($string)` utility now available in map-syntax,
+    to trim white-space from the start and end of a string
+  - NEW: `str-replace()` utility now forces arguments
+    to `string`-type when appropriate,
+    allowing e.g. `calc(16px + 1vw) ('str-replace': 1vw 2vw)`
+- [Plugin: Animate][animate]
+  - NEW: `change()`, `time()`, and `ease()` functions
+    all accept `$do` arg for on-the-fly adjustments
 - [Plugin: Type][type]
   - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data

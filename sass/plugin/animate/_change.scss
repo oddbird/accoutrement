@@ -56,13 +56,16 @@ $changes: () !default;
 /// @group animate-change
 ///
 /// @param {string} $name -
-///   The name of a change in your configuration (e.g. `fade-in`).
+///   The name of a change in your configuration (e.g. `fade-in`)
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
 /// @return {length} -
 ///   The change value requested
 @function change(
-  $name
+  $name,
+  $do: null
 ) {
-  @return get-token($changes, $name);
+  @return get-token($changes, $name, $do);
 }
 @include _a_register-function('change');
 

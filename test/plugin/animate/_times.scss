@@ -13,10 +13,17 @@
     );
   }
 
-  @include it('Adjusted times') {
+  @include it('Get adjusted times') {
     @include assert-equal(
       time('plus-name'),
       152ms
+    );
+  }
+
+  @include it('Makes on-the-fly adjustments') {
+    @include assert-equal(
+      time('plus-name', ('times': 2)),
+      304ms
     );
   }
 }

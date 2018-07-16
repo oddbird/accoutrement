@@ -361,8 +361,19 @@
 <ul>
 <li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
 <ul>
+<li>NEW: <code>get-token()</code> accepts <code>$do</code> argument,
+for final on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 <li>NEW: <code>trim($string)</code> utility now available in map-syntax,
-to trim white-space from the start and end of a<span class="widont">&nbsp;</span>string.</li>
+to trim white-space from the start and end of a<span class="widont">&nbsp;</span>string</li>
+<li>NEW: <code>str-replace()</code> utility now forces arguments
+to <code>string</code>-type when appropriate,
+allowing e.g. <code>calc(16px + 1vw) ('str-replace': 1vw 2vw)</code></li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/animate.html">Plugin: Animate</a>
+<ul>
+<li>NEW: <code>change()</code>, <code>time()</code>, and <code>ease()</code> functions
+all accept <code>$do</code> arg for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 </ul>
 </li>
 <li><a href="http://oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>

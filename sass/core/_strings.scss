@@ -45,6 +45,7 @@
 ) {
   $return: $string;
 
+  // Loops lists
   @if (type-of($string) == 'list') {
     $return: _a_list-template($string);
     @each $item in $string {
@@ -54,19 +55,31 @@
     @return $return;
   }
 
+  // Force $old to string
+  $old: if($old and (type-of($old) == 'string'), $old, '#{$old}');
+  $string: if((type-of($string) == 'string'), $string, '#{$string}');
+
+  // get length and index
   $i: str-index($string, $old);
   $n: str-length($old);
 
+  // replace…
   @if $string == $old {
     $return: $new;
   } @else if $i {
+    // Force $new & $string to string
+    $new: if((type-of($new) == 'string') or (not $new), $new, '#{$new}');
+
+    // before and after…
     $a: if($i > 1, str-slice($string, 1, $i - 1), '');
     $z: str-slice($string, $i + $n);
 
+    // recurion if needed…
     @if $replace-all {
       $z: _a_str-replace($z, $old, $new, true);
     }
 
+    // re-compile…
     $return: $a + if($new, $new, '') + $z;
   }
 
