@@ -7,33 +7,35 @@
 // --------------
 @include describe('String Replace [function]') {
 
-  @include it('Replacing a sub-string with another string') {
+  @include it('Replaces a sub-string with another string') {
     @include assert-equal(
       _a_str-replace('hello terrible world!', 'terrible', 'beautiful'),
       'hello beautiful world!'
     );
   }
 
-  @include it('Replacing a full string') {
+  @include it('Replaces a full string, with any type') {
     @include assert-equal(
-      _a_str-replace('hello', 'hello', 'world'),
-      'world'
+      _a_str-replace('hello', 'hello', 300ms),
+      300ms
     );
   }
 
-  @include it('Replacing a sub-string with nothing') {
+  @include it('Replaces a sub-string with nothing (false)') {
     @include assert-equal(
       _a_str-replace('hello world', 'hello ', false),
       'world'
     );
+  }
 
+  @include it('Replaces a sub-string with nothing (null)') {
     @include assert-equal(
       _a_str-replace('hello world', 'hello ', null),
       'world'
     );
   }
 
-  @include it('Replacing all instances of a sub-string') {
+  @include it('Replaces all instances of a sub-string') {
     @include assert-equal(
       _a_str-replace('hello world', 'o', '000', true),
       'hell000 w000rld');
@@ -44,6 +46,14 @@
       _a_str-replace('hello' 'world', 'o', '000', true),
       'hell000' 'w000rld');
   }
+
+  @include it('Forces $old and $new values to string type') {
+    @include assert-equal(
+      _a_str-replace('hello 0.5s world!', 0.5s, 250ms),
+      'hello 250ms world!'
+    );
+  }
+
 }
 
 

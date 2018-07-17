@@ -38,16 +38,24 @@ $times: () !default;
 // ---------------
 /// Access a named time in your `$times` map.
 ///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
 /// @group animate-times
 ///
 /// @param {string} $time -
 ///   The name of a time in your configuration
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
 /// @return {length} -
 ///   The calculated length of time
 @function time(
-  $time
+  $time,
+  $do: null
 ) {
-  @return get-token($times, $time);
+  $time: get-token($times, $time, $do);
+  @return if((type-of($time) == 'string'), unquote($time), $time);
 }
 @include _a_register-function('time');
 

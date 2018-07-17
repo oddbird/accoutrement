@@ -26,6 +26,13 @@
       cubic-bezier(0.455, 0.03, 0.515, 0.955)
     );
   }
+
+  @include it('Applies on-the-fly adjustments') {
+    @include assert-equal(
+      ease('sidebar-in', ('str-replace': 0.03 0.25)),
+      cubic-bezier(0.455, 0.25, 0.515, 0.955)
+    );
+  }
 }
 
 

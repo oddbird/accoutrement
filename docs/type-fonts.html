@@ -529,8 +529,10 @@ long and repetative paths for every<span class="widont">&nbsp;</span>font.</p>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
-        <div class="subsection-details"><p>The default changed from <code>'../fonts/'</code> to <code>''</code> –
-so that no path is added unless explicity<span class="widont">&nbsp;</span>requested.</p>
+        <div class="subsection-details"><ul>
+<li>BREAKING: The default changed from <code>'../fonts/'</code> to <code>''</code> –
+so that no path is added unless explicity<span class="widont">&nbsp;</span>requested.</li>
+</ul>
 </div>
       </section>
     
@@ -778,9 +780,9 @@ it will include <code>source</code> links in the<span class="widont">&nbsp;</spa
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>Supports <code>'bold italic'</code> weight/style syntax
+<li>NEW: Supports <code>'bold italic'</code> weight/style syntax
 in addition to <code>('bold', 'italic')</code></li>
-<li>Full support for the <a href="core.html">core</a> map-reference syntax,
+<li>BREAKING: Full support for the <a href="core.html">core</a> map-reference syntax,
 not just font-name alias<span class="widont">&nbsp;</span>reference</li>
 </ul>
 </div>
@@ -789,18 +791,18 @@ not just font-name alias<span class="widont">&nbsp;</span>reference</li>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>Remove the <code>$font-formats</code> variable,
+<li>BREAKING: Remove the <code>$font-formats</code> variable,
 and replaced it with a <code>formats</code> property
 in each individual font<span class="widont">&nbsp;</span>map</li>
-<li>No longer accepts <code>regular</code> as a font-variant,
+<li>BREAKING: No longer accepts <code>regular</code> as a font-variant,
 use the CSS-friendly <code>normal</code> instead</li>
-<li>Allow explicit configuration maps for each font variant,
+<li>NEW: Allow explicit configuration maps for each font variant,
 to support variant-specific <code>local</code> and <code>svgid</code> options,
 along with the ability to specificy
 explicit urls for each format desired
 The old string value will be treated the same as
 a map with only <code>'path'</code> defined</li>
-<li>Supports <code>unicode-range</code> CSS property,
+<li>NEW: Supports <code>unicode-range</code> CSS property,
 as <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range">described on<span class="widont">&nbsp;</span>MDN</a></li>
 </ul>
 </div>
@@ -2076,8 +2078,10 @@ to calling font-families by any given<span class="widont">&nbsp;</span>alias.</p
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><p>NEW: Use <code>font</code> to access a normalized map of font data
-for any key in your global <code>$fonts</code> map</p>
+        <div class="subsection-details"><ul>
+<li>NEW: Provided to access and normalize a map of font data
+for any key in your global <code>$fonts</code> map</li>
+</ul>
 </div>
       </section>
     
@@ -2469,7 +2473,9 @@ which simply prepends the global <code>$font-path</code> when appropriate.</p>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
-        <div class="subsection-details"><p>Supports Base64 data URI’s, without prepending<span class="widont">&nbsp;</span>font-path.</p>
+        <div class="subsection-details"><ul>
+<li>BUGFIX: Supports Base64 data URI’s, without prepending<span class="widont">&nbsp;</span>font-path</li>
+</ul>
 </div>
       </section>
     
@@ -2867,7 +2873,9 @@ with name and<span class="widont">&nbsp;</span>font-stack.</p>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
-        <div class="subsection-details"><p>Provides the correct name for fonts when an alias is<span class="widont">&nbsp;</span>given.</p>
+        <div class="subsection-details"><ul>
+<li>BUGFIX: Provides the correct name for fonts when an alias is<span class="widont">&nbsp;</span>given</li>
+</ul>
 </div>
       </section>
     
@@ -3544,7 +3552,9 @@ html {
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
-        <div class="subsection-details"><p>No longer accepts the <code>$formats</code> parameter</p>
+        <div class="subsection-details"><ul>
+<li>BREAKING: No longer accepts the <code>$formats</code> parameter</li>
+</ul>
 </div>
       </section>
     
@@ -4010,14 +4020,18 @@ and generate <code>@font-face</code> blocks for each individual font and<span cl
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><p>No longer accepts the <code>$fonts</code> parameter,
-variant data should be normalized in<span class="widont">&nbsp;</span>advance</p>
+        <div class="subsection-details"><ul>
+<li>BREAKING: No longer accepts the <code>$fonts</code> parameter,
+variant data should be normalized in<span class="widont">&nbsp;</span>advance</li>
+</ul>
 </div>
       </section>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
-        <div class="subsection-details"><p>No longer accepts the <code>$formats</code> parameter</p>
+        <div class="subsection-details"><ul>
+<li>BREAKING: No longer accepts the <code>$formats</code> parameter</li>
+</ul>
 </div>
       </section>
     

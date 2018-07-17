@@ -26,6 +26,13 @@
       ratio('octave')
     );
   }
+
+  @include it('Accepts $do adjustments') {
+    @include assert-equal(
+      ratio('new', ('plus': 1)),
+      ratio('octave') + 1
+    );
+  }
 }
 
 

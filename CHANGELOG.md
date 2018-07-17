@@ -3,11 +3,38 @@
 
 ## 1.0.0 - UNRELEASED
 - [Core][core]:
+  - NEW: `get-token()` and `ratio()` funtions accept `$do` argument,
+    for on-the-fly adjustments
   - NEW: `trim($string)` utility now available in map-syntax,
-    to trim white-space from the start and end of a string.
+    to trim white-space from the start and end of a string
+  - NEW: `str-replace()` utility now forces arguments
+    to `string`-type when appropriate,
+    allowing e.g. `calc(16px + 1vw) ('str-replace': 1vw 2vw)`
+- [Plugin: Animate][animate]
+  - NEW: `change()`, `time()`, and `ease()` functions
+    all accept `$do` arg for on-the-fly adjustments
+- [Plugin: Color][color]
+  - BREAKING: `color()` functions accept `$do` arg
+    for on-the-fly adjustments – 
+    *before* existing `$palette` argument
+- [Plugin: Layout][layout]
+  - NEW: `break()` function accept `$do` arg
+    for on-the-fly adjustments
+- [Plugin: Scale][scale]
+  - BREAKING: `size()` function `$units…` vararg
+    has been replaced with `$do` map argument,
+    for flexible on-the-fly adjustments.
+    Non-map `$do` values are converted to
+    `('convert-units': $do)` before processing,
+    to provide a shortcut for unit-conversions.
+    `size('root', 'cm')` will continue to work,
+    but `size('root', 'em', 10px)` should be changed to
+    `size('root', 'em' 10px)` (with all unit args in a single list)
 - [Plugin: Type][type]
   - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data
+  - NEW: `'trim'` string helper strips whitespace
+    from the start and end of a string
   - NEW: Improved font-normalization handles more font-map edge-cases
   - NEW: Font-stacks can be written as comma-delimited strings,
     e.g. `'Helvetica Neue, Helvetica, Arial'` or

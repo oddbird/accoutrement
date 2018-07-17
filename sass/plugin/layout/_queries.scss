@@ -13,8 +13,8 @@
 /// Otherwise, the map should contain only valid CSS length values.
 ///
 /// @since 0.1.0 -
-/// Uses the new [shared](core.html) map syntax,
-/// for internal references and adjustments
+/// - BREAKING: Uses the new [shared](core.html) map syntax,
+///   for internal references and adjustments
 ///
 /// @group layout-queries
 /// @example scss - defining breakpoints
@@ -37,28 +37,32 @@ $breakpoints: () !default;
 /// Return a breakpoint from the `$breakpoint` map,
 /// or the accoutrement-scale `$sizes` map if it's available.
 ///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
 /// @group layout-queries
 ///
 /// @param {string} $break -
 ///   The name or value of a breakpoint
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
 /// @return {length} -
 ///   The retrieved value of a named breakpoint
 @function break(
-  $break
+  $break,
+  $do: null
 ) {
-  // already valid
-  @if (type-of($break) == 'number') and not unitless($break) {
-    @return $break;
-  }
-
-  // get breakpoint from sources
+  // gather sources
   $scale: variable-exists('sizes') and (type-of($sizes) == 'map');
   $source: if($scale, map-merge($sizes, $breakpoints), $breakpoints);
-  $break: get-token($source, $break);
+
+  // get breakpoint
+  $break: get-token($source, $break, $do);
 
   // validate
   @if type-of($break) != 'number' or unitless($break) {
-    @error '"#{$break}" isn’t a valid length or keyword.';
+    @error '"#{$break}" isn’t a valid length or keyword for `break()`';
   }
 
   @return $break;

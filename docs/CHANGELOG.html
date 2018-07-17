@@ -361,14 +361,53 @@
 <ul>
 <li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
 <ul>
+<li>NEW: <code>get-token()</code> and <code>ratio()</code> funtions accept <code>$do</code> argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 <li>NEW: <code>trim($string)</code> utility now available in map-syntax,
-to trim white-space from the start and end of a<span class="widont">&nbsp;</span>string.</li>
+to trim white-space from the start and end of a<span class="widont">&nbsp;</span>string</li>
+<li>NEW: <code>str-replace()</code> utility now forces arguments
+to <code>string</code>-type when appropriate,
+allowing e.g. <code>calc(16px + 1vw) ('str-replace': 1vw 2vw)</code></li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/animate.html">Plugin: Animate</a>
+<ul>
+<li>NEW: <code>change()</code>, <code>time()</code>, and <code>ease()</code> functions
+all accept <code>$do</code> arg for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/color.html">Plugin: Color</a>
+<ul>
+<li>BREAKING: <code>color()</code> functions accept <code>$do</code> arg
+for on-the-fly adjustments – 
+<em>before</em> existing <code>$palette</code> argument</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/layout.html">Plugin: Layout</a>
+<ul>
+<li>NEW: <code>break()</code> function accept <code>$do</code> arg
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/scale.html">Plugin: Scale</a>
+<ul>
+<li>BREAKING: <code>size()</code> function <code>$units…</code> vararg
+has been replaced with <code>$do</code> map argument,
+for flexible on-the-fly adjustments.
+Non-map <code>$do</code> values are converted to
+<code>('convert-units': $do)</code> before processing,
+to provide a shortcut for unit-conversions.
+<code>size('root', 'cm')</code> will continue to work,
+but <code>size('root', 'em', 10px)</code> should be changed to
+<code>size('root', 'em' 10px)</code> (with all unit args in a single<span class="widont">&nbsp;</span>list)</li>
 </ul>
 </li>
 <li><a href="http://oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>
 <ul>
 <li>BREAKING: <code>import-webfonts()</code> mixin no longer accepts any<span class="widont">&nbsp;</span>arguments</li>
 <li>NEW: <code>font()</code> function provides access to parsed<span class="widont">&nbsp;</span>font-data</li>
+<li>NEW: <code>'trim'</code> string helper strips whitespace
+from the start and end of a<span class="widont">&nbsp;</span>string</li>
 <li>NEW: Improved font-normalization handles more font-map<span class="widont">&nbsp;</span>edge-cases</li>
 <li>NEW: Font-stacks can be written as comma-delimited strings,
 e.g. <code>'Helvetica Neue, Helvetica, Arial'</code> or

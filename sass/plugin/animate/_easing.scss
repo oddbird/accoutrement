@@ -82,18 +82,25 @@ $_a_EASING: (
 // ---------------
 /// Access a named easing function in your `$easing` map.
 ///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
 /// @group animate-ease
 ///
 /// @param {string} $name [ease] -
 ///   The name of an easing in your configuration
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
 /// @return {length} -
 ///   The pre-defined easing
 @function ease(
-  $name: ease
+  $name: ease,
+  $do: null
 ) {
   $map: map-merge($_a_EASING, $easing);
-  $name: get-token($map, $name);
-  @return unquote($name);
+  $name: get-token($map, $name, $do);
+  @return if((type-of($name) == 'string'), unquote($name), $name);
 }
 @include _a_register-function('ease');
 

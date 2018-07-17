@@ -7,29 +7,36 @@
 /// Access a named size in your `$sizes` map,
 /// using any comparable units.
 ///
+/// @since 1.0.0 -
+/// - BREAKING: The previous `$units…` vararg
+///   has been replaced with `$do` map argument,
+///   for flexible on-the-fly adjustments.
+///   Non-map `$do` values are converted to
+///   `('convert-units': $do)` before processing,
+///   to provide a shortcut for unit-conversions.
+///   `size('root', 'cm')` will continue to work,
+///   but `size('root', 'em', 10px)` should be changed to
+///   `size('root', 'em' 10px)` (with all unit args in a single list)
+///
 /// @group scale-sizes
 ///
-/// @param {string | length | list} $size -
-///   The name of a size in your configuration (e.g. `line-height`),
-///   or a length to be converted into different units (e.g. `24px`),
-///   or a base-size and adjustments to be made
-///   (e.g. `24px ('minor-third': 2)`),
-///   or a `calc(%s + %s) ('root', 'rhythm')` recipie
-///   for building `calc` values.
-///   For the sake of consistent documentation,
-///   I recommend keeping adjustments in the configuration
-///   whenever possible.
-/// @param {vararg} $unit... -
-///   The desired unit for the output (e.g. `px` or `rem`),
-///   and any other arguments required for the conversion.
+/// @param {string} $size -
+///   The name of any size in your configuration
+/// @param {map | unit-args | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value,
+///   or a unit followed by any necessary arguments
+///   for conversion
 /// @return {length} -
 ///   The calculated length, in the requested units.
 @function size(
   $size,
-  $unit...
+  $do: null
 ) {
-  $size: get-token($sizes, $size);
-  $size: if(length($unit) > 0, convert-units($size, $unit...), $size);
+  @if ($do) and (type-of($do) != 'map') {
+    $do: ('to': $do);
+  }
+
+  $size: get-token($sizes, $size, $do);
   @return $size;
 }
 

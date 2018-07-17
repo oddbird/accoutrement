@@ -15,14 +15,21 @@
   @include it('Can start with a simple map key') {
     @include assert-equal(
       get-token($haystack, 'delay'),
-      0.5
+      0.5s
     );
   }
 
   @include it('Handles recursion with accoutrement-get') {
     @include assert-equal(
       get-token($haystack, 'key'),
-      3
+      3s
+    );
+  }
+
+  @include it('Handles on-th-fly adjustments with $do') {
+    @include assert-equal(
+      get-token($haystack, 'key', ('octave': 2, 'minus': '#delay')),
+      11.5s
     );
   }
 }
@@ -339,6 +346,29 @@
 }
 
 
+// Do Each [function]
+// ------------------
+@include describe('Do Each [function]') {
+  @include it('Handles each adjustment in a $do map') {
+    $map: (
+      'root': 16px,
+      'large': '#root',
+    );
+    $do: (
+      'octave': 2,
+      'plus': '#root' ('divide': 2),
+    );
+
+    @include assert-equal(
+      _a_do-each($map, 16px, $do),
+      72px
+    );
+  }
+}
+
+
+// Do [function]
+// -------------
 @include describe('Do [function]') {
   @include it('Adjusts a number based on ratios') {
     $source: (

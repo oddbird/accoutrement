@@ -33,6 +33,10 @@ $ratios: () !default;
 /// from either the `$_DEFAULT-RATIOS`
 /// or user `$ratios` configurations.
 ///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
 /// @group core-scale
 /// @example scss
 ///   /* Octave: #{ratio('octave')} */
@@ -40,13 +44,16 @@ $ratios: () !default;
 ///
 /// @param {string | number} $ratio -
 ///   The key-name or value of a ratio
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
 /// @return {number} -
 ///   The numeric value of a ratio
 @function ratio(
-  $ratio
+  $ratio,
+  $do: null
 ) {
   $_ratio-options: map-merge($_a_RATIOS, $ratios);
-  @return get-token($_ratio-options, $ratio);
+  @return get-token($_ratio-options, $ratio, $do);
 }
 
 

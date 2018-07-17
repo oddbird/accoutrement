@@ -14,6 +14,10 @@
 /// It has access to the global `$colors` map by default,
 /// but you can also pass in arbitrary color-palette maps as well.
 ///
+/// @since 1.0.0 -
+/// - BREAKING: Accepts `$do` argument
+///   between `$color` and `$palette`
+///
 /// @group color-api
 /// @example scss
 ///   $colors: (
@@ -26,12 +30,13 @@
 ///     color: color('text');
 ///   }
 ///
-/// @parameter {string | list} $color -
+/// @param {string | list} $color -
 ///   The name of a color in your palette,
 ///   or a color description in the
 ///   [map configuration format](config.html).
-///
-/// @parameter {map} $palette [$colors] -
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $palette [$colors] -
 ///   Optional map containing the source color-palette.
 ///   Defaults to the global `$colors` map.
 ///
@@ -40,7 +45,8 @@
 ///   based on your global color palette and adjustments.
 @function color(
   $color,
+  $do: null,
   $palette: $colors
 ) {
-  @return get-token($palette, $color);
+  @return get-token($palette, $color, $do);
 }

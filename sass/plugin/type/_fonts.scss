@@ -13,8 +13,8 @@
 /// Retrieve and normalize font data from the `$fonts` map
 ///
 /// @since 1.0.0 -
-/// NEW: Use `font` to access a normalized map of font data
-/// for any key in your global `$fonts` map
+/// - NEW: Provided to access and normalize a map of font data
+///   for any key in your global `$fonts` map
 ///
 /// @group type-fonts
 /// @param {any} $font -
@@ -36,7 +36,7 @@
 /// which simply prepends the global `$font-path` when appropriate.
 ///
 /// @since type-4.0.0 -
-/// Supports Base64 data URI's, without prepending font-path.
+/// - BUGFIX: Supports Base64 data URI's, without prepending font-path
 ///
 /// @group type-fonts
 /// @example scss
@@ -65,7 +65,7 @@
 /// with name and font-stack.
 ///
 /// @since type-4.0.0 -
-/// Provides the correct name for fonts when an alias is given.
+/// - BUGFIX: Provides the correct name for fonts when an alias is given
 ///
 /// @group type-fonts
 /// @example scss
@@ -125,7 +125,7 @@
 /// (variants without a path will not be imported).
 ///
 /// @since type-4.0.0 -
-/// No longer accepts the `$formats` parameter
+/// - BREAKING: No longer accepts the `$formats` parameter
 ///
 /// @group type-fonts
 /// @example scss
@@ -168,10 +168,10 @@
 /// and generate `@font-face` blocks for each individual font and variant.
 ///
 /// @since 1.0.0 -
-/// No longer accepts the `$fonts` parameter,
-/// variant data should be normalized in advance
+/// - BREAKING: No longer accepts the `$fonts` parameter,
+///   variant data should be normalized in advance
 /// @since type-4.0.0 -
-/// No longer accepts the `$formats` parameter
+/// - BREAKING: No longer accepts the `$formats` parameter
 ///
 /// @group type-fonts
 /// @example scss

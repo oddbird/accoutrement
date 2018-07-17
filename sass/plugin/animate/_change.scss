@@ -53,16 +53,23 @@ $changes: () !default;
 // -----------------
 /// Access a named change in your `$changes` map.
 ///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
 /// @group animate-change
 ///
 /// @param {string} $name -
-///   The name of a change in your configuration (e.g. `fade-in`).
+///   The name of a change in your configuration (e.g. `fade-in`)
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
 /// @return {length} -
 ///   The change value requested
 @function change(
-  $name
+  $name,
+  $do: null
 ) {
-  @return get-token($changes, $name);
+  @return get-token($changes, $name, $do);
 }
 @include _a_register-function('change');
 
