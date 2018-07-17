@@ -123,11 +123,11 @@
 /// Parse a list of font variants into a map of `style` and `weight` settings.
 ///
 /// @since 0.1.0 -
-/// Supports `'bold italic'` weight/style syntax
-/// in addition to `('bold', 'italic')`
+/// - NEW: Supports `'bold italic'` weight/style syntax
+///   in addition to `('bold', 'italic')`
 /// @since type-4.0.0 -
-/// - Name changed from `_parse-font-variant` for clarity.
-/// - Supports both string and number values for font-weight.
+/// - BREAKING: Name changed from `_parse-font-variant` for clarity.
+/// - NEW: Supports both string and number values for font-weight.
 ///
 /// @access private
 /// @group type-normalize

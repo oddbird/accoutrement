@@ -39,8 +39,8 @@ $times: () !default;
 /// Access a named time in your `$times` map.
 ///
 /// @since 1.0.0 -
-/// Accepts `$do` map argument,
-/// for on-the-fly adjustments
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
 ///
 /// @group animate-times
 ///

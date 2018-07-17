@@ -13,8 +13,8 @@
 /// Otherwise, the map should contain only valid CSS length values.
 ///
 /// @since 0.1.0 -
-/// Uses the new [shared](core.html) map syntax,
-/// for internal references and adjustments
+/// - BREAKING: Uses the new [shared](core.html) map syntax,
+///   for internal references and adjustments
 ///
 /// @group layout-queries
 /// @example scss - defining breakpoints

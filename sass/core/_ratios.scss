@@ -34,8 +34,8 @@ $ratios: () !default;
 /// or user `$ratios` configurations.
 ///
 /// @since 1.0.0 -
-/// Accepts `$do` map argument,
-/// for on-the-fly adjustments
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
 ///
 /// @group core-scale
 /// @example scss

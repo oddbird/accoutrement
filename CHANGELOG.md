@@ -30,6 +30,8 @@
 - [Plugin: Type][type]
   - BREAKING: `import-webfonts()` mixin no longer accepts any arguments
   - NEW: `font()` function provides access to parsed font-data
+  - NEW: `'trim'` string helper strips whitespace
+    from the start and end of a string
   - NEW: Improved font-normalization handles more font-map edge-cases
   - NEW: Font-stacks can be written as comma-delimited strings,
     e.g. `'Helvetica Neue, Helvetica, Arial'` or

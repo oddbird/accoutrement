@@ -35,8 +35,8 @@
 /// long and repetative paths for every font.
 ///
 /// @since type-4.0.0 -
-/// The default changed from `'../fonts/'` to `''` --
-/// so that no path is added unless explicity requested.
+/// - BREAKING: The default changed from `'../fonts/'` to `''` --
+///   so that no path is added unless explicity requested.
 ///
 /// @group type-fonts
 /// @example scss
@@ -66,23 +66,23 @@ $font-path: '' !default;
 /// it will include `source` links in the output.
 ///
 /// @since 0.1.0 -
-/// - Supports `'bold italic'` weight/style syntax
+/// - NEW: Supports `'bold italic'` weight/style syntax
 ///   in addition to `('bold', 'italic')`
-/// - Full support for the [core](core.html) map-reference syntax,
+/// - BREAKING: Full support for the [core](core.html) map-reference syntax,
 ///   not just font-name alias reference
 /// @since type-4.0.0 -
-/// - Remove the `$font-formats` variable,
+/// - BREAKING: Remove the `$font-formats` variable,
 ///   and replaced it with a `formats` property
 ///   in each individual font map
-/// - No longer accepts `regular` as a font-variant,
+/// - BREAKING: No longer accepts `regular` as a font-variant,
 ///   use the CSS-friendly `normal` instead
-/// - Allow explicit configuration maps for each font variant,
+/// - NEW: Allow explicit configuration maps for each font variant,
 ///   to support variant-specific `local` and `svgid` options,
 ///   along with the ability to specificy
 ///   explicit urls for each format desired
 ///   The old string value will be treated the same as
 ///   a map with only `'path'` defined
-/// - Supports `unicode-range` CSS property,
+/// - NEW: Supports `unicode-range` CSS property,
 ///   as [described on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)
 ///
 /// @group type-fonts
