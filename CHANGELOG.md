@@ -17,6 +17,9 @@
   - BREAKING: `color()` functions accept `$do` arg
     for on-the-fly adjustments – 
     *before* existing `$palette` argument
+- [Plugin: Layout][layout]
+  - NEW: `break()` function accept `$do` arg
+    for on-the-fly adjustments
 - [Plugin: Scale][scale]
   - BREAKING: `size()` function `$units…` vararg
     has been replaced with `$do` map argument,

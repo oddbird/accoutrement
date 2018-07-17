@@ -47,6 +47,13 @@
       40em
     );
   }
+
+  @include it('Allows on-the-fly adjustments') {
+    @include assert-equal(
+      break('adjust', ('times': 2)),
+      80em
+    );
+  }
 }
 
 
