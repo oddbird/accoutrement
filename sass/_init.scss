@@ -1,11 +1,19 @@
 /// # QuickStart: Init
+/// Light-weight browser normalization
+/// based (loosely) on
+/// [Sanitize][sanitize] and [Normalize][normalize].
+///
+/// [sanitize]: https://github.com/10up/sanitize.css
+/// [normalize]: https://github.com/necolas/normalize.css
 /// @group init
+
 
 @import 'init/root';
 @import 'init/a11y';
 @import 'init/forms';
 @import 'init/media';
 @import 'init/typography';
+
 
 /// ## Import
 ///
@@ -16,5 +24,12 @@
 ///
 /// ```scss
 ///   @import '<path-to>/accoutrement/sass/init';
+/// ```
+///
+/// If you're using [Eyeglass](https://github.com/sass-eyeglass/eyeglass),
+/// you can leave off most of the path:
+///
+/// ```scss
+///   @import 'accoutrement/init';
 /// ```
 /// @group init

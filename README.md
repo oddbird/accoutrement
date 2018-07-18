@@ -47,7 +47,7 @@ yarn add accoutrement [--dev]
 Import what you need:
 
 ```scss
-// core and all plugins
+// core and all plugins (also available with `/index`)
 @import '<path-to>/accoutrement/sass/tools';
 
 // init normalization
@@ -56,6 +56,13 @@ Import what you need:
 // individual plugins (core is required)
 @import '<path-to>/accoutrement/sass/core';
 @import '<path-to>/accoutrement/sass/plugin/<name>';
+```
+
+If you're using [Eyeglass](https://github.com/sass-eyeglass/eyeglass),
+you can import the default "tools" (core + plugins) using only:
+
+```scss
+@import 'accoutrement';
 ```
 
 

@@ -397,7 +397,7 @@ and <a href="http://oddbird.net/herman/">Herman</a>.</em></p>
 yarn add accoutrement [--dev]
 </code></pre>
 <p>Import what you<span class="widont">&nbsp;</span>need:</p>
-<pre><code class="lang-scss">// core and all plugins
+<pre><code class="lang-scss">// core and all plugins (also available with `/index`)
 @import '&lt;path-to&gt;/accoutrement/sass/tools';
 
 // init normalization
@@ -406,6 +406,10 @@ yarn add accoutrement [--dev]
 // individual plugins (core is required)
 @import '&lt;path-to&gt;/accoutrement/sass/core';
 @import '&lt;path-to&gt;/accoutrement/sass/plugin/&lt;name&gt;';
+</code></pre>
+<p>If you’re using <a href="https://github.com/sass-eyeglass/eyeglass">Eyeglass</a>,
+you can import the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
+<pre><code class="lang-scss">@import 'accoutrement';
 </code></pre>
 <h2 id="usage">Usage</h2>
 <p>The accoutrement tools are built around
