@@ -2,8 +2,12 @@
 
 
 ## 1.0.0 - UNRELEASED
+
+### 1.0.0-beta.1 - 07/18/18
+- NEW: Add `_index.scss` to simplify default "tools" import (core + plugins)
+  in Eyeglass: `@import 'accoutrement';`
 - [Core][core]:
-  - NEW: `get-token()` and `ratio()` funtions accept `$do` argument,
+  - NEW: `get-token()` and `ratio()` functions accept `$do` argument,
     for on-the-fly adjustments
   - NEW: `trim($string)` utility now available in map-syntax,
     to trim white-space from the start and end of a string
@@ -21,7 +25,7 @@
   - NEW: `break()` function accept `$do` arg
     for on-the-fly adjustments
 - [Plugin: Scale][scale]
-  - BREAKING: `size()` function `$units…` vararg
+  - BREAKING: `size()` function `$units…` variable argument
     has been replaced with `$do` map argument,
     for flexible on-the-fly adjustments.
     Non-map `$do` values are converted to

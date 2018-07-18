@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">0.1.0</span>
+          <span class="project-version">1.0.0-beta.1</span>
         
       </div>
     </header>
@@ -358,10 +358,13 @@
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
 <h2 id="1-0-0-unreleased">1.0.0 - UNRELEASED</h2>
+<h3 id="1-0-0-beta-1-07-18-18">1.0.0-beta.1 - 07/18/18</h3>
 <ul>
+<li>NEW: Add <code>_index.scss</code> to simplify default “tools” import (core + plugins)
+in Eyeglass: <code>@import 'accoutrement';</code></li>
 <li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
 <ul>
-<li>NEW: <code>get-token()</code> and <code>ratio()</code> funtions accept <code>$do</code> argument,
+<li>NEW: <code>get-token()</code> and <code>ratio()</code> functions accept <code>$do</code> argument,
 for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 <li>NEW: <code>trim($string)</code> utility now available in map-syntax,
 to trim white-space from the start and end of a<span class="widont">&nbsp;</span>string</li>
@@ -391,7 +394,7 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 </li>
 <li><a href="http://oddbird.net/accoutrement/docs/scale.html">Plugin: Scale</a>
 <ul>
-<li>BREAKING: <code>size()</code> function <code>$units…</code> vararg
+<li>BREAKING: <code>size()</code> function <code>$units…</code> variable argument
 has been replaced with <code>$do</code> map argument,
 for flexible on-the-fly adjustments.
 Non-map <code>$do</code> values are converted to
