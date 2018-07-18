@@ -32,6 +32,23 @@
 @import 'core/ratios';
 
 
+/// ## Import
+/// If you already imported `accoutrement/sass/tools` you are ready to go.
+/// If you want to import the core alone:
+///
+/// ```scss
+///   @import '<path-to>/accoutrement/sass/core';
+/// ```
+///
+/// If you're using [Eyeglass](https://github.com/sass-eyeglass/eyeglass),
+/// you can leave off most of the path:
+///
+/// ```scss
+///   @import 'accoutrement/core';
+/// ```
+/// @group core
+
+
 /// ## Internal Reference
 /// The core module provides a generic map-parsing syntax,
 /// for internal reference & adjustments --
