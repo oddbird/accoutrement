@@ -1,4 +1,4 @@
-// Easing Tests
+ // Easing Tests
 // ============
 @include test-module('Animate: Easing') {
 
@@ -33,6 +33,15 @@
       cubic-bezier(0.455, 0.25, 0.515, 0.955)
     );
   }
+
+  @include it('Get easing from local map') {
+    $local: ('name': 'ease-in-out');
+    @include assert-equal(
+      ease('name', $source: $local),
+      ease-in-out
+    );
+  }
+
 }
 
 

@@ -85,6 +85,8 @@ $_a_EASING: (
 /// @since 1.0.0 -
 /// - NEW: Accepts `$do` map argument,
 ///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
 ///
 /// @group animate-ease
 ///
@@ -92,13 +94,17 @@ $_a_EASING: (
 ///   The name of an easing in your configuration
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$easing] -
+///   Optional accoutrement-format map of easings to use as the origin palette
+///   (in additional to the provided defaults)
 /// @return {length} -
 ///   The pre-defined easing
 @function ease(
   $name: ease,
-  $do: null
+  $do: null,
+  $source: $easing
 ) {
-  $map: map-merge($_a_EASING, $easing);
+  $map: map-merge($_a_EASING, $source);
   $name: get-token($map, $name, $do);
   @return if((type-of($name) == 'string'), unquote($name), $name);
 }

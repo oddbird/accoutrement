@@ -36,6 +36,8 @@ $ratios: () !default;
 /// @since 1.0.0 -
 /// - NEW: Accepts `$do` map argument,
 ///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
 ///
 /// @group core-scale
 /// @example scss
@@ -46,15 +48,20 @@ $ratios: () !default;
 ///   The key-name or value of a ratio
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$ratios] -
+///   Optional accoutrement-format map of ratios to use as the origin palette
+///   (in addition to the provided defaults)
 /// @return {number} -
 ///   The numeric value of a ratio
 @function ratio(
   $ratio,
-  $do: null
+  $do: null,
+  $source: $ratios
 ) {
-  $_ratio-options: map-merge($_a_RATIOS, $ratios);
+  $_ratio-options: map-merge($_a_RATIOS, $source);
   @return get-token($_ratio-options, $ratio, $do);
 }
+@include _a_register-function('ratio');
 
 
 // Add Ratios

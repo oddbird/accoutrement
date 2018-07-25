@@ -26,6 +26,14 @@
       304ms
     );
   }
+
+  @include it('Get time from local source') {
+    $local: ('new': 34ms);
+    @include assert-equal(
+      time('new', $source: $local),
+      34ms
+    );
+  }
 }
 
 

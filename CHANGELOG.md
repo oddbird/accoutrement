@@ -2,6 +2,37 @@
 
 
 ## 1.0.0 - UNRELEASED
+- [Core][core]:
+  - NEW: `ratio()` function accepts `$source` argument,
+    for passing in a custom source map
+- [Plugin: Animate][animate]
+  - NEW: `ease()`, `time()`, and `change()` functions all
+    accept `$source` argument,
+    for passing in a custom source map
+- [Plugin: Layout][layout]
+  - NEW: `break()` function accepts `$source` argument,
+    for passing in a custom source map
+  - NEW: `break()` function accepts `$scale` boolean,
+    to turn off access to the scale-plugin `$sizes` map
+  - NEW: `fluid-ratio()` function and mixin both accept `$source` argument,
+    for passing in a custom source map
+- [Plugin: Scale][scale]
+  - BREAKING: `negative()` function and `square()` mixin
+    both accept `$do` argument for on-the-fly adjustments --
+    replacing the old `$units…` variable argument.
+    Non-map `$do` values are converted to
+    `('convert-units': $do)` before processing,
+    to provide a shortcut for unit-conversions.
+    `negative('root', 'cm')` will continue to work,
+    but `negative('root', 'em', 10px)` should be changed to
+    `negative('root', 'em' 10px)` (with all unit args in a single list)
+  - NEW: `size()`/`negative()` functions and `square()` mixin
+    accept `$source` argument, for passing in a custom source map
+- [Plugin: Type][type]
+  - NEW: `font()`/`font-family()` functions and `font-family()` mixin
+    accept `$source` argument,
+    for passing in a custom font-source map
+
 
 ### 1.0.0-beta.1 - 07/18/18
 - NEW: Add `_index.scss` to simplify default "tools" import (core + plugins)
@@ -21,6 +52,8 @@
   - BREAKING: `color()` functions accept `$do` arg
     for on-the-fly adjustments – 
     *before* existing `$palette` argument
+  - BREAKING: `$palette` argument renamed `$source`
+    for consistency across plugins
 - [Plugin: Layout][layout]
   - NEW: `break()` function accept `$do` arg
     for on-the-fly adjustments

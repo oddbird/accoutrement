@@ -33,6 +33,18 @@
       ratio('octave') + 1
     );
   }
+
+  @include it('Accepts custom source') {
+    $custom: (
+      'special': (16 / 9),
+      'custom-source': '#special',
+    );
+
+    @include assert-equal(
+      ratio('custom-source', $source: $custom),
+      (16 / 9)
+    );
+  }
 }
 
 

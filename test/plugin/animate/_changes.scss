@@ -22,6 +22,14 @@
       -ms-transform time('fast')
     );
   }
+
+  @include it('Get change from local source') {
+    $local: ('new': opacity 34ms);
+    @include assert-equal(
+      change('new', $source: $local),
+      opacity 34ms
+    );
+  }
 }
 
 

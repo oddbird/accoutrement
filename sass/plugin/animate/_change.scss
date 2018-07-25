@@ -56,6 +56,8 @@ $changes: () !default;
 /// @since 1.0.0 -
 /// - NEW: Accepts `$do` map argument,
 ///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
 ///
 /// @group animate-change
 ///
@@ -63,13 +65,16 @@ $changes: () !default;
 ///   The name of a change in your configuration (e.g. `fade-in`)
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$changes] -
+///   Optional accoutrement-format map of changes to use as the origin palette
 /// @return {length} -
 ///   The change value requested
 @function change(
   $name,
-  $do: null
+  $do: null,
+  $source: $changes
 ) {
-  @return get-token($changes, $name, $do);
+  @return get-token($source, $name, $do);
 }
 @include _a_register-function('change');
 

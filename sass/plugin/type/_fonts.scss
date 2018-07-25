@@ -19,12 +19,15 @@
 /// @group type-fonts
 /// @param {any} $font -
 ///   A key for accessing the desired font in `$fonts`
+/// @param {map} $source [$fonts] -
+///   Optional accoutrement-format map of fonts to use as the origin palette
 /// @return {map} -
 ///   A parsed and normalized map of font-data
 @function font(
-  $font
+  $font,
+  $source: $fonts
 ) {
-  $data: get-token($fonts, $font);
+  $data: get-token($source, $font);
   $normal: _a_normalize-font($data, $font);
   @return $normal;
 }
@@ -64,6 +67,9 @@
 /// Access a font-family from your `$fonts` map,
 /// with name and font-stack.
 ///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
 /// @since type-4.0.0 -
 /// - BUGFIX: Provides the correct name for fonts when an alias is given
 ///
@@ -82,13 +88,16 @@
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
+/// @param {map} $source [$fonts] -
+///   Optional accoutrement-format map of fonts to use as the origin palette
 /// @return {String} -
 ///   The full font-stack for the given font,
 ///   ready for output with the `font-family` property.
 @function font-family(
-  $key
+  $key,
+  $source: $fonts
 ) {
-  $font: font($key);
+  $font: font($key, $source);
   @return map-get($font, 'stack');
 }
 
@@ -96,6 +105,10 @@
 // Font Family [mixin]
 // -------------------
 /// Output a font-stack to font-family based on your `$fonts` configuration.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
 ///
 /// @group type-fonts
 /// @example scss
@@ -112,10 +125,13 @@
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
+/// @param {map} $source [$fonts] -
+///   Optional accoutrement-format map of fonts to use as the origin palette
 @mixin font-family(
-  $key
+  $key,
+  $source: $fonts
 ) {
-  font-family: font-family($key);
+  font-family: font-family($key, $source);
 }
 
 

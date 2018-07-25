@@ -15,8 +15,9 @@
 /// but you can also pass in arbitrary color-palette maps as well.
 ///
 /// @since 1.0.0 -
+/// - BEAKING: Renamed `$palette` arg to `$source`
 /// - BREAKING: Accepts `$do` argument
-///   between `$color` and `$palette`
+///   between `$color` and `$source`
 ///
 /// @group color-api
 /// @example scss
@@ -36,7 +37,7 @@
 ///   [map configuration format](config.html).
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
-/// @param {map} $palette [$colors] -
+/// @param {map} $source [$colors] -
 ///   Optional map containing the source color-palette.
 ///   Defaults to the global `$colors` map.
 ///
@@ -46,7 +47,7 @@
 @function color(
   $color,
   $do: null,
-  $palette: $colors
+  $source: $colors
 ) {
-  @return get-token($palette, $color, $do);
+  @return get-token($source, $color, $do);
 }

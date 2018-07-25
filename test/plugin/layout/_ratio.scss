@@ -14,6 +14,14 @@
       $expect
     );
   }
+
+  @include it('Gets ratio from local source') {
+    $local: ('new': (2 / 1));
+    @include assert-equal(
+      fluid-ratio('new', $source: $local),
+      50%
+    );
+  }
 }
 
 
