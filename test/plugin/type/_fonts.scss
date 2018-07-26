@@ -38,6 +38,18 @@
       $inspect: true
     );
   }
+
+  @include it('Gets font from local source') {
+    $local: ('new': ('stack': 'hello' 'world'));
+    @include assert-equal(
+      font('new', $source: $local),
+      (
+        'stack': (new, hello, world),
+        'name': 'new',
+      ),
+      $inspect: true
+    );
+  }
 }
 
 
@@ -76,6 +88,14 @@
       ('TestFont', 'Georgia', 'serif')
     );
   }
+
+  @include it('Get font-family from local source') {
+    $local: ('new': ('stack': 'hello' 'world'));
+    @include assert-equal(
+      font-family('new', $local),
+      (new, hello, world)
+     );
+  }
 }
 
 
@@ -90,6 +110,19 @@
 
       @include expect {
         font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+    }
+  }
+
+  @include it('Get font-family from local source') {
+    $local: ('new': ('stack': 'hello' 'world'));
+    @include assert {
+      @include output {
+        @include font-family('new', $local);
+      }
+
+      @include expect {
+        font-family: new, hello, world;
       }
     }
   }

@@ -44,6 +44,16 @@
       $expect
     );
   }
+
+  @include it('Adds font name from implicit local source') {
+    $local: ('new': ('stack': 'hello' 'world'));
+    $font: get-token($local, 'new');
+    $normal: _a_normalize-font($font, 'new', $local);
+    @include assert-equal(
+      map-get($normal, 'name'),
+      'new'
+     );
+  }
 }
 
 
@@ -76,6 +86,14 @@
     @include assert-equal(
       _a_normalize-font-name(get-token($fonts, $key), $key),
       'normal-stack'
+     );
+  }
+
+  @include it('Get implicit font name by local source') {
+    $local: ('new': ('stack': 'hello' 'world'));
+    @include assert-equal(
+      _a_normalize-font-name(get-token($local, 'new'), 'new', $local),
+      'new'
      );
   }
 }

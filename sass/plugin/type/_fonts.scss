@@ -20,7 +20,8 @@
 /// @param {any} $font -
 ///   A key for accessing the desired font in `$fonts`
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts to use as the origin palette
+///   Optional accoutrement-format map of fonts
+///   to use as the origin palette
 /// @return {map} -
 ///   A parsed and normalized map of font-data
 @function font(
@@ -28,7 +29,7 @@
   $source: $fonts
 ) {
   $data: get-token($source, $font);
-  $normal: _a_normalize-font($data, $font);
+  $normal: _a_normalize-font($data, $font, $source);
   @return $normal;
 }
 
@@ -89,7 +90,8 @@
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts to use as the origin palette
+///   Optional accoutrement-format map of fonts
+///   to use as the origin palette
 /// @return {String} -
 ///   The full font-stack for the given font,
 ///   ready for output with the `font-family` property.
@@ -126,7 +128,8 @@
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts to use as the origin palette
+///   Optional accoutrement-format map of fonts
+///   to use as the origin palette
 @mixin font-family(
   $key,
   $source: $fonts

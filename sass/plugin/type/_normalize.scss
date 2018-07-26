@@ -13,14 +13,18 @@
 /// @param {string} $key [null] -
 ///   The map key used to access the font,
 ///   if available…
+/// @param {map} $source [$fonts] -
+///   Optional accoutrement-format map of fonts
+///   to use as the origin palette
 /// @return {map} -
 ///   A map of font data in consistent longhand format
 @function _a_normalize-font(
   $font,
-  $key: null
+  $key: null,
+  $source: $fonts
 ) {
   // Normalize name…
-  $name: _a_normalize-font-name($font, $key);
+  $name: _a_normalize-font-name($font, $key, $source);
   $font: map-merge($font, ('name': $name));
 
   // Normalize the font stack…
@@ -58,23 +62,27 @@
 /// @param {string} $key [null] -
 ///   The map key used to access the font,
 ///   if available…
+/// @param {map} $source [$fonts] -
+///   Optional accoutrement-format map of fonts
+///   to use as the origin palette
 /// @return {string} -
 ///   The font-name associated with the given font map
 @function _a_normalize-font-name(
   $font,
-  $key: null
+  $key: null,
+  $source: $fonts
 ) {
   $name: map-get($font, 'name') or null;
 
   // Try reverse lookup
   @if (not $name) {
-    $index: index(map-values($fonts), $font);
+    $index: index(map-values($source), $font);
     @if ($index) {
-      $name: nth(map-keys($fonts), $index);
+      $name: nth(map-keys($source), $index);
     }
   }
 
-  @return $name or _a_origin($fonts, $key);
+  @return $name or _a_origin($source, $key);
 }
 
 

@@ -775,37 +775,6 @@ This should match the size applied to your html<span class="widont">&nbsp;</span
       <span class="item-type">@function</span>
       
         <a href="
-  scale-sizes.html#function--size" class="item-name">size()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
   scale-units.html#function--convert-units" class="item-name">convert-units()</a>
       
       
@@ -1323,6 +1292,8 @@ to provide a shortcut for unit-conversions.
 <code>size('root', 'cm')</code> will continue to work,
 but <code>size('root', 'em', 10px)</code> should be changed to
 <code>size('root', 'em' 10px)</code> (with all unit args in a single<span class="widont">&nbsp;</span>list)</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
 </ul>
 </div>
       </section>
@@ -1410,6 +1381,33 @@ but <code>size('root', 'em', 10px)</code> should be changed to
         <p>A map of function/ratio adjustments to run on the returned value,
 or a unit followed by any necessary arguments
 for<span class="widont">&nbsp;</span>conversion</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of sizes to use as the origin<span class="widont">&nbsp;</span>palette</p>
 
       </div>
     
@@ -1515,41 +1513,6 @@ for<span class="widont">&nbsp;</span>conversion</p>
 
         
       
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  scale-sizes.html#variable--sizes" class="item-name">$sizes</a>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
     
   </div>
 
@@ -1596,10 +1559,6 @@ for<span class="widont">&nbsp;</span>conversion</p>
     
   </div>
 
-
-        
-      
-        
 
         
       
@@ -1754,6 +1713,26 @@ in comparable<span class="widont">&nbsp;</span>units.</p>
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: The previous <code>$units…</code> vararg
+has been replaced with <code>$do</code> map argument,
+for flexible on-the-fly adjustments.
+Non-map <code>$do</code> values are converted to
+<code>('convert-units': $do)</code> before processing,
+to provide a shortcut for unit-conversions.
+<code>size('root', 'cm')</code> will continue to work,
+but <code>size('root', 'em', 10px)</code> should be changed to
+<code>size('root', 'em' 10px)</code> (with all unit args in a single<span class="widont">&nbsp;</span>list)</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
+</ul>
+</div>
+      </section>
+    
+  
 
       
   
@@ -1829,18 +1808,46 @@ whenever<span class="widont">&nbsp;</span>possible.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$unit...:</span>
+        <span class="item-name">$do:</span>
       
-      
-      <span class="value-type">(vararg)</span>
+      <span class="item-value">null</span>
+      <span class="value-type">(map | unit-args |<span class="widont">&nbsp;</span>null)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The desired unit for the output (e.g. <code>px</code> or <code>rem</code>),
-and any other arguments required for the<span class="widont">&nbsp;</span>conversion.</p>
+        <p>A map of function/ratio adjustments to run on the returned value,
+or a unit followed by any necessary arguments
+for<span class="widont">&nbsp;</span>conversion</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of sizes to use as the origin<span class="widont">&nbsp;</span>palette</p>
 
       </div>
     
@@ -1945,12 +1952,6 @@ and any other arguments required for the<span class="widont">&nbsp;</span>conver
 
         
       
-        
-        
-        
-
-        
-      
     
   </div>
 
@@ -2029,6 +2030,26 @@ with the given size &amp; unit<span class="widont">&nbsp;</span>value.</p>
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: The previous <code>$units…</code> vararg
+has been replaced with <code>$do</code> map argument,
+for flexible on-the-fly adjustments.
+Non-map <code>$do</code> values are converted to
+<code>('convert-units': $do)</code> before processing,
+to provide a shortcut for unit-conversions.
+<code>size('root', 'cm')</code> will continue to work,
+but <code>size('root', 'em', 10px)</code> should be changed to
+<code>size('root', 'em' 10px)</code> (with all unit args in a single<span class="widont">&nbsp;</span>list)</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
+</ul>
+</div>
+      </section>
+    
+  
 
       
   
@@ -2104,18 +2125,46 @@ whenever<span class="widont">&nbsp;</span>possible.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$unit...:</span>
+        <span class="item-name">$do:</span>
       
-      
-      <span class="value-type">(vararg)</span>
+      <span class="item-value">null</span>
+      <span class="value-type">(map | unit-args |<span class="widont">&nbsp;</span>null)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The desired unit for the output (e.g. <code>px</code> or <code>rem</code>),
-and any other arguments required for the<span class="widont">&nbsp;</span>conversion.</p>
+        <p>A map of function/ratio adjustments to run on the returned value,
+or a unit followed by any necessary arguments
+for<span class="widont">&nbsp;</span>conversion</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of sizes to use as the origin<span class="widont">&nbsp;</span>palette</p>
 
       </div>
     

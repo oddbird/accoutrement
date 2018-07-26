@@ -21,7 +21,7 @@
 ///
 /// @param {float | string} $ratio ['widescreen'] -
 ///   The ratio of width over height, or a ratio keyword.
-/// @param {perentage} $width [100%] -
+/// @param {percentage} $width [100%] -
 ///   The established fluid width of the element.
 /// @param {relative | absolute | fixed | null} $position [relative] -
 ///   Establish a positioning context, so children can be stretched to fit.
@@ -32,10 +32,10 @@
   $ratio: 'widescreen',
   $width: 100%,
   $position: relative,
-  $ratios: $ratios
+  $source: $ratios
 ) {
   height: 0;
-  padding-top: fluid-ratio($ratio, $width, $ratios);
+  padding-top: fluid-ratio($ratio, $width, $source);
   position: $position;
   width: $width;
 }
@@ -62,7 +62,7 @@
 ///
 /// @param {float | string} $ratio ['widescreen'] -
 ///   The ratio of width over height, or a ratio keyword.
-/// @param {perentage} $width [100%] -
+/// @param {percentage} $width [100%] -
 ///   The established fluid width of the element.
 /// @param {map} $source [$ratios] -
 ///   Optional accoutrement-format map of ratios to use as the origin palette

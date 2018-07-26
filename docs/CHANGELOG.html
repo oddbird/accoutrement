@@ -358,6 +358,53 @@
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
 <h2 id="1-0-0-unreleased">1.0.0 - UNRELEASED</h2>
+<ul>
+<li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
+<ul>
+<li>NEW: <code>ratio()</code> function accepts <code>$source</code> argument,
+for passing in a custom source<span class="widont">&nbsp;</span>map</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/animate.html">Plugin: Animate</a>
+<ul>
+<li>NEW: <code>ease()</code>, <code>time()</code>, and <code>change()</code> functions all
+accept <code>$source</code> argument,
+for passing in a custom source<span class="widont">&nbsp;</span>map</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/layout.html">Plugin: Layout</a>
+<ul>
+<li>NEW: <code>break()</code> function accepts <code>$source</code> argument,
+for passing in a custom source<span class="widont">&nbsp;</span>map</li>
+<li>NEW: <code>break()</code> function accepts <code>$scale</code> boolean,
+to turn off access to the scale-plugin <code>$sizes</code> map</li>
+<li>NEW: <code>fluid-ratio()</code> function and mixin both accept <code>$source</code> argument,
+for passing in a custom source<span class="widont">&nbsp;</span>map</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/scale.html">Plugin: Scale</a>
+<ul>
+<li>BREAKING: <code>negative()</code> function and <code>square()</code> mixin
+both accept <code>$do</code> argument for on-the-fly adjustments –
+replacing the old <code>$units…</code> variable argument.
+Non-map <code>$do</code> values are converted to
+<code>('convert-units': $do)</code> before processing,
+to provide a shortcut for unit-conversions.
+<code>negative('root', 'cm')</code> will continue to work,
+but <code>negative('root', 'em', 10px)</code> should be changed to
+<code>negative('root', 'em' 10px)</code> (with all unit args in a single<span class="widont">&nbsp;</span>list)</li>
+<li>NEW: <code>size()</code>/<code>negative()</code> functions and <code>square()</code> mixin
+accept <code>$source</code> argument, for passing in a custom source<span class="widont">&nbsp;</span>map</li>
+</ul>
+</li>
+<li><a href="http://oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>
+<ul>
+<li>NEW: <code>font()</code>/<code>font-family()</code> functions and <code>font-family()</code> mixin
+accept <code>$source</code> argument,
+for passing in a custom font-source<span class="widont">&nbsp;</span>map</li>
+</ul>
+</li>
+</ul>
 <h3 id="1-0-0-beta-1-07-18-18">1.0.0-beta.1 - 07/18/18</h3>
 <ul>
 <li>NEW: Add <code>_index.scss</code> to simplify default “tools” import (core + plugins)
@@ -384,6 +431,8 @@ all accept <code>$do</code> arg for on-the-fly<span class="widont">&nbsp;</span>
 <li>BREAKING: <code>color()</code> functions accept <code>$do</code> arg
 for on-the-fly adjustments – 
 <em>before</em> existing <code>$palette</code> argument</li>
+<li>BREAKING: <code>$palette</code> argument renamed <code>$source</code>
+for consistency across<span class="widont">&nbsp;</span>plugins</li>
 </ul>
 </li>
 <li><a href="http://oddbird.net/accoutrement/docs/layout.html">Plugin: Layout</a>

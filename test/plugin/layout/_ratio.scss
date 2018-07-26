@@ -44,4 +44,20 @@
   }
 }
 
+  @include it('Gets ratio from local source') {
+    $local: ('new': (2 / 1));
+    @include assert{
+      @include output {
+        @include fluid-ratio('new', 50%, $source: $local);
+      }
+
+      @include expect {
+        height: 0;
+        padding-top: fluid-ratio('new', 50%, $local);
+        position: relative;
+        width: 50%;
+      }
+    }
+  }
+
 } // end module

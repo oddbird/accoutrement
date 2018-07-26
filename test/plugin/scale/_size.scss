@@ -116,6 +116,14 @@
       calc(60px + 2vw / 3)
     );
   }
+
+  @include it('Gets size from local source') {
+    $local: ('new': 35em);
+    @include assert-equal(
+      size('new', $source: $local),
+      35em
+    );
+  }
 }
 
 
@@ -142,6 +150,14 @@
       calc(-1 * (60px + 2vw / 3))
     );
   }
+
+  @include it('Gets negative from local source') {
+    $local: ('new': 35em);
+    @include assert-equal(
+      negative('new', $source: $local),
+      -35em
+    );
+  }
 }
 
 
@@ -157,6 +173,20 @@
       @include expect {
         height: 4rem;
         width: 4rem;
+      }
+    }
+  }
+
+  @include it('Gets square from local source') {
+    $local: ('new': 35em);
+    @include assert {
+      @include output {
+        @include square('new', $source: $local);
+      }
+
+      @include expect {
+        height: 35em;
+        width: 35em;
       }
     }
   }
