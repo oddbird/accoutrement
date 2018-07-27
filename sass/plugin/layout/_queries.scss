@@ -60,6 +60,7 @@ $breakpoints: () !default;
 ///   making both `$breakpoints` and `$sizes` keys available
 /// @return {length} -
 ///   The retrieved value of a named breakpoint
+/// @throws `$break` is not a valid length or keyword
 @function break(
   $break,
   $do: null,

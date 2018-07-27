@@ -120,6 +120,7 @@
 ///   New strings, to replace the `%s` format strings
 /// @return {string} -
 ///   Original string, with `%s` format strings replaced
+/// @throws Too many interpolation values given for the string
 @function _a_interpolate(
   $string,
   $values...

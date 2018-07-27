@@ -600,7 +600,7 @@ Some units (<code>ch</code>, <code>vw</code>, <code>vh</code>, <code>vmin</code>
       
         <span class="item-name">$from-context:</span>
       
-      <span class="item-value">&#39;root&#39; setting or 16px</span>
+      <span class="item-value">false</span>
       <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
       
     </h4>
@@ -611,7 +611,8 @@ Some units (<code>ch</code>, <code>vw</code>, <code>vh</code>, <code>vmin</code>
         <p>When converting from relative units,
 the absolute length (in px) to which $length refers -
 e.g. for <code>$lengths</code> in em units, would normally be the
-font-size of the current<span class="widont">&nbsp;</span>element.</p>
+font-size of the current element.
+<code>false</code> and <code>null</code> will resolve to your ‘root’ setting or<span class="widont">&nbsp;</span>16px</p>
 
       </div>
     
@@ -676,29 +677,7 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
     
       
       <div class="param-details text-block">
-        <p>Context paremeters must resolve to a value in pixel<span class="widont">&nbsp;</span>units.</p>
-
-      </div>
-    
-  </div>
-
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Failed to convert #{$length} into<span class="widont">&nbsp;</span>#{$to-units}.</p>
+        <p>Context paremeters must resolve to a value in pixel<span class="widont">&nbsp;</span>units</p>
 
       </div>
     
@@ -766,18 +745,6 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
     
   </div>
 
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
 
         
       
@@ -884,6 +851,12 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
         
 
         
+      
+        
+        
+        
+
+        
           
           
   
@@ -898,9 +871,9 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
       
-      
-        <span class="item-name">$_BROWSER-DEFAULT-FONT-SIZE</span>
+        <span class="item-name">_a_error()</span>
       
       
       
@@ -910,6 +883,12 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
     
   </div>
 
+
+        
+      
+        
+        
+        
 
         
       
@@ -940,6 +919,40 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
       
       <span class="value-type">(map)</span>
       
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$_BROWSER-DEFAULT-FONT-SIZE</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
     </h4>
 
     

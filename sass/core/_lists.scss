@@ -30,6 +30,8 @@
 ///   The 1-indexed item to remove from the list
 /// @return {list} -
 ///   The original list, with item removed
+/// @throws `$index` must be a non-zero integer
+/// @throws `$index` is too large for the list length
 @function _a_remove-nth(
   $list,
   $index

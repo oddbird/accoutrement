@@ -48,6 +48,7 @@ $WCAG-CONTRAST: (
 ///   otherwise `white` and `black` are the default options.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
+/// @throws Provide at least two contrasting `$options…` for comparison
 @function contrast(
   $color,
   $options...

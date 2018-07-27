@@ -147,8 +147,7 @@ $_a_FUNCTIONS: () !default;
 ///   and internal registration
 /// @return {map} -
 ///   Updated registration map
-/// @throw -
-///   '#{$function}() is not available to register with Accoutrement'
+/// @throws `$function` is not available to register with Accoutrement
 @function _a_registration(
   $function,
   $names: (),

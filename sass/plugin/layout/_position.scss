@@ -37,6 +37,7 @@
 ///   defaults to `absolute`.
 /// @output -
 ///   `top`, `right`, `bottom`, `left`, and `position` properties
+/// @throws Unknown positioning value
 @mixin position(
   $position: null
 ) {

@@ -219,6 +219,7 @@ $fonts: () !default;
 ///   Map of font-data to be added at the given key.
 /// @output An updated global `$fonts` variable,
 ///   with new maps merged in.
+/// @throws Font key already exists. Rename or `$force` to continue
 @mixin add-font(
   $key,
   $map,

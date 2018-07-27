@@ -76,7 +76,8 @@ $_a_error-output-override: false !default;
 ///   The origin of this value, for error reporting
 /// @return {string} $arg ['$value'] -
 ///   The origin arg-name, for error reporting
-/// @throws When type-of `$value` is not listed as valid
+/// @throws `$valid` is not a string or list
+/// @throws Type-of `$value` is not considered valid
 @function _a_type-check(
   $value,
   $valid,

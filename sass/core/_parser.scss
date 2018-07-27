@@ -260,6 +260,7 @@
 ///   Any arguments required for a function call
 /// @return {*} -
 ///   Manipulated value
+/// @throws No ratio or function found with the given name
 @function _a_do(
   $source,
   $name,

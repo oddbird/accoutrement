@@ -95,6 +95,7 @@
 ///   For converting *to* relative units,
 ///   the absolute length in px to which the output value will refer.
 ///   Defaults to the same as `$from-context`, since it is rarely needed.
+/// @throws Context paremeters must resolve to a value in pixel units
 @function convert-units(
   $length,
   $to-unit,
