@@ -2,6 +2,8 @@
 
 
 ## 1.0.0 - UNRELEASED
+
+### 1.0.0-beta.2 - 07/27/18
 - [Core][core]:
   - NEW: `ratio()` function accepts `$source` argument,
     for passing in a custom source map
@@ -36,7 +38,6 @@
     and `font-family()`/`font-face()` mixins
     accept `$source` argument,
     for passing in a custom font-source map
-
 
 ### 1.0.0-beta.1 - 07/18/18
 - NEW: Add `_index.scss` to simplify default "tools" import (core + plugins)
