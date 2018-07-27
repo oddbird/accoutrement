@@ -85,11 +85,12 @@
 /// @param {string} $to-unit -
 ///   The desired units to convert to.
 ///   Some units (`ch`, `vw`, `vh`, `vmin`, `vmax`) cannot be converted.
-/// @param {length | string} $from-context ['root' setting or 16px] -
+/// @param {length | string} $from-context [false] -
 ///   When converting from relative units,
 ///   the absolute length (in px) to which $length refers -
 ///   e.g. for `$lengths` in em units, would normally be the
 ///   font-size of the current element.
+///   `false` and `null` will resolve to your 'root' setting or 16px
 /// @param {length | string} $to-context [$from-context] -
 ///   For converting *to* relative units,
 ///   the absolute length in px to which the output value will refer.
@@ -97,59 +98,71 @@
 @function convert-units(
   $length,
   $to-unit,
-  $from-context: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE,
+  $from-context: false,
   $to-context: $from-context
 ) {
-  $_convertable: ('in', 'mm', 'cm', 'pt', 'pc', 'px', 'em', 'rem', '%', 'ex');
-
+  $_convertable: (
+    'in', 'mm', 'cm',
+    'pt', 'pc',
+    'px',
+    'em', 'rem', 'browser-ems',
+    '%', 'ex',
+  );
   $length: size($length);
-  $from-context: size($from-context);
-  $to-context: size($to-context);
-
   $from-unit: unit($length);
-
-  // Special conversion for browser-default ems (needed in media-queries)
-  @if ($to-unit == 'browser-ems') {
-    $size: convert-units($length, 'px', $from-context);
-    @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
-  }
 
   // No conversion needed
   @if ($from-unit == $to-unit) {
     @return $length;
   }
 
+  // No units
   @if ($from-unit == '') {
     @return _a_get-number($to-unit, 'allow-relative') + $length;
   } @else if ($to-unit == '') {
     @return $length / ($length * 0 + 1);
   }
 
+  // Easily comparable units
+  $to-zero: _a_get-number($to-unit);
+
+  @if $to-zero and comparable($length, $to-zero)  {
+    @return $to-zero + $length;
+  }
+
   // Warn and escape when units are not convertable
   @each $units in ($from-unit, $to-unit) {
     @if not index($_convertable, $units) {
-      @warn '`#{$units}` units can not be reliably converted; Returning original value.';
+      $warning: '`#{$units}` units can not be reliably converted,';
+      $warning: '#{$warning} returning original value';
+      @warn $warning;
       @return $length;
     }
   }
 
-  // Optomize comparable (non-relative) units
-  $absolute-output: _a_get-number($to-unit);
-
-  @if $absolute-output and comparable($length, $absolute-output)  {
-    @return $absolute-output + $length;
-  }
-
-  // Establish relative context
+  // Establish root size
   $root-size: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE;
   $root-size: size($root-size);
   $root-size: _a_get-px($root-size);
-  $from-context: _a_get-px($from-context);
-  $to-context: _a_get-px($to-context);
+
+  // Establish relative context
+  $from-context: size($from-context);
+  $to-context: size($to-context);
+  $from-context: if($from-context, _a_get-px($from-context), $root-size);
+  $to-context: if($to-context, _a_get-px($to-context), $root-size);
 
   // Context values must be in px
   @if (not $from-context) or (not $to-context) {
-    @error 'Context paremeters must resolve to a value in pixel units.';
+    @return _a_error(
+      'Context paremeters must resolve to a value in pixel units',
+      'convert-units'
+    );
+  }
+
+  // Special conversion for browser-default ems (needed in media-queries)
+  @if ($to-unit == 'browser-ems') {
+    $size: convert-units($length, 'px', $from-context);
+    @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
   }
 
   // Convert relative length to pixels
@@ -168,8 +181,8 @@
   }
 
   // Convert length in pixels to the output unit
-  @if $absolute-output {
-    @return $absolute-output + $px-length;
+  @if $to-zero {
+    @return $to-zero + $px-length;
   } @else if $to-unit == 'em' {
     @return $px-length * 1em / $to-context;
   } @else if $to-unit == 'rem' {
@@ -180,6 +193,8 @@
     @return $px-length * 2ex / $to-context;
   }
 
-  @error 'Failed to convert #{$length} into #{$to-units}.';
+  $warn: 'Failed to convert `#{$length}` into `#{$to-units}` units';
+  @warn '#{$warn} returning original value';
+  @return $length;
 }
 @include _a_register-function('convert-units', 'convert', 'units', 'to');

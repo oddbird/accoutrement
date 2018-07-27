@@ -12,6 +12,9 @@
 /// Use `null` for a value to keep it from displaying,
 /// and `auto` or `initial` to reset a given value.
 ///
+/// @since 1.0.0 -
+/// Support `sticky` positioning
+///
 /// @group layout-position
 /// @example scss - stretch over the full viewport
 ///   .overlay {
@@ -37,17 +40,22 @@
 @mixin position(
   $position: null
 ) {
-  $sides: ();
+  $types: 'static' 'relative' 'absolute' 'fixed' 'sticky';
+  $values: ('auto', null);
   $type: 'absolute';
+  $sides: ();
 
   // Syntax parsing
   @each $item in $position {
-    @if (type-of($item) == 'number') or index('auto' null, $item) {
+    @if (type-of($item) == 'number') or index($values, $item) {
       $sides: append($sides, $item);
-    } @else if index('absolute' 'fixed' 'relative' 'static', $item) {
+    } @else if index($types, $item) {
       $type: $item;
     } @else {
-      @error 'Unknown positioning value: #{$item}';
+      @include _a_error(
+        'Unknown positioning value: `#{$item}`',
+        'position'
+      );
     }
   }
 

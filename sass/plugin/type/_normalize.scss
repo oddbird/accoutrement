@@ -215,7 +215,10 @@
         $implicit: map-merge($implicit, ($format: $url));
       }
     } @else {
-      @return 'format-error';
+      @return _a_error(
+        'Font-path interpolation of `#{$path}` requires a list of formats',
+        'normalize-font'
+      );
     }
   }
 

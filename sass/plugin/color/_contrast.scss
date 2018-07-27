@@ -57,7 +57,10 @@ $WCAG-CONTRAST: (
     $options: append($options, map-get($colors, 'contrast-light') or white);
     $options: append($options, map-get($colors, 'contrast-dark') or black);
   } @else if length($options) == 1 {
-    @error 'Provide at least two contrasting color options for `contrast()`';
+    @return _a_error(
+      'Provide at least two contrasting color options for `$options`',
+      'contrast'
+    );
   }
 
   // Get the colors and their contrasts
@@ -202,11 +205,8 @@ $WCAG-CONTRAST: (
   $color
 ) {
   $color: color($color);
+  $color: _a_type-check($color, 'color', 'luminance', '$color');
   $luminance: 0;
-
-  @if (type-of($color) != 'color') {
-    @error '`#{$color}` is not a color.';
-  }
 
   @each $component in 'red' 'green' 'blue' {
     $function: $component;

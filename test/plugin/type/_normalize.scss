@@ -178,7 +178,7 @@
         $data: 'my/path',
         $formats: ()
       ),
-      'format-error'
+      'ERROR [normalize-font] Font-path interpolation of `my/path` requires a list of formats'
     );
   }
 

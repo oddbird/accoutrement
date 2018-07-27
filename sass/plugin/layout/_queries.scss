@@ -74,8 +74,11 @@ $breakpoints: () !default;
   $break: get-token($source, $break, $do);
 
   // validate
-  @if type-of($break) != 'number' or unitless($break) {
-    @error '"#{$break}" isn’t a valid length or keyword for `break()`';
+  @if (type-of($break) != 'number') or unitless($break) {
+    @return _a_error(
+      '`#{$break}` is not a valid length or keyword for $break',
+      'break'
+    );
   }
 
   @return $break;

@@ -225,9 +225,12 @@ $fonts: () !default;
   $force: false
 ) {
   @if map-get($fonts, $key) and not $force {
-    @error 'Font key `#{$key}` already exists. Rename or $force to continue';
+    @include _a_error(
+      'Font key `#{$key}` already exists. Rename or `$force` to continue',
+      'add-font'
+    );
+  } @else {
+    $new: ($key: $map);
+    $fonts: map-merge($fonts, $new) !global;
   }
-
-  $new: ($key: $map);
-  $fonts: map-merge($fonts, $new) !global;
 }

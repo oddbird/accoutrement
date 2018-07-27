@@ -33,9 +33,9 @@
 ///
 /// @param {string | list} $string -
 ///   The original string (or list of strings) to edit
-/// @param {string} $old -
+/// @param {any} $old -
 ///   A sub-string to replace
-/// @param {string} $new [null] -
+/// @param {any} $new [null] -
 ///   A new sub-string to replace the old
 /// @param {boolean} $replace-all [false] -
 ///   A new sub-string to replace the old
@@ -116,7 +116,7 @@
 ///
 /// @param {string} $string -
 ///   The original string to be edited
-/// @param {strings} $values... -
+/// @param {any} $values... -
 ///   New strings, to replace the `%s` format strings
 /// @return {string} -
 ///   Original string, with `%s` format strings replaced
@@ -124,13 +124,18 @@
   $string,
   $values...
 ) {
+  $string: _a_type-check($string, 'string', '_a_interpolate', '$string');
   $_return: $string;
 
   @each $val in $values {
     @if str-index($_return, '%s') {
       $_return: _a_str-replace($_return, '%s', $val);
     } @else {
-      @warn 'Too many values passed for interpolation with "#{$string}".';
+      $length: length($values);
+      @return _a_error(
+        'Too many interpolation values (#{$length}) given for `#{$string}`',
+        '_a_interpolate'
+      );
     }
   }
 
@@ -147,10 +152,13 @@
 /// This function is prefixed outside maps
 /// & should not be used directly,
 /// but is available in all accoutrement maps
-/// under the `'split'` alias.
+/// under the `'str-split'` or `'split'` aliases.
+///
+/// @since 1.0.0 -
+/// - NEW: Aliased as `str-split`
 ///
 /// @access public
-/// @name interpolate
+/// @name str-split
 /// @group core-strings
 /// @example scss
 ///   $map: (
@@ -180,14 +188,11 @@
 ) {
   $list: ();
 
-  @if (type-of($string) != 'string') {
-    @error '$string value in `str-split` must be a string';
-  }
-
   @if (not $separator) or ($string == '') {
     @return append($list, $string);
   }
 
+  $string: if((type-of($string) == 'string'), $string, '#{$string}');
   $length: str-length($string);
   $limit: if($limit, min($limit, $length), $length);
   $separator: if(type-of($separator) != 'string', '#{$separator}', $separator);
@@ -220,7 +225,7 @@
 
   @return $list;
 }
-@include _a_register-function('_a_split', 'split');
+@include _a_register-function('_a_split', 'str-split', 'split');
 
 
 // Trim
@@ -230,13 +235,14 @@
 /// This function is prefixed outside maps
 /// & should not be used directly,
 /// but is available in all accoutrement maps
-/// under the `'trim'` alias.
+/// under the `'str-trim'` or `'trim'` aliases.
 ///
 /// @since 1.0.0 -
 /// - NEW: Strips whitespace
+/// - NEW: Aliased as `str-trim`
 ///
 /// @access public
-/// @name trim
+/// @name str-trim
 /// @group core-strings
 /// @example scss
 ///   $map: (
@@ -252,6 +258,7 @@
 @function _a_trim(
   $string
 ) {
+  $string: _a_type-check($string, 'string', 'str-trim', '$string');
   $first: (str-slice($string, 1, 1) == ' ');
   $last: (str-slice($string, -1) == ' ');
 
@@ -263,4 +270,4 @@
 
   @return $string;
 }
-@include _a_register-function('_a_trim', 'trim');
+@include _a_register-function('_a_trim', 'str-trim', 'trim');

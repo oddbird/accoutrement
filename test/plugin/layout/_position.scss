@@ -22,12 +22,18 @@
     @include assert {
       @include output {
         @include position('fixed');
-        @include position(fixed);
+        @include position(static);
+        @include position('absolute');
+        @include position(relative);
+        @include position('sticky');
       }
 
       @include expect {
         position: fixed;
-        position: fixed;
+        position: static;
+        position: absolute;
+        position: relative;
+        position: sticky;
       }
     }
   }
@@ -88,6 +94,21 @@
       @include expect {
         bottom: 1em;
         left: 20px;
+        position: relative;
+        right: auto;
+      }
+    }
+  }
+
+  @include it('Errors on unknown ') {
+    @include assert {
+      @include output {
+        @include position(relative null auto 'nope');
+      }
+
+      @include expect {
+        --accoutrement-error: 'ERROR [position] Unknown positioning value: `nope`';
+        left: auto;
         position: relative;
         right: auto;
       }

@@ -288,7 +288,7 @@
   }
 
   // Fallback to function calls
-  $function: _a_get-function($name, $error: false);
+  $function: _a_get-function($name);
 
   @if ($function) {
     @if ($args) {
@@ -299,5 +299,8 @@
   }
 
   // error
-  @error 'No ratio or function named #{$name}';
+  @return _a_error(
+    'No ratio or function named `#{$name}`',
+    '_a_do'
+  );
 }

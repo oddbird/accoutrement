@@ -28,6 +28,10 @@ $z-index: ();
 // ------------------
 /// Return the numeric index of a named layer in your `$z-index` variable.
 ///
+/// @since 1.0.0 -
+/// No longer type-check output,
+/// to allow CSS variables and other non-number values
+///
 /// @group layout-z-index
 ///
 /// @param {string} $layer -
@@ -57,10 +61,6 @@ $z-index: ();
         }
       }
     }
-  }
-
-  @if type-of($layer) != 'number' {
-    @error '#{$layer} is not a valid z-index.';
   }
 
   @return $layer;
