@@ -1,6 +1,8 @@
 // Arrow Tests
 // ===========
 
+$_a_error-output-override: true;
+
 // source…
 @import '../node_modules/sass-true/sass/true';
 @import '../sass/tools';

@@ -577,7 +577,7 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
         <span class="item-name">$old:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(any)</span>
       
     </h4>
 
@@ -604,7 +604,7 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
         <span class="item-name">$new:</span>
       
       <span class="item-value">null</span>
-      <span class="value-type">(string)</span>
+      <span class="value-type">(any)</span>
       
     </h4>
 
@@ -977,7 +977,7 @@ under the <code>'interpolate'</code> or <code>'%s'</code> aliases.</p>
         <span class="item-name">$values...:</span>
       
       
-      <span class="value-type">(strings)</span>
+      <span class="value-type">(any)</span>
       
     </h4>
 
@@ -1025,6 +1025,30 @@ under the <code>'interpolate'</code> or <code>'%s'</code> aliases.</p>
   
 
       
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Too many interpolation values given for the<span class="widont">&nbsp;</span>string</p>
+
+      </div>
+    
+  </div>
+
+    
   
 
     
@@ -1124,6 +1148,90 @@ $map: (
   
     
     
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_type-check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
   
 
   
@@ -1153,7 +1261,7 @@ $map: (
 
 
 
-<section class="item" id="function--interpolate">
+<section class="item" id="function--str-split">
   
     
   
@@ -1171,7 +1279,7 @@ $map: (
       
 
       
-        <a href="#function--interpolate" class="item-name">interpolate()</a>
+        <a href="#function--str-split" class="item-name">str-split()</a>
       
 
       
@@ -1197,9 +1305,19 @@ using the same logic as JavaScript’s <code>split()</code> meathod.</p>
 <p>This function is prefixed outside maps
 &amp; should not be used directly,
 but is available in all accoutrement maps
-under the <code>'split'</code> alias.</p>
+under the <code>'str-split'</code> or <code>'split'</code> aliases.</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Aliased as <code>str-split</code></li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -1360,30 +1478,6 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
       
   
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>$string value in <code>str-split</code> must be a<span class="widont">&nbsp;</span>string</p>
-
-      </div>
-    
-  </div>
-
-    
-  
 
     
   </div>
@@ -1508,7 +1602,7 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
 
 
-<section class="item" id="function--trim">
+<section class="item" id="function--str-trim">
   
     
   
@@ -1526,7 +1620,7 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
       
 
       
-        <a href="#function--trim" class="item-name">trim()</a>
+        <a href="#function--str-trim" class="item-name">str-trim()</a>
       
 
       
@@ -1551,7 +1645,7 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 <p>This function is prefixed outside maps
 &amp; should not be used directly,
 but is available in all accoutrement maps
-under the <code>'trim'</code> alias.</p>
+under the <code>'str-trim'</code> or <code>'trim'</code> aliases.</p>
 
       
   
@@ -1560,6 +1654,7 @@ under the <code>'trim'</code> alias.</p>
         <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
         <div class="subsection-details"><ul>
 <li>NEW: Strips whitespace</li>
+<li>NEW: Aliased as <code>str-trim</code></li>
 </ul>
 </div>
       </section>
@@ -1754,6 +1849,56 @@ under the <code>'trim'</code> alias.</p>
   
   
     
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_type-check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
     
   
 

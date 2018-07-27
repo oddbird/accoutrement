@@ -5,6 +5,9 @@
 - [Core][core]:
   - NEW: `ratio()` function accepts `$source` argument,
     for passing in a custom source map
+  - NEW: Improved error-handling and messages
+  - NEW: Added `str-trim` and `str-split` aliases
+    in addition to the existing `trim` and `split`
 - [Plugin: Animate][animate]
   - NEW: `ease()`, `time()`, and `change()` functions all
     accept `$source` argument,
@@ -29,7 +32,8 @@
   - NEW: `size()`/`negative()` functions and `square()` mixin
     accept `$source` argument, for passing in a custom source map
 - [Plugin: Type][type]
-  - NEW: `font()`/`font-family()` functions and `font-family()` mixin
+  - NEW: `font()`/`font-family()` functions
+    and `font-family()`/`font-face()` mixins
     accept `$source` argument,
     for passing in a custom font-source map
 

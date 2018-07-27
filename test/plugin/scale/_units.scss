@@ -30,8 +30,8 @@
 }
 
 
-// Convert Length
-// --------------
+// Convert Units
+// -------------
 @include describe('convert-units [function]') {
   @include it('Converts px size to browser em size') {
     @include assert-equal(
@@ -135,6 +135,13 @@
     @include assert-equal(
       convert-units('rhythm', 'browser-ems', 'root'),
       1.875em
+    );
+  }
+
+  @include it('Errors on non-px/falsey context values') {
+    @include assert-equal(
+      convert-units('rhythm', 'em', 10%),
+      'ERROR [convert-units] Context paremeters must resolve to a value in pixel units'
     );
   }
 }

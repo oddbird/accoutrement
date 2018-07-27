@@ -630,7 +630,7 @@ under the <code>'remove-nth'</code> alias.</p>
     
       
       <div class="param-details text-block">
-        <p>$index: #{quote($index)} is not a number for <code>_a_remove-nth</code>.</p>
+        <p><code>$index</code> must be a non-zero<span class="widont">&nbsp;</span>integer</p>
 
       </div>
     
@@ -652,29 +652,7 @@ under the <code>'remove-nth'</code> alias.</p>
     
       
       <div class="param-details text-block">
-        <p>List index 0 must be a non-zero integer for <code>_a_remove-nth</code>.</p>
-
-      </div>
-    
-  </div>
-
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>#{$state} but list is only #{length($list)} item<span class="widont">&nbsp;</span>long.</p>
+        <p><code>$index</code> is too large for the list<span class="widont">&nbsp;</span>length</p>
 
       </div>
     
@@ -820,6 +798,46 @@ under the <code>'remove-nth'</code> alias.</p>
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
 
         
       

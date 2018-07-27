@@ -1710,7 +1710,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</p>
     
       
       <div class="param-details text-block">
-        <p>Font key <code>#{$key}</code> already exists. Rename or $force to<span class="widont">&nbsp;</span>continue</p>
+        <p>Font key already exists. Rename or <code>$force</code> to continue</p>
 
       </div>
     
@@ -1802,6 +1802,40 @@ with new maps merged<span class="widont">&nbsp;</span>in.</p>
 
     
       
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <span class="item-name">_a_error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
       
         
         
@@ -2012,6 +2046,8 @@ to calling font-families by any given<span class="widont">&nbsp;</span>alias.</p
         <div class="subsection-details"><ul>
 <li>NEW: Provided to access and normalize a map of font data
 for any key in your global <code>$fonts</code> map</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
 </ul>
 </div>
       </section>
@@ -3551,6 +3587,15 @@ html {
   
     
       <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
+</ul>
+</div>
+      </section>
+    
+      <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><ul>
 <li>BREAKING: No longer accepts the <code>$formats</code> parameter</li>
@@ -3612,6 +3657,34 @@ html {
       
       <div class="param-details text-block">
         <p>The key-name of a font in your <code>$fonts</code> map</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$fonts</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of fonts
+to use as the origin<span class="widont">&nbsp;</span>palette</p>
 
       </div>
     

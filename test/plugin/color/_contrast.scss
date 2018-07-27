@@ -124,6 +124,13 @@
       'Returns the best option from the list.'
     );
   }
+
+  @include it('Errors on a single option') {
+    @include assert-equal(
+      contrast('primary', #ff0),
+      'ERROR [contrast] Provide at least two contrasting color options for `$options`'
+    );
+  }
 }
 
 

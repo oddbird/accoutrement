@@ -60,6 +60,7 @@ $breakpoints: () !default;
 ///   making both `$breakpoints` and `$sizes` keys available
 /// @return {length} -
 ///   The retrieved value of a named breakpoint
+/// @throws `$break` is not a valid length or keyword
 @function break(
   $break,
   $do: null,
@@ -74,8 +75,11 @@ $breakpoints: () !default;
   $break: get-token($source, $break, $do);
 
   // validate
-  @if type-of($break) != 'number' or unitless($break) {
-    @error '"#{$break}" isn’t a valid length or keyword for `break()`';
+  @if (type-of($break) != 'number') or unitless($break) {
+    @return _a_error(
+      '`#{$break}` is not a valid length or keyword for $break',
+      'break'
+    );
   }
 
   @return $break;

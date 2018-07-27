@@ -43,6 +43,26 @@
       $franklin
     );
   }
+
+  @include it('Errors on existing font-key') {
+    $has: map-get($fonts, 'sans');
+    @include assert-true($has);
+
+    @include assert {
+      @include output {
+        @include add-font('sans', 'any');
+      }
+
+      @include expect {
+        --accoutrement-error: 'ERROR [add-font] Font key `sans` already exists. Rename or `$force` to continue';
+      }
+    }
+
+    @include assert-equal(
+      map-get($fonts, 'sans'),
+      $has
+    );
+  }
 }
 
 } // end module

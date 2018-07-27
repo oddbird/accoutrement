@@ -192,6 +192,7 @@
 ///   A map of formats and urls for the given font-variant,
 ///   merging interpolated and explicit format/paths
 ///   into a single map.
+/// @throws Font-path interpolation of `path` requires a list of formats
 @function _a_normalize-variant-data(
   $data,
   $formats: ()
@@ -215,7 +216,10 @@
         $implicit: map-merge($implicit, ($format: $url));
       }
     } @else {
-      @return 'format-error';
+      @return _a_error(
+        'Font-path interpolation of `#{$path}` requires a list of formats',
+        'normalize-font'
+      );
     }
   }
 

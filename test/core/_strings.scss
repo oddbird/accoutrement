@@ -66,6 +66,13 @@
       'hello world!'
     );
   }
+
+  @include it('Errors with too many values') {
+    @include assert-equal(
+      _a_interpolate('hello %s', 'world', '!'),
+      'ERROR [_a_interpolate] Too many interpolation values (2) given for `hello %s`'
+    );
+  }
 }
 
 
@@ -132,6 +139,13 @@
       'h' 'e' 'l' 'l' 'o' ' ' 'w' 'o' 'r' 'l' 'd'
     );
   }
+
+  @include it('Forces $string to a string') {
+    @include assert-equal(
+      _a_split(34.5, '.'),
+      '34' '5'
+    );
+  }
 }
 
 
@@ -142,6 +156,13 @@
     @include assert-equal(
       _a_trim('  hello world     '),
       'hello world'
+    );
+  }
+
+  @include it('Errors on invalid $string type') {
+    @include assert-equal(
+      _a_trim(3.4),
+      'ERROR [str-trim] `$string` argument must be a string; got (number) `3.4`'
     );
   }
 }

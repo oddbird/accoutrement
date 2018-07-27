@@ -93,19 +93,19 @@
 
   @include it('Handles list values in function calls') {
     $map: (
-      "main-start": ["nav-end" "main-start" "footer-start"],
-      "small-start": (
-        "value": "#main-start",
-        "remove-nth": 1
+      'main-start': ['nav-end' 'main-start' 'footer-start'],
+      'small-start': (
+        'value': '#main-start',
+        'remove-nth': 1
       ),
-      "small-end": (
-        "value": "#small-start",
-        "str-replace": "-start" "-end" true
+      'small-end': (
+        'value': '#small-start',
+        'str-replace': '-start' '-end' true
       )
     );
     @include assert-equal(
       _a_get($map, '#small-end'),
-      ["main-end" "footer-end"]
+      ['main-end' 'footer-end']
     );
   }
 
@@ -397,6 +397,15 @@
       _a_do(('not': 'needed'), 'round', 2.35, null),
       2
     );
+  }
+
+  @if function-exists('get-function') {
+    @include it('Errors on missing function') {
+      @include assert-equal(
+        _a_do(('not': 'needed'), 'mine', 2.35, 'any'),
+        'ERROR [_a_do] No ratio or function named `mine`'
+      );
+    }
   }
 }
 

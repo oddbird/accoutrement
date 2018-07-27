@@ -15,8 +15,36 @@
 
   @include it('Returns a list with negative-indexed item removed') {
     @include assert-equal(
-      _a_remove-nth('one' 'two' 3, -1),
-      'one' 'two'
+      _a_remove-nth('one' 'two' 3 'four' 5, -2),
+      'one' 'two' 3 5
+    );
+  }
+
+  @include it('Errors on non-number index') {
+    @include assert-equal(
+      _a_remove-nth('one' 'two' 3, null),
+      'ERROR [remove-nth] $index must be a non-zero integer, got (null) `null`'
+    );
+  }
+
+  @include it('Errors on non-integer number') {
+    @include assert-equal(
+      _a_remove-nth('one' 'two' 3, 2.5),
+      'ERROR [remove-nth] $index must be a non-zero integer, got (number) `2.5`'
+    );
+  }
+
+  @include it('Errors on zero') {
+    @include assert-equal(
+      _a_remove-nth('one' 'two' 3, 0),
+      'ERROR [remove-nth] $index must be a non-zero integer, got (number) `0`'
+    );
+  }
+
+  @include it('Errors on too-large index') {
+    @include assert-equal(
+      _a_remove-nth('one' 'two' 3, 6),
+      'ERROR [remove-nth] $index is `6` but list is only 3 item long'
     );
   }
 }

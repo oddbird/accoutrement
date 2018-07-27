@@ -219,15 +219,19 @@ $fonts: () !default;
 ///   Map of font-data to be added at the given key.
 /// @output An updated global `$fonts` variable,
 ///   with new maps merged in.
+/// @throws Font key already exists. Rename or `$force` to continue
 @mixin add-font(
   $key,
   $map,
   $force: false
 ) {
   @if map-get($fonts, $key) and not $force {
-    @error 'Font key `#{$key}` already exists. Rename or $force to continue';
+    @include _a_error(
+      'Font key `#{$key}` already exists. Rename or `$force` to continue',
+      'add-font'
+    );
+  } @else {
+    $new: ($key: $map);
+    $fonts: map-merge($fonts, $new) !global;
   }
-
-  $new: ($key: $map);
-  $fonts: map-merge($fonts, $new) !global;
 }

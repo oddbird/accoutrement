@@ -293,11 +293,6 @@ $_a_FONT-FORMATS: (
   $data,
   $unicode: null
 ) {
-  @if ($data == 'format-error') {
-    @error '(#{$name}) Font-path interpolation ' +
-    'requires a list of `formats` to import.';
-  }
-
   // Special handling of eot with local or data
   $eot: map-get($data, 'eot');
   $local: map-get($data, 'local');

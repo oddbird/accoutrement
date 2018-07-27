@@ -30,19 +30,26 @@
 ///   The 1-indexed item to remove from the list
 /// @return {list} -
 ///   The original list, with item removed
+/// @throws `$index` must be a non-zero integer
+/// @throws `$index` is too large for the list length
 @function _a_remove-nth(
   $list,
   $index
 ) {
   $result: _a_list-template($list);
+  $type: type-of($index);
 
-  @if (type-of($index) != 'number') {
-    @error '$index: #{quote($index)} is not a number for `_a_remove-nth`.';
-  } @else if $index == 0 {
-    @error 'List index 0 must be a non-zero integer for `_a_remove-nth`.';
-  } @else if abs($index) > length($list) {
-    $state: 'List index for `_a_remove-nth` is #{$index}';
-    @error '#{$state} but list is only #{length($list)} item long.';
+  @if ($type != 'number') or ($index == 0) or (round($index) != $index) {
+    $got: 'got (#{$type}) `#{if(($type == 'null'), 'null', $index)}`';
+    @return _a_error(
+      '$index must be a non-zero integer, #{$got}',
+      'remove-nth'
+    );
+  } @else if (abs($index) > length($list)) {
+    @return _a_error(
+      '$index is `#{$index}` but list is only #{length($list)} item long',
+      'remove-nth'
+    );
   }
 
   $index: if(($index < 0), length($list) + $index + 1, $index);

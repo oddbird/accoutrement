@@ -40,6 +40,13 @@
       ('register': $exp)
     );
   }
+
+  @include it('Errors when function is not available') {
+    @include assert-equal(
+      _a_registration('my-func', 'alias', $origin: 'test'),
+      'ERROR [test] my-func() is not available to register with Accoutrement'
+    );
+  }
 }
 
 
