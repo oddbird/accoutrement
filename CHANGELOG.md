@@ -3,7 +3,7 @@
 
 ## 1.0.0 - UNRELEASED
 
-### 1.0.0-beta.3 - UNRELEASED
+### 1.0.0-beta.3 - 08/03/18
 - [Plugin: Scale][scale]
   - BUGFIX: `size()` function removes quotes from string (calc) sizes
 
