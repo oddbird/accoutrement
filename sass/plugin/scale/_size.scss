@@ -42,7 +42,7 @@
   }
 
   $size: get-token($source, $size, $do);
-  @return $size;
+  @return if((type-of($size) == 'string'), unquote($size), $size);
 }
 
 

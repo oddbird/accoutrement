@@ -3,6 +3,10 @@
 
 ## 1.0.0 - UNRELEASED
 
+### 1.0.0-beta.3 - UNRELEASED
+- [Plugin: Scale][scale]
+  - BUGFIX: `size()` function removes quotes from string (calc) sizes
+
 ### 1.0.0-beta.2 - 07/27/18
 - [Core][core]:
   - NEW: `ratio()` function accepts `$source` argument,
