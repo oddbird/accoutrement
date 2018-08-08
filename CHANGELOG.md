@@ -2,6 +2,8 @@
 
 
 ## 1.0.0 - UNRELEASED
+- The stable 1.0 release is identical to `-beta.3`,
+  see change details below
 
 ### 1.0.0-beta.3 - 08/03/18
 - [Plugin: Scale][scale]
