@@ -114,7 +114,7 @@ The **Core** module provides the generic
 (non data-specific)
 setup and syntax parsing:
 
-- Retreive & parse map values
+- Retrieve & parse map values
   with the generic [`get-token()`][get] function
 - Use our built-in [math][math], [modular-scale][ratio],
   [list][list], and [string][string] utilities
