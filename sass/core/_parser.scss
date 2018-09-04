@@ -140,22 +140,18 @@
     // handle each value in the map…
     @each $key, $value in $needle {
       // check both maps
-      $key: _a_get($needle, $key);
-      $value: _a_get($needle, $value);
-
-      // handle nested maps
-      @if type-of($value) == 'map' {
-        $value: _a_get($haystack, $value);
-      }
-      @else {
-        // check the entire haystack when searching aliases
-        @if type-of($value) == 'string' and str-index($value, '#') {
-          $value: _a_get($haystack, $value);
-        }
-      }
+      $layers: map-merge($haystack, $needle);
+      $key: _a_get($layers, $key);
+      $value: _a_get($layers, $value);
 
       // update pair
-      $needle: map-merge($needle, ($key: $value));
+      $needle: ($key: $value);
+
+      @if type-of($value) == 'map' {
+        $value: _a_get($haystack, $value);
+        $needle: map-merge($needle, ($key: $value));
+      }
+
       $new: map-merge($new, $needle);
     }
 
@@ -195,14 +191,17 @@
   $haystack,
   $string
 ) {
+  // @debug $string;
   // replace aliases…
   @if str-index($string, '#') {
     // check longest keys first, in case of overlap
     @each $key in _a_str-length-sort(map-keys($haystack)) {
       $hash: '##{$key}';
 
+      // @debug $string $key $hash;
       @if (type-of($string) == 'string') and str-index($string, $hash) {
         $new: get-token($haystack, $key);
+        // @debug 'new ->' $new '(from' $key ')';
         $string: _a_str-replace($string, $hash, $new, 'all');
       }
     }
