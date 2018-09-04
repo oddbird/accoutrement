@@ -140,12 +140,22 @@
     // handle each value in the map…
     @each $key, $value in $needle {
       // check both maps
-      $layers: map-merge($haystack, $needle);
-      $key: _a_get($layers, $key);
-      $value: _a_get($layers, $value);
+      $key: _a_get($needle, $key);
+      $value: _a_get($needle, $value);
+
+      // handle nested maps
+      @if type-of($value) == 'map' {
+        $value: _a_get($haystack, $value);
+      }
+      @else {
+        // check the entire haystack when searching aliases
+        @if type-of($value) == 'string' and str-index($value, '#') {
+          $value: _a_get($haystack, $value);
+        }
+      }
 
       // update pair
-      $needle: ($key: $value);
+      $needle: map-merge($needle, ($key: $value));
       $new: map-merge($new, $needle);
     }
 
@@ -153,6 +163,14 @@
   }
 
   @if ($type == 'string') {
+    // $sep: '->';
+
+    // @if str-index($needle, $sep) {
+    //   $parent: str-slice( $needle, 1, ( str-index($needle, $sep) - 1 ) );
+    //   $child: str-slice( $needle, ( str-index($needle, $sep) + str-length($sep) ) );
+
+    //   @return get-token( get-token($haystack, $parent), $child );
+    // }
     $needle: _a_replace($haystack, $needle);
   }
 

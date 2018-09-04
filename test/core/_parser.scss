@@ -150,6 +150,10 @@
     'map': (
       'one': 'inner value',
       'second': '#one',
+      'interrupt': 'foo',
+      'nested':(
+        'bar':'#two'
+      ),
       'third': '#two',
     ),
   );
@@ -179,6 +183,10 @@
     $expect: (
       'one': 'inner value',
       'second': 'inner value',
+      'interrupt': 'foo',
+      'nested':(
+          'bar':'original value'
+      ),
       'third': 'original value',
     );
 
