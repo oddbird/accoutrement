@@ -183,17 +183,14 @@
   $haystack,
   $string
 ) {
-  // @debug $string;
   // replace aliases…
   @if str-index($string, '#') {
     // check longest keys first, in case of overlap
     @each $key in _a_str-length-sort(map-keys($haystack)) {
       $hash: '##{$key}';
 
-      // @debug $string $key $hash;
       @if (type-of($string) == 'string') and str-index($string, $hash) {
         $new: get-token($haystack, $key);
-        // @debug 'new ->' $new '(from' $key ')';
         $string: _a_str-replace($string, $hash, $new, 'all');
       }
     }
