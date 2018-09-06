@@ -152,9 +152,13 @@
       'second': '#one',
       'interrupt': 'foo',
       'nested':(
-        'bar':'#two'
+        'bar':'#three',
+        'baz':'#second',
+        'zab':'#one',
+        'rab':'#two',
       ),
       'third': '#two',
+      'fourth': '#one',
     ),
   );
 
@@ -185,9 +189,13 @@
       'second': 'inner value',
       'interrupt': 'foo',
       'nested':(
-          'bar':'original value'
+        'bar':'original value',
+        'baz':'inner value',
+        'zab':'inner value',
+        'rab':'original value',
       ),
       'third': 'original value',
+      'fourth': 'inner value',
     );
 
     @include assert-equal(

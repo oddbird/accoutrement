@@ -45,15 +45,8 @@
   $key,
   $do: null
 ) {
-  // @debug '#{$_}-->';
-  // @debug $key;
   $key: map-get($map, $key) or $key;
-  // @debug $key;
   $key: _a_get($map, $key);
-  // @debug $key;
-  // @debug '#{$_}<--';
-  // @debug $map;
-  // @debug _a_map-keys-values-deep($map);
   @return _a_do-each($map, $key, $do);
 }
 
@@ -83,18 +76,12 @@
   $do: null;
   $value: $key;
 
-  // @debug 'getting `#{$key}` of type `#{$type}` in map `#{$map}`';
-
-  $_: $_ + '-g- ' !global;
-
   // break out `do` maps…
   @if ($type == 'map') and map-get($key, 'value') {
     $value: map-get($key, 'value');
     $do: map-remove($key, 'value');
   } @else if index('list' 'arglist', $type) {
-    @debug 'is this the one throwing the error? `#{$key}`';
     $final: nth($key, -1);
-    @debug $final;
 
     @if (length($key) > 1) and (type-of($final) == 'map') {
       $do: $final;
@@ -104,13 +91,11 @@
   }
 
   // resolve any #alias tags…
-  // @debug 'ready to parse `#{$value}` in map `#{$map}`';
   $value: _a_parse($map, $value);
 
   // make any necessary adjustments…
   $value: _a_do-each($map, $value, $do);
 
-  $_: _a_str-replace($_, '-g- ', '') !global;
   @return $value;
 }
 
@@ -135,12 +120,8 @@
 ) {
   $type: type-of($needle);
 
-  $_: $_ + '-p- ' !global;
-  // @debug 'parsing `#{$needle}` of type `#{$type}` in haystack `#{$haystack}`';
-
   // handle list values…
   @if index('list' 'arglist', $type) {
-    @debug 'parsing list `#{$needle}` from haystack `#{$haystack}`';
     $new: _a_list-template($needle);
 
     // handle each item in the list…
@@ -154,172 +135,48 @@
   // handle map values…
   @if ($type == 'map') {
     $new: ();
+    // create a list of keys and values in the current map scope
     $keys: map-keys($needle);
     $values: map-values($needle);
-    // $needleKey: null;
-    // @debug map-values($haystack);
-    @debug $needle;
-    // @debug index(map-values($haystack), $needle);
-    // @each $k, $v in $haystack {
-    //   // @debug $v == $needle;
-    //   @if $v == $needle {
-    //     $needleKey: $k;
-    //   }
-    // }
-    // $needleKey: nth( map-keys($haystack), index(map-values($haystack), $needle) );
 
     // handle each value in the map…
     @each $key, $value in $needle {
-      /**/
       $new: ();
       $index: index($keys, $key);
-      @debug '#{$_}';
 
-      @debug '#{$_}➡️ key: `#{$key}`';
-      @debug '#{$_}➡️ value: `#{$value}`';
-      @debug 'value for `#{$key}` is `#{$value}` with type `#{type-of($value)}`';
-
+      // check in the $needle
       $newkey: _a_get($needle, $key);
       $newvalue: _a_get($needle, $value);
-      @debug 'newvalue for `#{$key}` is `#{$newvalue}` with type `#{type-of($newvalue)}`';
 
+      // if the key isn't found in the $needle or is a #reference, check the $haystack with the $newkey
       @if type-of($newkey) != 'string' or str-index($newkey, "#") {
         $newkey: _a_get($haystack, $newkey);
       }
+
+      // if the value isn't found in the $needle or is a #reference, check the $haystack
       @if type-of($newvalue) != 'string' or str-index($newvalue, "#") {
-        @debug '❓ not string? `#{type-of($newvalue) != 'string'}`';
-        @debug '❓ new == old? `#{$newvalue == $value}`';
-        @if type-of($newvalue) == 'string' {
-          @debug '❓ index of #? `#{str-index($newvalue, "#")}`';
+        // if we're dealing with a map or a #reference, search with the $newvalue
+        @if type-of($newvalue) == 'map' or (type-of($newvalue) == 'string' and str-index($newvalue, "#")) {
+          $newvalue: _a_get($haystack, $newvalue);
         }
-        @debug '❓ type:map?   `#{type-of($newvalue) == 'map'}`';
-        @debug '❓ type:list?  `#{type-of($newvalue) == 'list'}`';
-        @debug '❓ type?       `#{type-of($newvalue)}`';
-        // @debug 'length of list `#{length($newvalue)}`';
-        // @if type-of($newvalue) == 'list' and length($newvalue) {
-        // }
-        // @else {
-          @debug 'something went wrong for `#{$newvalue}`';
-          @if type-of($newvalue) == 'map' or (type-of($newvalue) == 'string' and str-index($newvalue, "#")) {
-            @debug 'so we try the haystack search for `#{$newvalue}`';
-            $newvalue: _a_get($haystack, $newvalue);
-          }
-          @else {
-            @debug 'so we try the haystack search for `#{$value}`';
-            $newvalue: _a_get($haystack, $value);
-          }
-          @debug 'newvalue from haystack search is `#{$newvalue}` with type `#{type-of($newvalue)}`';
-        // }
+        // otherwise, search with the original value
+        @else {
+          $newvalue: _a_get($haystack, $value);
+        }
       }
-      // @if type-of($newvalue) == 'map' {
 
-      // }
+      // update the lists of keys and values with the new ones
+      $keys: set-nth($keys, $index, $newkey);
+      $values: set-nth($values, $index, $newvalue);
 
-      $key: $newkey;
-      $value: $newvalue;
-      // $layers: map-merge($haystack, $needle);
-      // @if type-of($value) == 'map' {
-      //   $layers: map-merge($needle, $haystack);
-      // }
-      // $key: _a_get($layers, $key);
-      // $value: _a_get($layers, $value);
-
-      // $innerKey: _a_get($needle, $key);
-      // // @debug '#{$_}✅ innerKey: `#{$innerKey}` from `#{$needle}`';
-      // $innerValue: _a_get($needle, $value);
-      // @debug '#{$_}✅ innerValue: `#{$innerValue}`';// from `#{$needle}`';
-      // @debug '#{$_}❓ innerValue: `#{_a_get(map-merge($needle, $haystack), $value)}`';// from `#{$needle}`';
-
-      // $outerKey: _a_get($haystack, $key);
-      // $outerValue: null;
-      // @if type-of($value) == 'map' {
-      //   $_: $_ + '-v- ' !global;
-
-      //   $mash: map-merge(map-merge($value, $needle), $haystack);
-      //   // @debug $mash;
-      //   $outerValue: _a_get($mash, $value);
-      //   // @debug '#{$_}#{_a_get($mash, "#baz")}';
-      //   // @debug '#{$_}#{_a_get($mash, "#bar")}';
-
-      //   $_: _a_str-replace($_, '-v- ', '') !global;
-      // }
-      // @else {
-      //   $outerValue: _a_get($haystack, $value);
-      // }
-      // // @debug '#{$_}✅ outerKey: `#{$outerKey}` from `#{$haystack}`';
-      // @debug '#{$_}✅ outerValue: `#{$outerValue}`';// from `#{$haystack}`';
-
-
-
-      // // @debug '#{$_}key: `#{$key}` | direct: `#{$directValue}` | inner: `#{$innerValue}` | outer: `#{$outerValue}`';
-
-      // // @debug $value type-of($value);
-      // // @debug $innerValue type-of($innerValue);
-
-      // @if $innerKey == $key or type-of($key) == 'map' or type-of($key) == 'list' {
-      //   $key: $outerKey;
-      // }
-      // @else {
-      //   $key: $innerKey;
-      // }
-
-      // // $value: $innerValue;
-      // @if $innerValue == $value or type-of($value) == 'map' or type-of($value) == 'list' {
-      //   $value: $outerValue;
-      // }
-      // @else {
-      //   $value: $innerValue;
-      // }
-
-      @debug '#{$_}⬅️ key: `#{$key}`';
-      @debug '#{$_}⬅️ value: `#{$value}`';
-
-      // @debug ($key: $value);
-
-      // $new: map-merge($needle, ($key: $value));
-      $keys: set-nth($list: $keys, $n: $index, $value: $key);
-      $values: set-nth($list: $values, $n: $index, $value: $value);
-      @debug '#{$_}⬅️ keys: `#{$keys}`';
-      @debug '#{$_}⬅️ values: `#{$values}`';
+      // rebuild the map from the new keys and values
       @each $k in $keys {
         $new: map-merge($new, (
           $k: nth($values, index($keys, $k))
         ));
       }
-      // @debug $needle;
-      // @debug $new;
-      $needle: $new;
-      @debug '#{$_}new needle: `#{$needle}`';
-
-      // @if $needleKey {
-      //   $newHaystack: map-merge($haystack, ($needleKey: $needle));
-      //   $haystack: $newHaystack;
-      //   @debug '#{$_}new haystack: `#{$haystack}`';
-      // }
-/**/
-/*
-
-      // check both maps
-      $layers: map-merge($haystack, $needle);
-      $key: _a_get($layers, $key);
-      $value: _a_get($layers, $value);
-
-      // update pair
-      $needle: ($key: $value);
-
-      // @if type-of($value) == 'map' {
-      //   $value: _a_get($haystack, $value);
-      //   $needle: map-merge($needle, ($key: $value));
-      // }
-
-      $new: map-merge($new, $needle);
-*/
     }
 
-    // @debug $new;
-    // @debug $haystack;
-
-    $_: _a_str-replace($_, '-p- ', '') !global;
     @return $new;
   }
 
@@ -327,70 +184,6 @@
     $needle: _a_replace($haystack, $needle);
   }
 
-  $_: _a_str-replace($_, '-p- ', '') !global;
-  @return $needle;
-}
-
-@function _a_parseNEW(
-  $haystack,
-  $needle
-) {
-  $type: type-of($needle);
-  @debug '#{$_}...  starting _a_parse for: `#{$needle}`';
-  // @debug #{'needle and type:' $needle $type};
-
-  // handle list values…
-  @if index('list' 'arglist', $type) {
-    $new: _a_list-template($needle);
-
-    // handle each item in the list…
-    @each $bit in $needle {
-      $new: append($new, _a_get($haystack, $bit));
-    }
-
-    @debug '#{$_}>>> returning `#{$new}` for list';
-    @return $new;
-  }
-
-  // handle map values…
-  @if ($type == 'map') {
-    $new: ();
-
-    // handle each value in the map…
-    @each $key, $value in $needle {
-      // check both maps
-      $layers: map-merge($haystack, $needle);
-      $key: _a_get($layers, $key);
-      $value: _a_get($layers, $value);
-      // @debug $key $value;
-
-      // @debug $needle;
-      // update pair
-      $needle: ($key: $value);
-
-      @if type-of($value) == 'map' {
-        // @debug $haystack;
-        // @debug $layers;
-        // @debug $needle;
-        $value: _a_get($haystack, $value);
-        // @debug $value;
-        $needle: map-merge($needle, ($key: $value));
-        // @debug $needle;
-      }
-
-      $new: map-merge($new, $needle);
-    }
-
-    @debug '#{$_}>>> returning `#{$new}` for map';
-    @return $new;
-  }
-
-  @if ($type == 'string') {
-    // @debug #{$needle '--->' _a_map-get-deep( $haystack, $needle )};
-    $needle: _a_replace($haystack, $needle);
-  }
-
-  @debug '#{$_}>>> returning `#{$needle}` for string input`';
   @return $needle;
 }
 
@@ -412,74 +205,19 @@
   $haystack,
   $string
 ) {
-  // $gstring: $string;
   // replace aliases…
   @if str-index($string, '#') {
-    // @debug '#{$_}`#{$string}` is a hash. Searching in `#{$haystack}`';
     $keys: map-keys($haystack);
-    // @debug $keys;
-    // @debug _a_map-keys-deep($haystack);
     // check longest keys first, in case of overlap
     @each $key in _a_str-length-sort($keys) {
       $hash: '##{$key}';
 
-      // @debug '#{$_}Type of `#{$string}` is `#{type-of($string)}`.';
       @if (type-of($string) == 'string') and str-index($string, $hash) {
-        // @debug '#{$_}String `#{$string}` matched hash `#{$hash}` from key `#{$key}`';
-        // $gnew: map-get($haystack, $key);
         $new: get-token($haystack, $key);
-        // @debug '#{$_}Found new `#{$new}`';
-        // @debug '#{$_}Found gnew `#{$gnew}`';
-        // $gnew: _a_parse($haystack, $gnew);
-        $string: _a_str-replace($string, $hash, $new, 'all');
-        // $gstring: _a_str-replace($gstring, $hash, $gnew, 'all');
-      }
-    }
-  }
-
-  // @debug '#{$_}Returning string `#{$string}` from replace';
-  // @debug '#{$_}Returning gstring `#{$gstring}` from replace';
-  @return $string;
-}
-
-@function _a_replaceNEW(
-  $haystack,
-  $string
-) {
-  // replace aliases…
-  @if str-index($string, '#') {
-    $unhash: _a_str-replace($string, '#', '');
-    @debug $unhash type-of($unhash);
-    $flatten: _a_map-keys-values-deep($haystack);
-    $keys: map-get($flatten, 'keys');
-    $values: map-get($flatten, 'values');
-    $index: index( $keys, $unhash );
-    $newval: nth( $values, $index );
-    @debug $index $newval;
-    // check longest keys first, in case of overlap
-    // @debug map-keys($haystack);
-    // @debug map-values($haystack);
-    // @each $key in _a_str-length-sort(_a_map-keys-deep($haystack)) {
-    @each $key in $keys {
-      $hash: '##{$key}';
-      @debug $hash $newval;
-      // @debug index($keys, $key) '--' $key $hash $string;
-      // @debug $index '--' $key $hash $string nth($values, ($index or 1)) str-index($string, $hash);
-
-      @if (type-of($string) == 'string') and str-index($string, $hash) {
-        @debug '#{$_}^^^     going back in to find `#{$key}`';
-        $new: get-token($haystack, $key);
-      // @if (type-of($string) == 'string') and (type-of($index) == 'number') {
-      //   $newkey: nth( $keys, $index );
-      //   @debug '#{$_}^^^     going back in to find `#{$newkey}`';
-      //   $new: get-token($haystack, $newkey);
-
-        // @debug #{'------>' $new};
         $string: _a_str-replace($string, $hash, $new, 'all');
       }
     }
   }
-
   @return $string;
 }
 
