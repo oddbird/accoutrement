@@ -4,7 +4,9 @@
 
 // Tint
 // ----
-/// Mix a color with `white` to get a lighter tint.
+/// Mix a color with `contrast-light` to get a lighter tint.
+///
+/// Uses `white` by default, but allows overriding if your global `contrast-light` is set differently.
 ///
 /// @group color-utils
 ///
@@ -12,7 +14,7 @@
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @param {Percentage} $percentage -
-///   The percentage of white to mix in.
+///   The percentage of `contrast-light` to mix in.
 ///   Higher percentages will result in a lighter tint.
 /// @return {Color} -
 ///   A calculated css-ready color-value based on your global color palette.
@@ -21,15 +23,21 @@
   $percentage
 ) {
   $color: color($color);
+  $base: white;
+  @if type-of( color('contrast-light') ) == color {
+    $base: color('contrast-light');
+  }
 
-  @return mix(#fff, $color, $percentage);
+  @return mix($base, $color, $percentage);
 }
 @include _a_register-function('tint');
 
 
 // Shade
 // -----
-/// Mix a color with `black` to get a darker shade.
+/// Mix a color with `contrast-dark` to get a darker shade.
+///
+/// Uses `black` by default, but allows overriding if your global `contrast-dark` is set differently.
 ///
 /// @group color-utils
 ///
@@ -37,7 +45,7 @@
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @param {Percentage} $percentage -
-///   The percentage of black to mix in.
+///   The percentage of `contrast-dark` to mix in.
 ///   Higher percentages will result in a darker shade.
 /// @return {Color} -
 ///   A calculated css-ready color-value based on your global color palette.
@@ -46,7 +54,11 @@
   $percentage
 ) {
   $color: color($color);
+  $base: black;
+  @if type-of( color('contrast-dark') ) == color {
+    $base: color('contrast-dark');
+  }
 
-  @return mix(#000, $color, $percentage);
+  @return mix($base, $color, $percentage);
 }
 @include _a_register-function('shade');
