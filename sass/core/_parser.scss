@@ -170,7 +170,7 @@
       $parent: str-slice( $needle, 1, ( str-index($needle, $sep) - 1 ) );
       $child: str-slice( $needle, ( str-index($needle, $sep) + str-length($sep) ) );
 
-      @return get-token( map-get($haystack, $parent), $child );
+      @return get-token( $haystack, get-token( map-get($haystack, $parent), $child) );
     }
 
     $needle: _a_replace($haystack, $needle);
