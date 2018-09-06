@@ -15,7 +15,7 @@
       'find': 'this',
       'alias': '#slow',
       'again': (
-        'find': 'that',
+        'find': '#delay',
       )
     ),
   );
@@ -44,7 +44,7 @@
   @include it('Traverses nested maps in a single get') {
     @include assert-equal(
       [get-token($haystack, 'nest->find'), get-token($haystack, 'nest->alias'), get-token($haystack, 'nest->again->find')],
-      ['this', 1s, 'that']
+      ['this', 1s, 0.5s]
     );
   }
 }
