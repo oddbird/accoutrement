@@ -1,6 +1,7 @@
 /// # Accessing Maps
 /// @group core-get
 
+
 // Get Token
 // ---------
 /// The primary function for accessing and parsing
@@ -141,7 +142,6 @@
 
     // handle each value in the map…
     @each $key, $value in $needle {
-      $new: ();
       $index: index($keys, $key);
 
       // check in the $needle
@@ -169,6 +169,8 @@
       $keys: set-nth($keys, $index, $newkey);
       $values: set-nth($values, $index, $newvalue);
 
+      // erase $new to guarantee a fresh map
+      $new: ();
       // rebuild the map from the new keys and values
       @each $k in $keys {
         $new: map-merge($new, (
@@ -207,9 +209,8 @@
 ) {
   // replace aliases…
   @if str-index($string, '#') {
-    $keys: map-keys($haystack);
     // check longest keys first, in case of overlap
-    @each $key in _a_str-length-sort($keys) {
+    @each $key in _a_str-length-sort(map-keys($haystack)) {
       $hash: '##{$key}';
 
       @if (type-of($string) == 'string') and str-index($string, $hash) {
@@ -218,6 +219,7 @@
       }
     }
   }
+
   @return $string;
 }
 
