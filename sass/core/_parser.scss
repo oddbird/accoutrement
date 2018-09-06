@@ -136,17 +136,47 @@
   // handle map values…
   @if ($type == 'map') {
     $new: ();
+    // create a list of keys and values in the current map scope
+    $keys: map-keys($needle);
+    $values: map-values($needle);
 
     // handle each value in the map…
     @each $key, $value in $needle {
-      // check both maps
-      $layers: map-merge($haystack, $needle);
-      $key: _a_get($layers, $key);
-      $value: _a_get($layers, $value);
+      $index: index($keys, $key);
 
-      // update pair
-      $needle: ($key: $value);
-      $new: map-merge($new, $needle);
+      // check in the $needle
+      $newkey: _a_get($needle, $key);
+      $newvalue: _a_get($needle, $value);
+
+      // if the key isn't found in the $needle or is a #reference, check the $haystack with the $newkey
+      @if type-of($newkey) != 'string' or str-index($newkey, "#") {
+        $newkey: _a_get($haystack, $newkey);
+      }
+
+      // if the value isn't found in the $needle or is a #reference, check the $haystack
+      @if type-of($newvalue) != 'string' or str-index($newvalue, "#") {
+        // if we're dealing with a map or a #reference, search with the $newvalue
+        @if type-of($newvalue) == 'map' or (type-of($newvalue) == 'string' and str-index($newvalue, "#")) {
+          $newvalue: _a_get($haystack, $newvalue);
+        }
+        // otherwise, search with the original value
+        @else {
+          $newvalue: _a_get($haystack, $value);
+        }
+      }
+
+      // update the lists of keys and values with the new ones
+      $keys: set-nth($keys, $index, $newkey);
+      $values: set-nth($values, $index, $newvalue);
+
+      // erase $new to guarantee a fresh map
+      $new: ();
+      // rebuild the map from the new keys and values
+      @each $k in $keys {
+        $new: map-merge($new, (
+          $k: nth($values, index($keys, $k))
+        ));
+      }
     }
 
     @return $new;
