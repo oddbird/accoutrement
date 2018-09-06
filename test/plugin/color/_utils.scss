@@ -7,10 +7,14 @@
 // ---------------
 @include describe('Tint [function]') {
   @include it('Adjusts the tint of a color') {
+    $base: white;
+    @if type-of( color('contrast-light') ) == 'color' {
+      $base: color('contrast-light');
+    }
     @include assert-equal(
       tint('primary', 25%),
-      mix(#fff, color('primary'), 25%),
-      'Returns a color mixed with white at a given weight.'
+      mix($base, color('primary'), 25%),
+      'Returns a color mixed with `contrast-light` at a given weight.'
     );
   }
 }
@@ -20,10 +24,14 @@
 // ----------------
 @include describe('Shade [function]') {
   @include it('Adjusts the shade of a color') {
+    $base: black;
+    @if type-of( color('contrast-dark') ) == 'color' {
+      $base: color('contrast-dark');
+    }
     @include assert-equal(
       shade('primary', 25%),
-      mix(#000, color('primary'), 25%),
-      'Returns a color mixed with black at a given weight.'
+      mix($base, color('primary'), 25%),
+      'Returns a color mixed with `contrast-dark` at a given weight.'
     );
   }
 }
