@@ -150,7 +150,15 @@
     'map': (
       'one': 'inner value',
       'second': '#one',
+      'interrupt': 'foo',
+      'nested':(
+        'bar':'#three',
+        'baz':'#second',
+        'zab':'#one',
+        'rab':'#two',
+      ),
       'third': '#two',
+      'fourth': '#one',
     ),
   );
 
@@ -179,7 +187,15 @@
     $expect: (
       'one': 'inner value',
       'second': 'inner value',
+      'interrupt': 'foo',
+      'nested':(
+        'bar':'original value',
+        'baz':'inner value',
+        'zab':'inner value',
+        'rab':'original value',
+      ),
       'third': 'original value',
+      'fourth': 'inner value',
     );
 
     @include assert-equal(
