@@ -136,6 +136,7 @@
   // handle map values…
   @if ($type == 'map') {
     $new: ();
+
     // create a list of keys and values in the current map scope
     $keys: map-keys($needle);
     $values: map-values($needle);
@@ -146,17 +147,23 @@
 
       // check in the $needle
       $newkey: _a_get($needle, $key);
+      $keytype: type-of($newkey);
       $newvalue: _a_get($needle, $value);
+      $valuetype: type-of($newvalue);
 
-      // if the key isn't found in the $needle or is a #reference, check the $haystack with the $newkey
+      // if the key isn't found in the $needle or is a #reference,
+      // check the $haystack with the $newkey
       @if type-of($newkey) != 'string' or str-index($newkey, "#") {
         $newkey: _a_get($haystack, $newkey);
       }
 
-      // if the value isn't found in the $needle or is a #reference, check the $haystack
-      @if type-of($newvalue) != 'string' or str-index($newvalue, "#") {
-        // if we're dealing with a map or a #reference, search with the $newvalue
-        @if type-of($newvalue) == 'map' or (type-of($newvalue) == 'string' and str-index($newvalue, "#")) {
+      // if the value isn't found in the $needle or is a #reference,
+      // check the $haystack
+      @if ($valuetype != 'string') or str-index($newvalue, "#") {
+        // if we're dealing with a map or a #reference,
+        // search with the $newvalue
+        @if ($valuetype == 'map')
+          or (($valuetype == 'string') and str-index($newvalue, "#")) {
           $newvalue: _a_get($haystack, $newvalue);
         }
         // otherwise, search with the original value
@@ -171,6 +178,7 @@
 
       // erase $new to guarantee a fresh map
       $new: ();
+
       // rebuild the map from the new keys and values
       @each $k in $keys {
         $new: map-merge($new, (
