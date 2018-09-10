@@ -40,11 +40,69 @@
       11.5s
     );
   }
+}
 
-  @include it('Traverses nested maps in a single get') {
+
+// Deep Token Get
+// ---------
+@include describe('Deep Token Get [function]') {
+  $map: (
+    'this': 0,
+    'this->that': 1,
+    'foo': (
+      'baz': 2,
+      'three': (
+        'abc': '#baz',
+        'def': '#this'
+      ),
+    ),
+    'ofo': (
+      'zab': 4
+    ),
+    'fop': '#foo->baz',
+    'fta': '#foo->three->abc',
+    'ftb': '#foo->three->def',
+
+    // These two tests illustrate the tolerance for `->` in keys/values
+    // 'bar': '#this->that', // 1 [-> used in valid key]
+    // 'bip': 'this->that', // this->that [not a hashtag]
+
+    'dop': '#ofo->nope',
+    'dip': '#this->baz',
+  );
+
+  @include it('Can start with a simple parent->child lookup') {
     @include assert-equal(
-      [get-token($haystack, 'nest->find'), get-token($haystack, 'nest->alias'), get-token($haystack, 'nest->again->find')],
-      ['this', 1s, 0.5s]
+      get-token($map, 'foo->baz'),
+      2
+    );
+  }
+
+  @include it('Handles parent->child hashes in values') {
+    @include assert-equal(
+      get-token($map, 'fop'),
+      2
+    );
+  }
+
+  @include it('Handles multi-level hashes and references') {
+    @include assert-equal(
+      [get-token($map, 'fta'), get-token($map, 'ftb')],
+      [2,0]
+    );
+  }
+
+  // @include it('Tolerates `->` in keys and values') {
+  //   @include assert-equal(
+  //     [get-token($map, 'bar'), get-token($map, 'bip')],
+  //     [1,'this->that']
+  //   );
+  // }
+
+  @include it('Fails elegantly when keys are not found') {
+    @include assert-equal(
+      [get-token($map, 'dop'), get-token($map, 'dip')],
+      ['("zab": 4)->nope', '#this->baz']
     );
   }
 }
