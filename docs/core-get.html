@@ -771,6 +771,85 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 
           
             <span class='code-description'>
+              Find nested values in a single get
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$map: (
+  &#39;nested&#39;: (
+    &#39;key&#39;: 2,
+    &#39;deep&#39;: (
+      &#39;key&#39;: 3
+    )
+  ),
+);
+/*! Nested Value: #{get-token($map, &#39;nested-&gt;key&#39;)} */
+/*! Deeply Nested Value: #{get-token($map, &#39;nested-&gt;deep-&gt;key&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! Nested Value: 2 */
+/*! Deeply Nested Value: 3 */
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
               Write your own shortcut plugin for specific maps
             </span>
           
@@ -1200,6 +1279,40 @@ $my-map: (&#39;main&#39;: 32em);
     
   </div>
 
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_parse()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
 
         
       
