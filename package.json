@@ -1,7 +1,7 @@
 {
   "name": "accoutrement",
   "title": "Accoutrement",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "Sass design-systems management and utilities.",
   "homepage": "http://oddbird.net/accoutrement/",
   "repository": {
