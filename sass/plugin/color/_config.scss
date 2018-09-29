@@ -96,3 +96,10 @@ $colors: () !default;
 ) {
   $colors: _a_map-multimerge($colors, $maps...) !global;
 }
+
+
+@mixin css-colors(
+  $map: $colors
+) {
+  @include css-variables($map, 'color-');
+}

@@ -1,0 +1,90 @@
+// CSS Variables
+// =============
+@include test-module('Core CSS Variables') {
+
+
+$test: (
+  'brand': hsl(120, 50%, 50%),
+  'text': '#brand' (get-function('shade'): 50%),
+  'border': '#text',
+);
+
+
+// CSS Variables [mixin]
+// ---------------------
+@include describe('CSS Variables [mixin]') {
+  @include it('Converts a map into css custom properties') {
+    @include assert {
+      @include output {
+        @include css-variables($test);
+      }
+
+      @include expect {
+        --brand: #{get-token($test, 'brand')};
+        --text: #{get-token($test, 'text')};
+        --border: var(--text, #{get-token($test, 'border')});
+      }
+    }
+  }
+
+  @include it('Optionally adds a prefix') {
+    @include assert {
+      @include output {
+        @include css-variables($test, 'test-');
+      }
+
+      @include expect {
+        --test-brand: #{get-token($test, 'brand')};
+        --test-text: #{get-token($test, 'text')};
+        --test-border: var(--test-text, #{get-token($test, 'border')});
+      }
+    }
+  }
+}
+
+
+// Var Token [function]
+// --------------------
+@include describe('Var Token [function]') {
+  @include it('Returns a variable with generated fallback') {
+    @include assert-equal(
+      var-token($test, 'brand'),
+      var(--brand, get-token($test, 'brand'))
+    );
+  }
+
+  @include it('Optionally uses no fallback') {
+    @include assert-equal(
+      var-token($test, 'text', false),
+      var(--text)
+    );
+  }
+
+  @include it('Optionally uses var fallback') {
+    @include assert-equal(
+      var-token($test, 'text', 'brand'),
+      var(--text, --brand)
+    );
+  }
+
+  @include it('Optionally uses custom fallback') {
+    @include assert-equal(
+      var-token($test, 'text', red),
+      var(--text, red)
+    );
+  }
+
+  @include it('Optionally adds a prefix') {
+    @include assert-equal(
+      var-token($test, 'text', 'brand', 'color-'),
+      var(--color-text, --color-brand)
+    );
+
+    @include assert-equal(
+      var-token($test, 'text', red, 'color-'),
+      var(--color-text, red)
+    );
+  }
+}
+
+} // end module

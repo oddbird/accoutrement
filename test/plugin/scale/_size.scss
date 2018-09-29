@@ -1,5 +1,6 @@
 // Scale Tests
 // ===========
+@include test-module('Scale: Size') {
 
 
 // Size [function]
@@ -191,3 +192,5 @@
     }
   }
 }
+
+} // end module

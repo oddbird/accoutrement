@@ -1,0 +1,43 @@
+// CSS Variables
+// =============
+
+
+@mixin css-variables(
+  $map,
+  $prefix: null
+) {
+  @each $token, $val in $map {
+    $key: unquote('--#{$prefix}#{$token}');
+    $ref: false;
+
+    @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
+      $ref: str-slice($val, 2);
+      $ref: if(map-has-key($map, $ref), unquote('--#{$prefix}#{$ref}'), false);
+    }
+
+    $val: get-token($map, $token);
+    $val: if($ref, var($ref, $val), $val);
+
+    #{$key}: $val;
+  }
+}
+
+
+@function var-token(
+  $map,
+  $token,
+  $fallback: true,
+  $prefix: null
+) {
+  $var: unquote('--#{$prefix}#{$token}');
+
+  @if ($fallback == true) {
+    @return var($var, get-token($map, $token));
+  } @else if (map-has-key($map, $fallback)) {
+    @return var($var, unquote('--#{$prefix}#{$fallback}'));
+  } @else if $fallback {
+    @return var($var, $fallback);
+  }
+
+  @return var($var);
+}

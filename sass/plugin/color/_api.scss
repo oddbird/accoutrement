@@ -51,3 +51,12 @@
 ) {
   @return get-token($source, $color, $do);
 }
+
+
+@function var-color(
+  $color,
+  $fallback: true,
+  $source: $colors
+) {
+  @return var-token($source, $color, $fallback, 'color-');
+}

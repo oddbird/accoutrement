@@ -72,4 +72,42 @@
   }
 }
 
+
+// Var-Color [function]
+// --------------------
+@include describe('Var-Color [function]') {
+  @include it('Accesses a color variable with default fallback') {
+    @include assert-equal(
+      var-color('simple'),
+      var(--color-simple, get-token($colors, 'simple'))
+    );
+  }
+
+  @include it('Allows custom fallback') {
+    @include assert-equal(
+      var-color('simple', red),
+      var(--color-simple, red)
+    );
+  }
+
+  @include it('Allows false fallback') {
+    @include assert-equal(
+      var-color('simple', false),
+      var(--color-simple)
+    );
+  }
+
+  @include it('Accepts custom palette') {
+    $my-palette: (
+      'my-base': #393,
+      'my-adjustment': '#my-base' ('shade': 10%),
+    );
+
+    @include assert-equal(
+      var-color('my-adjustment'),
+      var(--color-my-adjustment, color('my-adjustment'))
+    );
+  }
+}
+
 } // end module
