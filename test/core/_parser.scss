@@ -64,11 +64,11 @@
     'ftb': '#foo->three->def',
 
     // These two tests illustrate the tolerance for `->` in keys/values
-    // 'bar': '#this->that', // 1 [-> used in valid key]
-    // 'bip': 'this->that', // this->that [not a hashtag]
+    'bar': '#this->that', // 1 [-> used in valid key]
+    'bip': 'this->that', // this->that [not a hashtag]
 
     'dop': '#ofo->nope',
-    'dip': '#this->baz',
+    'dip': '#that->baz',
   );
 
   @include it('Can start with a simple parent->child lookup') {
@@ -92,17 +92,17 @@
     );
   }
 
-  // @include it('Tolerates `->` in keys and values') {
-  //   @include assert-equal(
-  //     [get-token($map, 'bar'), get-token($map, 'bip')],
-  //     [1,'this->that']
-  //   );
-  // }
+  @include it('Tolerates `->` in keys and values') {
+    @include assert-equal(
+      [get-token($map, 'bar'), get-token($map, 'bip')],
+      [1,'this->that']
+    );
+  }
 
   @include it('Fails elegantly when keys are not found') {
     @include assert-equal(
       [get-token($map, 'dop'), get-token($map, 'dip')],
-      ['("zab": 4)->nope', '#this->baz']
+      ['("zab": 4)->nope', '#that->baz']
     );
   }
 }

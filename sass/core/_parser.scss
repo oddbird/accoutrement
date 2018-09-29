@@ -57,9 +57,18 @@
   $key,
   $do: null
 ) {
-  $key: map-get($map, $key) or $key;
-  $key: _a_get($map, $key);
-  @return _a_do-each($map, $key, $do);
+  $val: map-get($map, $key) or $key;
+
+  // Handle deep keys
+  @if ($val == $key)
+    and (type-of($key) == 'string')
+    and str-index($key, '->')
+    and not (str-index($key, '#') == 1) {
+    $val: '##{$key}';
+  }
+
+  $val: _a_get($map, $val);
+  @return _a_do-each($map, $val, $do);
 }
 
 
@@ -147,6 +156,7 @@
   // handle map values…
   @if ($type == 'map') {
     $new: ();
+
     // create a list of keys and values in the current map scope
     $keys: map-keys($needle);
     $values: map-values($needle);
@@ -157,17 +167,23 @@
 
       // check in the $needle
       $newkey: _a_get($needle, $key);
+      $keytype: type-of($newkey);
       $newvalue: _a_get($needle, $value);
+      $valuetype: type-of($newvalue);
 
-      // if the key isn't found in the $needle or is a #reference, check the $haystack with the $newkey
+      // if the key isn't found in the $needle or is a #reference,
+      // check the $haystack with the $newkey
       @if type-of($newkey) != 'string' or str-index($newkey, "#") {
         $newkey: _a_get($haystack, $newkey);
       }
 
-      // if the value isn't found in the $needle or is a #reference, check the $haystack
-      @if type-of($newvalue) != 'string' or str-index($newvalue, "#") {
-        // if we're dealing with a map or a #reference, search with the $newvalue
-        @if type-of($newvalue) == 'map' or (type-of($newvalue) == 'string' and str-index($newvalue, "#")) {
+      // if the value isn't found in the $needle or is a #reference,
+      // check the $haystack
+      @if ($valuetype != 'string') or str-index($newvalue, "#") {
+        // if we're dealing with a map or a #reference,
+        // search with the $newvalue
+        @if ($valuetype == 'map')
+          or (($valuetype == 'string') and str-index($newvalue, "#")) {
           $newvalue: _a_get($haystack, $newvalue);
         }
         // otherwise, search with the original value
@@ -182,6 +198,7 @@
 
       // erase $new to guarantee a fresh map
       $new: ();
+
       // rebuild the map from the new keys and values
       @each $k in $keys {
         $new: map-merge($new, (
@@ -194,27 +211,6 @@
   }
 
   @if ($type == 'string') {
-    $sep: '->';
-
-    @if str-index($needle, $sep) {
-      $parentStr: _a_str-replace( str-slice( $needle, 1, ( str-index($needle, $sep) - 1 ) ), '#', '');
-      $childStr: str-slice( $needle, ( str-index($needle, $sep) + str-length($sep) ) );
-
-      $parent: map-get( $haystack, $parentStr );
-      @if type-of( $parent ) != 'map' {
-        // @warn "Parent map `#{$parentStr}` doesn't exist.";
-        @return $needle;
-      }
-
-      $childTok: get-token( $parent, $childStr );
-      @if $childTok == $childStr {
-        // @warn "No child `#{$childStr}` found in parent `#{$parent}`.";
-        @return '#{$parent}#{$sep}#{$childStr}';
-      }
-
-      @return get-token( $haystack, get-token( $parent, $childTok ) );
-    }
-
     $needle: _a_replace($haystack, $needle);
   }
 
@@ -225,7 +221,7 @@
 // Replace
 // -------
 /// Search for `#alias` mentions within a string,
-/// and return a list of unique mentions with `#` removed.
+/// and return the string with aliases replaced.
 ///
 /// @access private
 ///
@@ -247,6 +243,16 @@
 
       @if (type-of($string) == 'string') and str-index($string, $hash) {
         $new: get-token($haystack, $key);
+
+        @if (type-of($new) == 'map') and str-index($string, '#{$hash}->') {
+          $deep: _a_str-replace($string, '#{$hash}->', '#', 'all');
+          $try: _a_replace($new, $deep);
+
+          @if ($try != $deep) {
+            @return $try;
+          }
+        }
+
         $string: _a_str-replace($string, $hash, $new, 'all');
       }
     }
