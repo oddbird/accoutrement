@@ -1,7 +1,12 @@
 # Accoutrement Changelog
 
+## 1.0.1 - 09/08/18
+- BUGFIX: Typos, including the `cinema` ratio spelling
+  (thanks to @biw-joelschou)
+- BUGFIX: Improved consistency of nested-map parser
+  (thanks to @biw-joelschou)
 
-## 1.0.0 - UNRELEASED
+## 1.0.0 - 08/08/18
 - The stable 1.0 release is identical to `-beta.3`,
   see change details below
 
