@@ -10,6 +10,14 @@
     'slow': 3s,
     'delay': 0.5s,
     'key': '#slow',
+    'nest': (
+      'slow': 1s,
+      'find': 'this',
+      'alias': '#slow',
+      'again': (
+        'find': '#delay',
+      )
+    ),
   );
 
   @include it('Can start with a simple map key') {
@@ -26,10 +34,17 @@
     );
   }
 
-  @include it('Handles on-th-fly adjustments with $do') {
+  @include it('Handles on-the-fly adjustments with $do') {
     @include assert-equal(
       get-token($haystack, 'key', ('octave': 2, 'minus': '#delay')),
       11.5s
+    );
+  }
+
+  @include it('Traverses nested maps in a single get') {
+    @include assert-equal(
+      [get-token($haystack, 'nest->find'), get-token($haystack, 'nest->alias'), get-token($haystack, 'nest->again->find')],
+      ['this', 1s, 0.5s]
     );
   }
 }
