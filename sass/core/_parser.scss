@@ -191,7 +191,7 @@
   }
 
   @if ($type == 'string') {
-   $needle: _a_replace($haystack, $needle);
+    $needle: _a_replace($haystack, $needle);
   }
 
   @return $needle;
