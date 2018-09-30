@@ -4,11 +4,9 @@
 
 // Tint
 // ----
-/// Mix a color with `contrast-light` to get a lighter tint.
-///
-/// Uses `white` by default,
-/// but allows overriding
-/// if your global `contrast-light` is set differently.
+/// Mix a color with `contrast-light`
+/// (defaults to `white`)
+/// to get a lighter tint of your color.
 ///
 /// @group color-utils
 ///
@@ -24,12 +22,8 @@
   $color,
   $percentage
 ) {
+  $base: color('contrast-light');
   $color: color($color);
-  $base: white;
-  @if type-of( color('contrast-light') ) == color {
-    $base: color('contrast-light');
-  }
-
   @return mix($base, $color, $percentage);
 }
 @include _a_register-function('tint');
@@ -37,9 +31,9 @@
 
 // Shade
 // -----
-/// Mix a color with `contrast-dark` to get a darker shade.
-///
-/// Uses `black` by default, but allows overriding if your global `contrast-dark` is set differently.
+/// Mix a color with `contrast-dark`
+/// (defaults to `black`)
+/// to get a darker shade of your color.
 ///
 /// @group color-utils
 ///
@@ -55,12 +49,8 @@
   $color,
   $percentage
 ) {
+  $base: color('contrast-dark');
   $color: color($color);
-  $base: black;
-  @if type-of( color('contrast-dark') ) == color {
-    $base: color('contrast-dark');
-  }
-
   @return mix($base, $color, $percentage);
 }
 @include _a_register-function('shade');

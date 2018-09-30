@@ -49,5 +49,6 @@
   $do: null,
   $source: $colors
 ) {
+  $source: map-merge($_a_COLORS, $source);
   @return get-token($source, $color, $do);
 }
