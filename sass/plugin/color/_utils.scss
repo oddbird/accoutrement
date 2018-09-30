@@ -14,17 +14,18 @@
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @param {Percentage} $percentage -
-///   The percentage of `contrast-light` to mix in.
+///   The percentage of a `$light` color to mix in.
 ///   Higher percentages will result in a lighter tint.
+/// @param {Color | String} $light ['contrast-light'] -
+///   The lighter color to be mixed in for tinting.
 /// @return {Color} -
 ///   A calculated css-ready color-value based on your global color palette.
 @function tint(
   $color,
-  $percentage
+  $percentage,
+  $light: 'contrast-light'
 ) {
-  $base: color('contrast-light');
-  $color: color($color);
-  @return mix($base, $color, $percentage);
+  @return mix(color($light), color($color), $percentage);
 }
 @include _a_register-function('tint');
 
@@ -41,16 +42,17 @@
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @param {Percentage} $percentage -
-///   The percentage of `contrast-dark` to mix in.
-///   Higher percentages will result in a darker shade.
+///   The percentage of a `$dark` color to mix in.
+///   Higher percentages will result in a lighter tint.
+/// @param {Color | String} $dark ['contrast-dark'] -
+///   The darker color to be mixed in for shading.
 /// @return {Color} -
 ///   A calculated css-ready color-value based on your global color palette.
 @function shade(
   $color,
-  $percentage
+  $percentage,
+  $base: 'contrast-dark'
 ) {
-  $base: color('contrast-dark');
-  $color: color($color);
-  @return mix($base, $color, $percentage);
+  @return mix(color($dark), color($color), $percentage);
 }
 @include _a_register-function('shade');
