@@ -51,7 +51,7 @@
 @function shade(
   $color,
   $percentage,
-  $base: 'contrast-dark'
+  $dark: 'contrast-dark'
 ) {
   @return mix(color($dark), color($color), $percentage);
 }
