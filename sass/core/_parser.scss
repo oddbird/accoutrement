@@ -25,17 +25,6 @@
 ///     ),
 ///   );
 ///   /*! New Value: #{get-token($map, 'new-value')} */
-/// @example scss - Find nested values in a single get
-///   $map: (
-///     'nested': (
-///       'key': 2,
-///       'deep': (
-///         'key': 3
-///       )
-///     ),
-///   );
-///   /*! Nested Value: #{get-token($map, 'nested->key')} */
-///   /*! Deeply Nested Value: #{get-token($map, 'nested->deep->key')} */
 /// @example scss - Write your own shortcut plugin for specific maps
 ///   @function get($key) {
 ///     @return get-token($my-map, $key);

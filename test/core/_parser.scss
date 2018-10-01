@@ -10,14 +10,6 @@
     'slow': 3s,
     'delay': 0.5s,
     'key': '#slow',
-    'nest': (
-      'slow': 1s,
-      'find': 'this',
-      'alias': '#slow',
-      'again': (
-        'find': '#delay',
-      )
-    ),
   );
 
   @include it('Can start with a simple map key') {
