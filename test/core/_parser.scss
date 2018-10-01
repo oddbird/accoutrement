@@ -26,7 +26,7 @@
     );
   }
 
-  @include it('Handles on-th-fly adjustments with $do') {
+  @include it('Handles on-the-fly adjustments with $do') {
     @include assert-equal(
       get-token($haystack, 'key', ('octave': 2, 'minus': '#delay')),
       11.5s

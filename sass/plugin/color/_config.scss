@@ -29,7 +29,7 @@
 ///
 /// The color-names `contrast-light` and `contrast-dark` are special.
 /// Use those names to define the default light-and-dark options
-/// for our color-contrast tools.
+/// for our color-contrast tools, as well as tint and shade.
 /// They default to `white` and `black` respectively.
 ///
 /// @since 0.1.0 -
@@ -56,6 +56,21 @@
 ///
 /// @type map
 $colors: () !default;
+
+
+// Default Colors
+// --------------
+/// These default colors will be used as defaults,
+/// for color-contrast functions
+/// unless they are provided by the user.
+///
+/// @access private
+/// @group color-api
+/// @type map
+$_a_COLORS: (
+  'contrast-light': white,
+  'contrast-dark': black,
+);
 
 
 // Add Colors
