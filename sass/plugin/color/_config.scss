@@ -86,7 +86,7 @@ $colors: () !default;
 ///
 ///   @include add-colors($brand-colors, $text-colors);
 ///
-/// @parameter {map...} $maps -
+/// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
 /// @output -
 ///   An updated global `$colors` variable,
