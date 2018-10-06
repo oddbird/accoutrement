@@ -75,7 +75,7 @@ $sizes: (
 ///   );
 ///   @include add-sizes($text-sizes);
 ///
-/// @parameter {map...} $maps -
+/// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
 /// @output -
 ///   An updated global `$sizes` variable,

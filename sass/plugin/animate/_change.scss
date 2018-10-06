@@ -88,7 +88,7 @@ $changes: () !default;
 ///
 /// @group animate-change
 ///
-/// @parameter {map...} $maps -
+/// @param {map...} $maps -
 ///   Pass any number of maps to be merged and added
 /// @output -
 ///   An updated global `$changes` variable,
