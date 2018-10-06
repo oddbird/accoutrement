@@ -7,18 +7,22 @@
   $prefix: null
 ) {
   @each $token, $val in $map {
-    $key: unquote('--#{$prefix}#{$token}');
-    $ref: false;
+    @if not _a_is-private-token($token) {
+      $alias: false;
 
-    @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
-      $ref: str-slice($val, 2);
-      $ref: if(map-has-key($map, $ref), unquote('--#{$prefix}#{$ref}'), false);
+      @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
+        $try: str-slice($val, 2);
+
+        @if map-has-key($map, $try) {
+          $alias: unquote('--#{$prefix}#{$try}');
+        }
+      }
+
+      $key: unquote('--#{$prefix}#{$token}');
+      $val: get-token($map, $token);
+      $val: if($alias, var($alias, $val), $val);
+      #{$key}: $val;
     }
-
-    $val: get-token($map, $token);
-    $val: if($ref, var($ref, $val), $val);
-
-    #{$key}: $val;
   }
 }
 

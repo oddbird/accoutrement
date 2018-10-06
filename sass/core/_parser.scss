@@ -343,3 +343,32 @@
     '_a_do'
   );
 }
+
+
+// Is Private Token
+// ----------------
+/// Check if a token key is marked as private
+/// with `_` or `-` as the starting character
+///
+/// @access private
+///
+/// @param {*} $key -
+///   The token key to check for private prefix
+///   (only string and list keys can be marked as private)
+/// @return {boolean} -
+///   True if the key is private
+@function _a_is-private-token(
+  $key
+) {
+  $pre: '_' '-';
+
+  @if (type-of($key) == 'list') {
+    $key: nth($key, 1);
+  }
+
+  @if (type-of($key) == 'string') and (index($pre, str-slice($key, 1, 1))) {
+    @return true;
+  }
+
+  @return false;
+}

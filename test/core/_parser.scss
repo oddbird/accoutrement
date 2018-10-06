@@ -425,4 +425,58 @@
   }
 }
 
+// Is-Private Token [function]
+// ---------------------------
+@include describe('Is-Private Token [function]') {
+  @include it('Returns true for string tokens starting with _') {
+    @include assert-true(
+      _a_is-private-token('_hello')
+    );
+
+    @include assert-true(
+      _a_is-private-token('_')
+    );
+  }
+
+  @include it('Returns true for string tokens starting with -') {
+    @include assert-true(
+      _a_is-private-token('-hello')
+    );
+
+    @include assert-true(
+      _a_is-private-token('-')
+    );
+  }
+
+  @include it('Returns true for list tokens starting with private string') {
+    @include assert-true(
+      _a_is-private-token('_hello' 'world')
+    );
+
+    @include assert-true(
+      _a_is-private-token('_' 32)
+    );
+  }
+
+  @include it('Returns false for un-prefixed tokens') {
+    @include assert-false(
+      _a_is-private-token('hello')
+    );
+
+    @include assert-false(
+      _a_is-private-token(32)
+    );
+  }
+
+  @include it('Returns false for un-prefixed lists') {
+    @include assert-false(
+      _a_is-private-token('hello' 'world')
+    );
+
+    @include assert-false(
+      _a_is-private-token(32 'world')
+    );
+  }
+}
+
 } // end module
