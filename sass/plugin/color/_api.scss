@@ -15,7 +15,7 @@
 /// but you can also pass in arbitrary color-palette maps as well.
 ///
 /// @since 1.0.0 -
-/// - BEAKING: Renamed `$palette` arg to `$source`
+/// - BREAKING: Renamed `$palette` arg to `$source`
 /// - BREAKING: Accepts `$do` argument
 ///   between `$color` and `$source`
 ///
@@ -49,6 +49,7 @@
   $do: null,
   $source: $colors
 ) {
+  $source: map-merge($_a_COLORS, $source);
   @return get-token($source, $color, $do);
 }
 

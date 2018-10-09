@@ -56,18 +56,32 @@
     );
   }
 
-  @include it('Works with a custom palette') {
-    $my-palette: (
-      'my-base': #393,
-      'my-adjustment': '#my-base' ('shade': 10%),
-    );
+  $my-palette: (
+    'my-base': #393,
+    'my-adjustment': '#my-base' ('shade': 10%),
+  );
 
+  @include it('Works with a custom palette') {
     $expect: map-get($my-palette, 'my-base');
     $expect: shade($expect, 10%);
 
     @include assert-equal(
       color('my-adjustment', $source: $my-palette),
       $expect
+    );
+  }
+
+  @include it('Has a default contrast-light') {
+    @include assert-equal(
+      color('contrast-light', $source: $my-palette),
+      white
+    );
+  }
+
+  @include it('Has a default contrast-dark') {
+    @include assert-equal(
+      color('contrast-dark', $source: $my-palette),
+      black
     );
   }
 }

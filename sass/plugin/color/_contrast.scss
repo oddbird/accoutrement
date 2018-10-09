@@ -55,8 +55,10 @@ $WCAG-CONTRAST: (
 ) {
   // Establish default options if they are missing
   @if length($options) == 0 {
-    $options: append($options, map-get($colors, 'contrast-light') or white);
-    $options: append($options, map-get($colors, 'contrast-dark') or black);
+    $options: (
+      color('contrast-light'),
+      color('contrast-dark'),
+    );
   } @else if length($options) == 1 {
     @return _a_error(
       'Provide at least two contrasting color options for `$options`',
@@ -114,7 +116,7 @@ $WCAG-CONTRAST: (
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
 ///   or your `contrast-light` and `contrast-dark` settings
-///   if they are prodided in the global `$colors` map.
+///   if they are provided in the global `$colors` map.
 /// @output -
 ///   Sets the `background-color` to `$background`
 ///   and the foreground `color` to

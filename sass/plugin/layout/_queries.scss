@@ -17,6 +17,8 @@
 ///   for internal references and adjustments
 ///
 /// @group layout-queries
+/// @link https://zellwk.com/blog/media-query-units/
+///   PX, EM, or REM Media Queries?
 /// @example scss - defining breakpoints
 ///   $breakpoints: (
 ///     'small': 30em,
@@ -90,9 +92,17 @@ $breakpoints: () !default;
 // -------------
 /// Generate a max–<`width`/`height`> query,
 /// for styling elements below the given viewport width.
+///
 /// To help with overlapping min/max queries,
-/// we remove `1px` (or `0.01em`) from every max value
-/// to avoid media-query overlap.
+/// we remove `1px` (or `0.01em`) from every max value by default.
+/// You can adjust that setting
+/// to adjust min values
+/// or avoid adjustments
+/// using the global `$adjust-query-overlap` setting.
+///
+/// @since 2.0.0 -
+/// - BREAKING: min/max adjustments applied to all units (not only px/em/rem)
+/// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
 ///
 /// @group layout-queries
 /// @example scss -
@@ -106,9 +116,6 @@ $breakpoints: () !default;
 ///     html { background: red; }
 ///   }
 ///
-/// @link https://zellwk.com/blog/media-query-units/ PX, EM, or REM Media Queries?
-/// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints
-///
 /// @param {length | string} $max -
 ///   The name of a documented breakpoint/size,
 ///   or an arbitarty length to use in the query.
@@ -120,7 +127,7 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value: break($max);
-  $value: _a_fix-max($value);
+  $value: _a_nudge-query($value, 'max');
 
   @media (max-#{$prop}: #{$value}) {
     @content;
@@ -132,6 +139,17 @@ $breakpoints: () !default;
 // -------------
 /// Generate a min-<`width`/`height`> query,
 /// for styling elements above the given viewport width.
+///
+/// To help with overlapping min/max queries,
+/// we remove `1px` (or `0.01em`) from max values by default.
+/// You can adjust that setting
+/// to adjust min values
+/// or avoid adjustments
+/// using the global `$adjust-query-overlap` setting.
+///
+/// @since 2.0.0 -
+/// - BREAKING: min/max adjustments applied to all units (not only px/em/rem)
+/// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
 ///
 /// @group layout-queries
 /// @example scss -
@@ -147,7 +165,7 @@ $breakpoints: () !default;
 ///
 /// @param {length | string} $min -
 ///   The name of a documented breakpoint/size,
-///   or an arbitarty length to use in the query.
+///   or an arbitrary length to use in the query.
 /// @param {'width' | 'height'} $prop ['width'] -
 ///   The property (width or height) to test against,
 ///   for a result of e.g. `(min-width: 30em)`.
@@ -156,6 +174,7 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value: break($min);
+  $value: _a_nudge-query($value, 'min');
 
   @media (min-#{$prop}: #{$value}) {
     @content;
@@ -167,9 +186,17 @@ $breakpoints: () !default;
 // ---------------
 /// Generate a min-and-max-<`width`/`height`> query,
 /// for styling elements between given viewport widths.
+///
 /// To help with overlapping min/max queries,
-/// we remove `1px` (or `0.01em`) from every max value
-/// to avoid media-query overlap.
+/// we remove `1px` (or `0.01em`) from every max value by default.
+/// You can adjust that setting
+/// to adjust min values
+/// or avoid adjustments
+/// using the global `$adjust-query-overlap` setting.
+///
+/// @since 2.0.0 -
+/// - BREAKING: min/max adjustments applied to all units (not only px/em/rem)
+/// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
 ///
 /// @group layout-queries
 /// @example scss -
@@ -186,9 +213,6 @@ $breakpoints: () !default;
 ///     html { background: yellow; }
 ///   }
 ///
-/// @link https://zellwk.com/blog/media-query-units/ PX, EM, or REM Media Queries?
-/// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints
-///
 /// @param {length | string} $min -
 ///   The name of a documented breakpoint/size,
 ///   or an arbitarty length to use as a minimum in the query.
@@ -204,8 +228,9 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value-min: break($min);
+  $value-max: _a_nudge-query($value-min, 'min');
   $value-max: break($max);
-  $value-max: _a_fix-max($value-max);
+  $value-max: _a_nudge-query($value-max, 'max');
 
   @media (min-#{$prop}: #{$value-min}) and (max-#{$prop}: #{$value-max}) {
     @content;

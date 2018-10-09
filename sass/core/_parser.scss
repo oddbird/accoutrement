@@ -46,9 +46,18 @@
   $key,
   $do: null
 ) {
-  $key: map-get($map, $key) or $key;
-  $key: _a_get($map, $key);
-  @return _a_do-each($map, $key, $do);
+  $val: map-get($map, $key) or $key;
+
+  // Handle deep keys
+  @if ($val == $key)
+    and (type-of($key) == 'string')
+    and str-index($key, '->')
+    and not (str-index($key, '#') == 1) {
+    $val: '##{$key}';
+  }
+
+  $val: _a_get($map, $val);
+  @return _a_do-each($map, $val, $do);
 }
 
 
@@ -201,7 +210,7 @@
 // Replace
 // -------
 /// Search for `#alias` mentions within a string,
-/// and return a list of unique mentions with `#` removed.
+/// and return the string with aliases replaced.
 ///
 /// @access private
 ///
@@ -223,6 +232,16 @@
 
       @if (type-of($string) == 'string') and str-index($string, $hash) {
         $new: get-token($haystack, $key);
+
+        @if (type-of($new) == 'map') and str-index($string, '#{$hash}->') {
+          $deep: _a_str-replace($string, '#{$hash}->', '#', 'all');
+          $try: _a_replace($new, $deep);
+
+          @if ($try != $deep) {
+            @return $try;
+          }
+        }
+
         $string: _a_str-replace($string, $hash, $new, 'all');
       }
     }

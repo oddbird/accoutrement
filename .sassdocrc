@@ -14,7 +14,7 @@ groups:
     core-math: 'Math Helpers'
     core-scale: 'Modular Scales'
     core-lists: 'Sass List Utils'
-    core-strings: 'Sass Strings Utils'
+    core-strings: 'Sass String Utils'
     core-register: 'Function Registration'
   'Init (Normalization)':
     init: 'QuickStart: Init'
