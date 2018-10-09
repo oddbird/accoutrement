@@ -10,6 +10,7 @@ groups:
   'Core (Parser)':
     core: 'QuickStart: Core'
     core-get: 'Accessing Maps'
+    core-vars: 'CSS Variables'
     core-math: 'Math Helpers'
     core-scale: 'Modular Scales'
     core-lists: 'Sass List Utils'

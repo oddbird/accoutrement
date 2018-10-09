@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Easing &amp; Steps | Accoutrement Documentation</title>
+  <title>CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -102,7 +102,7 @@
   
   
     <li class="nav-item">
-      <a href="core-vars.html" data-nav="is-not-active">CSS Variables</a>
+      <a href="core-vars.html" data-nav="is-active">CSS Variables</a>
     </li>
   
   
@@ -182,7 +182,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-ease.html" data-nav="is-active">Easing &amp;<span class="widont">&nbsp;</span>Steps</a>
+      <a href="animate-ease.html" data-nav="is-not-active">Easing &amp;<span class="widont">&nbsp;</span>Steps</a>
     </li>
   
   
@@ -354,11 +354,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Easing &amp; Steps</strong>
+    <strong>CSS Variables</strong>
   </nav>
 
 
-        <div data-page="animate-ease">
+        <div data-page="core-vars">
           
   
     
@@ -383,156 +383,23 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="easing-steps">Easing &amp; Steps</h1>
-<p>Whether you are using CSS-named easing,
-like <code>ease-in-out</code> and <code>linear</code>,
-or defining your own easing
-with <code>cubic-bezier()</code> and <code>steps()</code>/<code>frames()</code> –
-we’ll help you organize and standardize your values
-in a single location.
-We also provide a classic set of built-in easing functions,
-which you can rename, access, or override as<span class="widont">&nbsp;</span>desired.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--easing">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--easing" class="item-name">$easing</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$easing: () !default;</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>A variable storing the map of
-all easing globally-avialble on your project.
-Any easing added to the <code>$easing</code> map will be accesible
-to the <code>ease()</code> function by<span class="widont">&nbsp;</span>default.</p>
-<p>Define each easing with a <code>name</code> and <code>value</code>…</p>
-<pre><code>$easing: (
-  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
-  'sidebar-in': ease-out,
-  'sidebar-out': '#in-back',
-  'modal-in': '#sidebar-in',
-);
-</code></pre>
+      <h1 id="css-variables">CSS Variables</h1>
+<p><em>aka “Custom Properties”</em></p>
+<p>CSS variables are a useful way to manage
+values that might change in relation to the DOM –
+something that Sass variables cannot do.
+In many cases,
+we find it helpful to manage variables in Sass,
+and output CSS properties as-needed.
+These tools help integrate Accoutrement map values
+with CSS variables
+to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
+<p>Some of the use-cases covered here
+can be written more simply in pure CSS.
+but these tools provide two main<span class="widont">&nbsp;</span>advantages:</p>
 <ul>
-<li>Name your easing anything –
-from abstractions like <code>elastic</code>,
-to concrete patterns like <code>sidebar-in</code>.</li>
-<li>Values can be CSS-ready easing functions,
-or references other easings in the<span class="widont">&nbsp;</span>map.</li>
+<li>Core logic allows plugins to build additional<span class="widont">&nbsp;</span>shortcuts</li>
+<li>Explicit relationships make code more<span class="widont">&nbsp;</span>meaningful</li>
 </ul>
 
       
@@ -547,8 +414,6 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
     </div>
   
 
-  </div>
-
   
 
   
@@ -571,57 +436,6 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
   
     
     
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-ease.html#mixin--add-easing" class="item-name">add-easing()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-    
-  </div>
-
   
 
   
@@ -651,7 +465,7 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
 
 
 
-<section class="item" id="variable--_a_EASING">
+<section class="item" id="mixin--css-tokens">
   
     
   
@@ -665,216 +479,11 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type"></span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#variable--_a_EASING" class="item-name">$_a_EASING</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$_a_EASING: (
-  &#39;in&#39;: ease-in,
-  &#39;out&#39;: ease-out,
-  &#39;in-out&#39;: ease-in-out,
-  &#39;in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
-  &#39;in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
-  &#39;in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
-  &#39;in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
-  &#39;in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
-  &#39;in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
-  &#39;in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
-  &#39;in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
-  &#39;out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
-  &#39;out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
-  &#39;out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
-  &#39;out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
-  &#39;out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
-  &#39;out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
-  &#39;out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
-  &#39;out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
-  &#39;in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
-  &#39;in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
-  &#39;in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
-  &#39;in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
-  &#39;in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
-  &#39;in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
-  &#39;in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
-  &#39;in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
-);</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>A classic set of built-in easing functions,
-if you don’t want to define your own.
-Don’t edit this map directly,
-but feel free to reference these values
-from the user-defined <code>$easing</code> map.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease.html#function--ease" class="item-name">ease()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--ease">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--ease" class="item-name">ease()</a>
+        <a href="#mixin--css-tokens" class="item-name">css-tokens()</a>
       
 
       
@@ -895,22 +504,17 @@ from the user-defined <code>$easing</code> map.</p>
 
   
     <div class="text-block">
-      <p>Access a named easing function in your <code>$easing</code> map.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Accepts <code>$do</code> map argument,
-for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
-<li>NEW: Accepts <code>$source</code> map argument,
-for custom<span class="widont">&nbsp;</span>source-palette</li>
+      <p>Convert any Accoutrement map
+into CSS custom properties (aka<span class="widont">&nbsp;</span>variables).</p>
+<ul>
+<li>Token names that start with <code>_</code> are considered “private”
+and will not be output as<span class="widont">&nbsp;</span>variables</li>
+<li>Tokens that contain a simple alias with no adjustments
+will be output with a <code>var()</code> value,
+keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 </ul>
-</div>
-      </section>
-    
+
+      
   
 
       
@@ -938,7 +542,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -954,63 +558,9 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$name:</span>
-      
-      <span class="item-value">ease</span>
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of an easing in your<span class="widont">&nbsp;</span>configuration</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
+        <span class="item-name">$map:</span>
       
       
-        <span class="item-name">$do:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$source:</span>
-      
-      <span class="item-value">$easing</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1018,8 +568,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
     
       
       <div class="param-details text-block">
-        <p>Optional accoutrement-format map of easings to use as the origin palette
-(in additional to the provided<span class="widont">&nbsp;</span>defaults)</p>
+        <p>Accoutrement map of tokens to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -1027,6 +576,36 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
 
       
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$prefix:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional prefix for naming token<span class="widont">&nbsp;</span>variables</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
 
       
   
@@ -1038,17 +617,19 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">@return</span>
+        <span class="item-name">{CSS output}</span>
       
       
-      <span class="value-type">(length)</span>
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The pre-defined easing</p>
+        <ul>
+<li>Custom properties for all public tokens in the<span class="widont">&nbsp;</span>map</li>
+</ul>
 
       </div>
     
@@ -1059,6 +640,450 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
       
   
 
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;_brand&#39;: hsl(120, 50%, 50%),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
+  &#39;border&#39;: &#39;#text&#39;,
+);
+:root {
+  @include css-tokens($colors, &#39;color-&#39;);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">:root {
+  --color-text: #206020;
+  --color-border: var(--color-text, #206020);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-vars.html#mixin--css-token" class="item-name">css-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_is-private-token()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--css-token">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--css-token" class="item-name">css-token()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Set a single custom property based on a map-token,
+with optional alias, fallback, and<span class="widont">&nbsp;</span>prefixing</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$map:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Accoutrement map of tokens to use as<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$token:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Token name available in the source <code>$map</code></p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$as:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional custom-property name,
+will default to token-name if<span class="widont">&nbsp;</span>false/null</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$prefix:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional prefix used for naming token<span class="widont">&nbsp;</span>variables</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
       
   
 
@@ -1070,13 +1095,100 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
   
   
-
-
-  
-  
-  
-  
     
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;_brand&#39;: hsl(120, 50%, 50%),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
+  &#39;border&#39;: &#39;#text&#39;,
+);
+.example {
+  @include css-token($colors, &#39;border&#39;);
+  @include css-token($colors, &#39;border&#39;, &#39;outline&#39;, red);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --border: var(--text, #206020);
+  --outline: var(--text, red);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
     
   <div data-item-section="requires">
     
@@ -1143,10 +1255,133 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
       
+        <span class="item-name">_a_is-alias()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-ease.html#variable--_a_EASING" class="item-name">$_a_EASING</a>
+  core-vars.html#function--var-token" class="item-name">var-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_var-name()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-vars.html#mixin--css-tokens" class="item-name">css-tokens()</a>
       
       
       
@@ -1163,9 +1398,8 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
   </div>
 
   
-    
-  
 
+    </div>
   
 
   
@@ -1193,7 +1427,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
 
 
-<section class="item" id="mixin--add-easing">
+<section class="item" id="function--var-token">
   
     
   
@@ -1207,11 +1441,11 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@mixin</span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#mixin--add-easing" class="item-name">add-easing()</a>
+        <a href="#function--var-token" class="item-name">var-token()</a>
       
 
       
@@ -1232,10 +1466,8 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
   
     <div class="text-block">
-      <p>Merge individual easing maps into the global <code>$easing</code> variable,
-in case you want to define easings in smaller groups
-such as <code>fade-easing</code>, <code>slide-easing</code>, etc
-before merging them into a single global<span class="widont">&nbsp;</span>easing-palette.</p>
+      <p>Access the CSS variable associated with a given token,
+along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
 
       
   
@@ -1265,7 +1497,7 @@ before merging them into a single global<span class="widont">&nbsp;</span>easing
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
@@ -1281,17 +1513,17 @@ before merging them into a single global<span class="widont">&nbsp;</span>easing
     <h4 class="param-title">
       
       
-        <span class="item-name">$maps:</span>
+        <span class="item-name">$map:</span>
       
       
-      <span class="value-type">(map...)</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+        <p>Accoutrement map of tokens to use as<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1299,9 +1531,93 @@ before merging them into a single global<span class="widont">&nbsp;</span>easing
 
 
       
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$token:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Token name available in the source <code>$map</code></p>
+
+      </div>
+    
+  </div>
+
 
       
+        
   
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$prefix:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional prefix used for naming token<span class="widont">&nbsp;</span>variables</p>
+
+      </div>
+    
+  </div>
+
+
+      
 
       
   
@@ -1313,20 +1629,18 @@ before merging them into a single global<span class="widont">&nbsp;</span>easing
     <h4 class="param-title">
       
       
-        <span class="item-name">{CSS output}</span>
+        <span class="item-name">@return</span>
       
       
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <ul>
-<li>An updated global <code>$easing</code> variable,
-with new maps merged<span class="widont">&nbsp;</span>in.</li>
-</ul>
+        <p>CSS variable call, in the format:
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
 
       </div>
     
@@ -1337,6 +1651,9 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
       
   
 
+      
+  
+
     
   </div>
 
@@ -1345,13 +1662,100 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
 
   
   
-
-
-  
-  
-  
-  
     
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;_brand&#39;: hsl(120, 50%, 50%),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
+  &#39;border&#39;: &#39;#text&#39;,
+);
+.example {
+  border-color: var-token($colors, &#39;border&#39;);
+  color: var-token($colors, &#39;text&#39;, black);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  border-color: var(--border, #206020);
+  color: var(--text, black);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
     
   <div data-item-section="requires">
     
@@ -1385,7 +1789,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_map-multimerge()</span>
+        <span class="item-name">_a_var-name()</span>
       
       
       
@@ -1417,10 +1821,59 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
   
   <div class="param-list">
     <h4 class="param-title">
-      
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-ease.html#variable--easing" class="item-name">$easing</a>
+  core-get.html#function--get-token" class="item-name">get-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-vars.html#mixin--css-token" class="item-name">css-token()</a>
       
       
       
@@ -1434,8 +1887,6 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
         
       
         
-        
-        
 
         
       
@@ -1443,9 +1894,8 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
   </div>
 
   
-    
-  
 
+    </div>
   
 
   

@@ -68,14 +68,16 @@ $_a_error-output-override: false !default;
 ///
 /// @access private
 ///
-/// @param {any} $value -
+/// @param {*} $value -
 ///   The value to type-check
 /// @param {string | list} $valid -
 ///   A list of valid types to check against
 /// @param {string} $origin ['_a_type-check'] -
 ///   The origin of this value, for error reporting
-/// @return {string} $arg ['$value'] -
+/// @param {string} $arg ['$value'] -
 ///   The origin arg-name, for error reporting
+/// @return {*} -
+///   The original value, if it passes the type check
 /// @throws `$valid` is not a string or list
 /// @throws Type-of `$value` is not considered valid
 @function _a_type-check(

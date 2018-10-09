@@ -101,5 +101,5 @@ $colors: () !default;
 @mixin css-colors(
   $map: $colors
 ) {
-  @include css-variables($map, 'color-');
+  @include css-tokens($map, 'color-');
 }
