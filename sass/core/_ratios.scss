@@ -77,7 +77,7 @@ $ratios: () !default;
 ///
 /// @group core-scale
 ///
-/// @parameter {map...} $maps -
+/// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
 /// @output -
 ///   An updated global `$ratios` variable,

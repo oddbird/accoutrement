@@ -212,10 +212,10 @@ $fonts: () !default;
 ///
 ///   @include add-font('heading', $franklin);
 ///
-/// @parameter {map} $key -
+/// @param {map} $key -
 ///   Give your font a semantic access-key
 ///   for easy reference across your project.
-/// @parameter {map} $map -
+/// @param {map} $map -
 ///   Map of font-data to be added at the given key.
 /// @output An updated global `$fonts` variable,
 ///   with new maps merged in.

@@ -232,6 +232,19 @@
 }
 
 
+// Origin
+// ------
+/// Follows any number of alias tokens
+/// to find the original token-name for that same value.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   A map of terms to reference tags against
+/// @param {string} $key -
+///   The original token name to be traced
+/// @return {any} -
+///   Token name where the returned value originates
 @function _a_origin(
   $map,
   $key

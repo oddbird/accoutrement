@@ -74,7 +74,7 @@ $times: () !default;
 ///
 /// @group animate-times
 ///
-/// @parameter {map...} $maps -
+/// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
 /// @output -
 ///   An updated global `$times` variable,
