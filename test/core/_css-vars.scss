@@ -12,9 +12,9 @@ $test: (
 );
 
 
-// Var [function]
-// --------------
-@include describe('Var [function]') {
+// Var Name [function]
+// -------------------
+@include describe('Var Name [function]') {
   @include it('Returns a custom-property formatted token name') {
     @include assert-equal(
       _a_var-name('test'),
@@ -26,6 +26,20 @@ $test: (
     @include assert-equal(
       _a_var-name('test', 'color-'),
       --color-test
+    );
+  }
+
+  @include it('Converts values to a string') {
+    @include assert-equal(
+      _a_var-name(red, 'color-'),
+      --color-red
+    );
+  }
+
+  @include it('Replace spaces with dashes') {
+    @include assert-equal(
+      _a_var-name(red 'list', 'color-'),
+      --color-red-list
     );
   }
 }
@@ -60,6 +74,91 @@ $test: (
         --test-border: var(--test-text, #{get-token($test, 'border')});
         --test-private-alias: #{get-token($test, '_brand')};
         --test-multi: var(--test-border, #{get-token($test, 'border')});
+      }
+    }
+  }
+}
+
+
+// CSS Token [mixin]
+// -----------------
+@include describe('CSS Token [mixin]') {
+  $token-test: (
+    '_private': blue,
+    'simple': red,
+    'kevin': '#_private',
+    'thread': '#kevin'
+  );
+
+  @include it('Generates a single variable from a token') {
+    @include assert {
+      @include output {
+        @include css-token($token-test, 'simple');
+      }
+
+      @include expect {
+        --simple: red;
+      }
+    }
+  }
+
+  @include it('Optionally adds a prefix') {
+    @include assert {
+      @include output {
+        @include css-token($token-test, 'simple', $prefix: 'color_');
+      }
+
+      @include expect {
+        --color_simple: red;
+      }
+    }
+  }
+
+  @include it('Generates a reference variable from a token') {
+    @include assert {
+      @include output {
+        @include css-token($token-test, 'thread');
+      }
+
+      @include expect {
+        --thread: var(--kevin, blue);
+      }
+    }
+  }
+
+
+  @include it('Optionally adds a fallback value') {
+    @include assert {
+      @include output {
+        @include css-token($token-test, 'thread', $fallback: green);
+      }
+
+      @include expect {
+        --thread: var(--kevin, green);
+      }
+    }
+  }
+
+  @include it('Generates a new variable alias') {
+    @include assert {
+      @include output {
+        @include css-token($token-test, 'alias', 'thread');
+      }
+
+      @include expect {
+        --alias: var(--thread, blue);
+      }
+    }
+  }
+
+  @include it('Gracefully handles values without valid fallback') {
+    @include assert {
+      @include output {
+        @include css-token($token-test, 'alias', 'multi', true);
+      }
+
+      @include expect {
+        --alias: var(--multi);
       }
     }
   }
@@ -148,7 +247,7 @@ $test: (
   @include it('Establishes a CSS-Variable alias for any token') {
     @include assert {
       @include output {
-        @include css-token($test, 'text', 'alias');
+        @include css-token($test, 'alias', 'text');
       }
 
       @include expect {
@@ -160,7 +259,7 @@ $test: (
   @include it('Accepts explicit fallback values') {
     @include assert {
       @include output {
-        @include css-token($test, 'text', 'alias', red);
+        @include css-token($test, 'alias', 'text', red);
       }
 
       @include expect {
@@ -172,7 +271,7 @@ $test: (
   @include it('Handles prefixing') {
     @include assert {
       @include output {
-        @include css-token($test, 'text', 'alias', red, 'color-');
+        @include css-token($test, 'alias', 'text', red, 'color-');
       }
 
       @include expect {

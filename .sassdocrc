@@ -31,6 +31,7 @@ groups:
   'Plugin/Color':
     color: 'QuickStart: Color'
     color-api: 'Colors'
+    color-vars: 'CSS Variables'
     color-contrast: 'Contrast'
     color-utils: 'Color Utils'
   'Plugin/Layout':

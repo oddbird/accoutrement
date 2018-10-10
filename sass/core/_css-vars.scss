@@ -34,7 +34,9 @@
   $name,
   $prefix: null
 ) {
-  @return unquote('--#{$prefix}#{$name}');
+  $string: unquote('--#{$prefix}#{$name}');
+  $string: _a_str-replace($string, ' ', '-', 'all');
+  @return $string;
 }
 
 
@@ -64,7 +66,7 @@
 ///   Accoutrement map of tokens to set as css variables
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix for naming token variables
-/// @output -
+/// @output
 ///   Custom properties for all public tokens in the map
 @mixin css-tokens(
   $map,
@@ -92,16 +94,15 @@
 ///   );
 ///   .example {
 ///     @include css-token($colors, 'border');
-///     @include css-token($colors, 'border', 'outline', red);
+///     @include css-token($colors, 'outline', 'border', red);
 ///   }
 ///
 /// @param {map} $map -
 ///   Accoutrement map of tokens to use as source
 /// @param {*} $token -
 ///   Token name available in the source `$map`
-/// @param {string | null} $as [null] -
-///   Optional custom-property name,
-///   will default to token-name if false/null
+/// @param {string | null} $value [null] -
+///   Optional new value for the given token
 /// @param {*} $fallback [true] -
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
@@ -113,21 +114,21 @@
 @mixin css-token(
   $map,
   $token,
-  $as: null,
+  $value: null,
   $fallback: true,
   $prefix: null
 ) {
-  $val: get-token($map, $token);
-  $ref: _a_is-alias($map, $token);
+  $prop: _a_var-name($token, $prefix);
+  $val: $value or $token;
+  $ref: $value or _a_is-alias($map, $val);
 
   @if ($ref) {
     $val: var-token($map, $ref, $fallback, $prefix);
-  } @else if ($as) {
-    $val: var-token($map, $token, $fallback, $prefix);
+  } @else {
+    $val: get-token($map, $val);
   }
 
-  $as: _a_var-name($as or $token, $prefix);
-  #{$as}: $val;
+  #{$prop}: $val;
 }
 
 
@@ -154,15 +155,15 @@
 ///   Token name available in the source `$map`
 /// @param {*} $fallback [true] -
 ///   The optional fallback value for a `var()` function:
-///   - `true` will generate a fallback based on the token value
-///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///   - `true` will try to generate a fallback based on the color value
+///   - A color name will fallback to the value of that
+///     css-variable and then to the color's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix used for naming token variables
 /// @return {string} -
 ///   CSS variable call, in the format:
-///   `var(--<token>, <fallback>)`
+///   `var(--<color>, <fallback>)`
 @function var-token(
   $map,
   $token,
@@ -172,7 +173,9 @@
   $var: _a_var-name($token, $prefix);
 
   @if ($fallback == true) {
-    @return var($var, get-token($map, $token));
+    @if map-has-key($map, $token) {
+      @return var($var, get-token($map, $token));
+    }
   } @else if map-has-key($map, $fallback) {
     @return var($var, var-token($map, $fallback, true, $prefix));
   } @else if $fallback {
