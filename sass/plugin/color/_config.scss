@@ -111,3 +111,10 @@ $_a_COLORS: (
 ) {
   $colors: _a_map-multimerge($colors, $maps...) !global;
 }
+
+
+@mixin css-colors(
+  $map: $colors
+) {
+  @include tokens--($map, 'color-');
+}

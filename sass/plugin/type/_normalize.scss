@@ -82,7 +82,7 @@
     }
   }
 
-  @return $name or _a_origin($source, $key);
+  @return $name or _a_is-alias($source, $key, 'origin') or $key;
 }
 
 

@@ -52,3 +52,4 @@ $sizes: map-merge($sizes, $test-sizes);
 @import 'scale/config';
 @import 'scale/units';
 @import 'scale/size';
+@import 'scale/css-vars';

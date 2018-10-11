@@ -10,6 +10,7 @@ groups:
   'Core (Parser)':
     core: 'QuickStart: Core'
     core-get: 'Accessing Maps'
+    core-vars: 'CSS Variables'
     core-math: 'Math Helpers'
     core-scale: 'Modular Scales'
     core-lists: 'Sass List Utils'
@@ -25,11 +26,15 @@ groups:
   'Plugin/Animate':
     animate: 'QuickStart: Animate'
     animate-times: 'Durations & Delays'
+    animate-time-vars: 'CSS Time Variables'
     animate-ease: 'Easing & Steps'
+    animate-ease-vars: 'CSS Easing Variables'
     animate-change: 'Animations & Transitions'
+    animate-change-vars: 'CSS Change Variables'
   'Plugin/Color':
     color: 'QuickStart: Color'
     color-api: 'Colors'
+    color-vars: 'CSS Color Variables'
     color-contrast: 'Contrast'
     color-utils: 'Color Utils'
   'Plugin/Layout':
@@ -43,6 +48,7 @@ groups:
   'Plugin/Scale':
     scale: 'QuickStart: Scale'
     scale-sizes: 'Sizes'
+    scale-vars: 'CSS Size Variables'
     scale-units: 'Unit Conversion'
   'Plugin/Type':
     type: 'QuickStart: Type'

@@ -105,11 +105,11 @@ $breakpoints: () !default;
 /// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
 ///
 /// @group layout-queries
-/// @example scss -
+/// @example scss
 ///   @include below(30em) {
 ///     html { background: red; }
 ///   }
-/// @example scss -
+/// @example scss
 ///   $breakpoints: ('red': 30em);
 ///
 ///   @include below('red') {
@@ -152,11 +152,11 @@ $breakpoints: () !default;
 /// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
 ///
 /// @group layout-queries
-/// @example scss -
+/// @example scss
 ///   @include above(50em) {
 ///     html { background: green; }
 ///   }
-/// @example scss -
+/// @example scss
 ///   $breakpoints: ('green': 50em);
 ///
 ///   @include above('green') {
@@ -199,11 +199,11 @@ $breakpoints: () !default;
 /// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
 ///
 /// @group layout-queries
-/// @example scss -
+/// @example scss
 ///   @include between(30em, 50em) {
 ///     html { background: yellow; }
 ///   }
-/// @example scss -
+/// @example scss
 ///   $breakpoints: (
 ///     'red': 30em,
 ///     'green': 50em,

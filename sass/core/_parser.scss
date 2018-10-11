@@ -218,7 +218,7 @@
 ///   A map of terms to reference tags against
 /// @param {string} $string -
 ///   The original string to be parsed for `#alias` tags
-/// @return {any} -
+/// @return {*} -
 ///   Input $string, with #alias mentions replaced
 @function _a_replace(
   $haystack,
@@ -248,40 +248,6 @@
   }
 
   @return $string;
-}
-
-
-// Origin
-// ------
-/// Follows any number of alias tokens
-/// to find the original token-name for that same value.
-///
-/// @access private
-///
-/// @param {map} $map -
-///   A map of terms to reference tags against
-/// @param {string} $key -
-///   The original token name to be traced
-/// @return {any} -
-///   Token name where the returned value originates
-@function _a_origin(
-  $map,
-  $key
-) {
-  $name: null;
-
-  @while map-has-key($map, $key) {
-    $name: $key;
-    $try: map-get($map, $key);
-
-    @if (type-of($try) == 'string') and (str-index($try, '#') == 1) {
-      $try: str-slice($try, 2);
-    }
-
-    $key: $try;
-  }
-
-  @return $name;
 }
 
 
@@ -374,4 +340,69 @@
     'No ratio or function named `#{$name}`',
     '_a_do'
   );
+}
+
+
+// Is Private Token
+// ----------------
+/// Check if a token key is marked as private
+/// with `_` or `-` as the starting character
+///
+/// @access private
+///
+/// @param {*} $key -
+///   The token key to check for private prefix
+///   (only string and list keys can be marked as private)
+/// @return {boolean} -
+///   True if the key is private
+@function _a_is-private-token(
+  $key
+) {
+  $pre: '_' '-';
+
+  @if (type-of($key) == 'list') {
+    $key: nth($key, 1);
+  }
+
+  @if (type-of($key) == 'string') and (index($pre, str-slice($key, 1, 1))) {
+    @return true;
+  }
+
+  @return false;
+}
+
+
+// Is Alias
+// --------
+/// Find if a token is simply an alias,
+/// and (if so) what token it represents –
+/// either directly,
+/// or following the thread to it's origin.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   A map of terms to reference against
+/// @param {*} $token -
+///   The token name to be traced
+/// @return {*} -
+///   Token name where the returned value originates,
+///   or `false` for non-alias tokens
+@function _a_is-alias(
+  $map,
+  $token,
+  $origin: false
+) {
+  $ref: false;
+  $val: map-get($map, $token);
+
+  @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
+    $try: str-slice($val, 2);
+
+    @if map-has-key($map, $try) and not _a_is-private-token($try) {
+      $ref: if($origin, _a_is-alias($map, $try, $origin) or $try, $try);
+    }
+  }
+
+  @return $ref;
 }
