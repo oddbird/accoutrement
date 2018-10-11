@@ -11,6 +11,7 @@
 /// Set a prefix for all color-tokens,
 /// and we'll apply it when setting or calling css variables
 /// based on your color maps.
+/// Set to `null` or `''` (empty string) for no prefix.
 ///
 /// @group color-vars
 ///
@@ -26,16 +27,13 @@ $color-var-prefix: 'color-' !default;
 // CSS Colors
 // ----------
 /// Convert any color-map into CSS variables,
-/// using the global prefix,
-/// and core logic from [`css-tokens()`][logic]:
+/// using the global `$color-var-prefix`.
 ///
 /// - Color names that start with `_` are considered "private"
 ///   and will not be output as variables
 /// - Colors that contain a simple alias with no adjustments
 ///   will be output with a `var()` value,
 ///   keeping the alias relationship intact
-///
-/// [logic]: core-vars.html#mixin--css-tokens
 ///
 /// @group color-vars
 /// @example scss

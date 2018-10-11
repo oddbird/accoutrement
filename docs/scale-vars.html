@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Function Registration | Accoutrement Documentation</title>
+  <title>CSS Size Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -127,7 +127,7 @@
   
   
     <li class="nav-item">
-      <a href="core-register.html" data-nav="is-active">Function Registration</a>
+      <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   </ul>
             </li>
@@ -280,7 +280,7 @@
   
   
     <li class="nav-item">
-      <a href="scale-vars.html" data-nav="is-not-active">CSS Size<span class="widont">&nbsp;</span>Variables</a>
+      <a href="scale-vars.html" data-nav="is-active">CSS Size<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -367,11 +367,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Function Registration</strong>
+    <strong>CSS Size Variables</strong>
   </nav>
 
 
-        <div data-page="core-register">
+        <div data-page="scale-vars">
           
   
     
@@ -396,11 +396,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="function-registration">Function Registration</h1>
-<p>Because Sass 3.5+ requires first-class functions,
-we provide tools for capturing functions
-and making them available to the Accoutrement map parser.
-This also provides the ability to alias functions as you<span class="widont">&nbsp;</span>like.</p>
+      <h1 id="css-size-variables">CSS Size Variables</h1>
 
       
   
@@ -465,7 +461,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
 
 
-<section class="item" id="variable--functions">
+<section class="item" id="variable--size-var-prefix">
   
     
   
@@ -483,11 +479,11 @@ This also provides the ability to alias functions as you<span class="widont">&nb
       
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
+        <a href="#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
       
 
       
-        <span class="value-type">(map)</span>
+        <span class="value-type">(string)</span>
       
 
       
@@ -514,7 +510,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$size-var-prefix: &#39;size-&#39; !default;</code></pre>
     </div>
   
 
@@ -526,34 +522,16 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
   
     <div class="text-block">
-      <p>We provide a single map to store &amp; manage functions
-that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<pre><code class="lang-scss">$functions: (
-  'times': get-function('times'),
-  'divide': get-function('divide'),
-);
-</code></pre>
-<p>Functions can be registered multiple times,
-under any aliases,
-using our standard hashtag reference<span class="widont">&nbsp;</span>syntax:</p>
-<pre><code class="lang-scss">$functions: (
-  'times': get-function('times'),
-  '*': '#times',
-);
-</code></pre>
+      <p>Since CSS variables are often defined in a global space,
+it can be useful to prefix different variable types.
+Accoutrement maps help solve that problem in Sass,
+so we wanted to carry that over into our CSS variable support.
+Set a prefix for all size-tokens,
+and we’ll apply it when setting or calling css variables
+based on your size maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Supports the <a href="core.html">core</a> map-refernece syntax,
-for creating function<span class="widont">&nbsp;</span>aliases</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -577,65 +555,88 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
   
 
   
+
+
+  
+  
     
-  <div data-item-section="property">
-    
+
+    <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
-        
+        <span class="item-subtitle-main">Example</span>
       </h3>
-    
 
-    
       
         
   
   
 
   
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">&lt;alias&gt;:</span>
-      
-      
-      <span class="value-type">(function)</span>
-      
-    </h4>
+  
+  
 
-    
-      
-      <div class="param-details text-block">
-        <p>Each alias key in the map
-should refer to a captured<span class="widont">&nbsp;</span>function</p>
+  
+  
 
-      </div>
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (&#39;my-size&#39;: 3em);
+$size-var-prefix: &#39;prefix_&#39;;
+:root { @include css-size(&#39;my-size&#39;) }</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">:root {
+  --prefix_my-size: 3em;
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
     
   </div>
 
-
       
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
+    </div>
   
 
 
@@ -676,7 +677,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  core-register.html#mixin--register-function" class="item-name">register-function()</a>
+  scale-vars.html#mixin--css-sizes" class="item-name">css-sizes()</a>
       
       
       
@@ -690,6 +691,33 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
         
       
         
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  scale-vars.html#mixin--css-size" class="item-name">css-size()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
       
@@ -710,11 +738,12 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get-function()</span>
+        <a href="
+  scale-vars.html#function--var-size" class="item-name">var-size()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -755,7 +784,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
 
 
-<section class="item" id="mixin--register-function">
+<section class="item" id="mixin--css-sizes">
   
     
   
@@ -773,7 +802,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
       
 
       
-        <a href="#mixin--register-function" class="item-name">register-function()</a>
+        <a href="#mixin--css-sizes" class="item-name">css-sizes()</a>
       
 
       
@@ -794,15 +823,15 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
   
     <div class="text-block">
-      <p>In addition to managing the <code>$functions</code> map directly,
-you can also register new functions on the<span class="widont">&nbsp;</span>fly:</p>
-<pre><code class="lang-scss">  // the first value is the function name,
-  // any additional values provide alias names for the same function
-  @include register-function('rgba', 'alpha');
-</code></pre>
-<p>Functions only need to be registered
-if they will be used inside accoutrement maps.
-That includes core Sass<span class="widont">&nbsp;</span>functions.</p>
+      <p>Convert any size-map into CSS variables,
+using the global <code>$size-var-prefix</code>.</p>
+<ul>
+<li>Size names that start with <code>_</code> are considered “private”
+and will not be output as<span class="widont">&nbsp;</span>variables</li>
+<li>Sizes that contain a simple alias with no adjustments
+will be output with a <code>var()</code> value,
+keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
+</ul>
 
       
   
@@ -848,46 +877,18 @@ That includes core Sass<span class="widont">&nbsp;</span>functions.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$function:</span>
+        <span class="item-name">$source:</span>
       
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The function-name to be registered
-or a first-class function previously<span class="widont">&nbsp;</span>captured</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$names...:</span>
-      
-      
-      <span class="value-type">(strings)</span>
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>One or more alias names (strings)
-to use for map-access to the<span class="widont">&nbsp;</span>function</p>
+        <p>Optionally use a custom
+map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -919,10 +920,7 @@ to use for map-access to the<span class="widont">&nbsp;</span>function</p>
     
       
       <div class="param-details text-block">
-        <p>{map} $functions -
-Functions are captured
-and added to the <code>$functions</code> map
-under any number of<span class="widont">&nbsp;</span>aliases</p>
+        <p>Custom properties for all public sizes in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
@@ -981,11 +979,13 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@include register-function(&#39;darken&#39;, &#39;shade&#39;);
-
-/*! Registered Functions… */
-@each $name, $value in $functions {
-  /*! - #{$name}: #{$value} */
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
+);
+:root {
+  @include css-sizes;
 }</code></pre>
     </div>
   
@@ -1008,10 +1008,850 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">@charset &quot;UTF-8&quot;;
-/*! Registered Functions… */
-/*! - darken: get-function(&quot;darken&quot;) */
-/*! - shade: #darken */
+      <pre class="hljs-pre"><code class="lang-css">:root {
+  --size-rhythm: 24px;
+  --size-line: var(--size-rhythm, 24px);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-vars.html#mixin--css-tokens" class="item-name">css-tokens()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--css-size">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--css-size" class="item-name">css-size()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Set a single custom property based on a map-size,
+with optional alias and<span class="widont">&nbsp;</span>fallback</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$size:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Size name available in the <code>$source</code> map,
+or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$value:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional value for the variable,
+if different from the given <code>$size</code></p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional map of sizes to use as a palette<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
+);
+.example {
+  @include css-size(&#39;line&#39;);
+  @include css-size(&#39;padding&#39;, &#39;line&#39;, 1.5rem);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --size-line: var(--size-rhythm, 24px);
+  --size-padding: var(--size-line, 1.5rem);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-vars.html#mixin--css-token" class="item-name">css-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-size">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--var-size" class="item-name">var-size()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access the CSS variable associated with a given token,
+along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$size:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Size name available in the <code>$source</code> map</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional Accoutrement map of sizes to use as<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>CSS variable call, in the format:
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
+);
+.example {
+  line-height: var-size(&#39;line&#39;);
+  padding: var-size(&#39;rhythm&#39;, 1.5em);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  line-height: var(--size-line, 24px);
+  padding: var(--size-rhythm, 1.5em);
+}
 </code></pre>
     </div>
   
@@ -1064,11 +1904,12 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_registration()</span>
+        <a href="
+  core-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -1099,22 +1940,16 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
       
       
         <a href="
-  core-register.html#variable--functions" class="item-name">$functions</a>
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
       
       
-      <span class="value-type">(map)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
   </div>
 
-
-        
-      
-        
-        
-        
 
         
       

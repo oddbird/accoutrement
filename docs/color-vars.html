@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>CSS Variables | Accoutrement Documentation</title>
+  <title>CSS Color Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -181,14 +181,17 @@
     </li>
   
   
+  
     <li class="nav-item">
       <a href="animate-ease.html" data-nav="is-not-active">Easing &amp;<span class="widont">&nbsp;</span>Steps</a>
     </li>
   
   
+  
     <li class="nav-item">
       <a href="animate-change.html" data-nav="is-not-active">Animations &amp;<span class="widont">&nbsp;</span>Transitions</a>
     </li>
+  
   </ul>
             </li>
             <li class="nav-subsection">
@@ -207,7 +210,7 @@
   
   
     <li class="nav-item">
-      <a href="color-vars.html" data-nav="is-active">CSS Variables</a>
+      <a href="color-vars.html" data-nav="is-active">CSS Color<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -273,6 +276,11 @@
   
     <li class="nav-item">
       <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="scale-vars.html" data-nav="is-not-active">CSS Size<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -359,7 +367,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>CSS Variables</strong>
+    <strong>CSS Color Variables</strong>
   </nav>
 
 
@@ -520,7 +528,8 @@ Accoutrement maps help solve that problem in Sass,
 so we wanted to carry that over into our CSS variable support.
 Set a prefix for all color-tokens,
 and we’ll apply it when setting or calling css variables
-based on your color<span class="widont">&nbsp;</span>maps.</p>
+based on your color maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
   
@@ -815,8 +824,7 @@ $color-var-prefix: &#39;prefix_&#39;;
   
     <div class="text-block">
       <p>Convert any color-map into CSS variables,
-using the global prefix,
-and core logic from <a href="core-vars.html#mixin--css-tokens"><code>css-tokens()</code></a>:</p>
+using the global <code>$color-var-prefix</code>.</p>
 <ul>
 <li>Color names that start with <code>_</code> are considered “private”
 and will not be output as<span class="widont">&nbsp;</span>variables</li>
