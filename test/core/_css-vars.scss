@@ -45,13 +45,13 @@ $test: (
 }
 
 
-// CSS Tokens [mixin]
-// ------------------
-@include describe('CSS Tokens [mixin]') {
+// Tokens-- [mixin]
+// ----------------
+@include describe('Tokens-- [mixin]') {
   @include it('Converts a map into css custom properties') {
     @include assert {
       @include output {
-        @include css-tokens($test);
+        @include tokens--($test);
       }
 
       @include expect {
@@ -66,7 +66,7 @@ $test: (
   @include it('Optionally adds a prefix') {
     @include assert {
       @include output {
-        @include css-tokens($test, 'test-');
+        @include tokens--($test, 'test-');
       }
 
       @include expect {
@@ -80,9 +80,9 @@ $test: (
 }
 
 
-// CSS Token [mixin]
-// -----------------
-@include describe('CSS Token [mixin]') {
+// Token-- [mixin]
+// ---------------
+@include describe('Token-- [mixin]') {
   $token-test: (
     '_private': blue,
     'simple': red,
@@ -93,7 +93,7 @@ $test: (
   @include it('Generates a single variable from a token') {
     @include assert {
       @include output {
-        @include css-token($token-test, 'simple');
+        @include token--($token-test, 'simple');
       }
 
       @include expect {
@@ -105,7 +105,7 @@ $test: (
   @include it('Optionally adds a prefix') {
     @include assert {
       @include output {
-        @include css-token($token-test, 'simple', $prefix: 'color_');
+        @include token--($token-test, 'simple', $prefix: 'color_');
       }
 
       @include expect {
@@ -117,7 +117,7 @@ $test: (
   @include it('Generates a reference variable from a token') {
     @include assert {
       @include output {
-        @include css-token($token-test, 'thread');
+        @include token--($token-test, 'thread');
       }
 
       @include expect {
@@ -130,7 +130,7 @@ $test: (
   @include it('Optionally adds a fallback value') {
     @include assert {
       @include output {
-        @include css-token($token-test, 'thread', $fallback: green);
+        @include token--($token-test, 'thread', $fallback: green);
       }
 
       @include expect {
@@ -142,7 +142,7 @@ $test: (
   @include it('Generates a new variable alias') {
     @include assert {
       @include output {
-        @include css-token($token-test, 'alias', 'thread');
+        @include token--($token-test, 'alias', 'thread');
       }
 
       @include expect {
@@ -154,7 +154,7 @@ $test: (
   @include it('Gracefully handles values without valid fallback') {
     @include assert {
       @include output {
-        @include css-token($token-test, 'alias', 'multi', true);
+        @include token--($token-test, 'alias', 'multi', true);
       }
 
       @include expect {
@@ -217,13 +217,13 @@ $test: (
 }
 
 
-// CSS Token [mixin]
+// Token-- [mixin]
 // -----------------
-@include describe('CSS Token [mixin]') {
+@include describe('Token-- [mixin]') {
   @include it('Establishes a CSS-Variable for any token') {
     @include assert {
       @include output {
-        @include css-token($test, 'text');
+        @include token--($test, 'text');
       }
 
       @include expect {
@@ -235,7 +235,7 @@ $test: (
   @include it('Provides a reference for alias tokens') {
     @include assert {
       @include output {
-        @include css-token($test, 'border');
+        @include token--($test, 'border');
       }
 
       @include expect {
@@ -247,7 +247,7 @@ $test: (
   @include it('Establishes a CSS-Variable alias for any token') {
     @include assert {
       @include output {
-        @include css-token($test, 'alias', 'text');
+        @include token--($test, 'alias', 'text');
       }
 
       @include expect {
@@ -259,7 +259,7 @@ $test: (
   @include it('Accepts explicit fallback values') {
     @include assert {
       @include output {
-        @include css-token($test, 'alias', 'text', red);
+        @include token--($test, 'alias', 'text', red);
       }
 
       @include expect {
@@ -271,7 +271,7 @@ $test: (
   @include it('Handles prefixing') {
     @include assert {
       @include output {
-        @include css-token($test, 'alias', 'text', red, 'color-');
+        @include token--($test, 'alias', 'text', red, 'color-');
       }
 
       @include expect {

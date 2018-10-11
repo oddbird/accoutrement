@@ -116,5 +116,5 @@ $_a_COLORS: (
 @mixin css-colors(
   $map: $colors
 ) {
-  @include css-tokens($map, 'color-');
+  @include tokens--($map, 'color-');
 }

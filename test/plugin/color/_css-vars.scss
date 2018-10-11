@@ -14,13 +14,13 @@ $global: $colors;
 $colors: $test !global;
 
 
-// CSS Colors [mixin]
+// Colors-- [mixin]
 // ------------------
-@include describe('CSS Colors [mixin]') {
+@include describe('Colors-- [mixin]') {
   @include it('Generates CSS variables from the default color map') {
     @include assert {
       @include output {
-        @include css-colors();
+        @include colors--;
       }
 
       @include expect {
@@ -34,7 +34,7 @@ $colors: $test !global;
   @include it('Generates CSS variables for any color map') {
     @include assert {
       @include output {
-        @include css-colors(('mine': green));
+        @include colors--(('mine': green));
       }
 
       @include expect {
@@ -45,13 +45,13 @@ $colors: $test !global;
 }
 
 
-// CSS Color [mixin]
+// Color-- [mixin]
 // -----------------
-@include describe('CSS Color [mixin]') {
+@include describe('Color-- [mixin]') {
   @include it('Generates a single variable from a token') {
     @include assert {
       @include output {
-        @include css-color('simple');
+        @include color--('simple');
       }
 
       @include expect {
@@ -63,7 +63,7 @@ $colors: $test !global;
   @include it('Generates a reference variable from a token') {
     @include assert {
       @include output {
-        @include css-color('thread');
+        @include color--('thread');
       }
 
       @include expect {
@@ -76,7 +76,7 @@ $colors: $test !global;
   @include it('Generates a new variable alias') {
     @include assert {
       @include output {
-        @include css-color('alias', 'thread');
+        @include color--('alias', 'thread');
       }
 
       @include expect {

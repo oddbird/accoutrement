@@ -601,7 +601,7 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
       
       <pre class="hljs-pre"><code class="lang-scss">$colors: (&#39;my-color&#39;: pink);
 $color-var-prefix: &#39;prefix_&#39;;
-:root { @include css-color(&#39;my-color&#39;) }</code></pre>
+:root { @include color--(&#39;my-color&#39;) }</code></pre>
     </div>
   
 
@@ -677,7 +677,7 @@ $color-var-prefix: &#39;prefix_&#39;;
       <span class="item-type">@mixin</span>
       
         <a href="
-  color-vars.html#mixin--css-colors" class="item-name">css-colors()</a>
+  color-vars.html#mixin--colors--" class="item-name">colors--()</a>
       
       
       
@@ -708,7 +708,7 @@ $color-var-prefix: &#39;prefix_&#39;;
       <span class="item-type">@mixin</span>
       
         <a href="
-  color-vars.html#mixin--css-color" class="item-name">css-color()</a>
+  color-vars.html#mixin--color--" class="item-name">color--()</a>
       
       
       
@@ -784,7 +784,7 @@ $color-var-prefix: &#39;prefix_&#39;;
 
 
 
-<section class="item" id="mixin--css-colors">
+<section class="item" id="mixin--colors--">
   
     
   
@@ -802,7 +802,7 @@ $color-var-prefix: &#39;prefix_&#39;;
       
 
       
-        <a href="#mixin--css-colors" class="item-name">css-colors()</a>
+        <a href="#mixin--colors--" class="item-name">colors--()</a>
       
 
       
@@ -985,7 +985,7 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
   &#39;border&#39;: &#39;#text&#39;,
 );
 :root {
-  @include css-colors;
+  @include colors--;
 }</code></pre>
     </div>
   
@@ -1065,7 +1065,7 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  core-vars.html#mixin--css-tokens" class="item-name">css-tokens()</a>
+  core-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
       
       
       
@@ -1147,7 +1147,7 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
 
 
 
-<section class="item" id="mixin--css-color">
+<section class="item" id="mixin--color--">
   
     
   
@@ -1165,7 +1165,7 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
       
 
       
-        <a href="#mixin--css-color" class="item-name">css-color()</a>
+        <a href="#mixin--color--" class="item-name">color--()</a>
       
 
       
@@ -1407,8 +1407,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   &#39;border&#39;: &#39;#text&#39;,
 );
 .example {
-  @include css-color(&#39;border&#39;);
-  @include css-color(&#39;outline&#39;, &#39;border&#39;, red);
+  @include color--(&#39;border&#39;);
+  @include color--(&#39;outline&#39;, &#39;border&#39;, red);
 }</code></pre>
     </div>
   
@@ -1488,7 +1488,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       <span class="item-type">@mixin</span>
       
         <a href="
-  core-vars.html#mixin--css-token" class="item-name">css-token()</a>
+  core-vars.html#mixin--token--" class="item-name">token--()</a>
       
       
       

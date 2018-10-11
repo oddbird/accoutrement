@@ -14,13 +14,13 @@ $global: $sizes;
 $sizes: $test !global;
 
 
-// CSS Sizes [mixin]
+// Sizes-- [mixin]
 // ------------------
-@include describe('CSS Sizes [mixin]') {
+@include describe('Sizes-- [mixin]') {
   @include it('Generates CSS variables from the default size map') {
     @include assert {
       @include output {
-        @include css-sizes();
+        @include sizes--;
       }
 
       @include expect {
@@ -34,7 +34,7 @@ $sizes: $test !global;
   @include it('Generates CSS variables for any size map') {
     @include assert {
       @include output {
-        @include css-sizes(('mine': 12pt));
+        @include sizes--(('mine': 12pt));
       }
 
       @include expect {
@@ -45,13 +45,13 @@ $sizes: $test !global;
 }
 
 
-// CSS Size [mixin]
+// Size-- [mixin]
 // -----------------
-@include describe('CSS Size [mixin]') {
+@include describe('Size-- [mixin]') {
   @include it('Generates a single variable from a token') {
     @include assert {
       @include output {
-        @include css-size('simple');
+        @include size--('simple');
       }
 
       @include expect {
@@ -63,7 +63,7 @@ $sizes: $test !global;
   @include it('Generates a reference variable from a token') {
     @include assert {
       @include output {
-        @include css-size('thread');
+        @include size--('thread');
       }
 
       @include expect {
@@ -76,7 +76,7 @@ $sizes: $test !global;
   @include it('Generates a new variable alias') {
     @include assert {
       @include output {
-        @include css-size('alias', 'thread');
+        @include size--('alias', 'thread');
       }
 
       @include expect {

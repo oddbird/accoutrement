@@ -40,8 +40,8 @@
 }
 
 
-// CSS Tokens
-// ----------
+// Tokens--
+// --------
 /// Convert any Accoutrement map
 /// into CSS custom properties (aka variables).
 ///
@@ -59,7 +59,7 @@
 ///     'border': '#text',
 ///   );
 ///   :root {
-///     @include css-tokens($colors, 'color-');
+///     @include tokens--($colors, 'color-');
 ///   }
 ///
 /// @param {map} $map -
@@ -68,20 +68,20 @@
 ///   Optional prefix for naming token variables
 /// @output
 ///   Custom properties for all public tokens in the map
-@mixin css-tokens(
+@mixin tokens--(
   $map,
   $prefix: null
 ) {
   @each $token in map-keys($map) {
     @if not _a_is-private-token($token) {
-      @include css-token($map, $token, $prefix: $prefix);
+      @include token--($map, $token, $prefix: $prefix);
     }
   }
 }
 
 
-// CSS Token
-// ---------
+// Token--
+// -------
 /// Set a single custom property based on a map-token,
 /// with optional alias, fallback, and prefixing
 ///
@@ -93,8 +93,8 @@
 ///     'border': '#text',
 ///   );
 ///   .example {
-///     @include css-token($colors, 'border');
-///     @include css-token($colors, 'outline', 'border', red);
+///     @include token--($colors, 'border');
+///     @include token--($colors, 'outline', 'border', red);
 ///   }
 ///
 /// @param {map} $map -
@@ -111,7 +111,7 @@
 ///   - Any other fallback will be passed through unchanged
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix used for naming token variables
-@mixin css-token(
+@mixin token--(
   $map,
   $token,
   $value: null,

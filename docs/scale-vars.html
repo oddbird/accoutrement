@@ -601,7 +601,7 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
       
       <pre class="hljs-pre"><code class="lang-scss">$sizes: (&#39;my-size&#39;: 3em);
 $size-var-prefix: &#39;prefix_&#39;;
-:root { @include css-size(&#39;my-size&#39;) }</code></pre>
+:root { @include size--(&#39;my-size&#39;) }</code></pre>
     </div>
   
 
@@ -677,7 +677,7 @@ $size-var-prefix: &#39;prefix_&#39;;
       <span class="item-type">@mixin</span>
       
         <a href="
-  scale-vars.html#mixin--css-sizes" class="item-name">css-sizes()</a>
+  scale-vars.html#mixin--sizes--" class="item-name">sizes--()</a>
       
       
       
@@ -708,7 +708,7 @@ $size-var-prefix: &#39;prefix_&#39;;
       <span class="item-type">@mixin</span>
       
         <a href="
-  scale-vars.html#mixin--css-size" class="item-name">css-size()</a>
+  scale-vars.html#mixin--size--" class="item-name">size--()</a>
       
       
       
@@ -784,7 +784,7 @@ $size-var-prefix: &#39;prefix_&#39;;
 
 
 
-<section class="item" id="mixin--css-sizes">
+<section class="item" id="mixin--sizes--">
   
     
   
@@ -802,7 +802,7 @@ $size-var-prefix: &#39;prefix_&#39;;
       
 
       
-        <a href="#mixin--css-sizes" class="item-name">css-sizes()</a>
+        <a href="#mixin--sizes--" class="item-name">sizes--()</a>
       
 
       
@@ -985,7 +985,7 @@ map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
   &#39;line&#39;: &#39;#rhythm&#39;,
 );
 :root {
-  @include css-sizes;
+  @include sizes--;
 }</code></pre>
     </div>
   
@@ -1065,7 +1065,7 @@ map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  core-vars.html#mixin--css-tokens" class="item-name">css-tokens()</a>
+  core-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
       
       
       
@@ -1147,7 +1147,7 @@ map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
 
 
 
-<section class="item" id="mixin--css-size">
+<section class="item" id="mixin--size--">
   
     
   
@@ -1165,7 +1165,7 @@ map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
       
 
       
-        <a href="#mixin--css-size" class="item-name">css-size()</a>
+        <a href="#mixin--size--" class="item-name">size--()</a>
       
 
       
@@ -1407,8 +1407,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   &#39;line&#39;: &#39;#rhythm&#39;,
 );
 .example {
-  @include css-size(&#39;line&#39;);
-  @include css-size(&#39;padding&#39;, &#39;line&#39;, 1.5rem);
+  @include size--(&#39;line&#39;);
+  @include size--(&#39;padding&#39;, &#39;line&#39;, 1.5rem);
 }</code></pre>
     </div>
   
@@ -1488,7 +1488,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       <span class="item-type">@mixin</span>
       
         <a href="
-  core-vars.html#mixin--css-token" class="item-name">css-token()</a>
+  core-vars.html#mixin--token--" class="item-name">token--()</a>
       
       
       

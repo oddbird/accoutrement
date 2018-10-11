@@ -33,7 +33,7 @@
       }
 
       @include expect {
-        @include css-tokens($colors, 'color-');
+        @include tokens--($colors, 'color-');
       }
     }
   }

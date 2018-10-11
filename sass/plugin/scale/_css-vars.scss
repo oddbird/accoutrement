@@ -18,14 +18,14 @@
 /// @example scss
 ///   $sizes: ('my-size': 3em);
 ///   $size-var-prefix: 'prefix_';
-///   :root { @include css-size('my-size') }
+///   :root { @include size--('my-size') }
 ///
 /// @type string
 $size-var-prefix: 'size-' !default;
 
 
-// CSS Sizes
-// ----------
+// Sizes--
+// -------
 /// Convert any size-map into CSS variables,
 /// using the global `$size-var-prefix`.
 ///
@@ -43,7 +43,7 @@ $size-var-prefix: 'size-' !default;
 ///     'line': '#rhythm',
 ///   );
 ///   :root {
-///     @include css-sizes;
+///     @include sizes--;
 ///   }
 ///
 /// @param {map} $source [$sizes] -
@@ -51,15 +51,15 @@ $size-var-prefix: 'size-' !default;
 ///   map of sizes to set as css variables
 /// @output
 ///   Custom properties for all public sizes in the map
-@mixin css-sizes(
+@mixin sizes--(
   $source: $sizes
 ) {
-  @include css-tokens($source, $size-var-prefix);
+  @include tokens--($source, $size-var-prefix);
 }
 
 
-// CSS Size
-// ---------
+// Size--
+// ------
 /// Set a single custom property based on a map-size,
 /// with optional alias and fallback
 ///
@@ -71,8 +71,8 @@ $size-var-prefix: 'size-' !default;
 ///     'line': '#rhythm',
 ///   );
 ///   .example {
-///     @include css-size('line');
-///     @include css-size('padding', 'line', 1.5rem);
+///     @include size--('line');
+///     @include size--('padding', 'line', 1.5rem);
 ///   }
 ///
 /// @param {*} $size -
@@ -89,13 +89,13 @@ $size-var-prefix: 'size-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$sizes] -
 ///   Optional map of sizes to use as a palette source
-@mixin css-size(
+@mixin size--(
   $size,
   $value: null,
   $fallback: true,
   $source: $sizes
 ) {
-  @include css-token($source, $size, $value, $fallback, $size-var-prefix);
+  @include token--($source, $size, $value, $fallback, $size-var-prefix);
 }
 
 

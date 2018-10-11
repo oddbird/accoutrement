@@ -18,14 +18,14 @@
 /// @example scss
 ///   $colors: ('my-color': pink);
 ///   $color-var-prefix: 'prefix_';
-///   :root { @include css-color('my-color') }
+///   :root { @include color--('my-color') }
 ///
 /// @type string
 $color-var-prefix: 'color-' !default;
 
 
-// CSS Colors
-// ----------
+// Colors--
+// --------
 /// Convert any color-map into CSS variables,
 /// using the global `$color-var-prefix`.
 ///
@@ -43,7 +43,7 @@ $color-var-prefix: 'color-' !default;
 ///     'border': '#text',
 ///   );
 ///   :root {
-///     @include css-colors;
+///     @include colors--;
 ///   }
 ///
 /// @param {map} $source [$colors] -
@@ -51,15 +51,15 @@ $color-var-prefix: 'color-' !default;
 ///   map of colors to set as css variables
 /// @output
 ///   Custom properties for all public colors in the map
-@mixin css-colors(
+@mixin colors--(
   $source: $colors
 ) {
-  @include css-tokens($source, $color-var-prefix);
+  @include tokens--($source, $color-var-prefix);
 }
 
 
-// CSS Color
-// ---------
+// Color--
+// -------
 /// Set a single custom property based on a map-color,
 /// with optional alias and fallback
 ///
@@ -71,8 +71,8 @@ $color-var-prefix: 'color-' !default;
 ///     'border': '#text',
 ///   );
 ///   .example {
-///     @include css-color('border');
-///     @include css-color('outline', 'border', red);
+///     @include color--('border');
+///     @include color--('outline', 'border', red);
 ///   }
 ///
 /// @param {*} $color -
@@ -89,13 +89,13 @@ $color-var-prefix: 'color-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$colors] -
 ///   Optional map of colors to use as a palette source
-@mixin css-color(
+@mixin color--(
   $color,
   $value: null,
   $fallback: true,
   $source: $colors
 ) {
-  @include css-token($source, $color, $value, $fallback, $color-var-prefix);
+  @include token--($source, $color, $value, $fallback, $color-var-prefix);
 }
 
 
