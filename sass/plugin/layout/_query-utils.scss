@@ -31,7 +31,7 @@ $adjust-query-overlap: 'max' !default;
 /// @since 2.0.0 -
 /// - BREAKING: Adjusts all units (not only px/em/rem)
 /// - BREAKING: Requires `$is` argument, either `min` or `max`
-/// - New: Optionally override `max` adjustment with `min` or `false`
+/// - NEW: Optionally override `max` adjustment with `min` or `false`
 ///
 /// @access private
 /// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints

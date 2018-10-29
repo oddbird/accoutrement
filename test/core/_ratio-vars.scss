@@ -1,0 +1,143 @@
+// Ratio Var Tests
+// ===============
+@include test-module('Core: Ratio Vars') {
+
+$global: $ratios;
+
+$ratios: (
+  '_private': 0.75,
+  'simple': 0.125,
+  'kevin': '#_private',
+  'thread': '#kevin',
+  'default': '#_octave',
+) !global;
+
+
+// Ratios-- [mixin]
+// ------------------
+@include describe('Ratios-- [mixin]') {
+  @include it('Generates CSS variables from the default ratio map') {
+    @include assert {
+      @include output {
+        @include ratios--;
+      }
+
+      @include expect {
+        --ratio-simple: 0.125;
+        --ratio-kevin: 0.75;
+        --ratio-thread: var(--ratio-kevin, 0.75);
+        --ratio-default: 2;
+      }
+    }
+  }
+
+  @include it('Generates CSS variables for any ratio map') {
+    @include assert {
+      @include output {
+        @include ratios--(('mine': 0.5));
+      }
+
+      @include expect {
+        --ratio-mine: 0.5;
+      }
+    }
+  }
+}
+
+
+// Ratio-- [mixin]
+// -----------------
+@include describe('Ratio-- [mixin]') {
+  @include it('Generates a single variable from a token') {
+    @include assert {
+      @include output {
+        @include ratio--('simple');
+      }
+
+      @include expect {
+        --ratio-simple: 0.125;
+      }
+    }
+  }
+
+  @include it('Generates a reference variable from a token') {
+    @include assert {
+      @include output {
+        @include ratio--('thread');
+      }
+
+      @include expect {
+        --ratio-thread: var(--ratio-kevin, 0.75);
+      }
+    }
+
+  }
+
+  @include it('Generate reference to default ratio') {
+    @include assert {
+      @include output {
+        @include ratio--('default');
+      }
+
+      @include expect {
+        --ratio-default: 2;
+      }
+    }
+  }
+
+  @include it('Generates a new variable alias') {
+    @include assert {
+      @include output {
+        @include ratio--('alias', 'thread');
+      }
+
+      @include expect {
+        --ratio-alias: var(--ratio-thread, 0.75);
+      }
+    }
+  }
+}
+
+
+// Var-Ratio [function]
+// --------------------
+@include describe('Var-Ratio [function]') {
+  @include it('Accesses a ratio variable with default fallback') {
+    @include assert-equal(
+      var-ratio('simple'),
+      var(--ratio-simple, ratio('simple'))
+    );
+  }
+
+  @include it('Allows custom fallback') {
+    @include assert-equal(
+      var-ratio('simple', 0.125),
+      var(--ratio-simple, 0.125)
+    );
+  }
+
+  @include it('Allows false fallback') {
+    @include assert-equal(
+      var-ratio('simple', false),
+      var(--ratio-simple)
+    );
+  }
+
+  @include it('Accepts custom palette') {
+    $my-palette: (
+      'my-base': 0.25,
+      'my-adjustment': '#my-base' ('divide': 2),
+    );
+
+    @include assert-equal(
+      var-ratio('my-adjustment', $source: $my-palette),
+      var(--ratio-my-adjustment, ratio('my-adjustment', $source: $my-palette))
+    );
+  }
+}
+
+
+$ratios: $global !global;
+
+
+} // end module

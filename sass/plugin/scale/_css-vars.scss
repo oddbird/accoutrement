@@ -1,4 +1,4 @@
-/// # CSS Size Variables
+/// # Sizes » CSS Variables
 /// @group scale-vars
 
 
@@ -12,6 +12,9 @@
 /// and we'll apply it when setting or calling css variables
 /// based on your size maps.
 /// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group scale-vars
 ///
@@ -29,11 +32,14 @@ $size-var-prefix: 'size-' !default;
 /// Convert any size-map into CSS variables,
 /// using the global `$size-var-prefix`.
 ///
-/// - Size names that start with `_` are considered "private"
+/// - Size names that start with `_` or `-` are considered "private"
 ///   and will not be output as variables
 /// - Sizes that contain a simple alias with no adjustments
 ///   will be output with a `var()` value,
 ///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group scale-vars
 /// @example scss
@@ -62,6 +68,9 @@ $size-var-prefix: 'size-' !default;
 // ------
 /// Set a single custom property based on a map-size,
 /// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group scale-vars
 /// @example scss
@@ -103,6 +112,9 @@ $size-var-prefix: 'size-' !default;
 // --------
 /// Access the CSS variable associated with a given token,
 /// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group scale-vars
 /// @example scss

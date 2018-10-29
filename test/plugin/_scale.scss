@@ -6,14 +6,14 @@
 $test-sizes: (
   'root': 20px,
   'text': '#root' ('convert-units': 'rem'),
-  'rhythm': '#text' ('fifth': 1),
+  'rhythm': '#text' ('_fifth': 1),
 
   'h1': '#text' ('linear': 4),
   'h2': '#text' ('linear': 3),
   'h3': '#text' ('linear': 2),
 
-  'big': '#text' ('fifth': 5),
-  'small': '#text' ('octave': -1),
+  'big': '#text' ('_fifth': 5),
+  'small': '#text' ('_octave': -1),
   'viewport': 10vw,
   'percent': 20%,
   'medium-page': 30em ('convert-units': 'browser-ems' 40px),

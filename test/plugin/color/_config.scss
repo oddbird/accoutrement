@@ -22,21 +22,4 @@
   $colors: $old !global;
 }
 
-
-// CSS Colors [mixin]
-// ------------------
-@include describe('CSS Colors [mixin]') {
-  @include it('Converts a color map into prefixed css variables') {
-    @include assert {
-      @include output {
-        @include css-colors;
-      }
-
-      @include expect {
-        @include tokens--($colors, 'color-');
-      }
-    }
-  }
-}
-
 } // end module

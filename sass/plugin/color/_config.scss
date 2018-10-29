@@ -5,8 +5,8 @@
 // Color Map
 // ---------
 /// A variable storing the map of
-/// all colors globally-avialble on your project.
-/// Any colors added to the `$colors` map will be accesible
+/// all colors globally-available on your project.
+/// Any colors added to the `$colors` map will be accessible
 /// to the `color()` function by default.
 ///
 /// Define each color with a `name`, `base-value`,
@@ -27,7 +27,7 @@
 /// - Adjustments are a nested map of color functions and arguments,
 ///   for adjusting colors directly in your palette.
 ///
-/// The color-names `contrast-light` and `contrast-dark` are special.
+/// The color-names `_contrast-light` and `_contrast-dark` are special.
 /// Use those names to define the default light-and-dark options
 /// for our color-contrast tools.
 /// They default to `white` and `black` respectively.
@@ -60,16 +60,22 @@ $colors: () !default;
 
 // Default Colors
 // --------------
-/// These default colors will be used as defaults,
-/// for color-contrast functions
-/// unless they are provided by the user.
+/// These colors are available by default
+/// for color-contrast and tint/shade functions.
+/// Override these defaults in the `$colors` map,
+/// using the same `contrast-*` names.
 ///
-/// @access private
+/// **Do not edit this variable directly**.
+///
+/// @since 2.0.0 -
+/// - NEW: Default contrast colors are publicly documented,
+///   and available via `color()` functions
+///
 /// @group color-api
 /// @type map
 $_a_COLORS: (
-  'contrast-light': white,
-  'contrast-dark': black,
+  '_contrast-light': white,
+  '_contrast-dark': black,
 );
 
 
@@ -110,11 +116,4 @@ $_a_COLORS: (
   $maps...
 ) {
   $colors: _a_map-multimerge($colors, $maps...) !global;
-}
-
-
-@mixin css-colors(
-  $map: $colors
-) {
-  @include tokens--($map, 'color-');
 }

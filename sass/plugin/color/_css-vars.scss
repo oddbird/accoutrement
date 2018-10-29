@@ -1,4 +1,4 @@
-/// # CSS Color Variables
+/// # Colors » CSS Variables
 /// @group color-vars
 
 
@@ -12,6 +12,9 @@
 /// and we'll apply it when setting or calling css variables
 /// based on your color maps.
 /// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group color-vars
 ///
@@ -29,11 +32,14 @@ $color-var-prefix: 'color-' !default;
 /// Convert any color-map into CSS variables,
 /// using the global `$color-var-prefix`.
 ///
-/// - Color names that start with `_` are considered "private"
+/// - Color names that start with `_` or `-` are considered "private"
 ///   and will not be output as variables
 /// - Colors that contain a simple alias with no adjustments
 ///   will be output with a `var()` value,
 ///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group color-vars
 /// @example scss
@@ -54,6 +60,7 @@ $color-var-prefix: 'color-' !default;
 @mixin colors--(
   $source: $colors
 ) {
+  $source: map-merge($_a_COLORS, $source);
   @include tokens--($source, $color-var-prefix);
 }
 
@@ -62,6 +69,9 @@ $color-var-prefix: 'color-' !default;
 // -------
 /// Set a single custom property based on a map-color,
 /// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group color-vars
 /// @example scss
@@ -95,6 +105,7 @@ $color-var-prefix: 'color-' !default;
   $fallback: true,
   $source: $colors
 ) {
+  $source: map-merge($_a_COLORS, $source);
   @include token--($source, $color, $value, $fallback, $color-var-prefix);
 }
 
@@ -103,6 +114,9 @@ $color-var-prefix: 'color-' !default;
 // ---------
 /// Access the CSS variable associated with a given token,
 /// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group color-vars
 /// @example scss
@@ -134,5 +148,6 @@ $color-var-prefix: 'color-' !default;
   $fallback: true,
   $source: $colors
 ) {
+  $source: map-merge($_a_COLORS, $source);
   @return var-token($source, $color, $fallback, $color-var-prefix);
 }

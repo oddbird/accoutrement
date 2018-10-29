@@ -83,7 +83,7 @@
   @include it('Dark on light') {
     @include assert-equal(
       contrast(#eee),
-      color('contrast-dark'),
+      color('_contrast-dark'),
       'Returns a dark color to contrast a light one.'
     );
   }
@@ -91,7 +91,7 @@
   @include it('Light on dark') {
     @include assert-equal(
       contrast('dark'),
-      color('contrast-light'),
+      color('_contrast-light'),
       'Returns a light color to contrast a dark one.'
     );
   }
@@ -145,7 +145,7 @@
 
       @include expect {
         background-color: #eee;
-        color: color('contrast-dark');
+        color: color('_contrast-dark');
       }
     }
   }
@@ -158,7 +158,7 @@
 
       @include expect {
         background-color: color('dark');
-        color: color('contrast-light');
+        color: color('_contrast-light');
       }
     }
   }

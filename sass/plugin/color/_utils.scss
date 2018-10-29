@@ -4,9 +4,13 @@
 
 // Tint
 // ----
-/// Mix a color with `contrast-light`
+/// Mix a color with `_contrast-light`
 /// (defaults to `white`)
 /// to get a lighter tint of your color.
+///
+/// @since 2.0.0 -
+/// - BREAKING: Use `_contrast-light` for mix, rather than `white`
+/// - NEW: Accept `$light` color to use in place of `_contrast-light` default
 ///
 /// @group color-utils
 ///
@@ -16,14 +20,14 @@
 /// @param {Percentage} $percentage -
 ///   The percentage of a `$light` color to mix in.
 ///   Higher percentages will result in a lighter tint.
-/// @param {Color | String} $light ['contrast-light'] -
+/// @param {Color | String} $light ['_contrast-light'] -
 ///   The lighter color to be mixed in for tinting.
 /// @return {Color} -
 ///   A calculated css-ready color-value based on your global color palette.
 @function tint(
   $color,
   $percentage,
-  $light: 'contrast-light'
+  $light: '_contrast-light'
 ) {
   @return mix(color($light), color($color), $percentage);
 }
@@ -32,9 +36,13 @@
 
 // Shade
 // -----
-/// Mix a color with `contrast-dark`
+/// Mix a color with `_contrast-dark`
 /// (defaults to `black`)
 /// to get a darker shade of your color.
+///
+/// @since 2.0.0 -
+/// - BREAKING: Use `_contrast-dark` for mix, rather than `black`
+/// - NEW: Accept `$dark` color to use in place of `_contrast-dark` default
 ///
 /// @group color-utils
 ///
@@ -44,14 +52,14 @@
 /// @param {Percentage} $percentage -
 ///   The percentage of a `$dark` color to mix in.
 ///   Higher percentages will result in a lighter tint.
-/// @param {Color | String} $dark ['contrast-dark'] -
+/// @param {Color | String} $dark ['_contrast-dark'] -
 ///   The darker color to be mixed in for shading.
 /// @return {Color} -
 ///   A calculated css-ready color-value based on your global color palette.
 @function shade(
   $color,
   $percentage,
-  $dark: 'contrast-dark'
+  $dark: '_contrast-dark'
 ) {
   @return mix(color($dark), color($color), $percentage);
 }

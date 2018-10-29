@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Durations &amp; Delays | Accoutrement Documentation</title>
+  <title>Timing Maps | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">1.0.1</span>
+          <span class="project-version">2.0.0-alpha.1</span>
         
       </div>
     </header>
@@ -87,7 +87,7 @@
     <div class="nav-subsection">
       <ul>
             <li class="nav-subsection">
-              <h3 class="nav-title">Core (Parser)</h3>
+              <h3 class="nav-title">Core (API)</h3>
               <ul>
                 
   
@@ -97,37 +97,52 @@
   
   
     <li class="nav-item">
-      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
+      <a href="core-get.html" data-nav="is-not-active">Token Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-vars.html" data-nav="is-not-active">CSS Variables</a>
+      <a href="core-vars.html" data-nav="is-not-active">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-math.html" data-nav="is-not-active">Math Helpers</a>
+      <a href="core-ratio.html" data-nav="is-not-active">Ratios &amp; Modular<span class="widont">&nbsp;</span>Scales</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+      <a href="core-ratio-vars.html" data-nav="is-not-active">Ratios » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="core-lists.html" data-nav="is-not-active">Sass List<span class="widont">&nbsp;</span>Utils</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="core-strings.html" data-nav="is-not-active">Sass String<span class="widont">&nbsp;</span>Utils</a>
-    </li>
-  
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Core (Utilities)</h3>
+              <ul>
+                
   
     <li class="nav-item">
       <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-math.html" data-nav="is-not-active">Math Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">List Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">String Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
     </li>
   </ul>
             </li>
@@ -177,21 +192,33 @@
   
   
     <li class="nav-item">
-      <a href="animate-times.html" data-nav="is-active">Durations &amp;<span class="widont">&nbsp;</span>Delays</a>
+      <a href="animate-times.html" data-nav="is-active">Timing Maps</a>
     </li>
-  
   
   
     <li class="nav-item">
-      <a href="animate-ease.html" data-nav="is-not-active">Easing &amp;<span class="widont">&nbsp;</span>Steps</a>
+      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
-  
   
   
     <li class="nav-item">
-      <a href="animate-change.html" data-nav="is-not-active">Animations &amp;<span class="widont">&nbsp;</span>Transitions</a>
+      <a href="animate-ease.html" data-nav="is-not-active">Easing Maps</a>
     </li>
   
+  
+    <li class="nav-item">
+      <a href="animate-ease-vars.html" data-nav="is-not-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change.html" data-nav="is-not-active">Combined &quot;Change&quot;<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change-vars.html" data-nav="is-not-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
   </ul>
             </li>
             <li class="nav-subsection">
@@ -205,12 +232,12 @@
   
   
     <li class="nav-item">
-      <a href="color-api.html" data-nav="is-not-active">Colors</a>
+      <a href="color-api.html" data-nav="is-not-active">Color Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-vars.html" data-nav="is-not-active">CSS Color<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -220,7 +247,7 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-not-active">Color Utils</a>
+      <a href="color-utils.html" data-nav="is-not-active">Color Functions</a>
     </li>
   </ul>
             </li>
@@ -235,6 +262,12 @@
   
   
     <li class="nav-item">
+      <a href="layout-queries.html" data-nav="is-not-active">Media Breakpoint<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+  
+    <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
     </li>
   
@@ -246,11 +279,6 @@
   
     <li class="nav-item">
       <a href="layout-position.html" data-nav="is-not-active">Positioning</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="layout-queries.html" data-nav="is-not-active">Media Queries</a>
     </li>
   
   
@@ -275,12 +303,12 @@
   
   
     <li class="nav-item">
-      <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
+      <a href="scale-sizes.html" data-nav="is-not-active">Size Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="scale-vars.html" data-nav="is-not-active">CSS Size<span class="widont">&nbsp;</span>Variables</a>
+      <a href="scale-vars.html" data-nav="is-not-active">Sizes » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -300,12 +328,17 @@
   
   
     <li class="nav-item">
-      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
+      <a href="type-fonts.html" data-nav="is-not-active">Font Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
+      <a href="type-font-vars.html" data-nav="is-not-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
     </li>
   
   
@@ -367,7 +400,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Durations &amp; Delays</strong>
+    <strong>Timing Maps</strong>
   </nav>
 
 
@@ -396,7 +429,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="durations-delays">Durations &amp; Delays</h1>
+      <h1 id="timing-maps-durations-delays">Timing Maps: Durations &amp;<span class="widont">&nbsp;</span>Delays</h1>
 <p>Manage all your duration &amp; delay patterns
 in a single place -
 with explicitly documented<span class="widont">&nbsp;</span>relationships.</p>

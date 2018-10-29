@@ -7,7 +7,8 @@ $test: (
   '_private': blue,
   'simple': red,
   'kevin': '#_private',
-  'thread': '#kevin'
+  'thread': '#kevin',
+  'default': '#_contrast-light',
 );
 
 $global: $colors;
@@ -27,6 +28,7 @@ $colors: $test !global;
         --color-simple: red;
         --color-kevin: blue;
         --color-thread: var(--color-kevin, blue);
+        --color-default: #{color('_contrast-light')};
       }
     }
   }
@@ -70,7 +72,19 @@ $colors: $test !global;
         --color-thread: var(--color-kevin, blue);
       }
     }
+  }
 
+
+  @include it('Generate reference to default color') {
+    @include assert {
+      @include output {
+        @include color--('default');
+      }
+
+      @include expect {
+        --color-default: #{color('_contrast-light')};
+      }
+    }
   }
 
   @include it('Generates a new variable alias') {

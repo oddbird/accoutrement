@@ -1,4 +1,4 @@
-/// # CSS Variables
+/// # Tokens » CSS Variables
 /// *aka "Custom Properties"*
 ///
 /// CSS variables are a useful way to manage
@@ -24,6 +24,9 @@
 /// Formats a token name as a CSS variable (custom property),
 /// with optional prefix
 ///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
 /// @access private
 ///
 /// @param {string} $name -
@@ -45,11 +48,14 @@
 /// Convert any Accoutrement map
 /// into CSS custom properties (aka variables).
 ///
-/// - Token names that start with `_` are considered "private"
+/// - Token names that start with `_` or `-` are considered "private"
 ///   and will not be output as variables
 /// - Tokens that contain a simple alias with no adjustments
 ///   will be output with a `var()` value,
 ///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group core-vars
 /// @example scss
@@ -73,7 +79,7 @@
   $prefix: null
 ) {
   @each $token in map-keys($map) {
-    @if not _a_is-private-token($token) {
+    @if not is-private-token($token) {
       @include token--($map, $token, $prefix: $prefix);
     }
   }
@@ -84,6 +90,9 @@
 // -------
 /// Set a single custom property based on a map-token,
 /// with optional alias, fallback, and prefixing
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group core-vars
 /// @example scss
@@ -120,7 +129,7 @@
 ) {
   $prop: _a_var-name($token, $prefix);
   $val: $value or $token;
-  $ref: $value or _a_is-alias($map, $val);
+  $ref: $value or is-alias-for($map, $val);
 
   @if ($ref) {
     $val: var-token($map, $ref, $fallback, $prefix);
@@ -136,6 +145,9 @@
 // ---------
 /// Access the CSS variable associated with a given token,
 /// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
 ///
 /// @group core-vars
 /// @example scss

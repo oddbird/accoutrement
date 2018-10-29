@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Modular Scales | Accoutrement Documentation</title>
+  <title>Ratios &amp; Modular Scales | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">1.0.1</span>
+          <span class="project-version">2.0.0-alpha.1</span>
         
       </div>
     </header>
@@ -87,7 +87,7 @@
     <div class="nav-subsection">
       <ul>
             <li class="nav-subsection">
-              <h3 class="nav-title">Core (Parser)</h3>
+              <h3 class="nav-title">Core (API)</h3>
               <ul>
                 
   
@@ -97,37 +97,52 @@
   
   
     <li class="nav-item">
-      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
+      <a href="core-get.html" data-nav="is-not-active">Token Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-vars.html" data-nav="is-not-active">CSS Variables</a>
+      <a href="core-vars.html" data-nav="is-not-active">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-math.html" data-nav="is-not-active">Math Helpers</a>
+      <a href="core-ratio.html" data-nav="is-active">Ratios &amp; Modular<span class="widont">&nbsp;</span>Scales</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-scale.html" data-nav="is-active">Modular Scales</a>
+      <a href="core-ratio-vars.html" data-nav="is-not-active">Ratios » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="core-lists.html" data-nav="is-not-active">Sass List<span class="widont">&nbsp;</span>Utils</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="core-strings.html" data-nav="is-not-active">Sass String<span class="widont">&nbsp;</span>Utils</a>
-    </li>
-  
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Core (Utilities)</h3>
+              <ul>
+                
   
     <li class="nav-item">
       <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-math.html" data-nav="is-not-active">Math Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">List Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">String Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
     </li>
   </ul>
             </li>
@@ -177,21 +192,33 @@
   
   
     <li class="nav-item">
-      <a href="animate-times.html" data-nav="is-not-active">Durations &amp;<span class="widont">&nbsp;</span>Delays</a>
+      <a href="animate-times.html" data-nav="is-not-active">Timing Maps</a>
     </li>
-  
   
   
     <li class="nav-item">
-      <a href="animate-ease.html" data-nav="is-not-active">Easing &amp;<span class="widont">&nbsp;</span>Steps</a>
+      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
-  
   
   
     <li class="nav-item">
-      <a href="animate-change.html" data-nav="is-not-active">Animations &amp;<span class="widont">&nbsp;</span>Transitions</a>
+      <a href="animate-ease.html" data-nav="is-not-active">Easing Maps</a>
     </li>
   
+  
+    <li class="nav-item">
+      <a href="animate-ease-vars.html" data-nav="is-not-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change.html" data-nav="is-not-active">Combined &quot;Change&quot;<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change-vars.html" data-nav="is-not-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
   </ul>
             </li>
             <li class="nav-subsection">
@@ -205,12 +232,12 @@
   
   
     <li class="nav-item">
-      <a href="color-api.html" data-nav="is-not-active">Colors</a>
+      <a href="color-api.html" data-nav="is-not-active">Color Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-vars.html" data-nav="is-not-active">CSS Color<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -220,7 +247,7 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-not-active">Color Utils</a>
+      <a href="color-utils.html" data-nav="is-not-active">Color Functions</a>
     </li>
   </ul>
             </li>
@@ -235,6 +262,12 @@
   
   
     <li class="nav-item">
+      <a href="layout-queries.html" data-nav="is-not-active">Media Breakpoint<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+  
+    <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
     </li>
   
@@ -246,11 +279,6 @@
   
     <li class="nav-item">
       <a href="layout-position.html" data-nav="is-not-active">Positioning</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="layout-queries.html" data-nav="is-not-active">Media Queries</a>
     </li>
   
   
@@ -275,12 +303,12 @@
   
   
     <li class="nav-item">
-      <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
+      <a href="scale-sizes.html" data-nav="is-not-active">Size Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="scale-vars.html" data-nav="is-not-active">CSS Size<span class="widont">&nbsp;</span>Variables</a>
+      <a href="scale-vars.html" data-nav="is-not-active">Sizes » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -300,12 +328,17 @@
   
   
     <li class="nav-item">
-      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
+      <a href="type-fonts.html" data-nav="is-not-active">Font Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
+      <a href="type-font-vars.html" data-nav="is-not-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
     </li>
   
   
@@ -367,11 +400,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Modular Scales</strong>
+    <strong>Ratios &amp; Modular Scales</strong>
   </nav>
 
 
-        <div data-page="core-scale">
+        <div data-page="core-ratio">
           
   
     
@@ -396,7 +429,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="modular-scale-ratios">Modular Scale Ratios</h1>
+      <h1 id="layout-type-ratios">Layout &amp; Type<span class="widont">&nbsp;</span>Ratios</h1>
 <p>Ratios are useful for both <a href="scale-sizes.html">modular-scales</a>
 and <a href="layout-ratios.html">fluid media</a> layouts.
 We’ve moved them into the core,
@@ -603,7 +636,7 @@ will not use any exponential<span class="widont">&nbsp;</span>scale.</p>
       <pre class="hljs-pre"><code class="lang-scss">$ratios: (
   &#39;line-height&#39;: (1 / 3),
   &#39;headings&#39;: &#39;linear&#39;,
-  &#39;golden&#39;: 1.61803399,
+  &#39;_golden&#39;: 1.61803399,
 );</code></pre>
     </div>
   
@@ -646,7 +679,7 @@ will not use any exponential<span class="widont">&nbsp;</span>scale.</p>
       
       
         <a href="
-  core-scale.html#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
+  core-ratio.html#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
       
       
       
@@ -698,7 +731,7 @@ will not use any exponential<span class="widont">&nbsp;</span>scale.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  core-scale.html#mixin--add-ratios" class="item-name">add-ratios()</a>
+  core-ratio.html#mixin--add-ratios" class="item-name">add-ratios()</a>
       
       
       
@@ -1003,8 +1036,8 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">/* Octave: #{ratio(&#39;octave&#39;)} */
-/* Fifth: #{ratio(&#39;fifth&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">/* _octave: #{ratio(&#39;_octave&#39;)} */
+/* _fifth: #{ratio(&#39;_fifth&#39;)} */</code></pre>
     </div>
   
 
@@ -1026,8 +1059,8 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/* Octave: 2 */
-/* Fifth: 1.5 */
+      <pre class="hljs-pre"><code class="lang-css">/* _octave: 2 */
+/* _fifth: 1.5 */
 </code></pre>
     </div>
   
@@ -1117,7 +1150,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
       
       
         <a href="
-  core-scale.html#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
+  core-ratio.html#variable--_a_RATIOS" class="item-name">$_a_RATIOS</a>
       
       
       
@@ -1470,7 +1503,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
       
       
         <a href="
-  core-scale.html#variable--ratios" class="item-name">$ratios</a>
+  core-ratio.html#variable--ratios" class="item-name">$ratios</a>
       
       
       <span class="value-type">(map)</span>
@@ -1571,24 +1604,24 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">$_a_RATIOS: (
-  &#39;octave&#39;: 2,
-  &#39;major-seventh&#39;: (15 / 8),
-  &#39;minor-seventh&#39;: (16 / 9),
-  &#39;major-sixth&#39;: (5 / 3),
-  &#39;minor-sixth&#39;: (8 / 5),
-  &#39;fifth&#39;: (3 / 2),
-  &#39;augmented-fourth&#39;: (45 / 32),
-  &#39;fourth&#39;: (4 / 3),
-  &#39;major-third&#39;: (5 / 4),
-  &#39;minor-third&#39;: (6 / 5),
-  &#39;major-second&#39;: (9 / 8),
-  &#39;minor-second&#39;: (16 / 15),
+  &#39;_octave&#39;: 2,
+  &#39;_major-seventh&#39;: (15 / 8),
+  &#39;_minor-seventh&#39;: (16 / 9),
+  &#39;_major-sixth&#39;: (5 / 3),
+  &#39;_minor-sixth&#39;: (8 / 5),
+  &#39;_fifth&#39;: (3 / 2),
+  &#39;_augmented-fourth&#39;: (45 / 32),
+  &#39;_fourth&#39;: (4 / 3),
+  &#39;_major-third&#39;: (5 / 4),
+  &#39;_minor-third&#39;: (6 / 5),
+  &#39;_major-second&#39;: (9 / 8),
+  &#39;_minor-second&#39;: (16 / 15),
 
-  &#39;photo&#39;: &#39;#fifth&#39;,
-  &#39;classic&#39;: &#39;#fourth&#39;,
-  &#39;widescreen&#39;: &#39;#minor-seventh&#39;,
-  &#39;cinema&#39;: 2.39,
-  &#39;golden&#39;: 1.618,
+  &#39;_photo&#39;: &#39;#_fifth&#39;,
+  &#39;_classic&#39;: &#39;#_fourth&#39;,
+  &#39;_widescreen&#39;: &#39;#_minor-seventh&#39;,
+  &#39;_cinema&#39;: 2.39,
+  &#39;_golden&#39;: 1.618,
 );</code></pre>
     </div>
   
@@ -1662,7 +1695,7 @@ but shouldn’t edit<span class="widont">&nbsp;</span>directly.</p>
       
       
         <a href="
-  core-scale.html#variable--ratios" class="item-name">$ratios</a>
+  core-ratio.html#variable--ratios" class="item-name">$ratios</a>
       
       
       
@@ -1714,7 +1747,100 @@ but shouldn’t edit<span class="widont">&nbsp;</span>directly.</p>
       <span class="item-type">@function</span>
       
         <a href="
-  core-scale.html#function--ratio" class="item-name">ratio()</a>
+  core-ratio.html#function--ratio" class="item-name">ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-ratio-vars.html#mixin--ratios--" class="item-name">ratios--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  core-ratio-vars.html#mixin--ratio--" class="item-name">ratio--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  core-ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
       
       
       

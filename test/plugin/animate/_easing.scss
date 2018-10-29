@@ -8,7 +8,7 @@
 @include describe('Ease [function]') {
   @include it('Get easing from defaults') {
     @include assert-equal(
-      ease('in-out-quad'),
+      ease('_in-out-quad'),
       cubic-bezier(0.455, 0.03, 0.515, 0.955)
     );
   }
@@ -49,8 +49,8 @@
 // ----------------
 @include describe('Add Ease [mixin]') {
   $old: $easing;
-  $a: ('sidebar-in': 'in-out-quad');
-  $b: ('elastic': 'in-out-back');
+  $a: ('sidebar-in': '_in-out-quad');
+  $b: ('elastic': '_in-out-back');
 
   @include add-easing($a, $b);
 

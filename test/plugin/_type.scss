@@ -4,11 +4,12 @@
 $font-path: '../fonts/';
 
 $fonts: (
-  'shared-stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
+  '_shared-stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
+  '_normal-stack': ('stack': '#_shared-stack'),
 
   'body-font': (
     'name': 'Source Sans Pro',
-    'stack': '#shared-stack',
+    'stack': '#_shared-stack',
     'formats': 'woff' 'svg' 'eot',
     'normal': 'sans/sourcesanspro-regular-webfont',
     'italic': 'sans/sourcesanspro-italic-webfont',
@@ -32,8 +33,6 @@ $fonts: (
     'unicode-range': (U+0000-00FF, U+0131, 'U+0152-0153', 'U+02C6'),
   ),
 
-  'normal-stack': ('stack': '#shared-stack'),
-  'normal-alias': '#normal-stack',
   'alias': '#body-font',
   'kevin bacon': '#alias',
   'tf-alias': '#TestFont',
@@ -46,4 +45,5 @@ $fonts: (
 @import 'type/normalize';
 @import 'type/a11y';
 @import 'type/fonts';
+@import 'type/font-vars';
 @import 'type/pseudo-elements';

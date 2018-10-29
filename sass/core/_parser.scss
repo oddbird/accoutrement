@@ -1,64 +1,5 @@
-/// # Accessing Maps
-/// @group core-get
-
-
-// Get Token
-// ---------
-/// The primary function for accessing and parsing
-/// accoutrement map values.
-/// Each accoutrement plugin creates a shortcut wrapper function
-/// for the specific map associated with that data-type.
-/// You can do the same, or use it directly
-/// to turn any arbitrary map into an accoutrement map.
-///
-/// @since 1.0.0 -
-/// - NEW: Accepts `$do` map argument,
-///   for on-the-fly adjustments
-///
-/// @group core-get
-/// @example scss - Access a map directly
-///   $map: (
-///     'original-value': 3em,
-///     'new-value': '#original-value' (
-///       'times': 2,
-///       'minus': 0.5
-///     ),
-///   );
-///   /*! New Value: #{get-token($map, 'new-value')} */
-/// @example scss - Write your own shortcut plugin for specific maps
-///   @function get($key) {
-///     @return get-token($my-map, $key);
-///   }
-///
-///   $my-map: ('main': 32em);
-///   /*! Main: #{get('main')} */
-///
-/// @param {map} $map -
-///   A map of token definitions to reference against
-/// @param {*} $key -
-///   The original key or value to be parsed for `#alias` tags
-/// @param {map | null} $do [null] -
-///   A final map of function/ratio adjustments to run on the returned value
-/// @return {*} -
-///   The parsed value of any key in a given map
-@function get-token(
-  $map,
-  $key,
-  $do: null
-) {
-  $val: map-get($map, $key) or $key;
-
-  // Handle deep keys
-  @if ($val == $key)
-    and (type-of($key) == 'string')
-    and str-index($key, '->')
-    and not (str-index($key, '#') == 1) {
-    $val: '##{$key}';
-  }
-
-  $val: _a_get($map, $val);
-  @return _a_do-each($map, $val, $do);
-}
+/// # Core Parser
+/// @access private
 
 
 // Get
@@ -68,7 +9,7 @@
 /// Functions can be added as a map at the end of a value --
 /// but some use-cases may confuse the parser,
 /// so we provide a more explicit map option with a `value` key,
-/// forllowed by functions and args.
+/// followed by functions and args.
 ///
 /// @access private
 ///
@@ -212,6 +153,10 @@
 /// Search for `#alias` mentions within a string,
 /// and return the string with aliases replaced.
 ///
+/// @since 2.0.0 -
+/// - NEW: Handles access to nested-map tokens
+///   using the hashtag `'#first->second->third'` syntax
+///
 /// @access private
 ///
 /// @param {map} $haystack -
@@ -340,69 +285,4 @@
     'No ratio or function named `#{$name}`',
     '_a_do'
   );
-}
-
-
-// Is Private Token
-// ----------------
-/// Check if a token key is marked as private
-/// with `_` or `-` as the starting character
-///
-/// @access private
-///
-/// @param {*} $key -
-///   The token key to check for private prefix
-///   (only string and list keys can be marked as private)
-/// @return {boolean} -
-///   True if the key is private
-@function _a_is-private-token(
-  $key
-) {
-  $pre: '_' '-';
-
-  @if (type-of($key) == 'list') {
-    $key: nth($key, 1);
-  }
-
-  @if (type-of($key) == 'string') and (index($pre, str-slice($key, 1, 1))) {
-    @return true;
-  }
-
-  @return false;
-}
-
-
-// Is Alias
-// --------
-/// Find if a token is simply an alias,
-/// and (if so) what token it represents –
-/// either directly,
-/// or following the thread to it's origin.
-///
-/// @access private
-///
-/// @param {map} $map -
-///   A map of terms to reference against
-/// @param {*} $token -
-///   The token name to be traced
-/// @return {*} -
-///   Token name where the returned value originates,
-///   or `false` for non-alias tokens
-@function _a_is-alias(
-  $map,
-  $token,
-  $origin: false
-) {
-  $ref: false;
-  $val: map-get($map, $token);
-
-  @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
-    $try: str-slice($val, 2);
-
-    @if map-has-key($map, $try) and not _a_is-private-token($try) {
-      $ref: if($origin, _a_is-alias($map, $try, $origin) or $try, $try);
-    }
-  }
-
-  @return $ref;
 }

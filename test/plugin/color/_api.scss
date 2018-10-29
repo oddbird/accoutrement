@@ -71,16 +71,16 @@
     );
   }
 
-  @include it('Has a default contrast-light') {
+  @include it('Has a default _contrast-light') {
     @include assert-equal(
-      color('contrast-light', $source: $my-palette),
+      color('_contrast-light', $source: $my-palette),
       white
     );
   }
 
-  @include it('Has a default contrast-dark') {
+  @include it('Has a default _contrast-dark') {
     @include assert-equal(
-      color('contrast-dark', $source: $my-palette),
+      color('_contrast-dark', $source: $my-palette),
       black
     );
   }

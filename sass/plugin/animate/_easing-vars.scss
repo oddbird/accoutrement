@@ -1,0 +1,154 @@
+/// # Easing » CSS Variables
+/// @group animate-ease-vars
+
+
+// Easing Var Prefix
+// -----------------
+/// Since CSS variables are often defined in a global space,
+/// it can be useful to prefix different variable types.
+/// Accoutrement maps help solve that problem in Sass,
+/// so we wanted to carry that over into our CSS variable support.
+/// Set a prefix for all easing-tokens,
+/// and we'll apply it when setting or calling css variables
+/// based on your easing maps.
+/// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-ease-vars
+///
+/// @example scss
+///   $easing: ('my-ease': '#_in-out-back');
+///   $easing-var-prefix: 'prefix_';
+///   :root { @include ease--('my-ease') }
+///
+/// @type string
+$easing-var-prefix: 'ease-' !default;
+
+
+// easing--
+// --------
+/// Convert any easing-map into CSS variables,
+/// using the global `$easing-var-prefix`.
+///
+/// - Easing names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Easing values that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-ease-vars
+/// @example scss
+///   $easing: (
+///     '_elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///     'modal': '#_elastic',
+///     'error-message': '#modal',
+///   );
+///   :root {
+///     @include easing--;
+///   }
+///
+/// @param {map} $source [$easing] -
+///   Optionally use a custom
+///   map of easing tokens to set as css variables
+/// @output
+///   Custom properties for all public easing in the map
+@mixin easing--(
+  $source: $easing
+) {
+  $source: map-merge($_a_EASING, $source);
+  @include tokens--($source, $easing-var-prefix);
+}
+
+
+// ease--
+// -------
+/// Set a single custom property based on a map-easing,
+/// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-ease-vars
+/// @example scss
+///   $easing: (
+///     '_elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///     'modal': '#_elastic',
+///     'error-message': '#modal',
+///   );
+///   .example {
+///     @include ease--('modal');
+///     @include ease--('toast', 'modal', ease-in);
+///   }
+///
+/// @param {*} $ease -
+///   Easing name available in the `$source` map,
+///   or alias to use in naming the CSS variable
+/// @param {string | null} $value [null] -
+///   Optional value for the variable,
+///   if different from the given `$ease`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source [$easing] -
+///   Optional map of easing to use as a palette source
+@mixin ease--(
+  $ease,
+  $value: null,
+  $fallback: true,
+  $source: $easing
+) {
+  $source: map-merge($_a_EASING, $source);
+  @include token--($source, $ease, $value, $fallback, $easing-var-prefix);
+}
+
+
+// Var Ease
+// --------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-ease-vars
+/// @example scss
+///   $easing: (
+///     '_elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///     'modal': '#_elastic',
+///     'error-message': '#modal',
+///   );
+///   .example {
+///     animation: fade 1s var-ease('error-message', ease-in);
+///     transition: translate var-ease('modal');
+///   }
+///
+/// @param {*} $ease -
+///   Easing name available in the `$source` map
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source -
+///   Optional Accoutrement map of easing tokens
+///   to use as source
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<token>, <fallback>)`
+@function var-ease(
+  $ease,
+  $fallback: true,
+  $source: $easing
+) {
+  $source: map-merge($_a_EASING, $source);
+  @return var-token($source, $ease, $fallback, $easing-var-prefix);
+}
