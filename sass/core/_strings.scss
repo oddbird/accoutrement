@@ -178,7 +178,7 @@
 ///   - Empty-string (`''`) separators will return a list of
 ///     all characters in the original string
 ///   - Non-string separators will be converted to strings before splitting
-/// @param {intiger | null} $limit [null] -
+/// @param {integer | null} $limit [null] -
 ///   Maximum length of the returned list
 /// @return {list} -
 ///   Space-delimited list of string-slices from the original string

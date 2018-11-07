@@ -21,16 +21,18 @@
 ///   Final parsed and adjusted value from the original map
 @function _a_get(
   $map,
-  $key
+  $key,
+  $is-flat: false
 ) {
+  $map: if($is-flat, $map, _a_flat-source($map));
   $type: type-of($key);
   $do: null;
   $value: $key;
 
   // break out `do` maps…
-  @if ($type == 'map') and map-get($key, 'value') {
-    $value: map-get($key, 'value');
-    $do: map-remove($key, 'value');
+  @if ($type == 'map') and (nth(map-keys($key), 1) == '%value') {
+    $value: map-get($key, '%value');
+    $do: map-remove($key, '%value');
   } @else if index('list' 'arglist', $type) {
     $final: nth($key, -1);
 
@@ -77,7 +79,7 @@
 
     // handle each item in the list…
     @each $bit in $needle {
-      $new: append($new, _a_get($haystack, $bit));
+      $new: append($new, _a_get($haystack, $bit, 'is-flat'));
     }
 
     @return $new;
@@ -87,54 +89,12 @@
   @if ($type == 'map') {
     $new: ();
 
-    // create a list of keys and values in the current map scope
-    $keys: map-keys($needle);
-    $values: map-values($needle);
-
     // handle each value in the map…
     @each $key, $value in $needle {
-      $index: index($keys, $key);
+      $new-key: _a_get($haystack, $key, 'is-flat');
+      $new-value: _a_get($haystack, $value, 'is-flat');
 
-      // check in the $needle
-      $newkey: _a_get($needle, $key);
-      $keytype: type-of($newkey);
-      $newvalue: _a_get($needle, $value);
-      $valuetype: type-of($newvalue);
-
-      // if the key isn't found in the $needle or is a #reference,
-      // check the $haystack with the $newkey
-      @if type-of($newkey) != 'string' or str-index($newkey, "#") {
-        $newkey: _a_get($haystack, $newkey);
-      }
-
-      // if the value isn't found in the $needle or is a #reference,
-      // check the $haystack
-      @if ($valuetype != 'string') or str-index($newvalue, "#") {
-        // if we're dealing with a map or a #reference,
-        // search with the $newvalue
-        @if ($valuetype == 'map')
-          or (($valuetype == 'string') and str-index($newvalue, "#")) {
-          $newvalue: _a_get($haystack, $newvalue);
-        }
-        // otherwise, search with the original value
-        @else {
-          $newvalue: _a_get($haystack, $value);
-        }
-      }
-
-      // update the lists of keys and values with the new ones
-      $keys: set-nth($keys, $index, $newkey);
-      $values: set-nth($values, $index, $newvalue);
-
-      // erase $new to guarantee a fresh map
-      $new: ();
-
-      // rebuild the map from the new keys and values
-      @each $k in $keys {
-        $new: map-merge($new, (
-          $k: nth($values, index($keys, $k))
-        ));
-      }
+      $new: map-merge($new, ($new-key: $new-value));
     }
 
     @return $new;
@@ -177,16 +137,6 @@
 
       @if (type-of($string) == 'string') and str-index($string, $hash) {
         $new: get-token($haystack, $key);
-
-        @if (type-of($new) == 'map') and str-index($string, '#{$hash}->') {
-          $deep: _a_str-replace($string, '#{$hash}->', '#', 'all');
-          $try: _a_replace($new, $deep);
-
-          @if ($try != $deep) {
-            @return $try;
-          }
-        }
-
         $string: _a_str-replace($string, $hash, $new, 'all');
       }
     }
@@ -249,8 +199,8 @@
   $args...
 ) {
   // Allow internal map references
-  $name: _a_get($source, $name);
-  $args: _a_get($source, $args);
+  $name: _a_get($source, $name, 'is-flat');
+  $args: _a_get($source, $args, 'is-flat');
 
   // Handle null args…
   @if (length($args) == 1) {
@@ -285,4 +235,32 @@
     'No ratio or function named `#{$name}`',
     '_a_do'
   );
+}
+
+
+$_a_source-memo: ();
+
+
+@function _a_flat-source(
+  $source,
+  $memo: $_a_source-memo
+) {
+  @if map-has-key($memo, $source) {
+    @return map-get($memo, $source);
+  }
+
+  $flat: $source;
+
+  @each $key, $value in $source {
+    @if (type-of($value) == 'map') and not map-has-key($value, '%value') {
+      @each $sub-key, $sub-val in _a_flat-source($value) {
+        $sub-key: '#{$key}->#{$sub-key}';
+        $flat: map-merge($flat, ($sub-key: $sub-val));
+      }
+    }
+  }
+
+  $_a_source-memo: map-merge($_a_source-memo, ($source: $flat)) !global;
+
+  @return $flat;
 }

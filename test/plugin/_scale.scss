@@ -39,7 +39,7 @@ $test-sizes: (
   'round': 10rem / 3 ('round': null),
   'calc-simple': calc(1em + 2vw),
   'calc': (
-    'value': 'calc(%s + %s / %s)',
+    '%value': 'calc(%s + %s / %s)',
     '%s': ('#root' ('times': 3), '#test-value' ('convert-units': 'vw'), 3),
   ),
   'calc-ref': '#calc',

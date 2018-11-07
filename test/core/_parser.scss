@@ -32,7 +32,7 @@
 
   @include it('Handles explicit todo-maps') {
     $needle: (
-      'value': '#slow or whatever',
+      '%value': '#slow or whatever',
       'str-replace': 'or' 'with',
     );
     @include assert-equal(
@@ -43,7 +43,7 @@
 
   @include it('Allows #alias tags in todo map') {
     $needle: (
-      'value': '#slow',
+      '%value': '#slow',
       '#*': '#two',
     );
     @include assert-equal(
@@ -63,11 +63,11 @@
     $map: (
       'main-start': ['nav-end' 'main-start' 'footer-start'],
       'small-start': (
-        'value': '#main-start',
+        '%value': '#main-start',
         'remove-nth': 1
       ),
       'small-end': (
-        'value': '#small-start',
+        '%value': '#small-start',
         'str-replace': '-start' '-end' true
       )
     );
@@ -118,10 +118,9 @@
     'map': (
       'one': 'inner value',
       'second': '#one',
-      'interrupt': 'foo',
       'nested':(
         'bar':'#three',
-        'baz':'#second',
+        'baz':'#map->nested->bar',
         'zab':'#one',
         'rab':'#two',
       ),
@@ -148,27 +147,6 @@
     @include assert-equal(
       _a_parse($haystack, '#three #four'),
       'original value and a new value'
-    );
-  }
-
-  @include it('Prefers nested keys in nested maps') {
-    $expect: (
-      'one': 'inner value',
-      'second': 'inner value',
-      'interrupt': 'foo',
-      'nested':(
-        'bar':'original value',
-        'baz':'inner value',
-        'zab':'inner value',
-        'rab':'original value',
-      ),
-      'third': 'original value',
-      '_fourth': 'inner value',
-    );
-
-    @include assert-equal(
-      _a_parse($haystack, '#map'),
-      $expect,
     );
   }
 
@@ -316,11 +294,11 @@
 
   @include it('Adjusts a value based on functions') {
     $source: (
-      'r': 'str-replace',
+      's': 'o',
     );
 
     @include assert-equal(
-      _a_do($source, '#r', 'hello world', 'o', '000', true),
+      _a_do($source, 'str-replace', 'hello world', '#s', '000', true),
       'hell000 w000rld'
     );
   }
@@ -341,5 +319,41 @@
     }
   }
 }
+
+
+// Flat Source [function]
+// ----------------------
+@include describe('Flat Source [function]') {
+  @include it('Compiles a flat map of all valid source keys') {
+    $test: (
+      'one': 1,
+      'nest': (
+        'two': 2,
+        'nest': (
+          'three': 3
+        ),
+      ),
+    );
+
+    @include assert-equal(
+      _a_flat-source($test),
+      (
+        'one': 1,
+        'nest': (
+          'two': 2,
+          'nest': (
+            'three': 3
+          ),
+        ),
+        'nest->two': 2,
+        'nest->nest': (
+          'three': 3
+        ),
+        'nest->nest->three': 3,
+      )
+    );
+  }
+}
+
 
 } // end module

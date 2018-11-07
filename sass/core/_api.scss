@@ -88,7 +88,7 @@
 /// In many cases, we'll want to reference a value
 /// and then make adjustments to it.
 /// The explicit long-hand syntax uses a map
-/// with `'value'` as the first key.
+/// with `'%value'` as the first key.
 /// Each additional key provides a function name
 /// along with arguments for that function:
 ///
@@ -97,7 +97,7 @@
 /// $map: (
 ///   'root': 16px,
 ///   'gutter': (
-///     'value': '#root',
+///     '%value': '#root',
 ///     'times': 1.5,
 ///     'convert-units': 'rem',
 ///   ),
@@ -112,7 +112,7 @@
 /// $map: (
 ///   'root': 16px,
 ///   'gutter': (
-///     'value': '#root',
+///     '%value': '#root',
 ///     'times': 1.5,
 ///     'convert-units': 'rem',
 ///   ),
@@ -142,7 +142,7 @@
 /// $map: (
 ///   'root': 16px,
 ///   'gutter': (
-///     'value': '#root',
+///     '%value': '#root',
 ///     '_major-third': 1,
 ///     'convert-units': 'rem',
 ///   ),
@@ -206,7 +206,7 @@
 ///   'root': 16px,
 ///   'scale': 1vw,
 ///   'responsive': (
-///     'value': calc(%s + %s),
+///     '%value': calc(%s + %s),
 ///     '%s': '#root' '#scale',
 ///   ),
 /// );
@@ -226,7 +226,7 @@
 ///   'root': 16px,
 ///   'scale': 1vw,
 ///   'responsive': (
-///     'value': calc(%s + %s),
+///     '%value': calc(%s + %s),
 ///     '%s': (
 ///       '#root' ('convert-units': 'rem'),
 ///       '#scale' ('times': 2),
