@@ -418,6 +418,19 @@ All factory-default tokens (contrast-colors, named ratios, etc)
 are now marked as private,
 and will need to be called with a <code>_</code> prefix.
 See the full details<span class="widont">&nbsp;</span>below:</p>
+<ul>
+<li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
+<ul>
+<li>BREAKING: Explicit value/adjustments maps require a <code>'%value'</code> key
+(used to be named <code>'value'</code>),
+in order to avoid possible conflicts or<span class="widont">&nbsp;</span>false-positives</li>
+<li>NEW (BREAKING alpha.1): all nested-map token references (using <code>-&gt;</code>)
+must be absolute paths from the map root,
+rather than assuming the most closely related
+sibling or ancestor<span class="widont">&nbsp;</span>value</li>
+</ul>
+</li>
+</ul>
 <h3 id="2-0-0-alpha-1-10-29-18">2.0.0-alpha.1 - 10/29/18</h3>
 <ul>
 <li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:

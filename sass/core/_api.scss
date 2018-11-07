@@ -66,9 +66,8 @@
 /// );
 /// ```
 ///
-/// In case of duplication,
-/// nested maps will compare `#tags` internally,
-/// before looking at the parent keys:
+/// All `->` nested references
+/// are resolved relative to the outermost map:
 ///
 /// ```scss
 /// // 'large-screen->text' == 24px
@@ -76,11 +75,12 @@
 ///   'root': 16px,
 ///   'large-screen': (
 ///     'root': 24px,
-///     'text': '#root'
+///     'text': '#large-screen->root'
 ///   ),
 /// );
 /// ```
 ///
+/// @since 2.0.0
 /// @group core-get
 
 

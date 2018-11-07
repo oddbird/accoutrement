@@ -626,20 +626,26 @@ $sizes: (
   'pull-quote': '#headings-&gt;h2',
 );
 </code></pre>
-<p>In case of duplication,
-nested maps will compare <code>#tags</code> internally,
-before looking at the parent<span class="widont">&nbsp;</span>keys:</p>
+<p>All <code>-&gt;</code> nested references
+are resolved relative to the outermost<span class="widont">&nbsp;</span>map:</p>
 <pre><code class="lang-scss">// 'large-screen-&gt;text' == 24px
 $map: (
   'root': 16px,
   'large-screen': (
     'root': 24px,
-    'text': '#root'
+    'text': '#large-screen-&gt;root'
   ),
 );
 </code></pre>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"></div>
+      </section>
+    
   
 
       
@@ -716,14 +722,14 @@ $map: (
 <p>In many cases, we’ll want to reference a value
 and then make adjustments to it.
 The explicit long-hand syntax uses a map
-with <code>'value'</code> as the first key.
+with <code>'%value'</code> as the first key.
 Each additional key provides a function name
 along with arguments for that<span class="widont">&nbsp;</span>function:</p>
 <pre><code class="lang-scss">// convert-units(16px, 'rem')
 $map: (
   'root': 16px,
   'gutter': (
-    'value': '#root',
+    '%value': '#root',
     'times': 1.5,
     'convert-units': 'rem',
   ),
@@ -735,7 +741,7 @@ to create more complex<span class="widont">&nbsp;</span>relationships:</p>
 $map: (
   'root': 16px,
   'gutter': (
-    'value': '#root',
+    '%value': '#root',
     'times': 1.5,
     'convert-units': 'rem',
   ),
@@ -830,7 +836,7 @@ Scales are<span class="widont">&nbsp;</span>exponential:</p>
 $map: (
   'root': 16px,
   'gutter': (
-    'value': '#root',
+    '%value': '#root',
     '_major-third': 1,
     'convert-units': 'rem',
   ),
@@ -1163,7 +1169,7 @@ with replacement values for each<span class="widont">&nbsp;</span>placeholder:</
   'root': 16px,
   'scale': 1vw,
   'responsive': (
-    'value': calc(%s + %s),
+    '%value': calc(%s + %s),
     '%s': '#root' '#scale',
   ),
 );
@@ -1293,7 +1299,7 @@ it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustme
   'root': 16px,
   'scale': 1vw,
   'responsive': (
-    'value': calc(%s + %s),
+    '%value': calc(%s + %s),
     '%s': (
       '#root' ('convert-units': 'rem'),
       '#scale' ('times': 2),

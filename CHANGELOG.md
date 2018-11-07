@@ -11,6 +11,15 @@ are now marked as private,
 and will need to be called with a `_` prefix.
 See the full details below:
 
+- [Core][core]:
+  - BREAKING: Explicit value/adjustments maps require a `'%value'` key
+    (used to be named `'value'`),
+    in order to avoid possible conflicts or false-positives
+  - NEW (BREAKING alpha.1): all nested-map token references (using `->`)
+    must be absolute paths from the map root,
+    rather than assuming the most closely related
+    sibling or ancestor value
+
 ### 2.0.0-alpha.1 - 10/29/18
 
 - [Core][core]:
