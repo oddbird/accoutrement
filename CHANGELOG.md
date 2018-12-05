@@ -1,6 +1,6 @@
 # Accoutrement Changelog
 
-## 2.0.0 - UNRELEASED
+## 2.0.0 - 12/05/18
 The 2.0 release is primarily focused on
 support for **CSS Custom Properties** (aka CSS Variables),
 and access to nested-map tokens with `#outside->inside` syntax.
@@ -9,7 +9,10 @@ and various tools for token-inspection.
 All factory-default tokens (contrast-colors, named ratios, etc)
 are now marked as private,
 and will need to be called with a `_` prefix.
-See the full details below:
+See the full details below.
+
+Thanks to Joel Schou (@joelschou) for extensive contributions,
+designing and testing several of these features.
 
 - [Core][core]:
   - BREAKING: Explicit value/adjustments maps require a `'%value'` key
@@ -28,7 +31,7 @@ See the full details below:
   - NEW: `$adjust-query-overlap` (`max` | `min` | `false`)
     allows you to control if and how media-queries are adjusted
     to avoid overlap between min/max queries
-    (thanks to @biw-joelschou)
+    (thanks to @joelschou)
   - NEW: Support for integrating accoutrement tokens & CSS variables
     with `tokens--()`, `token--()`, `var-token()`,
     and plugin-specific shortcuts
@@ -43,7 +46,7 @@ See the full details below:
     to help with token-inspection
   - BREAKING: Support for nested-map tokens with `->` syntax,
     both in `#hash->references` and `get-token($source, 'function->calls')`
-    (thanks to @biw-joelschou)
+    (thanks to @joelschou)
 - [Plugin: Animate][animate]
   - BREAKING: Default easing tokens are now prefixed with `_`
     (search/replace e.g. `in-out-quad` -> `_in-out-quad`)
@@ -58,7 +61,7 @@ See the full details below:
   - BREAKING: `_contrast-light` and `_contrast-dark` colors are used
     for mixing `tint()` and `shade()`,
     with optional `$light`/`$dark` override parameters
-    (thanks to @biw-joelschou)
+    (thanks to @joelschou)
   - NEW: Default `_contrast-light` and `_contrast-dark` provided,
     set `_contrast-light`/`dark` in `$colors` to override
   - NEW: Support for CSS Variables with
@@ -86,9 +89,9 @@ See the full details below:
 ## 1.0.1 - 09/08/18
 - [Core][core]:
   - BUGFIX: Typos, including the `cinema` ratio spelling
-    (thanks to @biw-joelschou)
+    (thanks to @joelschou)
   - BUGFIX: Improved consistency of nested-map parser
-    (thanks to @biw-joelschou)
+    (thanks to @joelschou)
 
 ## 1.0.0 - 08/08/18
 - The stable 1.0 release is identical to `-beta.3`,

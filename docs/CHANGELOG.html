@@ -408,7 +408,7 @@
           
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
-<h2 id="2-0-0-unreleased">2.0.0 - UNRELEASED</h2>
+<h2 id="2-0-0-12-05-18">2.0.0 - 12/05/18</h2>
 <p>The 2.0 release is primarily focused on
 support for <strong>CSS Custom Properties</strong> (aka CSS Variables),
 and access to nested-map tokens with <code>#outside-&gt;inside</code> syntax.
@@ -417,7 +417,9 @@ and various tools for token-inspection.
 All factory-default tokens (contrast-colors, named ratios, etc)
 are now marked as private,
 and will need to be called with a <code>_</code> prefix.
-See the full details<span class="widont">&nbsp;</span>below:</p>
+See the full details<span class="widont">&nbsp;</span>below.</p>
+<p>Thanks to Joel Schou (@joelschou) for extensive contributions,
+designing and testing several of these<span class="widont">&nbsp;</span>features.</p>
 <ul>
 <li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
 <ul>
@@ -440,7 +442,7 @@ when parsing <code>-&gt;</code> syntax</li>
 <li>NEW: <code>$adjust-query-overlap</code> (<code>max</code> | <code>min</code> | <code>false</code>)
 allows you to control if and how media-queries are adjusted
 to avoid overlap between min/max queries
-(thanks to<span class="widont">&nbsp;</span>@biw-joelschou)</li>
+(thanks to<span class="widont">&nbsp;</span>@joelschou)</li>
 <li>NEW: Support for integrating accoutrement tokens &amp; CSS variables
 with <code>tokens--()</code>, <code>token--()</code>, <code>var-token()</code>,
 and plugin-specific<span class="widont">&nbsp;</span>shortcuts</li>
@@ -455,7 +457,7 @@ to avoid CSS-variable<span class="widont">&nbsp;</span>output</li>
 to help with<span class="widont">&nbsp;</span>token-inspection</li>
 <li>BREAKING: Support for nested-map tokens with <code>-&gt;</code> syntax,
 both in <code>#hash-&gt;references</code> and <code>get-token($source, 'function-&gt;calls')</code>
-(thanks to<span class="widont">&nbsp;</span>@biw-joelschou)</li>
+(thanks to<span class="widont">&nbsp;</span>@joelschou)</li>
 </ul>
 </li>
 <li><a href="http://oddbird.net/accoutrement/docs/animate.html">Plugin: Animate</a>
@@ -476,7 +478,7 @@ to avoid CSS-variable<span class="widont">&nbsp;</span>output</li>
 <li>BREAKING: <code>_contrast-light</code> and <code>_contrast-dark</code> colors are used
 for mixing <code>tint()</code> and <code>shade()</code>,
 with optional <code>$light</code>/<code>$dark</code> override parameters
-(thanks to<span class="widont">&nbsp;</span>@biw-joelschou)</li>
+(thanks to<span class="widont">&nbsp;</span>@joelschou)</li>
 <li>NEW: Default <code>_contrast-light</code> and <code>_contrast-dark</code> provided,
 set <code>_contrast-light</code>/<code>dark</code> in <code>$colors</code> to override</li>
 <li>NEW: Support for CSS Variables with
@@ -517,9 +519,9 @@ but will import a direct alias of the private<span class="widont">&nbsp;</span>f
 <li><a href="http://oddbird.net/accoutrement/docs/core.html">Core</a>:
 <ul>
 <li>BUGFIX: Typos, including the <code>cinema</code> ratio spelling
-(thanks to<span class="widont">&nbsp;</span>@biw-joelschou)</li>
+(thanks to<span class="widont">&nbsp;</span>@joelschou)</li>
 <li>BUGFIX: Improved consistency of nested-map parser
-(thanks to<span class="widont">&nbsp;</span>@biw-joelschou)</li>
+(thanks to<span class="widont">&nbsp;</span>@joelschou)</li>
 </ul>
 </li>
 </ul>

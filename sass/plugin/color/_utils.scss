@@ -7,9 +7,11 @@
 /// Mix a color with `_contrast-light`
 /// (defaults to `white`)
 /// to get a lighter tint of your color.
+/// Make sure to override `$light` when using `tint`
+/// to define the value of `_contrast-light`
 ///
 /// @since 2.0.0 -
-/// - BREAKING: Use `_contrast-light` for mix, rather than `white`
+/// - BREAKING: Use `_contrast-light` for default mix, rather than `white`.
 /// - NEW: Accept `$light` color to use in place of `_contrast-light` default
 ///
 /// @group color-utils
@@ -39,6 +41,8 @@
 /// Mix a color with `_contrast-dark`
 /// (defaults to `black`)
 /// to get a darker shade of your color.
+/// Make sure to override `$dark` when using `shade`
+/// to define the value of `_contrast-dark`
 ///
 /// @since 2.0.0 -
 /// - BREAKING: Use `_contrast-dark` for mix, rather than `black`

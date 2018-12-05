@@ -535,7 +535,9 @@
     <div class="text-block">
       <p>Mix a color with <code>_contrast-light</code>
 (defaults to <code>white</code>)
-to get a lighter tint of your<span class="widont">&nbsp;</span>color.</p>
+to get a lighter tint of your color.
+Make sure to override <code>$light</code> when using <code>tint</code>
+to define the value of <code>_contrast-light</code></p>
 
       
   
@@ -543,7 +545,7 @@ to get a lighter tint of your<span class="widont">&nbsp;</span>color.</p>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>BREAKING: Use <code>_contrast-light</code> for mix, rather than <code>white</code></li>
+<li>BREAKING: Use <code>_contrast-light</code> for default mix, rather than <code>white</code>.</li>
 <li>NEW: Accept <code>$light</code> color to use in place of <code>_contrast-light</code> default</li>
 </ul>
 </div>
@@ -844,7 +846,9 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
     <div class="text-block">
       <p>Mix a color with <code>_contrast-dark</code>
 (defaults to <code>black</code>)
-to get a darker shade of your<span class="widont">&nbsp;</span>color.</p>
+to get a darker shade of your color.
+Make sure to override <code>$dark</code> when using <code>shade</code>
+to define the value of <code>_contrast-dark</code></p>
 
       
   
