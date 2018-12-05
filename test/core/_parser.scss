@@ -115,18 +115,6 @@
     'two': '#one',
     'three': '#two',
     'four': 'and a new value',
-    'map': (
-      'one': 'inner value',
-      'second': '#one',
-      'nested':(
-        'bar':'#three',
-        'baz':'#map->nested->bar',
-        'zab':'#one',
-        'rab':'#two',
-      ),
-      'third': '#two',
-      '_fourth': '#one',
-    ),
   );
 
   @include it('Replaces a hashtag key with the associated value') {
@@ -171,6 +159,7 @@
       7,
       'and a new value'
     ];
+
     @include assert-equal(
       _a_parse($haystack, $list),
       $expect
@@ -182,10 +171,12 @@
       '#one' '#two': '#two' 7 '#four',
       'and': '#one#one',
     );
+
     $expect: (
       'original value' 'original value': 'original value' 7 'and a new value',
       'and': 'original valueoriginal value',
     );
+
     @include assert-equal(
       _a_parse($haystack, $map),
       $expect

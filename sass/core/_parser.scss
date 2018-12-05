@@ -22,9 +22,7 @@
 @function _a_get(
   $map,
   $key,
-  $is-flat: false
 ) {
-  $map: if($is-flat, $map, _a_flat-source($map));
   $type: type-of($key);
   $do: null;
   $value: $key;
@@ -79,7 +77,7 @@
 
     // handle each item in the list…
     @each $bit in $needle {
-      $new: append($new, _a_get($haystack, $bit, 'is-flat'));
+      $new: append($new, _a_get($haystack, $bit));
     }
 
     @return $new;
@@ -91,8 +89,8 @@
 
     // handle each value in the map…
     @each $key, $value in $needle {
-      $new-key: _a_get($haystack, $key, 'is-flat');
-      $new-value: _a_get($haystack, $value, 'is-flat');
+      $new-key: _a_get($haystack, $key);
+      $new-value: _a_get($haystack, $value);
 
       $new: map-merge($new, ($new-key: $new-value));
     }
@@ -129,8 +127,13 @@
   $haystack,
   $string
 ) {
+  $hashdex: str-index($string, '#');
+
   // replace aliases…
-  @if str-index($string, '#') {
+  @if $hashdex {
+    $deep: str-index($string, '->') or 0;
+    $haystack: if(($deep > $hashdex), _a_flat-source($haystack), $haystack);
+
     // check longest keys first, in case of overlap
     @each $key in _a_str-length-sort(map-keys($haystack)) {
       $hash: '##{$key}';
@@ -199,8 +202,8 @@
   $args...
 ) {
   // Allow internal map references
-  $name: _a_get($source, $name, 'is-flat');
-  $args: _a_get($source, $args, 'is-flat');
+  $name: _a_get($source, $name);
+  $args: _a_get($source, $args);
 
   // Handle null args…
   @if (length($args) == 1) {
