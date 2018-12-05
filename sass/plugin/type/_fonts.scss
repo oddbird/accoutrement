@@ -12,6 +12,10 @@
 // ---------------
 /// Retrieve and normalize font data from the `$fonts` map
 ///
+/// @since 2.0.0 -
+/// - BREAKING: Non-map fonts are interpreted as font-stacks
+/// - BREAKING: Normalized font-data uses proper name-quotation,
+///   and ignores missing or private names/stacks
 /// @since 1.0.0 -
 /// - NEW: Provided to access and normalize a map of font data
 ///   for any key in your global `$fonts` map
@@ -19,7 +23,7 @@
 ///   for custom source-palette
 ///
 /// @group type-fonts
-/// @param {any} $font -
+/// @param {*} $font -
 ///   A key for accessing the desired font in `$fonts`
 /// @param {map} $source [$fonts] -
 ///   Optional accoutrement-format map of fonts
@@ -195,9 +199,13 @@
 /// Find all the fonts that include data for imports,
 /// and generate `@font-face` blocks for each individual font and variant.
 ///
+/// @since 2.0.0 -
+/// - NEW: Accepts `$source` parameter,
+///   which uses global `$fonts` by default
+/// - BREAKING: No longer imports private fonts,
+///   but will import a direct alias of the private font
 /// @since 1.0.0 -
-/// - BREAKING: No longer accepts the `$fonts` parameter,
-///   variant data should be normalized in advance
+/// - BREAKING: No longer accepts the `$fonts` parameter
 /// @since type-4.0.0 -
 /// - BREAKING: No longer accepts the `$formats` parameter
 ///
@@ -219,10 +227,15 @@
 ///   );
 ///   @include import-webfonts;
 ///
+/// @param {map} $source [$fonts] -
+///   Optional accoutrement-format map of fonts
+///   to use as the origin palette
 /// @output Any number of `@font-face` blocks.
-@mixin import-webfonts {
-  @each $key, $font in $fonts {
-    @if (type-of($font) == 'map') {
+@mixin import-webfonts(
+  $source: $fonts
+) {
+  @each $key, $font in $source {
+    @if not is-alias-for($source, $key) and not is-private-token($key) {
       @include font-face($key);
     }
   }

@@ -1,0 +1,153 @@
+/// # Colors » CSS Variables
+/// @group color-vars
+
+
+// Color Var Prefix
+// ----------------
+/// Since CSS variables are often defined in a global space,
+/// it can be useful to prefix different variable types.
+/// Accoutrement maps help solve that problem in Sass,
+/// so we wanted to carry that over into our CSS variable support.
+/// Set a prefix for all color-tokens,
+/// and we'll apply it when setting or calling css variables
+/// based on your color maps.
+/// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group color-vars
+///
+/// @example scss
+///   $colors: ('my-color': pink);
+///   $color-var-prefix: 'prefix_';
+///   :root { @include color--('my-color') }
+///
+/// @type string
+$color-var-prefix: 'color-' !default;
+
+
+// Colors--
+// --------
+/// Convert any color-map into CSS variables,
+/// using the global `$color-var-prefix`.
+///
+/// - Color names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Colors that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group color-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   :root {
+///     @include colors--;
+///   }
+///
+/// @param {map} $source [$colors] -
+///   Optionally use a custom
+///   map of colors to set as css variables
+/// @output
+///   Custom properties for all public colors in the map
+@mixin colors--(
+  $source: $colors
+) {
+  $source: map-merge($_a_COLORS, $source);
+  @include tokens--($source, $color-var-prefix);
+}
+
+
+// Color--
+// -------
+/// Set a single custom property based on a map-color,
+/// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group color-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   .example {
+///     @include color--('border');
+///     @include color--('outline', 'border', red);
+///   }
+///
+/// @param {*} $color -
+///   Color name available in the `$source` map,
+///   or alias to use in naming the CSS variable
+/// @param {string | null} $value [null] -
+///   Optional value for the variable,
+///   if different from the given `$color`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source [$colors] -
+///   Optional map of colors to use as a palette source
+@mixin color--(
+  $color,
+  $value: null,
+  $fallback: true,
+  $source: $colors
+) {
+  $source: map-merge($_a_COLORS, $source);
+  @include token--($source, $color, $value, $fallback, $color-var-prefix);
+}
+
+
+// Var Color
+// ---------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group color-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   .example {
+///     border-color: var-color('border');
+///     color: var-color('text', black);
+///   }
+///
+/// @param {*} $color -
+///   Color name available in the `$source` map
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source -
+///   Optional Accoutrement map of colors to use as source
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<token>, <fallback>)`
+@function var-color(
+  $color,
+  $fallback: true,
+  $source: $colors
+) {
+  $source: map-merge($_a_COLORS, $source);
+  @return var-token($source, $color, $fallback, $color-var-prefix);
+}

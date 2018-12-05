@@ -1,0 +1,131 @@
+// Scale Var Tests
+// ===============
+@include test-module('Scale: CSS Vars') {
+
+
+$test: (
+  '_private': 16px,
+  'simple': 1.5em,
+  'kevin': '#_private',
+  'thread': '#kevin'
+);
+
+$global: $sizes;
+$sizes: $test !global;
+
+
+// Sizes-- [mixin]
+// ------------------
+@include describe('Sizes-- [mixin]') {
+  @include it('Generates CSS variables from the default size map') {
+    @include assert {
+      @include output {
+        @include sizes--;
+      }
+
+      @include expect {
+        --size-simple: 1.5em;
+        --size-kevin: 16px;
+        --size-thread: var(--size-kevin, 16px);
+      }
+    }
+  }
+
+  @include it('Generates CSS variables for any size map') {
+    @include assert {
+      @include output {
+        @include sizes--(('mine': 12pt));
+      }
+
+      @include expect {
+        --size-mine: 12pt;
+      }
+    }
+  }
+}
+
+
+// Size-- [mixin]
+// -----------------
+@include describe('Size-- [mixin]') {
+  @include it('Generates a single variable from a token') {
+    @include assert {
+      @include output {
+        @include size--('simple');
+      }
+
+      @include expect {
+        --size-simple: 1.5em;
+      }
+    }
+  }
+
+  @include it('Generates a reference variable from a token') {
+    @include assert {
+      @include output {
+        @include size--('thread');
+      }
+
+      @include expect {
+        --size-thread: var(--size-kevin, 16px);
+      }
+    }
+
+  }
+
+  @include it('Generates a new variable alias') {
+    @include assert {
+      @include output {
+        @include size--('alias', 'thread');
+      }
+
+      @include expect {
+        --size-alias: var(--size-thread, 16px);
+      }
+    }
+  }
+}
+
+
+// Var-Size [function]
+// --------------------
+@include describe('Var-Size [function]') {
+  @include it('Accesses a size variable with default fallback') {
+    @include assert-equal(
+      var-size('simple'),
+      var(--size-simple, size('simple'))
+    );
+  }
+
+  @include it('Allows custom fallback') {
+    @include assert-equal(
+      var-size('simple', 1.5em),
+      var(--size-simple, 1.5em)
+    );
+  }
+
+  @include it('Allows false fallback') {
+    @include assert-equal(
+      var-size('simple', false),
+      var(--size-simple)
+    );
+  }
+
+  @include it('Accepts custom palette') {
+    $my-palette: (
+      'my-base': 10px,
+      'my-adjustment': '#my-base' ('times': 1.5),
+    );
+
+    @include assert-equal(
+      var-size('my-adjustment', $source: $my-palette),
+      var(--size-my-adjustment, size('my-adjustment', $source: $my-palette))
+    );
+  }
+}
+
+
+$sizes: $global !global;
+
+
+} // end module

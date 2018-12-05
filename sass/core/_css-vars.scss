@@ -1,0 +1,208 @@
+/// # Tokens » CSS Variables
+/// *aka "Custom Properties"*
+///
+/// CSS variables are a useful way to manage
+/// values that might change in relation to the DOM –
+/// something that Sass variables cannot do.
+/// In many cases,
+/// we find it helpful to manage variables in Sass,
+/// and output CSS properties as-needed.
+/// These tools help integrate Accoutrement map values
+/// with CSS variables
+/// to keep that relationship intact.
+///
+/// The Core feature provides generic variable logic,
+/// while each plugin provides specialized shortcuts
+/// for maintaining:
+/// - [time](animate-time-vars.html) variables
+/// - [easing](animate-ease-vars.html) variables
+/// - [change](animate-change-vars.html) variables
+/// - [color](color-vars.html), variables
+/// - [scale](scale-vars.html) variables
+/// - [font](type-font-vars.html) variables
+///
+/// Some of the use-cases covered here
+/// can be written more simply in pure CSS.
+/// but these tools provide two main advantages:
+/// - Core logic allows plugins to build additional shortcuts
+/// - Explicit relationships make code more meaningful
+/// @group core-vars
+
+
+// Var Name
+// --------
+/// Formats a token name as a CSS variable (custom property),
+/// with optional prefix
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @access private
+///
+/// @param {string} $name -
+///   The name of the token to be used as a variable
+/// @param {string | null} $prefix [null] -
+///   Optional prefix added to the token name
+@function _a_var-name(
+  $name,
+  $prefix: null
+) {
+  $string: unquote('--#{$prefix}#{$name}');
+  $string: _a_str-replace($string, ' ', '-', 'all');
+  @return $string;
+}
+
+
+// Tokens--
+// --------
+/// Convert any Accoutrement map
+/// into CSS custom properties (aka variables).
+///
+/// - Token names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Tokens that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   :root {
+///     @include tokens--($colors, 'color-');
+///   }
+///
+/// @param {map} $map -
+///   Accoutrement map of tokens to set as css variables
+/// @param {string | null} $prefix [null] -
+///   Optional prefix for naming token variables
+/// @output
+///   Custom properties for all public tokens in the map
+@mixin tokens--(
+  $map,
+  $prefix: null
+) {
+  @each $token in map-keys($map) {
+    @if not is-private-token($token) {
+      @include token--($map, $token, $prefix: $prefix);
+    }
+  }
+}
+
+
+// Token--
+// -------
+/// Set a single custom property based on a map-token,
+/// with optional alias, fallback, and prefixing
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   .example {
+///     @include token--($colors, 'border');
+///     @include token--($colors, 'outline', 'border', red);
+///   }
+///
+/// @param {map} $map -
+///   Accoutrement map of tokens to use as source
+/// @param {*} $token -
+///   Token name available in the source `$map`
+/// @param {string | null} $value [null] -
+///   Optional new value for the given token
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {string | null} $prefix [null] -
+///   Optional prefix used for naming token variables
+@mixin token--(
+  $map,
+  $token,
+  $value: null,
+  $fallback: true,
+  $prefix: null
+) {
+  $prop: _a_var-name($token, $prefix);
+  $val: $value or $token;
+  $ref: $value or is-alias-for($map, $val);
+
+  @if ($ref) {
+    $val: var-token($map, $ref, $fallback, $prefix);
+  } @else {
+    $val: get-token($map, $val);
+  }
+
+  #{$prop}: $val;
+}
+
+
+// Var Token
+// ---------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   .example {
+///     border-color: var-token($colors, 'border');
+///     color: var-token($colors, 'text', black);
+///   }
+///
+/// @param {map} $map -
+///   Accoutrement map of tokens to use as source
+/// @param {*} $token -
+///   Token name available in the source `$map`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will try to generate a fallback based on the color value
+///   - A color name will fallback to the value of that
+///     css-variable and then to the color's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {string | null} $prefix [null] -
+///   Optional prefix used for naming token variables
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<color>, <fallback>)`
+@function var-token(
+  $map,
+  $token,
+  $fallback: true,
+  $prefix: null
+) {
+  $var: _a_var-name($token, $prefix);
+
+  @if ($fallback == true) {
+    @if map-has-key($map, $token) {
+      @return var($var, get-token($map, $token));
+    }
+  } @else if map-has-key($map, $fallback) {
+    @return var($var, var-token($map, $fallback, true, $prefix));
+  } @else if $fallback {
+    @return var($var, $fallback);
+  }
+
+  @return var($var);
+}

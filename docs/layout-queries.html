@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Media Queries | Accoutrement Documentation</title>
+  <title>Media Breakpoint Maps | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">1.0.1</span>
+          <span class="project-version">2.0.0-alpha.1</span>
         
       </div>
     </header>
@@ -87,7 +87,7 @@
     <div class="nav-subsection">
       <ul>
             <li class="nav-subsection">
-              <h3 class="nav-title">Core (Parser)</h3>
+              <h3 class="nav-title">Core (API)</h3>
               <ul>
                 
   
@@ -97,32 +97,52 @@
   
   
     <li class="nav-item">
-      <a href="core-get.html" data-nav="is-not-active">Accessing Maps</a>
+      <a href="core-get.html" data-nav="is-not-active">Token Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-math.html" data-nav="is-not-active">Math Helpers</a>
+      <a href="core-vars.html" data-nav="is-not-active">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-scale.html" data-nav="is-not-active">Modular Scales</a>
+      <a href="core-ratio.html" data-nav="is-not-active">Ratios &amp; Modular<span class="widont">&nbsp;</span>Scales</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="core-lists.html" data-nav="is-not-active">Sass List<span class="widont">&nbsp;</span>Utils</a>
+      <a href="core-ratio-vars.html" data-nav="is-not-active">Ratios » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
-  
-  
-    <li class="nav-item">
-      <a href="core-strings.html" data-nav="is-not-active">Sass Strings<span class="widont">&nbsp;</span>Utils</a>
-    </li>
-  
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Core (Utilities)</h3>
+              <ul>
+                
   
     <li class="nav-item">
       <a href="core-register.html" data-nav="is-not-active">Function Registration</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-math.html" data-nav="is-not-active">Math Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-lists.html" data-nav="is-not-active">List Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-strings.html" data-nav="is-not-active">String Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="core-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
     </li>
   </ul>
             </li>
@@ -172,17 +192,32 @@
   
   
     <li class="nav-item">
-      <a href="animate-times.html" data-nav="is-not-active">Durations &amp;<span class="widont">&nbsp;</span>Delays</a>
+      <a href="animate-times.html" data-nav="is-not-active">Timing Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="animate-ease.html" data-nav="is-not-active">Easing &amp;<span class="widont">&nbsp;</span>Steps</a>
+      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="animate-change.html" data-nav="is-not-active">Animations &amp;<span class="widont">&nbsp;</span>Transitions</a>
+      <a href="animate-ease.html" data-nav="is-not-active">Easing Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-ease-vars.html" data-nav="is-not-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change.html" data-nav="is-not-active">Combined &quot;Change&quot;<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change-vars.html" data-nav="is-not-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li>
@@ -197,7 +232,12 @@
   
   
     <li class="nav-item">
-      <a href="color-api.html" data-nav="is-not-active">Colors</a>
+      <a href="color-api.html" data-nav="is-not-active">Color Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -207,7 +247,7 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-not-active">Color Utils</a>
+      <a href="color-utils.html" data-nav="is-not-active">Color Functions</a>
     </li>
   </ul>
             </li>
@@ -222,6 +262,12 @@
   
   
     <li class="nav-item">
+      <a href="layout-queries.html" data-nav="is-active">Media Breakpoint<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+  
+    <li class="nav-item">
       <a href="layout-box.html" data-nav="is-not-active">Box-Sizing</a>
     </li>
   
@@ -233,11 +279,6 @@
   
     <li class="nav-item">
       <a href="layout-position.html" data-nav="is-not-active">Positioning</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="layout-queries.html" data-nav="is-active">Media Queries</a>
     </li>
   
   
@@ -262,7 +303,12 @@
   
   
     <li class="nav-item">
-      <a href="scale-sizes.html" data-nav="is-not-active">Sizes</a>
+      <a href="scale-sizes.html" data-nav="is-not-active">Size Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="scale-vars.html" data-nav="is-not-active">Sizes » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -282,12 +328,17 @@
   
   
     <li class="nav-item">
-      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
+      <a href="type-fonts.html" data-nav="is-not-active">Font Maps</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="type-fonts.html" data-nav="is-not-active">Webfonts</a>
+      <a href="type-font-vars.html" data-nav="is-not-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
     </li>
   
   
@@ -349,7 +400,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Media Queries</strong>
+    <strong>Media Breakpoint Maps</strong>
   </nav>
 
 
@@ -584,6 +635,44 @@ for internal references and<span class="widont">&nbsp;</span>adjustments</li>
     </div>
   
 
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="https://zellwk.com/blog/media-query-units/" class="item-name">PX, EM, or REM Media Queries?</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
 
   
   
@@ -1208,12 +1297,26 @@ making both <code>$breakpoints</code> and <code>$sizes</code> keys available</p>
   
     <div class="text-block">
       <p>Generate a max–&lt;<code>width</code>/<code>height</code>&gt; query,
-for styling elements below the given viewport width.
-To help with overlapping min/max queries,
-we remove <code>1px</code> (or <code>0.01em</code>) from every max value
-to avoid media-query<span class="widont">&nbsp;</span>overlap.</p>
+for styling elements below the given viewport<span class="widont">&nbsp;</span>width.</p>
+<p>To help with overlapping min/max queries,
+we remove <code>1px</code> (or <code>0.01em</code>) from every max value by default.
+You can adjust that setting
+to adjust min values
+or avoid adjustments
+using the global <code>$adjust-query-overlap</code> setting.</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: min/max adjustments applied to all units (not only<span class="widont">&nbsp;</span>px/em/rem)</li>
+<li>NEW: min/max adjustments respect <code>$adjust-query-overlap</code> global setting</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -1482,64 +1585,6 @@ for a result of e.g. <code>(max-width: 30em)</code>.</p>
 
 
   
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="https://zellwk.com/blog/media-query-units/" class="item-name">PX, EM, or REM Media Queries?</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://tzi.fr/css/prevent-double-breakpoint" class="item-name">Prevent Double Breakpoints</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
-
-  
   
   
   
@@ -1612,7 +1657,7 @@ for a result of e.g. <code>(max-width: 30em)</code>.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_fix-max()</span>
+        <span class="item-name">_a_nudge-query()</span>
       
       
       
@@ -1700,8 +1745,25 @@ for a result of e.g. <code>(max-width: 30em)</code>.</p>
     <div class="text-block">
       <p>Generate a min-&lt;<code>width</code>/<code>height</code>&gt; query,
 for styling elements above the given viewport<span class="widont">&nbsp;</span>width.</p>
+<p>To help with overlapping min/max queries,
+we remove <code>1px</code> (or <code>0.01em</code>) from max values by default.
+You can adjust that setting
+to adjust min values
+or avoid adjustments
+using the global <code>$adjust-query-overlap</code> setting.</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: min/max adjustments applied to all units (not only<span class="widont">&nbsp;</span>px/em/rem)</li>
+<li>NEW: min/max adjustments respect <code>$adjust-query-overlap</code> global setting</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -1756,7 +1818,7 @@ for styling elements above the given viewport<span class="widont">&nbsp;</span>w
       
       <div class="param-details text-block">
         <p>The name of a documented breakpoint/size,
-or an arbitarty length to use in the<span class="widont">&nbsp;</span>query.</p>
+or an arbitrary length to use in the<span class="widont">&nbsp;</span>query.</p>
 
       </div>
     
@@ -2021,6 +2083,40 @@ for a result of e.g. <code>(min-width: 30em)</code>.</p>
 
         
       
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_nudge-query()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
     
   </div>
 
@@ -2095,12 +2191,26 @@ for a result of e.g. <code>(min-width: 30em)</code>.</p>
   
     <div class="text-block">
       <p>Generate a min-and-max-&lt;<code>width</code>/<code>height</code>&gt; query,
-for styling elements between given viewport widths.
-To help with overlapping min/max queries,
-we remove <code>1px</code> (or <code>0.01em</code>) from every max value
-to avoid media-query<span class="widont">&nbsp;</span>overlap.</p>
+for styling elements between given viewport<span class="widont">&nbsp;</span>widths.</p>
+<p>To help with overlapping min/max queries,
+we remove <code>1px</code> (or <code>0.01em</code>) from every max value by default.
+You can adjust that setting
+to adjust min values
+or avoid adjustments
+using the global <code>$adjust-query-overlap</code> setting.</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: min/max adjustments applied to all units (not only<span class="widont">&nbsp;</span>px/em/rem)</li>
+<li>NEW: min/max adjustments respect <code>$adjust-query-overlap</code> global setting</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -2400,64 +2510,6 @@ for a result of e.g. <code>(min-width: 30em)</code>.</p>
 
 
   
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="https://zellwk.com/blog/media-query-units/" class="item-name">PX, EM, or REM Media Queries?</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://tzi.fr/css/prevent-double-breakpoint" class="item-name">Prevent Double Breakpoints</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
-
-  
   
   
   
@@ -2514,12 +2566,6 @@ for a result of e.g. <code>(min-width: 30em)</code>.</p>
         
 
         
-      
-        
-        
-        
-
-        
           
           
   
@@ -2536,7 +2582,7 @@ for a result of e.g. <code>(min-width: 30em)</code>.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_fix-max()</span>
+        <span class="item-name">_a_nudge-query()</span>
       
       
       
@@ -2549,10 +2595,204 @@ for a result of e.g. <code>(min-width: 30em)</code>.</p>
 
         
       
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
     
   </div>
 
   
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--adjust-query-overlap">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--adjust-query-overlap" class="item-name">$adjust-query-overlap</a>
+      
+
+      
+        <span class="value-type">(&#39;min&#39; | &#39;max&#39; |<span class="widont">&nbsp;</span>false)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$adjust-query-overlap: &#39;max&#39; !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>When using both <code>min-</code> and <code>max-</code> media-queries,
+you will often get a <code>1px</code> or <code>1em</code> overlap
+where neither or both queries are applied.
+In order to avoid that,
+we nudge the <code>max-</code> value down by default.
+Set this variable to <code>min</code> to nudge <code>min-</code> values up,
+or <code>false</code> to keep both min and max values<span class="widont">&nbsp;</span>un-adjusted,</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Allows you to override global max-adjustment<span class="widont">&nbsp;</span>default</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="http://tzi.fr/css/prevent-double-breakpoint" class="item-name">Prevent Double Breakpoints</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
     
   
 

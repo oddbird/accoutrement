@@ -1,0 +1,307 @@
+/// # Token Maps
+/// We use "token" as a generic term
+/// for named values inside accoutrement maps.
+/// In the following map,
+/// `root` and `gutter` are considered accoutrement-tokens:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'gutter': 1em,
+/// );
+/// ```
+///
+/// Our core API provides token-map syntax parsing,
+/// and general token access with `get-token()` (below).
+/// Additional plugins provide shortcuts and utilities
+/// for managing and accessing common token-types,
+/// like colors, fonts, sizes, and animations.
+///
+/// @group core-get
+
+
+/// ## Internal Reference
+/// The core module provides a generic map-parsing syntax,
+/// for internal reference & adjustments --
+/// establishing dynamic relationships between map values.
+/// To reference another key in the same map,
+/// use the `#tag` hashtag format:
+///
+/// ```scss
+/// // 'gutter' == 16px
+/// $map: (
+///   'root': 16px,
+///   'gutter': '#root',
+/// );
+/// ```
+///
+/// Reference hashtags don't have to stand alone,
+/// but can be embedded inside a longer string:
+///
+/// ```scss
+/// // 'responsive' == calc(16px + 1vw)
+/// $map: (
+///   'root': 16px,
+///   'scale': 1vw,
+///   'responsive': 'calc(#root + #scale)',
+/// );
+/// ```
+///
+/// @group core-get
+
+
+/// ## Nested References
+/// You can define nested tokens in accoutrement maps,
+/// and access them using a `#first->second->third` syntax:
+///
+/// ```scss
+/// // 'large-screen->h2' == 24px
+/// $sizes: (
+///   'root': 16px,
+///   'headings': (
+///     'h1': '#root' ('times': 2),
+///     'h2': '#root' ('times': 1.5),
+///   ),
+///   'pull-quote': '#headings->h2',
+/// );
+/// ```
+///
+/// All `->` nested references
+/// are resolved relative to the outermost map:
+///
+/// ```scss
+/// // 'large-screen->text' == 24px
+/// $map: (
+///   'root': 16px,
+///   'large-screen': (
+///     'root': 24px,
+///     'text': '#large-screen->root'
+///   ),
+/// );
+/// ```
+///
+/// @since 2.0.0
+/// @group core-get
+
+
+/// ## Functional Adjustments
+/// In many cases, we'll want to reference a value
+/// and then make adjustments to it.
+/// The explicit long-hand syntax uses a map
+/// with `'%value'` as the first key.
+/// Each additional key provides a function name
+/// along with arguments for that function:
+///
+/// ```scss
+/// // convert-units(16px, 'rem')
+/// $map: (
+///   'root': 16px,
+///   'gutter': (
+///     '%value': '#root',
+///     'times': 1.5,
+///     'convert-units': 'rem',
+///   ),
+/// );
+/// ```
+///
+/// You can also string together multiple functions,
+/// to create more complex relationships:
+///
+/// ```scss
+/// // convert-units(times(16px, 1.5), 'rem')
+/// $map: (
+///   'root': 16px,
+///   'gutter': (
+///     '%value': '#root',
+///     'times': 1.5,
+///     'convert-units': 'rem',
+///   ),
+/// );
+/// ```
+///
+/// Each function in the function map
+/// (e.g. `times` & `convert-units` above)
+/// will be run in order --
+/// with any associated arguments included.
+/// The `value` is always passed as the first argument.
+///
+/// @group core-get
+
+
+/// ## Ratio Adjustments
+/// When managing numbers,
+/// you can also move up and down exponential [modular-scales][scale]
+/// by calling a named ratio
+/// in place of a function name.
+/// Scales are exponential:
+///
+/// [scale]: core-ratio.html
+///
+/// ```scss
+/// // one step up a 'major third' scale (5 / 4)
+/// $map: (
+///   'root': 16px,
+///   'gutter': (
+///     '%value': '#root',
+///     '_major-third': 1,
+///     'convert-units': 'rem',
+///   ),
+/// );
+/// ```
+///
+/// Multiple functions/ratios
+/// will be applied in the order they are given.
+///
+/// @see $ratios
+/// @see ratio
+/// @group core-get
+
+
+/// ## Adjustment Shorthand
+/// We also provide a shorthand syntax
+/// to simplify adjustments in most cases.
+/// Here, the value is written first (any data type),
+/// and a map of adjustments can be provided
+/// at the end of the definition:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'gutter': '#root' ('_major-third': 1, 'convert-units': 'rem'),
+/// );
+/// ```
+///
+/// @group core-get
+
+
+/// ## Adjustments with References
+/// Adjustment-function and ratio arguments
+/// can also reference keys in the map.
+/// In this example,
+/// we're using the unitless `line-height` token
+/// as both a multiplier, and a modular-scale ratio:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'line-height': 1.4,
+///   'rhythm': '#root' ('times': '#line-height'),
+///   'gutter': '#root' ('#line-height': 2),
+/// );
+/// ```
+///
+/// @group core-get
+
+
+/// ## String Interpolation
+/// For CSS features like `calc()`
+/// you can create format-strings
+/// and interpolate values into the string.
+/// Use `%s` as a placeholder,
+/// and call the `interpolate` (or `%s`) adjustment function
+/// with replacement values for each placeholder:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'scale': 1vw,
+///   'responsive': (
+///     '%value': calc(%s + %s),
+///     '%s': '#root' '#scale',
+///   ),
+/// );
+/// ```
+///
+/// @see interpolate
+/// @group core-get
+
+
+/// ## Nested Adjustments
+/// Since adjustment formats and values
+/// are parsed the same as any other value,
+/// it's possible to build quite complex adjustments:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'scale': 1vw,
+///   'responsive': (
+///     '%value': calc(%s + %s),
+///     '%s': (
+///       '#root' ('convert-units': 'rem'),
+///       '#scale' ('times': 2),
+///     ),
+///   ),
+/// );
+/// ```
+///
+/// @group core-get
+
+
+// Get Token
+// ---------
+/// The primary function for accessing and parsing
+/// accoutrement map values.
+/// Each accoutrement plugin creates a shortcut wrapper function
+/// for the specific map associated with that data-type.
+/// You can do the same, or use it directly
+/// to turn any arbitrary map into an accoutrement map.
+///
+/// @since 2.0.0 -
+/// - NEW: Handles access to nested-map tokens
+///   using the `get-token($map, 'first->second->third')` syntax
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
+/// @group core-get
+/// @example scss - Access a map directly
+///   $map: (
+///     'original-value': 3em,
+///     'new-value': '#original-value' (
+///       'times': 2,
+///       'minus': 0.5
+///     ),
+///   );
+///   /*! New Value: #{get-token($map, 'new-value')} */
+/// @example scss - Access nested-map tokens
+///   $map: (
+///     'outer': (
+///       'inner': 2,
+///     ),
+///   );
+///   /*! Inner: #{get-token($map, 'outer->inner')} */
+/// @example scss - Write your own shortcut plugin for specific maps
+///   @function get($key) {
+///     @return get-token($my-map, $key);
+///   }
+///
+///   $my-map: ('main': 32em);
+///   /*! Main: #{get('main')} */
+///
+/// @param {map} $map -
+///   A map of token definitions to reference against
+/// @param {*} $key -
+///   The original key or value to be parsed for `#alias` tags
+/// @param {map | null} $do [null] -
+///   A final map of function/ratio adjustments to run on the returned value
+/// @return {*} -
+///   The parsed value of any key in a given map
+@function get-token(
+  $map,
+  $key,
+  $do: null
+) {
+  $val: map-get($map, $key) or $key;
+
+  // Handle deep keys
+  @if ($val == $key)
+    and (type-of($key) == 'string')
+    and str-index($key, '->')
+    and not (str-index($key, '#') == 1) {
+    $val: '##{$key}';
+  }
+
+  $val: _a_get($map, $val);
+  @return _a_do-each($map, $val, $do);
+}

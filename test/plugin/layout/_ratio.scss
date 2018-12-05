@@ -10,7 +10,7 @@
     $expect: (3 / 4) * 50%;
 
     @include assert-equal(
-      fluid-ratio('classic', 50%),
+      fluid-ratio('_classic', 50%),
       $expect
     );
   }
@@ -31,12 +31,12 @@
   @include it('Establishes fluid container') {
     @include assert('Fluid output based on aspect ratio') {
       @include output {
-        @include fluid-ratio('widescreen', 100%);
+        @include fluid-ratio('_widescreen', 100%);
       }
 
       @include expect {
         height: 0;
-        padding-top: fluid-ratio('widescreen', 100%);
+        padding-top: fluid-ratio('_widescreen', 100%);
         position: relative;
         width: 100%;
       }

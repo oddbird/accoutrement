@@ -1,0 +1,149 @@
+/// # Times » CSS Variables
+/// @group animate-time-vars
+
+
+// Time Var Prefix
+// ----------------
+/// Since CSS variables are often defined in a global space,
+/// it can be useful to prefix different variable types.
+/// Accoutrement maps help solve that problem in Sass,
+/// so we wanted to carry that over into our CSS variable support.
+/// Set a prefix for all time-tokens,
+/// and we'll apply it when setting or calling css variables
+/// based on your time maps.
+/// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-time-vars
+///
+/// @example scss
+///   $times: ('my-time': 1s);
+///   $time-var-prefix: 'prefix_';
+///   :root { @include time--('my-time') }
+///
+/// @type string
+$time-var-prefix: 'time-' !default;
+
+
+// Times--
+// --------
+/// Convert any time-map into CSS variables,
+/// using the global `$time-var-prefix`.
+///
+/// - Time names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Times that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-time-vars
+/// @example scss
+///   $times: (
+///     '_fast': 200ms,
+///     'text': '#_fast',
+///     'fade': '#text',
+///   );
+///   :root {
+///     @include times--;
+///   }
+///
+/// @param {map} $source [$times] -
+///   Optionally use a custom
+///   map of times to set as css variables
+/// @output
+///   Custom properties for all public times in the map
+@mixin times--(
+  $source: $times
+) {
+  @include tokens--($source, $time-var-prefix);
+}
+
+
+// Time--
+// -------
+/// Set a single custom property based on a map-time,
+/// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-time-vars
+/// @example scss
+///   $times: (
+///     '_brand': 200ms,
+///     'text': '#_brand' ('plus': 50ms),
+///     'fade': '#text',
+///   );
+///   .example {
+///     @include time--('fade');
+///     @include time--('color-change', 'fade', 0.2s);
+///   }
+///
+/// @param {*} $time -
+///   Time name available in the `$source` map,
+///   or alias to use in naming the CSS variable
+/// @param {string | null} $value [null] -
+///   Optional value for the variable,
+///   if different from the given `$time`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source [$times] -
+///   Optional map of times to use as a palette source
+@mixin time--(
+  $time,
+  $value: null,
+  $fallback: true,
+  $source: $times
+) {
+  @include token--($source, $time, $value, $fallback, $time-var-prefix);
+}
+
+
+// Var Time
+// ---------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-time-vars
+/// @example scss
+///   $times: (
+///     '_fast': 200ms,
+///     'text': '#_fast' ('plus': 50ms),
+///     'fade': '#text',
+///   );
+///   .example {
+///     transition: opacity var-time('fade'), color var-time('text', 150ms);
+///   }
+///
+/// @param {*} $time -
+///   Time name available in the `$source` map
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source -
+///   Optional Accoutrement map of times to use as source
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<token>, <fallback>)`
+@function var-time(
+  $time,
+  $fallback: true,
+  $source: $times
+) {
+  @return var-token($source, $time, $fallback, $time-var-prefix);
+}

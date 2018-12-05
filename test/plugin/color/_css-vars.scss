@@ -1,0 +1,145 @@
+// Color Var Tests
+// ===============
+@include test-module('Color: CSS Vars') {
+
+
+$test: (
+  '_private': blue,
+  'simple': red,
+  'kevin': '#_private',
+  'thread': '#kevin',
+  'default': '#_contrast-light',
+);
+
+$global: $colors;
+$colors: $test !global;
+
+
+// Colors-- [mixin]
+// ------------------
+@include describe('Colors-- [mixin]') {
+  @include it('Generates CSS variables from the default color map') {
+    @include assert {
+      @include output {
+        @include colors--;
+      }
+
+      @include expect {
+        --color-simple: red;
+        --color-kevin: blue;
+        --color-thread: var(--color-kevin, blue);
+        --color-default: #{color('_contrast-light')};
+      }
+    }
+  }
+
+  @include it('Generates CSS variables for any color map') {
+    @include assert {
+      @include output {
+        @include colors--(('mine': green));
+      }
+
+      @include expect {
+        --color-mine: green;
+      }
+    }
+  }
+}
+
+
+// Color-- [mixin]
+// -----------------
+@include describe('Color-- [mixin]') {
+  @include it('Generates a single variable from a token') {
+    @include assert {
+      @include output {
+        @include color--('simple');
+      }
+
+      @include expect {
+        --color-simple: red;
+      }
+    }
+  }
+
+  @include it('Generates a reference variable from a token') {
+    @include assert {
+      @include output {
+        @include color--('thread');
+      }
+
+      @include expect {
+        --color-thread: var(--color-kevin, blue);
+      }
+    }
+  }
+
+
+  @include it('Generate reference to default color') {
+    @include assert {
+      @include output {
+        @include color--('default');
+      }
+
+      @include expect {
+        --color-default: #{color('_contrast-light')};
+      }
+    }
+  }
+
+  @include it('Generates a new variable alias') {
+    @include assert {
+      @include output {
+        @include color--('alias', 'thread');
+      }
+
+      @include expect {
+        --color-alias: var(--color-thread, blue);
+      }
+    }
+  }
+}
+
+
+// Var-Color [function]
+// --------------------
+@include describe('Var-Color [function]') {
+  @include it('Accesses a color variable with default fallback') {
+    @include assert-equal(
+      var-color('simple'),
+      var(--color-simple, color('simple'))
+    );
+  }
+
+  @include it('Allows custom fallback') {
+    @include assert-equal(
+      var-color('simple', red),
+      var(--color-simple, red)
+    );
+  }
+
+  @include it('Allows false fallback') {
+    @include assert-equal(
+      var-color('simple', false),
+      var(--color-simple)
+    );
+  }
+
+  @include it('Accepts custom palette') {
+    $my-palette: (
+      'my-base': #393,
+      'my-adjustment': '#my-base' ('shade': 10%),
+    );
+
+    @include assert-equal(
+      var-color('my-adjustment', $source: $my-palette),
+      var(--color-my-adjustment, color('my-adjustment', $source: $my-palette))
+    );
+  }
+}
+
+
+$colors: $global !global;
+
+
+} // end module

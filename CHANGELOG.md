@@ -1,10 +1,94 @@
 # Accoutrement Changelog
 
+## 2.0.0 - UNRELEASED
+The 2.0 release is primarily focused on
+support for **CSS Custom Properties** (aka CSS Variables),
+and access to nested-map tokens with `#outside->inside` syntax.
+We've also added private tokens (`_token`),
+and various tools for token-inspection.
+All factory-default tokens (contrast-colors, named ratios, etc)
+are now marked as private,
+and will need to be called with a `_` prefix.
+See the full details below:
+
+- [Core][core]:
+  - BREAKING: Explicit value/adjustments maps require a `'%value'` key
+    (used to be named `'value'`),
+    in order to avoid possible conflicts or false-positives
+  - NEW (BREAKING alpha.1): all nested-map token references (using `->`)
+    must be absolute paths from the map root,
+    rather than assuming the most closely related
+    sibling or ancestor value
+  - BUGFIX (from alpha.1): Major improvements to compile time
+    when parsing `->` syntax
+
+### 2.0.0-alpha.1 - 10/29/18
+
+- [Core][core]:
+  - NEW: `$adjust-query-overlap` (`max` | `min` | `false`)
+    allows you to control if and how media-queries are adjusted
+    to avoid overlap between min/max queries
+    (thanks to @biw-joelschou)
+  - NEW: Support for integrating accoutrement tokens & CSS variables
+    with `tokens--()`, `token--()`, `var-token()`,
+    and plugin-specific shortcuts
+  - BREAKING: Token names starting with `_` or `-`
+    are considered "private" to Sass,
+    and will not be output when auto-generating CSS
+    (variables, font-names, etc.)
+  - BREAKING: Default ratio tokens are now prefixed with `_`
+    (search/replace e.g. `minor-third` -> `_minor-third`)
+    to avoid CSS-variable output
+  - NEW: `is-private-token()` and `is-alias-for()` are now public functions,
+    to help with token-inspection
+  - BREAKING: Support for nested-map tokens with `->` syntax,
+    both in `#hash->references` and `get-token($source, 'function->calls')`
+    (thanks to @biw-joelschou)
+- [Plugin: Animate][animate]
+  - BREAKING: Default easing tokens are now prefixed with `_`
+    (search/replace e.g. `in-out-quad` -> `_in-out-quad`)
+    to avoid CSS-variable output
+  - NEW: Support for easing CSS variables with
+    `easing--()`, `ease--()`, and `var-ease()`
+  - NEW: Support for time CSS variables with
+    `times--()`, `time--()`, and `var-time()`
+  - NEW: Support for change CSS variables with
+    `changes--()`, `change--()`, and `var-change()`
+- [Plugin: Color][color]
+  - BREAKING: `_contrast-light` and `_contrast-dark` colors are used
+    for mixing `tint()` and `shade()`,
+    with optional `$light`/`$dark` override parameters
+    (thanks to @biw-joelschou)
+  - NEW: Default `_contrast-light` and `_contrast-dark` provided,
+    set `_contrast-light`/`dark` in `$colors` to override
+  - NEW: Support for CSS Variables with
+    `colors--()`, `color--()`, and `var-color()`
+- [Plugin: Layout][layout]
+  - BREAKING: Default ratio tokens are now prefixed with `_`,
+    see core for details
+- [Plugin: Scale][scale]
+  - BREAKING: Default ratio tokens are now prefixed with `_`,
+    see core for details
+  - NEW: Support for size CSS Variables with
+    `sizes--()`, `size--()`, and `var-size()`
+  - NEW: Support for ratio variables with
+    `ratios--()`, `ratio--()`, and `var-ratio()`
+- [Plugin: Type][type]
+  - BREAKING: Non-map fonts are interpreted as font-stacks
+  - BREAKING: Normalized font-data uses proper name-quotation,
+    and ignores missing or private names/stacks
+  - BREAKING: `import-webfonts()` no longer imports private fonts,
+    but will import a direct alias of the private font
+  - NEW: `import-webfonts()` accepts `$source` parameter
+  - NEW: Support for CSS Variables with
+    `fonts--()`, `font--()`, and `var-font()`
+
 ## 1.0.1 - 09/08/18
-- BUGFIX: Typos, including the `cinema` ratio spelling
-  (thanks to @biw-joelschou)
-- BUGFIX: Improved consistency of nested-map parser
-  (thanks to @biw-joelschou)
+- [Core][core]:
+  - BUGFIX: Typos, including the `cinema` ratio spelling
+    (thanks to @biw-joelschou)
+  - BUGFIX: Improved consistency of nested-map parser
+    (thanks to @biw-joelschou)
 
 ## 1.0.0 - 08/08/18
 - The stable 1.0 release is identical to `-beta.3`,

@@ -1,0 +1,187 @@
+// Type Var Tests
+// ===============
+@include test-module('Type: Font Vars') {
+
+
+// Font Values [function]
+// ----------------------
+@include describe('Font Values [function]') {
+  $test: (
+    '_shared-stack': ('Helvetica Neue', Helvetica, Arial, sans-serif),
+    '_normal-stack': ('Helvetica Neue', Helvetica, Arial, sans-serif),
+    'body-font': (
+      'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    ),
+    'TestFont': (TestFont, Georgia, serif),
+    'UniFont': ('Unicode Test',),
+    'alias': '#body-font',
+    'kevin bacon': '#alias',
+    'tf-alias': '#TestFont',
+    'tf': '#tf-alias',
+    "sans": (FranklinGothic, Helvetica, Arial, sans-serif),
+  );
+
+  @include it('Reduces a font-map down to the corresponding stacks') {
+    @include assert-equal(
+      _a_font-values(),
+      $test
+    );
+  }
+
+  @include it('Optionally reduce by other values') {
+    @include assert-equal(
+      _a_font-values($fonts, 'unicode-range'),
+      ('UniFont': (U+0000-00FF, U+0131, 'U+0152-0153', 'U+02C6'))
+    );
+  }
+}
+
+// Fonts-- [mixin]
+// ---------------
+@include describe('Fonts-- [mixin]') {
+  @include it('Generates CSS variables from the default font map') {
+    @include assert {
+      @include output {
+        @include fonts--;
+      }
+
+      @include expect {
+        --font-body-font: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-TestFont: TestFont, Georgia, serif;
+        --font-UniFont: "Unicode Test";
+        --font-alias: var(--font-body-font, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
+        --font-kevin-bacon: var(--font-alias, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
+        --font-tf-alias: var(--font-TestFont, TestFont, Georgia, serif);
+        --font-tf: var(--font-tf-alias, TestFont, Georgia, serif);
+        --font-sans: FranklinGothic, Helvetica, Arial, sans-serif;
+      }
+    }
+  }
+
+  @include it('Generates CSS variables for any font map') {
+    @include assert {
+      @include output {
+        @include fonts--(('mine': monospace));
+      }
+
+      @include expect {
+        --font-mine: mine, monospace;
+      }
+    }
+  }
+
+  @include it('Optionally specify the font-value to use') {
+    @include assert {
+      @include output {
+        @include fonts--(('mine': monospace), $use: 'name');
+      }
+
+      @include expect {
+        --font-mine: mine;
+      }
+    }
+  }
+}
+
+
+// Font-- [mixin]
+// --------------
+@include describe('Font-- [mixin]') {
+  @include it('Generates a single variable from a token') {
+    @include assert {
+      @include output {
+        @include font--('TestFont');
+      }
+
+      @include expect {
+        --font-TestFont: TestFont, Georgia, serif;
+      }
+    }
+  }
+
+  @include it('Use any given font-value') {
+    @include assert {
+      @include output {
+        @include font--('TestFont', $use: 'name');
+      }
+
+      @include expect {
+        --font-TestFont: TestFont;
+      }
+    }
+  }
+
+  @include it('Generates a reference variable from a token') {
+    @include assert {
+      @include output {
+        @include font--('alias');
+      }
+
+      @include expect {
+        --font-alias: var(--font-body-font, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
+      }
+    }
+  }
+
+  @include it('Generates a new variable alias') {
+    @include assert {
+      @include output {
+        @include font--('alias-2', 'alias');
+      }
+
+      @include expect {
+        --font-alias-2: var(--font-alias, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
+      }
+    }
+  }
+}
+
+
+// Va r-Size [function]
+// --------------------
+@include describe('Var-Size [function]') {
+  @include it('Accesses a size variable with default fallback') {
+    @include assert-equal(
+      var-font('TestFont'),
+      var(--font-TestFont, font-family('TestFont'))
+    );
+  }
+
+  @include it('Allows custom fallback') {
+    @include assert-equal(
+      var-font('TestFont', serif),
+      var(--font-TestFont, serif)
+    );
+  }
+
+  @include it('Allows false fallback') {
+    @include assert-equal(
+      var-font('TestFont', false),
+      var(--font-TestFont)
+    );
+  }
+
+  @include it('Use any font-value') {
+    @include assert-equal(
+      var-font('TestFont', $use: 'name'),
+      var(--font-TestFont, TestFont)
+    );
+  }
+
+  @include it('Accepts custom palette') {
+    $my-palette: (
+      'my-base': (arial, helvetica, sans-serif),
+      'my-adjustment': '#my-base' (get-function('append'): 'monospace'),
+    );
+
+    @include assert-equal(
+      var-font('my-adjustment', $source: $my-palette),
+      var(--font-my-adjustment, font-family(
+        'my-adjustment',
+        $source: $my-palette
+      ))
+    );
+  }
+}
+
+} // end module

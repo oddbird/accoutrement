@@ -1,4 +1,4 @@
-/// # Sass List Utilities
+/// # List Functions
 /// Functions for basic Sass-list manipulation.
 /// While these functions are defined with private prefixes,
 /// they are registered without the prefix for map-access.
@@ -102,7 +102,7 @@
 ///
 /// @param {list} $list -
 ///   Items to sort
-/// @return {any} -
+/// @return {*} -
 ///   Sorted list, long to short
 @function _a_str-length-sort(
   $list

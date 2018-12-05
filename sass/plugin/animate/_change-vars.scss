@@ -1,0 +1,150 @@
+/// # Changes » CSS Variables
+/// @group animate-change-vars
+
+
+// Change Var Prefix
+// ----------------
+/// Since CSS variables are often defined in a global space,
+/// it can be useful to prefix different variable types.
+/// Accoutrement maps help solve that problem in Sass,
+/// so we wanted to carry that over into our CSS variable support.
+/// Set a prefix for all change-tokens,
+/// and we'll apply it when setting or calling css variables
+/// based on your change maps.
+/// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-change-vars
+///
+/// @example scss
+///   $changes: ('my-change': pink);
+///   $change-var-prefix: 'prefix_';
+///   :root { @include change--('my-change') }
+///
+/// @type string
+$change-var-prefix: 'change-' !default;
+
+
+// Changes--
+// --------
+/// Convert any change-map into CSS variables,
+/// using the global `$change-var-prefix`.
+///
+/// - Change names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Changes that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-change-vars
+/// @example scss
+///   $changes: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   :root {
+///     @include changes--;
+///   }
+///
+/// @param {map} $source [$changes] -
+///   Optionally use a custom
+///   map of changes to set as css variables
+/// @output
+///   Custom properties for all public changes in the map
+@mixin changes--(
+  $source: $changes
+) {
+  @include tokens--($source, $change-var-prefix);
+}
+
+
+// Change--
+// -------
+/// Set a single custom property based on a map-change,
+/// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-change-vars
+/// @example scss
+///   $changes: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   .example {
+///     @include change--('border');
+///     @include change--('outline', 'border', red);
+///   }
+///
+/// @param {*} $change -
+///   Change name available in the `$source` map,
+///   or alias to use in naming the CSS variable
+/// @param {string | null} $value [null] -
+///   Optional value for the variable,
+///   if different from the given `$change`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source [$changes] -
+///   Optional map of changes to use as a palette source
+@mixin change--(
+  $change,
+  $value: null,
+  $fallback: true,
+  $source: $changes
+) {
+  @include token--($source, $change, $value, $fallback, $change-var-prefix);
+}
+
+
+// Var Change
+// ---------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group animate-change-vars
+/// @example scss
+///   $changes: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   .example {
+///     border-change: var-change('border');
+///     change: var-change('text', black);
+///   }
+///
+/// @param {*} $change -
+///   Change name available in the `$source` map
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source -
+///   Optional Accoutrement map of changes to use as source
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<token>, <fallback>)`
+@function var-change(
+  $change,
+  $fallback: true,
+  $source: $changes
+) {
+  @return var-token($source, $change, $fallback, $change-var-prefix);
+}

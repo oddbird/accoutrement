@@ -10,8 +10,8 @@
     @include assert-equal(
       change('modal-in'),
       (
-        (transform time('fast')) ease('out-back'),
-        (opacity time('fade') ease('out-quad')) time('delay'),
+        (transform time('fast')) ease('_out-back'),
+        (opacity time('fade') ease('_out-quad')) time('delay'),
       )
     );
   }
@@ -37,8 +37,8 @@
 // -------------------
 @include describe('Add Changes [mixin]') {
   $old: $changes;
-  $a: ('glow': glow time('slow') ease('in') infinite alternate);
-  $b: ('slide-out': '#slide' ease('in'));
+  $a: ('glow': glow time('slow') ease('_in') infinite alternate);
+  $b: ('slide-out': '#slide' ease('_in'));
 
   @include add-changes($a, $b);
 
@@ -62,7 +62,7 @@
         @include animate('animation');
       }
       @include expect {
-        animation: slide-frames 1 time('fast') ease('out-back');
+        animation: slide-frames 1 time('fast') ease('_out-back');
       }
     }
   }
@@ -73,7 +73,7 @@
         @include animate('animation-ref');
       }
       @include expect {
-        animation: slide-frames 1 time('fast') ease('out-back') both;
+        animation: slide-frames 1 time('fast') ease('_out-back') both;
       }
     }
   }
@@ -85,8 +85,8 @@
       }
       @include expect {
         animation:
-          slide-frames 1 time('fast') ease('out-back'),
-          slide-frames 1 time('fast') ease('out-back') both
+          slide-frames 1 time('fast') ease('_out-back'),
+          slide-frames 1 time('fast') ease('_out-back') both
         ;
       }
     }
@@ -114,7 +114,7 @@
         @include transition('slide-in');
       }
       @include expect {
-        transition:  transform time('fast') ease('out-back');
+        transition:  transform time('fast') ease('_out-back');
       }
     }
   }
@@ -126,9 +126,9 @@
       }
       @include expect {
         transition:
-          transform time('fast') ease('out-back'),
-          opacity time('fade') ease('out-quad') time('delay'),
-          opacity time('fade') ease('out-quad')
+          transform time('fast') ease('_out-back'),
+          opacity time('fade') ease('_out-quad') time('delay'),
+          opacity time('fade') ease('_out-quad')
         ;
       }
     }

@@ -7,14 +7,18 @@ display:
     - public
 
 groups:
-  'Core (Parser)':
+  'Core (API)':
     core: 'QuickStart: Core'
-    core-get: 'Accessing Maps'
-    core-math: 'Math Helpers'
-    core-scale: 'Modular Scales'
-    core-lists: 'Sass List Utils'
-    core-strings: 'Sass Strings Utils'
+    core-get: 'Token Maps'
+    core-vars: 'Tokens » CSS Variables'
+    core-ratio: 'Ratios & Modular Scales'
+    core-ratio-vars: 'Ratios » CSS Variables'
+  'Core (Utilities)':
     core-register: 'Function Registration'
+    core-math: 'Math Functions'
+    core-lists: 'List Functions'
+    core-strings: 'String Functions'
+    core-inspect: 'Inspecting Tokens'
   'Init (Normalization)':
     init: 'QuickStart: Init'
     init-root: 'General'
@@ -24,30 +28,37 @@ groups:
     init-type: 'Type'
   'Plugin/Animate':
     animate: 'QuickStart: Animate'
-    animate-times: 'Durations & Delays'
-    animate-ease: 'Easing & Steps'
-    animate-change: 'Animations & Transitions'
+    animate-times: 'Timing Maps'
+    animate-time-vars: 'Times » CSS Variables'
+    animate-ease: 'Easing Maps'
+    animate-ease-vars: 'Easing » CSS Variables'
+    animate-change: 'Combined "Change" Maps'
+    animate-change-vars: 'Changes » CSS Variables'
   'Plugin/Color':
     color: 'QuickStart: Color'
-    color-api: 'Colors'
+    color-api: 'Color Maps'
+    color-vars: 'Colors » CSS Variables'
     color-contrast: 'Contrast'
-    color-utils: 'Color Utils'
+    color-utils: 'Color Functions'
   'Plugin/Layout':
     layout: 'QuickStart: Layout'
+    layout-queries: 'Media Breakpoint Maps'
+    layout-query-vars: 'Breakpoints » CSS Variables'
     layout-box: 'Box-Sizing'
     layout-clearfix: 'Clearfix'
     layout-position: 'Positioning'
-    layout-queries: 'Media Queries'
     layout-ratios: 'Fluid Ratios'
     layout-z-index: 'Z-Index'
   'Plugin/Scale':
     scale: 'QuickStart: Scale'
-    scale-sizes: 'Sizes'
+    scale-sizes: 'Size Maps'
+    scale-vars: 'Sizes » CSS Variables'
     scale-units: 'Unit Conversion'
   'Plugin/Type':
     type: 'QuickStart: Type'
+    type-fonts: 'Font Maps'
+    type-font-vars: 'Fonts » CSS Variables'
     type-a11y: 'Accessibility'
-    type-fonts: 'Webfonts'
     type-pseudo: 'Pseudo Elements'
 
 

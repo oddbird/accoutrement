@@ -16,10 +16,10 @@
 /// @group layout-ratios
 /// @example scss
 ///   .media {
-///     @include fluid-ratio('widescreen');
+///     @include fluid-ratio('_widescreen');
 ///   }
 ///
-/// @param {float | string} $ratio ['widescreen'] -
+/// @param {float | string} $ratio ['_widescreen'] -
 ///   The ratio of width over height, or a ratio keyword.
 /// @param {length} $width [100%] -
 ///   The established fluid width of the element.
@@ -29,7 +29,7 @@
 ///   Optional accoutrement-format map of ratios to use as the origin palette
 ///   (in addition to the provided defaults)
 @mixin fluid-ratio(
-  $ratio: 'widescreen',
+  $ratio: '_widescreen',
   $width: 100%,
   $position: relative,
   $source: $ratios
@@ -57,10 +57,10 @@
 /// @example scss
 ///   .media {
 ///     width: 100%;
-///     padding-top: fluid-ratio('widescreen');
+///     padding-top: fluid-ratio('_widescreen');
 ///   }
 ///
-/// @param {float | string} $ratio ['widescreen'] -
+/// @param {float | string} $ratio ['_widescreen'] -
 ///   The ratio of width over height, or a ratio keyword.
 /// @param {length} $width [100%] -
 ///   The established fluid width of the element.
@@ -70,7 +70,7 @@
 /// @return {percentage} -
 ///   A fluid height, based on the width and ratio.
 @function fluid-ratio(
-  $ratio: 'widescreen',
+  $ratio: '_widescreen',
   $width: 100%,
   $source: $ratios
 ) {

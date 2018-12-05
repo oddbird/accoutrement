@@ -1,55 +1,5 @@
-/// # Accessing Maps
-/// @group core-get
-
-
-// Get Token
-// ---------
-/// The primary function for accessing and parsing
-/// accoutrement map values.
-/// Each accoutrement plugin creates a shortcut wrapper function
-/// for the specific map associated with that data-type.
-/// You can do the same, or use it directly
-/// to turn any arbitrary map into an accoutrement map.
-///
-/// @since 1.0.0 -
-/// - NEW: Accepts `$do` map argument,
-///   for on-the-fly adjustments
-///
-/// @group core-get
-/// @example scss - Access a map directly
-///   $map: (
-///     'original-value': 3em,
-///     'new-value': '#original-value' (
-///       'times': 2,
-///       'minus': 0.5
-///     ),
-///   );
-///   /*! New Value: #{get-token($map, 'new-value')} */
-/// @example scss - Write your own shortcut plugin for specific maps
-///   @function get($key) {
-///     @return get-token($my-map, $key);
-///   }
-///
-///   $my-map: ('main': 32em);
-///   /*! Main: #{get('main')} */
-///
-/// @param {map} $map -
-///   A map of token definitions to reference against
-/// @param {*} $key -
-///   The original key or value to be parsed for `#alias` tags
-/// @param {map | null} $do [null] -
-///   A final map of function/ratio adjustments to run on the returned value
-/// @return {*} -
-///   The parsed value of any key in a given map
-@function get-token(
-  $map,
-  $key,
-  $do: null
-) {
-  $key: map-get($map, $key) or $key;
-  $key: _a_get($map, $key);
-  @return _a_do-each($map, $key, $do);
-}
+/// # Core Parser
+/// @access private
 
 
 // Get
@@ -59,7 +9,7 @@
 /// Functions can be added as a map at the end of a value --
 /// but some use-cases may confuse the parser,
 /// so we provide a more explicit map option with a `value` key,
-/// forllowed by functions and args.
+/// followed by functions and args.
 ///
 /// @access private
 ///
@@ -71,16 +21,16 @@
 ///   Final parsed and adjusted value from the original map
 @function _a_get(
   $map,
-  $key
+  $key,
 ) {
   $type: type-of($key);
   $do: null;
   $value: $key;
 
   // break out `do` maps…
-  @if ($type == 'map') and map-get($key, 'value') {
-    $value: map-get($key, 'value');
-    $do: map-remove($key, 'value');
+  @if ($type == 'map') and (nth(map-keys($key), 1) == '%value') {
+    $value: map-get($key, '%value');
+    $do: map-remove($key, '%value');
   } @else if index('list' 'arglist', $type) {
     $final: nth($key, -1);
 
@@ -137,54 +87,12 @@
   @if ($type == 'map') {
     $new: ();
 
-    // create a list of keys and values in the current map scope
-    $keys: map-keys($needle);
-    $values: map-values($needle);
-
     // handle each value in the map…
     @each $key, $value in $needle {
-      $index: index($keys, $key);
+      $new-key: _a_get($haystack, $key);
+      $new-value: _a_get($haystack, $value);
 
-      // check in the $needle
-      $newkey: _a_get($needle, $key);
-      $keytype: type-of($newkey);
-      $newvalue: _a_get($needle, $value);
-      $valuetype: type-of($newvalue);
-
-      // if the key isn't found in the $needle or is a #reference,
-      // check the $haystack with the $newkey
-      @if type-of($newkey) != 'string' or str-index($newkey, "#") {
-        $newkey: _a_get($haystack, $newkey);
-      }
-
-      // if the value isn't found in the $needle or is a #reference,
-      // check the $haystack
-      @if ($valuetype != 'string') or str-index($newvalue, "#") {
-        // if we're dealing with a map or a #reference,
-        // search with the $newvalue
-        @if ($valuetype == 'map')
-          or (($valuetype == 'string') and str-index($newvalue, "#")) {
-          $newvalue: _a_get($haystack, $newvalue);
-        }
-        // otherwise, search with the original value
-        @else {
-          $newvalue: _a_get($haystack, $value);
-        }
-      }
-
-      // update the lists of keys and values with the new ones
-      $keys: set-nth($keys, $index, $newkey);
-      $values: set-nth($values, $index, $newvalue);
-
-      // erase $new to guarantee a fresh map
-      $new: ();
-
-      // rebuild the map from the new keys and values
-      @each $k in $keys {
-        $new: map-merge($new, (
-          $k: nth($values, index($keys, $k))
-        ));
-      }
+      $new: map-merge($new, ($new-key: $new-value));
     }
 
     @return $new;
@@ -201,7 +109,11 @@
 // Replace
 // -------
 /// Search for `#alias` mentions within a string,
-/// and return a list of unique mentions with `#` removed.
+/// and return the string with aliases replaced.
+///
+/// @since 2.0.0 -
+/// - NEW: Handles access to nested-map tokens
+///   using the hashtag `'#first->second->third'` syntax
 ///
 /// @access private
 ///
@@ -209,14 +121,19 @@
 ///   A map of terms to reference tags against
 /// @param {string} $string -
 ///   The original string to be parsed for `#alias` tags
-/// @return {any} -
+/// @return {*} -
 ///   Input $string, with #alias mentions replaced
 @function _a_replace(
   $haystack,
   $string
 ) {
+  $hashdex: str-index($string, '#');
+
   // replace aliases…
-  @if str-index($string, '#') {
+  @if $hashdex {
+    $deep: str-index($string, '->') or 0;
+    $haystack: if(($deep > $hashdex), _a_flat-source($haystack), $haystack);
+
     // check longest keys first, in case of overlap
     @each $key in _a_str-length-sort(map-keys($haystack)) {
       $hash: '##{$key}';
@@ -229,40 +146,6 @@
   }
 
   @return $string;
-}
-
-
-// Origin
-// ------
-/// Follows any number of alias tokens
-/// to find the original token-name for that same value.
-///
-/// @access private
-///
-/// @param {map} $map -
-///   A map of terms to reference tags against
-/// @param {string} $key -
-///   The original token name to be traced
-/// @return {any} -
-///   Token name where the returned value originates
-@function _a_origin(
-  $map,
-  $key
-) {
-  $name: null;
-
-  @while map-has-key($map, $key) {
-    $name: $key;
-    $try: map-get($map, $key);
-
-    @if (type-of($try) == 'string') and (str-index($try, '#') == 1) {
-      $try: str-slice($try, 2);
-    }
-
-    $key: $try;
-  }
-
-  @return $name;
 }
 
 
@@ -355,4 +238,54 @@
     'No ratio or function named `#{$name}`',
     '_a_do'
   );
+}
+
+
+// Source Memo
+// -----------
+/// Memoization of nested->flattened source maps,
+/// to avoid duplication of the flattening process.
+///
+/// @access private
+/// @prop {map} <nested source map>
+///   Use the original map as a key,
+///   and store the flattened map as a value
+$_a_source-memo: ();
+
+
+// Flat Source
+// -----------
+/// Flatten a nested accoutrement map,
+/// using `->` delimiter to designate nested keys.
+///
+/// @access private
+/// @param {map} $source -
+///   A nested map of accoutrement tokens to flatten
+@function _a_flat-source(
+  $source
+) {
+  // Check memo…
+  $memo: map-get($_a_source-memo, $source);
+
+  @if $memo {
+    @return $memo;
+  }
+
+  // No memo, flatten…
+  $flat: $source;
+
+  @each $key, $value in $source {
+    @if (type-of($value) == 'map') and not map-has-key($value, '%value') {
+      @each $sub-key, $sub-val in _a_flat-source($value) {
+        $sub-key: '#{$key}->#{$sub-key}';
+        $flat: map-merge($flat, ($sub-key: $sub-val));
+      }
+    }
+  }
+
+  // Store to memo…
+  $_a_source-memo: map-merge($_a_source-memo, ($source: $flat)) !global;
+
+  // Done…
+  @return $flat;
 }

@@ -1,15 +1,21 @@
-// Nomalize Font
-// -------------
+// Normalize Font
+// --------------
 /// Convert font maps into a consistent format -
 /// to allow shorthand APIs,
 /// while providing reliable data formats to the internal functions.
 ///
+/// @since 2.0.0 -
+/// - BREAKING: Non-map fonts are interpreted as font-stacks,
+///   and converted to an explicit map
+/// - BREAKING: Missing names & stacks are ignored, previously set to `null`
+///
 /// @access private
 /// @group type-normalize
 ///
-/// @param {map} $font -
+/// @param {map | list} $font -
 ///   A map of font-data using any of the acceptable
-///   [font-map](type-fonts.html#variable--fonts) syntax options
+///   [font-map](type-fonts.html#variable--fonts) syntax options,
+///   or a simple string/list font-stack
 /// @param {string} $key [null] -
 ///   The map key used to access the font,
 ///   if available…
@@ -23,13 +29,18 @@
   $key: null,
   $source: $fonts
 ) {
+  // make it a map…
+  @if (type-of($font) != 'map') {
+    $font: ('stack': $font);
+  }
+
   // Normalize name…
   $name: _a_normalize-font-name($font, $key, $source);
-  $font: map-merge($font, ('name': $name));
+  $font: if($name, map-merge($font, ('name': $name)), $font);
 
   // Normalize the font stack…
   $stack: _a_normalize-font-stack($font);
-  $font: map-merge($font, ('stack': $stack));
+  $font: if($stack, map-merge($font, ('stack': $stack)), $font);
 
   // Normalize variants
   $variants: _a_font-get-variants($font);
@@ -53,6 +64,11 @@
 // -------------------
 /// Normalize a font-name based on
 /// implicit or explicit cues.
+///
+/// @since 2.0.0 -
+/// - BREAKING: Ignores private tokens when tracking an alias origin,
+///   or determining name based on key
+/// - BREAKING: Quotes or unquotes names, based on CSS output requirements
 ///
 /// @access private
 /// @group type-normalize
@@ -82,7 +98,18 @@
     }
   }
 
-  @return $name or _a_origin($source, $key);
+  @if ($key and is-private-token($key))
+    or ($name and is-private-token($name)) {
+    @return null;
+  }
+
+  $name: $name or is-alias-for($source, $key, 'origin') or $key;
+
+  @if (type-of($name) == 'string') {
+    $name: if(str-index($name, ' '), quote($name), unquote($name));
+  }
+
+  @return $name;
 }
 
 

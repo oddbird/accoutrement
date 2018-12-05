@@ -90,7 +90,7 @@ $map: (
   'root': 16px,
 
   // internal reference & adjustments
-  'gutter': '#root' ('major-third': 1, 'convert-units': 'rem'),
+  'gutter': '#root' ('_major-third': 1, 'convert-units': 'rem'),
 );
 ```
 

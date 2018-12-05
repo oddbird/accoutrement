@@ -8,7 +8,7 @@
 @include describe('Ratio [function]') {
   @include it('Returns a named ratio') {
     @include assert-equal(
-      ratio('fifth'),
+      ratio('_fifth'),
       (3 / 2)
     );
   }
@@ -23,14 +23,14 @@
   @include it('Returns a recursive ratio') {
     @include assert-equal(
       ratio('new'),
-      ratio('octave')
+      ratio('_octave')
     );
   }
 
   @include it('Accepts $do adjustments') {
     @include assert-equal(
       ratio('new', ('plus': 1)),
-      ratio('octave') + 1
+      ratio('_octave') + 1
     );
   }
 

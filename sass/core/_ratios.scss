@@ -1,10 +1,10 @@
-/// # Modular Scale Ratios
+/// # Layout & Type Ratios
 /// Ratios are useful for both [modular-scales](scale-sizes.html)
 /// and [fluid media](layout-ratios.html) layouts.
 /// We've moved them into the core,
 /// as a common way of manipulating numerical data,
 /// on-par with function-calls.
-/// @group core-scale
+/// @group core-ratio
 
 
 // Ratios
@@ -14,12 +14,12 @@
 /// Any ratios that resolve to `linear`
 /// will not use any exponential scale.
 ///
-/// @group core-scale
-/// @example scss -
+/// @group core-ratio
+/// @example scss
 ///   $ratios: (
 ///     'line-height': (1 / 3),
 ///     'headings': 'linear',
-///     'golden': 1.61803399,
+///     '_golden': 1.61803399,
 ///   );
 ///
 /// @type map
@@ -39,10 +39,10 @@ $ratios: () !default;
 /// - NEW: Accepts `$source` map argument,
 ///   for custom source-palette
 ///
-/// @group core-scale
+/// @group core-ratio
 /// @example scss
-///   /* Octave: #{ratio('octave')} */
-///   /* Fifth: #{ratio('fifth')} */
+///   /* _octave: #{ratio('_octave')} */
+///   /* _fifth: #{ratio('_fifth')} */
 ///
 /// @param {string | number} $ratio -
 ///   The key-name or value of a ratio
@@ -58,8 +58,8 @@ $ratios: () !default;
   $do: null,
   $source: $ratios
 ) {
-  $_ratio-options: map-merge($_a_RATIOS, $source);
-  @return get-token($_ratio-options, $ratio, $do);
+  $source: map-merge($_a_RATIOS, $source);
+  @return get-token($source, $ratio, $do);
 }
 @include _a_register-function('ratio');
 
@@ -75,7 +75,7 @@ $ratios: () !default;
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: http://oddbird.net/herman/
 ///
-/// @group core-scale
+/// @group core-ratio
 ///
 /// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -94,28 +94,28 @@ $ratios: () !default;
 /// Some default named ratios you can use,
 /// but shouldn't edit directly.
 ///
-/// @group core-scale
+/// @group core-ratio
 /// @see $ratios
 /// @access public
 $_a_RATIOS: (
-  'octave': 2,
-  'major-seventh': (15 / 8),
-  'minor-seventh': (16 / 9),
-  'major-sixth': (5 / 3),
-  'minor-sixth': (8 / 5),
-  'fifth': (3 / 2),
-  'augmented-fourth': (45 / 32),
-  'fourth': (4 / 3),
-  'major-third': (5 / 4),
-  'minor-third': (6 / 5),
-  'major-second': (9 / 8),
-  'minor-second': (16 / 15),
+  '_octave': 2,
+  '_major-seventh': (15 / 8),
+  '_minor-seventh': (16 / 9),
+  '_major-sixth': (5 / 3),
+  '_minor-sixth': (8 / 5),
+  '_fifth': (3 / 2),
+  '_augmented-fourth': (45 / 32),
+  '_fourth': (4 / 3),
+  '_major-third': (5 / 4),
+  '_minor-third': (6 / 5),
+  '_major-second': (9 / 8),
+  '_minor-second': (16 / 15),
 
-  'photo': '#fifth',
-  'classic': '#fourth',
-  'widescreen': '#minor-seventh',
-  'cinema': 2.39,
-  'golden': 1.618,
+  '_photo': '#_fifth',
+  '_classic': '#_fourth',
+  '_widescreen': '#_minor-seventh',
+  '_cinema': 2.39,
+  '_golden': 1.618,
 );
 
 

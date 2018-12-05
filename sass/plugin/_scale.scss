@@ -11,6 +11,7 @@
 @import 'scale/config';
 @import 'scale/units';
 @import 'scale/size';
+@import 'scale/css-vars';
 
 
 /// ## Import
@@ -52,7 +53,7 @@
 ///
 ///   // apply adjustments and conversions
 ///   // using named-ratios or arbitrary functions
-///   'rhythm': '#root' ('fifth': 1, 'convert-units': 'rem'),
+///   'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
 ///
 ///   'h1': '#root' ('my-ratio': 3),
 ///   'h2': '#root' ('my-ratio': 2),

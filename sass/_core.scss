@@ -1,16 +1,26 @@
 /// # QuickStart: Core
-/// The accoutrement tools are built around
-/// a shared data-storage syntax
-/// using Sass "map" objects.
-/// We can use maps to store and name
-/// our design tokens:
+/// All the Accoutrement tools are built around a shared syntax,
+/// using Sass Maps to define "tokens" of various types:
 ///
 /// ```scss
-/// $map: (
+/// $sizes: (
 ///   'root': 16px,
 ///   'gutter': 1em,
 /// );
 /// ```
+///
+/// Tokens provide design abstractions,
+/// that can be easily reused across a product or design system.
+/// There are several reasons for this approach:
+/// - Sass Maps provide a format that is readable by both humans & machines
+/// - All related values are stored in a single variable,
+///   with explicit relationships intact
+/// - We can build automation tools around meaningful token-groups,
+///   from [font-imports](type-fonts.html)
+///   to [generated style guides](http://oddbird.net/herman)
+/// - Unlike `YAML`, `JSON`, and other object languages,
+///   Sass is a *style language* that understands the values involved,
+///   and provides specific tools for maintaining those values
 /// @group core
 
 
@@ -32,8 +42,15 @@
 
 // core logic
 // ----------
+@import 'core/inspect';
 @import 'core/parser';
+
+// core API
+// --------
+@import 'core/api';
+@import 'core/css-vars';
 @import 'core/ratios';
+@import 'core/ratio-vars';
 
 
 /// ## Import
@@ -53,231 +70,134 @@
 /// @group core
 
 
-/// ## Internal Reference
-/// The core module provides a generic map-parsing syntax,
-/// for internal reference & adjustments --
-/// establishing dynamic relationships between map values.
-/// To refernce another key in the same map,
-/// use the `#tag` hashtag format:
+/// ## [Token Maps](core-api.html)
+/// Using the map syntax,
+/// we can create named tokens for any related values:
 ///
 /// ```scss
-/// $map: (
-///   'root': 16px,
-///
-///   // 'gutter' == 16px
-///   'gutter': '#root',
+/// $colors: (
+///   'brand': rgb(13, 127, 165),
+///   'text': black,
 /// );
 /// ```
 ///
-/// Reference hashtags don't have to stand alone,
-/// but can be embeded inside a longer string:
+/// We can also create alias tokens
+/// and explicit relationships,
+/// using a `#token` hashtag syntax:
 ///
 /// ```scss
-/// $map: (
-///   'root': 16px,
-///   'scale': 1vw,
-///
-///   // 'responsive' == calc(16px + 1vw)
-///   'responsive': 'calc(#root + #scale)',
+/// $colors: (
+///   'brand': rgb(13, 127, 165),
+///   'accent': '#brand',
+///   'text': '#accent' ('shade': 75%),
 /// );
 /// ```
 ///
-/// Nested maps will compare `#tags` internally,
-/// before looking at the parent keys:
+/// Those relationships will be calculated at compile-time,
+/// using the `get-token()` function
+/// (or shortcut functions provided by plugins):
 ///
 /// ```scss
-/// $map: (
-///   'root': 16px,
-///   'large-screen': (
-///     'root': 24px,
-///
-///     // 'alias' == 24px
-///     'alias': '#root'
-///   ),
+/// :root: (
+///   color: get-token($colors, 'text');
 /// );
 /// ```
+///
+/// See [Token Maps](core-get.html) documentation
+/// for more detail.
+///
+/// @see get-token
 /// @group core
 
 
-/// ## Functional Adjustments
-/// In many cases, we'll want to reference a value
-/// and then make adjustments to it.
-/// The explicit long-hand syntax uses a map
-/// with `'value'` as the first key.
-/// Each additional key provides a function name
-/// along with arguments for that function:
+/// ## [Tokens » CSS Variables](core-vars.html)
+/// CSS Variables provide a DOM-aware alternative
+/// to the pre-processed Sass variables
+/// we use to store tokens.
+/// Rather than using one or the other,
+/// we recommend defining tokens in Sass
+/// (where relationships can be stored in an abstract format),
+/// and then generating CSS Variables as-necessary.
 ///
-/// ```scss
-/// $map: (
-///   'root': 16px,
+/// See [CSS Variables](core-vars.html) documentation
+/// for more detail.
 ///
-///   // convert-units(16px, 'rem')
-///   'gutter': (
-///     'value': '#root',
-///     'times': 1.5,
-///     'convert-units': 'rem',
-///   ),
-/// );
-/// ```
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   :root {
+///     // generate CSS Variables based on the map above…
+///     @include tokens--($colors);
+///     // access CSS Variables with smart fallbacks…
+///     border-color: var-token($colors, 'border');
+///     color: var-token($colors, 'text');
+///   }
 ///
-/// You can also string together multiple functions,
-/// to create more complex relationships:
-///
-/// ```scss
-/// $map: (
-///   'root': 16px,
-///
-///   // convert-units(times(16px, 1.5), 'rem')
-///   'gutter': (
-///     'value': '#root',
-///     'times': 1.5,
-///     'convert-units': 'rem',
-///   ),
-/// );
-/// ```
-///
-/// Each function in the function map
-/// (e.g. `times` & `convert-units` above)
-/// will be run in order --
-/// with any associated arguments included.
-/// The `value` is always passed as the first argument.
+/// @see tokens--
+/// @see var-token
 /// @group core
 
 
-/// ## Modular-Scale Adjustments
-/// When managing numbers,
-/// you can also move up and down exponential [modular-scales][scale]
-/// by calling a named ratio
-/// in place of a function name.
-/// Scales are exponential:
-///
-/// [scale]: core-scale.html
+/// ## [Ratios](core-ratio.html)
+/// Since ratios are used by multiple plugins,
+/// we provide relevant defaults & shortcuts in the core:
 ///
 /// ```scss
-/// $map: (
-///   'root': 16px,
-///
-///   // manipulating a 'value' with function & scale adjustments:
-///   'gutter': (
-///     'value': '#root',
-///     'convert-units': 'rem',
-///
-///     // one step up a 'major third' scale (5 / 4)
-///     'major-third': 1,
-///   ),
+/// $ratios: (
+///   'line-height': (1 / 3),
+///   '_golden': 1.61803399,
 /// );
+/// :root {
+///   line-height: ratio('line-height');
+/// }
 /// ```
 ///
-/// Multiple functions/ratios
-/// will be applied in the order they are given.
+/// See [Layout & Type Ratios](core-ratio.html) documentation
+/// for more detail.
+///
 /// @see $ratios
 /// @see ratio
 /// @group core
 
 
-/// ## Adjustment Shorthand
-/// We also provide a shorhand syntax
-/// to simplify adjustments in most cases.
-/// Here, the value is written first (any data type),
-/// and a map of adjustments can be provided
-/// at the end of the definition:
-///
-/// ```scss
-/// $map: (
-///   'root': 16px,
-///
-///   // shorthand for value/adjustments
-///   'gutter': '#root' ('major-third': 1, 'convert-units': 'rem'),
-/// );
-/// ```
-/// @group core
-
-
-/// ## Adjustments with #References
-/// Adjustment-function and ratio arguments
-/// can also refernce keys in the map:
-///
-/// ```scss
-/// $map: (
-///   'root': 16px,
-///   'line-height': 1.4,
-///
-///   // multiply by line-height (linear)
-///   'rhythm': '#root' ('times': '#line-height'),
-///
-///   // 2-steps up the (exponential) line-height scale
-///   'gutter': '#root' ('#line-height': 2),
-/// );
-/// ```
-/// @group core
-
-
-/// ## String Interpolation
-/// For CSS features like `calc()`
-/// you can also create format-strings
-/// and interpolate values into the string.
-/// Use `%s` as a placeholder in Sass strings,
-/// then call the `%s` adjustment function
-/// with values for each placeholder:
-///
-/// ```scss
-/// $map: (
-///   'root': 16px,
-///   'scale': 1vw,
-///   'responsive': (
-///     'value': calc(%s + %s),
-///     '%s': '#root' '#scale',
-///   ),
-/// );
-/// ```
-/// @see interpolate
-/// @group core
-
-
-/// ## Nested Adjustments
-/// Since adjustment formats and values
-/// are parsed the same as any other value,
-/// it's possible to build quite complex adjustments:
-///
-/// ```scss
-/// $map: (
-///   'root': 16px,
-///   'scale': 1vw,
-///   'responsive': (
-///     'value': calc(%s + %s),
-///     '%s': (
-///       '#root' ('convert-units': 'rem'),
-///       '#scale' ('times': 2),
-///     ),
-///   ),
-/// );
-/// ```
-/// @group core
-
-
-/// ## Included & Third-Party Functions
+/// ## [Utility Functions](core-register.html)
 /// We provide a core set of
 /// [math utilities](core-math.html),
-/// named [scales](core-scale.html),
-/// and [list](core-lists.html)/[string](./core-strings.html) helpers --
+/// [list](core-lists.html),
+/// and [string](./core-strings.html) helpers --
 /// prefixed to avoid conflict,
-/// but available unprefixed inside data maps.
+/// but available un-prefixed inside token maps.
 ///
-/// You can also [register functons](core-register.html) of your own,
+/// You can also [register your own functions](core-register.html),
 /// or pass along functions from other Sass modules --
 /// giving them any alias you like.
+/// This is all handled using the token-map syntax.
 ///
 /// ```scss
-/// $functions: (
-///   // register any functions…
-///   'my-function': get-function('my-function'),
+///   // Create a token-map of captured functions
+///   $functions: (
+///     'my-function': get-function('my-function'),
+///     'rgba': get-function('rgba'),
+///     'mine': '#my-function',
+///   );
+///   // Or add functions & aliases using the provided mixin:
+///   @include register-function('my-function', 'alias');
+/// ```
 ///
-///   // including Sass core functions…
-///   'rgba': get-function('rgba'),
+/// Once a function has been registered with accoutrement,
+/// it is available to call by name or alias in all token adjustment maps:
 ///
-///   // provide alias names…
-///   'mine': '#my-function',
-/// );
+/// ```scss
+///   @include register-function('rgba', 'fade');
+///   $colors: (
+///     'brand': hsl(120, 50%, 50%),
+///     'background': '#brand' ('fade': 50%),
+///   );
+/// ```
+///
 /// @see $functions
 /// @see register-function
 /// @group core

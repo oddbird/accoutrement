@@ -1,13 +1,16 @@
 /// # QuickStart: Animate
-/// Tools for managing animatoins & transitions.
+/// Tools for managing animations & transitions.
 /// - Organize all your timing, easing, and transitions into maps
 /// - Document relationships directly in the code
 /// @group animate
 
 
 @import 'animate/easing';
+@import 'animate/easing-vars';
 @import 'animate/times';
+@import 'animate/time-vars';
 @import 'animate/change';
+@import 'animate/change-vars';
 
 
 /// ## Import

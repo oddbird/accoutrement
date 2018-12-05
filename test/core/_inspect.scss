@@ -1,0 +1,152 @@
+// Core Inspector Tests
+// ====================
+@include test-module('Core Inspect') {
+
+
+// Is-Private Token [function]
+// ---------------------------
+@include describe('Is-Private Token [function]') {
+  @include it('Returns true for string tokens starting with _') {
+    @include assert-true(
+      is-private-token('_hello')
+    );
+
+    @include assert-true(
+      is-private-token('_')
+    );
+  }
+
+  @include it('Returns true for string tokens starting with -') {
+    @include assert-true(
+      is-private-token('-hello')
+    );
+
+    @include assert-true(
+      is-private-token('-')
+    );
+  }
+
+  @include it('Returns true for list tokens starting with private string') {
+    @include assert-true(
+      is-private-token('_hello' 'world')
+    );
+
+    @include assert-true(
+      is-private-token('_' 32)
+    );
+  }
+
+  @include it('Returns false for un-prefixed tokens') {
+    @include assert-false(
+      is-private-token('hello')
+    );
+
+    @include assert-false(
+      is-private-token(32)
+    );
+  }
+
+  @include it('Returns false for un-prefixed lists') {
+    @include assert-false(
+      is-private-token('hello' 'world')
+    );
+
+    @include assert-false(
+      is-private-token(32 'world')
+    );
+  }
+}
+
+
+// Is Alias For [function]
+// -----------------------
+@include describe('Is Alias For [function]') {
+  $test: (
+    '_brand': red,
+    'private': '#_brand',
+    'immediate': '#private',
+    'thread': '#immediate',
+    'altered': '#immediate break',
+    'pause': '#altered',
+  );
+
+  @include it('Returns false for a simple non-alias') {
+    @include assert-false(
+      is-alias-for($test, '_brand')
+    );
+  }
+
+  @include it('Returns false for a private alias-source') {
+    @include assert-false(
+      is-alias-for($test, 'private')
+    );
+  }
+
+  @include it('Returns the reference token for an alias thread') {
+    @include assert-equal(
+      is-alias-for($test, 'thread'),
+      'immediate'
+    );
+  }
+
+  @include it('Returns the source token for an altered thread') {
+    @include assert-equal(
+      is-alias-for($test, 'pause'),
+      'altered'
+    );
+  }
+
+  @include it('Optionally returns the origin reference following a thread') {
+    @include assert-equal(
+      is-alias-for($test, 'thread', 'origin'),
+      'private'
+    );
+  }
+}
+
+@include describe('Is Alias cont. [previously `origin()`]') {
+  $map: (
+    'one': 'hello world',
+    'two': '#one' ('str-replace': 'o' '0'),
+    'three': '#one three',
+    'four': '#two',
+    'five': '#four',
+    'six': '#five',
+    'kevin': '#one',
+    'bacon': '#kevin',
+  );
+
+  @include it('Returns a direct key as false') {
+    @include assert-false(
+      is-alias-for($map, 'one')
+    );
+  }
+
+  @include it('Returns false for a non-alias') {
+    @include assert-false(
+      is-alias-for($map, 'two'),
+      'with adjustments map'
+    );
+
+    @include assert-false(
+      is-alias-for($map, 'three'),
+      'with additional string'
+    );
+  }
+
+  @include it('Returns the origin key of an alias path') {
+    @include assert-equal(
+      is-alias-for($map, 'six', 'origin'),
+      'two',
+      'with adjustments map'
+    );
+
+    @include assert-equal(
+      is-alias-for($map, 'bacon', 'origin'),
+      'one',
+      'with dead-end string'
+    );
+  }
+}
+
+} // end module

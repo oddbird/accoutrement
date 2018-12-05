@@ -13,6 +13,7 @@
 @import 'color/config';
 @import 'color/api';
 @import 'color/contrast';
+@import 'color/css-vars';
 
 
 /// ## Import
@@ -73,7 +74,7 @@
 /// and then add them to the global `$colors` variable
 /// using the `add-colors()` mixin.
 /// Map-references using the `#tag` format
-/// will work accross maps,
+/// will work across maps,
 /// *once they are both added to the global setting*.
 ///
 /// ```scss
@@ -100,7 +101,7 @@
 /// We'll also help you calculate WCAG-appropriate color contrasts.
 /// We default to `white` and `black` options,
 /// but you can also set
-/// `'contrast-light'` and `'contrast-dark'` keys in your palette,
+/// `'_contrast-light'` and `'_contrast-dark'` keys in your palette,
 /// or pass in options.
 ///
 /// ```scss

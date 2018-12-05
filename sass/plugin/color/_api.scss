@@ -14,8 +14,11 @@
 /// It has access to the global `$colors` map by default,
 /// but you can also pass in arbitrary color-palette maps as well.
 ///
+/// @since 2.0.0 -
+/// - BREAKING: Provides access to color-contrast defaults,
+///   if they haven't been re-set by the user
 /// @since 1.0.0 -
-/// - BEAKING: Renamed `$palette` arg to `$source`
+/// - BREAKING: Renamed `$palette` arg to `$source`
 /// - BREAKING: Accepts `$do` argument
 ///   between `$color` and `$source`
 ///
@@ -49,5 +52,6 @@
   $do: null,
   $source: $colors
 ) {
+  $source: map-merge($_a_COLORS, $source);
   @return get-token($source, $color, $do);
 }

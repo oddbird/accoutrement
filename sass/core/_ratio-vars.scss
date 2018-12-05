@@ -1,0 +1,146 @@
+/// # Ratios » CSS Variables
+/// @group core-ratio-vars
+
+
+// Ratio Var Prefix
+// ----------------
+/// Set a prefix for all ratio-tokens,
+/// and we'll apply it when setting or calling css variables
+/// based on your ratio maps.
+/// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-ratio-vars
+///
+/// @example scss
+///   $ratios: ('my-ratio': 0.875);
+///   $ratio-var-prefix: 'prefix_';
+///   :root { @include ratios--; }
+///
+/// @type string
+$ratio-var-prefix: 'ratio-' !default;
+
+
+// Ratios--
+// --------
+/// Convert any ratio-map into CSS variables,
+/// using the global `$ratio-var-prefix`.
+///
+/// - Ratio names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Ratios that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-ratio-vars
+/// @example scss
+///   $ratios: (
+///     'my-golden': 1.61803399,
+///     'line-height': '#_major-third',
+///   );
+///   :root {
+///     @include ratios--;
+///   }
+///
+/// @param {map} $source [$ratios] -
+///   Optionally use a custom
+///   map of ratios to set as css variables
+/// @output
+///   Custom properties for all public ratios in the map
+@mixin ratios--(
+  $source: $ratios
+) {
+  $source: map-merge($_a_RATIOS, $source);
+  @include tokens--($source, $ratio-var-prefix);
+}
+
+
+// Ratio--
+// -------
+/// Set a single custom property based on a ratio token,
+/// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-ratio-vars
+/// @example scss
+///   $ratios: (
+///     'my-golden': 1.61803399,
+///     'line-height': '#_major-third',
+///   );
+///   .example {
+///     @include ratio--('my-golden');
+///     @include ratio--('gutter', 'line-height', 1.4em);
+///   }
+///
+/// @param {*} $ratio -
+///   Ratio name available in the `$source` map,
+///   or alias to use in naming the CSS variable
+/// @param {string | null} $value [null] -
+///   Optional value for the variable,
+///   if different from the given `$ratio`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source [$ratios] -
+///   Optional map of ratios to use as a palette source
+@mixin ratio--(
+  $ratio,
+  $value: null,
+  $fallback: true,
+  $source: $ratios
+) {
+  $source: map-merge($_a_RATIOS, $source);
+  @include token--($source, $ratio, $value, $fallback, $ratio-var-prefix);
+}
+
+
+// Var Ratio
+// ---------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-ratio-vars
+/// @example scss
+///   $ratios: (
+///     'my-golden': 1.61803399,
+///     'line-height': '#_major-third',
+///   );
+///   .example {
+///     line-height: var-ratio('line-height');
+///     padding-bottom: calc(1 / #{var-ratio('my-golden', 1.6)} * 100%);
+///   }
+///
+/// @param {*} $ratio -
+///   Ratio name available in the `$source` map
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source -
+///   Optional Accoutrement map of ratios to use as source
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<token>, <fallback>)`
+@function var-ratio(
+  $ratio,
+  $fallback: true,
+  $source: $ratios
+) {
+  $source: map-merge($_a_RATIOS, $source);
+  @return var-token($source, $ratio, $fallback, $ratio-var-prefix);
+}

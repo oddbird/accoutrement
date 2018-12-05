@@ -1,0 +1,94 @@
+/// # Inspecting Tokens
+/// Tools for inspecting accoutrement map token meta-data,
+/// useful for building more complicated logic for
+/// automation and integrations.
+/// @group core-inspect
+
+
+// Is Private Token
+// ----------------
+/// Check if a token key is marked as private
+/// with `_` or `-` as the starting character
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-inspect
+/// @example scss
+///   /*! #{is-private-token('_private-token')} */
+///   /*! #{is-private-token('public-token')} */
+///
+/// @param {*} $key -
+///   The token key to check for private prefix
+///   (only string and list keys can be marked as private)
+/// @return {boolean} -
+///   True if the key is private, otherwise false
+@function is-private-token(
+  $key
+) {
+  $pre: '_' '-';
+
+  @if (type-of($key) == 'list') {
+    $key: nth($key, 1);
+  }
+
+  @if (type-of($key) == 'string') and (index($pre, str-slice($key, 1, 1))) {
+    @return true;
+  }
+
+  @return false;
+}
+
+
+// Is Alias For
+// ------------
+/// Find if a token is simply an alias,
+/// and (if so) what token it represents –
+/// either directly,
+/// or following the thread to it's origin.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group core-inspect
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand',
+///     'border': '#text',
+///     'outline': '#border',
+///   );
+///   /*! _brand: #{is-alias-for($colors, '_brand')} */
+///   /*! text: #{is-alias-for($colors, 'text')} (_brand is private) */
+///   /*! border: #{is-alias-for($colors, 'border')} */
+///   /*! outline: #{is-alias-for($colors, 'outline', $origin: true)} */
+///
+/// @param {map} $map -
+///   A map of terms to reference against
+/// @param {*} $token -
+///   The token name to be traced
+/// @param {*} $origin [false] -
+///   False to trace the alias one step back,
+///   or `true` to trace an alias thread back to the original source token
+/// @return {*} -
+///   `false` for non-alias tokens,
+///   or the name of an alias source
+///   (either one step back, or the full origin of multiple aliases)
+@function is-alias-for(
+  $map,
+  $token,
+  $origin: false
+) {
+  $ref: false;
+  $val: map-get($map, $token);
+
+  @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
+    $try: str-slice($val, 2);
+
+    @if map-has-key($map, $try) and not is-private-token($try) {
+      $ref: if($origin, is-alias-for($map, $try, $origin) or $try, $try);
+    }
+  }
+
+  @return $ref;
+}

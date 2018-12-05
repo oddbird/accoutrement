@@ -20,7 +20,7 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 ///
 /// Named sizes can contain length values (`24px`),
 /// reference to previously-defined sizes (`'root'`),
-/// a map of relative-adjustments using ratios (`('golden': 2)`)
+/// a map of relative-adjustments using ratios (`('_golden': 2)`)
 /// and math functions (`('plus': 2)`),
 /// or a format-string & list for interpolating `calc()` values
 /// (`calc(%s + %s) ('root', 2vw)`).
@@ -34,7 +34,7 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 /// where we can continue to retrieve them by name.
 ///
 /// @group scale-sizes
-/// @example scss -
+/// @example scss
 ///   $sizes: (
 ///     'root': 24px,
 ///     'text': '#root' ('convert-units': 'em'),

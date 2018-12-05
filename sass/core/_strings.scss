@@ -1,4 +1,4 @@
-/// # Sass String Utilities
+/// # String functions
 /// Functions for basic Sass-string manipulation.
 /// While these functions are defined with private prefixes,
 /// they are registered without the prefix for map-access.
@@ -33,9 +33,9 @@
 ///
 /// @param {string | list} $string -
 ///   The original string (or list of strings) to edit
-/// @param {any} $old -
+/// @param {*} $old -
 ///   A sub-string to replace
-/// @param {any} $new [null] -
+/// @param {*} $new [null] -
 ///   A new sub-string to replace the old
 /// @param {boolean} $replace-all [false] -
 ///   A new sub-string to replace the old
@@ -116,7 +116,7 @@
 ///
 /// @param {string} $string -
 ///   The original string to be edited
-/// @param {any} $values... -
+/// @param {*} $values... -
 ///   New strings, to replace the `%s` format strings
 /// @return {string} -
 ///   Original string, with `%s` format strings replaced
@@ -170,7 +170,7 @@
 /// @param {string} $string -
 ///   The original string to be split
 ///   - Empty strings will be returned as a list of one empty string
-/// @param {any} $separator [null] -
+/// @param {*} $separator [null] -
 ///   The string will be split on any instance of the separator,
 ///   and the separators will be removed
 ///   - Null or unfound separators will return a single-item list
@@ -178,7 +178,7 @@
 ///   - Empty-string (`''`) separators will return a list of
 ///     all characters in the original string
 ///   - Non-string separators will be converted to strings before splitting
-/// @param {intiger | null} $limit [null] -
+/// @param {integer | null} $limit [null] -
 ///   Maximum length of the returned list
 /// @return {list} -
 ///   Space-delimited list of string-slices from the original string

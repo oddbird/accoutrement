@@ -1,16 +1,23 @@
 // Core Partials
 // =============
 
-$ratios: ('new': '#octave');
+$ratios: ('new': '#_octave');
 @include register-function('round');
 
 @import 'core/error';
+
 @import 'core/register';
+
 @import 'core/lists';
 @import 'core/math';
 @import 'core/maps';
 @import 'core/pow';
 @import 'core/strings';
 
+@import 'core/inspect';
 @import 'core/parser';
+
+@import 'core/api';
+@import 'core/css-vars';
 @import 'core/ratios';
+@import 'core/ratio-vars';

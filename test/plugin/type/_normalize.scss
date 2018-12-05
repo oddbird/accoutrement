@@ -54,6 +54,15 @@
       'new'
      );
   }
+
+  @include it('Generates a font map from stack string/list') {
+    @include assert-equal(
+      _a_normalize-font(map-get($fonts, '_shared-stack')),
+      (
+        stack: ('Helvetica Neue', Helvetica, Arial, sans-serif),
+      )
+    );
+  }
 }
 
 
@@ -82,10 +91,10 @@
   }
 
   @include it('Get implicit font name by alias') {
-    $key: 'normal-alias';
+    $key: 'tf-alias';
     @include assert-equal(
       _a_normalize-font-name(get-token($fonts, $key), $key),
-      'normal-stack'
+      'TestFont'
      );
   }
 

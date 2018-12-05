@@ -1,0 +1,285 @@
+// CSS Variables
+// =============
+@include test-module('Core CSS Variables') {
+
+
+$test: (
+  '_brand': hsl(120, 50%, 50%),
+  'text': '#_brand' ('shade': 50%),
+  'border': '#text',
+  'private-alias': '#_brand',
+  'multi': '#border',
+);
+
+
+// Var Name [function]
+// -------------------
+@include describe('Var Name [function]') {
+  @include it('Returns a custom-property formatted token name') {
+    @include assert-equal(
+      _a_var-name('test'),
+      --test
+    );
+  }
+
+  @include it('Prepends an optional prefix') {
+    @include assert-equal(
+      _a_var-name('test', 'color-'),
+      --color-test
+    );
+  }
+
+  @include it('Converts values to a string') {
+    @include assert-equal(
+      _a_var-name(red, 'color-'),
+      --color-red
+    );
+  }
+
+  @include it('Replace spaces with dashes') {
+    @include assert-equal(
+      _a_var-name(red 'list', 'color-'),
+      --color-red-list
+    );
+  }
+}
+
+
+// Tokens-- [mixin]
+// ----------------
+@include describe('Tokens-- [mixin]') {
+  @include it('Converts a map into css custom properties') {
+    @include assert {
+      @include output {
+        @include tokens--($test);
+      }
+
+      @include expect {
+        --text: #{get-token($test, 'text')};
+        --border: var(--text, #{get-token($test, 'border')});
+        --private-alias: #{get-token($test, '_brand')};
+        --multi: var(--border, #{get-token($test, 'border')});
+      }
+    }
+  }
+
+  @include it('Optionally adds a prefix') {
+    @include assert {
+      @include output {
+        @include tokens--($test, 'test-');
+      }
+
+      @include expect {
+        --test-text: #{get-token($test, 'text')};
+        --test-border: var(--test-text, #{get-token($test, 'border')});
+        --test-private-alias: #{get-token($test, '_brand')};
+        --test-multi: var(--test-border, #{get-token($test, 'border')});
+      }
+    }
+  }
+}
+
+
+// Token-- [mixin]
+// ---------------
+@include describe('Token-- [mixin]') {
+  $token-test: (
+    '_private': blue,
+    'simple': red,
+    'kevin': '#_private',
+    'thread': '#kevin'
+  );
+
+  @include it('Generates a single variable from a token') {
+    @include assert {
+      @include output {
+        @include token--($token-test, 'simple');
+      }
+
+      @include expect {
+        --simple: red;
+      }
+    }
+  }
+
+  @include it('Optionally adds a prefix') {
+    @include assert {
+      @include output {
+        @include token--($token-test, 'simple', $prefix: 'color_');
+      }
+
+      @include expect {
+        --color_simple: red;
+      }
+    }
+  }
+
+  @include it('Generates a reference variable from a token') {
+    @include assert {
+      @include output {
+        @include token--($token-test, 'thread');
+      }
+
+      @include expect {
+        --thread: var(--kevin, blue);
+      }
+    }
+  }
+
+
+  @include it('Optionally adds a fallback value') {
+    @include assert {
+      @include output {
+        @include token--($token-test, 'thread', $fallback: green);
+      }
+
+      @include expect {
+        --thread: var(--kevin, green);
+      }
+    }
+  }
+
+  @include it('Generates a new variable alias') {
+    @include assert {
+      @include output {
+        @include token--($token-test, 'alias', 'thread');
+      }
+
+      @include expect {
+        --alias: var(--thread, blue);
+      }
+    }
+  }
+
+  @include it('Gracefully handles values without valid fallback') {
+    @include assert {
+      @include output {
+        @include token--($token-test, 'alias', 'multi', true);
+      }
+
+      @include expect {
+        --alias: var(--multi);
+      }
+    }
+  }
+}
+
+
+// Var Token [function]
+// --------------------
+@include describe('Var Token [function]') {
+  @include it('Returns a variable with generated fallback') {
+    @include assert-equal(
+      var-token($test, 'text'),
+      var(--text, get-token($test, 'text'))
+    );
+  }
+
+  @include it('Optionally uses no fallback') {
+    @include assert-equal(
+      var-token($test, 'text', false),
+      var(--text)
+    );
+  }
+
+  @include it('Optionally uses var fallback') {
+    @include assert-equal(
+      var-token($test, 'text', 'border'),
+      var(--text, var(--border, get-token($test, 'border')))
+    );
+  }
+
+  @include it('Optionally uses custom fallback') {
+    @include assert-equal(
+      var-token($test, 'text', red),
+      var(--text, red)
+    );
+  }
+
+  @include it('Optionally adds a prefix') {
+    @include assert-equal(
+      var-token($test, 'text', 'border', 'color-'),
+      var(--color-text, var(--color-border, get-token($test, 'border')))
+    );
+
+    @include assert-equal(
+      var-token($test, 'text', red, 'color-'),
+      var(--color-text, red)
+    );
+  }
+
+  @include it('Accepts private tokens') {
+    @include assert-equal(
+      var-token($test, '_brand'),
+      var(--_brand, #40bf40)
+    );
+  }
+}
+
+
+// Token-- [mixin]
+// -----------------
+@include describe('Token-- [mixin]') {
+  @include it('Establishes a CSS-Variable for any token') {
+    @include assert {
+      @include output {
+        @include token--($test, 'text');
+      }
+
+      @include expect {
+        --text: #{get-token($test, 'text')};
+      }
+    }
+  }
+
+  @include it('Provides a reference for alias tokens') {
+    @include assert {
+      @include output {
+        @include token--($test, 'border');
+      }
+
+      @include expect {
+        --border: var(--text, #{get-token($test, 'border')});
+      }
+    }
+  }
+
+  @include it('Establishes a CSS-Variable alias for any token') {
+    @include assert {
+      @include output {
+        @include token--($test, 'alias', 'text');
+      }
+
+      @include expect {
+        --alias: var(--text, #{get-token($test, 'text')});
+      }
+    }
+  }
+
+  @include it('Accepts explicit fallback values') {
+    @include assert {
+      @include output {
+        @include token--($test, 'alias', 'text', red);
+      }
+
+      @include expect {
+        --alias: var(--text, red);
+      }
+    }
+  }
+
+  @include it('Handles prefixing') {
+    @include assert {
+      @include output {
+        @include token--($test, 'alias', 'text', red, 'color-');
+      }
+
+      @include expect {
+        --color-alias: var(--color-text, red);
+      }
+    }
+  }
+}
+
+
+} // end module

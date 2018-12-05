@@ -1,0 +1,150 @@
+/// # Sizes » CSS Variables
+/// @group scale-vars
+
+
+// Size Var Prefix
+// ---------------
+/// Since CSS variables are often defined in a global space,
+/// it can be useful to prefix different variable types.
+/// Accoutrement maps help solve that problem in Sass,
+/// so we wanted to carry that over into our CSS variable support.
+/// Set a prefix for all size-tokens,
+/// and we'll apply it when setting or calling css variables
+/// based on your size maps.
+/// Set to `null` or `''` (empty string) for no prefix.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group scale-vars
+///
+/// @example scss
+///   $sizes: ('my-size': 3em);
+///   $size-var-prefix: 'prefix_';
+///   :root { @include size--('my-size') }
+///
+/// @type string
+$size-var-prefix: 'size-' !default;
+
+
+// Sizes--
+// -------
+/// Convert any size-map into CSS variables,
+/// using the global `$size-var-prefix`.
+///
+/// - Size names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Sizes that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group scale-vars
+/// @example scss
+///   $sizes: (
+///     '_root': 16px,
+///     'rhythm': '#_root' ('times': 1.5),
+///     'line': '#rhythm',
+///   );
+///   :root {
+///     @include sizes--;
+///   }
+///
+/// @param {map} $source [$sizes] -
+///   Optionally use a custom
+///   map of sizes to set as css variables
+/// @output
+///   Custom properties for all public sizes in the map
+@mixin sizes--(
+  $source: $sizes
+) {
+  @include tokens--($source, $size-var-prefix);
+}
+
+
+// Size--
+// ------
+/// Set a single custom property based on a map-size,
+/// with optional alias and fallback
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group scale-vars
+/// @example scss
+///   $sizes: (
+///     '_root': 16px,
+///     'rhythm': '#_root' ('times': 1.5),
+///     'line': '#rhythm',
+///   );
+///   .example {
+///     @include size--('line');
+///     @include size--('padding', 'line', 1.5rem);
+///   }
+///
+/// @param {*} $size -
+///   Size name available in the `$source` map,
+///   or alias to use in naming the CSS variable
+/// @param {string | null} $value [null] -
+///   Optional value for the variable,
+///   if different from the given `$size`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source [$sizes] -
+///   Optional map of sizes to use as a palette source
+@mixin size--(
+  $size,
+  $value: null,
+  $fallback: true,
+  $source: $sizes
+) {
+  @include token--($source, $size, $value, $fallback, $size-var-prefix);
+}
+
+
+// Var Size
+// --------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group scale-vars
+/// @example scss
+///   $sizes: (
+///     '_root': 16px,
+///     'rhythm': '#_root' ('times': 1.5),
+///     'line': '#rhythm',
+///   );
+///   .example {
+///     line-height: var-size('line');
+///     padding: var-size('rhythm', 1.5em);
+///   }
+///
+/// @param {*} $size -
+///   Size name available in the `$source` map
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     css-variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {map} $source -
+///   Optional Accoutrement map of sizes to use as source
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<token>, <fallback>)`
+@function var-size(
+  $size,
+  $fallback: true,
+  $source: $sizes
+) {
+  @return var-token($source, $size, $fallback, $size-var-prefix);
+}

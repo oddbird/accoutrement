@@ -3,38 +3,6 @@
 @include test-module('Core Parser') {
 
 
-// Token Get
-// ---------
-@include describe('Token Get [function]') {
-  $haystack: (
-    'slow': 3s,
-    'delay': 0.5s,
-    'key': '#slow',
-  );
-
-  @include it('Can start with a simple map key') {
-    @include assert-equal(
-      get-token($haystack, 'delay'),
-      0.5s
-    );
-  }
-
-  @include it('Handles recursion with accoutrement-get') {
-    @include assert-equal(
-      get-token($haystack, 'key'),
-      3s
-    );
-  }
-
-  @include it('Handles on-th-fly adjustments with $do') {
-    @include assert-equal(
-      get-token($haystack, 'key', ('octave': 2, 'minus': '#delay')),
-      11.5s
-    );
-  }
-}
-
-
 // Get
 // ---
 @include describe('Get [function]') {
@@ -64,7 +32,7 @@
 
   @include it('Handles explicit todo-maps') {
     $needle: (
-      'value': '#slow or whatever',
+      '%value': '#slow or whatever',
       'str-replace': 'or' 'with',
     );
     @include assert-equal(
@@ -75,7 +43,7 @@
 
   @include it('Allows #alias tags in todo map') {
     $needle: (
-      'value': '#slow',
+      '%value': '#slow',
       '#*': '#two',
     );
     @include assert-equal(
@@ -95,11 +63,11 @@
     $map: (
       'main-start': ['nav-end' 'main-start' 'footer-start'],
       'small-start': (
-        'value': '#main-start',
+        '%value': '#main-start',
         'remove-nth': 1
       ),
       'small-end': (
-        'value': '#small-start',
+        '%value': '#small-start',
         'str-replace': '-start' '-end' true
       )
     );
@@ -147,19 +115,6 @@
     'two': '#one',
     'three': '#two',
     'four': 'and a new value',
-    'map': (
-      'one': 'inner value',
-      'second': '#one',
-      'interrupt': 'foo',
-      'nested':(
-        'bar':'#three',
-        'baz':'#second',
-        'zab':'#one',
-        'rab':'#two',
-      ),
-      'third': '#two',
-      'fourth': '#one',
-    ),
   );
 
   @include it('Replaces a hashtag key with the associated value') {
@@ -180,27 +135,6 @@
     @include assert-equal(
       _a_parse($haystack, '#three #four'),
       'original value and a new value'
-    );
-  }
-
-  @include it('Prefers nested keys in nested maps') {
-    $expect: (
-      'one': 'inner value',
-      'second': 'inner value',
-      'interrupt': 'foo',
-      'nested':(
-        'bar':'original value',
-        'baz':'inner value',
-        'zab':'inner value',
-        'rab':'original value',
-      ),
-      'third': 'original value',
-      'fourth': 'inner value',
-    );
-
-    @include assert-equal(
-      _a_parse($haystack, '#map'),
-      $expect,
     );
   }
 
@@ -225,6 +159,7 @@
       7,
       'and a new value'
     ];
+
     @include assert-equal(
       _a_parse($haystack, $list),
       $expect
@@ -236,10 +171,12 @@
       '#one' '#two': '#two' 7 '#four',
       'and': '#one#one',
     );
+
     $expect: (
       'original value' 'original value': 'original value' 7 'and a new value',
       'and': 'original valueoriginal value',
     );
+
     @include assert-equal(
       _a_parse($haystack, $map),
       $expect
@@ -311,57 +248,6 @@
 }
 
 
-// Origin [function]
-// -----------------
-@include describe('Origin [function]') {
-  $map: (
-    'one': 'hello world',
-    'two': '#one' ('str-replace': 'o' '0'),
-    'three': '#one three',
-    'four': '#two',
-    'five': '#four',
-    'six': '#five',
-    'kevin': '#one',
-    'bacon': '#kevin',
-  );
-
-  @include it('Returns a direct key as origin') {
-    @include assert-equal(
-      _a_origin($map, 'one'),
-      'one'
-    );
-  }
-
-  @include it('Returns direct key of a non-alias') {
-    @include assert-equal(
-      _a_origin($map, 'two'),
-      'two',
-      'with adjustments map'
-    );
-
-    @include assert-equal(
-      _a_origin($map, 'three'),
-      'three',
-      'with additional string'
-    );
-  }
-
-  @include it('Returns the origin key of an alias path') {
-    @include assert-equal(
-      _a_origin($map, 'six'),
-      'two',
-      'with adjustments map'
-    );
-
-    @include assert-equal(
-      _a_origin($map, 'bacon'),
-      'one',
-      'with dead-end string'
-    );
-  }
-}
-
-
 // Do Each [function]
 // ------------------
 @include describe('Do Each [function]') {
@@ -371,7 +257,7 @@
       'large': '#root',
     );
     $do: (
-      'octave': 2,
+      '_octave': 2,
       'plus': '#root' ('divide': 2),
     );
 
@@ -392,18 +278,18 @@
     );
 
     @include assert-equal(
-      _a_do($source, 'octave', 3, '#two'),
+      _a_do($source, '_octave', 3, '#two'),
       12
     );
   }
 
   @include it('Adjusts a value based on functions') {
     $source: (
-      'r': 'str-replace',
+      's': 'o',
     );
 
     @include assert-equal(
-      _a_do($source, '#r', 'hello world', 'o', '000', true),
+      _a_do($source, 'str-replace', 'hello world', '#s', '000', true),
       'hell000 w000rld'
     );
   }
@@ -424,5 +310,41 @@
     }
   }
 }
+
+
+// Flat Source [function]
+// ----------------------
+@include describe('Flat Source [function]') {
+  @include it('Compiles a flat map of all valid source keys') {
+    $test: (
+      'one': 1,
+      'nest': (
+        'two': 2,
+        'nest': (
+          'three': 3
+        ),
+      ),
+    );
+
+    @include assert-equal(
+      _a_flat-source($test),
+      (
+        'one': 1,
+        'nest': (
+          'two': 2,
+          'nest': (
+            'three': 3
+          ),
+        ),
+        'nest->two': 2,
+        'nest->nest': (
+          'three': 3
+        ),
+        'nest->nest->three': 3,
+      )
+    );
+  }
+}
+
 
 } // end module

@@ -21,7 +21,7 @@ $WCAG-CONTRAST: (
 /// For any color, select the best contrast among a set of options.
 /// For best results, pass in a combination of light and dark colors
 /// to contrast against – 
-/// or define default `contrast-light` and `contrast-dark` values
+/// or define default `_contrast-light` and `_contrast-dark` values
 /// in your global `$colors` map.
 ///
 /// @group color-contrast
@@ -43,7 +43,7 @@ $WCAG-CONTRAST: (
 /// @param {arglist} $options [black, white] -
 ///   Two or more colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
-///   or the `contrast-light` and `contrast-dark` defaults
+///   or the `_contrast-light` and `_contrast-dark` defaults
 ///   if they are defined in your color palette,
 ///   otherwise `white` and `black` are the default options.
 /// @return {color} -
@@ -55,8 +55,10 @@ $WCAG-CONTRAST: (
 ) {
   // Establish default options if they are missing
   @if length($options) == 0 {
-    $options: append($options, map-get($colors, 'contrast-light') or white);
-    $options: append($options, map-get($colors, 'contrast-dark') or black);
+    $options: (
+      color('_contrast-light'),
+      color('_contrast-dark'),
+    );
   } @else if length($options) == 1 {
     @return _a_error(
       'Provide at least two contrasting color options for `$options`',
@@ -113,8 +115,8 @@ $WCAG-CONTRAST: (
 /// @param {arglist} $options [white, black] -
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
-///   or your `contrast-light` and `contrast-dark` settings
-///   if they are prodided in the global `$colors` map.
+///   or your `_contrast-light` and `_contrast-dark` settings
+///   if they are provided in the global `$colors` map.
 /// @output -
 ///   Sets the `background-color` to `$background`
 ///   and the foreground `color` to
