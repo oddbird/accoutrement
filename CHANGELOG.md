@@ -19,6 +19,8 @@ See the full details below:
     must be absolute paths from the map root,
     rather than assuming the most closely related
     sibling or ancestor value
+  - BUGFIX (from alpha.1): Major improvements to compile time
+    when parsing `->` syntax
 
 ### 2.0.0-alpha.1 - 10/29/18
 

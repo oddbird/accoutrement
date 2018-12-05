@@ -241,17 +241,37 @@
 }
 
 
+// Source Memo
+// -----------
+/// Memoization of nested->flattened source maps,
+/// to avoid duplication of the flattening process.
+///
+/// @access private
+/// @prop {map} <nested source map>
+///   Use the original map as a key,
+///   and store the flattened map as a value
 $_a_source-memo: ();
 
 
+// Flat Source
+// -----------
+/// Flatten a nested accoutrement map,
+/// using `->` delimiter to designate nested keys.
+///
+/// @access private
+/// @param {map} $source -
+///   A nested map of accoutrement tokens to flatten
 @function _a_flat-source(
-  $source,
-  $memo: $_a_source-memo
+  $source
 ) {
-  @if map-has-key($memo, $source) {
-    @return map-get($memo, $source);
+  // Check memo…
+  $memo: map-get($_a_source-memo, $source);
+
+  @if $memo {
+    @return $memo;
   }
 
+  // No memo, flatten…
   $flat: $source;
 
   @each $key, $value in $source {
@@ -263,7 +283,9 @@ $_a_source-memo: ();
     }
   }
 
+  // Store to memo…
   $_a_source-memo: map-merge($_a_source-memo, ($source: $flat)) !global;
 
+  // Done…
   @return $flat;
 }
