@@ -237,12 +237,17 @@
   
   
     <li class="nav-item">
+      <a href="color-contrast.html" data-nav="is-active">Contrast</a>
+    </li>
+  
+  
+    <li class="nav-item">
       <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-contrast.html" data-nav="is-active">Contrast</a>
+      <a href="color-vars-contrast.html" data-nav="is-not-active">Contrast » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -610,10 +615,10 @@ in your global <code>$colors</code> map.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$options:</span>
+        <span class="item-name">$options...:</span>
       
       <span class="item-value">black, white</span>
-      <span class="value-type">(arglist)</span>
+      <span class="value-type">(colors)</span>
       
     </h4>
 
@@ -902,140 +907,11 @@ html {
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  color-api.html#function--color" class="item-name">color()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_error()</span>
+        <span class="item-name">_a_get-contrast()</span>
       
       
       
       <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-contrast.html#function--luminance" class="item-name">luminance()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-contrast.html#function--contrast-ratio" class="item-name">contrast-ratio()</a>
-      
-      
-      
-      
     </h4>
 
     
@@ -1166,7 +1042,7 @@ html {
   
     <div class="text-block">
       <p>Apply any background color,
-along with the highest-contraast text color from a set of options.
+along with the highest-contrast text color from a set of options.
 This works the same as the <code>contrast</code> function,
 but applies the resulting values to <code>background-color</code>
 and text <code>color</code> properties.</p>
@@ -1242,10 +1118,10 @@ and text <code>color</code> properties.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$options:</span>
+        <span class="item-name">$options...:</span>
       
       <span class="item-value">white, black</span>
-      <span class="value-type">(arglist)</span>
+      <span class="value-type">(colors)</span>
       
     </h4>
 
@@ -2049,12 +1925,11 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  color-contrast.html#function--contrast" class="item-name">contrast()</a>
+        <span class="item-name">_a_get-contrast()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -2405,7 +2280,7 @@ The function will return <code>false</code> if the required ratio is not<span cl
       <span class="item-type">@function</span>
       
         <a href="
-  color-contrast.html#function--contrast" class="item-name">contrast()</a>
+  color-contrast.html#function--contrast-ratio" class="item-name">contrast-ratio()</a>
       
       
       
@@ -2439,12 +2314,11 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  color-contrast.html#function--contrast-ratio" class="item-name">contrast-ratio()</a>
+        <span class="item-name">_a_get-contrast()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     

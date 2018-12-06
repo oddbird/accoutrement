@@ -37,8 +37,9 @@ groups:
   'Plugin/Color':
     color: 'QuickStart: Color'
     color-api: 'Color Maps'
-    color-vars: 'Colors » CSS Variables'
     color-contrast: 'Contrast'
+    color-vars: 'Colors » CSS Variables'
+    color-vars-contrast: 'Contrast » CSS Variables'
     color-utils: 'Color Functions'
   'Plugin/Layout':
     layout: 'QuickStart: Layout'

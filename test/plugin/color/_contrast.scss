@@ -77,6 +77,78 @@
 }
 
 
+// Get Contrast [function]
+// -----------------------
+@include describe('Get Contrast [function]') {
+  @include it('Dark on light') {
+    @include assert-equal(
+      _a_get-contrast('map', #eee),
+      (
+        'name': '_contrast-dark',
+        'color': color('_contrast-dark'),
+      ),
+      'Returns a dark color to contrast a light one.'
+    );
+  }
+
+  @include it('Light on dark') {
+    @include assert-equal(
+      _a_get-contrast('map', 'dark'),
+      (
+        'name': '_contrast-light',
+        'color': color('_contrast-light'),
+      ),
+      color('_contrast-light'),
+      'Returns a light color to contrast a dark one.'
+    );
+  }
+
+  $original-colors: $colors;
+  $colors: () !global;
+
+  @include it('Default light fallback') {
+    @include assert-equal(
+      _a_get-contrast('color', #000),
+      #fff,
+      'Returns white for light contrast when none is given.'
+    );
+  }
+
+  @include it('Default dark fallback') {
+    @include assert-equal(
+      _a_get-contrast('color', #fff),
+      #000,
+      'Returns black for dark contrast when none is given.'
+    );
+  }
+
+  $colors: $original-colors !global;
+
+  @include it('Multiple contrast options') {
+    @include assert-equal(
+      _a_get-contrast('name', 'primary', #ff0, #fcc, #0f0, 'light', #003),
+      #003,
+      'Returns the best option from the list.'
+    );
+  }
+
+  @include it('Return name of a token') {
+    @include assert-equal(
+      _a_get-contrast('name', 'primary'),
+      '_contrast-dark',
+      'Returns the name of a selected token.'
+    );
+  }
+
+  @include it('Errors on a single option') {
+    @include assert-equal(
+      _a_get-contrast('name', 'primary', #ff0),
+      'ERROR [contrast] Provide at least two contrasting color options for `$options`'
+    );
+  }
+}
+
+
 // Contrast [function]
 // -------------------
 @include describe('Contrast [function]') {

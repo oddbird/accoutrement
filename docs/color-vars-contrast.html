@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>General | Accoutrement Documentation</title>
+  <title>Contrast » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -157,7 +157,7 @@
   
   
     <li class="nav-item">
-      <a href="init-root.html" data-nav="is-active">General</a>
+      <a href="init-root.html" data-nav="is-not-active">General</a>
     </li>
   
   
@@ -247,7 +247,7 @@
   
   
     <li class="nav-item">
-      <a href="color-vars-contrast.html" data-nav="is-not-active">Contrast » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-vars-contrast.html" data-nav="is-active">Contrast » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -405,11 +405,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>General</strong>
+    <strong>Contrast » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="init-root">
+        <div data-page="color-vars-contrast">
           
   
     
@@ -424,7 +424,84 @@
 
 
 
-<section class="item" id="css--html">
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="contrast-css-variables">Contrast » CSS<span class="widont">&nbsp;</span>Variables</h1>
+<p>Extend the <a href="color-contrast.html">color contrast</a> utilities
+to support CSS-variable<span class="widont">&nbsp;</span>output.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-contrast">
   
     
   
@@ -438,11 +515,11 @@
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type"></span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#css--html" class="item-name">html</a>
+        <a href="#function--var-contrast" class="item-name">var-contrast()</a>
       
 
       
@@ -456,7 +533,205 @@
 
     
     
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>An extension of the <code>contrast</code> function,
+designed to output CSS variables
+rather than simple color<span class="widont">&nbsp;</span>values.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
     
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or value of a<span class="widont">&nbsp;</span>color.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$options...:</span>
+      
+      <span class="item-value">black, white</span>
+      <span class="value-type">(colors)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Two or more colors to contrast against.
+This function will choose the best contrast of all the options provided,
+or the <code>_contrast-light</code> and <code>_contrast-dark</code> defaults
+if they are defined in your color palette,
+otherwise <code>white</code> and <code>black</code> are the default<span class="widont">&nbsp;</span>options.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>var())</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>CSS Variable for the color-option
+that has the highest contrast-ratio to <code>$color</code>,
+or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Provide at least two contrasting <code>$options…</code> for comparison</p>
+
+      </div>
+    
+  </div>
+
+    
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
   
     <div class="code-block">
       
@@ -465,6 +740,84 @@
             scss
           </span>
 
+          
+            <span class='code-description'>
+              use CSS variables when available
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (&#39;my-color&#39;: lightpink);
+html {
+  background: var-contrast(#333, &#39;my-color&#39;, &#39;_contrast-dark&#39;);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background: var(--color-my-color, lightpink);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              direct output when contrast options are private
+            </span>
           
         </div>
       
@@ -472,12 +825,315 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">html {
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  text-size-adjust: 100%;
+  color: var-contrast(#eee);
 }</code></pre>
     </div>
   
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: black;
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_get-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  core-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_var-name()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-vars-contrast.html#mixin--var-contrasted" class="item-name">var-contrasted()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--var-contrasted">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--var-contrasted" class="item-name">var-contrasted()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
     
   
   
@@ -486,109 +1142,177 @@
 
   
     <div class="text-block">
-      <p>Prevent iOS and IE text size adjust after device orientation<span class="widont">&nbsp;</span>change.</p>
-<ul>
-<li>Overflow-style: Edge 12+, Internet Explorer<span class="widont">&nbsp;</span>11-</li>
+      <p>Apply any background color as a CSS variable,
+along with the highest-contrast text color from a set of options.
+This works the same as the <code>var-contrast</code> function,
+but applies the resulting values to <code>background-color</code>
+and text <code>color</code> properties.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$background:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or value of your desired background<span class="widont">&nbsp;</span>color.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$options...:</span>
+      
+      <span class="item-value">white, black</span>
+      <span class="value-type">(colors)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A list of colors to contrast against,
+defaulting to <code>white</code> and <code>black</code>
+or your <code>_contrast-light</code> and <code>_contrast-dark</code> settings
+if they are provided in the global <code>$colors</code> map.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>Sets the <code>background-color</code> to <code>$background</code>
+and the foreground <code>color</code> to
+whichever option has better contrast against the given<span class="widont">&nbsp;</span>background.</li>
 </ul>
 
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
+      </div>
+    
   </div>
 
   
 
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--main">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
       
-        <span class="item-type"></span>
-      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
 
       
-        <a href="#css--main" class="item-name">main</a>
-      
-
-      
-
-      
-    </h2>
-
-    
+        
+  
   
 
+  
+  
+  
 
-    
-    
-    
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
   
     <div class="code-block">
       
@@ -603,1112 +1327,144 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">main {
-  display: block;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  @include var-contrasted(&#39;background&#39;, &#39;light&#39;, &#39;dark&#39;);
 }</code></pre>
     </div>
   
 
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <ul>
-<li>Android 4.3-</li>
-<li>Internet Explorer 11-</li>
-<li>Windows Phone 8.1+</li>
-</ul>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--details">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--details" class="item-name">details</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
   
     <div class="code-block">
       
         <div class="code-header">
           <span class="code-language">
-            scss
+            css
           </span>
 
+          
+            <span class='code-description'>
+              compiled
+            </span>
           
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">details {
-  display: block;
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var(--color-background, blue);
+  color: var(--color-light, #eee);
+}
+</code></pre>
     </div>
   
+
+    </div>
 
     
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <ul>
-<li>Edge 12+</li>
-<li>Firefox 40+</li>
-<li>Internet Explorer 11-</li>
-<li>Windows Phone 8.1+</li>
-</ul>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
   </div>
 
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--pre">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
       
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--pre" class="item-name">pre</a>
-      
-
-      
-
-      
-    </h2>
-
-    
+    </div>
   
 
 
-    
-    
-    
   
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
 
+    
+      
+      
+        
+        
+        
+
+        
           
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">pre {
-  overflow: auto;
-}</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Internet Explorer 11-</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--progress">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--progress" class="item-name">progress</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
           
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">progress {
-  display: inline-block;
-}</code></pre>
-    </div>
   
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-vars.html#function--var-color" class="item-name">var-color()</a>
+      
+      
+      
+      
+    </h4>
 
     
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <ul>
-<li>Internet Explorer 11-</li>
-<li>Windows Phone 8.1+</li>
-</ul>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
   </div>
 
-  
 
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--summary">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
+        
       
-        <span class="item-type"></span>
-      
+        
+        
+        
 
-      
-        <a href="#css--summary" class="item-name">summary</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
+        
           
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">summary {
-  display: block;
-}</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <ul>
-<li>Firefox 40+</li>
-<li>Internet Explorer 11-</li>
-<li>Windows Phone 8.1+</li>
-</ul>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--template">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--template" class="item-name">template</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
           
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">template {
-  display: none;
-}</code></pre>
-    </div>
   
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-vars-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
+      
+      
+      
+      
+    </h4>
 
     
-  
-  
-  
-  
+  </div>
 
-  
-    <div class="text-block">
-      <ul>
-<li>Android 4.3-</li>
-<li>Internet Explorer 11-</li>
-<li>iOS 7-</li>
-<li>Safari 7-</li>
-<li>Windows Phone 8.1+</li>
-</ul>
 
+        
       
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
+    
   </div>
 
   
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--*%2C%0A%3A%3Abefore%2C%0A%3A%3Aafter">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--*%2C%0A%3A%3Abefore%2C%0A%3A%3Aafter" class="item-name">*,
-::before,<span class="widont">&nbsp;</span>::after</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">*,
-::before,
-::after {
-  border-style: solid;
-  border-width: 0;
-  box-sizing: border-box;
-}</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Specify the border style, width, and box-sizing of all<span class="widont">&nbsp;</span>elements.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--*">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--*" class="item-name">*</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">* {
-  font-size: inherit;
-  line-height: inherit;
-  margin: 0;
-  padding: 0;
-}</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Specify the core styles of all<span class="widont">&nbsp;</span>elements.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="css--table">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#css--table" class="item-name">table</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Specify the border styling of<span class="widont">&nbsp;</span>tables.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
     
   
 

@@ -40,7 +40,7 @@ $WCAG-CONTRAST: (
 ///
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {arglist} $options [black, white] -
+/// @param {colors} $options... [black, white] -
 ///   Two or more colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
 ///   or the `_contrast-light` and `_contrast-dark` defaults
@@ -53,39 +53,7 @@ $WCAG-CONTRAST: (
   $color,
   $options...
 ) {
-  // Establish default options if they are missing
-  @if length($options) == 0 {
-    $options: (
-      color('_contrast-light'),
-      color('_contrast-dark'),
-    );
-  } @else if length($options) == 1 {
-    @return _a_error(
-      'Provide at least two contrasting color options for `$options`',
-      'contrast'
-    );
-  }
-
-  // Get the colors and their contrasts
-  $color-val: color($color);
-  $color-lum: luminance($color-val);
-  $color-list: ();
-  $contrast-list: ();
-
-  @each $item in $options {
-    $item: color($item);
-    $luminance: luminance($item);
-    $contrast: contrast-ratio($color-lum, $luminance);
-
-    $color-list: append($color-list, $item);
-    $contrast-list: append($contrast-list, $contrast);
-  }
-
-  // Find the best results
-  $best-ratio: max($contrast-list...);
-  $best-color: nth($color-list, index($contrast-list, $best-ratio));
-
-  @return $best-color;
+  @return _a_get-contrast('color', $color, $options...);
 }
 @include _a_register-function('contrast');
 
@@ -93,7 +61,7 @@ $WCAG-CONTRAST: (
 // Contrasted
 // ----------
 /// Apply any background color,
-/// along with the highest-contraast text color from a set of options.
+/// along with the highest-contrast text color from a set of options.
 /// This works the same as the `contrast` function,
 /// but applies the resulting values to `background-color`
 /// and text `color` properties.
@@ -112,7 +80,7 @@ $WCAG-CONTRAST: (
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
-/// @param {arglist} $options [white, black] -
+/// @param {colors} $options... [white, black] -
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
 ///   or your `_contrast-light` and `_contrast-dark` settings
@@ -239,4 +207,81 @@ $WCAG-CONTRAST: (
   }
 
   @return $luminance;
+}
+
+
+// Contrast
+// --------
+/// For any color, select the best contrast among a set of options.
+/// For best results, pass in a combination of light and dark colors
+/// to contrast against.
+///
+/// Unlike the `contrast` function,
+/// `_a_get-contrast` can return the name of a contrasted color,
+/// the output value, or both.
+///
+/// @access private
+///
+/// @param {'map' | 'name' | 'color'} $return -
+///   Return either a token name, color value,
+///   or both together in a map.
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {arglist} $options [black, white] -
+///   Two or more colors to contrast against.
+///   This function will choose the best contrast of all the options provided,
+///   or the `_contrast-light` and `_contrast-dark` defaults
+///   if they are defined in your color palette,
+///   otherwise `white` and `black` are the default options.
+/// @return {color} -
+///   Whichever color-option has the highest contrast-ratio to `$color`.
+/// @throws Provide at least two contrasting `$options…` for comparison
+@function _a_get-contrast(
+  $return,
+  $color,
+  $options...
+) {
+  // Establish default options if they are missing
+  @if length($options) == 0 {
+    $options: (
+      '_contrast-light',
+      '_contrast-dark',
+    );
+  } @else if length($options) == 1 {
+    @return _a_error(
+      'Provide at least two contrasting color options for `$options`',
+      'contrast'
+    );
+  }
+
+  // Get the colors and their contrasts
+  $color-val: color($color);
+  $color-lum: luminance($color-val);
+  $color-list: ();
+  $contrast-list: ();
+
+  @each $item in $options {
+    $item: color($item);
+    $luminance: luminance($item);
+    $contrast: contrast-ratio($color-lum, $luminance);
+
+    $color-list: append($color-list, $item);
+    $contrast-list: append($contrast-list, $contrast);
+  }
+
+  // Find the best results
+  $best-ratio: max($contrast-list...);
+  $best-name: nth($options, index($contrast-list, $best-ratio));
+  $best-color: nth($color-list, index($contrast-list, $best-ratio));
+
+  @if ($return == 'map') {
+    @return (
+      'name': $best-name,
+      'color': $best-color,
+    );
+  } @else if ($return == 'name') {
+    @return $best-name;
+  }
+
+  @return $best-color;
 }
