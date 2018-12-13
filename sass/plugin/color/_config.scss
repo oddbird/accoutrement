@@ -27,7 +27,8 @@
 /// - Adjustments are a nested map of color functions and arguments,
 ///   for adjusting colors directly in your palette.
 ///
-/// The color-names `_contrast-light` and `_contrast-dark` are special.
+/// The color-names `contrast-light` and `contrast-dark` are special
+/// (with or without a private `_` prefix).
 /// Use those names to define the default light-and-dark options
 /// for our color-contrast tools.
 /// They default to `white` and `black` respectively.

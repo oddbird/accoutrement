@@ -14,7 +14,7 @@
 
   @include it('Returns a contrasting color when no variable') {
     @include assert-equal(
-      var-contrast('blue'),
+      var-contrast('blue', #111, #eee),
       #111
     );
   }

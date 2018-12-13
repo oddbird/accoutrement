@@ -546,6 +546,16 @@ rather than simple color<span class="widont">&nbsp;</span>values.</p>
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Provides access to contrast colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
+</ul>
+</div>
+      </section>
+    
+  
 
       
   
@@ -627,7 +637,7 @@ rather than simple color<span class="widont">&nbsp;</span>values.</p>
       <div class="param-details text-block">
         <p>Two or more colors to contrast against.
 This function will choose the best contrast of all the options provided,
-or the <code>_contrast-light</code> and <code>_contrast-dark</code> defaults
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
 if they are defined in your color palette,
 otherwise <code>white</code> and <code>black</code> are the default<span class="widont">&nbsp;</span>options.</p>
 
@@ -752,7 +762,7 @@ or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">$colors: (&#39;my-color&#39;: lightpink);
 html {
-  background: var-contrast(#333, &#39;my-color&#39;, &#39;_contrast-dark&#39;);
+  background: var-contrast(#333, &#39;my-color&#39;);
 }</code></pre>
     </div>
   
@@ -1150,6 +1160,16 @@ and text <code>color</code> properties.</p>
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Applies contrasting colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
+</ul>
+</div>
+      </section>
+    
+  
 
       
   
@@ -1231,7 +1251,7 @@ and text <code>color</code> properties.</p>
       <div class="param-details text-block">
         <p>A list of colors to contrast against,
 defaulting to <code>white</code> and <code>black</code>
-or your <code>_contrast-light</code> and <code>_contrast-dark</code> settings
+or your <code>contrast-light</code> and <code>contrast-dark</code> settings
 if they are provided in the global <code>$colors</code> map.</p>
 
       </div>

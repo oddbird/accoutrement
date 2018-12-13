@@ -11,10 +11,12 @@
 /// rather than simple color values.
 ///
 /// @group color-vars-contrast
+/// @since 2.1.0 -
+/// - NEW: Provides access to contrast colors as CSS-variables, when defined
 /// @example scss - use CSS variables when available
 ///   $colors: ('my-color': lightpink);
 ///   html {
-///     background: var-contrast(#333, 'my-color', '_contrast-dark');
+///     background: var-contrast(#333, 'my-color');
 ///   }
 /// @example scss - direct output when contrast options are private
 ///   html {
@@ -25,7 +27,7 @@
 /// @param {colors} $options... [black, white] -
 ///   Two or more colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
-///   or the `_contrast-light` and `_contrast-dark` defaults
+///   or the `contrast-light` and `contrast-dark` defaults
 ///   if they are defined in your color palette,
 ///   otherwise `white` and `black` are the default options.
 /// @return {color | var()} -
@@ -59,6 +61,8 @@
 /// and text `color` properties.
 ///
 /// @group color-vars-contrast
+/// @since 2.1.0 -
+/// - NEW: Applies contrasting colors as CSS-variables, when defined
 /// @example scss
 ///   $colors: (
 ///     'background': blue,
@@ -74,7 +78,7 @@
 /// @param {colors} $options... [white, black] -
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
-///   or your `_contrast-light` and `_contrast-dark` settings
+///   or your `contrast-light` and `contrast-dark` settings
 ///   if they are provided in the global `$colors` map.
 /// @output -
 ///   Sets the `background-color` to `$background`

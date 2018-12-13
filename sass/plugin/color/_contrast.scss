@@ -21,7 +21,8 @@ $WCAG-CONTRAST: (
 /// For any color, select the best contrast among a set of options.
 /// For best results, pass in a combination of light and dark colors
 /// to contrast against – 
-/// or define default `_contrast-light` and `_contrast-dark` values
+/// or define default `contrast-light` and `contrast-dark` values
+/// (with or without a private `_` prefix)
 /// in your global `$colors` map.
 ///
 /// @group color-contrast
@@ -43,7 +44,8 @@ $WCAG-CONTRAST: (
 /// @param {colors} $options... [black, white] -
 ///   Two or more colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
-///   or the `_contrast-light` and `_contrast-dark` defaults
+///   or the `contrast-light` and `contrast-dark` defaults
+///   (with or without a private `_` prefix)
 ///   if they are defined in your color palette,
 ///   otherwise `white` and `black` are the default options.
 /// @return {color} -
@@ -83,7 +85,8 @@ $WCAG-CONTRAST: (
 /// @param {colors} $options... [white, black] -
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
-///   or your `_contrast-light` and `_contrast-dark` settings
+///   or your `contrast-light` and `contrast-dark` settings
+///   (with or without a private `_` prefix)
 ///   if they are provided in the global `$colors` map.
 /// @output -
 ///   Sets the `background-color` to `$background`
@@ -210,6 +213,39 @@ $WCAG-CONTRAST: (
 }
 
 
+// Default Contrast
+// ----------------
+/// Access the user or system default contrast values.
+///
+/// @access private
+/// @since 2.1.0 -
+/// - NEW: Allows for either private or public defaults
+///
+/// @param {'light' | 'dark' | *} $return -
+///   Return the light value, dark value, or both
+/// @return {color-name | map} -
+///   Light or dark color-name string,
+///   or map with `light` and `dark` keys.
+@function _a_default-contrast(
+  $return: 'both'
+) {
+  $both: (
+    'light': if(
+      map-has-key($colors, 'contrast-light'),
+      'contrast-light',
+      '_contrast-light'
+    ),
+    'dark': if(
+      map-has-key($colors, 'contrast-dark'),
+      'contrast-dark',
+      '_contrast-dark'
+    ),
+  );
+
+  @return map-get($both, $return) or $both;
+}
+
+
 // Contrast
 // --------
 /// For any color, select the best contrast among a set of options.
@@ -221,6 +257,9 @@ $WCAG-CONTRAST: (
 /// the output value, or both.
 ///
 /// @access private
+/// @since 2.1.0 -
+/// - NEW: Provides access to both name and value of result
+/// - NEW: Provides a smart default for comparison against a single option
 ///
 /// @param {'map' | 'name' | 'color'} $return -
 ///   Return either a token name, color value,
@@ -228,14 +267,11 @@ $WCAG-CONTRAST: (
 /// @param {string | list} $color -
 ///   The name or value of a color.
 /// @param {arglist} $options [black, white] -
-///   Two or more colors to contrast against.
+///   Any number of colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
-///   or the `_contrast-light` and `_contrast-dark` defaults
-///   if they are defined in your color palette,
-///   otherwise `white` and `black` are the default options.
+///   or the `contrast-light` and `contrast-dark` defaults.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
-/// @throws Provide at least two contrasting `$options…` for comparison
 @function _a_get-contrast(
   $return,
   $color,
@@ -243,15 +279,10 @@ $WCAG-CONTRAST: (
 ) {
   // Establish default options if they are missing
   @if length($options) == 0 {
-    $options: (
-      '_contrast-light',
-      '_contrast-dark',
-    );
+    $options: map-values(_a_default-contrast());
   } @else if length($options) == 1 {
-    @return _a_error(
-      'Provide at least two contrasting color options for `$options`',
-      'contrast'
-    );
+    $use: _a_get-contrast('name', nth($options, 1));
+    $options: append($options, $use);
   }
 
   // Get the colors and their contrasts
