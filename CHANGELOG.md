@@ -3,6 +3,8 @@
 ## 2.1.0 - UNRELEASED
 Improved tools for managing color contrast in CSS-variables.
 
+### 2.1.0-beta.1 - 12/13/18
+
 - [Plugin: Color][color]
   - NEW: `var-contrast()` and `var-contrasted()`
     provide CSS variable parallels

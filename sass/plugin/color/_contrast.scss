@@ -41,16 +41,14 @@ $WCAG-CONTRAST: (
 ///
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {colors} $options... [black, white] -
-///   Two or more colors to contrast against.
-///   This function will choose the best contrast of all the options provided,
-///   or the `contrast-light` and `contrast-dark` defaults
+/// @param {colors} $options... -
+///   A list of colors to contrast against,
+///   defaulting to `white` and `black`
+///   or your `contrast-light` and `contrast-dark` settings
 ///   (with or without a private `_` prefix)
-///   if they are defined in your color palette,
-///   otherwise `white` and `black` are the default options.
+///   if they are provided in the global `$colors` map.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
-/// @throws Provide at least two contrasting `$options…` for comparison
 @function contrast(
   $color,
   $options...
@@ -266,7 +264,7 @@ $WCAG-CONTRAST: (
 ///   or both together in a map.
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {arglist} $options [black, white] -
+/// @param {arglist} $options -
 ///   Any number of colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
 ///   or the `contrast-light` and `contrast-dark` defaults.

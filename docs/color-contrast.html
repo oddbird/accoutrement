@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.0.0</span>
+          <span class="project-version">2.1.0-beta.1</span>
         
       </div>
     </header>
@@ -618,7 +618,7 @@ in your global <code>$colors</code> map.</p>
       
         <span class="item-name">$options...:</span>
       
-      <span class="item-value">black, white</span>
+      
       <span class="value-type">(colors)</span>
       
     </h4>
@@ -626,12 +626,11 @@ in your global <code>$colors</code> map.</p>
     
       
       <div class="param-details text-block">
-        <p>Two or more colors to contrast against.
-This function will choose the best contrast of all the options provided,
-or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+        <p>A list of colors to contrast against,
+defaulting to <code>white</code> and <code>black</code>
+or your <code>contrast-light</code> and <code>contrast-dark</code> settings
 (with or without a private <code>_</code> prefix)
-if they are defined in your color palette,
-otherwise <code>white</code> and <code>black</code> are the default<span class="widont">&nbsp;</span>options.</p>
+if they are provided in the global <code>$colors</code> map.</p>
 
       </div>
     
@@ -672,30 +671,6 @@ otherwise <code>white</code> and <code>black</code> are the default<span class="
   
 
       
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Provide at least two contrasting <code>$options…</code> for comparison</p>
-
-      </div>
-    
-  </div>
-
-    
   
 
     
