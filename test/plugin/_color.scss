@@ -24,13 +24,14 @@ $colors: (
   'dark': #111,
   'light': #eee,
 
-  '_contrast-dark': '#dark',
-  '_contrast-light': '#light',
+  'contrast-dark': '#dark',
+  'contrast-light': '#light',
 );
 
 
 @import 'color/utils';
 @import 'color/config';
 @import 'color/api';
-@import 'color/contrast';
 @import 'color/css-vars';
+@import 'color/contrast';
+@import 'color/contrast-vars';

@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.0.0</span>
+          <span class="project-version">2.1.0-beta.1</span>
         
       </div>
     </header>
@@ -237,12 +237,17 @@
   
   
     <li class="nav-item">
+      <a href="color-contrast.html" data-nav="is-not-active">Contrast</a>
+    </li>
+  
+  
+    <li class="nav-item">
       <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-contrast.html" data-nav="is-not-active">Contrast</a>
+      <a href="color-vars-contrast.html" data-nav="is-not-active">Contrast » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -904,8 +909,8 @@ will work across maps,
 <p>We’ll also help you calculate WCAG-appropriate color contrasts.
 We default to <code>white</code> and <code>black</code> options,
 but you can also set
-<code>'_contrast-light'</code> and <code>'_contrast-dark'</code>
-keys in your palette,
+<code>'contrast-light'</code> and <code>'contrast-dark'</code>
+keys in your palette (with or without a private <code>_</code> prefix),
 or pass in<span class="widont">&nbsp;</span>options.</p>
 <pre><code class="lang-scss">a:hover {
   // set a background, and get well-contrasted text

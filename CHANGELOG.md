@@ -1,5 +1,21 @@
 # Accoutrement Changelog
 
+## 2.1.0 - UNRELEASED
+Improved tools for managing color contrast in CSS-variables.
+
+### 2.1.0-beta.1 - 12/13/18
+
+- [Plugin: Color][color]
+  - NEW: `var-contrast()` and `var-contrasted()`
+    provide CSS variable parallels
+    to `contrast()` and `contrasted()`
+  - NEW: User-defined contrast defaults
+    (`contrast-light` and `contrast-dark`)
+    can be defined with or without the `_` private-color prefix
+  - NEW: Contrast-related functions and mixins
+    provide a smart second light-or-dark default option
+    when only one is defined (previously an error)
+
 ## 2.0.0 - 12/05/18
 The 2.0 release is primarily focused on
 support for **CSS Custom Properties** (aka CSS Variables),

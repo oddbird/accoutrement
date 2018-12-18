@@ -1,0 +1,93 @@
+/// # Contrast » CSS Variables
+/// Extend the [color contrast](color-contrast.html) utilities
+/// to support CSS-variable output.
+/// @group color-vars-contrast
+
+
+// Var-Contrast
+// ------------
+/// An extension of the `contrast` function,
+/// designed to output CSS variables
+/// rather than simple color values.
+///
+/// @group color-vars-contrast
+/// @since 2.1.0 -
+/// - NEW: Provides access to contrast colors as CSS-variables, when defined
+/// @example scss - use CSS variables when available
+///   $colors: ('my-color': lightpink);
+///   html {
+///     background: var-contrast(#333, 'my-color');
+///   }
+/// @example scss - direct output when contrast options are private
+///   html {
+///     color: var-contrast(#eee);
+///   }
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {colors} $options... [black, white] -
+///   Two or more colors to contrast against.
+///   This function will choose the best contrast of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   if they are defined in your color palette,
+///   otherwise `white` and `black` are the default options.
+/// @return {color | var()} -
+///   CSS Variable for the color-option
+///   that has the highest contrast-ratio to `$color`,
+///   or the color if no variable exists.
+/// @throws Provide at least two contrasting `$options…` for comparison
+@function var-contrast(
+  $color,
+  $options...
+) {
+  $contrast: _a_get-contrast('map', $color, $options...);
+  $name: map-get($contrast, 'name');
+  $color: map-get($contrast, 'color');
+
+  @if ($name != $color) and not is-private-token($name) {
+    $name: _a_var-name($name, $color-var-prefix);
+    @return var($name, $color);
+  }
+
+  @return $color;
+}
+
+
+// Var Contrasted
+// --------------
+/// Apply any background color as a CSS variable,
+/// along with the highest-contrast text color from a set of options.
+/// This works the same as the `var-contrast` function,
+/// but applies the resulting values to `background-color`
+/// and text `color` properties.
+///
+/// @group color-vars-contrast
+/// @since 2.1.0 -
+/// - NEW: Applies contrasting colors as CSS-variables, when defined
+/// @example scss
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     @include var-contrasted('background', 'light', 'dark');
+///   }
+///
+/// @param {string | list} $background -
+///   The name or value of your desired background color.
+/// @param {colors} $options... [white, black] -
+///   A list of colors to contrast against,
+///   defaulting to `white` and `black`
+///   or your `contrast-light` and `contrast-dark` settings
+///   if they are provided in the global `$colors` map.
+/// @output -
+///   Sets the `background-color` to `$background`
+///   and the foreground `color` to
+///   whichever option has better contrast against the given background.
+@mixin var-contrasted(
+  $background,
+  $options...
+) {
+  background-color: var-color($background);
+  color: var-contrast($background, $options...);
+}

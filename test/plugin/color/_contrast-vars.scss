@@ -1,0 +1,40 @@
+// Contrast Vars Tests
+// ===================
+@include test-module('Color: Contrast Variables') {
+
+// var-contrast [function]
+// -----------------------
+@include describe('var-contrast [function]') {
+  @include it('Returns a contrasting CSS variable when available') {
+    @include assert-equal(
+      var-contrast('blue', 'dark', 'light'),
+      var(--color-dark, #111)
+    );
+  }
+
+  @include it('Returns a contrasting color when no variable') {
+    @include assert-equal(
+      var-contrast('blue', #111, #eee),
+      #111
+    );
+  }
+}
+
+// var-contrasted [function]
+// -------------------------
+@include describe('var-contrasted [function]') {
+  @include it('Creates a background and contrasting color with CSS variables') {
+    @include assert {
+      @include output {
+        @include var-contrasted('blue', 'light', 'dark');
+      }
+
+      @include expect {
+        background-color: var-color('blue');
+        color: var-color('dark');
+      }
+    }
+  }
+}
+
+}

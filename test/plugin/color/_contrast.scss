@@ -77,13 +77,135 @@
 }
 
 
+// Default Contrast [function]
+// ---------------------------
+@include describe('Default Contrast [function]') {
+  @include it('Returns the user default values when defined') {
+    @include assert-equal(
+      _a_default-contrast(),
+      (
+        'light': 'contrast-light',
+        'dark': 'contrast-dark',
+      )
+    );
+  }
+
+  @include it('Returns the user light value') {
+    @include assert-equal(
+      _a_default-contrast('light'),
+      'contrast-light'
+    );
+  }
+
+  @include it('Returns the user dark value') {
+    @include assert-equal(
+      _a_default-contrast('dark'),
+      'contrast-dark'
+    );
+  }
+
+  @include it('Returns the user dark value') {
+    @include assert-equal(
+      _a_default-contrast('dark'),
+      'contrast-dark'
+    );
+  }
+
+  $original-colors: $colors;
+  $colors: () !global;
+
+  @include it('Returns the factory values by default') {
+    @include assert-equal(
+      _a_default-contrast(),
+      (
+        'light': '_contrast-light',
+        'dark': '_contrast-dark',
+      )
+    );
+  }
+
+  $colors: $original-colors !global;
+}
+
+
+// Get Contrast [function]
+// -----------------------
+@include describe('Get Contrast [function]') {
+  @include it('Dark on light') {
+    @include assert-equal(
+      _a_get-contrast('map', #eee),
+      (
+        'name': 'contrast-dark',
+        'color': color('contrast-dark'),
+      ),
+      'Returns a dark color to contrast a light one.'
+    );
+  }
+
+  @include it('Light on dark') {
+    @include assert-equal(
+      _a_get-contrast('map', 'dark'),
+      (
+        'name': 'contrast-light',
+        'color': color('contrast-light'),
+      ),
+      'Returns a light color to contrast a dark one.'
+    );
+  }
+
+  $original-colors: $colors;
+  $colors: () !global;
+
+  @include it('Default light fallback') {
+    @include assert-equal(
+      _a_get-contrast('color', #000),
+      #fff,
+      'Returns white for light contrast when none is given.'
+    );
+  }
+
+  @include it('Default dark fallback') {
+    @include assert-equal(
+      _a_get-contrast('color', #fff),
+      #000,
+      'Returns black for dark contrast when none is given.'
+    );
+  }
+
+  $colors: $original-colors !global;
+
+  @include it('Multiple contrast options') {
+    @include assert-equal(
+      _a_get-contrast('name', 'primary', #ff0, #fcc, #0f0, 'light', #003),
+      #003,
+      'Returns the best option from the list.'
+    );
+  }
+
+  @include it('Return name of a token') {
+    @include assert-equal(
+      _a_get-contrast('name', 'primary'),
+      'contrast-dark',
+      'Returns the name of a selected token.'
+    );
+  }
+
+  @include it('Picks a smart default when only one option is given') {
+    @include assert-equal(
+      _a_get-contrast('name', #eee, #ff0),
+      'contrast-dark'
+    );
+  }
+}
+
+
 // Contrast [function]
 // -------------------
 @include describe('Contrast [function]') {
   @include it('Dark on light') {
     @include assert-equal(
       contrast(#eee),
-      color('_contrast-dark'),
+      color('contrast-dark'),
       'Returns a dark color to contrast a light one.'
     );
   }
@@ -91,7 +213,7 @@
   @include it('Light on dark') {
     @include assert-equal(
       contrast('dark'),
-      color('_contrast-light'),
+      color('contrast-light'),
       'Returns a light color to contrast a dark one.'
     );
   }
@@ -125,10 +247,10 @@
     );
   }
 
-  @include it('Errors on a single option') {
+  @include it('Picks a smart default when given a single option') {
     @include assert-equal(
       contrast('primary', #ff0),
-      'ERROR [contrast] Provide at least two contrasting color options for `$options`'
+      color('contrast-dark')
     );
   }
 }
@@ -145,7 +267,7 @@
 
       @include expect {
         background-color: #eee;
-        color: color('_contrast-dark');
+        color: color('contrast-dark');
       }
     }
   }
@@ -158,7 +280,7 @@
 
       @include expect {
         background-color: color('dark');
-        color: color('_contrast-light');
+        color: color('contrast-light');
       }
     }
   }
