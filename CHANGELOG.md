@@ -3,6 +3,13 @@
 ## 2.1.0 - UNRELEASED
 Improved tools for managing color contrast in CSS-variables.
 
+- [Plugin: Color][color]
+  - NEW: `min-contrast()` and `min-contrasted()`
+    provide access to the lowest accessible contrast value,
+    rather than the maximum contrast value
+  - NEW: `shades-of()` generates a range of light and dark color-shades
+    to help build accessible themes based on a few origin colors
+
 ### 2.1.0-beta.1 - 12/13/18
 
 - [Plugin: Color][color]

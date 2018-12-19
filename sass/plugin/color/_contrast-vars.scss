@@ -39,7 +39,7 @@
   $color,
   $options...
 ) {
-  $contrast: _a_get-contrast('map', $color, $options...);
+  $contrast: _a_best-contrast($color, $options);
   $name: map-get($contrast, 'name');
   $color: map-get($contrast, 'color');
 

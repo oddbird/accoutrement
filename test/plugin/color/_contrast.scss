@@ -111,10 +111,17 @@
     );
   }
 
+  @include it('Returns a list of values') {
+    @include assert-equal(
+      _a_default-contrast('values'),
+      ('contrast-light', 'contrast-dark')
+    );
+  }
+
   $original-colors: $colors;
   $colors: () !global;
 
-  @include it('Returns the factory values by default') {
+  @include it('Returns the factory keys by default') {
     @include assert-equal(
       _a_default-contrast(),
       (
@@ -128,15 +135,16 @@
 }
 
 
-// Get Contrast [function]
+// Best Contrast [function]
 // -----------------------
-@include describe('Get Contrast [function]') {
+@include describe('Best Contrast [function]') {
   @include it('Dark on light') {
     @include assert-equal(
-      _a_get-contrast('map', #eee),
+      _a_best-contrast(#eee),
       (
         'name': 'contrast-dark',
         'color': color('contrast-dark'),
+        'ratio': contrast-ratio(#eee, 'contrast-dark'),
       ),
       'Returns a dark color to contrast a light one.'
     );
@@ -144,10 +152,11 @@
 
   @include it('Light on dark') {
     @include assert-equal(
-      _a_get-contrast('map', 'dark'),
+      _a_best-contrast('dark'),
       (
         'name': 'contrast-light',
         'color': color('contrast-light'),
+        'ratio': contrast-ratio('dark', 'contrast-light'),
       ),
       'Returns a light color to contrast a dark one.'
     );
@@ -158,7 +167,7 @@
 
   @include it('Default light fallback') {
     @include assert-equal(
-      _a_get-contrast('color', #000),
+      _a_best-contrast(#000, $return: 'color'),
       #fff,
       'Returns white for light contrast when none is given.'
     );
@@ -166,7 +175,7 @@
 
   @include it('Default dark fallback') {
     @include assert-equal(
-      _a_get-contrast('color', #fff),
+      _a_best-contrast(#fff, $return: 'color'),
       #000,
       'Returns black for dark contrast when none is given.'
     );
@@ -176,7 +185,11 @@
 
   @include it('Multiple contrast options') {
     @include assert-equal(
-      _a_get-contrast('name', 'primary', #ff0, #fcc, #0f0, 'light', #003),
+      _a_best-contrast(
+        $color: 'primary',
+        $options: (#ff0, #fcc, #0f0, 'light', #003),
+        $return: 'name'
+      ),
       #003,
       'Returns the best option from the list.'
     );
@@ -184,7 +197,7 @@
 
   @include it('Return name of a token') {
     @include assert-equal(
-      _a_get-contrast('name', 'primary'),
+      _a_best-contrast('primary', $return: 'name'),
       'contrast-dark',
       'Returns the name of a selected token.'
     );
@@ -192,10 +205,33 @@
 
   @include it('Picks a smart default when only one option is given') {
     @include assert-equal(
-      _a_get-contrast('name', #eee, #ff0),
+      _a_best-contrast(#eee, #ff0, $return: 'name'),
       'contrast-dark'
     );
   }
+
+  $original-colors: $colors;
+  $colors: ('gray': gray) !global;
+  @include add-colors(shades-of('gray', 5));
+
+  @include it('Can selects the minimum-best for a given ratio') {
+    @include assert-equal(
+      _a_best-contrast(black, map-keys($colors), 'ratio', 'aa-large'),
+      contrast-ratio(black, 'gray-dark-5')
+    );
+
+    @include assert-equal(
+      _a_best-contrast(black, map-keys($colors), 'name', 'aa'),
+      'gray-dark-4'
+    );
+
+    @include assert-equal(
+      _a_best-contrast(black, map-keys($colors), 'ratio', 'aaa'),
+      contrast-ratio(black, 'gray-0')
+    );
+  }
+
+  $colors: $original-colors !global;
 }
 
 
@@ -256,6 +292,18 @@
 }
 
 
+// Min Contrast [function]
+// -----------------------
+@include describe('Min Contrast [function]') {
+  @include it('Returns the minimum contrast for a given ratio') {
+    @include assert-equal(
+      min-contrast('primary', 'AA-large', #ff0, #fcc, #0f0, 'light', #003),
+      #eee
+    );
+  }
+}
+
+
 // Contrasted [mixin]
 // ------------------
 @include describe('contrasted [mixin]') {
@@ -285,5 +333,27 @@
     }
   }
 }
+
+
+// Min Contrasted [mixin]
+// ----------------------
+@include describe('Min Contrasted [mixin]') {
+  @include it('Returns the minimum contrast for a given ratio') {
+    @include assert {
+      @include output {
+        @include min-contrasted(
+          'primary',
+          'AA-large',
+          #ff0, #fcc, #0f0, 'light', #003
+        );
+      }
+      @include expect {
+        background-color: color('primary');
+        color: #eee;
+      }
+    }
+  }
+}
+
 
 } // end module

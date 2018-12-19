@@ -36,7 +36,9 @@ $WCAG-CONTRAST: (
 ///   $background: #333;
 ///   html {
 ///     background: $background;
-///     color: contrast($background, red, orange, yellow, green, blue, indigo);
+///     color: contrast(
+///       $background, red, orange, yellow, green, blue, indigo
+///     );
 ///   }
 ///
 /// @param {string | list} $color -
@@ -53,9 +55,46 @@ $WCAG-CONTRAST: (
   $color,
   $options...
 ) {
-  @return _a_get-contrast('color', $color, $options...);
+  @return _a_best-contrast($color, $options, 'color');
 }
 @include _a_register-function('contrast');
+
+
+// Min Contrast
+// ------------
+/// For any color, select the minimum passing contrast
+/// among a set of options.
+///
+/// @group color-contrast
+/// @example scss - explicit options
+///   $background: #333;
+///   html {
+///     background: $background;
+///     color: min-contrast(
+///       $background, red, orange, yellow, green, blue, indigo
+///     );
+///   }
+///
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {'AA' | 'AA-large' | 'AAA' | number } $min-ratio ['AAA'] -
+///   WCAG color-contrast ratio (`0` to `21`) to require.
+/// @param {colors} $options... -
+///   A list of colors to contrast against,
+///   defaulting to `white` and `black`
+///   or your `contrast-light` and `contrast-dark` settings
+///   (with or without a private `_` prefix)
+///   if they are provided in the global `$colors` map.
+/// @return {color} -
+///   Option with the lowest acceptable contrast-ratio to `$color`.
+@function min-contrast(
+  $color,
+  $min-ratio: 'AAA',
+  $options...
+) {
+  @return _a_best-contrast($color, $options, 'color', $min-ratio);
+}
+@include _a_register-function('min-contrast');
 
 
 // Contrasted
@@ -75,12 +114,14 @@ $WCAG-CONTRAST: (
 /// @example scss - explicit options
 ///   $background: #333;
 ///   html {
-///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
+///     @include contrasted(
+///       $background, red, orange, yellow, green, blue, indigo
+///     );
 ///   }
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
-/// @param {colors} $options... [white, black] -
+/// @param {colors} $options... -
 ///   A list of colors to contrast against,
 ///   defaulting to `white` and `black`
 ///   or your `contrast-light` and `contrast-dark` settings
@@ -101,9 +142,54 @@ $WCAG-CONTRAST: (
 }
 
 
+// Min Contrasted
+// --------------
+/// Apply any background color,
+/// along with the minimum-acceptable contrast text color
+/// from a set of options.
+/// This works the same as the `min-contrast` function,
+/// but applies the resulting values to `background-color`
+/// and text `color` properties.
+///
+/// @group color-contrast
+/// @example scss - explicit options
+///   $background: #333;
+///   html {
+///     @include min-contrasted(
+///       $background, red, orange, yellow, green, blue, indigo
+///     );
+///   }
+///
+/// @param {string | list} $background -
+///   The name or value of your desired background color.
+///   An optional WCAG contrast ratio to require.
+/// @param {'AA' | 'AA-large' | 'AAA' | number } $min-ratio ['AAA'] -
+///   WCAG color-contrast ratio (`0` to `21`) to require.
+/// @param {colors} $options... -
+///   A list of colors to contrast against,
+///   defaulting to `white` and `black`
+///   or your `contrast-light` and `contrast-dark` settings
+///   (with or without a private `_` prefix)
+///   if they are provided in the global `$colors` map.
+/// @output -
+///   Sets the `background-color` to `$background`
+///   and the foreground `color` to
+///   whichever option has better contrast against the given background.
+@mixin min-contrasted(
+  $background,
+  $min-ratio: 'AAA',
+  $options...
+) {
+  $background: color($background);
+
+  background-color: $background;
+  color: min-contrast($background, $min-ratio, $options...);
+}
+
+
 // Contrast Ratio
 // --------------
-/// Compare two colors using the WCAG comparison algorythm,
+/// Compare two colors using the WCAG comparison algorithm,
 /// and return the resulting contrast-ratio.
 /// Optionally pass in a standard (AA, AAA, AA-large)
 /// and return `false` when the contrast-check fails.
@@ -219,8 +305,8 @@ $WCAG-CONTRAST: (
 /// @since 2.1.0 -
 /// - NEW: Allows for either private or public defaults
 ///
-/// @param {'light' | 'dark' | *} $return -
-///   Return the light value, dark value, or both
+/// @param {'light' | 'dark' | 'values' | 'map'} $return -
+///   Return the light value, dark value, both values, or a map
 /// @return {color-name | map} -
 ///   Light or dark color-name string,
 ///   or map with `light` and `dark` keys.
@@ -240,77 +326,92 @@ $WCAG-CONTRAST: (
     ),
   );
 
+  @if ($return == 'values') {
+    @return map-values($both);
+  }
+
   @return map-get($both, $return) or $both;
 }
 
 
-// Contrast
-// --------
+// Best Contrast
+// -------------
 /// For any color, select the best contrast among a set of options.
-/// For best results, pass in a combination of light and dark colors
-/// to contrast against.
+/// Returns the highest contrast by default,
+/// or the minimum contrast to meet a particular ratio cutoff.
 ///
 /// Unlike the `contrast` function,
-/// `_a_get-contrast` can return the name of a contrasted color,
-/// the output value, or both.
+/// `_a_best-contrast` can return the color name,
+/// output value, ratio, or all three.
 ///
 /// @access private
 /// @since 2.1.0 -
 /// - NEW: Provides access to both name and value of result
 /// - NEW: Provides a smart default for comparison against a single option
 ///
-/// @param {'map' | 'name' | 'color'} $return -
-///   Return either a token name, color value,
-///   or both together in a map.
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {arglist} $options -
+/// @param {list} $options [null] -
 ///   Any number of colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
-///   or the `contrast-light` and `contrast-dark` defaults.
+///   or use the `contrast-light` and `contrast-dark` defaults.
+/// @param {'map' | 'name' | 'color' | 'ratio'} $return ['map'] -
+///   Return either a token name, color value, best-ratio
+///   or all three together in a map.
+/// @param {number | 'AA-large' | 'AA' | 'AAA' | false} $min-ratio [false] -
+///   Return either a token name, color value, best-ratio
+///   or all three together in a map.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
-@function _a_get-contrast(
-  $return,
+@function _a_best-contrast(
   $color,
-  $options...
+  $options: null,
+  $return: 'map',
+  $min-ratio: false
 ) {
   // Establish default options if they are missing
-  @if length($options) == 0 {
-    $options: map-values(_a_default-contrast());
-  } @else if length($options) == 1 {
-    $use: _a_get-contrast('name', nth($options, 1));
+  @if (length($options) == 0) or (not $options) {
+    $options: _a_default-contrast('values');
+  } @else if (length($options) == 1 ){
+    $use: _a_best-contrast(nth($options, 1), $return: 'name');
     $options: append($options, $use);
   }
 
   // Get the colors and their contrasts
   $color-val: color($color);
   $color-lum: luminance($color-val);
-  $color-list: ();
-  $contrast-list: ();
+  $best: (
+    'name': null,
+    'color': null,
+    'ratio': null,
+  );
 
-  @each $item in $options {
-    $item: color($item);
-    $luminance: luminance($item);
-    $contrast: contrast-ratio($color-lum, $luminance);
+  @each $name in $options {
+    // 22 is above the highest possible, 0 is below the lowest
+    $best-ratio: map-get($best, 'ratio') or if($min-ratio, 22, 0);
+    $better: false;
+    $value: color($name);
+    $lum: luminance($value);
+    $ratio: contrast-ratio($color-lum, $lum, $min-ratio);
 
-    $color-list: append($color-list, $item);
-    $contrast-list: append($contrast-list, $contrast);
+    @if $min-ratio and $ratio {
+      $better: ($ratio < $best-ratio);
+    } @else if $ratio {
+      $better: ($ratio > $best-ratio);
+    }
+
+    @if $better {
+      $best: (
+        'name': $name,
+        'color': $value,
+        'ratio': $ratio,
+      );
+    }
   }
 
-  // Find the best results
-  $best-ratio: max($contrast-list...);
-  $best-name: nth($options, index($contrast-list, $best-ratio));
-  $best-color: nth($color-list, index($contrast-list, $best-ratio));
-
-  @if ($return == 'map') {
-    @return (
-      'name': $best-name,
-      'color': $best-color,
-    );
-  } @else if ($return == 'name') {
-    @return $best-name;
+  @if (map-get($best, 'name')) {
+    @return map-get($best, $return) or $best;
   }
 
-  @return $best-color;
+  @return false;
 }
