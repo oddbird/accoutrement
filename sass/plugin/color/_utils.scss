@@ -1,4 +1,4 @@
-/// # Tint & Shade Utilities
+/// # Color Utility Functions
 /// @group color-utils
 
 
@@ -16,15 +16,15 @@
 ///
 /// @group color-utils
 ///
-/// @param {String | list} $color -
+/// @param {string | list} $color -
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
-/// @param {Percentage} $percentage -
+/// @param {percentage} $percentage -
 ///   The percentage of a `$light` color to mix in.
 ///   Higher percentages will result in a lighter tint.
-/// @param {Color | String} $light [null] -
+/// @param {color | String} $light [null] -
 ///   The lighter color to be mixed in for tinting.
-/// @return {Color} -
+/// @return {color} -
 ///   A calculated css-ready color-value based on your global color palette.
 @function tint(
   $color,
@@ -51,15 +51,15 @@
 ///
 /// @group color-utils
 ///
-/// @param {String | list} $color -
+/// @param {string | list} $color -
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @param {Percentage} $percentage -
 ///   The percentage of a `$dark` color to mix in.
 ///   Higher percentages will result in a lighter tint.
-/// @param {Color | String} $dark [null] -
+/// @param {color | String} $dark [null] -
 ///   The darker color to be mixed in for shading.
-/// @return {Color} -
+/// @return {color} -
 ///   A calculated css-ready color-value based on your global color palette.
 @function shade(
   $color,
@@ -70,3 +70,33 @@
   @return mix(color($dark), color($color), $percentage);
 }
 @include _a_register-function('shade');
+
+
+// Stripe Colors
+// -------------
+/// Create color-stops for a striped gradient background,
+/// from any number of colors
+///
+/// @since 2.1.0 -
+/// - NEW: Especially useful for viewing generated color palettes
+///
+/// @group color-utils
+///
+/// @param {string | color} $colors... -
+///   ArgList of colors
+/// @return {color} -
+///   A calculated css-ready color-value based on your global color palette.
+@function stripe-colors(
+  $colors...
+) {
+  $gradient: ();
+  $width: 100% / length($colors);
+
+  @for $i from 1 through length($colors) {
+    $pop: color(nth($colors, $i));
+    $new: $pop ($width * ($i - 1)), $pop ($width * $i);
+    $gradient: join($gradient, $new, comma);
+  }
+
+  @return $gradient;
+}

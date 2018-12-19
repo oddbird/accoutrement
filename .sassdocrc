@@ -40,7 +40,8 @@ groups:
     color-contrast: 'Contrast'
     color-vars: 'Colors » CSS Variables'
     color-vars-contrast: 'Contrast » CSS Variables'
-    color-utils: 'Color Functions'
+    color-utils: 'Color Adjustments'
+    color-themes: 'Color Themes'
   'Plugin/Layout':
     layout: 'QuickStart: Layout'
     layout-queries: 'Media Breakpoint Maps'

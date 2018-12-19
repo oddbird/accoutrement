@@ -1,0 +1,78 @@
+/// # Color Themes
+/// @group color-themes
+
+
+// Shades Of
+// ---------
+/// Generates an accoutrement map of light/dark color variations
+/// from a map of user-defined colors,
+/// based on luminosity.
+/// The origin color will be included in the appropriate spot,
+/// based on it's own luminosity.
+///
+/// @param {map} $origin -
+///   user-color map to use as a basis for generating the theme
+/// @param {integer} $range [1] -
+///   number of dark and light variations desired,
+///   in addition to the midpoint
+///
+/// @example scss
+///   $user-colors: (
+///     'primary': blue,
+///     'accent': red,
+///   );
+///   @include add-colors($user-colors);
+///
+///   $theme-colors: shades-of($user-colors, 3);
+///   @include add-colors($theme-colors);
+///
+///   @each $name in map-keys($theme-colors) {
+///   /* #{$name}: #{color($name)} */
+///   }
+/// @group color-themes
+@function shades-of(
+  $origin,
+  $range: 2
+) {
+  $adjust: (
+    'light': 'tint',
+    'dark': 'shade',
+  );
+
+  $theme: ();
+  $count: (2 * $range + 1);
+
+  // Generate a map from keys
+  @if (type-of($origin) != 'map') {
+    $map: ();
+
+    @each $item in $origin {
+      $map: map-merge($map, ($item: color($item)));
+    }
+
+    $origin: $map;
+  }
+
+  // generate shades
+  @each $name, $color in $origin {
+    $lum: luminance($name);
+    $pos: ceil($lum * $count) - ($range + 1);
+
+    @for $i from (0 - $range) through $range {
+      $diff: $i - $pos;
+      $do: if($diff > 0, 'light', if($diff < 0, 'dark', null));
+      $is: if($i > 0, 'light-#{abs($i)}', if($i < 0, 'dark-#{abs($i)}', '0'));
+      $value: '##{$name}';
+
+      @if ($do) {
+        $int: percentage(1 / $count);
+        $amount: (abs($diff) * $int) - ($int / 2);
+        $value: $value (map-get($adjust, $do): $amount);
+      }
+
+      $theme: map-merge($theme, ('#{$name}-#{$is}': $value));
+    }
+  }
+
+  @return $theme;
+}

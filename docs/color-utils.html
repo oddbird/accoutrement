@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Color Functions | Accoutrement Documentation</title>
+  <title>Color Adjustments | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -252,7 +252,12 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-active">Color Functions</a>
+      <a href="color-utils.html" data-nav="is-active">Color Adjustments</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="color-themes.html" data-nav="is-not-active">Color Themes</a>
     </li>
   </ul>
             </li>
@@ -405,7 +410,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Color Functions</strong>
+    <strong>Color Adjustments</strong>
   </nav>
 
 
@@ -434,7 +439,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="tint-shade-utilities">Tint &amp; Shade<span class="widont">&nbsp;</span>Utilities</h1>
+      <h1 id="color-utility-functions">Color Utility Functions</h1>
 
       
   
@@ -602,7 +607,7 @@ to define the value of <code>contrast-light</code></p>
         <span class="item-name">$color:</span>
       
       
-      <span class="value-type">(String |<span class="widont">&nbsp;</span>list)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
       
     </h4>
 
@@ -630,7 +635,7 @@ with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&
         <span class="item-name">$percentage:</span>
       
       
-      <span class="value-type">(Percentage)</span>
+      <span class="value-type">(percentage)</span>
       
     </h4>
 
@@ -658,7 +663,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
         <span class="item-name">$light:</span>
       
       <span class="item-value">null</span>
-      <span class="value-type">(Color |<span class="widont">&nbsp;</span>String)</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
       
     </h4>
 
@@ -687,7 +692,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(Color)</span>
+      <span class="value-type">(color)</span>
       
     </h4>
 
@@ -947,7 +952,7 @@ to define the value of <code>contrast-dark</code></p>
         <span class="item-name">$color:</span>
       
       
-      <span class="value-type">(String |<span class="widont">&nbsp;</span>list)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
       
     </h4>
 
@@ -1003,7 +1008,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
         <span class="item-name">$dark:</span>
       
       <span class="item-value">null</span>
-      <span class="value-type">(Color |<span class="widont">&nbsp;</span>String)</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
       
     </h4>
 
@@ -1032,7 +1037,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(Color)</span>
+      <span class="value-type">(color)</span>
       
     </h4>
 
@@ -1146,6 +1151,298 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--stripe-colors">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--stripe-colors" class="item-name">stripe-colors()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Create color-stops for a striped gradient background,
+from any number of<span class="widont">&nbsp;</span>colors</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$colors...:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>ArgList of colors</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-api.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-api.html#variable--colors" class="item-name">$colors</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
 
         
       

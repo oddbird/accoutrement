@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Fluid Ratios | Accoutrement Documentation</title>
+  <title>Color Themes | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -257,7 +257,7 @@
   
   
     <li class="nav-item">
-      <a href="color-themes.html" data-nav="is-not-active">Color Themes</a>
+      <a href="color-themes.html" data-nav="is-active">Color Themes</a>
     </li>
   </ul>
             </li>
@@ -293,7 +293,7 @@
   
   
     <li class="nav-item">
-      <a href="layout-ratios.html" data-nav="is-active">Fluid Ratios</a>
+      <a href="layout-ratios.html" data-nav="is-not-active">Fluid Ratios</a>
     </li>
   
   
@@ -410,11 +410,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Fluid Ratios</strong>
+    <strong>Color Themes</strong>
   </nav>
 
 
-        <div data-page="layout-ratios">
+        <div data-page="color-themes">
           
   
     
@@ -429,7 +429,82 @@
 
 
 
-<section class="item" id="mixin--fluid-ratio">
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="color-themes">Color Themes</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--shades-of">
   
     
   
@@ -443,11 +518,11 @@
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@mixin</span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#mixin--fluid-ratio" class="item-name">fluid-ratio()</a>
+        <a href="#function--shades-of" class="item-name">shades-of()</a>
       
 
       
@@ -468,29 +543,13 @@
 
   
     <div class="text-block">
-      <p>Establish a fluid-height container based on an aspect<span class="widont">&nbsp;</span>ratio.</p>
+      <p>Generates an accoutrement map of light/dark color variations
+from a map of user-defined colors,
+based on luminosity.
+The origin color will be included in the appropriate spot,
+based on it’s own<span class="widont">&nbsp;</span>luminosity.</p>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Accepts <code>$source</code> map argument,
-for custom<span class="widont">&nbsp;</span>source-palette</li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Uses the new <a href="core.html">shared</a> map syntax,
-and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settings</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -534,90 +593,9 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
     <h4 class="param-title">
       
       
-        <span class="item-name">$ratio:</span>
-      
-      <span class="item-value">&#39;_widescreen&#39;</span>
-      <span class="value-type">(float |<span class="widont">&nbsp;</span>string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The ratio of width over height, or a ratio<span class="widont">&nbsp;</span>keyword.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
+        <span class="item-name">$origin:</span>
       
       
-        <span class="item-name">$width:</span>
-      
-      <span class="item-value">100%</span>
-      <span class="value-type">(length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The established fluid width of the<span class="widont">&nbsp;</span>element.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$position:</span>
-      
-      <span class="item-value">relative</span>
-      <span class="value-type">(relative | absolute | fixed |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Establish a positioning context, so children can be stretched to<span class="widont">&nbsp;</span>fit.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$source:</span>
-      
-      <span class="item-value">$ratios</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -625,8 +603,35 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
     
       
       <div class="param-details text-block">
-        <p>Optional accoutrement-format map of ratios to use as the origin palette
-(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
+        <p>user-color map to use as a basis for generating the<span class="widont">&nbsp;</span>theme</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$range:</span>
+      
+      <span class="item-value">1</span>
+      <span class="value-type">(integer)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>number of dark and light variations desired,
+in addition to the<span class="widont">&nbsp;</span>midpoint</p>
 
       </div>
     
@@ -695,8 +700,17 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">.media {
-  @include fluid-ratio(&#39;_widescreen&#39;);
+      <pre class="hljs-pre"><code class="lang-scss">$user-colors: (
+  &#39;primary&#39;: blue,
+  &#39;accent&#39;: red,
+);
+@include add-colors($user-colors);
+
+$theme-colors: shades-of($user-colors, 3);
+@include add-colors($theme-colors);
+
+@each $name in map-keys($theme-colors) {
+/* #{$name}: #{color($name)} */
 }</code></pre>
     </div>
   
@@ -719,12 +733,20 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.media {
-  height: 0;
-  padding-top: 56.25%;
-  position: relative;
-  width: 100%;
-}
+      <pre class="hljs-pre"><code class="lang-css">/* primary-dark-3: blue */
+/* primary-dark-2: #1212ff */
+/* primary-dark-1: #3737ff */
+/* primary-0: #5b5bff */
+/* primary-light-1: #8080ff */
+/* primary-light-2: #a4a4ff */
+/* primary-light-3: #c8c8ff */
+/* accent-dark-3: #ed0000 */
+/* accent-dark-2: red */
+/* accent-dark-1: #ff1212 */
+/* accent-0: #ff3737 */
+/* accent-light-1: #ff5b5b */
+/* accent-light-2: #ff8080 */
+/* accent-light-3: #ffa4a4 */
 </code></pre>
     </div>
   
@@ -778,7 +800,7 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
       <span class="item-type">@function</span>
       
         <a href="
-  layout-ratios.html#function--fluid-ratio" class="item-name">fluid-ratio()</a>
+  color-api.html#function--color" class="item-name">color()</a>
       
       
       
@@ -790,363 +812,6 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
 
 
         
-      
-    
-  </div>
-
-  
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--fluid-ratio">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--fluid-ratio" class="item-name">fluid-ratio()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Return a padding-height
-based on a given ratio and fluid<span class="widont">&nbsp;</span>width.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Accepts <code>$source</code> map argument,
-for custom<span class="widont">&nbsp;</span>source-palette</li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Uses the new <a href="core.html">shared</a> map syntax,
-and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settings</li>
-</ul>
-</div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$ratio:</span>
-      
-      <span class="item-value">&#39;_widescreen&#39;</span>
-      <span class="value-type">(float |<span class="widont">&nbsp;</span>string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The ratio of width over height, or a ratio<span class="widont">&nbsp;</span>keyword.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$width:</span>
-      
-      <span class="item-value">100%</span>
-      <span class="value-type">(length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The established fluid width of the<span class="widont">&nbsp;</span>element.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$source:</span>
-      
-      <span class="item-value">$ratios</span>
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional accoutrement-format map of ratios to use as the origin palette
-(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(percentage)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A fluid height, based on the width and<span class="widont">&nbsp;</span>ratio.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">.media {
-  width: 100%;
-  padding-top: fluid-ratio(&#39;_widescreen&#39;);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.media {
-  width: 100%;
-  padding-top: 56.25%;
-}
-</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    <div class="requires-wrapper">
-      
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
       
         
         
@@ -1170,7 +835,7 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
       <span class="item-type">@function</span>
       
         <a href="
-  core-ratio.html#function--ratio" class="item-name">ratio()</a>
+  color-contrast.html#function--luminance" class="item-name">luminance()</a>
       
       
       
@@ -1187,57 +852,9 @@ and <a href="core-ratios.html">ratio</a><span class="widont">&nbsp;</span>settin
   </div>
 
   
-      
-  
     
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
   
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  layout-ratios.html#mixin--fluid-ratio" class="item-name">fluid-ratio()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
   
 
   
