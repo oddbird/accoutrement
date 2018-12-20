@@ -1,7 +1,21 @@
 # Accoutrement Changelog
 
-## 2.1.0 - UNRELEASED
-Improved tools for managing color contrast in CSS-variables.
+## 2.1.0 - 12/20/18
+
+- [Plugin: Color][color]
+  - NEW: `contrast()`, `contrasted()`,
+    `var-contrast()`, and `var-contrasted()`
+    provide access to the lowest accessible contrast value,
+    as well as than the (default) maximum contrast value.
+    Pass a valid contrast ratio (`0-21`)
+    or WCAG standard (`aaa`, `aa`, `aa-large`)
+    to set a cutoff ratio,
+    and return the minimum accessible color
+  - NEW: `shades-of()` generates a range of light and dark color-shades
+    to help build accessible themes based on a few origin colors
+  - NEW: `stripe-colors()` function and mixin
+    generate a color-stops or a full striped gradient background.
+    This is useful for viewing the result from `shades-of()`
 
 ### 2.1.0-beta.1 - 12/13/18
 

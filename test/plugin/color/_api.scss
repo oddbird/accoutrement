@@ -40,7 +40,7 @@
 
   @include it('Multiple adjustment function arguments') {
     $adjust: (
-      'contrast': (#999, #666, #333),
+      'contrast': #999 #666 #333 'aaa',
     );
     @include assert-equal(
       color(#fcc $adjust),

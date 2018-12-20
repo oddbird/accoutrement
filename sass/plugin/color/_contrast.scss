@@ -1,4 +1,4 @@
-/// # Managing Contrast & Accessibility
+/// # Contrast & Accessibility
 /// @group color-contrast
 
 
@@ -26,36 +26,125 @@ $WCAG-CONTRAST: (
 /// in your global `$colors` map.
 ///
 /// @group color-contrast
-/// @example scss - default options
-///   $background: #333;
+/// @example scss - max contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
 ///   html {
-///     background: $background;
-///     color: contrast($background);
+///     color: contrast(
+///       'background',
+///       'light', 'dark', black, white
+///     );
 ///   }
-/// @example scss - explicit options
-///   $background: #333;
+/// @example scss - min contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
 ///   html {
-///     background: $background;
-///     color: contrast($background, red, orange, yellow, green, blue, indigo);
+///     color: contrast(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
+///     );
 ///   }
 ///
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {colors} $options... -
-///   A list of colors to contrast against,
-///   defaulting to `white` and `black`
-///   or your `contrast-light` and `contrast-dark` settings
-///   (with or without a private `_` prefix)
-///   if they are provided in the global `$colors` map.
+/// @param {colors | min-contrast} $options... -
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
+///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
+///     will be treated as a minimum color-contrast ratio –
+///     and will return the minimum accessible option,
+///     rather than the maximum contrast.
 /// @return {color} -
-///   Whichever color-option has the highest contrast-ratio to `$color`.
+///   Whichever color-option has the highest contrast-ratio to `$color`,
+///   or the minimum needed contrast to meet a given accessibility ratio.
 @function contrast(
   $color,
   $options...
 ) {
-  @return _a_get-contrast('color', $color, $options...);
+  @return _a_best-contrast($color, $options, 'color');
 }
 @include _a_register-function('contrast');
+
+
+// Var-Contrast
+// ------------
+/// An extension of the `contrast` function,
+/// designed to output CSS variables
+/// rather than simple color values.
+///
+/// @group color-contrast
+/// @since 2.1.0 -
+/// - NEW: Provides access to contrast colors as CSS-variables, when defined
+/// @example scss - max contrast / no variable names
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     color: var-contrast(
+///       'background',
+///       'light', 'dark', black, white
+///     );
+///   }
+/// @example scss - min contrast / variable names
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     color: var-contrast(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
+///     );
+///   }
+///
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {colors | min-contrast} $options... -
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
+///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
+///     will be treated as a minimum color-contrast ratio –
+///     and will return the minimum accessible option,
+///     rather than the maximum contrast.
+/// @return {color | var()} -
+///   CSS Variable for the color-option
+///   that has the highest contrast-ratio to `$color`,
+///   or the color if no variable exists.
+@function var-contrast(
+  $color,
+  $options...
+  ) {
+  $contrast: _a_best-contrast($color, $options);
+  $name: map-get($contrast, 'name');
+  $color: map-get($contrast, 'color');
+
+  @if ($name != $color) and not is-private-token($name) {
+    $name: _a_var-name($name, $color-var-prefix);
+    @return var($name, $color);
+  }
+
+  @return $color;
+}
+@include _a_register-function('var-contrast');
 
 
 // Contrasted
@@ -67,29 +156,50 @@ $WCAG-CONTRAST: (
 /// and text `color` properties.
 ///
 /// @group color-contrast
-/// @example scss - default options
-///   $background: #333;
+/// @example scss - max contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
 ///   html {
-///     @include contrasted($background);
+///     @include contrasted(
+///       'background',
+///       'light', 'dark', black, white
+///     );
 ///   }
-/// @example scss - explicit options
-///   $background: #333;
+/// @example scss - min contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
 ///   html {
-///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
+///     @include contrasted(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
+///     );
 ///   }
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
-/// @param {colors} $options... [white, black] -
-///   A list of colors to contrast against,
-///   defaulting to `white` and `black`
-///   or your `contrast-light` and `contrast-dark` settings
-///   (with or without a private `_` prefix)
-///   if they are provided in the global `$colors` map.
+/// @param {colors | min-contrast} $options... -
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
+///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
+///     will be treated as a minimum color-contrast ratio –
+///     and will return the minimum accessible option,
+///     rather than the maximum contrast.
 /// @output -
 ///   Sets the `background-color` to `$background`
-///   and the foreground `color` to
-///   whichever option has better contrast against the given background.
+///   and `color` to the option with
+///   highest contrast against that background,
+///   or minimum contrast that still meets a given accessibility ratio.
 @mixin contrasted(
   $background,
   $options...
@@ -101,9 +211,72 @@ $WCAG-CONTRAST: (
 }
 
 
+// Var Contrasted
+// --------------
+/// Apply any background color as a CSS variable,
+/// along with the highest-contrast text color from a set of options.
+/// This works the same as the `var-contrast` function,
+/// but applies the resulting values to `background-color`
+/// and text `color` properties.
+///
+/// @group color-contrast
+/// @since 2.1.0 -
+/// - NEW: Applies contrasting colors as CSS-variables, when defined
+/// @example scss - max contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     @include var-contrasted(
+///       'background',
+///       'light', 'dark', black, white
+///     );
+///   }
+/// @example scss - min contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     @include var-contrasted(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
+///     );
+///   }
+///
+/// @param {string | list} $background -
+///   The name or value of your desired background color.
+/// @param {colors | min-contrast} $options... -
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
+///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
+///     will be treated as a minimum color-contrast ratio –
+///     and will return the minimum accessible option,
+///     rather than the maximum contrast.
+/// @output -
+///   Sets the `background-color` to `$background`
+///   and the foreground `color` to
+///   whichever option has better contrast against the given background.
+@mixin var-contrasted(
+  $background,
+  $options...
+) {
+  background-color: var-color($background);
+  color: var-contrast($background, $options...);
+}
+
+
 // Contrast Ratio
 // --------------
-/// Compare two colors using the WCAG comparison algorythm,
+/// Compare two colors using the WCAG comparison algorithm,
 /// and return the resulting contrast-ratio.
 /// Optionally pass in a standard (AA, AAA, AA-large)
 /// and return `false` when the contrast-check fails.
@@ -135,11 +308,6 @@ $WCAG-CONTRAST: (
   $require: false
 ) {
   $is-lumins: (type-of($base) == 'number');
-  $uppercase: (
-    'aaa': 'AAA',
-    'aa': 'AA',
-    'aa-large': 'AA-large'
-  );
 
   $base-lumin: if($is-lumins, $base, luminance($base));
   $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
@@ -149,10 +317,7 @@ $WCAG-CONTRAST: (
 
   $ratio: ($lighter + 0.05) / ($darker + 0.05);
 
-  @if (type-of($require) != 'number') {
-    $require: map-get($uppercase, $require) or $require;
-    $require: map-get($WCAG-CONTRAST, $require);
-  }
+  $require: _a_valid-contrast($require);
 
   @if $require and ($ratio < $require) {
     @return false;
@@ -219,8 +384,8 @@ $WCAG-CONTRAST: (
 /// @since 2.1.0 -
 /// - NEW: Allows for either private or public defaults
 ///
-/// @param {'light' | 'dark' | *} $return -
-///   Return the light value, dark value, or both
+/// @param {'light' | 'dark' | 'values' | 'map'} $return -
+///   Return the light value, dark value, both values, or a map
 /// @return {color-name | map} -
 ///   Light or dark color-name string,
 ///   or map with `light` and `dark` keys.
@@ -240,77 +405,125 @@ $WCAG-CONTRAST: (
     ),
   );
 
+  @if ($return == 'values') {
+    @return map-values($both);
+  }
+
   @return map-get($both, $return) or $both;
 }
 
 
-// Contrast
-// --------
+// Best Contrast
+// -------------
 /// For any color, select the best contrast among a set of options.
-/// For best results, pass in a combination of light and dark colors
-/// to contrast against.
+/// Returns the highest contrast by default,
+/// or the minimum contrast to meet a particular ratio cutoff.
 ///
 /// Unlike the `contrast` function,
-/// `_a_get-contrast` can return the name of a contrasted color,
-/// the output value, or both.
+/// `_a_best-contrast` can return the color name,
+/// output value, ratio, or all three.
 ///
 /// @access private
 /// @since 2.1.0 -
 /// - NEW: Provides access to both name and value of result
 /// - NEW: Provides a smart default for comparison against a single option
 ///
-/// @param {'map' | 'name' | 'color'} $return -
-///   Return either a token name, color value,
-///   or both together in a map.
 /// @param {string | list} $color -
 ///   The name or value of a color.
-/// @param {arglist} $options -
+/// @param {list} $options [null] -
 ///   Any number of colors to contrast against.
 ///   This function will choose the best contrast of all the options provided,
-///   or the `contrast-light` and `contrast-dark` defaults.
+///   or use the `contrast-light` and `contrast-dark` defaults.
+/// @param {'map' | 'name' | 'color' | 'ratio'} $return ['map'] -
+///   Return either a token name, color value, best-ratio
+///   or all three together in a map.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
-@function _a_get-contrast(
-  $return,
+@function _a_best-contrast(
   $color,
-  $options...
+  $options: null,
+  $return: 'map'
 ) {
+  $opt-colors: ();
+  $min-ratio: false;
+
+  @each $opt in $options {
+    @if (type-of($opt) == 'color') or map-has-key($colors, $opt) {
+      $opt-colors: append($opt-colors, $opt);
+    } @else {
+      $min-ratio: _a_valid-contrast($opt) or $min-ratio;
+    }
+  }
+
   // Establish default options if they are missing
-  @if length($options) == 0 {
-    $options: map-values(_a_default-contrast());
-  } @else if length($options) == 1 {
-    $use: _a_get-contrast('name', nth($options, 1));
-    $options: append($options, $use);
+  @if (length($opt-colors) == 0) or (not $opt-colors) {
+    $opt-colors: _a_default-contrast('values');
+  } @else if (length($opt-colors) == 1 ){
+    $use: _a_best-contrast(nth($opt-colors, 1), $return: 'name');
+    $opt-colors: append($opt-colors, $use);
   }
 
   // Get the colors and their contrasts
   $color-val: color($color);
   $color-lum: luminance($color-val);
-  $color-list: ();
-  $contrast-list: ();
+  $best: (
+    'name': null,
+    'color': null,
+    'ratio': null,
+  );
 
-  @each $item in $options {
-    $item: color($item);
-    $luminance: luminance($item);
-    $contrast: contrast-ratio($color-lum, $luminance);
+  @each $name in $opt-colors {
+    // 22 is above the highest possible, 0 is below the lowest
+    $best-ratio: map-get($best, 'ratio') or if($min-ratio, 22, 0);
+    $better: false;
+    $value: color($name);
+    $lum: luminance($value);
+    $ratio: contrast-ratio($color-lum, $lum, $min-ratio);
 
-    $color-list: append($color-list, $item);
-    $contrast-list: append($contrast-list, $contrast);
+    @if $min-ratio and $ratio {
+      $better: ($ratio < $best-ratio);
+    } @else if $ratio {
+      $better: ($ratio > $best-ratio);
+    }
+
+    @if $better {
+      $best: (
+        'name': $name,
+        'color': $value,
+        'ratio': $ratio,
+      );
+    }
   }
 
-  // Find the best results
-  $best-ratio: max($contrast-list...);
-  $best-name: nth($options, index($contrast-list, $best-ratio));
-  $best-color: nth($color-list, index($contrast-list, $best-ratio));
-
-  @if ($return == 'map') {
-    @return (
-      'name': $best-name,
-      'color': $best-color,
-    );
-  } @else if ($return == 'name') {
-    @return $best-name;
+  @if (map-get($best, 'name')) {
+    @return map-get($best, $return) or $best;
   }
 
-  @return $best-color;
+  @return false;
+}
+
+
+// Valid Contrast
+// --------------
+/// Return a valid contrast ratio or `false`
+///
+/// @access private
+/// @param {'AA' | 'AA-large' | 'AAA' | 0-21} $ratio -
+///   WCAG or 0-21 contrast ratios will pass validation,
+///   all other values will return false
+@function _a_valid-contrast(
+  $ratio
+) {
+  @if (type-of($ratio) == 'number') and ($ratio >= 1) and ($ratio <= 21) {
+    @return $ratio;
+  }
+
+  $uppercase: (
+    'aaa': 'AAA',
+    'aa': 'AA',
+    'aa-large': 'AA-large'
+  );
+
+  $ratio: map-get($uppercase, $ratio) or $ratio;
+  @return map-get($WCAG-CONTRAST, $ratio);
 }

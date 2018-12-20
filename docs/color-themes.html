@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Contrast » CSS Variables | Accoutrement Documentation</title>
+  <title>Themes | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.1.0-beta.1</span>
+          <span class="project-version">2.1.0</span>
         
       </div>
     </header>
@@ -237,22 +237,22 @@
   
   
     <li class="nav-item">
-      <a href="color-contrast.html" data-nav="is-not-active">Contrast</a>
-    </li>
-  
-  
-    <li class="nav-item">
       <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-vars-contrast.html" data-nav="is-active">Contrast » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-contrast.html" data-nav="is-not-active">Contrast &amp;<span class="widont">&nbsp;</span>Accessibility</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-not-active">Color Functions</a>
+      <a href="color-utils.html" data-nav="is-not-active">Adjustments</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="color-themes.html" data-nav="is-active">Themes</a>
     </li>
   </ul>
             </li>
@@ -405,11 +405,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Contrast » CSS Variables</strong>
+    <strong>Themes</strong>
   </nav>
 
 
-        <div data-page="color-vars-contrast">
+        <div data-page="color-themes">
           
   
     
@@ -434,9 +434,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="contrast-css-variables">Contrast » CSS<span class="widont">&nbsp;</span>Variables</h1>
-<p>Extend the <a href="color-contrast.html">color contrast</a> utilities
-to support CSS-variable<span class="widont">&nbsp;</span>output.</p>
+      <h1 id="color-themes">Color Themes</h1>
 
       
   
@@ -501,7 +499,7 @@ to support CSS-variable<span class="widont">&nbsp;</span>output.</p>
 
 
 
-<section class="item" id="function--var-contrast">
+<section class="item" id="function--shades-of">
   
     
   
@@ -519,7 +517,7 @@ to support CSS-variable<span class="widont">&nbsp;</span>output.</p>
       
 
       
-        <a href="#function--var-contrast" class="item-name">var-contrast()</a>
+        <a href="#function--shades-of" class="item-name">shades-of()</a>
       
 
       
@@ -540,9 +538,11 @@ to support CSS-variable<span class="widont">&nbsp;</span>output.</p>
 
   
     <div class="text-block">
-      <p>An extension of the <code>contrast</code> function,
-designed to output CSS variables
-rather than simple color<span class="widont">&nbsp;</span>values.</p>
+      <p>Generates an accoutrement map of light/dark color variations
+from a map of user-defined colors,
+based on luminosity.
+The origin color will be included in the appropriate spot,
+based on it’s own<span class="widont">&nbsp;</span>luminosity.</p>
 
       
   
@@ -550,7 +550,388 @@ rather than simple color<span class="widont">&nbsp;</span>values.</p>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Provides access to contrast colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
+<li>NEW: Generate consistent tint/shade themes from arbitrary<span class="widont">&nbsp;</span>colors</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$origin:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>user-color map to use as a basis for generating the<span class="widont">&nbsp;</span>theme</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$range:</span>
+      
+      <span class="item-value">3</span>
+      <span class="value-type">(integer)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>number of dark and light variations desired,
+in addition to the<span class="widont">&nbsp;</span>midpoint</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$user-colors: (
+  &#39;primary&#39;: blue,
+  &#39;accent&#39;: red,
+);
+@include add-colors($user-colors);
+
+$theme-colors: shades-of($user-colors, 2);
+@include add-colors($theme-colors);
+
+@each $name, $value in $theme-colors {
+/* #{$name}: #{$value} */
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/* primary-dark-2: #primary (&quot;shade&quot;: 40%) */
+/* primary-dark-1: #primary */
+/* primary-0: #primary (&quot;tint&quot;: 15.38462%) */
+/* primary-light-1: #primary (&quot;tint&quot;: 46.15385%) */
+/* primary-light-2: #primary (&quot;tint&quot;: 76.92308%) */
+/* accent-dark-2: #accent (&quot;shade&quot;: 40%) */
+/* accent-dark-1: #accent */
+/* accent-0: #accent (&quot;tint&quot;: 15.38462%) */
+/* accent-light-1: #accent (&quot;tint&quot;: 46.15385%) */
+/* accent-light-2: #accent (&quot;tint&quot;: 76.92308%) */
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-api.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--luminance" class="item-name">luminance()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--stripe-colors">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--stripe-colors" class="item-name">stripe-colors()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Create color-stops for a striped gradient background,
+from any number of<span class="widont">&nbsp;</span>colors</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
 </ul>
 </div>
       </section>
@@ -598,48 +979,17 @@ rather than simple color<span class="widont">&nbsp;</span>values.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$color:</span>
+        <span class="item-name">$colors...:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or value of a<span class="widont">&nbsp;</span>color.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$options...:</span>
-      
-      <span class="item-value">black, white</span>
-      <span class="value-type">(colors)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Two or more colors to contrast against.
-This function will choose the best contrast of all the options provided,
-or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
-if they are defined in your color palette,
-otherwise <code>white</code> and <code>black</code> are the default<span class="widont">&nbsp;</span>options.</p>
+        <p>ArgList of colors</p>
 
       </div>
     
@@ -661,16 +1011,14 @@ otherwise <code>white</code> and <code>black</code> are the default<span class="
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>var())</span>
+      <span class="value-type">(color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>CSS Variable for the color-option
-that has the highest contrast-ratio to <code>$color</code>,
-or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
 
       </div>
     
@@ -682,30 +1030,6 @@ or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
   
 
       
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Provide at least two contrasting <code>$options…</code> for comparison</p>
-
-      </div>
-    
-  </div>
-
-    
   
 
     
@@ -720,7 +1044,7 @@ or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Examples</span>
+        <span class="item-subtitle-main">Example</span>
       </h3>
 
       
@@ -751,18 +1075,16 @@ or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
           </span>
 
           
-            <span class='code-description'>
-              use CSS variables when available
-            </span>
-          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (&#39;my-color&#39;: lightpink);
-html {
-  background: var-contrast(#333, &#39;my-color&#39;);
+      <pre class="hljs-pre"><code class="lang-scss">[data-theme=&#39;rainbow&#39;] {
+  background: linear-gradient(
+    to right,
+    stripe-colors(red, orange, yellow, green, blue, indigo, violet)
+  );
 }</code></pre>
     </div>
   
@@ -785,81 +1107,8 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
-  background: var(--color-my-color, lightpink);
-}
-</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-            <span class='code-description'>
-              direct output when contrast options are private
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">html {
-  color: var-contrast(#eee);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  color: black;
+      <pre class="hljs-pre"><code class="lang-css">[data-theme=&#39;rainbow&#39;] {
+  background: linear-gradient(to right, red 0% 14.28571%, orange 14.28571% 28.57143%, yellow 28.57143% 42.85714%, green 42.85714% 57.14286%, blue 57.14286% 71.42857%, indigo 71.42857% 85.71429%, violet 85.71429% 100%);
 }
 </code></pre>
     </div>
@@ -914,80 +1163,12 @@ html {
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get-contrast()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
         <a href="
-  core-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
+  color-api.html#function--color" class="item-name">color()</a>
       
       
       
       
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_var-name()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -1018,16 +1199,28 @@ html {
       
       
         <a href="
-  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+  color-api.html#variable--colors" class="item-name">$colors</a>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
 
         
       
@@ -1067,7 +1260,7 @@ html {
       <span class="item-type">@mixin</span>
       
         <a href="
-  color-vars-contrast.html#mixin--var-contrasted" class="item-name">var-contrasted()</a>
+  color-themes.html#mixin--stripe-colors" class="item-name">stripe-colors()</a>
       
       
       
@@ -1113,7 +1306,7 @@ html {
 
 
 
-<section class="item" id="mixin--var-contrasted">
+<section class="item" id="mixin--stripe-colors">
   
     
   
@@ -1131,7 +1324,7 @@ html {
       
 
       
-        <a href="#mixin--var-contrasted" class="item-name">var-contrasted()</a>
+        <a href="#mixin--stripe-colors" class="item-name">stripe-colors()</a>
       
 
       
@@ -1152,11 +1345,7 @@ html {
 
   
     <div class="text-block">
-      <p>Apply any background color as a CSS variable,
-along with the highest-contrast text color from a set of options.
-This works the same as the <code>var-contrast</code> function,
-but applies the resulting values to <code>background-color</code>
-and text <code>color</code> properties.</p>
+      <p>Create a striped gradient background from any number of<span class="widont">&nbsp;</span>colors</p>
 
       
   
@@ -1164,7 +1353,7 @@ and text <code>color</code> properties.</p>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Applies contrasting colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
 </ul>
 </div>
       </section>
@@ -1196,7 +1385,7 @@ and text <code>color</code> properties.</p>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        <span class="item-subtitle-main">Parameters</span>
         
       </h3>
     
@@ -1212,17 +1401,17 @@ and text <code>color</code> properties.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$background:</span>
+        <span class="item-name">$angle...:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      <span class="value-type">(gradient<span class="widont">&nbsp;</span>angle)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or value of your desired background<span class="widont">&nbsp;</span>color.</p>
+        <p>e.g. <code>to right</code> or <code>35deg</code></p>
 
       </div>
     
@@ -1239,20 +1428,17 @@ and text <code>color</code> properties.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$options...:</span>
+        <span class="item-name">$colors...:</span>
       
-      <span class="item-value">white, black</span>
-      <span class="value-type">(colors)</span>
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A list of colors to contrast against,
-defaulting to <code>white</code> and <code>black</code>
-or your <code>contrast-light</code> and <code>contrast-dark</code> settings
-if they are provided in the global <code>$colors</code> map.</p>
+        <p>ArgList of colors</p>
 
       </div>
     
@@ -1268,32 +1454,6 @@ if they are provided in the global <code>$colors</code> map.</p>
   
 
       
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <ul>
-<li>Sets the <code>background-color</code> to <code>$background</code>
-and the foreground <code>color</code> to
-whichever option has better contrast against the given<span class="widont">&nbsp;</span>background.</li>
-</ul>
-
-      </div>
-    
-  </div>
-
   
 
       
@@ -1347,13 +1507,11 @@ whichever option has better contrast against the given<span class="widont">&nbsp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;background&#39;: blue,
-  &#39;light&#39;: #eee,
-  &#39;dark&#39;: #111,
-);
-html {
-  @include var-contrasted(&#39;background&#39;, &#39;light&#39;, &#39;dark&#39;);
+      <pre class="hljs-pre"><code class="lang-scss">[data-theme=&#39;rainbow&#39;] {
+  @include stripe-colors(
+    to right,
+    red, orange, yellow, green, blue, indigo, violet
+  );
 }</code></pre>
     </div>
   
@@ -1376,9 +1534,8 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: var(--color-background, blue);
-  color: var(--color-light, #eee);
+      <pre class="hljs-pre"><code class="lang-css">[data-theme=&#39;rainbow&#39;] {
+  background-image: linear-gradient(to right, red 0% 14.28571%, orange 14.28571% 28.57143%, yellow 28.57143% 42.85714%, green 42.85714% 57.14286%, blue 57.14286% 71.42857%, indigo 71.42857% 85.71429%, violet 85.71429% 100%);
 }
 </code></pre>
     </div>
@@ -1433,7 +1590,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  color-vars.html#function--var-color" class="item-name">var-color()</a>
+  color-themes.html#function--stripe-colors" class="item-name">stripe-colors()</a>
       
       
       
@@ -1465,13 +1622,13 @@ html {
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      
       
         <a href="
-  color-vars-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
+  color-api.html#variable--colors" class="item-name">$colors</a>
       
       
-      
+      <span class="value-type">(map)</span>
       
     </h4>
 

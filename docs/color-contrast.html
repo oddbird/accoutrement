@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Contrast | Accoutrement Documentation</title>
+  <title>Contrast &amp; Accessibility | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.1.0-beta.1</span>
+          <span class="project-version">2.1.0</span>
         
       </div>
     </header>
@@ -237,22 +237,22 @@
   
   
     <li class="nav-item">
-      <a href="color-contrast.html" data-nav="is-active">Contrast</a>
-    </li>
-  
-  
-    <li class="nav-item">
       <a href="color-vars.html" data-nav="is-not-active">Colors » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-vars-contrast.html" data-nav="is-not-active">Contrast » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-contrast.html" data-nav="is-active">Contrast &amp;<span class="widont">&nbsp;</span>Accessibility</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-not-active">Color Functions</a>
+      <a href="color-utils.html" data-nav="is-not-active">Adjustments</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="color-themes.html" data-nav="is-not-active">Themes</a>
     </li>
   </ul>
             </li>
@@ -405,7 +405,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Contrast</strong>
+    <strong>Contrast &amp; Accessibility</strong>
   </nav>
 
 
@@ -434,7 +434,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="managing-contrast-accessibility">Managing Contrast &amp;<span class="widont">&nbsp;</span>Accessibility</h1>
+      <h1 id="contrast-accessibility">Contrast &amp; Accessibility</h1>
 
       
   
@@ -619,18 +619,24 @@ in your global <code>$colors</code> map.</p>
         <span class="item-name">$options...:</span>
       
       
-      <span class="value-type">(colors)</span>
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A list of colors to contrast against,
-defaulting to <code>white</code> and <code>black</code>
-or your <code>contrast-light</code> and <code>contrast-dark</code> settings
-(with or without a private <code>_</code> prefix)
-if they are provided in the global <code>$colors</code> map.</p>
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
 
       </div>
     
@@ -659,7 +665,8 @@ if they are provided in the global <code>$colors</code> map.</p>
     
       
       <div class="param-details text-block">
-        <p>Whichever color-option has the highest contrast-ratio to <code>$color</code>.</p>
+        <p>Whichever color-option has the highest contrast-ratio to <code>$color</code>,
+or the minimum needed contrast to meet a given accessibility<span class="widont">&nbsp;</span>ratio.</p>
 
       </div>
     
@@ -717,7 +724,7 @@ if they are provided in the global <code>$colors</code> map.</p>
 
           
             <span class='code-description'>
-              default options
+              max contrast
             </span>
           
         </div>
@@ -725,10 +732,16 @@ if they are provided in the global <code>$colors</code> map.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$background: #333;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
 html {
-  background: $background;
-  color: contrast($background);
+  color: contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
 }</code></pre>
     </div>
   
@@ -752,7 +765,6 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background: #333;
   color: white;
 }
 </code></pre>
@@ -793,7 +805,7 @@ html {
 
           
             <span class='code-description'>
-              explicit options
+              min contrast
             </span>
           
         </div>
@@ -801,10 +813,17 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$background: #333;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
 html {
-  background: $background;
-  color: contrast($background, red, orange, yellow, green, blue, indigo);
+  color: contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
 }</code></pre>
     </div>
   
@@ -828,8 +847,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background: #333;
-  color: yellow;
+  color: #eee;
 }
 </code></pre>
     </div>
@@ -884,7 +902,7 @@ html {
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get-contrast()</span>
+        <span class="item-name">_a_best-contrast()</span>
       
       
       
@@ -934,6 +952,616 @@ html {
       
         <a href="
   color-contrast.html#mixin--contrasted" class="item-name">contrasted()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-contrast">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--var-contrast" class="item-name">var-contrast()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>An extension of the <code>contrast</code> function,
+designed to output CSS variables
+rather than simple color<span class="widont">&nbsp;</span>values.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Provides access to contrast colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or value of a<span class="widont">&nbsp;</span>color.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$options...:</span>
+      
+      
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>var())</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>CSS Variable for the color-option
+that has the highest contrast-ratio to <code>$color</code>,
+or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              max contrast / no variable names
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  color: var-contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: white;
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              min contrast / variable names
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  color: var-contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: var(--color-light, #eee);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_best-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  core-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_var-name()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-contrast.html#mixin--var-contrasted" class="item-name">var-contrasted()</a>
       
       
       
@@ -1097,19 +1725,25 @@ and text <code>color</code> properties.</p>
       
         <span class="item-name">$options...:</span>
       
-      <span class="item-value">white, black</span>
-      <span class="value-type">(colors)</span>
+      
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A list of colors to contrast against,
-defaulting to <code>white</code> and <code>black</code>
-or your <code>contrast-light</code> and <code>contrast-dark</code> settings
-(with or without a private <code>_</code> prefix)
-if they are provided in the global <code>$colors</code> map.</p>
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
 
       </div>
     
@@ -1143,8 +1777,9 @@ if they are provided in the global <code>$colors</code> map.</p>
       <div class="param-details text-block">
         <ul>
 <li>Sets the <code>background-color</code> to <code>$background</code>
-and the foreground <code>color</code> to
-whichever option has better contrast against the given<span class="widont">&nbsp;</span>background.</li>
+and <code>color</code> to the option with
+highest contrast against that background,
+or minimum contrast that still meets a given accessibility<span class="widont">&nbsp;</span>ratio.</li>
 </ul>
 
       </div>
@@ -1200,7 +1835,7 @@ whichever option has better contrast against the given<span class="widont">&nbsp
 
           
             <span class='code-description'>
-              default options
+              max contrast
             </span>
           
         </div>
@@ -1208,9 +1843,16 @@ whichever option has better contrast against the given<span class="widont">&nbsp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$background: #333;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
 html {
-  @include contrasted($background);
+  @include contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
 }</code></pre>
     </div>
   
@@ -1234,7 +1876,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: #333;
+  background-color: blue;
   color: white;
 }
 </code></pre>
@@ -1275,7 +1917,7 @@ html {
 
           
             <span class='code-description'>
-              explicit options
+              min contrast
             </span>
           
         </div>
@@ -1283,9 +1925,17 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$background: #333;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
 html {
-  @include contrasted($background, red, orange, yellow, green, blue, indigo);
+  @include contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
 }</code></pre>
     </div>
   
@@ -1309,8 +1959,8 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: #333;
-  color: yellow;
+  background-color: blue;
+  color: #eee;
 }
 </code></pre>
     </div>
@@ -1447,6 +2097,505 @@ html {
 
 
 
+<section class="item" id="mixin--var-contrasted">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--var-contrasted" class="item-name">var-contrasted()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Apply any background color as a CSS variable,
+along with the highest-contrast text color from a set of options.
+This works the same as the <code>var-contrast</code> function,
+but applies the resulting values to <code>background-color</code>
+and text <code>color</code> properties.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Applies contrasting colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$background:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or value of your desired background<span class="widont">&nbsp;</span>color.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$options...:</span>
+      
+      
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>Sets the <code>background-color</code> to <code>$background</code>
+and the foreground <code>color</code> to
+whichever option has better contrast against the given<span class="widont">&nbsp;</span>background.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              max contrast
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  @include var-contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var(--color-background, blue);
+  color: white;
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              min contrast
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  @include var-contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var(--color-background, blue);
+  color: var(--color-light, #eee);
+}
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-vars.html#function--var-color" class="item-name">var-color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="function--contrast-ratio">
   
     
@@ -1486,7 +2635,7 @@ html {
 
   
     <div class="text-block">
-      <p>Compare two colors using the WCAG comparison algorythm,
+      <p>Compare two colors using the WCAG comparison algorithm,
 and return the resulting contrast-ratio.
 Optionally pass in a standard (AA, AAA, AA-large)
 and return <code>false</code> when the contrast-check<span class="widont">&nbsp;</span>fails.</p>
@@ -1853,9 +3002,9 @@ The function will return <code>false</code> if the required ratio is not<span cl
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
       
-      
-        <span class="item-name">$WCAG-CONTRAST</span>
+        <span class="item-name">_a_valid-contrast()</span>
       
       
       
@@ -1903,7 +3052,7 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get-contrast()</span>
+        <span class="item-name">_a_best-contrast()</span>
       
       
       
@@ -2292,7 +3441,38 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_get-contrast()</span>
+        <a href="
+  color-themes.html#function--shades-of" class="item-name">shades-of()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_best-contrast()</span>
       
       
       

@@ -37,10 +37,10 @@ groups:
   'Plugin/Color':
     color: 'QuickStart: Color'
     color-api: 'Color Maps'
-    color-contrast: 'Contrast'
     color-vars: 'Colors » CSS Variables'
-    color-vars-contrast: 'Contrast » CSS Variables'
-    color-utils: 'Color Functions'
+    color-contrast: 'Contrast & Accessibility'
+    color-utils: 'Adjustments'
+    color-themes: 'Themes'
   'Plugin/Layout':
     layout: 'QuickStart: Layout'
     layout-queries: 'Media Breakpoint Maps'

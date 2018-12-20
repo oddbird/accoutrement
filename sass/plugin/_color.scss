@@ -14,7 +14,7 @@
 @import 'color/api';
 @import 'color/css-vars';
 @import 'color/contrast';
-@import 'color/contrast-vars';
+@import 'color/themes';
 
 
 /// ## Import
@@ -111,7 +111,7 @@
 ///   // set a background, and get well-contrasted text
 ///   @include contrasted('link');
 ///
-///   // or return a contrasting color for use anywhere…
+///   // or return a contrasting color from a set of options…
 ///   border-color: contrast('background', white, rebeccapurple);
 /// }
 /// ```
