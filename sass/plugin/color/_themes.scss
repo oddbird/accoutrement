@@ -10,12 +10,10 @@
 /// The origin color will be included in the appropriate spot,
 /// based on it's own luminosity.
 ///
-/// @param {map} $origin -
-///   user-color map to use as a basis for generating the theme
-/// @param {integer} $range [1] -
-///   number of dark and light variations desired,
-///   in addition to the midpoint
+/// @since 2.1.0 -
+/// - NEW: Generate consistent tint/shade themes from arbitrary colors
 ///
+/// @group color-themes
 /// @example scss
 ///   $user-colors: (
 ///     'primary': blue,
@@ -29,10 +27,15 @@
 ///   @each $name in map-keys($theme-colors) {
 ///   /* #{$name}: #{color($name)} */
 ///   }
-/// @group color-themes
+///
+/// @param {map} $origin -
+///   user-color map to use as a basis for generating the theme
+/// @param {integer} $range [3] -
+///   number of dark and light variations desired,
+///   in addition to the midpoint
 @function shades-of(
   $origin,
-  $range: 2
+  $range: 3
 ) {
   $adjust: (
     'light': 'tint',
@@ -68,4 +71,38 @@
   }
 
   @return $theme;
+}
+
+
+// Stripe Colors
+// -------------
+/// Create color-stops for a striped gradient background,
+/// from any number of colors
+///
+/// @since 2.1.0 -
+/// - NEW: Especially useful for viewing generated color palettes
+///
+/// @group color-themes
+/// @example scss
+///   [data-theme='light'] {
+///     background: linear-gradient(to right, stripe-colors
+///   }
+///
+/// @param {string | color} $colors... -
+///   ArgList of colors
+/// @return {color} -
+///   A calculated css-ready color-value based on your global color palette.
+@function stripe-colors(
+  $colors...
+) {
+  $gradient: ();
+  $width: 100% / length($colors);
+
+  @for $i from 1 through length($colors) {
+    $pop: color(nth($colors, $i));
+    $new: $pop ($width * ($i - 1)) ($width * $i);
+    $gradient: append($gradient, $new, comma);
+  }
+
+  @return $gradient;
 }

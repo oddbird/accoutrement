@@ -304,12 +304,7 @@
       color('contrast-dark')
     );
   }
-}
 
-
-// Min Contrast [function]
-// -----------------------
-@include describe('Min Contrast [function]') {
   @include it('Returns the minimum contrast for a given ratio') {
     @include assert-equal(
       contrast(
@@ -351,12 +346,7 @@
       }
     }
   }
-}
 
-
-// Min Contrasted [mixin]
-// ----------------------
-@include describe('Min Contrasted [mixin]') {
   @include it('Returns the minimum contrast for a given ratio') {
     @include assert {
       @include output {
@@ -369,6 +359,42 @@
       @include expect {
         background-color: color('primary');
         color: #eee;
+      }
+    }
+  }
+}
+
+
+// var-contrast [function]
+// -----------------------
+@include describe('var-contrast [function]') {
+  @include it('Returns a contrasting CSS variable when available') {
+    @include assert-equal(
+      var-contrast('blue', 'dark', 'light'),
+      var(--color-dark, #111)
+    );
+  }
+
+  @include it('Returns a contrasting color when no variable') {
+    @include assert-equal(
+      var-contrast('blue', #111, #eee),
+      #111
+    );
+  }
+}
+
+// var-contrasted [function]
+// -------------------------
+@include describe('var-contrasted [function]') {
+  @include it('Creates a background and contrasting color with CSS variables') {
+    @include assert {
+      @include output {
+        @include var-contrasted('blue', 'light', 'dark');
+      }
+
+      @include expect {
+        background-color: var-color('blue');
+        color: var-color('dark');
       }
     }
   }

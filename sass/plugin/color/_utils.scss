@@ -70,33 +70,3 @@
   @return mix(color($dark), color($color), $percentage);
 }
 @include _a_register-function('shade');
-
-
-// Stripe Colors
-// -------------
-/// Create color-stops for a striped gradient background,
-/// from any number of colors
-///
-/// @since 2.1.0 -
-/// - NEW: Especially useful for viewing generated color palettes
-///
-/// @group color-utils
-///
-/// @param {string | color} $colors... -
-///   ArgList of colors
-/// @return {color} -
-///   A calculated css-ready color-value based on your global color palette.
-@function stripe-colors(
-  $colors...
-) {
-  $gradient: ();
-  $width: 100% / length($colors);
-
-  @for $i from 1 through length($colors) {
-    $pop: color(nth($colors, $i));
-    $new: $pop ($width * ($i - 1)), $pop ($width * $i);
-    $gradient: join($gradient, $new, comma);
-  }
-
-  @return $gradient;
-}

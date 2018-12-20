@@ -10,7 +10,7 @@
   $lint: percentage(1 / 3.25);
   @include it('Generates a range of shades based on the origin color') {
     @include assert-equal(
-      shades-of('simple'),
+      shades-of('simple', 2),
       (
         'simple-dark-2': '#simple' ('shade': (0.5 * $dint)),
         'simple-dark-1': '#simple',
@@ -20,7 +20,6 @@
       )
     );
   }
-
 
   @include it('Generates a range of shades based on a map') {
     $int1: percentage(1 / 1.25);
@@ -39,6 +38,23 @@
         'two-dark-1': ('#two' ('shade': (1.5 * $int2))),
         'two-0': ('#two' ('shade': (0.5 * $int2))),
         'two-light-1': '#two'
+      )
+    );
+  }
+}
+
+
+// Stripe Colors [function]
+// ------------------------
+@include describe('Stripe Colors [function]') {
+  @include it('Generates color-stops for a striped gradient') {
+    @include assert-equal(
+      stripe-colors(red, orange, yellow, 'primary'),
+      (
+        red 0 25%,
+        orange 25% 50%,
+        yellow 50% 75%,
+        color('primary') 75% 100%,
       )
     );
   }

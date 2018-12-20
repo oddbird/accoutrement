@@ -43,21 +43,4 @@
 }
 
 
-// Stripe Colors [function]
-// ------------------------
-@include describe('Stripe Colors [function]') {
-  @include it('Generates color-stops for a striped gradient') {
-    @include assert-equal(
-      stripe-colors(red, orange, yellow, 'primary'),
-      (
-        red 0, red 25%,
-        orange 25%, orange 50%,
-        yellow 50%, yellow 75%,
-        color('primary') 75%, color('primary') 100%,
-      )
-    );
-  }
-}
-
-
 } // end module
