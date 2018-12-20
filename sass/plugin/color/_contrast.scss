@@ -55,11 +55,12 @@ $WCAG-CONTRAST: (
 /// @param {string | list} $color -
 ///   The name or value of a color.
 /// @param {colors | min-contrast} $options... -
-///   - List of colors to contrast against.
-///     This function will choose the best contrast
-///     of all the options provided,
-///     or the `contrast-light` and `contrast-dark` defaults
-///     defined in your color palette or the factory settings.
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
 ///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
 ///     will be treated as a minimum color-contrast ratio –
 ///     and will return the minimum accessible option,
@@ -114,11 +115,12 @@ $WCAG-CONTRAST: (
 /// @param {string | list} $color -
 ///   The name or value of a color.
 /// @param {colors | min-contrast} $options... -
-///   - List of colors to contrast against.
-///     This function will choose the best contrast
-///     of all the options provided,
-///     or the `contrast-light` and `contrast-dark` defaults
-///     defined in your color palette or the factory settings.
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
 ///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
 ///     will be treated as a minimum color-contrast ratio –
 ///     and will return the minimum accessible option,
@@ -154,28 +156,41 @@ $WCAG-CONTRAST: (
 /// and text `color` properties.
 ///
 /// @group color-contrast
-/// @example scss - default options
-///   $background: #333;
-///   html {
-///     @include contrasted($background);
-///   }
-/// @example scss - explicit options
-///   $background: #333;
+/// @example scss - max contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
 ///   html {
 ///     @include contrasted(
-///       $background,
-///       red, orange, yellow, green, blue, indigo
+///       'background',
+///       'light', 'dark', black, white
+///     );
+///   }
+/// @example scss - min contrast
+///   $colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     @include contrasted(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
 ///     );
 ///   }
 ///
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
 /// @param {colors | min-contrast} $options... -
-///   - List of colors to contrast against.
-///     This function will choose the best contrast
-///     of all the options provided,
-///     or the `contrast-light` and `contrast-dark` defaults
-///     defined in your color palette or the factory settings.
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
 ///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
 ///     will be treated as a minimum color-contrast ratio –
 ///     and will return the minimum accessible option,
@@ -236,11 +251,12 @@ $WCAG-CONTRAST: (
 /// @param {string | list} $background -
 ///   The name or value of your desired background color.
 /// @param {colors | min-contrast} $options... -
-///   - List of colors to contrast against.
-///     This function will choose the best contrast
-///     of all the options provided,
-///     or the `contrast-light` and `contrast-dark` defaults
-///     defined in your color palette or the factory settings.
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
 ///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
 ///     will be treated as a minimum color-contrast ratio –
 ///     and will return the minimum accessible option,

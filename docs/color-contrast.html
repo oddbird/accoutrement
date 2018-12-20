@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Contrast | Accoutrement Documentation</title>
+  <title>Contrast &amp; Accessibility | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -242,7 +242,7 @@
   
   
     <li class="nav-item">
-      <a href="color-contrast.html" data-nav="is-active">Contrast</a>
+      <a href="color-contrast.html" data-nav="is-active">Contrast &amp;<span class="widont">&nbsp;</span>Accessibility</a>
     </li>
   
   
@@ -405,7 +405,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Contrast</strong>
+    <strong>Contrast &amp; Accessibility</strong>
   </nav>
 
 
@@ -626,19 +626,16 @@ in your global <code>$colors</code> map.</p>
     
       
       <div class="param-details text-block">
-        <ul>
-<li>List of colors to contrast against.
+        <p>List of colors to contrast against.
 This function will choose the best contrast
 of all the options provided,
 or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
-defined in your color palette or the factory settings.
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
 <ul>
 <li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
 will be treated as a minimum color-contrast ratio –
 and will return the minimum accessible option,
 rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
-</ul>
-</li>
 </ul>
 
       </div>
@@ -1134,19 +1131,16 @@ rather than simple color<span class="widont">&nbsp;</span>values.</p>
     
       
       <div class="param-details text-block">
-        <ul>
-<li>List of colors to contrast against.
+        <p>List of colors to contrast against.
 This function will choose the best contrast
 of all the options provided,
 or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
-defined in your color palette or the factory settings.
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
 <ul>
 <li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
 will be treated as a minimum color-contrast ratio –
 and will return the minimum accessible option,
 rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
-</ul>
-</li>
 </ul>
 
       </div>
@@ -1739,19 +1733,16 @@ and text <code>color</code> properties.</p>
     
       
       <div class="param-details text-block">
-        <ul>
-<li>List of colors to contrast against.
+        <p>List of colors to contrast against.
 This function will choose the best contrast
 of all the options provided,
 or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
-defined in your color palette or the factory settings.
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
 <ul>
 <li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
 will be treated as a minimum color-contrast ratio –
 and will return the minimum accessible option,
 rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
-</ul>
-</li>
 </ul>
 
       </div>
@@ -1844,7 +1835,7 @@ or minimum contrast that still meets a given accessibility<span class="widont">&
 
           
             <span class='code-description'>
-              default options
+              max contrast
             </span>
           
         </div>
@@ -1852,9 +1843,16 @@ or minimum contrast that still meets a given accessibility<span class="widont">&
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$background: #333;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
 html {
-  @include contrasted($background);
+  @include contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
 }</code></pre>
     </div>
   
@@ -1878,7 +1876,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: #333;
+  background-color: blue;
   color: white;
 }
 </code></pre>
@@ -1919,7 +1917,7 @@ html {
 
           
             <span class='code-description'>
-              explicit options
+              min contrast
             </span>
           
         </div>
@@ -1927,11 +1925,16 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$background: #333;
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
 html {
   @include contrasted(
-    $background,
-    red, orange, yellow, green, blue, indigo
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
   );
 }</code></pre>
     </div>
@@ -1956,8 +1959,8 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: #333;
-  color: yellow;
+  background-color: blue;
+  color: #eee;
 }
 </code></pre>
     </div>
@@ -2230,19 +2233,16 @@ and text <code>color</code> properties.</p>
     
       
       <div class="param-details text-block">
-        <ul>
-<li>List of colors to contrast against.
+        <p>List of colors to contrast against.
 This function will choose the best contrast
 of all the options provided,
 or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
-defined in your color palette or the factory settings.
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
 <ul>
 <li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
 will be treated as a minimum color-contrast ratio –
 and will return the minimum accessible option,
 rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
-</ul>
-</li>
 </ul>
 
       </div>

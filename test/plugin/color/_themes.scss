@@ -61,4 +61,23 @@
 }
 
 
+// Stripe Colors [mixin]
+// ---------------------
+@include describe('Stripe Colors [mixin]') {
+  @include it('Generates a striped gradient') {
+    @include assert {
+      @include output {
+        @include stripe-colors(to right, red, orange, yellow, 'primary');
+      }
+      @include expect {
+        background-image: linear-gradient(
+          to right,
+          stripe-colors(red, orange, yellow, 'primary')
+        );
+      }
+    }
+  }
+}
+
+
 } // end module

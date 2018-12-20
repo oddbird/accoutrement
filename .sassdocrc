@@ -38,7 +38,7 @@ groups:
     color: 'QuickStart: Color'
     color-api: 'Color Maps'
     color-vars: 'Colors » CSS Variables'
-    color-contrast: 'Contrast'
+    color-contrast: 'Contrast & Accessibility'
     color-utils: 'Adjustments'
     color-themes: 'Themes'
   'Plugin/Layout':

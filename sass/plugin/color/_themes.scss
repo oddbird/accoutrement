@@ -21,11 +21,11 @@
 ///   );
 ///   @include add-colors($user-colors);
 ///
-///   $theme-colors: shades-of($user-colors, 3);
+///   $theme-colors: shades-of($user-colors, 2);
 ///   @include add-colors($theme-colors);
 ///
-///   @each $name in map-keys($theme-colors) {
-///   /* #{$name}: #{color($name)} */
+///   @each $name, $value in $theme-colors {
+///   /* #{$name}: #{$value} */
 ///   }
 ///
 /// @param {map} $origin -
@@ -84,8 +84,11 @@
 ///
 /// @group color-themes
 /// @example scss
-///   [data-theme='light'] {
-///     background: linear-gradient(to right, stripe-colors
+///   [data-theme='rainbow'] {
+///     background: linear-gradient(
+///       to right,
+///       stripe-colors(red, orange, yellow, green, blue, indigo, violet)
+///     );
 ///   }
 ///
 /// @param {string | color} $colors... -
@@ -105,4 +108,32 @@
   }
 
   @return $gradient;
+}
+
+
+// Stripe Colors
+// -------------
+/// Create a striped gradient background from any number of colors
+///
+/// @since 2.1.0 -
+/// - NEW: Especially useful for viewing generated color palettes
+///
+/// @group color-themes
+/// @example scss
+///   [data-theme='rainbow'] {
+///     @include stripe-colors(
+///       to right,
+///       red, orange, yellow, green, blue, indigo, violet
+///     );
+///   }
+///
+/// @param {gradient angle} $angle... -
+///   e.g. `to right` or `35deg`
+/// @param {string | color} $colors... -
+///   ArgList of colors
+@mixin stripe-colors(
+  $angle,
+  $colors...
+) {
+  background-image: linear-gradient($angle, stripe-colors($colors...));
 }
