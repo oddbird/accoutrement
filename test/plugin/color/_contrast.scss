@@ -216,18 +216,33 @@
 
   @include it('Can selects the minimum-best for a given ratio') {
     @include assert-equal(
-      _a_best-contrast(black, map-keys($colors), 'ratio', 'aa-large'),
-      contrast-ratio(black, 'gray-dark-5')
+      _a_best-contrast(
+        black,
+        append(map-keys($colors), 'aa-large'),
+        'ratio'
+      ),
+      contrast-ratio(black, 'gray-dark-3'),
+      'aa-large'
     );
 
     @include assert-equal(
-      _a_best-contrast(black, map-keys($colors), 'name', 'aa'),
-      'gray-dark-4'
+      _a_best-contrast(
+        black,
+        append(map-keys($colors), 'aa'),
+        'name'
+      ),
+      'gray',
+      'aa'
     );
 
     @include assert-equal(
-      _a_best-contrast(black, map-keys($colors), 'ratio', 'aaa'),
-      contrast-ratio(black, 'gray-0')
+      _a_best-contrast(
+        black,
+        append(map-keys($colors), 'aaa'),
+        'ratio'
+      ),
+      contrast-ratio(black, 'gray-0'),
+      'aaa'
     );
   }
 
@@ -297,7 +312,11 @@
 @include describe('Min Contrast [function]') {
   @include it('Returns the minimum contrast for a given ratio') {
     @include assert-equal(
-      min-contrast('primary', 'AA-large', #ff0, #fcc, #0f0, 'light', #003),
+      contrast(
+        'primary',
+        #ff0, #fcc, #0f0, 'light', #003,
+        'AA-large'
+      ),
       #eee
     );
   }
@@ -341,10 +360,10 @@
   @include it('Returns the minimum contrast for a given ratio') {
     @include assert {
       @include output {
-        @include min-contrasted(
+        @include contrasted(
           'primary',
-          'AA-large',
-          #ff0, #fcc, #0f0, 'light', #003
+          #ff0, #fcc, #0f0, 'light', #003,
+          'AA-large'
         );
       }
       @include expect {

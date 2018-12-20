@@ -42,21 +42,13 @@
   $theme: ();
   $count: (2 * $range + 1);
 
-  // Generate a map from keys
-  @if (type-of($origin) != 'map') {
-    $map: ();
-
-    @each $item in $origin {
-      $map: map-merge($map, ($item: color($item)));
-    }
-
-    $origin: $map;
-  }
-
-  // generate shades
   @each $name, $color in $origin {
-    $lum: luminance($name);
-    $pos: ceil($lum * $count) - ($range + 1);
+    $color: color($name);
+    $light: lightness($color);
+    $light: if($light == 0, 0.00000001%, $light);
+    $lum: luminance($color);
+    $avg: (($light / 100%) + $lum) / 2;
+    $pos: (ceil($avg * $count) - ($range + 1));
 
     @for $i from (0 - $range) through $range {
       $diff: $i - $pos;
@@ -65,8 +57,9 @@
       $value: '##{$name}';
 
       @if ($do) {
-        $int: percentage(1 / $count);
-        $amount: (abs($diff) * $int) - ($int / 2);
+        $distance: abs(if(($do == 'dark'), (0 - $range), $range) - $pos);
+        $interval: percentage(1 / ($distance + 0.25));
+        $amount: (abs($diff) - 0.5) * $interval;
         $value: $value (map-get($adjust, $do): $amount);
       }
 
