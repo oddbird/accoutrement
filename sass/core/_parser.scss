@@ -265,7 +265,7 @@ $_a_source-memo: ();
   $source
 ) {
   // Check memo…
-  $memo: map-get($_a_source-memo, $source);
+  $memo: map-get($_a_source-memo, quote($source));
 
   @if $memo {
     @return $memo;
@@ -284,7 +284,7 @@ $_a_source-memo: ();
   }
 
   // Store to memo…
-  $_a_source-memo: map-merge($_a_source-memo, ($source: $flat)) !global;
+  $_a_source-memo: map-merge($_a_source-memo, (quote($source): $flat)) !global;
 
   // Done…
   @return $flat;
