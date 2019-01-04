@@ -1,5 +1,10 @@
 # Accoutrement Changelog
 
+## 2.1.1 - 01/04/19
+
+- [Core][core]:
+  - BUGFIX (#31): Fixes an issue with longhand map memoization
+
 ## 2.1.0 - 12/20/18
 
 - [Plugin: Color][color]
