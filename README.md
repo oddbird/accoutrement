@@ -123,7 +123,7 @@ setup and syntax parsing:
 
 [get]: http://oddbird.net/accoutrement/docs/core-get.html
 [math]: http://oddbird.net/accoutrement/docs/core-math.html
-[ratio]: http://oddbird.net/accoutrement/docs/core-ratios.html
+[ratio]: http://oddbird.net/accoutrement/docs/core-ratio.html
 [list]: http://oddbird.net/accoutrement/docs/core-lists.html
 [string]: http://oddbird.net/accoutrement/docs/core-strings.html
 [functions]: http://oddbird.net/accoutrement/docs/core-register.html
