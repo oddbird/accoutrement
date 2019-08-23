@@ -1174,7 +1174,7 @@ with replacement values for each<span class="widont">&nbsp;</span>placeholder:</
   'root': 16px,
   'scale': 1vw,
   'responsive': (
-    '%value': calc(%s + %s),
+    '%value': 'calc(%s + %s)',
     '%s': '#root' '#scale',
   ),
 );
@@ -1304,7 +1304,7 @@ it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustme
   'root': 16px,
   'scale': 1vw,
   'responsive': (
-    '%value': calc(%s + %s),
+    '%value': 'calc(%s + %s)',
     '%s': (
       '#root' ('convert-units': 'rem'),
       '#scale' ('times': 2),
