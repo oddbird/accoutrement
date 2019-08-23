@@ -10,9 +10,6 @@
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
-  "engines": {
-    "node": ">=8"
-  },
   "keywords": [
     "sass",
     "accoutrement",

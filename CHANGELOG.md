@@ -2,7 +2,7 @@
 
 ## UNRELEASED
 
-- BREAKING: Drop support for node < 8
+- Upgrade dev dependencies.
 
 ## 2.1.1 - 01/04/19
 
