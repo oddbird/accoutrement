@@ -292,7 +292,7 @@
   $key,
   $do: null
 ) {
-  $val: map-get($map, $key) or $key;
+  $val: if(map-has-key($map, $key), map-get($map, $key), $key);
 
   // Handle deep keys
   @if ($val == $key)
