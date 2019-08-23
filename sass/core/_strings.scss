@@ -110,7 +110,7 @@
 ///   // so we can use string-functions to manipulate calc values…
 ///   $map: (
 ///     'root': 16px,
-///     'responsive': calc(%s + %s) ('%s': #root 0.5vw),
+///     'responsive': 'calc(%s + %s)' ('%s': '#root' 0.5vw),
 ///   );
 ///   /*! #{get-token($map, 'responsive')} */
 ///

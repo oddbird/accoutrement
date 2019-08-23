@@ -1,5 +1,9 @@
 # Accoutrement Changelog
 
+## UNRELEASED
+
+- Upgrade dev dependencies.
+
 ## 2.1.1 - 01/04/19
 
 - [Core][core]:
@@ -36,6 +40,7 @@
     when only one is defined (previously an error)
 
 ## 2.0.0 - 12/05/18
+
 The 2.0 release is primarily focused on
 support for **CSS Custom Properties** (aka CSS Variables),
 and access to nested-map tokens with `#outside->inside` syntax.
@@ -122,6 +127,7 @@ designing and testing several of these features.
     `fonts--()`, `font--()`, and `var-font()`
 
 ## 1.0.1 - 09/08/18
+
 - [Core][core]:
   - BUGFIX: Typos, including the `cinema` ratio spelling
     (thanks to @joelschou)
@@ -129,14 +135,17 @@ designing and testing several of these features.
     (thanks to @joelschou)
 
 ## 1.0.0 - 08/08/18
+
 - The stable 1.0 release is identical to `-beta.3`,
   see change details below
 
 ### 1.0.0-beta.3 - 08/03/18
+
 - [Plugin: Scale][scale]
   - BUGFIX: `size()` function removes quotes from string (calc) sizes
 
 ### 1.0.0-beta.2 - 07/27/18
+
 - [Core][core]:
   - NEW: `ratio()` function accepts `$source` argument,
     for passing in a custom source map
@@ -173,6 +182,7 @@ designing and testing several of these features.
     for passing in a custom font-source map
 
 ### 1.0.0-beta.1 - 07/18/18
+
 - NEW: Add `_index.scss` to simplify default "tools" import (core + plugins)
   in Eyeglass: `@import 'accoutrement';`
 - [Core][core]:
@@ -189,7 +199,7 @@ designing and testing several of these features.
 - [Plugin: Color][color]
   - BREAKING: `color()` functions accept `$do` arg
     for on-the-fly adjustments – 
-    *before* existing `$palette` argument
+    _before_ existing `$palette` argument
   - BREAKING: `$palette` argument renamed `$source`
     for consistency across plugins
 - [Plugin: Layout][layout]
@@ -215,8 +225,8 @@ designing and testing several of these features.
     e.g. `'Helvetica Neue, Helvetica, Arial'` or
     `'Helvetica Neue, Helvetica, Arial'`
 
-
 ## 0.1.0 - 07/12/18
+
 - BREAKING: All modules now use a shared map syntax,
   with explicit `#tag` references
   and the option for explicit value/adjustment maps.
@@ -259,7 +269,6 @@ designing and testing several of these features.
   - NEW: Automatically formats font-family stacks
     with proper commas & quotations for CSS output
 
-
 [core]: http://oddbird.net/accoutrement/docs/core.html
 [init]: http://oddbird.net/accoutrement/docs/init.html
 [animate]: http://oddbird.net/accoutrement/docs/animate.html
@@ -268,16 +277,16 @@ designing and testing several of these features.
 [scale]: http://oddbird.net/accoutrement/docs/scale.html
 [type]: http://oddbird.net/accoutrement/docs/type.html
 
-
 ## Older Changelogs, from individual modules:
-- [Accoutrement Init][IO]
-- [Accoutrement Color][CO]
-- [Accoutrement Layout][LO]
-- [Accoutrement Scale][SO]
-- [Accoutrement Type][TO]
 
-[IO]: http://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
-[CO]: http://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
-[LO]: http://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
-[SO]: http://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
-[TO]: http://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md
+- [Accoutrement Init][io]
+- [Accoutrement Color][co]
+- [Accoutrement Layout][lo]
+- [Accoutrement Scale][so]
+- [Accoutrement Type][to]
+
+[io]: http://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
+[co]: http://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
+[lo]: http://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
+[so]: http://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
+[to]: http://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md
