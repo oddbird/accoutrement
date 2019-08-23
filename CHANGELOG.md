@@ -3,6 +3,9 @@
 ## UNRELEASED
 
 - Upgrade dev dependencies.
+- [Core][core]:
+  - BUGFIX (#36): Fixes an issue with `quote()` in dart-sass.
+  - BUGFIX (#38): Fixes an issue with `false` values in maps.
 
 ## 2.1.1 - 01/04/19
 
