@@ -1,6 +1,6 @@
 # Accoutrement Changelog
 
-## 2.1.2-beta.1 - 08/26/19
+## 2.1.2 - 08/26/19
 
 - Upgrade dev dependencies.
 - [Core][core]:
