@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.1.1</span>
+          <span class="project-version">2.1.2</span>
         
       </div>
     </header>
@@ -438,7 +438,7 @@
 <p>Sass size &amp; scale management<span class="widont">&nbsp;</span>tools:</p>
 <ul>
 <li>Gather all your sizes into a single<span class="widont">&nbsp;</span>map</li>
-<li>Generate new sizes based on [modular scales][core-ratios.html]
+<li>Generate new sizes based on [modular scales][core-ratio.html]
 or arbitrary<span class="widont">&nbsp;</span>functions</li>
 <li>Convert between relative<span class="widont">&nbsp;</span>units</li>
 <li>Access sizes on the<span class="widont">&nbsp;</span>fly</li>
@@ -627,7 +627,7 @@ $sizes: (
   'h3': '#root' ('my-ratio': 1),
 
   // define calc() output based on existing sizes
-  'viewport-relative': calc(%s + %s) ('%s': '#root' 2vw),
+  'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
 );
 </code></pre>
 <p>Access your named sizes using the <code>size()</code> function,

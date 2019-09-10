@@ -60,7 +60,7 @@
 ///   'h3': '#root' ('my-ratio': 1),
 ///
 ///   // define calc() output based on existing sizes
-///   'viewport-relative': calc(%s + %s) ('%s': '#root' 2vw),
+///   'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
 /// );
 /// ```
 ///

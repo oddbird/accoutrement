@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.1.1</span>
+          <span class="project-version">2.1.2</span>
         
       </div>
     </header>
@@ -571,7 +571,7 @@ reference to previously-defined sizes (<code>'root'</code>),
 a map of relative-adjustments using ratios (<code>('_golden': 2)</code>)
 and math functions (<code>('plus': 2)</code>),
 or a format-string &amp; list for interpolating <code>calc()</code> values
-(<code>calc(%s + %s) ('root', 2vw)</code>).</p>
+(<code>'calc(%s + %s)' ('#root', 2vw)</code>).</p>
 <p>Internal math functions are always available by name,
 but recent versions of Sass require you to capture 3rd-party functions
 using the <code>get-function($name)</code> syntax before calling them.
@@ -709,7 +709,7 @@ This should match the size applied to your html<span class="widont">&nbsp;</span
   &#39;root&#39;: 24px,
   &#39;text&#39;: &#39;#root&#39; (&#39;convert-units&#39;: &#39;em&#39;),
   &#39;h1&#39;: &#39;#root&#39; (&#39;times&#39;: 2),
-  &#39;calc&#39;: calc(%s + %s) (&#39;%s&#39;: &#39;#root&#39; 2vw),
+  &#39;calc&#39;: &#39;calc(%s + %s)&#39; (&#39;%s&#39;: &#39;#root&#39; 2vw),
 );</code></pre>
     </div>
   
