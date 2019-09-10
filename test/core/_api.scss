@@ -99,7 +99,7 @@
   }
 
   @include it('Fails when keys are not found if strict mode is enabled') {
-    $_a_strict: true !global;
+    $error-on-missing-keys: true !global;
 
     @include assert-equal(
       (get-token($map, 'dop'), get-token($map, 'dip')),
@@ -107,7 +107,7 @@
       'ERROR [_a_replace] Key "that->baz" not found in map')
       );
 
-    $_a_strict: false !global;
+    $error-on-missing-keys: false !global;
   }
 }
 

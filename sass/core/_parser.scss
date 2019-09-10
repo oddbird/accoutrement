@@ -169,7 +169,7 @@
 
       // No more #alias tags to replace, done parsing.
       $parsed: (type-of($string) != 'string') or (not str-index($string, '#'));
-    } @else if not $key-exists and $_a_strict {
+    } @else if not $key-exists and $error-on-missing-keys {
       @return _a_error('Key "#{$key}" not found in map', '_a_replace');
     } @else {
       // Fall back to linear search for partial
