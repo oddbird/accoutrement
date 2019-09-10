@@ -232,6 +232,17 @@
     );
   }
 
+  @include it('Fails on unknown hashtags if strict mode is enabled') {
+    $_a_strict: true !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      'ERROR [_a_replace] Key "ignore" not found in map'
+    );
+
+    $_a_strict: false !global;
+  }
+
   @include it('Can distinguish between overlapping keys') {
     @include assert-equal(
       _a_replace($map, '#name#na'),
@@ -244,6 +255,17 @@
       _a_replace($map, '#nameofthething'),
       'N4M3!ofthething'
     );
+  }
+
+  @include it('Fails if given an alias without explicit ending when strict mode is enabled') {
+    $_a_strict: true !global;
+
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      'ERROR [_a_replace] Key "nameofthething" not found in map'
+    );
+
+    $_a_strict: false !global;
   }
 }
 

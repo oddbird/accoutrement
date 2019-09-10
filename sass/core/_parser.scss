@@ -105,6 +105,35 @@
   @return $needle;
 }
 
+// Next Reference
+// -----
+/// Returns the next available key for parsing/replacing from the given string.
+///
+/// @access private
+///
+/// @param {string} $string -
+///   A string to extract an #alias from.
+/// @param {list} $terminators -
+///   The characters/string to consider terminators for an alias.
+///   Default to '#', ' ', and ')'.
+/// @return {string} -
+///   The extracted #alias key to replace
+@function _a_next_reference(
+  $string,
+  $terminators: ('#', ' ', ')')
+) {
+  $key-start: str-index($string, '#') + 1;
+  $sliced: str-slice($string, $key-start, -1);
+  $key-length: str-length($sliced);
+
+  @each $terminator in $terminators {
+    $index: str-index($sliced, $terminator);
+    @if $index and $index <= $key-length { $key-length: $index - 1; }
+  }
+
+  @return str-slice($string, $key-start, $key-start + $key-length - 1);
+}
+
 
 // Replace
 // -------
@@ -127,21 +156,36 @@
   $haystack,
   $string
 ) {
-  $hashdex: str-index($string, '#');
+  $haystack: _a_flat-source($haystack);
+  $parsed: not str-index($string, '#');
 
-  // replace aliases…
-  @if $hashdex {
-    $deep: str-index($string, '->') or 0;
-    $haystack: if(($deep > $hashdex), _a_flat-source($haystack), $haystack);
+  @while not $parsed {
+    $key: _a_next_reference($string);
+    $key-exists: map-has-key($haystack, $key);
 
-    // check longest keys first, in case of overlap
-    @each $key in _a_str-length-sort(map-keys($haystack)) {
-      $hash: '##{$key}';
+    @if $key-exists {
+      $new: get-token($haystack, $key);
+      $string: _a_str-replace($string, '##{$key}', $new);
 
-      @if (type-of($string) == 'string') and str-index($string, $hash) {
-        $new: get-token($haystack, $key);
-        $string: _a_str-replace($string, $hash, $new, 'all');
+      // No more #alias tags to replace, done parsing.
+      $parsed: (type-of($string) != 'string') or (not str-index($string, '#'));
+    } @else if not $key-exists and $_a_strict {
+      @return _a_error('Key "#{$key}" not found in map', '_a_replace');
+    } @else {
+      // Fall back to linear search for partial
+      // replacements if strict mode is disabled.
+      // Check longest keys first, in case of overlap.
+      @each $key in _a_str-length-sort(map-keys($haystack)) {
+        $hash: '##{$key}';
+
+        @if (type-of($string) == 'string') and str-index($string, $hash) {
+          $new: get-token($haystack, $key);
+          $string: _a_str-replace($string, $hash, $new, 'all');
+        }
       }
+
+      // Exhaustive replacement complete, no more parsing can be done.
+      $parsed: true;
     }
   }
 

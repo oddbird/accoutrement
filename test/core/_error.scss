@@ -64,7 +64,7 @@
   @include it('Errors on improper valid-type') {
     @include assert-equal(
       _a_type-check('hello world', 3, 'my-function', '$this'),
-      'ERROR [_a_type-check] `$valid` argument bust be a type-string or list of types'
+      'ERROR [_a_type-check] `$valid` argument must be a type-string or list of types'
     );
   }
 }
