@@ -112,25 +112,34 @@
 /// @access private
 ///
 /// @param {string} $string -
-///   A string to extract an #alias from.
-/// @param {list} $terminators -
-///   The characters/string to consider terminators for an alias.
-///   Default to '#', ' ', and ')'.
-/// @return {string} -
-///   The extracted #alias key to replace
+///   A string to extract an #alias from
+/// @return {string | null} -
+///   The extracted #alias key to replace, or null if no references exist
 @function _a_next_reference(
-  $string,
-  $terminators: ('#', ' ', ')')
-) {
-  $key-start: str-index($string, '#') + 1;
-  $sliced: str-slice($string, $key-start, -1);
+  $string
+  ) {
+  $terminators: ('#', ' ', ')', '\\');
+  $hash-index: str-index($string, '#');
+
+  // If escaped # symbols exist, update $hash-index to exclude them.
+  @if $error-on-missing-keys {
+    $escape-index: str-index($string, '\\#');
+    @while $escape-index and $hash-index and $escape-index < $hash-index {
+      $hash-index: str-index(str-slice($string, $escape-index + 2), '#');
+    }
+  }
+
+  @if not $hash-index { @return null; }
+
+  $key-start: $hash-index + 1;
+  $sliced: str-slice($string, $key-start);
   $key-length: str-length($sliced);
 
   @each $terminator in $terminators {
     $index: str-index($sliced, $terminator);
     @if $index and $index <= $key-length { $key-length: $index - 1; }
   }
-
+  
   @return str-slice($string, $key-start, $key-start + $key-length - 1);
 }
 
@@ -157,7 +166,7 @@
   $string
 ) {
   $haystack: _a_flat-source($haystack);
-  $parsed: not str-index($string, '#');
+  $parsed: not _a_next_reference($string);
 
   @while not $parsed {
     $key: _a_next_reference($string);
@@ -167,8 +176,8 @@
       $new: get-token($haystack, $key);
       $string: _a_str-replace($string, '##{$key}', $new);
 
-      // No more #alias tags to replace, done parsing.
-      $parsed: (type-of($string) != 'string') or (not str-index($string, '#'));
+      // We're done parsing if there are no more #alias tags to replace.
+      $parsed: (type-of($string) != 'string') or (not _a_next_reference($string));
     } @else if not $key-exists and $error-on-missing-keys {
       @return _a_error('Key "#{$key}" not found in map', '_a_replace');
     } @else {
@@ -188,6 +197,9 @@
       $parsed: true;
     }
   }
+
+  // Correct escaped # symbols now that parsing is complete.
+  @if $error-on-missing-keys { $string: _a_str-replace($string, '\\#', '#', 'all'); }
 
   @return $string;
 }
