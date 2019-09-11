@@ -279,16 +279,16 @@
     $error-on-missing-keys: false !global;
   }
 
-  // @include it('Finds an explicitly terminated alias when strict mode is enabled') {
-  //   $error-on-missing-keys: true !global;
+  @include it('Finds an explicitly terminated alias when strict mode is enabled') {
+    $error-on-missing-keys: true !global;
 
-  //   @include assert-equal(
-  //     _a_replace($map, '#name\\ofthething'),
-  //     'N4M3!ofthething'
-  //   );
+    @include assert-equal(
+      _a_replace($map, '#name\\ofthething'),
+      'N4M3!ofthething'
+    );
 
-  //   $error-on-missing-keys: false !global;
-  // }
+    $error-on-missing-keys: false !global;
+  }
 }
 
 

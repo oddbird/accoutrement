@@ -139,7 +139,7 @@
     $index: str-index($sliced, $terminator);
     @if $index and $index <= $key-length { $key-length: $index - 1; }
   }
-  
+
   @return str-slice($string, $key-start, $key-start + $key-length - 1);
 }
 
@@ -174,7 +174,13 @@
 
     @if $key-exists {
       $new: get-token($haystack, $key);
-      $string: _a_str-replace($string, '##{$key}', $new);
+
+      // Handle explicitly terminated keys (#key\).
+      @if $error-on-missing-keys and str-index($string, '##{$key}\\') {
+        $string: _a_str-replace($string, '##{$key}\\', $new);
+      } @else {
+        $string: _a_str-replace($string, '##{$key}', $new);
+      }
 
       // We're done parsing if there are no more #alias tags to replace.
       $parsed: (type-of($string) != 'string') or (not _a_next_reference($string));

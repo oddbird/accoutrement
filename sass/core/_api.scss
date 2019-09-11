@@ -310,10 +310,10 @@
 // Error on Missing Keys
 // ---------------------
 /// A configuration option for setting the strictness with which `get-token()`
-/// handles missing nested keys. In the default state, `get-token()` will attempt
-/// to fail gracefully and greedily replace all existing references. If set to 
-/// `true`, the `get-token()` function will throw an error if an attempt to retrieve
-/// a non-existent key is made.
+/// handles missing nested keys. In the default state, `get-token()` will
+/// attempt to fail gracefully and greedily replace all existing references.
+/// If set to `true`, the `get-token()` function will throw an error if an
+/// attempt to retrieve a non-existent key is made.
 /// @group core-get
 /// @type boolean
 $error-on-missing-keys: false !default;
