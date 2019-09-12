@@ -36,7 +36,7 @@
 
 
 // Deep Token Get
-// ---------
+// --------------
 @include describe('Deep Token Get [function]') {
   $map: (
     'this': 0,
@@ -108,6 +108,56 @@
       );
 
     $error-on-missing-keys: false !global;
+  }
+}
+
+// Key Injection
+// -------------
+@include describe('Deep Token Get with Key Injection [function]') {
+  $map: (
+    'this': 0,
+    'this->that': 1,
+    'foo': (
+      'baz': 2,
+      'three': (
+        'abc': '#foo->baz',
+        'def': '#this'
+      ),
+    ),
+    'ofo': (
+      'zab': 4
+    ),
+    'fop': '#foo->baz',
+    'fta': '#foo->three->abc',
+    'ftb': '#foo->three->def',
+
+    // These two tests illustrate the tolerance for `->` in keys/values
+    'bar': '#this->that', // 1 [-> used in valid key]
+    'bip': 'this->that', // this->that [not a hashtag]
+
+    'dop': '#ofo->nope',
+    'dip': '#that->baz',
+  );
+
+  @include it('Can replace keys in a simple parent->child lookup') {
+    @include assert-equal(
+      get-token($map, 'foo->baz', $use-keys: ('foo->baz': 1)),
+      1
+    );
+  }
+
+  @include it('Handles key replacement in multi-level hashes and references') {
+    @include assert-equal(
+      get-token($map, 'fta', $use-keys: ('foo->baz': 1)),
+      1
+    );
+  }
+
+  @include it('Ignores injected keys if not accessed') {
+    @include assert-equal(
+      get-token($map, 'fta', $use-keys: ('ftc->ftd': 13)),
+      2
+    );
   }
 }
 

@@ -290,7 +290,8 @@
 @function get-token(
   $map,
   $key,
-  $do: null
+  $do: null,
+  $use-keys: null
 ) {
   $val: if(map-has-key($map, $key), map-get($map, $key), $key);
 
@@ -302,8 +303,8 @@
     $val: '##{$key}';
   }
 
-  $val: _a_get($map, $val);
-  @return _a_do-each($map, $val, $do);
+  $val: _a_get($map, $val, $use-keys);
+  @return _a_do-each($map, $val, $do, $use-keys);
 }
 
 

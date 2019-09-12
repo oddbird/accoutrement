@@ -322,7 +322,7 @@
     );
 
     @include assert-equal(
-      _a_do($source, '_octave', 3, '#two'),
+      _a_do($source, '_octave', 3, null, '#two'),
       12
     );
   }
@@ -333,14 +333,14 @@
     );
 
     @include assert-equal(
-      _a_do($source, 'str-replace', 'hello world', '#s', '000', true),
+      _a_do($source, 'str-replace', 'hello world', null, '#s', '000', true),
       'hell000 w000rld'
     );
   }
 
   @include it('Ignores a single null arg') {
     @include assert-equal(
-      _a_do(('not': 'needed'), 'round', 2.35, null),
+      _a_do(('not': 'needed'), 'round', 2.35, null, null),
       2
     );
   }
@@ -348,7 +348,7 @@
   @if function-exists('get-function') {
     @include it('Errors on missing function') {
       @include assert-equal(
-        _a_do(('not': 'needed'), 'mine', 2.35, 'any'),
+        _a_do(('not': 'needed'), 'mine', 2.35, null, 'any'),
         'ERROR [_a_do] No ratio or function named `mine`'
       );
     }
