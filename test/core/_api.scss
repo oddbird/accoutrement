@@ -98,8 +98,19 @@
     );
   }
 
-  @include it('Fails when keys are not found if strict mode is enabled') {
-    $error-on-missing-keys: true !global;
+  @include it('Returns null when keys are not found if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      (get-token($map, 'dop'), get-token($map, 'dip')),
+      (null, null)
+      );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Fails when keys are not found if error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
 
     @include assert-equal(
       (get-token($map, 'dop'), get-token($map, 'dip')),
@@ -107,7 +118,7 @@
       'ERROR [_a_replace] Key "that->baz" not found in map')
       );
 
-    $error-on-missing-keys: false !global;
+    $handle-missing-keys: 'silent' !global;
   }
 }
 

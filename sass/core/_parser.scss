@@ -122,7 +122,7 @@
   $hash-index: str-index($string, '#');
 
   // If escaped # symbols exist, update $hash-index to exclude them.
-  @if $error-on-missing-keys {
+  @if $handle-missing-keys {
     $escape-index: str-index($string, '\\#');
     @while $escape-index and $hash-index and $escape-index < $hash-index {
       $hash-index: str-index(str-slice($string, $escape-index + 2), '#');
@@ -176,7 +176,7 @@
       $new: get-token($haystack, $key);
 
       // Handle explicitly terminated keys (#key\).
-      @if $error-on-missing-keys and str-index($string, '##{$key}\\') {
+      @if $handle-missing-keys != 'silent' and str-index($string, '##{$key}\\') {
         $string: _a_str-replace($string, '##{$key}\\', $new);
       } @else {
         $string: _a_str-replace($string, '##{$key}', $new);
@@ -184,8 +184,10 @@
 
       // We're done parsing if there are no more #alias tags to replace.
       $parsed: (type-of($string) != 'string') or (not _a_next_reference($string));
-    } @else if not $key-exists and $error-on-missing-keys {
+    } @else if not $key-exists and $handle-missing-keys == 'error' {
       @return _a_error('Key "#{$key}" not found in map', '_a_replace');
+    } @else if not $key-exists and $handle-missing-keys == 'null' {
+      @return null;
     } @else {
       // Fall back to linear search for partial
       // replacements if strict mode is disabled.
@@ -205,7 +207,9 @@
   }
 
   // Correct escaped # symbols now that parsing is complete.
-  @if $error-on-missing-keys { $string: _a_str-replace($string, '\\#', '#', 'all'); }
+  @if $handle-missing-keys != 'silent' {
+    $string: _a_str-replace($string, '\\#', '#', 'all');
+  }
 
   @return $string;
 }

@@ -232,26 +232,48 @@
     );
   }
 
-  @include it('Fails on unknown hashtags if strict mode is enabled') {
-    $error-on-missing-keys: true !global;
+  @include it('Fails on unknown hashtags if error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
 
     @include assert-equal(
       _a_replace($map, 'please #ignore'),
       'ERROR [_a_replace] Key "ignore" not found in map'
     );
 
-    $error-on-missing-keys: false !global;
+    $handle-missing-keys: 'silent' !global;
   }
 
-  @include it('Ignores escaped # symbols if strict mode is enabled') {
-    $error-on-missing-keys: true !global;
+  @include it('Returns null on unknown hashtags if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Ignores escaped # symbols if error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
 
     @include assert-equal(
       _a_replace($map, 'please \\#ignore'),
       'please #ignore'
     );
 
-    $error-on-missing-keys: false !global;
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Ignores escaped # symbols if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please \\#ignore'),
+      'please #ignore'
+    );
+
+    $handle-missing-keys: 'silent' !global;
   }
 
   @include it('Can distinguish between overlapping keys') {
@@ -268,26 +290,48 @@
     );
   }
 
-  @include it('Fails if given an alias without explicit ending when strict mode is enabled') {
-    $error-on-missing-keys: true !global;
+  @include it('Fails if given an alias without explicit ending when error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
 
     @include assert-equal(
       _a_replace($map, '#nameofthething'),
       'ERROR [_a_replace] Key "nameofthething" not found in map'
     );
 
-    $error-on-missing-keys: false !global;
+    $handle-missing-keys: 'silent' !global;
   }
 
-  @include it('Finds an explicitly terminated alias when strict mode is enabled') {
-    $error-on-missing-keys: true !global;
+  @include it('Returns null if given an alias without explicit ending when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Finds an explicitly terminated alias when error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
 
     @include assert-equal(
       _a_replace($map, '#name\\ofthething'),
       'N4M3!ofthething'
     );
 
-    $error-on-missing-keys: false !global;
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Finds an explicitly terminated alias when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#name\\ofthething'),
+      'N4M3!ofthething'
+    );
+
+    $handle-missing-keys: 'silent' !global;
   }
 }
 
