@@ -57,6 +57,22 @@ $functions: () !default;
 /// if they will be used inside accoutrement maps.
 /// That includes core Sass functions.
 ///
+/// **Note**: When using the Sass "module" syntax,
+/// the `$function` argument *must be a first-class function*,
+/// rather than a string of the function name.
+/// We cannot capture functions for you,
+/// since they are not global:
+///
+/// ```scss
+///   @use 'sass:meta';
+///   @use 'sass:color';
+///   @use '<path-to>/accoutrement/tools';
+///   // capture the function from local context
+///   $rgba: meta.get-function('rgba', $module: 'color');
+///   // pass the captured function for registration
+///   @include tools.register-function($rgba, 'alpha');
+/// ```
+///
 /// @group core-register
 /// @example scss
 ///   @include register-function('darken', 'shade');
@@ -154,28 +170,40 @@ $_a_FUNCTIONS: () !default;
   $register: (),
   $origin: '_a_registration'
 ) {
-  @if not function-exists($function) {
-    $error: '#{$function}() is not available to register with Accoutrement';
-    @return _a_error($error, $origin);
-  } @else {
-    @if (length($names) == 0) or (str-index($function, '_') != 1) {
-      $names: join($function, $names);
+  $type: type-of($function);
+  $function-name: $function;
+
+  // handle string function names if possible
+  @if ($type == 'string') {
+    @if function-exists($function) {
+      $function: if(
+        function-exists('get-function'),
+        get-function($function),
+        $function
+      );
+    } @else {
+      $error: '#{$function}() is not available to register with Accoutrement';
+      @return _a_error($error, $origin);
+    }
+  } @else if ($type == 'function') {
+    // convert to string, and remove "get-function()" wrapper…
+    $function-name: str-slice(unquote('#{$function}'), 14, -2);
+  }
+
+  @if (length($names) == 0) or (str-index($function-name, '_') != 1) {
+    $names: join($function-name, $names);
+  }
+
+  // register captured functions
+  @each $name in $names {
+    // capture once, then alias…
+    @if (index($names, $name) == 1) {
+      $name: ($name: $function);
+    } @else {
+      $name: ($name: '##{nth($names, 1)}');
     }
 
-    @if function-exists('get-function') and (type-of($function) == 'string') {
-      $function: get-function($function);
-    }
-
-    @each $name in $names {
-      // capture once, then alias…
-      @if (index($names, $name) == 1) {
-        $name: ($name: $function);
-      } @else {
-        $name: ($name: '##{nth($names, 1)}');
-      }
-
-      $register: map-merge($register, $name);
-    }
+    $register: map-merge($register, $name);
   }
 
   @return $register;

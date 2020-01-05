@@ -10,7 +10,7 @@
 
   @include it('Adds functions to a registration map') {
     @include assert-equal(
-      _a_registration('rgba', $register: ('already': 'here')),
+      _a_registration($rgba, $register: ('already': 'here')),
       (
         'already': 'here',
         'rgba': $rgba
@@ -20,7 +20,7 @@
 
   @include it('Registers alias names for functions') {
     @include assert-equal(
-      _a_registration('rgba', ('alpha', 'a')),
+      _a_registration($rgba, ('alpha', 'a')),
       (
         'rgba': $rgba,
         'alpha': '#rgba',
