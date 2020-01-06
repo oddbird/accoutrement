@@ -1,6 +1,6 @@
 # Accoutrement Changelog
 
-## 2.1.3 - UNRELEASED
+## 2.1.3 - 01/06/20
 
 - [Core][core]:
   - BUGFIX (#46): Fixes `register-function()` usage with Sass module syntax
