@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.1.2</span>
+          <span class="project-version">2.1.3</span>
         
       </div>
     </header>
@@ -841,8 +841,31 @@ you can also register new functions on the<span class="widont">&nbsp;</span>fly:
 <p>Functions only need to be registered
 if they will be used inside accoutrement maps.
 That includes core Sass<span class="widont">&nbsp;</span>functions.</p>
+<p><strong>Note</strong>: When using the Sass “module” syntax,
+the <code>$function</code> argument <em>must be a first-class function</em>
+(since we cannot capture functions in your module),
+and you must provide at least one <code>$name</code>
+(since we cannot extract the name of captured<span class="widont">&nbsp;</span>functions):</p>
+<pre><code class="lang-scss">  @use 'sass:meta';
+  @use 'sass:color';
+  @use '&lt;path-to&gt;/accoutrement/tools';
+  // capture the function from local context
+  $rgba: meta.get-function('rgba', $module: 'color');
+  // pass the captured function for registration
+  @include tools.register-function($rgba, ('rgba', 'alpha'));
+</code></pre>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.3</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BUGFIX: proper support for Sass modules<span class="widont">&nbsp;</span>system</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
