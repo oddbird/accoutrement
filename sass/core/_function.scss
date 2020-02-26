@@ -1,0 +1,65 @@
+@use '../utils/function';
+
+/// # Function Registration
+/// Because Sass 3.5+ requires first-class functions,
+/// we provide tools for capturing functions
+/// and making them available to the Accoutrement map parser.
+/// This also provides the ability to alias functions as you like.
+/// @group core-register
+
+// Functions
+// ---------
+/// We provide a single map to store & manage functions
+/// that you would like to use inside Accoutrement maps.
+///
+/// ```scss
+/// $functions: (
+///   'times': get-function('times'),
+///   'divide': get-function('divide'),
+/// );
+/// ```
+///
+/// Functions can be registered multiple times,
+/// under any aliases,
+/// using our standard hashtag reference syntax:
+///
+/// ```scss
+/// $functions: (
+///   'times': get-function('times'),
+///   '*': '#times',
+/// );
+/// ```
+///
+/// @since 0.1.0 -
+/// - NEW: Supports the [core](core.html) map-refernece syntax,
+///   for creating function aliases
+///
+/// @group core-register
+/// @type map
+///
+/// @prop {function} <alias> -
+///   Each alias key in the map
+///   should refer to a captured function
+$functions: () !default;
+
+// Register Function
+// -----------------
+/// Register functions with accoutrement.
+///
+/// @group core-register
+///
+/// @param {string | function} $function -
+///   The function-name to be registered
+///   or a first-class function previously captured
+/// @param {strings} $names... [$function] -
+///   One or more alias names (strings)
+///   to use for map-access to the function
+/// @output {map} $_ACCOUTREMENT_APP -
+///   Functions are registered in a map
+///   under any number of aliases
+@mixin register(
+  $function,
+  $names...
+) {
+  $functions: function.set($functions, $function, $names...) !global;
+}

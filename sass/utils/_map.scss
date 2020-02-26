@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 // Map MultiMerge
 // --------------
 /// Merge multiple \maps into a single map,
@@ -11,13 +13,13 @@
 ///   Pass any number of maps to be merged.
 /// @return {map} -
 ///   The merged map of easings.
-@function _a_map-multimerge(
+@function merge(
   $maps...
 ) {
   $return: ();
 
   @each $map in $maps {
-    $return: map-merge($return, $map);
+    $return: map.merge($return, $map);
   }
 
   @return $return;

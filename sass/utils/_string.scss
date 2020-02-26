@@ -1,8 +1,23 @@
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+@use 'list' as l;
+@use 'throw';
+@use 'type';
+
 /// # String functions
 /// Functions for basic Sass-string manipulation.
 /// While these functions are defined with private prefixes,
 /// they are registered without the prefix for map-access.
 /// @group core-strings
+
+
+@function force(
+  $value
+) {
+  @return if((meta.type-of($value) == 'string'), $value, '#{$value}');
+}
 
 
 // String Replace
@@ -19,15 +34,13 @@
 /// - NEW: Improved handling of non-string values,
 ///   allows you to replace a number within a string, for example
 ///
-/// @access public
-/// @name str-replace
 /// @group core-strings
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
 ///   $map: (
 ///     'text-size': calc(1em + 1vw),
-///     'large-text': '#text-size' ('str-replace': '1vw' '3vw'),
+///     'large-text': '#text-size' ('string.replace': '1vw' '3vw'),
 ///   );
 ///   /*! #{get-token($map, 'large-text')} */
 ///
@@ -35,61 +48,61 @@
 ///   The original string (or list of strings) to edit
 /// @param {*} $old -
 ///   A sub-string to replace
-/// @param {*} $new [null] -
+/// @param {*} $new [''] -
 ///   A new sub-string to replace the old
-/// @param {boolean} $replace-all [false] -
+/// @param {boolean} $all [false] -
 ///   A new sub-string to replace the old
 /// @return {string} -
 ///   Original string, with substring replaced
-@function _a_str-replace(
+@function replace(
   $string,
   $old,
-  $new: null,
-  $replace-all: false
+  $new: '',
+  $all: false
 ) {
   $return: $string;
+  $type: meta.type-of($string);
 
   // Loops lists
-  @if (type-of($string) == 'list') {
-    $return: _a_list-template($string);
+  @if ($type == 'list') {
+    $return: l.template($string);
     @each $item in $string {
-      $item: _a_str-replace($item, $old, $new, $replace-all);
-      $return: append($return, $item);
+      $item: replace($item, $old, $new, $all);
+      $return: list.append($return, $item);
     }
     @return $return;
   }
 
   // Force $old to string
-  $old: if($old and (type-of($old) == 'string'), $old, '#{$old}');
-  $string: if((type-of($string) == 'string'), $string, '#{$string}');
+  $old: force($old);
+  $string: force($string);
 
   // get length and index
-  $i: str-index($string, $old);
-  $n: str-length($old);
+  $i: string.index($string, $old);
+  $n: string.length($old);
 
   // replace…
   @if $string == $old {
-    $return: $new;
+    @return $new;
   } @else if $i {
     // Force $new & $string to string
-    $new: if((type-of($new) == 'string') or (not $new), $new, '#{$new}');
+    $new: if($new, force($new), '');
 
     // before and after…
-    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
-    $z: str-slice($string, $i + $n);
+    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $z: string.slice($string, $i + $n);
 
     // recurion if needed…
-    @if $replace-all {
-      $z: _a_str-replace($z, $old, $new, true);
+    @if $all {
+      $z: replace($z, $old, $new, true);
     }
 
     // re-compile…
-    $return: $a + if($new, $new, '') + $z;
+    @return $a + $new + $z;
   }
 
   @return $return;
 }
-@include _a_register-function('_a_str-replace', 'str-replace');
 
 
 // Interpolate
@@ -102,8 +115,6 @@
 /// but is available in all accoutrement maps
 /// under the `'interpolate'` or `'%s'` aliases.
 ///
-/// @access public
-/// @name interpolate
 /// @group core-strings
 /// @example scss
 ///   // sass treats calc() as a string,
@@ -121,28 +132,27 @@
 /// @return {string} -
 ///   Original string, with `%s` format strings replaced
 /// @throws Too many interpolation values given for the string
-@function _a_interpolate(
+@function interpolate(
   $string,
   $values...
 ) {
-  $string: _a_type-check($string, 'string', '_a_interpolate', '$string');
-  $_return: $string;
+  $string: type.check($string, 'string', 'interpolate', '$string');
+  $return: $string;
 
   @each $val in $values {
-    @if str-index($_return, '%s') {
-      $_return: _a_str-replace($_return, '%s', $val);
+    @if string.index($return, '%s') {
+      $return: replace($return, '%s', $val);
     } @else {
-      $length: length($values);
-      @return _a_error(
+      $length: list.length($values);
+      @return throw.error(
         'Too many interpolation values (#{$length}) given for `#{$string}`',
-        '_a_interpolate'
+        'interpolate'
       );
     }
   }
 
-  @return $_return;
+  @return $return;
 }
-@include _a_register-function('_a_interpolate', 'interpolate', '%s');
 
 
 // Split
@@ -158,8 +168,6 @@
 /// @since 1.0.0 -
 /// - NEW: Aliased as `str-split`
 ///
-/// @access public
-/// @name str-split
 /// @group core-strings
 /// @example scss
 ///   $map: (
@@ -182,7 +190,7 @@
 ///   Maximum length of the returned list
 /// @return {list} -
 ///   Space-delimited list of string-slices from the original string
-@function _a_split(
+@function split(
   $string,
   $separator: null,
   $limit: null
@@ -190,33 +198,33 @@
   $list: ();
 
   @if (not $separator) or ($string == '') {
-    @return append($list, $string);
+    @return list.append($list, $string);
   }
 
-  $string: if((type-of($string) == 'string'), $string, '#{$string}');
-  $length: str-length($string);
-  $limit: if($limit, min($limit, $length), $length);
-  $separator: if(type-of($separator) != 'string', '#{$separator}', $separator);
-  $index: str-index($string, $separator);
+  $string: force($string);
+  $separator: force($separator);
+  $length: string.length($string);
+  $limit: if($limit, math.min($limit, $length), $length);
+  $index: string.index($string, $separator);
 
   @for $i from 1 through $limit {
     @if ($string) {
       $slice: null;
 
       @if ($separator == '') {
-        $length: str-length($string);
+        $length: string.length($string);
 
         @if ($length > 1) {
-          $slice: str-slice($string, 1, 1);
-          $string: str-slice($string, 2);
+          $slice: string.slice($string, 1, 1);
+          $string: string.slice($string, 2);
         } @else {
           $slice: if(($length == 1), $string, '');
           $string: null;
         }
       } @else if ($index) {
-        $slice: str-slice($string, 1, $index - 1);
-        $string: str-slice($string, $index + str-length($separator));
-        $index: str-index($string, $separator);
+        $slice: string.slice($string, 1, $index - 1);
+        $string: string.slice($string, $index + string.length($separator));
+        $index: string.index($string, $separator);
         $slice: if($string and not $index, $slice $string, $slice);
       }
 
@@ -226,7 +234,6 @@
 
   @return $list;
 }
-@include _a_register-function('_a_split', 'str-split', 'split');
 
 
 // Trim
@@ -243,7 +250,7 @@
 /// - NEW: Aliased as `str-trim`
 ///
 /// @access public
-/// @name str-trim
+/// @name string.trim
 /// @group core-strings
 /// @example scss
 ///   $map: (
@@ -256,19 +263,18 @@
 ///   The original string to be trimmed
 /// @return {string} -
 ///   Trimmed string
-@function _a_trim(
+@function trim(
   $string
 ) {
-  $string: _a_type-check($string, 'string', 'str-trim', '$string');
-  $first: (str-slice($string, 1, 1) == ' ');
-  $last: (str-slice($string, -1) == ' ');
+  $string: type.check($string, 'string', 'string.trim', '$string');
+  $first: (string.slice($string, 1, 1) == ' ');
+  $last: (string.slice($string, -1) == ' ');
 
   @if ($first or $last) {
-    $string: if($first, str-slice($string, 2), $string);
-    $string: if($last, str-slice($string, 1, -2), $string);
-    $string: _a_trim($string);
+    $string: if($first, string.slice($string, 2), $string);
+    $string: if($last, string.slice($string, 1, -2), $string);
+    $string: trim($string);
   }
 
   @return $string;
 }
-@include _a_register-function('_a_trim', 'str-trim', 'trim');

@@ -1,0 +1,19 @@
+@use 'sass:map';
+
+$_default-config: ();
+
+$config: ();
+
+// can be extended to support nested maps if necessary
+@function get(
+  $key
+) {
+  @return map.get($config, $key) or map.get($_default-config, $key);
+}
+
+@mixin set(
+  $key,
+  $value
+) {
+  $config: map.merge($config, ($key: $value)) !global;
+}

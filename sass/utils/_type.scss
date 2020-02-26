@@ -1,0 +1,51 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'throw';
+
+// Check [function]
+// ----------------
+/// Validate the type of any value
+///
+/// @access private
+///
+/// @param {*} $value -
+///   The value to type-check
+/// @param {string | list} $valid -
+///   A list of valid types to check against
+/// @param {string} $origin ['type.check'] -
+///   The origin of this value, for error reporting
+/// @param {string} $arg ['$value'] -
+///   The origin arg-name, for error reporting
+/// @return {*} -
+///   The original value, if it passes the type check
+/// @throws `$valid` is not a string or list
+/// @throws Type-of `$value` is not considered valid
+@function type-check(
+  $value,
+  $valid,
+  $origin: 'type.check',
+  $arg: '$value'
+) {
+  $valid-check: list.index('list' 'string', meta.type-of($valid));
+
+  @if not $valid-check {
+    @return throw.error(
+      '`$valid` argument bust be a type-string or list of types',
+      'type.check'
+    );
+  }
+
+  $type: meta.type-of($value);
+
+  @if list.index($valid, $type) {
+    @return $value;
+  }
+
+  $in: if((list.length($valid) > 1), 'in types:', 'a');
+  $start: '`#{$arg}` argument must be #{$in} #{$valid};';
+
+  @return throw.error(
+    '#{$start} got (#{$type}) `#{$value}`',
+    $origin
+  );
+}

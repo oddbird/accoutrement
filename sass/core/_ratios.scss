@@ -61,7 +61,7 @@ $ratios: () !default;
   $source: map-merge($_a_RATIOS, $source);
   @return get-token($source, $ratio, $do);
 }
-@include _a_register-function('ratio');
+@include register-internal('ratio');
 
 
 // Add Ratios

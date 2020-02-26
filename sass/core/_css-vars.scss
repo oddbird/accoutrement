@@ -48,7 +48,7 @@
   $prefix: null
 ) {
   $string: unquote('--#{$prefix}#{$name}');
-  $string: _a_str-replace($string, ' ', '-', 'all');
+  $string: string-replace($string, ' ', '-', 'all');
   @return $string;
 }
 

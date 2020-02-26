@@ -34,7 +34,7 @@
   $light: $light or _a_default-contrast('light');
   @return mix(color($light), color($color), $percentage);
 }
-@include _a_register-function('tint');
+@include register-internal('tint');
 
 
 // Shade
@@ -69,4 +69,4 @@
   $dark: $dark or _a_default-contrast('dark');
   @return mix(color($dark), color($color), $percentage);
 }
-@include _a_register-function('shade');
+@include register-internal('shade');

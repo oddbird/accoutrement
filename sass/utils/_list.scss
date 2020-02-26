@@ -1,0 +1,89 @@
+@use 'sass:meta';
+@use 'sass:math';
+@use 'throw';
+
+/// # List Functions
+/// Functions for basic Sass-list manipulation.
+/// While these functions are defined with private prefixes,
+/// they are registered without the prefix for map-access.
+/// @group core-lists
+
+
+// Remove Nth
+// ----------
+/// Remove any item (1-indexed) from a list.
+///
+/// This function is prefixed outside maps
+/// & should not be used directly,
+/// but is available in all accoutrement maps
+/// under the `'remove-nth'` alias.
+///
+/// @group core-lists
+/// @example scss
+///   $map: (
+///     'main-start': ['nav-end' 'main-start' 'footer-start'],
+///     'small-start': '#main-start' ('remove-nth': 1),
+///   );
+///   /*! #{inspect(get-token($map, 'small-start'))} */
+///
+/// @param {list} $list -
+///   The original list to be edited
+/// @param {number} $index -
+///   The 1-indexed item to remove from the list
+/// @return {list} -
+///   The original list, with item removed
+/// @throws `$index` must be a non-zero integer
+/// @throws `$index` is too large for the list length
+@function remove-nth(
+  $list,
+  $index
+) {
+  $result: template($list);
+  $type: meta.type-of($index);
+  $length: list.length($list);
+
+  @if ($type != 'number') or ($index == 0) or (math.round($index) != $index) {
+    $got: 'got (#{$type}) `#{if(($type == 'null'), 'null', $index)}`';
+    @return throw.error(
+      '$index must be a non-zero integer, #{$got}',
+      'lists.remove-nth'
+    );
+  } @else if (math.abs($index) > $length) {
+    @return throw.error(
+      '$index is `#{$index}` but list is only #{$length} items long',
+      'lists.remove-nth'
+    );
+  }
+
+  $index: if(($index < 0), $length + $index + 1, $index);
+
+  @for $i from 1 through $length {
+    @if ($i != $index) {
+      $result: append($result, nth($list, $i));
+    }
+  }
+
+  @return $result;
+}
+
+
+// List From Template
+// ------------------
+/// Return a new (empty) list using the same delimiter
+/// and bracket settings as the template list.
+///
+/// @access private
+///
+/// @param {list} $template [()] -
+///   The original list to be matched
+/// @return {list} -
+///   An empty list that matches the template
+@function template(
+  $template: ()
+) {
+  // return the same type of list we were given…
+  @return join((), (),
+    list.separator($template),
+    list.is-bracketed($template)
+  );
+}
