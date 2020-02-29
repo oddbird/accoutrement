@@ -1,5 +1,7 @@
-@forward 'utils';
+@use '../index' with ($catch-errors: true);
 
+// tests…
+@use 'utils';
 // @import 'core';
 // @import 'plugin/animate';
 // @import 'plugin/color';

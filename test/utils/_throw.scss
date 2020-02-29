@@ -1,0 +1,33 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/utils/throw';
+
+@include test-module('utils/throw') {
+
+  // Error [function]
+  // ----------------
+  @include describe('Error [function]') {
+    @include it('Allows errors to return without blocking compilation') {
+      @include assert-equal(
+        throw.error('This is a test error message', 'throw.error test'),
+        'ERROR [throw.error test] This is a test error message'
+      );
+    }
+  }
+
+  // Error [mixin]
+  // -------------
+  @include describe('Error [mixin]') {
+    @include it('Creates error output for mixins') {
+      @include assert {
+        @include output {
+          @include throw.error('nope', 'test');
+        }
+
+        @include expect {
+          --accoutrement-error: 'ERROR [test] nope';
+        }
+      }
+    }
+  }
+
+}

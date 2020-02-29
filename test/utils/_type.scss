@@ -1,0 +1,68 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/utils/type';
+
+@include test-module('utils/type') {
+
+  // Error [function]
+  // ----------------
+  @include describe('Error [function]') {
+    @include it('Composes a single-type error message') {
+      @include assert-equal(
+        type.error('hello world', 'list', 'my-function', '$this'),
+        'ERROR [my-function] Argument `$this` must be a list; got (string) `hello world`'
+      );
+    }
+
+    @include it('Composes a multi-type error message') {
+      @include assert-equal(
+        type.error('hello world', ('list', 'map'), 'my-function'),
+        'ERROR [my-function] Argument must be in types: list, map; got (string) `hello world`'
+      );
+    }
+  }
+
+  // Check [function]
+  // ----------------
+  @include describe('Check [function]') {
+    @include it('Returns a properly-typed value') {
+      @include assert-equal(
+        type.check('hello world', 'string'),
+        'string'
+      );
+    }
+
+    @include it('Returns properly multi-typed values') {
+      @include assert-equal(
+        type.check('hello world', 'string' 'list'),
+        'string'
+      );
+
+      @include assert-equal(
+        type.check('hello' 'world', 'string' 'list'),
+        'list'
+      );
+    }
+
+    @include it('Can error on improper type') {
+      @include assert-equal(
+        type.check('hello world', 'list', true),
+        'ERROR [type-check] Argument must be a list; got (string) `hello world`'
+      );
+    }
+
+    @include it('Fails silently by default, returning null') {
+      @include assert-equal(
+        type.check('hello world', 'list'),
+        null
+      );
+    }
+
+    @include it('Errors on improper valid-type') {
+      @include assert-equal(
+        type.check('hello world', 3),
+        'ERROR [check] `$valid` argument bust be a string or list of types'
+      );
+    }
+  }
+
+}

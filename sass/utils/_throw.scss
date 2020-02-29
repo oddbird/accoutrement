@@ -1,10 +1,8 @@
-@use 'config';
-
 // Error Output Override
 // ---------------------
 /// Optionally turn off error output for testing,
 /// with the 'catch-errors' setting
-@include config.set('catch-errors', false);
+$catch-errors: false !default;
 
 
 // Error [function]
@@ -16,7 +14,7 @@
 ///   A useful error message, explaining the problem
 /// @param {string} $source -
 ///   The original source of the error for debugging
-/// @param {bool} $catch [config.get('catch-errors')] -
+/// @param {bool} $catch [$catch-errors] -
 ///   Optionally return the error rather than failing
 /// @return {string} -
 ///   Combined error with source and message
@@ -24,7 +22,7 @@
 @function error(
   $message,
   $source,
-  $catch: config.get('catch-errors')
+  $catch: $catch-errors
 ) {
   @if $catch {
     @return 'ERROR [#{$source}] #{$message}';
@@ -43,14 +41,14 @@
 ///   A useful error message, explaining the problem
 /// @param {string} $source -
 ///   The original source of the error for debugging
-/// @param {bool} $catch [config.get('catch-errors')] -
+/// @param {bool} $catch [$catch-errors] -
 ///   Optionally return the error rather than failing
 /// @output -
 ///   `--accoutrement-error` property with error message
 @mixin error(
   $message,
   $source,
-  $catch: config.get('catch-errors')
+  $catch: $catch-errors
 ) {
   --accoutrement-error: '#{error($message, $source, $catch)}';
 }

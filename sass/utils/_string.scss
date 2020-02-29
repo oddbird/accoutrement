@@ -136,7 +136,10 @@
   $string,
   $values...
 ) {
-  $string: type.check($string, 'string', 'interpolate', '$string');
+  @if not type.check($string, 'string') {
+    @return type.error($string, 'string', 'interpolate', '$string');
+  }
+
   $return: $string;
 
   @each $val in $values {
@@ -266,7 +269,10 @@
 @function trim(
   $string
 ) {
-  $string: type.check($string, 'string', 'string.trim', '$string');
+  @if not type.check($string, 'string') {
+    @return type.error($string, 'string', 'trim', '$string');
+  }
+
   $first: (string.slice($string, 1, 1) == ' ');
   $last: (string.slice($string, -1) == ' ');
 

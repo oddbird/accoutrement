@@ -2,50 +2,75 @@
 @use 'sass:list';
 @use 'throw';
 
-// Check [function]
+// Error [function]
 // ----------------
-/// Validate the type of any value
-///
-/// @access private
-///
 /// @param {*} $value -
-///   The value to type-check
+///   The value to check
 /// @param {string | list} $valid -
 ///   A list of valid types to check against
-/// @param {string} $origin ['type.check'] -
+/// @param {string} $origin ['check'] -
 ///   The origin of this value, for error reporting
 /// @param {string} $arg ['$value'] -
 ///   The origin arg-name, for error reporting
-/// @return {*} -
-///   The original value, if it passes the type check
-/// @throws `$valid` is not a string or list
-/// @throws Type-of `$value` is not considered valid
-@function type-check(
+@function error(
   $value,
   $valid,
-  $origin: 'type.check',
-  $arg: '$value'
+  $origin: 'type-check',
+  $arg: null
 ) {
-  $valid-check: list.index('list' 'string', meta.type-of($valid));
-
-  @if not $valid-check {
-    @return throw.error(
-      '`$valid` argument bust be a type-string or list of types',
-      'type.check'
-    );
-  }
-
   $type: meta.type-of($value);
-
-  @if list.index($valid, $type) {
-    @return $value;
-  }
-
   $in: if((list.length($valid) > 1), 'in types:', 'a');
-  $start: '`#{$arg}` argument must be #{$in} #{$valid};';
+  $arg: if($arg, ' `#{$arg}`', '');
+  $start: 'Argument#{$arg} must be #{$in} #{$valid};';
 
   @return throw.error(
     '#{$start} got (#{$type}) `#{$value}`',
     $origin
   );
+}
+
+// Check [function]
+// ----------------
+/// Validate the type of any value
+///
+/// @since 3.0.0 -
+/// - BREAKING: Returns type rather than value
+///
+/// @param {*} $value -
+///   The value to check
+/// @param {string | list} $valid -
+///   A list of valid types to check against
+/// @param {string} $silent [true] -
+///   Returns `null` on failure, rather than throwing an error
+/// @return {*} -
+///   The value type, if it passes the type check
+/// @throws `$valid` is not a string or list
+/// @throws Type-of `$value` is not considered valid
+@function check(
+  $value,
+  $valid,
+  $throw: false
+) {
+  // validate types
+  @if not list.index('list' 'string', meta.type-of($valid)) {
+    @return throw.error(
+      '`$valid` argument bust be a string or list of types',
+      'check'
+    );
+  }
+
+  // type check
+  $type: meta.type-of($value);
+
+  @if list.index($valid, $type) {
+    @return $type;
+  }
+
+  // error
+  @if ($throw) {
+    @return error($value, $valid);
+  }
+
+  // silent fail
+  @return null;
 }

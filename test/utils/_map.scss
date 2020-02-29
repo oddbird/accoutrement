@@ -1,0 +1,36 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/utils/map';
+@use '../../sass/utils/type';
+
+@include test-module('utils/map') {
+
+  // Merge [function]
+  // ----------------
+  @include describe('Merge [function]') {
+    $a: (
+      'one': 1,
+      'two': 2,
+    );
+    $b: ('two': 'tooooo');
+    $c: ('three': 3);
+
+    @include it('Merges multiple maps') {
+      @include assert-equal(
+        map.merge($a, $b, $c),
+        (
+          'one': 1,
+          'two': 'tooooo',
+          'three': 3,
+        )
+      );
+    }
+
+    @include it('Errors on non-map values') {
+      @include assert-equal(
+        map.merge($a, 'nope', $c),
+        'ERROR [merge] Each value of `$maps...` must be a map, got `[string]: nope`'
+      );
+    }
+  }
+
+}

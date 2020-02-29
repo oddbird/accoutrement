@@ -1,4 +1,7 @@
+@use 'sass:meta';
 @use 'sass:map';
+@use 'type';
+@use 'throw';
 
 // Map MultiMerge
 // --------------
@@ -6,8 +9,6 @@
 /// in case you want to define tokens in smaller groups –
 /// such as `brand-colors`, `text-colors`, etc. –
 /// before merging them into a single map.
-///
-/// @access private
 ///
 /// @param {maps...} $maps -
 ///   Pass any number of maps to be merged.
@@ -19,7 +20,15 @@
   $return: ();
 
   @each $map in $maps {
-    $return: map.merge($return, $map);
+    @if type.check($map, 'map') {
+      $return: map.merge($return, $map);
+    } @else {
+      $type: meta.type-of($map);
+      @return throw.error(
+        'Each value of `$maps...` must be a map, got `[#{$type}]: #{$map}`',
+        'merge'
+      );
+    }
   }
 
   @return $return;

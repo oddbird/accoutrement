@@ -1,5 +1,6 @@
-@use 'sass:meta';
+@use 'sass:list';
 @use 'sass:math';
+@use 'sass:meta';
 @use 'throw';
 
 /// # List Functions
@@ -46,12 +47,12 @@
     $got: 'got (#{$type}) `#{if(($type == 'null'), 'null', $index)}`';
     @return throw.error(
       '$index must be a non-zero integer, #{$got}',
-      'lists.remove-nth'
+      'remove-nth'
     );
   } @else if (math.abs($index) > $length) {
     @return throw.error(
       '$index is `#{$index}` but list is only #{$length} items long',
-      'lists.remove-nth'
+      'remove-nth'
     );
   }
 
