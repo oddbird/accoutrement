@@ -254,6 +254,17 @@
     $handle-missing-keys: 'silent' !global;
   }
 
+  @include it('Returns null on unknown hashtags if warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
   @include it('Ignores escaped # symbols if error mode is enabled') {
     $handle-missing-keys: 'error' !global;
 
@@ -267,6 +278,17 @@
 
   @include it('Ignores escaped # symbols if null mode is enabled') {
     $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please \\#ignore'),
+      'please #ignore'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Ignores escaped # symbols if warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
 
     @include assert-equal(
       _a_replace($map, 'please \\#ignore'),
@@ -312,6 +334,17 @@
     $handle-missing-keys: 'silent' !global;
   }
 
+  @include it('Returns null if given an alias without explicit ending when warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
   @include it('Finds an explicitly terminated alias when error mode is enabled') {
     $handle-missing-keys: 'error' !global;
 
@@ -325,6 +358,17 @@
 
   @include it('Finds an explicitly terminated alias when null mode is enabled') {
     $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#name\\ofthething'),
+      'N4M3!ofthething'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Finds an explicitly terminated alias when warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
 
     @include assert-equal(
       _a_replace($map, '#name\\ofthething'),

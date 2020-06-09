@@ -310,11 +310,16 @@
 // Error on Missing Keys
 // ---------------------
 /// A configuration option for setting the strictness with which `get-token()`
-/// handles missing nested keys. In the default state, `'silent'`, `get-token()`
-/// will attempt to fail gracefully and greedily replace all existing
-/// references. If set to `'null'`, the `get-token()` function will return
-/// `null` if an attempt to retrieve a non-existent key is made, and if set to
-/// `'error'` an error will be thrown if the key isn't found.
+/// handles missing nested keys. The option can be set to `'silent'`, `'null'`,
+/// `'warning'`, or `'error'`.
+///
+/// silent: The default state. `get-token()` will attempt to fail gracefully
+///         and greedily replace all existing references.
+/// null:   `get-token()` will return `null` if the value is not found,
+///         mimicking sass's inbuilt `map.get()` function.
+/// warn:  `get-token()` will return `null` if the value is not found, and
+///         also throw a warning.
+/// error: `get-token()` will throw an error if the value is not found.
 ///
 /// @group core-get
 /// @type string

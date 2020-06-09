@@ -184,11 +184,19 @@
 
       // We're done parsing if there are no more #alias tags to replace.
       $parsed: (type-of($string) != 'string') or (not _a_next_reference($string));
-    } @else if not $key-exists and $handle-missing-keys == 'error' {
-      @return _a_error('Key "#{$key}" not found in map', '_a_replace');
-    } @else if not $key-exists and $handle-missing-keys == 'null' {
-      @return null;
     } @else {
+      @if $handle-missing-keys == 'error' {
+        @return _a_error('Key "#{$key}" not found in map', '_a_replace');
+      }
+
+      @if $handle-missing-keys == 'warn' and not $_a_error-output-override {
+        @warn 'Key "#{$key}" not found in map';
+      }
+
+      @if index(('warn', 'null'), $handle-missing-keys) {
+        @return null;
+      }
+
       // Fall back to linear search for partial
       // replacements if strict mode is disabled.
       // Check longest keys first, in case of overlap.
