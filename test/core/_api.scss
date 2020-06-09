@@ -109,6 +109,22 @@
     $handle-missing-keys: 'silent' !global;
   }
 
+  @include it('Returns null when a single key from a string of keys is not found, if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+    $map2: (
+      'a': 'one',
+      'b': 'two',
+      'c': 'three'
+    );
+
+    @include assert-equal(
+      (get-token($map2, '#a #b#c #d')),
+      (null)
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
   @include it('Fails when keys are not found if error mode is enabled') {
     $handle-missing-keys: 'error' !global;
 
