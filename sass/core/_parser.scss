@@ -27,6 +27,12 @@
   $do: null;
   $value: $key;
 
+  // Throw an error if the missing key flag is not configured correctly.
+  @if not index(('error', 'warn', 'null', 'silent'), $handle-missing-keys) {
+    @return _a_error('"$handle-missing-keys" configuration should be set ' +
+      'to "error", "warn", "null", or "silent"', '_a_get');
+  }
+
   // break out `do` maps…
   @if ($type == 'map') and (nth(map-keys($key), 1) == '%value') {
     $value: map-get($key, '%value');
@@ -122,7 +128,7 @@
   $hash-index: str-index($string, '#');
 
   // If escaped # symbols exist, update $hash-index to exclude them.
-  @if $handle-missing-keys {
+  @if $handle-missing-keys != 'silent' {
     $escape-index: str-index($string, '\\#');
     @while $escape-index and $hash-index and $escape-index < $hash-index {
       $hash-index: str-index(str-slice($string, $escape-index + 2), '#');
