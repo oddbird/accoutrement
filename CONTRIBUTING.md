@@ -40,11 +40,12 @@ As you work...
   using [True](http://oddbird.net/true) --
   in the `test` directory,
   and make sure all tests are passing with `yarn test`
-- Add your changes to the [changelog](CHANGELOG.md)
+- Add your changes to the [changelog][]
 - Update or add inline documentation
   using [SassDoc][sassdoc] as appropriate,
   and compile the docs with `yarn docs`
 
+[changelog]: https://github.com/oddbird/accoutrement/blob/master/CHANGELOG.md
 [sassdoc]: http://sassdoc.com/
 
 
