@@ -19,7 +19,7 @@
 /// from locally-hosted, to base64 embedded,
 /// and even CDN imports from sites like typekit and google fonts.
 ///
-/// [Herman]: http://oddbird.net/herman/
+/// [Herman]: https://www.oddbird.net/herman/
 ///
 /// @group type-fonts
 
@@ -55,7 +55,7 @@ $font-path: '' !default;
 /// define fallback font-stacks,
 /// and genrate font specimens with a tool like [Herman].
 ///
-/// [Herman]: http://oddbird.net/herman/
+/// [Herman]: https://www.oddbird.net/herman/
 ///
 /// All the provided tools will ignore unknown font properties,
 /// so you can safely include any extra data you need access to.
@@ -201,7 +201,7 @@ $fonts: () !default;
 /// [Herman].
 ///
 /// [SassDoc]: http://sassdoc.com/
-/// [Herman]: http://oddbird.net/herman/
+/// [Herman]: https://www.oddbird.net/herman/
 ///
 /// @group type-fonts
 /// @example scss

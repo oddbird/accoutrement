@@ -76,6 +76,6 @@ herman:
       path: LICENSE
   extraLinks:
     - name: 'Accoutrement Site'
-      url: 'http://oddbird.net/accoutrement/'
+      url: 'https://www.oddbird.net/accoutrement/'
     - name: 'OddBird'
-      url: 'http://oddbird.net/'
+      url: 'https://www.oddbird.net/'

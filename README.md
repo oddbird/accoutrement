@@ -15,11 +15,11 @@ These tools also integrate with [Herman][Herman],
 our automated living pattern-library generator
 built on [SassDoc][SassDoc].
 
-[Herman]: http://oddbird.net/herman/
+[Herman]: https://www.oddbird.net/herman/
 [SassDoc]: http://sassdoc.com/
 
-- [Official Site](http://oddbird.net/accoutrement/)
-- [Documentation](http://oddbird.net/accoutrement/docs/)
+- [Official Site](https://www.oddbird.net/accoutrement/)
+- [Documentation](https://www.oddbird.net/accoutrement/docs/)
 - [Source Code](https://github.com/oddbird/accoutrement/)
 - [Issues](https://github.com/oddbird/accoutrement/issues)
 
@@ -28,11 +28,11 @@ the creators of [Susy][susy],
 [True][true],
 and [Herman][herman].*
 
-[oddbird]: http://oddbird.net/
-[susy]: http://oddbird.net/susy/
-[true]: http://oddbird.net/true
-[herman]: http://oddbird.net/herman
-[fonts]: http://oddbird.net/accoutrement/docs/type.html
+[oddbird]: https://www.oddbird.net/
+[susy]: https://www.oddbird.net/susy/
+[true]: https://www.oddbird.net/true
+[herman]: https://www.oddbird.net/herman
+[fonts]: https://www.oddbird.net/accoutrement/docs/type.html
 
 
 ## Installation
@@ -58,7 +58,7 @@ Import what you need:
 @import '<path-to>/accoutrement/sass/plugin/<name>';
 ```
 
-If you're using [Eyeglass](https://github.com/sass-eyeglass/eyeglass),
+If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 you can import the default "tools" (core + plugins) using only:
 
 ```scss
@@ -104,11 +104,11 @@ Map storage serves a larger purpose:
   to automated functionality
   (provided in the plugins)
 
-[herman]: http://oddbird.net/herman/
-[type]: http://oddbird.net/accoutrement/docs/type.html
+[herman]: https://www.oddbird.net/herman/
+[type]: https://www.oddbird.net/accoutrement/docs/type.html
 
 
-## [Core](http://oddbird.net/accoutrement/docs/core.html)
+## [Core](https://www.oddbird.net/accoutrement/docs/core.html)
 
 The **Core** module provides the generic
 (non data-specific)
@@ -121,15 +121,15 @@ setup and syntax parsing:
 - Register your own first class [functions][functions],
   for reference inside data maps
 
-[get]: http://oddbird.net/accoutrement/docs/core-get.html
-[math]: http://oddbird.net/accoutrement/docs/core-math.html
-[ratio]: http://oddbird.net/accoutrement/docs/core-ratio.html
-[list]: http://oddbird.net/accoutrement/docs/core-lists.html
-[string]: http://oddbird.net/accoutrement/docs/core-strings.html
-[functions]: http://oddbird.net/accoutrement/docs/core-register.html
+[get]: https://www.oddbird.net/accoutrement/docs/core-get.html
+[math]: https://www.oddbird.net/accoutrement/docs/core-math.html
+[ratio]: https://www.oddbird.net/accoutrement/docs/core-ratio.html
+[list]: https://www.oddbird.net/accoutrement/docs/core-lists.html
+[string]: https://www.oddbird.net/accoutrement/docs/core-strings.html
+[functions]: https://www.oddbird.net/accoutrement/docs/core-register.html
 
 
-## [Init](http://oddbird.net/accoutrement/docs/init.html)
+## [Init](https://www.oddbird.net/accoutrement/docs/init.html)
 
 We provide light-weight browser-normalization,
 as a distinct include.
@@ -143,11 +143,11 @@ direct CSS output.
 While the core module handles generic data-management,
 we also provide plugins for a few common data types:
 
-- **[Animate](http://oddbird.net/accoutrement/docs/animate.html)** --
+- **[Animate](https://www.oddbird.net/accoutrement/docs/animate.html)** --
   Tools for managing CSS transitions and animations
-- **[Color](http://oddbird.net/accoutrement/docs/color.html)** --
+- **[Color](https://www.oddbird.net/accoutrement/docs/color.html)** --
   Tools for managing CSS colors and contrast-ratios
-- **[Scale](http://oddbird.net/accoutrement/docs/scale.html)** --
+- **[Scale](https://www.oddbird.net/accoutrement/docs/scale.html)** --
   Tools for managing CSS sizes: typographic scales, spacing, etc.
-- **[Type](http://oddbird.net/accoutrement/docs/type.html)** --
+- **[Type](https://www.oddbird.net/accoutrement/docs/type.html)** --
   Tools for managing webfonts, generated content, and other text needs

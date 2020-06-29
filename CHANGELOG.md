@@ -281,13 +281,13 @@ designing and testing several of these features.
   - NEW: Automatically formats font-family stacks
     with proper commas & quotations for CSS output
 
-[core]: http://oddbird.net/accoutrement/docs/core.html
-[init]: http://oddbird.net/accoutrement/docs/init.html
-[animate]: http://oddbird.net/accoutrement/docs/animate.html
-[color]: http://oddbird.net/accoutrement/docs/color.html
-[layout]: http://oddbird.net/accoutrement/docs/layout.html
-[scale]: http://oddbird.net/accoutrement/docs/scale.html
-[type]: http://oddbird.net/accoutrement/docs/type.html
+[core]: https://www.oddbird.net/accoutrement/docs/core.html
+[init]: https://www.oddbird.net/accoutrement/docs/init.html
+[animate]: https://www.oddbird.net/accoutrement/docs/animate.html
+[color]: https://www.oddbird.net/accoutrement/docs/color.html
+[layout]: https://www.oddbird.net/accoutrement/docs/layout.html
+[scale]: https://www.oddbird.net/accoutrement/docs/scale.html
+[type]: https://www.oddbird.net/accoutrement/docs/type.html
 
 ## Older Changelogs, from individual modules:
 
@@ -297,8 +297,8 @@ designing and testing several of these features.
 - [Accoutrement Scale][so]
 - [Accoutrement Type][to]
 
-[io]: http://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
-[co]: http://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
-[lo]: http://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
-[so]: http://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
-[to]: http://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md
+[io]: https://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
+[co]: https://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
+[lo]: https://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
+[so]: https://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
+[to]: https://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md
