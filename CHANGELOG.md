@@ -1,8 +1,9 @@
 # Accoutrement Changelog
 
-## UNRELEASED
+## 2.1.4 - 06/30/20
 
 - DOCS (#54): Fix broken links in docs
+- INTERNAL: Upgrade dev dependencies.
 
 ## 2.1.3 - 01/06/20
 
