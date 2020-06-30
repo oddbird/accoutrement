@@ -5,7 +5,7 @@ Bug reports and feature requests are welcome,
 but code is even better!
 In all cases,
 we ask you to follow the
-[Sass community guidelines](http://sass-lang.com/community-guidelines).
+[Sass community guidelines](https://sass-lang.com/community-guidelines).
 
 Issues
 ------
@@ -37,14 +37,15 @@ yarn
 As you work...
 
 - Add or update any appropriate unit tests --
-  using [True](http://oddbird.net/true) --
+  using [True](https://www.oddbird.net/true) --
   in the `test` directory,
   and make sure all tests are passing with `yarn test`
-- Add your changes to the [changelog](CHANGELOG.md)
+- Add your changes to the [changelog][]
 - Update or add inline documentation
   using [SassDoc][sassdoc] as appropriate,
   and compile the docs with `yarn docs`
 
+[changelog]: https://github.com/oddbird/accoutrement/blob/master/CHANGELOG.md
 [sassdoc]: http://sassdoc.com/
 
 

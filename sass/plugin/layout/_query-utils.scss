@@ -17,7 +17,7 @@
 ///
 /// @group layout-queries
 /// @type 'min' | 'max' | false
-/// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints
+/// @link https://tzi.fr/css/prevent-double-breakpoint/ Prevent Double Breakpoints
 $adjust-query-overlap: 'max' !default;
 
 
@@ -34,7 +34,7 @@ $adjust-query-overlap: 'max' !default;
 /// - NEW: Optionally override `max` adjustment with `min` or `false`
 ///
 /// @access private
-/// @link http://tzi.fr/css/prevent-double-breakpoint Prevent Double Breakpoints
+/// @link https://tzi.fr/css/prevent-double-breakpoint/ Prevent Double Breakpoints
 ///
 /// @param {length} $value -
 ///   The query value to adjust

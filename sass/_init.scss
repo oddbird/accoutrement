@@ -3,7 +3,7 @@
 /// based (loosely) on
 /// [Sanitize][sanitize] and [Normalize][normalize].
 ///
-/// [sanitize]: https://github.com/10up/sanitize.css
+/// [sanitize]: https://github.com/csstools/sanitize.css
 /// [normalize]: https://github.com/necolas/normalize.css
 /// @group init
 
@@ -26,7 +26,7 @@
 ///   @import '<path-to>/accoutrement/sass/init';
 /// ```
 ///
-/// If you're using [Eyeglass](https://github.com/sass-eyeglass/eyeglass),
+/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 /// you can leave off most of the path:
 ///
 /// ```scss
