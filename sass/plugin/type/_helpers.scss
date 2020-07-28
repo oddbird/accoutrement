@@ -338,6 +338,7 @@ $_a_FONT-FORMATS: (
       font-family: $name;
       font-style: $style;
       font-weight: $weight;
+      font-display: $display;
       src: $eot;
       unicode-range: $unicode;
     }
