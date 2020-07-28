@@ -291,7 +291,8 @@ $_a_FONT-FORMATS: (
   $weight,
   $style,
   $data,
-  $unicode: null
+  $unicode: null,
+  $display: 'auto'
 ) {
   // Special handling of eot with local or data
   $eot: map-get($data, 'eot');
@@ -346,6 +347,7 @@ $_a_FONT-FORMATS: (
       font-family: $name;
       font-style: $style;
       font-weight: $weight;
+      font-display: $display;
       src: _a_font-src-list($data);
       unicode-range: $unicode;
     }
@@ -355,6 +357,7 @@ $_a_FONT-FORMATS: (
       font-family: $name;
       font-style: $style;
       font-weight: $weight;
+      font-display: $display;
       src: $eot;
       src: _a_font-src-list($data);
       unicode-range: $unicode;
