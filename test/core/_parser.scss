@@ -14,6 +14,17 @@
     'two': 2,
   );
 
+  @include it('Throws an error if the "$handle-missing-keys" flag is incorrectly configured') {
+    $handle-missing-keys: 'this is definitely wrong' !global;
+
+    @include assert-equal(
+      _a_get($haystack, '#key'),
+      'ERROR [_a_get] "$handle-missing-keys" configuration should be set to "error", "warn", "null", or "silent"'
+    );
+
+    $handle-missing-keys: 'error' !global;
+  }
+
   @include it('Replaces the value of any #alias tag') {
     $needle: ('has-delay': 'is #delay', '#key': 3) '#key';
     $expect: ('has-delay': 'is 0.5s', 'value': 3) 'value';
@@ -184,6 +195,69 @@
   }
 }
 
+// Next Reference
+// --------------
+@include describe('Next Reference [function]') {
+  @include it('Returns `null` if the given string contains no hash references') {
+    @include assert-equal(
+      _a_next_reference('not a single hash in here'),
+      null
+    );
+  }
+
+  @include it('Returns a hash reference in a string') {
+    @include assert-equal(
+      _a_next_reference('there\'s a hash in this string: #hash'),
+      'hash'
+    );
+  }
+
+  @include it('Returns the first hash reference encountered in a string') {
+    @include assert-equal(
+      _a_next_reference('there\'s a number of hashes in this string: #hash #hash2 #hash3'),
+      'hash'
+    );
+  }
+
+  @include it('Terminates the retrieved hash on a space character') {
+    @include assert-equal(
+      _a_next_reference('there\'s a #hash here too'),
+      'hash'
+    );
+  }
+
+  @include it('Terminates the retrieved hash on a `)` character') {
+    @include assert-equal(
+      _a_next_reference('one (#hash) reference, please'),
+      'hash'
+    );
+  }
+
+  @include it('Returns the first hash reference of two concatenated references') {
+    @include assert-equal(
+      _a_next_reference('#hashes#glued#together'),
+      'hashes'
+    );
+  }
+
+  @include it('Recognises an explicitly terminated hash reference') {
+    @include assert-equal(
+      _a_next_reference('terminate this#hash\\here'),
+      'hash'
+    );
+  }
+
+  @include it('Does not terminate a hash reference with an escaped # symbol prematurely when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_next_reference('this hash is not a actually a reference: \\#no'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+}
 
 // Replace
 // -------
@@ -232,6 +306,72 @@
     );
   }
 
+  @include it('Fails on unknown hashtags if error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      'ERROR [_a_replace] Key "ignore" not found in map'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null on unknown hashtags if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null on unknown hashtags if warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please #ignore'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Ignores escaped # symbols if error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please \\#ignore'),
+      'please #ignore'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Ignores escaped # symbols if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please \\#ignore'),
+      'please #ignore'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Ignores escaped # symbols if warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      _a_replace($map, 'please \\#ignore'),
+      'please #ignore'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
   @include it('Can distinguish between overlapping keys') {
     @include assert-equal(
       _a_replace($map, '#name#na'),
@@ -244,6 +384,72 @@
       _a_replace($map, '#nameofthething'),
       'N4M3!ofthething'
     );
+  }
+
+  @include it('Fails if given an alias without explicit ending when error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      'ERROR [_a_replace] Key "nameofthething" not found in map'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null if given an alias without explicit ending when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null if given an alias without explicit ending when warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#nameofthething'),
+      null
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Finds an explicitly terminated alias when error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#name\\ofthething'),
+      'N4M3!ofthething'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Finds an explicitly terminated alias when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#name\\ofthething'),
+      'N4M3!ofthething'
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Finds an explicitly terminated alias when warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      _a_replace($map, '#name\\ofthething'),
+      'N4M3!ofthething'
+    );
+
+    $handle-missing-keys: 'silent' !global;
   }
 }
 

@@ -78,7 +78,7 @@
     $a: if($i > 1, str-slice($string, 1, $i - 1), '');
     $z: str-slice($string, $i + $n);
 
-    // recurion if needed…
+    // recursion if needed…
     @if $replace-all {
       $z: _a_str-replace($z, $old, $new, true);
     }
