@@ -1376,6 +1376,398 @@ it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustme
 
 
 
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="escaping-references">Escaping References</h2>
+<ul>
+<li>If you need to use the <code>#</code> character without creating an alias reference,
+you can prefix it with an (also-escaped) back-slash:
+<code>'this is \\#not-an-alias'</code></li>
+<li>If you need to end an alias without using punctuation or spaces,
+the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></li>
+</ul>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.2.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Added to help manage more complex missing-key<span class="widont">&nbsp;</span>options</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--handle-missing-keys">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--handle-missing-keys" class="item-name">$handle-missing-keys</a>
+      
+
+      
+        <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$handle-missing-keys: &#39;silent&#39; !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A configuration option for setting the strictness with which <code>get-token()</code>
+handles missing nested keys. The option can be set to <code>silent</code>, <code>null</code>,
+<code>warning</code>, or <code>error</code>:</p>
+<ul>
+<li><code>silent</code>: The default (backwards-compatible) value
+will attempt to fail gracefully
+and greedily replace all existing<span class="widont">&nbsp;</span>references.</li>
+<li><code>null</code>: Will return <code>null</code> if the value is not found,
+mimicking the built-in Sass <code>map.get()</code> function.</li>
+<li><code>warn</code>: Will return <code>null</code> if the value is not found,
+and also throw a<span class="widont">&nbsp;</span>warning.</li>
+<li><code>error</code>: Will throw an error if the value is not<span class="widont">&nbsp;</span>found.</li>
+</ul>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.2.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Provides authors with more Sass-like behavior,
+and more options for managing or testing when a key lookup<span class="widont">&nbsp;</span>fails</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+    
+    <section class="summary-subsection">
+      <h3 class="summary-subtitle">Author:</h3>
+      <ul class="subsection-details">
+        
+          <li><p>James Camilleri</p>
+</li>
+        
+      </ul>
+    </section>
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_next_reference()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+      
+        
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">_a_replace()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+      
+        
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="function--get-token">
   
     
@@ -2298,6 +2690,40 @@ $my-map: (&#39;main&#39;: 32em);
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
+        <span class="item-name">_a_next_reference()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
         <span class="item-name">_a_replace()</span>
       
       
@@ -2308,6 +2734,10 @@ $my-map: (&#39;main&#39;: 32em);
     
   </div>
 
+
+        
+      
+        
 
         
       
