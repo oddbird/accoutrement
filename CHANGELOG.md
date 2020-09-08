@@ -4,17 +4,16 @@
 
 - NEW: (#41) Global `$handle-missing-keys` allows you to control exactly
   what should happen when a key look-up fails.
-  The default `silent` provides backwards-compatable silent-failure.
+  The default `silent` provides backwards-compatible silent-failure.
   Other options include:
   - `null`: `get-token()` will return `null`, similar to Sass `map.get()`
   - `warn`: `get-token()` will return `null`, and also throw a warning
   - `error`: `get-token()` will throw an error if the value is not found
 - NEW: `\\` (an escaped backslash) can be used to ignore (`\\#not-an-alias`)
   or end (`#alias\\not-part-of-alias`) a `#` reference
-- INTERNAL: (#41) Major performance improvements to the token look-up algorythm
+- INTERNAL: (#41) Major performance improvements to the token look-up algorithm
 
-Huge thanks to James Camilleri (jcamilleri13) for
-all the improveents here.
+Huge thanks to James Camilleri (@jcamilleri13) for all the improvements here.
 
 ## 2.1.4 - 06/30/20
 
