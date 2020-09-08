@@ -28,7 +28,7 @@
   $value: $key;
 
   // Throw an error if the missing key flag is not configured correctly.
-  @if not index(('error', 'warn', 'null', 'silent'), $handle-missing-keys) {
+  @if not index(('silent', 'error', 'warn', 'null', null), $handle-missing-keys) {
     @return _a_error('"$handle-missing-keys" configuration should be set ' +
       'to "error", "warn", "null", or "silent"', '_a_get');
   }
