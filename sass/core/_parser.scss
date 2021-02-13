@@ -211,7 +211,9 @@
 
         @if (type-of($string) == 'string') and str-index($string, $hash) {
           $new: get-token($haystack, $key);
-          $string: _a_str-replace($string, $hash, $new, 'all');
+          @if (type-of($new) != 'map') {
+            $string: _a_str-replace($string, $hash, $new, true);
+          }
         }
       }
 
