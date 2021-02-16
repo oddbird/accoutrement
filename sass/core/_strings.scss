@@ -76,8 +76,7 @@
       @if (type-of($new) == 'map') {
         @warn '_a_str-replace $new parameter cannot be a map';
         @return $string;
-      }
-      @else {
+      } @else {
         $new: '#{$new}';
       }
     }
