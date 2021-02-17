@@ -223,7 +223,7 @@
   }
 
   // Correct escaped # symbols now that parsing is complete.
-  @if $handle-missing-keys != 'silent' {
+  @if ($handle-missing-keys != 'silent') and (type-of($string) != 'map') {
     $string: _a_str-replace($string, '\\#', '#', 'all');
   }
 

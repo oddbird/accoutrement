@@ -413,6 +413,23 @@
           
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
+<h2 id="unreleased-02-16-20">UNRELEASED - 02/16/20</h2>
+<ul>
+<li>BREAKING: Change to <code>get-token()</code> return value when the key path cannot be
+resolved, and <code>$handle-missing-keys</code> is unset or <code>silent</code>: Maps along the
+missing key path are no longer interpolated into the returned string. This
+is part of the fix for #49. Use <code>$handle-missing-keys</code> for more precise
+missing subkey<span class="widont">&nbsp;</span>behavior.</li>
+<li>BUGFIX (#49): Using <code>get-token()</code> to resolve a missing key no longer errors
+when using dart-sass and <code>$handle-missing-keys</code> is unset or <code>silent</code>.
+Instead, the unresolved path is<span class="widont">&nbsp;</span>returned.</li>
+<li>BUGFIX (#61): Using <code>get-token()</code> to obtain a 2nd level or deeper submap no
+longer causes a fatal error when using dart-sass and <code>$handle-missing-keys</code>
+is <code>null</code>, <code>warn</code>, or <code>error</code>.</li>
+<li>INTERNAL: Run unit tests with dart-sass (in addition to node-sass, which was
+used<span class="widont">&nbsp;</span>prior).</li>
+<li>INTERNAL: Upgrade dev<span class="widont">&nbsp;</span>dependencies.</li>
+</ul>
 <h2 id="2-2-0-09-08-20">2.2.0 - 09/08/20</h2>
 <ul>
 <li>NEW: (#41) Global <code>$handle-missing-keys</code> allows you to control exactly

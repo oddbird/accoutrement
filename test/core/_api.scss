@@ -100,7 +100,10 @@
 
   @include it('Can return submaps') {
     @include assert-equal(
-      (get-token($map, 'ofo'), get-token($map, 'foo->three')),
+      (
+        get-token($map, 'ofo'),
+        get-token($map, 'foo->three')
+      ),
       (
         (
           'zab': 4
@@ -111,6 +114,28 @@
         )
       )
     );
+  }
+
+  @include it('Can return submaps when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      (
+        get-token($map, 'ofo'),
+        get-token($map, 'foo->three')
+      ),
+      (
+        (
+          'zab': 4
+        ),
+        (
+          'abc': 2,
+          'def': 0
+        )
+      )
+    );
+
+    $handle-missing-keys: 'silent' !global;
   }
 
   @include it('Returns null when keys are not found if null mode is enabled') {
