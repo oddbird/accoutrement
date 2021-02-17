@@ -1,5 +1,19 @@
 # Accoutrement Changelog
 
+## UNRELEASED - 02/16/20
+
+- BREAKING: Change to `get-token()` return value when the key path cannot be
+  resolved, and `$handle-missing-keys` is unset or `silent`: Maps along the
+  missing key path are no longer interpolated into the returned string. This
+  is part of the fix for #49. Use `$handle-missing-keys` for more precise
+  missing subkey behavior.
+- BUGFIX (#49): Using `get-token()` to resolve a missing key no longer errors
+  when using dart-sass and `$handle-missing-keys` is unset or `silent`.
+  Instead, the unresolved path is returned.
+- INTERNAL: Run unit tests with dart-sass (in addition to node-sass, which was
+  used prior).
+- INTERNAL: Upgrade dev dependencies.
+
 ## 2.2.0 - 09/08/20
 
 - NEW: (#41) Global `$handle-missing-keys` allows you to control exactly
