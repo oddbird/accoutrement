@@ -7,9 +7,12 @@
   missing key path are no longer interpolated into the returned string. This
   is part of the fix for #49. Use `$handle-missing-keys` for more precise
   missing subkey behavior.
-- BUGFIX (#49): Using `get-token()` to obtain a submap no longer cause a fatal
-  error when using dart-sass and `$handle-missing-keys` is unset or `silent`.
+- BUGFIX (#49): Using `get-token()` to resolve a missing key no longer errors
+  when using dart-sass and `$handle-missing-keys` is unset or `silent`.
   Instead, the unresolved path is returned.
+- BUGFIX (#61): Using `get-token()` to obtain a 2nd level or deeper submap no
+  longer causes a fatal error when using dart-sass and `$handle-missing-keys`
+  is `null`, `warn`, or `error`.
 - INTERNAL: Run unit tests with dart-sass (in addition to node-sass, which was
   used prior).
 - INTERNAL: Upgrade dev dependencies.

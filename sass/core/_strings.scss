@@ -49,6 +49,11 @@
 ) {
   $return: $string;
 
+  @if (type-of($string) == 'map') {
+    @warn '_a_str-replace $string parameter cannot be a map';
+    @return $return;
+  }
+
   // Loops lists
   @if (type-of($string) == 'list') {
     $return: _a_list-template($string);

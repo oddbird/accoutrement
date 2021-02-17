@@ -119,19 +119,10 @@
   @include it('Can return submaps when null mode is enabled') {
     $handle-missing-keys: 'null' !global;
 
-    $map2: (
-      'bar': (
-        'foo': (
-          'three': 'four'
-        ),
-      )
-    );
-
     @include assert-equal(
       (
         get-token($map, 'ofo'),
         get-token($map, 'foo->three')
-        // get-token($map2, 'bar->foo')
       ),
       (
         (
