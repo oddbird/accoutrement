@@ -26,6 +26,7 @@
   $expect: (
     'name': 'Unicode Test',
     'formats': 'woff2',
+    'display': 'swap',
     'unicode-range': (U+0000-00FF, U+0131, 'U+0152-0153', 'U+02C6'),
     'stack': join((), 'Unicode Test', 'comma'),
     ('normal', 'normal'): ('woff2': 'path/to/normal.woff2'),

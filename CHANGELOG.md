@@ -7,6 +7,9 @@
   missing key path are no longer interpolated into the returned string. This
   is part of the fix for #49. Use `$handle-missing-keys` for more precise
   missing subkey behavior.
+- NEW/BREAKING: Font maps accept `display` key,
+  which can be used to set `font-display` property for importing web-fonts.
+  (thanks to André Schließer @schliesser)
 - BUGFIX (#49): Using `get-token()` to resolve a missing key no longer errors
   when using dart-sass and `$handle-missing-keys` is unset or `silent`.
   Instead, the unresolved path is returned.

@@ -253,6 +253,9 @@ $_a_FONT-FORMATS: (
 /// Compile provided font-variant data into a
 /// CSS `@font-face` import.
 ///
+/// @since 3.0.0 -
+/// - NEW: Supports `display` setting in font-maps
+///
 /// @access private
 /// @group type-helpers
 /// @example scss
@@ -278,11 +281,10 @@ $_a_FONT-FORMATS: (
 /// @param {map} $data -
 ///   Path to the font files (leaving off the file-format extension),
 ///   or map of format/path pairs.
-/// @param {list | null} <key>.unicode-range -
+/// @param {list | null} $unicode [null] -
 ///   Optionally import only specific unicode ranges.
-///   See [MDN unicode-range documentation][unicode] for details.
-///
-///   [unicode]: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range
+/// @param {string | null} $display [null] -
+///   Optionally set the font-display property.
 /// @output `@font-face` CSS-block for importing a given font variant.
 /// @throws When a generic variant-path is provided
 ///   without formats for interpolation.
@@ -292,7 +294,7 @@ $_a_FONT-FORMATS: (
   $style,
   $data,
   $unicode: null,
-  $display: 'auto'
+  $display: null
 ) {
   // Special handling of eot with local or data
   $eot: map-get($data, 'eot');
@@ -318,6 +320,7 @@ $_a_FONT-FORMATS: (
   $name: quote($name);
   $style: unquote($style);
   $weight: unquote($weight);
+  $display: if($display, unquote($display), null);
 
   @if $unicode {
     $new: ();

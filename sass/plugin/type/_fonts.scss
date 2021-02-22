@@ -149,6 +149,8 @@
 /// Import any local webfont defined in your `$fonts` configuration
 /// (variants without a path will not be imported).
 ///
+/// @since 3.0.0 -
+/// - NEW: Supports `display` setting in font-maps
 /// @since 1.0.0 -
 /// - NEW: Accepts `$source` map argument,
 ///   for custom source-palette

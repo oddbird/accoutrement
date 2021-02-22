@@ -420,6 +420,9 @@ resolved, and <code>$handle-missing-keys</code> is unset or <code>silent</code>:
 missing key path are no longer interpolated into the returned string. This
 is part of the fix for #49. Use <code>$handle-missing-keys</code> for more precise
 missing subkey<span class="widont">&nbsp;</span>behavior.</li>
+<li>NEW/BREAKING: Font maps accept <code>display</code> key,
+which can be used to set <code>font-display</code> property for importing web-fonts.
+(thanks to André Schließer<span class="widont">&nbsp;</span>@schliesser)</li>
 <li>BUGFIX (#49): Using <code>get-token()</code> to resolve a missing key no longer errors
 when using dart-sass and <code>$handle-missing-keys</code> is unset or <code>silent</code>.
 Instead, the unresolved path is<span class="widont">&nbsp;</span>returned.</li>

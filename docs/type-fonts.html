@@ -834,6 +834,14 @@ it will include <code>source</code> links in the<span class="widont">&nbsp;</spa
   
     
       <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>3.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Supports <code>display</code> map key for setting CSS <code>font-display</code> property</li>
+</ul>
+</div>
+      </section>
+    
+      <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
         <div class="subsection-details"><ul>
 <li>NEW: Supports <code>'bold italic'</code> weight/style syntax
@@ -1033,6 +1041,34 @@ for font-face imported<span class="widont">&nbsp;</span>fonts.</p>
       <div class="param-details text-block">
         <p>Optionally import only specific unicode ranges.
 See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range">MDN unicode-range documentation</a> for<span class="widont">&nbsp;</span>details.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">&lt;key&gt;.display:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optionally set the <code>font-display</code> property when importing web fonts.
+See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display">MDN font-display documentation</a> for<span class="widont">&nbsp;</span>details.</p>
 
       </div>
     
@@ -1271,6 +1307,7 @@ or base64 data-URIs for specific<span class="widont">&nbsp;</span>formats.</p>
     &#39;bold&#39;: &#39;museosans-bold-filename&#39;,
     &#39;bold&#39; &#39;italic&#39;: &#39;museosans-bolditalic-filename&#39;,
     &#39;unicode-range&#39;: (U+0000-00FF, U+0131, U+0152-0153, U+02C6),
+    &#39;display&#39;: &#39;swap&#39;,
     // safely document any additional font data you want…
     &#39;source&#39;: &#39;https://www.fontspring.com/fonts/exljbris/museo-sans&#39;,
   ),
@@ -3620,6 +3657,14 @@ html {
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>3.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Supports <code>display</code> setting in<span class="widont">&nbsp;</span>font-maps</li>
+</ul>
+</div>
+      </section>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
