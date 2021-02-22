@@ -17,6 +17,7 @@
   used prior).
 - INTERNAL: Upgrade dev dependencies.
 - DOCS (#53): Use `html` rather than `:root` for examples.
+- DOCS: Wrong parameter name in `contrast-ratio()` function docs.
 
 ## 2.2.0 - 09/08/20
 
