@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.2.0</span>
+          <span class="project-version">3.0.0</span>
         
       </div>
     </header>
@@ -649,7 +649,7 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
       
       <pre class="hljs-pre"><code class="lang-scss">$easing: (&#39;my-ease&#39;: &#39;#_in-out-back&#39;);
 $easing-var-prefix: &#39;prefix_&#39;;
-:root { @include ease--(&#39;my-ease&#39;) }</code></pre>
+html { @include ease--(&#39;my-ease&#39;) }</code></pre>
     </div>
   
 
@@ -671,7 +671,7 @@ $easing-var-prefix: &#39;prefix_&#39;;
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --prefix_my-ease: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 </code></pre>
@@ -1042,7 +1042,7 @@ map of easing tokens to set as css<span class="widont">&nbsp;</span>variables</p
   &#39;modal&#39;: &#39;#_elastic&#39;,
   &#39;error-message&#39;: &#39;#modal&#39;,
 );
-:root {
+html {
   @include easing--;
 }</code></pre>
     </div>
@@ -1066,7 +1066,7 @@ map of easing tokens to set as css<span class="widont">&nbsp;</span>variables</p
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --ease-modal: cubic-bezier(0.5, -0.4, 0.5, 1.4);
   --ease-error-message: var(--ease-modal, cubic-bezier(0.5, -0.4, 0.5, 1.4));
 }

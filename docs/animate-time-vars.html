@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.2.0</span>
+          <span class="project-version">3.0.0</span>
         
       </div>
     </header>
@@ -649,7 +649,7 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
       
       <pre class="hljs-pre"><code class="lang-scss">$times: (&#39;my-time&#39;: 1s);
 $time-var-prefix: &#39;prefix_&#39;;
-:root { @include time--(&#39;my-time&#39;) }</code></pre>
+html { @include time--(&#39;my-time&#39;) }</code></pre>
     </div>
   
 
@@ -671,7 +671,7 @@ $time-var-prefix: &#39;prefix_&#39;;
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --prefix_my-time: 1s;
 }
 </code></pre>
@@ -1042,7 +1042,7 @@ map of times to set as css<span class="widont">&nbsp;</span>variables</p>
   &#39;text&#39;: &#39;#_fast&#39;,
   &#39;fade&#39;: &#39;#text&#39;,
 );
-:root {
+html {
   @include times--;
 }</code></pre>
     </div>
@@ -1066,7 +1066,7 @@ map of times to set as css<span class="widont">&nbsp;</span>variables</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --time-text: 200ms;
   --time-fade: var(--time-text, 200ms);
 }

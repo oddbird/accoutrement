@@ -291,7 +291,7 @@ $WCAG-CONTRAST: (
 ///   /* black and white: #{contrast-ratio(white, black)} */
 ///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
 ///
-/// @param {string | list | number} $color -
+/// @param {string | list | number} $base -
 ///   The name of a color in your palette,
 ///   any other color value,
 ///   or even a pre-calculated numeric luminance.

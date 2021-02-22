@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.2.0</span>
+          <span class="project-version">3.0.0</span>
         
       </div>
     </header>
@@ -633,7 +633,7 @@ using a <code>#token</code> hashtag syntax:</p>
 <p>Those relationships will be calculated at compile-time,
 using the <code>get-token()</code> function
 (or shortcut functions provided by<span class="widont">&nbsp;</span>plugins):</p>
-<pre><code class="lang-scss">:root: (
+<pre><code class="lang-scss">html: (
   color: get-token($colors, 'text');
 );
 </code></pre>
@@ -838,7 +838,7 @@ for more<span class="widont">&nbsp;</span>detail.</p>
   &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
   &#39;border&#39;: &#39;#text&#39;,
 );
-:root {
+html {
   // generate CSS Variables based on the map above…
   @include tokens--($colors);
   // access CSS Variables with smart fallbacks…
@@ -866,7 +866,7 @@ for more<span class="widont">&nbsp;</span>detail.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --text: #206020;
   --border: var(--text, #206020);
   border-color: var(--border, #206020);
@@ -1006,7 +1006,7 @@ we provide relevant defaults &amp; shortcuts in the<span class="widont">&nbsp;</
   'line-height': (1 / 3),
   '_golden': 1.61803399,
 );
-:root {
+html {
   line-height: ratio('line-height');
 }
 </code></pre>

@@ -21,7 +21,7 @@
 /// @example scss
 ///   $changes: ('my-change': pink);
 ///   $change-var-prefix: 'prefix_';
-///   :root { @include change--('my-change') }
+///   html { @include change--('my-change') }
 ///
 /// @type string
 $change-var-prefix: 'change-' !default;
@@ -48,7 +48,7 @@ $change-var-prefix: 'change-' !default;
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
-///   :root {
+///   html {
 ///     @include changes--;
 ///   }
 ///

@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.2.0</span>
+          <span class="project-version">3.0.0</span>
         
       </div>
     </header>
@@ -653,7 +653,7 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
    )
 );
 $font-var-prefix: &#39;prefix_&#39;;
-:root { @include font--(&#39;my-font&#39;) }</code></pre>
+html { @include font--(&#39;my-font&#39;) }</code></pre>
     </div>
   
 
@@ -675,7 +675,7 @@ $font-var-prefix: &#39;prefix_&#39;;
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --prefix_my-font: my-font, arial, helvetica, sans-serif;
 }
 </code></pre>
@@ -1077,7 +1077,7 @@ to use as custom-property<span class="widont">&nbsp;</span>values</p>
   &#39;text&#39;: &#39;#_TestFont&#39;,
   &#39;sans&#39;: &#39;#text&#39;,
 );
-:root {
+html {
   @include fonts--;
 }</code></pre>
     </div>
@@ -1101,7 +1101,7 @@ to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --font-text: &quot;My Test Font&quot;, Georgia, serif;
   --font-sans: var(--font-text, &quot;My Test Font&quot;, Georgia, serif);
 }

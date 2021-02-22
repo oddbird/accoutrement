@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.2.0</span>
+          <span class="project-version">3.0.0</span>
         
       </div>
     </header>
@@ -649,7 +649,7 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
       
       <pre class="hljs-pre"><code class="lang-scss">$sizes: (&#39;my-size&#39;: 3em);
 $size-var-prefix: &#39;prefix_&#39;;
-:root { @include size--(&#39;my-size&#39;) }</code></pre>
+html { @include size--(&#39;my-size&#39;) }</code></pre>
     </div>
   
 
@@ -671,7 +671,7 @@ $size-var-prefix: &#39;prefix_&#39;;
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --prefix_my-size: 3em;
 }
 </code></pre>
@@ -1042,7 +1042,7 @@ map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
   &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
   &#39;line&#39;: &#39;#rhythm&#39;,
 );
-:root {
+html {
   @include sizes--;
 }</code></pre>
     </div>
@@ -1066,7 +1066,7 @@ map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">:root {
+      <pre class="hljs-pre"><code class="lang-css">html {
   --size-rhythm: 24px;
   --size-line: var(--size-rhythm, 24px);
 }
