@@ -184,11 +184,12 @@
 
   @if (length($variants) > 0) {
     $unicode: map-get($font, 'unicode-range');
+    $display: map-get($font, 'display');
 
     @each $variant, $data in $variants {
       $weight: nth($variant, 1);
       $style: nth($variant, 2);
-      @include _a_import-font-face($name, $weight, $style, $data, $unicode);
+      @include _a_import-font-face($name, $weight, $style, $data, $unicode, $display);
     }
   }
 }
