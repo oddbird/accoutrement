@@ -98,7 +98,7 @@
 /// (or shortcut functions provided by plugins):
 ///
 /// ```scss
-/// :root: (
+/// html: (
 ///   color: get-token($colors, 'text');
 /// );
 /// ```
@@ -128,7 +128,7 @@
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
-///   :root {
+///   html {
 ///     // generate CSS Variables based on the map above…
 ///     @include tokens--($colors);
 ///     // access CSS Variables with smart fallbacks…
@@ -150,7 +150,7 @@
 ///   'line-height': (1 / 3),
 ///   '_golden': 1.61803399,
 /// );
-/// :root {
+/// html {
 ///   line-height: ratio('line-height');
 /// }
 /// ```

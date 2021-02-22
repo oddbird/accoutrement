@@ -16,6 +16,7 @@
 - INTERNAL: Run unit tests with dart-sass (in addition to node-sass, which was
   used prior).
 - INTERNAL: Upgrade dev dependencies.
+- DOCS (#53): Use `html` rather than `:root` for examples.
 
 ## 2.2.0 - 09/08/20
 

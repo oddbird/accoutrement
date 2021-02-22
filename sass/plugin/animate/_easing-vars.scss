@@ -21,7 +21,7 @@
 /// @example scss
 ///   $easing: ('my-ease': '#_in-out-back');
 ///   $easing-var-prefix: 'prefix_';
-///   :root { @include ease--('my-ease') }
+///   html { @include ease--('my-ease') }
 ///
 /// @type string
 $easing-var-prefix: 'ease-' !default;
@@ -48,7 +48,7 @@ $easing-var-prefix: 'ease-' !default;
 ///     'modal': '#_elastic',
 ///     'error-message': '#modal',
 ///   );
-///   :root {
+///   html {
 ///     @include easing--;
 ///   }
 ///

@@ -21,7 +21,7 @@
 /// @example scss
 ///   $colors: ('my-color': pink);
 ///   $color-var-prefix: 'prefix_';
-///   :root { @include color--('my-color') }
+///   html { @include color--('my-color') }
 ///
 /// @type string
 $color-var-prefix: 'color-' !default;
@@ -48,7 +48,7 @@ $color-var-prefix: 'color-' !default;
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
-///   :root {
+///   html {
 ///     @include colors--;
 ///   }
 ///

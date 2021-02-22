@@ -21,7 +21,7 @@
 /// @example scss
 ///   $sizes: ('my-size': 3em);
 ///   $size-var-prefix: 'prefix_';
-///   :root { @include size--('my-size') }
+///   html { @include size--('my-size') }
 ///
 /// @type string
 $size-var-prefix: 'size-' !default;
@@ -48,7 +48,7 @@ $size-var-prefix: 'size-' !default;
 ///     'rhythm': '#_root' ('times': 1.5),
 ///     'line': '#rhythm',
 ///   );
-///   :root {
+///   html {
 ///     @include sizes--;
 ///   }
 ///
