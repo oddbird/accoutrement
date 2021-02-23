@@ -424,7 +424,7 @@
   
     <div class="text-block">
       <h1 id="sass-accoutrement">Sass Accoutrement</h1>
-<p><a href="https://travis-ci.org/oddbird/accoutrement"><img src="https://travis-ci.org/oddbird/accoutrement.svg?branch=master" alt="Build Status"></a></p>
+<p><a href="https://travis-ci.com/oddbird/accoutrement"><img src="https://travis-ci.com/oddbird/accoutrement.svg?branch=master" alt="Build Status"></a></p>
 <p><strong>Robust design systems</strong> require
 <em>meaningful</em>, <em>readable</em>, <em>reusable</em> code.
 These Sass utilities are designed to
@@ -454,26 +454,26 @@ yarn add accoutrement [--dev]
 </code></pre>
 <p>Import what you<span class="widont">&nbsp;</span>need:</p>
 <pre><code class="lang-scss">// core and all plugins (also available with `/index`)
-@import '&lt;path-to&gt;/accoutrement/sass/tools';
+@import &quot;&lt;path-to&gt;/accoutrement/sass/tools&quot;;
 
 // init normalization
-@import '&lt;path-to&gt;/accoutrement/sass/init';
+@import &quot;&lt;path-to&gt;/accoutrement/sass/init&quot;;
 
 // individual plugins (core is required)
-@import '&lt;path-to&gt;/accoutrement/sass/core';
-@import '&lt;path-to&gt;/accoutrement/sass/plugin/&lt;name&gt;';
+@import &quot;&lt;path-to&gt;/accoutrement/sass/core&quot;;
+@import &quot;&lt;path-to&gt;/accoutrement/sass/plugin/&lt;name&gt;&quot;;
 </code></pre>
 <p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
 you can import the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
-<pre><code class="lang-scss">@import 'accoutrement';
+<pre><code class="lang-scss">@import &quot;accoutrement&quot;;
 </code></pre>
 <h2 id="usage">Usage</h2>
 <p>The accoutrement tools are built around
 a shared data-storage syntax
 using Sass “map”<span class="widont">&nbsp;</span>objects:</p>
 <pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'gutter': 1em,
+  &quot;root&quot;: 16px,
+  &quot;gutter&quot;: 1em,
 );
 </code></pre>
 <p>Using a custom syntax,
@@ -482,10 +482,13 @@ and functional adjustments –
 capturing meaningful relationships
 between design<span class="widont">&nbsp;</span>tokens:</p>
 <pre><code class="lang-scss">$map: (
-  'root': 16px,
-
+  &quot;root&quot;: 16px,
   // internal reference &amp; adjustments
-  'gutter': '#root' ('_major-third': 1, 'convert-units': 'rem'),
+  &quot;gutter&quot;: &quot;#root&quot;
+    (
+      &quot;_major-third&quot;: 1,
+      &quot;convert-units&quot;: &quot;rem&quot;,
+    ),
 );
 </code></pre>
 <p>Map storage serves a larger<span class="widont">&nbsp;</span>purpose:</p>

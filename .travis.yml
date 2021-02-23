@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - 'node'
-  - 'lts/*'
-  - '8'
+  - "node"
+  - "lts/*"
 sudo: false
 notifications:
   slack:

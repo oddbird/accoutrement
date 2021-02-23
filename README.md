@@ -1,9 +1,9 @@
 # Sass Accoutrement
 
-[![Build Status](https://travis-ci.org/oddbird/accoutrement.svg?branch=master)](https://travis-ci.org/oddbird/accoutrement)
+[![Build Status](https://travis-ci.com/oddbird/accoutrement.svg?branch=master)](https://travis-ci.com/oddbird/accoutrement)
 
 **Robust design systems** require
-*meaningful*, *readable*, *reusable* code.
+_meaningful_, _readable_, _reusable_ code.
 These Sass utilities are designed to
 help define and manage your design tokens
 (colors, fonts, sizes, etc.)
@@ -11,29 +11,28 @@ in a format that can be understood
 by both humans and parsers --
 opening the door for automation,
 while improving consistency and readability.
-These tools also integrate with [Herman][Herman],
+These tools also integrate with [Herman][herman],
 our automated living pattern-library generator
-built on [SassDoc][SassDoc].
+built on [SassDoc][sassdoc].
 
-[Herman]: https://www.oddbird.net/herman/
-[SassDoc]: http://sassdoc.com/
+[herman]: https://www.oddbird.net/herman/
+[sassdoc]: http://sassdoc.com/
 
 - [Official Site](https://www.oddbird.net/accoutrement/)
 - [Documentation](https://www.oddbird.net/accoutrement/docs/)
 - [Source Code](https://github.com/oddbird/accoutrement/)
 - [Issues](https://github.com/oddbird/accoutrement/issues)
 
-*Brought to you by [OddBird][oddbird] --
+_Brought to you by [OddBird][oddbird] --
 the creators of [Susy][susy],
 [True][true],
-and [Herman][herman].*
+and [Herman][herman]._
 
 [oddbird]: https://www.oddbird.net/
 [susy]: https://www.oddbird.net/susy/
 [true]: https://www.oddbird.net/true
 [herman]: https://www.oddbird.net/herman
 [fonts]: https://www.oddbird.net/accoutrement/docs/type.html
-
 
 ## Installation
 
@@ -48,23 +47,22 @@ Import what you need:
 
 ```scss
 // core and all plugins (also available with `/index`)
-@import '<path-to>/accoutrement/sass/tools';
+@import "<path-to>/accoutrement/sass/tools";
 
 // init normalization
-@import '<path-to>/accoutrement/sass/init';
+@import "<path-to>/accoutrement/sass/init";
 
 // individual plugins (core is required)
-@import '<path-to>/accoutrement/sass/core';
-@import '<path-to>/accoutrement/sass/plugin/<name>';
+@import "<path-to>/accoutrement/sass/core";
+@import "<path-to>/accoutrement/sass/plugin/<name>";
 ```
 
 If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 you can import the default "tools" (core + plugins) using only:
 
 ```scss
-@import 'accoutrement';
+@import "accoutrement";
 ```
-
 
 ## Usage
 
@@ -74,8 +72,8 @@ using Sass "map" objects:
 
 ```scss
 $map: (
-  'root': 16px,
-  'gutter': 1em,
+  "root": 16px,
+  "gutter": 1em,
 );
 ```
 
@@ -87,14 +85,18 @@ between design tokens:
 
 ```scss
 $map: (
-  'root': 16px,
-
+  "root": 16px,
   // internal reference & adjustments
-  'gutter': '#root' ('_major-third': 1, 'convert-units': 'rem'),
+  "gutter": "#root"
+    (
+      "_major-third": 1,
+      "convert-units": "rem",
+    ),
 );
 ```
 
 Map storage serves a larger purpose:
+
 - Related data is grouped explicitly,
   making the code more readable and maintainable
 - The "single source of truth"
@@ -106,7 +108,6 @@ Map storage serves a larger purpose:
 
 [herman]: https://www.oddbird.net/herman/
 [type]: https://www.oddbird.net/accoutrement/docs/type.html
-
 
 ## [Core](https://www.oddbird.net/accoutrement/docs/core.html)
 
@@ -128,7 +129,6 @@ setup and syntax parsing:
 [string]: https://www.oddbird.net/accoutrement/docs/core-strings.html
 [functions]: https://www.oddbird.net/accoutrement/docs/core-register.html
 
-
 ## [Init](https://www.oddbird.net/accoutrement/docs/init.html)
 
 We provide light-weight browser-normalization,
@@ -136,7 +136,6 @@ as a distinct include.
 This is not part of the `accoutrement/sass/tools` package
 because it is the only module to produce
 direct CSS output.
-
 
 ## Plugins…
 
