@@ -149,6 +149,8 @@
 /// Import any local webfont defined in your `$fonts` configuration
 /// (variants without a path will not be imported).
 ///
+/// @since 3.0.0 -
+/// - NEW: Supports `display` setting in font-maps
 /// @since 1.0.0 -
 /// - NEW: Accepts `$source` map argument,
 ///   for custom source-palette
@@ -184,11 +186,12 @@
 
   @if (length($variants) > 0) {
     $unicode: map-get($font, 'unicode-range');
+    $display: map-get($font, 'display');
 
     @each $variant, $data in $variants {
       $weight: nth($variant, 1);
       $style: nth($variant, 2);
-      @include _a_import-font-face($name, $weight, $style, $data, $unicode);
+      @include _a_import-font-face($name, $weight, $style, $data, $unicode, $display);
     }
   }
 }

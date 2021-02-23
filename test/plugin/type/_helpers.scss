@@ -220,6 +220,33 @@
     }
   }
 
+  @include it('Allows font-display setting') {
+    @include assert {
+      @include output(false) {
+        @include _a_import-font-face(
+          $name: 'Source Sans Pro',
+          $weight: 'bold',
+          $style: 'normal',
+          $data: _a_normalize-variant-data('path/to/myFont', 'woff' 'svg'),
+          $display: 'fallback'
+        );
+      }
+
+      @include expect(false) {
+        @font-face {
+          font-family: "Source Sans Pro";
+          font-style: normal;
+          font-weight: bold;
+          font-display: fallback;
+          src: (
+            url("../fonts/path/to/myFont.woff") format("woff"),
+            url("../fonts/path/to/myFont.svg") format("svg")
+          );
+        }
+      }
+    }
+  }
+
   @include it('Allows local font src') {
     @include assert {
       @include output(false) {

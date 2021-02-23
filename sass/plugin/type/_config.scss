@@ -65,6 +65,8 @@ $font-path: '' !default;
 /// If you are using [Herman] to font previews,
 /// it will include `source` links in the output.
 ///
+/// @since 3.0.0 -
+/// - NEW: Supports `display` map key for setting CSS `font-display` property
 /// @since 0.1.0 -
 /// - NEW: Supports `'bold italic'` weight/style syntax
 ///   in addition to `('bold', 'italic')`
@@ -96,6 +98,7 @@ $font-path: '' !default;
 ///       'bold': 'museosans-bold-filename',
 ///       'bold' 'italic': 'museosans-bolditalic-filename',
 ///       'unicode-range': (U+0000-00FF, U+0131, U+0152-0153, U+02C6),
+///       'display': 'swap',
 ///       // safely document any additional font data you want…
 ///       'source': 'https://www.fontspring.com/fonts/exljbris/museo-sans',
 ///     ),
@@ -157,6 +160,11 @@ $font-path: '' !default;
 ///   See [MDN unicode-range documentation][unicode] for details.
 ///
 ///   [unicode]: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range
+/// @prop {string} <key>.display -
+///   Optionally set the `font-display` property when importing web fonts.
+///   See [MDN font-display documentation][display] for details.
+///
+///   [display]: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
 /// @prop {string | map} <key>.<variant> -
 ///   When describing locally-hosted or data-embedded fonts,
 ///   provide a key for each font-variant to import.

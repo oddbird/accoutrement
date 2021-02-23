@@ -419,15 +419,22 @@
 resolved, and <code>$handle-missing-keys</code> is unset or <code>silent</code>: Maps along the
 missing key path are no longer interpolated into the returned string. This
 is part of the fix for #49. Use <code>$handle-missing-keys</code> for more precise
-missing subkey<span class="widont">&nbsp;</span>behavior.</li>
+missing subkey behavior.
+(Thanks to John Crim<span class="widont">&nbsp;</span>@johncrim)</li>
+<li>NEW/BREAKING: Font maps accept <code>display</code> key,
+which can be used to set <code>font-display</code> property for importing web-fonts.
+(thanks to André Schließer<span class="widont">&nbsp;</span>@schliesser)</li>
 <li>BUGFIX (#49): Using <code>get-token()</code> to resolve a missing key no longer errors
 when using dart-sass and <code>$handle-missing-keys</code> is unset or <code>silent</code>.
-Instead, the unresolved path is<span class="widont">&nbsp;</span>returned.</li>
+Instead, the unresolved path is returned.
+(Thanks to John Crim<span class="widont">&nbsp;</span>@johncrim)</li>
 <li>BUGFIX (#61): Using <code>get-token()</code> to obtain a 2nd level or deeper submap no
 longer causes a fatal error when using dart-sass and <code>$handle-missing-keys</code>
-is <code>null</code>, <code>warn</code>, or <code>error</code>.</li>
+is <code>null</code>, <code>warn</code>, or <code>error</code>.
+(Thanks to John Crim<span class="widont">&nbsp;</span>@johncrim)</li>
 <li>INTERNAL: Run unit tests with dart-sass (in addition to node-sass, which was
-used<span class="widont">&nbsp;</span>prior).</li>
+used prior).
+(Thanks to John Crim<span class="widont">&nbsp;</span>@johncrim)</li>
 <li>INTERNAL: Upgrade dev<span class="widont">&nbsp;</span>dependencies.</li>
 <li>DOCS (#53): Use <code>html</code> rather than <code>:root</code> for examples.</li>
 <li>DOCS: Wrong parameter name in <code>contrast-ratio()</code> function docs.</li>
