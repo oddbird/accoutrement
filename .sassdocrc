@@ -65,7 +65,7 @@ groups:
 
 herman:
   sass:
-    includepaths: ['sass']
+    includePaths: ['sass']
     includes: ['tools']
   extraDocs:
     - name: 'Changelog'

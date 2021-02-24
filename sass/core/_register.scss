@@ -82,7 +82,7 @@ $functions: () !default;
 ///
 ///   /*! Registered Functions… */
 ///   @each $name, $value in $functions {
-///     /*! - #{$name}: #{$value} */
+///     /*! - #{$name}: #{inspect($value)} */
 ///   }
 ///
 /// @param {string | function} $function -
