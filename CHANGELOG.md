@@ -4,7 +4,7 @@
 
 - INTERNAL: Upgrade dev dependencies.
 
-## 3.0.0 - 02/22/20
+## 3.0.0 - 02/22/21
 
 - BREAKING: Change to `get-token()` return value when the key path cannot be
   resolved, and `$handle-missing-keys` is unset or `silent`: Maps along the
