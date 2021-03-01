@@ -1,8 +1,9 @@
 # Accoutrement Changelog
 
-## UNRELEASED
+## 3.0.1 - 03/01/21
 
 - INTERNAL: Upgrade dev dependencies.
+- DOCS: Fix changelog typo.
 
 ## 3.0.0 - 02/22/21
 
