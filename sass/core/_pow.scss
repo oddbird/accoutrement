@@ -9,6 +9,8 @@
 
 // Constants
 // ---------
+@use "sass:math";
+
 $_LN2: 0.6931471805599453;
 $_SQRT2: 1.4142135623730951;
 
@@ -53,7 +55,7 @@ $_SQRT2: 1.4142135623730951;
       $exp: floor($exp * 0.5);
       $base: $base * $base;
     }
-    @return if($s != 0, 1 / $r, $r);
+    @return if($s != 0, math.div(1, $r), $r);
   } @else if $base == 0 and $exp > 0 {
     @return 0;
   } @else {
@@ -85,7 +87,7 @@ $_SQRT2: 1.4142135623730951;
   $i: 1;
   @for $n from 0 to 24 {
     $ret: $ret + $i;
-    $i: $i * $x / ($n + 1);
+    $i: math.div($i * $x, $n + 1);
   }
   @return $ret;
 }
@@ -115,14 +117,14 @@ $_SQRT2: 1.4142135623730951;
   $b: null
 ) {
   @if $b != null {
-    @return _a_log($x) / _a_log($b);
+    @return math.div(_a_log($x), _a_log($b));
   }
 
   @if $x <= 0 {
-    @return 0 / 0;
+    @return math.div(0, 0);
   }
-  $k: nth(_a_frexp($x / $_SQRT2), 2);
-  $x: $x / _a_ldexp(1, $k);
+  $k: nth(_a_frexp(math.div($x, $_SQRT2)), 2);
+  $x: math.div($x, _a_ldexp(1, $k));
 
   @return $_LN2 * $k + _a_log-approx($x);
 }
@@ -136,7 +138,7 @@ $_SQRT2: 1.4142135623730951;
 @function _a_log-approx(
   $x
 ) {
-  $x: ($x - 1) / ($x + 1);
+  $x: math.div($x - 1, $x + 1);
   $x2: $x * $x;
   $i: 1;
   $s: $x;
@@ -145,7 +147,7 @@ $_SQRT2: 1.4142135623730951;
     $x: $x * $x2;
     $i: $i + 2;
     $sp: $s;
-    $s: $s + $x / $i;
+    $s: $s + math.div($x, $i);
   }
   @return 2 * $s;
 }
@@ -174,7 +176,7 @@ $_SQRT2: 1.4142135623730951;
     }
   } @else if $x >= 1 {
     @while $x >= 1 {
-      $x: $x / 2;
+      $x: math.div($x, 2);
       $exp: $exp + 1;
     }
   }
@@ -193,7 +195,7 @@ $_SQRT2: 1.4142135623730951;
   $x,
   $exp
 ) {
-  $b: if($exp >= 0, 2, 1 / 2);
+  $b: if($exp >= 0, 2, math.div(1, 2));
   @if $exp < 0 {
     $exp: $exp * -1;
   }

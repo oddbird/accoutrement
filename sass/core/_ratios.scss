@@ -24,6 +24,8 @@
 ///
 /// @type map
 /// @see $_a_RATIOS
+@use "sass:math";
+
 $ratios: () !default;
 
 
@@ -99,17 +101,17 @@ $ratios: () !default;
 /// @access public
 $_a_RATIOS: (
   '_octave': 2,
-  '_major-seventh': (15 / 8),
-  '_minor-seventh': (16 / 9),
-  '_major-sixth': (5 / 3),
-  '_minor-sixth': (8 / 5),
-  '_fifth': (3 / 2),
-  '_augmented-fourth': (45 / 32),
-  '_fourth': (4 / 3),
-  '_major-third': (5 / 4),
-  '_minor-third': (6 / 5),
-  '_major-second': (9 / 8),
-  '_minor-second': (16 / 15),
+  '_major-seventh': math.div(15, 8),
+  '_minor-seventh': math.div(16, 9),
+  '_major-sixth': math.div(5, 3),
+  '_minor-sixth': math.div(8, 5),
+  '_fifth': math.div(3, 2),
+  '_augmented-fourth': math.div(45, 32),
+  '_fourth': math.div(4, 3),
+  '_major-third': math.div(5, 4),
+  '_minor-third': math.div(6, 5),
+  '_major-second': math.div(9, 8),
+  '_minor-second': math.div(16, 15),
 
   '_photo': '#_fifth',
   '_classic': '#_fourth',

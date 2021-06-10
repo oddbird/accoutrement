@@ -9,6 +9,8 @@
 /// [WCAG]: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 ///
 /// @access private
+@use "sass:math";
+
 $WCAG-CONTRAST: (
   'AA-large': 3,
   'AA': 4.5,
@@ -315,7 +317,7 @@ $WCAG-CONTRAST: (
   $darker: min($base-lumin, $contrast-lumin);
   $lighter: max($base-lumin, $contrast-lumin);
 
-  $ratio: ($lighter + 0.05) / ($darker + 0.05);
+  $ratio: math.div($lighter + 0.05, $darker + 0.05);
 
   $require: _a_valid-contrast($require);
 
@@ -352,12 +354,12 @@ $WCAG-CONTRAST: (
       $function: get-function($component);
     }
 
-    $value: call($function, $color) / 255;
+    $value: math.div(call($function, $color), 255);
 
     @if ($value < 0.03928) {
-      $value: $value / 12.92;
+      $value: math.div($value, 12.92);
     } @else {
-      $base: ($value + 0.055) / 1.055;
+      $base: math.div($value + 0.055, 1.055);
       $value: _a_pow($base, 2.4);
     }
 
