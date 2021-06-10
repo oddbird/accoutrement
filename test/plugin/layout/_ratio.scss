@@ -1,5 +1,7 @@
 // Ratio Tests
 // ===========
+@use "sass:math";
+
 @include test-module('Layout: Aspect Ratios') {
 
 
@@ -7,7 +9,7 @@
 // ----------------------
 @include describe('Fluid Ratio [function]') {
   @include it('Generates height from ratio') {
-    $expect: (3 / 4) * 50%;
+    $expect: math.div(3, 4) * 50%;
 
     @include assert-equal(
       fluid-ratio('_classic', 50%),
@@ -16,7 +18,7 @@
   }
 
   @include it('Gets ratio from local source') {
-    $local: ('new': (2 / 1));
+    $local: ('new': math.div(2, 1));
     @include assert-equal(
       fluid-ratio('new', $source: $local),
       50%
@@ -45,7 +47,7 @@
 }
 
   @include it('Gets ratio from local source') {
-    $local: ('new': (2 / 1));
+    $local: ('new': math.div(2, 1));
     @include assert{
       @include output {
         @include fluid-ratio('new', 50%, $source: $local);

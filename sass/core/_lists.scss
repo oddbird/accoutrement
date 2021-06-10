@@ -32,6 +32,8 @@
 ///   The original list, with item removed
 /// @throws `$index` must be a non-zero integer
 /// @throws `$index` is too large for the list length
+@use "sass:math";
+
 @function _a_remove-nth(
   $list,
   $index
@@ -113,7 +115,7 @@
   $large: $less;
 
   @if length($list) > 1 {
-    $seed: nth($list, ceil(length($list) / 2));
+    $seed: nth($list, ceil(math.div(length($list), 2)));
     $seed-length: str-length('#{$seed}');
 
     @each $item in $list {

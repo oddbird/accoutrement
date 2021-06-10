@@ -1,13 +1,15 @@
 // Color Theme Tests
 // =================
+@use "sass:math";
+
 @include test-module('Color: Themes') {
 
 
 // Shades Of [function]
 // --------------------
 @include describe('Shades Of [function]') {
-  $dint: percentage(1 / 1.25);
-  $lint: percentage(1 / 3.25);
+  $dint: percentage(math.div(1, 1.25));
+  $lint: percentage(math.div(1, 3.25));
   @include it('Generates a range of shades based on the origin color') {
     @include assert-equal(
       shades-of('simple', 2),
@@ -22,8 +24,8 @@
   }
 
   @include it('Generates a range of shades based on a map') {
-    $int1: percentage(1 / 1.25);
-    $int2: percentage(1 / 2.25);
+    $int1: percentage(math.div(1, 1.25));
+    $int2: percentage(math.div(1, 2.25));
     $map: (
       'one': red,
       'two': yellow,

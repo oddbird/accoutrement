@@ -12,6 +12,8 @@
 ///   The number to be converted to px if comparable.
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
+@use "sass:math";
+
 @function _a_get-px(
   $length
 ) {
@@ -121,7 +123,7 @@
   @if ($from-unit == '') {
     @return _a_get-number($to-unit, 'allow-relative') + $length;
   } @else if ($to-unit == '') {
-    @return $length / ($length * 0 + 1);
+    @return math.div($length, $length * 0 + 1);
   }
 
   // Easily comparable units
@@ -163,7 +165,7 @@
   // Special conversion for browser-default ems (needed in media-queries)
   @if ($to-unit == 'browser-ems') {
     $size: convert-units($length, 'px', $from-context);
-    @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
+    @return math.div($size, $_BROWSER-DEFAULT-FONT-SIZE) * 1em;
   }
 
   // Convert relative length to pixels
@@ -172,26 +174,26 @@
 
   // Convert relative units using the from-context parameter.
   @if $from-unit == 'em' {
-    $px-length: $length * $from-context / 1em;
+    $px-length: math.div($length * $from-context, 1em);
   } @else if $from-unit == 'rem' {
-    $px-length: $length * $root-size / 1rem;
+    $px-length: math.div($length * $root-size, 1rem);
   } @else if $from-unit == '%' {
-    $px-length: $length * $from-context / 100%;
+    $px-length: math.div($length * $from-context, 100%);
   } @else if $from-unit == 'ex'  {
-    $px-length: $length * $from-context / 2ex;
+    $px-length: math.div($length * $from-context, 2ex);
   }
 
   // Convert length in pixels to the output unit
   @if $to-zero {
     @return $to-zero + $px-length;
   } @else if $to-unit == 'em' {
-    @return $px-length * 1em / $to-context;
+    @return math.div($px-length * 1em, $to-context);
   } @else if $to-unit == 'rem' {
-    @return $px-length * 1rem / $root-size;
+    @return math.div($px-length * 1rem, $root-size);
   } @else if $to-unit == '%' {
-    @return $px-length * 100% / $to-context;
+    @return math.div($px-length * 100%, $to-context);
   } @else if $to-unit == 'ex' {
-    @return $px-length * 2ex / $to-context;
+    @return math.div($px-length * 2ex, $to-context);
   }
 
   $warn: 'Failed to convert `#{$length}` into `#{$to-units}` units';

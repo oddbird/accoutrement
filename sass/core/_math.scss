@@ -33,6 +33,8 @@
 /// @return {number} -
 ///   The calculated results of adding
 ///   `$num1` and `$num2`
+@use "sass:math";
+
 @function _a_plus(
   $num1,
   $num2
@@ -137,7 +139,7 @@
   $num1,
   $num2
 ) {
-  @return $num1 / $num2;
+  @return math.div($num1, $num2);
 }
 @include _a_register-function('_a_divide', 'divide', '/');
 

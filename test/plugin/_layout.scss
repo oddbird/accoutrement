@@ -1,6 +1,8 @@
 // Layout Tests
 // ============
 
+@use "sass:math";
+
 $sizes: (
   'off-canvas': 30em,
   'page': 50em,
@@ -16,7 +18,7 @@ $breakpoints: (
 );
 
 $aspect-ratios: (
-  'mine': 13 / 4,
+  'mine': math.div(13, 4),
   'retro': '#_classic',
 );
 

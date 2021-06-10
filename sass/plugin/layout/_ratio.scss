@@ -28,6 +28,8 @@
 /// @param {map} $source [$ratios] -
 ///   Optional accoutrement-format map of ratios to use as the origin palette
 ///   (in addition to the provided defaults)
+@use "sass:math";
+
 @mixin fluid-ratio(
   $ratio: '_widescreen',
   $width: 100%,
@@ -76,5 +78,5 @@
 ) {
   $ratio: ratio($ratio, $source: $source);
 
-  @return (1 / $ratio) * $width;
+  @return math.div(1, $ratio) * $width;
 }
