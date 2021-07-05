@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /// # Core Parser
 /// @access private
 
@@ -42,7 +44,7 @@
 
     @if (length($key) > 1) and (type-of($final) == 'map') {
       $do: $final;
-      $value: _a_remove-nth($key, -1);
+      $value: remove-nth($key, -1);
       $value: if(length($value) == 1, nth($value, 1), $value);
     }
   }
@@ -212,7 +214,7 @@
         @if (type-of($string) == 'string') and str-index($string, $hash) {
           $new: get-token($haystack, $key);
           @if (type-of($new) != 'map') {
-            $string: _a_str-replace($string, $hash, $new, true);
+            $string: string-replace($string, $hash, $new, 'all');
           }
         }
       }
@@ -299,7 +301,7 @@
     @if ($ratio == 'linear') {
       @return $value * $args;
     } @else if (type-of($ratio) == 'number') {
-      $multiplier: _a_pow($ratio, $args);
+      $multiplier: math.pow($ratio, $args);
       @return $value * $multiplier;
     }
   }

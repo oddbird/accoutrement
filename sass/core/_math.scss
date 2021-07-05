@@ -39,7 +39,7 @@
 ) {
   @return $num1 + $num2;
 }
-@include _a_register-function('_a_plus', 'plus', 'add', '+');
+@include register-internal('_a_plus', 'plus', 'add', '+');
 
 
 // Minus
@@ -73,7 +73,7 @@
 ) {
   @return $num1 - $num2;
 }
-@include _a_register-function('_a_minus', 'minus', 'subtract', '-');
+@include register-internal('_a_minus', 'minus', 'subtract', '-');
 
 
 // Times
@@ -106,7 +106,7 @@
 ) {
   @return $num1 * $num2;
 }
-@include _a_register-function('_a_times', 'times', 'multiply', '*');
+@include register-internal('_a_times', 'times', 'multiply', '*');
 
 
 // Divide
@@ -139,7 +139,7 @@
 ) {
   @return $num1 / $num2;
 }
-@include _a_register-function('_a_divide', 'divide', '/');
+@include register-internal('_a_divide', 'divide', '/');
 
 
 // Modulo
@@ -173,4 +173,4 @@
 ) {
   @return $num1 % $num2;
 }
-@include _a_register-function('_a_modulo', 'modulo', 'remainder', 'mod', '%');
+@include register-internal('_a_modulo', 'modulo', 'remainder', 'mod', '%');

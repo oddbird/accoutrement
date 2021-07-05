@@ -76,7 +76,7 @@ $changes: () !default;
 ) {
   @return get-token($source, $name, $do);
 }
-@include _a_register-function('change');
+@include register-internal('change');
 
 
 // Add Changes

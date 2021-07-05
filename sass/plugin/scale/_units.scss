@@ -198,4 +198,4 @@
   @warn '#{$warn} returning original value';
   @return $length;
 }
-@include _a_register-function('convert-units', 'convert', 'units', 'to');
+@include register-internal('convert-units', 'convert', 'units', 'to');

@@ -108,7 +108,7 @@ $_a_EASING: (
   $name: get-token($source, $name, $do);
   @return if((type-of($name) == 'string'), unquote($name), $name);
 }
-@include _a_register-function('ease');
+@include register-internal('ease');
 
 
 // Add Easing

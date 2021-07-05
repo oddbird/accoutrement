@@ -3,8 +3,15 @@
 # -------------------------------------------------------------------------------
 
 extends: stylelint-config-recommended-scss
+plugins: stylelint-scss
+
+ignoreFiles:
+  - '**/*.js'
 
 rules:
+  at-rule-no-unknown: null
+  scss/at-rule-no-unknown: true
+
   # possible errors (these are all on by default)
   no-descending-specificity: null
 

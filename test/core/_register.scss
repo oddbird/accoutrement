@@ -61,7 +61,7 @@
     $functions: () !global;
 
     // register internal and user functions
-    @include _a_register-function('rgba', '_c', '_a_');
+    @include register-internal('rgba', '_c', '_a_');
     @include register-function('rgba', '_c', '_a_');
 
     // legacy Sass app-functions map
@@ -99,7 +99,7 @@
 // Get Function
 // ------------
 @include describe('Get Function [function]') {
-  @include _a_register-function('rgba', 'a');
+  @include register-internal('rgba', 'a');
   $test: _a_get-function('rgba');
   $alias: _a_get-function('a');
 

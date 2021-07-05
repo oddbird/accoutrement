@@ -62,7 +62,7 @@ $times: () !default;
   $time: get-token($source, $time, $do);
   @return if((type-of($time) == 'string'), unquote($time), $time);
 }
-@include _a_register-function('time');
+@include register-internal('time');
 
 
 // Add Times

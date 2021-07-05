@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /// # Contrast & Accessibility
 /// @group color-contrast
 
@@ -74,7 +76,7 @@ $WCAG-CONTRAST: (
 ) {
   @return _a_best-contrast($color, $options, 'color');
 }
-@include _a_register-function('contrast');
+@include register-internal('contrast');
 
 
 // Var-Contrast
@@ -144,7 +146,7 @@ $WCAG-CONTRAST: (
 
   @return $color;
 }
-@include _a_register-function('var-contrast');
+@include register-internal('var-contrast');
 
 
 // Contrasted
@@ -358,7 +360,7 @@ $WCAG-CONTRAST: (
       $value: $value / 12.92;
     } @else {
       $base: ($value + 0.055) / 1.055;
-      $value: _a_pow($base, 2.4);
+      $value: math.pow($base, 2.4);
     }
 
     @if ($component == 'red') {
