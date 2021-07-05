@@ -29,6 +29,12 @@
   $do: null;
   $value: $key;
 
+  // Throw an error if the missing key flag is not configured correctly.
+  @if not index(('silent', 'error', 'warn', 'null', null), $handle-missing-keys) {
+    @return _a_error('"$handle-missing-keys" configuration should be set ' +
+      'to "error", "warn", "null", or "silent"', '_a_get');
+  }
+
   // break out `do` maps…
   @if ($type == 'map') and (nth(map-keys($key), 1) == '%value') {
     $value: map-get($key, '%value');
@@ -107,6 +113,44 @@
   @return $needle;
 }
 
+// Next Reference
+// -----
+/// Returns the next available key for parsing/replacing from the given string.
+///
+/// @access private
+///
+/// @param {string} $string -
+///   A string to extract an #alias from
+/// @return {string | null} -
+///   The extracted #alias key to replace, or null if no references exist
+@function _a_next_reference(
+  $string
+  ) {
+  $terminators: ('#', ' ', ')', '\\');
+  $hash-index: str-index($string, '#');
+
+  // If escaped # symbols exist, update $hash-index to exclude them.
+  @if $handle-missing-keys != 'silent' {
+    $escape-index: str-index($string, '\\#');
+    @while $escape-index and $hash-index and $escape-index < $hash-index {
+      $hash-index: str-index(str-slice($string, $escape-index + 2), '#');
+    }
+  }
+
+  @if not $hash-index { @return null; }
+
+  $key-start: $hash-index + 1;
+  $sliced: str-slice($string, $key-start);
+  $key-length: str-length($sliced);
+
+  @each $terminator in $terminators {
+    $index: str-index($sliced, $terminator);
+    @if $index and $index <= $key-length { $key-length: $index - 1; }
+  }
+
+  @return str-slice($string, $key-start, $key-start + $key-length - 1);
+}
+
 
 // Replace
 // -------
@@ -129,22 +173,60 @@
   $haystack,
   $string
 ) {
-  $hashdex: str-index($string, '#');
+  $haystack: _a_flat-source($haystack);
+  $parsed: not _a_next_reference($string);
 
-  // replace aliases…
-  @if $hashdex {
-    $deep: str-index($string, '->') or 0;
-    $haystack: if(($deep > $hashdex), _a_flat-source($haystack), $haystack);
+  @while not $parsed {
+    $key: _a_next_reference($string);
+    $key-exists: map-has-key($haystack, $key);
 
-    // check longest keys first, in case of overlap
-    @each $key in _a_str-length-sort(map-keys($haystack)) {
-      $hash: '##{$key}';
+    @if $key-exists {
+      $new: get-token($haystack, $key);
 
-      @if (type-of($string) == 'string') and str-index($string, $hash) {
-        $new: get-token($haystack, $key);
-        $string: string-replace($string, $hash, $new, 'all');
+      // Handle explicitly terminated keys (#key\).
+      @if $handle-missing-keys != 'silent' and str-index($string, '##{$key}\\') {
+        $string: _a_str-replace($string, '##{$key}\\', $new);
+      } @else {
+        $string: _a_str-replace($string, '##{$key}', $new);
       }
+
+      // We're done parsing if there are no more #alias tags to replace.
+      $parsed: (type-of($string) != 'string') or (not _a_next_reference($string));
+    } @else {
+      @if $handle-missing-keys == 'error' {
+        @return _a_error('Key "#{$key}" not found in map', '_a_replace');
+      }
+
+      @if $handle-missing-keys == 'warn' and not $_a_error-output-override {
+        @warn 'Key "#{$key}" not found in map';
+      }
+
+      @if index(('warn', 'null'), $handle-missing-keys) {
+        @return null;
+      }
+
+      // Fall back to linear search for partial
+      // replacements if strict mode is disabled.
+      // Check longest keys first, in case of overlap.
+      @each $key in _a_str-length-sort(map-keys($haystack)) {
+        $hash: '##{$key}';
+
+        @if (type-of($string) == 'string') and str-index($string, $hash) {
+          $new: get-token($haystack, $key);
+          @if (type-of($new) != 'map') {
+            $string: string-replace($string, $hash, $new, 'all');
+          }
+        }
+      }
+
+      // Exhaustive replacement complete, no more parsing can be done.
+      $parsed: true;
     }
+  }
+
+  // Correct escaped # symbols now that parsing is complete.
+  @if ($handle-missing-keys != 'silent') and (type-of($string) != 'map') {
+    $string: _a_str-replace($string, '\\#', '#', 'all');
   }
 
   @return $string;

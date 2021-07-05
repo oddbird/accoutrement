@@ -94,8 +94,114 @@
   @include it('Fails elegantly when keys are not found') {
     @include assert-equal(
       (get-token($map, 'dop'), get-token($map, 'dip')),
-      ('("zab": 4)->nope', '#that->baz')
+      ('#ofo->nope', '#that->baz')
     );
+  }
+
+  @include it('Can return submaps') {
+    @include assert-equal(
+      (
+        get-token($map, 'ofo'),
+        get-token($map, 'foo->three')
+      ),
+      (
+        (
+          'zab': 4
+        ),
+        (
+          'abc': 2,
+          'def': 0
+        )
+      )
+    );
+  }
+
+  @include it('Can return submaps when null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      (
+        get-token($map, 'ofo'),
+        get-token($map, 'foo->three')
+      ),
+      (
+        (
+          'zab': 4
+        ),
+        (
+          'abc': 2,
+          'def': 0
+        )
+      )
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null when keys are not found if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+
+    @include assert-equal(
+      (get-token($map, 'dop'), get-token($map, 'dip')),
+      (null, null)
+      );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null when keys are not found if warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+
+    @include assert-equal(
+      (get-token($map, 'dop'), get-token($map, 'dip')),
+      (null, null)
+      );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null when a single key from a string of keys is not found, if null mode is enabled') {
+    $handle-missing-keys: 'null' !global;
+    $map2: (
+      'a': 'one',
+      'b': 'two',
+      'c': 'three'
+    );
+
+    @include assert-equal(
+      (get-token($map2, '#a #b#c #d')),
+      (null)
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Returns null when a single key from a string of keys is not found, if warn mode is enabled') {
+    $handle-missing-keys: 'warn' !global;
+    $map2: (
+      'a': 'one',
+      'b': 'two',
+      'c': 'three'
+    );
+
+    @include assert-equal(
+      (get-token($map2, '#a #b#c #d')),
+      (null)
+    );
+
+    $handle-missing-keys: 'silent' !global;
+  }
+
+  @include it('Fails when keys are not found if error mode is enabled') {
+    $handle-missing-keys: 'error' !global;
+
+    @include assert-equal(
+      (get-token($map, 'dop'), get-token($map, 'dip')),
+      ('ERROR [_a_replace] Key "ofo->nope" not found in map',
+      'ERROR [_a_replace] Key "that->baz" not found in map')
+      );
+
+    $handle-missing-keys: 'silent' !global;
   }
 }
 

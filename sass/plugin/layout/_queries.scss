@@ -6,8 +6,8 @@
 // -----------
 /// Establish a map of named breakpoints.
 ///
-/// If you have [Accoutrement-Scale](http://oddbird.net/accoutrement-scale/)
-/// installed, you can use the scale syntax
+/// If using [Accoutrement Scale](https://www.oddbird.net/accoutrement/docs/scale.html),
+/// you can use the scale syntax
 /// for describing size-relationships and adjustments –
 /// and even reference `$sizes` as though they are `$breakpoints`.
 /// Otherwise, the map should contain only valid CSS length values.

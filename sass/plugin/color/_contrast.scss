@@ -8,7 +8,7 @@
 // -------------
 /// These named contrast-ratios are defined by the [WCAG][WCAG].
 ///
-/// [WCAG]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
+/// [WCAG]: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 ///
 /// @access private
 $WCAG-CONTRAST: (
@@ -288,12 +288,12 @@ $WCAG-CONTRAST: (
 /// - 'AAA' == `7:1`
 ///
 /// @group color-contrast
-/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
+/// @link https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
 /// @example scss
 ///   /* black and white: #{contrast-ratio(white, black)} */
 ///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
 ///
-/// @param {string | list | number} $color -
+/// @param {string | list | number} $base -
 ///   The name of a color in your palette,
 ///   any other color value,
 ///   or even a pre-calculated numeric luminance.
@@ -334,7 +334,7 @@ $WCAG-CONTRAST: (
 /// Get the WCAG luminance of a color in your palette.
 ///
 /// @group color-contrast
-/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
+/// @link https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
 ///
 /// @param {string | list} $color -
 ///   The name or value of a color.

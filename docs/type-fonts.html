@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-herman="root">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 
   
 </head>
-<body>
+<body data-herman="body">
   <svg xmlns="http://www.w3.org/2000/svg" hidden>
   <symbol id="icon-logo" viewBox="0 0 16 16">
     <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">2.1.3</span>
+          <span class="project-version">3.0.1</span>
         
       </div>
     </header>
@@ -364,11 +364,11 @@
         <ul>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement Site</a>
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement Site</a>
             </li>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/" data-nav="is-not-active">OddBird</a>
+              <a href="https://www.oddbird.net/" data-nav="is-not-active">OddBird</a>
             </li>
           
         </ul>
@@ -377,7 +377,7 @@
 
     
       <aside class="footer-credit">
-        <a href="http://oddbird.net/herman/" class="footer-icon">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
           
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
@@ -385,13 +385,13 @@
         </a>
         <span>
           Documented with
-          <a href="http://oddbird.net/herman/" class="footer-link">
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
             Herman
           </a>
         </span>
         <span>
           by
-          <a href="http://oddbird.net/" class="footer-link">
+          <a href="https://www.oddbird.net/" class="footer-link">
             OddBird
           </a>
         </span>
@@ -444,7 +444,7 @@ allows us to automate various actions:
 <code>font-family</code> fallback stacks,
 font aliases (for semantic access),
 or even documentation and font-specimens
-with a tool like <a href="http://oddbird.net/herman/">Herman</a>.</p>
+with a tool like <a href="https://www.oddbird.net/herman/">Herman</a>.</p>
 <p>We provide options for maintianing various font-types,
 from locally-hosted, to base64 embedded,
 and even CDN imports from sites like typekit and google<span class="widont">&nbsp;</span>fonts.</p>
@@ -821,17 +821,25 @@ By storing this font data in map format,
 we can automate <code>@font-face</code> imports,
 call fonts with a semantic access-key,
 define fallback font-stacks,
-and genrate font specimens with a tool like <a href="http://oddbird.net/herman/">Herman</a>.</p>
+and genrate font specimens with a tool like <a href="https://www.oddbird.net/herman/">Herman</a>.</p>
 <p>All the provided tools will ignore unknown font properties,
 so you can safely include any extra data you need access to.
 For example,
 we often include a <code>source</code> property in our font maps,
 providing a link to the font foundry, license, or CDN.
-If you are using <a href="http://oddbird.net/herman/">Herman</a> to font previews,
+If you are using <a href="https://www.oddbird.net/herman/">Herman</a> to font previews,
 it will include <code>source</code> links in the<span class="widont">&nbsp;</span>output.</p>
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>3.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Supports <code>display</code> map key for setting CSS <code>font-display</code> property</li>
+</ul>
+</div>
+      </section>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
@@ -1033,6 +1041,34 @@ for font-face imported<span class="widont">&nbsp;</span>fonts.</p>
       <div class="param-details text-block">
         <p>Optionally import only specific unicode ranges.
 See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range">MDN unicode-range documentation</a> for<span class="widont">&nbsp;</span>details.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">&lt;key&gt;.display:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optionally set the <code>font-display</code> property when importing web fonts.
+See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display">MDN font-display documentation</a> for<span class="widont">&nbsp;</span>details.</p>
 
       </div>
     
@@ -1271,6 +1307,7 @@ or base64 data-URIs for specific<span class="widont">&nbsp;</span>formats.</p>
     &#39;bold&#39;: &#39;museosans-bold-filename&#39;,
     &#39;bold&#39; &#39;italic&#39;: &#39;museosans-bolditalic-filename&#39;,
     &#39;unicode-range&#39;: (U+0000-00FF, U+0131, U+0152-0153, U+02C6),
+    &#39;display&#39;: &#39;swap&#39;,
     // safely document any additional font data you want…
     &#39;source&#39;: &#39;https://www.fontspring.com/fonts/exljbris/museo-sans&#39;,
   ),
@@ -1592,7 +1629,7 @@ into our global <code>$fonts</code> configuration.</p>
 <p>This can be useful for internal organization,
 documentation with <a href="http://sassdoc.com/">SassDoc</a>,
 or integration with a pattern-library generator like
-<a href="http://oddbird.net/herman/">Herman</a>.</p>
+<a href="https://www.oddbird.net/herman/">Herman</a>.</p>
 
       
   
@@ -2642,8 +2679,7 @@ $src: font-url(&#39;sans/my-sans-font.woff2&#39;);
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/* url(&quot;../fonts/sans/my-sans-font.woff2&quot;) */
-</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* url(&quot;../fonts/sans/my-sans-font.woff2&quot;) */</code></pre>
     </div>
   
 
@@ -3089,8 +3125,7 @@ html {
       
       <pre class="hljs-pre"><code class="lang-css">html {
   font-family: FranklinGothic, Helvetica, Arial, sans-serif;
-}
-</code></pre>
+}</code></pre>
     </div>
   
 
@@ -3475,8 +3510,7 @@ html {
       
       <pre class="hljs-pre"><code class="lang-css">html {
   font-family: FranklinGothic, Helvetica, Arial, sans-serif;
-}
-</code></pre>
+}</code></pre>
     </div>
   
 
@@ -3620,6 +3654,14 @@ html {
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>3.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Supports <code>display</code> setting in<span class="widont">&nbsp;</span>font-maps</li>
+</ul>
+</div>
+      </section>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
@@ -3848,7 +3890,6 @@ to use as the origin<span class="widont">&nbsp;</span>palette</p>
   src: url(&quot;sans/sourcesanspro-regular-webfont.eot&quot;);
   src: url(&quot;sans/sourcesanspro-regular-webfont.eot?#iefix&quot;) format(&quot;embedded-opentype&quot;), url(&quot;sans/sourcesanspro-regular-webfont.woff2&quot;) format(&quot;woff2&quot;), url(&quot;sans/sourcesanspro-regular-webfont.woff&quot;) format(&quot;woff&quot;);
 }
-
 @font-face {
   font-family: &quot;Source Sans Pro&quot;;
   font-style: italic;
@@ -3856,15 +3897,13 @@ to use as the origin<span class="widont">&nbsp;</span>palette</p>
   src: url(&quot;sans/sourcesanspro-italic-webfont.eot&quot;);
   src: url(&quot;sans/sourcesanspro-italic-webfont.eot?#iefix&quot;) format(&quot;embedded-opentype&quot;), url(&quot;sans/sourcesanspro-italic-webfont.woff2&quot;) format(&quot;woff2&quot;), url(&quot;sans/sourcesanspro-italic-webfont.woff&quot;) format(&quot;woff&quot;);
 }
-
 @font-face {
   font-family: &quot;Source Sans Pro&quot;;
   font-style: normal;
   font-weight: bold;
   src: url(&quot;sans/sourcesanspro-bold-webfont.eot&quot;);
   src: url(&quot;sans/sourcesanspro-bold-webfont.eot?#iefix&quot;) format(&quot;embedded-opentype&quot;), url(&quot;sans/sourcesanspro-bold-webfont.woff2&quot;) format(&quot;woff2&quot;), url(&quot;sans/sourcesanspro-bold-webfont.woff&quot;) format(&quot;woff&quot;);
-}
-</code></pre>
+}</code></pre>
     </div>
   
 
@@ -4309,7 +4348,7 @@ to use as the origin<span class="widont">&nbsp;</span>palette</p>
   // alias keys, and fonts without path data will be ignored…
   &#39;alias&#39;: &#39;#body-font&#39;,
   &#39;google-font&#39;: (
-    &#39;source&#39;: &#39;http://fonts.google.com/&#39;,
+    &#39;source&#39;: &#39;https://fonts.google.com/&#39;,
   ),
 );
 @include import-webfonts;</code></pre>
@@ -4341,7 +4380,6 @@ to use as the origin<span class="widont">&nbsp;</span>palette</p>
   src: url(&quot;sans/sourcesanspro-regular-webfont.eot&quot;);
   src: url(&quot;sans/sourcesanspro-regular-webfont.eot?#iefix&quot;) format(&quot;embedded-opentype&quot;), url(&quot;sans/sourcesanspro-regular-webfont.woff2&quot;) format(&quot;woff2&quot;), url(&quot;sans/sourcesanspro-regular-webfont.woff&quot;) format(&quot;woff&quot;);
 }
-
 @font-face {
   font-family: &quot;Source Sans Pro&quot;;
   font-style: italic;
@@ -4349,15 +4387,13 @@ to use as the origin<span class="widont">&nbsp;</span>palette</p>
   src: url(&quot;sans/sourcesanspro-italic-webfont.eot&quot;);
   src: url(&quot;sans/sourcesanspro-italic-webfont.eot?#iefix&quot;) format(&quot;embedded-opentype&quot;), url(&quot;sans/sourcesanspro-italic-webfont.woff2&quot;) format(&quot;woff2&quot;), url(&quot;sans/sourcesanspro-italic-webfont.woff&quot;) format(&quot;woff&quot;);
 }
-
 @font-face {
   font-family: &quot;Source Sans Pro&quot;;
   font-style: normal;
   font-weight: bold;
   src: url(&quot;sans/sourcesanspro-bold-webfont.eot&quot;);
   src: url(&quot;sans/sourcesanspro-bold-webfont.eot?#iefix&quot;) format(&quot;embedded-opentype&quot;), url(&quot;sans/sourcesanspro-bold-webfont.woff2&quot;) format(&quot;woff2&quot;), url(&quot;sans/sourcesanspro-bold-webfont.woff&quot;) format(&quot;woff&quot;);
-}
-</code></pre>
+}</code></pre>
     </div>
   
 

@@ -1,14 +1,12 @@
-Contributing to Accoutrement
-============================
+# Contributing to Accoutrement
 
 Bug reports and feature requests are welcome,
 but code is even better!
 In all cases,
 we ask you to follow the
-[Sass community guidelines](http://sass-lang.com/community-guidelines).
+[Sass community guidelines](https://sass-lang.com/community-guidelines).
 
-Issues
-------
+## Issues
 
 You are welcome to ask support questions
 and file bug reports
@@ -23,9 +21,7 @@ please provide:
 
 [issues]: https://github.com/oddbird/accoutrement/issues
 
-
-Development
------------
+## Development
 
 Set up your environment
 with the appropriate development dependencies:
@@ -37,19 +33,18 @@ yarn
 As you work...
 
 - Add or update any appropriate unit tests --
-  using [True](http://oddbird.net/true) --
+  using [True](https://www.oddbird.net/true) --
   in the `test` directory,
   and make sure all tests are passing with `yarn test`
-- Add your changes to the [changelog](CHANGELOG.md)
+- Add your changes to the [changelog][]
 - Update or add inline documentation
   using [SassDoc][sassdoc] as appropriate,
   and compile the docs with `yarn docs`
 
+[changelog]: https://github.com/oddbird/accoutrement/blob/master/CHANGELOG.md
 [sassdoc]: http://sassdoc.com/
 
-
-Committing
-----------
+## Committing
 
 Linting, testing, and documentation
 should be done before every commit:
@@ -69,9 +64,7 @@ yarn docs
 Once you've fixed any final errors or typos,
 commit your changes, and submit a pull request!
 
-
-Pull Requests
--------------
+## Pull Requests
 
 We use the `master` branch for production-ready code,
 and side-branches for everything in-progress

@@ -17,7 +17,7 @@
 /// @example scss
 ///   $ratios: ('my-ratio': 0.875);
 ///   $ratio-var-prefix: 'prefix_';
-///   :root { @include ratios--; }
+///   html { @include ratios--; }
 ///
 /// @type string
 $ratio-var-prefix: 'ratio-' !default;
@@ -43,7 +43,7 @@ $ratio-var-prefix: 'ratio-' !default;
 ///     'my-golden': 1.61803399,
 ///     'line-height': '#_major-third',
 ///   );
-///   :root {
+///   html {
 ///     @include ratios--;
 ///   }
 ///

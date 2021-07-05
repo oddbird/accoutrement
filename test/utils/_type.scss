@@ -60,7 +60,7 @@
     @include it('Errors on improper valid-type') {
       @include assert-equal(
         type.check('hello world', 3),
-        'ERROR [check] `$valid` argument bust be a string or list of types'
+        'ERROR [check] `$valid` argument must be a string or list of Sass data types'
       );
     }
   }

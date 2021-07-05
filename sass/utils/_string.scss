@@ -14,9 +14,19 @@
 
 
 @function force(
-  $value
+  $value,
 ) {
-  @return if((meta.type-of($value) == 'string'), $value, '#{$value}');
+  $value: $value or '';
+  $type: type.exclude($value, 'map');
+
+  @if (not $type) {
+    @return throw.error(
+      'Maps cannot be converted to strings',
+      'string-force'
+    );
+  }
+
+  @return if(($type == 'string'), $value, '#{$value}');
 }
 
 
@@ -51,7 +61,7 @@
 /// @param {*} $new [''] -
 ///   A new sub-string to replace the old
 /// @param {boolean} $all [false] -
-///   A new sub-string to replace the old
+///   If true, replace all instances of $old in $string
 /// @return {string} -
 ///   Original string, with substring replaced
 @function replace(
@@ -63,6 +73,11 @@
   $return: $string;
   $type: meta.type-of($string);
 
+  @if (type-of($string) == 'map') {
+    @warn '_a_str-replace $string parameter cannot be a map';
+    @return $return;
+  }
+
   // Loops lists
   @if ($type == 'list') {
     $return: l.template($string);
@@ -73,7 +88,7 @@
     @return $return;
   }
 
-  // Force $old to string
+  // Force $old, $string to type string
   $old: force($old);
   $string: force($string);
 
@@ -85,14 +100,14 @@
   @if $string == $old {
     @return $new;
   } @else if $i {
-    // Force $new & $string to string
-    $new: if($new, force($new), '');
+    // Force $new to type string
+    $new: force($new);
 
     // before and after…
     $a: if($i > 1, string.slice($string, 1, $i - 1), '');
     $z: string.slice($string, $i + $n);
 
-    // recurion if needed…
+    // recursion if needed…
     @if $all {
       $z: replace($z, $old, $new, true);
     }

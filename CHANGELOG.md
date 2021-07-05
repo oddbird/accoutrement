@@ -1,5 +1,56 @@
 # Accoutrement Changelog
 
+## 3.0.1 - 03/01/21
+
+- INTERNAL: Upgrade dev dependencies.
+- DOCS: Fix changelog typo.
+
+## 3.0.0 - 02/22/21
+
+- BREAKING: Change to `get-token()` return value when the key path cannot be
+  resolved, and `$handle-missing-keys` is unset or `silent`: Maps along the
+  missing key path are no longer interpolated into the returned string. This
+  is part of the fix for #49. Use `$handle-missing-keys` for more precise
+  missing subkey behavior.
+  (Thanks to John Crim @johncrim)
+- NEW/BREAKING: Font maps accept `display` key,
+  which can be used to set `font-display` property for importing web-fonts.
+  (thanks to André Schließer @schliesser)
+- BUGFIX (#49): Using `get-token()` to resolve a missing key no longer errors
+  when using dart-sass and `$handle-missing-keys` is unset or `silent`.
+  Instead, the unresolved path is returned.
+  (Thanks to John Crim @johncrim)
+- BUGFIX (#61): Using `get-token()` to obtain a 2nd level or deeper submap no
+  longer causes a fatal error when using dart-sass and `$handle-missing-keys`
+  is `null`, `warn`, or `error`.
+  (Thanks to John Crim @johncrim)
+- INTERNAL: Run unit tests with dart-sass (in addition to node-sass, which was
+  used prior).
+  (Thanks to John Crim @johncrim)
+- INTERNAL: Upgrade dev dependencies.
+- DOCS (#53): Use `html` rather than `:root` for examples.
+- DOCS: Wrong parameter name in `contrast-ratio()` function docs.
+
+## 2.2.0 - 09/08/20
+
+- NEW: (#41) Global `$handle-missing-keys` allows you to control exactly
+  what should happen when a key look-up fails.
+  The default `silent` provides backwards-compatible silent-failure.
+  Other options include:
+  - `null`: `get-token()` will return `null`, similar to Sass `map.get()`
+  - `warn`: `get-token()` will return `null`, and also throw a warning
+  - `error`: `get-token()` will throw an error if the value is not found
+- NEW: `\\` (an escaped backslash) can be used to ignore (`\\#not-an-alias`)
+  or end (`#alias\\not-part-of-alias`) a `#` reference
+- INTERNAL: (#41) Major performance improvements to the token look-up algorithm
+
+Huge thanks to James Camilleri (@jcamilleri13) for all the improvements here.
+
+## 2.1.4 - 06/30/20
+
+- DOCS (#54): Fix broken links in docs
+- INTERNAL: Upgrade dev dependencies.
+
 ## 2.1.3 - 01/06/20
 
 - [Core][core]:
@@ -277,13 +328,13 @@ designing and testing several of these features.
   - NEW: Automatically formats font-family stacks
     with proper commas & quotations for CSS output
 
-[core]: http://oddbird.net/accoutrement/docs/core.html
-[init]: http://oddbird.net/accoutrement/docs/init.html
-[animate]: http://oddbird.net/accoutrement/docs/animate.html
-[color]: http://oddbird.net/accoutrement/docs/color.html
-[layout]: http://oddbird.net/accoutrement/docs/layout.html
-[scale]: http://oddbird.net/accoutrement/docs/scale.html
-[type]: http://oddbird.net/accoutrement/docs/type.html
+[core]: https://www.oddbird.net/accoutrement/docs/core.html
+[init]: https://www.oddbird.net/accoutrement/docs/init.html
+[animate]: https://www.oddbird.net/accoutrement/docs/animate.html
+[color]: https://www.oddbird.net/accoutrement/docs/color.html
+[layout]: https://www.oddbird.net/accoutrement/docs/layout.html
+[scale]: https://www.oddbird.net/accoutrement/docs/scale.html
+[type]: https://www.oddbird.net/accoutrement/docs/type.html
 
 ## Older Changelogs, from individual modules:
 
@@ -293,8 +344,8 @@ designing and testing several of these features.
 - [Accoutrement Scale][so]
 - [Accoutrement Type][to]
 
-[io]: http://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
-[co]: http://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
-[lo]: http://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
-[so]: http://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
-[to]: http://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md
+[io]: https://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
+[co]: https://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
+[lo]: https://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
+[so]: https://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
+[to]: https://github.com/oddbird/accoutrement-type/blob/master/CHANGELOG.md

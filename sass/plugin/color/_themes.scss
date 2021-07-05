@@ -25,7 +25,7 @@
 ///   @include add-colors($theme-colors);
 ///
 ///   @each $name, $value in $theme-colors {
-///   /* #{$name}: #{$value} */
+///   /* #{$name}: #{inspect($value)} */
 ///   }
 ///
 /// @param {map} $origin -

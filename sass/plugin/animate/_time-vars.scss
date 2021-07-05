@@ -21,7 +21,7 @@
 /// @example scss
 ///   $times: ('my-time': 1s);
 ///   $time-var-prefix: 'prefix_';
-///   :root { @include time--('my-time') }
+///   html { @include time--('my-time') }
 ///
 /// @type string
 $time-var-prefix: 'time-' !default;
@@ -48,7 +48,7 @@ $time-var-prefix: 'time-' !default;
 ///     'text': '#_fast',
 ///     'fade': '#text',
 ///   );
-///   :root {
+///   html {
 ///     @include times--;
 ///   }
 ///

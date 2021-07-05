@@ -17,7 +17,7 @@
 ///   with explicit relationships intact
 /// - We can build automation tools around meaningful token-groups,
 ///   from [font-imports](type-fonts.html)
-///   to [generated style guides](http://oddbird.net/herman)
+///   to [generated style guides](https://www.oddbird.net/herman)
 /// - Unlike `YAML`, `JSON`, and other object languages,
 ///   Sass is a *style language* that understands the values involved,
 ///   and provides specific tools for maintaining those values
@@ -61,7 +61,7 @@
 ///   @import '<path-to>/accoutrement/sass/core';
 /// ```
 ///
-/// If you're using [Eyeglass](https://github.com/sass-eyeglass/eyeglass),
+/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 /// you can leave off most of the path:
 ///
 /// ```scss
@@ -70,7 +70,7 @@
 /// @group core
 
 
-/// ## [Token Maps](core-api.html)
+/// ## [Token Maps](core-get.html)
 /// Using the map syntax,
 /// we can create named tokens for any related values:
 ///
@@ -98,7 +98,7 @@
 /// (or shortcut functions provided by plugins):
 ///
 /// ```scss
-/// :root: (
+/// html: (
 ///   color: get-token($colors, 'text');
 /// );
 /// ```
@@ -128,7 +128,7 @@
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
-///   :root {
+///   html {
 ///     // generate CSS Variables based on the map above…
 ///     @include tokens--($colors);
 ///     // access CSS Variables with smart fallbacks…
@@ -150,7 +150,7 @@
 ///   'line-height': (1 / 3),
 ///   '_golden': 1.61803399,
 /// );
-/// :root {
+/// html {
 ///   line-height: ratio('line-height');
 /// }
 /// ```

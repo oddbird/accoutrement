@@ -54,7 +54,7 @@
   // validate types
   @if not list.index('list' 'string', meta.type-of($valid)) {
     @return throw.error(
-      '`$valid` argument bust be a string or list of types',
+      '`$valid` argument must be a string or list of Sass data types',
       'check'
     );
   }
@@ -73,4 +73,33 @@
 
   // silent fail
   @return null;
+}
+
+@function exclude(
+  $value,
+  $invalid,
+  $throw: false
+) {
+  // validate types
+  @if not list.index('list' 'string', meta.type-of($invalid)) {
+    @return throw.error(
+      '`$invalid` argument must be a string or list of Sass data types',
+      'check'
+    );
+  }
+
+  // type check
+  $type: meta.type-of($value);
+
+  @if list.index($invalid, $type) {
+    // error
+    @if ($throw) {
+      @return error($value, $invalid);
+    }
+
+    // silent fail
+    @return null;
+  }
+
+  @return $type;
 }
