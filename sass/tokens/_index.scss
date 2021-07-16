@@ -1,5 +1,5 @@
-/// # QuickStart: Core
-/// All the Accoutrement tools are built around a shared syntax,
+/// # QuickStart: Tokens
+/// Accoutrement tokens provide a custom syntax,
 /// using Sass Maps to define "tokens" of various types:
 ///
 /// ```scss
@@ -21,53 +21,35 @@
 /// - Unlike `YAML`, `JSON`, and other object languages,
 ///   Sass is a *style language* that understands the values involved,
 ///   and provides specific tools for maintaining those values
-/// @group core
+/// @group tokens
 
-
-// error handling
-// --------------
-@import 'core/error';
 
 // function registration
 // ---------------------
-@import 'core/register';
+@use 'register';
+@forward 'function' show register, $functions;
 
-// utilities
-// ---------
-@import 'core/lists';
-@import 'core/math';
-@import 'core/maps';
-@import 'core/pow';
-@import 'core/strings';
-
-// core logic
-// ----------
-@import 'core/inspect';
-@import 'core/parser';
-
-// core API
+// token api
 // --------
-@import 'core/api';
-@import 'core/css-vars';
-@import 'core/ratios';
-@import 'core/ratio-vars';
-
+@forward 'config';
+@forward 'inspect';
+@forward 'api';
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// If you want to import the core alone:
+/// If you want to import the tokens alone:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/core';
+///   @import '<path-to>/accoutrement/sass/tokens';
 /// ```
 ///
 /// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 /// you can leave off most of the path:
 ///
 /// ```scss
-///   @import 'accoutrement/core';
+///   @import 'accoutrement/tokens';
 /// ```
-/// @group core
+/// @group tokens
 
 
 /// ## [Token Maps](core-get.html)
@@ -107,7 +89,7 @@
 /// for more detail.
 ///
 /// @see get-token
-/// @group core
+/// @group tokens
 
 
 /// ## [Tokens » CSS Variables](core-vars.html)
@@ -138,29 +120,7 @@
 ///
 /// @see tokens--
 /// @see var-token
-/// @group core
-
-
-/// ## [Ratios](core-ratio.html)
-/// Since ratios are used by multiple plugins,
-/// we provide relevant defaults & shortcuts in the core:
-///
-/// ```scss
-/// $ratios: (
-///   'line-height': (1 / 3),
-///   '_golden': 1.61803399,
-/// );
-/// html {
-///   line-height: ratio('line-height');
-/// }
-/// ```
-///
-/// See [Layout & Type Ratios](core-ratio.html) documentation
-/// for more detail.
-///
-/// @see $ratios
-/// @see ratio
-/// @group core
+/// @group tokens
 
 
 /// ## [Utility Functions](core-register.html)
@@ -200,4 +160,4 @@
 ///
 /// @see $functions
 /// @see register-function
-/// @group core
+/// @group tokens

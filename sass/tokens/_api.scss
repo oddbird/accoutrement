@@ -1,3 +1,9 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'parse';
+
+$_memo: ();
+
 /// # Token Maps
 /// We use "token" as a generic term
 /// for named values inside accoutrement maps.
@@ -17,7 +23,7 @@
 /// for managing and accessing common token-types,
 /// like colors, fonts, sizes, and animations.
 ///
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## Internal Reference
@@ -47,7 +53,7 @@
 /// );
 /// ```
 ///
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## Nested References
@@ -81,7 +87,7 @@
 /// ```
 ///
 /// @since 2.0.0
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## Functional Adjustments
@@ -125,36 +131,7 @@
 /// with any associated arguments included.
 /// The `value` is always passed as the first argument.
 ///
-/// @group core-get
-
-
-/// ## Ratio Adjustments
-/// When managing numbers,
-/// you can also move up and down exponential [modular-scales][scale]
-/// by calling a named ratio
-/// in place of a function name.
-/// Scales are exponential:
-///
-/// [scale]: core-ratio.html
-///
-/// ```scss
-/// // one step up a 'major third' scale (5 / 4)
-/// $map: (
-///   'root': 16px,
-///   'gutter': (
-///     '%value': '#root',
-///     '_major-third': 1,
-///     'convert-units': 'rem',
-///   ),
-/// );
-/// ```
-///
-/// Multiple functions/ratios
-/// will be applied in the order they are given.
-///
-/// @see $ratios
-/// @see ratio
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## Adjustment Shorthand
@@ -167,30 +144,29 @@
 /// ```scss
 /// $map: (
 ///   'root': 16px,
-///   'gutter': '#root' ('_major-third': 1, 'convert-units': 'rem'),
+///   'gutter': '#root' ('times': 1.5, 'convert-units': 'rem'),
 /// );
 /// ```
 ///
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## Adjustments with References
-/// Adjustment-function and ratio arguments
+/// Adjustment-function arguments
 /// can also reference keys in the map.
 /// In this example,
-/// we're using the unitless `line-height` token
-/// as both a multiplier, and a modular-scale ratio:
+/// we're multiplying the `root` & `line-height` values
+/// to generate a `rhythm` token.
 ///
 /// ```scss
 /// $map: (
 ///   'root': 16px,
 ///   'line-height': 1.4,
 ///   'rhythm': '#root' ('times': '#line-height'),
-///   'gutter': '#root' ('#line-height': 2),
 /// );
 /// ```
 ///
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## String Interpolation
@@ -213,7 +189,7 @@
 /// ```
 ///
 /// @see interpolate
-/// @group core-get
+/// @group tokens-get
 
 
 /// ## Nested Adjustments
@@ -235,7 +211,7 @@
 /// );
 /// ```
 ///
-/// @group core-get
+/// @group tokens-get
 
 /// ## Escaping References
 /// - If you need to use the `#` character without creating an alias reference,
@@ -246,30 +222,7 @@
 ///
 /// @since 2.2.0 -
 ///   - NEW: Added to help manage more complex missing-key options
-/// @group core-get
-
-// Error on Missing Keys
-// ---------------------
-/// A configuration option for setting the strictness with which `get-token()`
-/// handles missing nested keys. The option can be set to `silent`, `null`,
-/// `warning`, or `error`:
-///
-/// - `silent`: The default (backwards-compatible) value
-///   will attempt to fail gracefully
-///   and greedily replace all existing references.
-/// - `null`: Will return `null` if the value is not found,
-///   mimicking the built-in Sass `map.get()` function.
-/// - `warn`: Will return `null` if the value is not found,
-///   and also throw a warning.
-/// - `error`: Will throw an error if the value is not found.
-///
-/// @since 2.2.0 -
-///   - NEW: Provides authors with more Sass-like behavior,
-///     and more options for managing or testing when a key lookup fails
-/// @author James Camilleri
-/// @group core-get
-/// @type string | null
-$handle-missing-keys: 'silent' !default;
+/// @group tokens-get
 
 
 // Get Token
@@ -288,7 +241,7 @@ $handle-missing-keys: 'silent' !default;
 /// - NEW: Accepts `$do` map argument,
 ///   for on-the-fly adjustments
 ///
-/// @group core-get
+/// @group tokens-get
 /// @example scss - Access a map directly
 ///   $map: (
 ///     'original-value': 3em,
@@ -316,26 +269,76 @@ $handle-missing-keys: 'silent' !default;
 /// @param {map} $map -
 ///   A map of token definitions to reference against
 /// @param {*} $key -
-///   The original key or value to be parsed for `#alias` tags
-/// @param {map | null} $do [null] -
-///   A final map of function/ratio adjustments to run on the returned value
+///   The original key to get from the map
+/// @param {map | null} $do -
+///   A map of function adjustments to run on the returned value
 /// @return {*} -
 ///   The parsed value of any key in a given map
-@function get-token(
+@function get(
   $map,
   $key,
-  $do: null
+  $do: null,
 ) {
-  $val: if(map-has-key($map, $key), map-get($map, $key), $key);
+  // check the memo
+  $resolved: map.get($_memo, $map, $key);
+  @if $resolved { @return $resolved; }
 
-  // Handle deep keys
-  @if ($val == $key)
-    and (type-of($key) == 'string')
-    and str-index($key, '->')
-    and not (str-index($key, '#') == 1) {
-    $val: '##{$key}';
+  // lookup the key in the map
+  $lookup: parse.lookup-alias($map, $key);
+
+  @if $lookup {
+    $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
   }
 
-  $val: _a_get($map, $val);
-  @return _a_do-each($map, $val, $do);
+  // update the memo
+  $_memo: map.set($_memo, $map, $key, $resolved);
+
+  // handle any final adjustments
+  @if $do {
+    @return parse.compile-token($map, map.merge(('%value': $resolved), $do), $key);
+  }
+
+  // return the result
+  @return $resolved;
 }
+
+// Compile Token
+// -------------
+/// @group tokens-get
+/// @example scss - Access a map directly
+///   $map: (
+///     'original-value': 3em,
+///     'new-value': '#original-value' (
+///       'times': 2,
+///       'minus': 0.5
+///     ),
+///   );
+///   /*! New Value: #{get-token($map, 'new-value')} */
+/// @example scss - Access nested-map tokens
+///   $map: (
+///     'outer': (
+///       'inner': 2,
+///     ),
+///   );
+///   /*! Inner: #{get-token($map, 'outer->inner')} */
+/// @example scss - Write your own shortcut plugin for specific maps
+///   @function get($key) {
+///     @return get-token($my-map, $key);
+///   }
+///
+///   $my-map: ('main': 32em);
+///   /*! Main: #{get('main')} */
+///
+/// @param {map} $map -
+///   A map of token definitions to reference against
+/// @param {*} $token -
+///   The original key to get from the map
+/// @return {*} -
+///   The parsed value of any key in a given map
+@function compile(
+  $map,
+  $token,
+) {
+  @return parse.compile-token($map, $token);
+}
+

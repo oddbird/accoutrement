@@ -74,8 +74,7 @@
   $type: meta.type-of($string);
 
   @if (type-of($string) == 'map') {
-    @warn '_a_str-replace $string parameter cannot be a map';
-    @return $return;
+    @return throw.error('`$string` parameter cannot be a map', 'string-replace');
   }
 
   // Loops lists

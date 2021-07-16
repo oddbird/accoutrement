@@ -1,12 +1,15 @@
+@use '../function';
+@use 'sass:math';
+@use 'sass:meta';
+
 /// # Math Functions
 /// Use these internal math functions
 /// to adjust related numbers in your maps.
-/// The functions are prefixed,
-/// to avoid conflicts,
+/// The functions are not available directly,
 /// but each can be accessed in accoutrement maps
-/// using a numer of unprefixed alias names.
-/// @group core-math
-
+/// using a number of un-prefixed alias names.
+/// All the functions from `sass:math` are also available.
+/// @group token-math
 
 // Plus
 // ----
@@ -18,7 +21,7 @@
 ///
 /// @access public
 /// @name plus
-/// @group core-math
+/// @group token-math
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
@@ -33,13 +36,13 @@
 /// @return {number} -
 ///   The calculated results of adding
 ///   `$num1` and `$num2`
-@function _a_plus(
+@function plus(
   $num1,
   $num2
 ) {
   @return $num1 + $num2;
 }
-@include register-internal('_a_plus', 'plus', 'add', '+');
+@include function.internal(meta.get-function('plus'), 'plus', 'add', '+');
 
 
 // Minus
@@ -52,7 +55,7 @@
 ///
 /// @access public
 /// @name minus
-/// @group core-math
+/// @group token-math
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
@@ -67,13 +70,13 @@
 /// @return {number} -
 ///   The calculated results of subtracting
 ///   `$num2` from `$num1`
-@function _a_minus(
+@function minus(
   $num1,
   $num2
 ) {
   @return $num1 - $num2;
 }
-@include register-internal('_a_minus', 'minus', 'subtract', '-');
+@include function.internal(meta.get-function('minus'), 'minus', 'subtract', '-');
 
 
 // Times
@@ -86,7 +89,7 @@
 ///
 /// @access public
 /// @name times
-/// @group core-math
+/// @group token-math
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
@@ -100,13 +103,13 @@
 /// @return {number} -
 ///   The calculated results of multiplying
 ///   `$num1` by `$num2`
-@function _a_times(
+@function times(
   $num1,
   $num2
 ) {
   @return $num1 * $num2;
 }
-@include register-internal('_a_times', 'times', 'multiply', '*');
+@include function.internal(meta.get-function('times'), 'times', 'multiply', '*');
 
 
 // Divide
@@ -119,7 +122,7 @@
 ///
 /// @access public
 /// @name divide
-/// @group core-math
+/// @group token-math
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
@@ -133,13 +136,13 @@
 /// @return {number} -
 ///   The calculated results of dividing
 ///   `$num1` by `$num2`
-@function _a_divide(
+@function divide(
   $num1,
   $num2
 ) {
-  @return $num1 / $num2;
+  @return math.div($num1, $num2);
 }
-@include register-internal('_a_divide', 'divide', '/');
+@include function.internal(meta.get-function('divide'), 'divide', '/');
 
 
 // Modulo
@@ -153,7 +156,7 @@
 ///
 /// @access public
 /// @name modulo
-/// @group core-math
+/// @group token-math
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
@@ -167,10 +170,10 @@
 /// @return {number} -
 ///   The calculated results of dividing
 ///   `$num1` by `$num2`
-@function _a_modulo(
+@function modulo(
   $num1,
   $num2
 ) {
   @return $num1 % $num2;
 }
-@include register-internal('_a_modulo', 'modulo', 'remainder', 'mod', '%');
+@include function.internal(meta.get-function('modulo'), 'modulo', 'remainder', 'mod', '%');

@@ -52,3 +52,30 @@ $catch-errors: false !default;
 ) {
   --accoutrement-error: '#{error($message, $source, $catch)}';
 }
+
+// Warn [function]
+// ---------------
+/// Optionally return warning messages,
+/// as a way to test error cases
+///
+/// @param {string} $message -
+///   A useful warning message, explaining the problem
+/// @param {string} $source -
+///   The original source of the warning for debugging
+/// @param {bool} $catch [$catch-errors] -
+///   Optionally return the warning message
+/// @return {string} -
+///   Combined warning with source and message
+/// @throws When `$catch == true`
+@function warn(
+  $message,
+  $source,
+  $catch: $catch-errors
+) {
+  @if $catch {
+    @return 'WARNING [#{$source}] #{$message}';
+  }
+
+  @warn '[#{$source}] #{$message}';
+  @return null;
+}

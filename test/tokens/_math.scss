@@ -1,6 +1,11 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/tokens/register/math';
+@use '../../sass/tokens/function';
+@use 'sass:meta';
+
 // Math Tests
 // ==========
-@include test-module('Core Math') {
+@include test-module('tokens/register/math') {
 
 
 // Plus/Add
@@ -8,16 +13,17 @@
 @include describe('Plus [function]') {
   @include it('Adds numbers') {
     @include assert-equal(
-      _a_plus(400px, 14px),
+      math.plus(400px, 14px),
       414px
     );
   }
 
   @include it('is registered under the correct aliases') {
+    $actual: meta.get-function('plus', $module: 'math');
     @each $alias in ('plus', 'add', '+') {
       @include assert-equal(
-        _a_get-function($alias),
-        get-function('_a_plus'),
+        function.get($alias),
+        $actual,
         $alias
       );
     }
@@ -30,16 +36,17 @@
 @include describe('Minus [function]') {
   @include it('Subtracts numbers') {
     @include assert-equal(
-      _a_minus(3em, 1),
+      math.minus(3em, 1),
       2em
     );
   }
 
   @include it('is registered under the correct aliases') {
+    $actual: meta.get-function('minus', $module: 'math');
     @each $alias in ('minus', 'subtract', '-') {
       @include assert-equal(
-        _a_get-function($alias),
-        get-function('_a_minus'),
+        function.get($alias),
+        $actual,
         $alias
       );
     }
@@ -52,16 +59,17 @@
 @include describe('Times [function]') {
   @include it('Multiplies numbers') {
     @include assert-equal(
-      _a_times(6em, 0.5),
+      math.times(6em, 0.5),
       3em
     );
   }
 
   @include it('is registered under the correct aliases') {
+    $actual: meta.get-function('times', $module: 'math');
     @each $alias in ('times', 'multiply', '*') {
       @include assert-equal(
-        _a_get-function($alias),
-        get-function('_a_times'),
+        function.get($alias),
+        $actual,
         $alias
       );
     }
@@ -74,16 +82,17 @@
 @include describe('Divide [function]') {
   @include it('Divides numbers') {
     @include assert-equal(
-      _a_divide(3, 2),
-      1.5em
+      math.divide(3, 2),
+      1.5
     );
   }
 
   @include it('is registered under the correct aliases') {
+    $actual: meta.get-function('divide', $module: 'math');
     @each $alias in ('divide', '/') {
       @include assert-equal(
-        _a_get-function($alias),
-        get-function('_a_divide'),
+        function.get($alias),
+        $actual,
         $alias
       );
     }
@@ -96,16 +105,17 @@
 @include describe('Modulo [function]') {
   @include it('Finds the remaineder of numbers') {
     @include assert-equal(
-      _a_modulo(3, 2),
+      math.modulo(3, 2),
       1
     );
   }
 
   @include it('is registered under the correct aliases') {
+    $actual: meta.get-function('modulo', $module: 'math');
     @each $alias in ('modulo', 'mod', '%') {
       @include assert-equal(
-        _a_get-function($alias),
-        get-function('_a_modulo'),
+        function.get($alias),
+        $actual,
         $alias
       );
     }

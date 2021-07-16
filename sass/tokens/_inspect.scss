@@ -1,3 +1,8 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
+
 /// # Inspecting Tokens
 /// Tools for inspecting accoutrement map token meta-data,
 /// useful for building more complicated logic for
@@ -28,11 +33,11 @@
 ) {
   $pre: '_' '-';
 
-  @if (type-of($key) == 'list') {
-    $key: nth($key, 1);
+  @if (meta.type-of($key) == 'list') {
+    $key: list.nth($key, 1);
   }
 
-  @if (type-of($key) == 'string') and (index($pre, str-slice($key, 1, 1))) {
+  @if (meta.type-of($key) == 'string') and (list.index($pre, string.slice($key, 1, 1))) {
     @return true;
   }
 
@@ -80,12 +85,12 @@
   $origin: false
 ) {
   $ref: false;
-  $val: map-get($map, $token);
+  $val: map.get($map, $token);
 
-  @if (type-of($val) == 'string') and (str-index($val, '#') == 1) {
-    $try: str-slice($val, 2);
+  @if (meta.type-of($val) == 'string') and (string.index($val, '#') == 1) {
+    $try: string.slice($val, 2);
 
-    @if map-has-key($map, $try) and not is-private-token($try) {
+    @if map.has-key($map, $try) and not is-private-token($try) {
       $ref: if($origin, is-alias-for($map, $try, $origin) or $try, $try);
     }
   }

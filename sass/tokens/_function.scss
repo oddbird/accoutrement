@@ -1,8 +1,8 @@
 @use 'sass:meta';
 @use 'sass:map';
 @use 'sass:list';
-@use 'type';
-@use 'throw';
+@use '../utils/type';
+@use '../utils/throw';
 
 /// # Function Registration
 /// Because Sass 3.5+ requires first-class functions,
@@ -10,6 +10,35 @@
 /// and making them available to the Accoutrement map parser.
 /// This also provides the ability to alias functions as you like.
 /// @group core-register
+
+// Functions
+// ---------
+/// We provide a single map to store & manage functions
+/// that you would like to use inside Accoutrement maps.
+///
+/// ```scss
+/// $functions: (
+///   'times': get-function('times'),
+///   'divide': get-function('divide'),
+/// );
+/// ```
+///
+/// Functions can be registered multiple times,
+/// under any aliases,
+/// but function maps are not able to use
+/// the alias syntax.
+///
+/// @since 0.1.0 -
+/// - NEW: Supports the [core](core.html) map-reference syntax,
+///   for creating function aliases
+///
+/// @group core-register
+/// @type map
+///
+/// @prop {function} <alias> -
+///   Each alias key in the map
+///   should refer to a captured function
+$functions: () !default;
 
 // Internal Functions
 // ------------------
@@ -19,44 +48,23 @@
 /// User should not make changes to this map.
 ///
 /// @access private
-/// @group core-registers
-/// @type map
-$default-functions: ();
-
-
-// Set [mixin]
-// -----------
-/// Register internal functions.
-///
-/// @access private
 /// @group core-register
-/// @param {function} $function -
-///   The function-name to be registered,
-///   or a first-class function previously captured
-/// @param {string | arglist} $names... -
-///   One or more alias names (strings)
-///   to use for map-access to the function
-@mixin set(
-  $function,
-  $names...
-) {
-  $default-functions: set($default-functions, $function, $names...) !global;
-}
+/// @type map
+$internal: ();
 
 // Registration
 // ------------
 /// This function provides the shared logic used by
-/// `register-function()` (for user registration)
-/// and `register-internal()` (for internal use).
+/// `function.register()` (for user registration)
+/// and `function.internal()` (for internal use).
 ///
 /// @access private
 /// @group core-register
 ///
 /// @param {map} $source -
 ///   The original map source in which to register a function
-/// @param {string | function} $function -
-///   The function-name to be registered,
-///   or a first-class function previously captured
+/// @param {function} $function -
+///   The function to be registered
 /// @param {string | arglist} $names... -
 ///   One or more alias names (strings)
 ///   to use for map-access to the function
@@ -68,11 +76,14 @@ $default-functions: ();
   $function,
   $names...
 ) {
-  $origin: 'function-registration';
-  $type: type.check($function, 'function');
+  $origin: 'function-register';
+
+  @if not type.check($function, 'function') {
+    @return type.error($function, 'function', $origin, '$function');
+  }
 
   @if (list.length($names) == 0) {
-    $error: 'Provide at least one name for this function registration';
+    $error: 'Provide at least one name for this function';
     @return throw.error($error, $origin);
   }
 
@@ -106,43 +117,27 @@ $default-functions: ();
   $name,
   $source: ()
 ) {
-  @return map.get($source, $name) map.get($default-functions, $name);
+  @return map.get($source, $name) or map.get($functions, $name) or map.get($internal, $name);
 }
 
-// Functions
-// ---------
-/// We provide a single map to store & manage functions
-/// that you would like to use inside Accoutrement maps.
+// Internal [mixin]
+// ----------------
+/// Register internal functions.
 ///
-/// ```scss
-/// $functions: (
-///   'times': get-function('times'),
-///   'divide': get-function('divide'),
-/// );
-/// ```
-///
-/// Functions can be registered multiple times,
-/// under any aliases,
-/// using our standard hashtag reference syntax:
-///
-/// ```scss
-/// $functions: (
-///   'times': get-function('times'),
-///   '*': '#times',
-/// );
-/// ```
-///
-/// @since 0.1.0 -
-/// - NEW: Supports the [core](core.html) map-refernece syntax,
-///   for creating function aliases
-///
+/// @access private
 /// @group core-register
-/// @type map
-///
-/// @prop {function} <alias> -
-///   Each alias key in the map
-///   should refer to a captured function
-$functions: () !default;
+/// @param {function} $function -
+///   The function to be registered
+/// @param {string | arglist} $names... -
+///   One or more alias names (strings)
+///   to use for map-access to the function
+@mixin internal(
+  $function,
+  $names...
+) {
+  $internal: set($internal, $function, $names...) !global;
+}
+
 
 // Register Function
 // -----------------
@@ -150,9 +145,8 @@ $functions: () !default;
 ///
 /// @group core-register
 ///
-/// @param {string | function} $function -
-///   The function-name to be registered
-///   or a first-class function previously captured
+/// @param {function} $function -
+///   The first-class function to be registered
 /// @param {strings} $names... [$function] -
 ///   One or more alias names (strings)
 ///   to use for map-access to the function
@@ -163,5 +157,5 @@ $functions: () !default;
   $function,
   $names...
 ) {
-  $functions: function.set($functions, $function, $names...) !global;
+  $functions: set($functions, $function, $names...) !global;
 }

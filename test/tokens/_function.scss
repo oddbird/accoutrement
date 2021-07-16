@@ -1,0 +1,105 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/tokens/function';
+@use 'sass:meta';
+
+$fun: meta.get-function('set', $module: 'function');
+
+$reg: function.$functions;
+$int: function.$internal;
+function.$functions: ('user': 'got-user');
+function.$internal: ('internal': 'got-internal');
+
+@include test-module('tokens/function') {
+
+  @include describe('set [function]') {
+    @include it('Throws if $function is not a function') {
+      @include assert-equal(
+        function.set((), 'set', 'any', 'names'),
+        'ERROR [function-register] Argument `$function` must be a function; got (string) `set`'
+      );
+    }
+
+    @include it('Throws if no $names are provided') {
+      @include assert-equal(
+        function.set((), meta.get-function('set', $module: 'function')),
+        'ERROR [function-register] Provide at least one name for this function'
+      );
+    }
+
+    @include it('Throws if a name is previously registered') {
+      @include assert-equal(
+        function.set(('set': true), meta.get-function('set', $module: 'function'), 'set'),
+        'ERROR [function-register] A function has already been registered under the name `set`'
+      );
+    }
+
+    @include it('Registers a function under any number of names') {
+      @include assert-equal(
+        function.set(('existing': true), $fun, 'set', 'any', 'names'),
+        (
+          'existing': true,
+          'set': $fun,
+          'any': $fun,
+          'names': $fun,
+        )
+      );
+    }
+  }
+
+  @include describe('get [function]') {
+    @include it('Returns an internal function') {
+      @include assert-equal(
+        function.get('internal'),
+        'got-internal'
+      );
+    }
+
+    @include it('Returns a user function') {
+      @include assert-equal(
+        function.get('user', ('source': 'got-source')),
+        'got-user'
+      );
+    }
+
+    @include it('Returns a function from any map') {
+      @include assert-equal(
+        function.get('source', ('source': 'got-source')),
+        'got-source'
+      );
+    }
+  }
+
+  @include describe('internal [mixin]') {
+    @include it('Registers an internal function') {
+      @include function.internal($fun, 'int-fun', 'int-fun2');
+
+      @include assert-equal(
+        function.$internal,
+        (
+          'internal': 'got-internal',
+          'int-fun': $fun,
+          'int-fun2': $fun,
+        )
+      )
+    }
+  }
+
+  @include describe('register [mixin]') {
+    @include it('Registers a user function') {
+      @include function.register($fun, 'user-fun', 'user-fun2');
+
+      @include assert-equal(
+        function.$functions,
+        (
+          'user': 'got-user',
+          'user-fun': $fun,
+          'user-fun2': $fun,
+        )
+      )
+    }
+  }
+
+}
+
+function.$functions: $reg;
+function.$internal: $int;
