@@ -1,0 +1,20 @@
+@use '../../utils/string';
+@use '../function';
+@use 'sass:meta';
+@use 'sass:map';
+
+$_string: meta.module-functions('string');
+
+$_functions: (
+  'replace': 'str-replace',
+  'interpolate': '%s',
+  'split': 'str-split',
+  'trim': 'str-trim',
+);
+
+@each $name, $alias in $_functions {
+  @include function.internal(
+    map.get($_string, $name),
+    $name, $alias
+  );
+}

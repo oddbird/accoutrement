@@ -1,5 +1,41 @@
 # Accoutrement Changelog
 
+## 4.0.0 - UNRELEASED
+
+- BREAKING: Requires Sass modules, and other recent features of Dart Sass.
+  Legacy versions of Sass (Node & Ruby) are no longer supported
+
+- [Core][core]:
+  - BREAKING: The old "core" module has been broken into individual modules
+    for "utilities" (extending several Sass modules),
+    "tokens" (the map syntax parser),
+    "variables" (converting Sass variables & maps to CSS custom properties),
+    and ratios have been moved into the existing "scale" module
+
+- [Utilities][utils]:
+  - NEW: These functions are now available directly,
+    as well as being registered in the map syntax
+
+- [Tokens][token]:
+  - NEW: A module just for the custom map syntax parser & function registration
+  - BREAKING: The `$functions` map no longer accepts alias references
+    or any other aspects of the token syntax
+  - BREAKING: Ratios are no longer first-class adjustments
+    (like functions) in the token syntax
+  - BREAKING: `tokens.$handle-missing-keys` defaults to `null`,
+    and no longer supports the legacy `silent` option.
+  - BREAKING: `get-token()` is renamed `get()`,
+    and only accepts map-keys (including the `outer->inner` nested key syntax)
+  - NEW: The new `compile()` function provides direct access to
+    parse & resolve an arbitrary token value,
+    without adding it to the map and accessing it by name
+  - NEW: All the built-in Sass module functions are registered by default,
+    as `<module-name>.<function-name>`
+
+- [Variables][vars]:
+  - @@@
+
+
 ## 3.0.1 - 03/01/21
 
 - INTERNAL: Upgrade dev dependencies.
@@ -328,6 +364,9 @@ designing and testing several of these features.
   - NEW: Automatically formats font-family stacks
     with proper commas & quotations for CSS output
 
+[tokens]: https://www.oddbird.net/accoutrement/docs/tokens.html
+[utils]: https://www.oddbird.net/accoutrement/docs/utils.html
+[vars]: https://www.oddbird.net/accoutrement/docs/vars.html
 [core]: https://www.oddbird.net/accoutrement/docs/core.html
 [init]: https://www.oddbird.net/accoutrement/docs/init.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html

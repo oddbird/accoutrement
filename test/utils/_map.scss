@@ -1,6 +1,6 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/utils/map';
-@use '../../sass/utils/type';
+@use '../../sass/internal/type';
 
 @include test-module('utils/map') {
 

@@ -1,7 +1,7 @@
 @use '../../node_modules/sass-true/sass/true' as *;
-@use '../../sass/utils/type';
+@use '../../sass/internal/type';
 
-@include test-module('utils/type') {
+@include test-module('internal/type') {
 
   // Error [function]
   // ----------------
@@ -10,6 +10,13 @@
       @include assert-equal(
         type.error('hello world', 'list', 'my-function', '$this'),
         'ERROR [my-function] Argument `$this` must be a list; got (string) `hello world`'
+      );
+    }
+
+    @include it('Ignores null arg names') {
+      @include assert-equal(
+        type.error(null, 'list', 'my-function', null),
+        'ERROR [my-function] Argument must be a list; got `null`'
       );
     }
 
@@ -46,7 +53,7 @@
     @include it('Can error on improper type') {
       @include assert-equal(
         type.check('hello world', 'list', true),
-        'ERROR [type-check] Argument must be a list; got (string) `hello world`'
+        'ERROR [type.check] Argument `$valid` must be a list; got (string) `hello world`'
       );
     }
 
@@ -60,7 +67,7 @@
     @include it('Errors on improper valid-type') {
       @include assert-equal(
         type.check('hello world', 3),
-        'ERROR [check] `$valid` argument must be a string or list of Sass data types'
+        'ERROR [type.check] `$valid` argument must be a string or list of Sass data types'
       );
     }
   }

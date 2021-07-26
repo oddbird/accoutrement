@@ -1,7 +1,7 @@
 @use 'sass:meta';
 @use 'sass:map';
-@use 'type';
-@use 'throw';
+@use '../internal/type';
+@use '../internal/throw';
 
 // Map MultiMerge
 // --------------

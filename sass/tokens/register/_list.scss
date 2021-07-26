@@ -1,0 +1,17 @@
+@use '../../utils/list';
+@use '../function';
+@use 'sass:meta';
+@use 'sass:map';
+
+$_list: meta.module-functions('list');
+
+$_functions: (
+  'remove-nth': null,
+);
+
+@each $name, $alias in $_functions {
+  @include function.internal(
+    map.get($_list, $name),
+    $name, $alias
+  );
+}

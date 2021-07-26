@@ -67,6 +67,27 @@ function.$internal: ('internal': 'got-internal');
         'got-source'
       );
     }
+
+    @include it('Returns null if no function is found') {
+      @include assert-equal(
+        function.get('nothing'),
+        null
+      );
+    }
+
+    @include it('Optionally throws when the function is not registered') {
+      @include assert-equal(
+        function.get('nothing', $throw: true),
+        'ERROR [function.get] `nothing` is not a registered function'
+      );
+    }
+
+    @include it('Optionally throws when the registered item is not a function') {
+      @include assert-equal(
+        function.get('user', $throw: true),
+        'ERROR [function.get] `user` (`got-user`) is not a valid function for performing token adjustments'
+      );
+    }
   }
 
   @include describe('internal [mixin]') {

@@ -1,16 +1,12 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/tokens/parse';
 @use '../../sass/tokens/function';
+@use '../../sass/tokens/register';
 @use 'sass:color';
-@use 'sass:meta';
 
-$global: function.$functions;
-$mix: meta.get-function('mix', $module: 'color');
-$alpha: meta.get-function('alpha', $module: 'color');
-$scale: meta.get-function('scale', $module: 'color');
-@include function.register($mix, 'mix');
-@include function.register($alpha, 'alpha');
-@include function.register($scale, 'scale');
+$mix: function.get('color.mix');
+$alpha: function.get('color.alpha');
+$scale: function.get('color.scale');
 
 @include test-module('tokens/parse') {
 
@@ -183,14 +179,14 @@ $scale: meta.get-function('scale', $module: 'color');
 
     @include it('Calls a registered function with arguments') {
       @include assert-equal(
-        parse.do('mix', white, black),
+        parse.do('color.mix', white, black),
         color.mix(white, black)
       );
     }
 
     @include it('Removes null arguments') {
       @include assert-equal(
-        parse.do('alpha', black, null),
+        parse.do('color.alpha', black, null),
         color.alpha(black)
       );
     }
@@ -210,6 +206,8 @@ $scale: meta.get-function('scale', $module: 'color');
       alpha: ('alpha': 50%),
       bad: '#worse',
       worse: '#bad',
+      h: 'hello',
+      w: 'world',
     );
 
     @include it('Has no impact on a token without references') {
@@ -258,11 +256,50 @@ $scale: meta.get-function('scale', $module: 'color');
       );
     }
 
+    @include it('Handles all token-terminators') {
+      @include assert-equal(
+        parse.compile-token($map, '#h#w'),
+        'helloworld',
+        'The # terminator'
+      );
+
+      @include assert-equal(
+        parse.compile-token($map, '#h #w'),
+        'hello world',
+        'The space (` `) terminator'
+      );
+
+      @include assert-equal(
+        parse.compile-token($map, '(#h)#w'),
+        '(hello)world',
+        'The end-parenthesis `)` terminator'
+      );
+
+      @include assert-equal(
+        parse.compile-token($map, '#h\\00#w'),
+        'hello00world',
+        'The escape (`\\`) terminator'
+      );
+    }
+
+    @include it('Ignores slashes detached from an alias') {
+      @include assert-equal(
+        parse.compile-token($map, 'any\\thing'),
+        'any\\thing'
+      );
+    }
+
     @include it('Can perform functional adjustments') {
       $shadow: rgba(black, 0.5);
 
       @include assert-equal(
-        parse.compile-token($map, '#brand' ('mix': $shadow 20%, 'scale': ('alpha': 50%))),
+        parse.compile-token(
+          $map,
+          '#brand' (
+            'color.mix': $shadow 20%,
+            'color.scale': ('alpha': 50%),
+          )
+        ),
         color.scale(color.mix(mediumvioletred, $shadow, 20%), $alpha: 50%)
       )
     }
@@ -271,7 +308,7 @@ $scale: meta.get-function('scale', $module: 'color');
       $shadow: rgba(black, 0.5);
 
       @include assert-equal(
-        parse.compile-token($map, '#brand' ('mix': $shadow 20%, 'scale': '#alpha')),
+        parse.compile-token($map, '#brand' ('color.mix': $shadow 20%, 'color.scale': '#alpha')),
         color.scale(color.mix(mediumvioletred, $shadow, 20%), $alpha: 50%)
       )
     }
@@ -291,5 +328,3 @@ $scale: meta.get-function('scale', $module: 'color');
     }
   }
 }
-
-function.$functions: $global;

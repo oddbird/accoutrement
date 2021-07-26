@@ -1,7 +1,7 @@
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:meta';
-@use 'throw';
+@use '../internal/throw';
 
 /// # List Functions
 /// Functions for basic Sass-list manipulation.
@@ -14,9 +14,7 @@
 // ----------
 /// Remove any item (1-indexed) from a list.
 ///
-/// This function is prefixed outside maps
-/// & should not be used directly,
-/// but is available in all accoutrement maps
+/// This function is available in all accoutrement maps
 /// under the `'remove-nth'` alias.
 ///
 /// @group core-lists

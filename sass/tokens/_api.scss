@@ -23,7 +23,7 @@ $_memo: ();
 /// for managing and accessing common token-types,
 /// like colors, fonts, sizes, and animations.
 ///
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## Internal Reference
@@ -53,7 +53,7 @@ $_memo: ();
 /// );
 /// ```
 ///
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## Nested References
@@ -87,7 +87,7 @@ $_memo: ();
 /// ```
 ///
 /// @since 2.0.0
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## Functional Adjustments
@@ -131,7 +131,7 @@ $_memo: ();
 /// with any associated arguments included.
 /// The `value` is always passed as the first argument.
 ///
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## Adjustment Shorthand
@@ -148,7 +148,7 @@ $_memo: ();
 /// );
 /// ```
 ///
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## Adjustments with References
@@ -166,7 +166,7 @@ $_memo: ();
 /// );
 /// ```
 ///
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## String Interpolation
@@ -189,7 +189,7 @@ $_memo: ();
 /// ```
 ///
 /// @see interpolate
-/// @group tokens-get
+/// @group tokens-api
 
 
 /// ## Nested Adjustments
@@ -211,7 +211,7 @@ $_memo: ();
 /// );
 /// ```
 ///
-/// @group tokens-get
+/// @group tokens-api
 
 /// ## Escaping References
 /// - If you need to use the `#` character without creating an alias reference,
@@ -222,18 +222,24 @@ $_memo: ();
 ///
 /// @since 2.2.0 -
 ///   - NEW: Added to help manage more complex missing-key options
-/// @group tokens-get
+/// @group tokens-api
 
 
 // Get Token
 // ---------
 /// The primary function for accessing and parsing
-/// accoutrement map values.
-/// Each accoutrement plugin creates a shortcut wrapper function
+/// accoutrement map-syntax values.
+/// Each accoutrement plugin provides a shortcut function
 /// for the specific map associated with that data-type.
 /// You can do the same, or use it directly
 /// to turn any arbitrary map into an accoutrement map.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `get-token` to `get`
+/// - BREAKING: The `$key` value must be a taken name for lookup,
+///   not a raw token value to be compiled
+///   (see the `compile()` function)
+/// -
 /// @since 2.0.0 -
 /// - NEW: Handles access to nested-map tokens
 ///   using the `get-token($map, 'first->second->third')` syntax
@@ -241,7 +247,7 @@ $_memo: ();
 /// - NEW: Accepts `$do` map argument,
 ///   for on-the-fly adjustments
 ///
-/// @group tokens-get
+/// @group tokens-api
 /// @example scss - Access a map directly
 ///   $map: (
 ///     'original-value': 3em,
@@ -250,17 +256,17 @@ $_memo: ();
 ///       'minus': 0.5
 ///     ),
 ///   );
-///   /*! New Value: #{get-token($map, 'new-value')} */
+///   /*! New Value: #{tokens.get($map, 'new-value')} */
 /// @example scss - Access nested-map tokens
 ///   $map: (
 ///     'outer': (
 ///       'inner': 2,
 ///     ),
 ///   );
-///   /*! Inner: #{get-token($map, 'outer->inner')} */
+///   /*! Inner: #{tokens.get($map, 'outer->inner')} */
 /// @example scss - Write your own shortcut plugin for specific maps
 ///   @function get($key) {
-///     @return get-token($my-map, $key);
+///     @return tokens.get($my-map, $key);
 ///   }
 ///
 ///   $my-map: ('main': 32em);
@@ -269,9 +275,9 @@ $_memo: ();
 /// @param {map} $map -
 ///   A map of token definitions to reference against
 /// @param {*} $key -
-///   The original key to get from the map
+///   A key to get from the map (can use nested `key->subkey` syntax)
 /// @param {map | null} $do -
-///   A map of function adjustments to run on the returned value
+///   A map of functional adjustments to run on the returned value
 /// @return {*} -
 ///   The parsed value of any key in a given map
 @function get(
@@ -304,30 +310,23 @@ $_memo: ();
 
 // Compile Token
 // -------------
-/// @group tokens-get
+/// Allows you to compile arbitrary token values
+/// in reference to a map,
+/// without the initial step of referencing a single key.
+///
+/// @since 4.0.0 -
+/// - NEW: Added to handle direct token parsing, without map-key lookup
+///
+/// @group tokens-api
 /// @example scss - Access a map directly
 ///   $map: (
 ///     'original-value': 3em,
-///     'new-value': '#original-value' (
-///       'times': 2,
-///       'minus': 0.5
-///     ),
 ///   );
-///   /*! New Value: #{get-token($map, 'new-value')} */
-/// @example scss - Access nested-map tokens
-///   $map: (
-///     'outer': (
-///       'inner': 2,
-///     ),
+///   $token: '#original-value' (
+///     'times': 2,
+///     'minus': 0.5
 ///   );
-///   /*! Inner: #{get-token($map, 'outer->inner')} */
-/// @example scss - Write your own shortcut plugin for specific maps
-///   @function get($key) {
-///     @return get-token($my-map, $key);
-///   }
-///
-///   $my-map: ('main': 32em);
-///   /*! Main: #{get('main')} */
+///   /*! New Value: #{tokens.compile($map, $token)} */
 ///
 /// @param {map} $map -
 ///   A map of token definitions to reference against

@@ -3,7 +3,7 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use 'sass:string';
-@use '../utils/throw';
+@use '../internal/throw';
 @use '../utils/string' as str;
 @use '../utils/list' as li;
 @use 'config';
@@ -173,7 +173,7 @@ $_stack: ();
 ) {
   // resolve functions
   @if (meta.type-of($function) != 'function') {
-    $function: function.get($function);
+    $function: function.get($function, $throw: true);
   }
 
   // Handle null args…
@@ -277,7 +277,9 @@ $_stack: ();
 // Compile Token
 // -------------
 /// Given a token map,
-/// and a single token value
+/// and a single token value,
+/// compile the token to resolve any internal references
+/// or functional adjustments.
 ///
 /// @access private
 ///
