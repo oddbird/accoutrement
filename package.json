@@ -44,7 +44,7 @@
     "sass-true": "^5.0.0",
     "sassdoc": "^2.7.3",
     "sassdoc-theme-herman": "^4.0.0",
-    "stylelint": "^13.11.0",
+    "stylelint": "^13.13.1",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.19.0"
   },
