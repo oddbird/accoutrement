@@ -19,13 +19,6 @@ groups:
     core-lists: 'List Functions'
     core-strings: 'String Functions'
     core-inspect: 'Inspecting Tokens'
-  'Init (Normalization)':
-    init: 'QuickStart: Init'
-    init-root: 'General'
-    init-a11y: 'Accessibility'
-    init-forms: 'Forms'
-    init-media: 'Media'
-    init-type: 'Type'
   'Plugin/Animate':
     animate: 'QuickStart: Animate'
     animate-times: 'Timing Maps'
@@ -61,7 +54,6 @@ groups:
     type-font-vars: 'Fonts » CSS Variables'
     type-a11y: 'Accessibility'
     type-pseudo: 'Pseudo Elements'
-
 
 herman:
   sass:
