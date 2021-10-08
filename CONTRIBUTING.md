@@ -41,7 +41,7 @@ As you work...
   using [SassDoc][sassdoc] as appropriate,
   and compile the docs with `yarn docs`
 
-[changelog]: https://github.com/oddbird/accoutrement/blob/master/CHANGELOG.md
+[changelog]: https://github.com/oddbird/accoutrement/blob/main/CHANGELOG.md
 [sassdoc]: http://sassdoc.com/
 
 ## Committing
@@ -66,7 +66,7 @@ commit your changes, and submit a pull request!
 
 ## Pull Requests
 
-We use the `master` branch for production-ready code,
+We use the `main` branch for production-ready code,
 and side-branches for everything in-progress
 or up-for-debate.
 
