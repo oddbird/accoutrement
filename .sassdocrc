@@ -2,15 +2,6 @@ theme: herman
 dest: docs/
 src: sass/
 
-# @@@ remove these as they are migrated
-exclude:
-  - ./sass/animate/**/*
-  - ./sass/color/**/*
-  - ./sass/core/**/*
-  - ./sass/layout/**/*
-  - ./sass/scale/**/*
-  - ./sass/type/**/*
-
 display:
   access:
     - public

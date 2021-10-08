@@ -11,8 +11,20 @@ const paths = {
   TEST_DIR: 'test/',
   SASS_DIR: 'sass/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
+  // @@@ remove these as they are migrated
+  IGNORE_SASS: [
+    '!sass/animate/**/*.scss',
+    '!sass/color/**/*.scss',
+    '!sass/core/**/*.scss',
+    '!sass/layout/**/*.scss',
+    '!sass/scale/**/*.scss',
+    '!sass/tokens/**/*.scss',
+    '!sass/type/**/*.scss',
+  ],
   init: function () {
-    this.SASS = [this.SASS_DIR + '**/*.scss'].concat(this.IGNORE);
+    this.SASS = [this.SASS_DIR + '**/*.scss']
+      .concat(this.IGNORE)
+      .concat(this.IGNORE_SASS);
     this.ALL_SASS = [
       this.SASS_DIR + '**/*.scss',
       this.TEST_DIR + '**/*.scss',
