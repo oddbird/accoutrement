@@ -60,9 +60,9 @@
 ///   // so we can use string-functions to manipulate calc values…
 ///   $map: (
 ///     'text-size': calc(1em + 1vw),
-///     'large-text': '#text-size' ('string.replace': '1vw' '3vw'),
+///     'large-text': '#text-size' ('str-replace': '1vw' '3vw'),
 ///   );
-///   /*! #{get-token($map, 'large-text')} */
+///   /*! #{tools.get($map, 'large-text')} */
 ///
 /// @param {string | list} $string -
 ///   The original string (or list of strings) to edit
@@ -145,7 +145,7 @@
 ///     'root': 16px,
 ///     'responsive': 'calc(%s + %s)' ('%s': '#root' 0.5vw),
 ///   );
-///   /*! #{get-token($map, 'responsive')} */
+///   /*! #{tools.get($map, 'responsive')} */
 ///
 /// @param {string} $string -
 ///   The original string to be edited
@@ -196,7 +196,7 @@
 ///   $map: (
 ///     'list': 'hello world' ('split': ' '),
 ///   );
-///   /*! #{get-token($map, 'list')} */
+///   /*! #{tools.get($map, 'list')} */
 ///
 /// @param {string} $string -
 ///   The original string to be split
@@ -278,7 +278,7 @@
 ///     // null value is needed for single-argument functions…
 ///     'trim': '  hello world     ' ('trim': null),
 ///   );
-///   /*! #{get-token($map, 'trim')} */
+///   /*! #{tools.get($map, 'trim')} */
 ///
 /// @param {string} $string -
 ///   The original string to be trimmed

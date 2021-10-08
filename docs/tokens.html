@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>animate-times | Accoutrement Documentation</title>
+  <title>tokens | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -123,7 +123,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-times.html" data-nav="is-active">animate-times</a>
+      <a href="animate-times.html" data-nav="is-not-active">animate-times</a>
     </li>
   
   
@@ -253,7 +253,7 @@
   
   
     <li class="nav-item">
-      <a href="tokens.html" data-nav="is-not-active">tokens</a>
+      <a href="tokens.html" data-nav="is-active">tokens</a>
     </li>
   
   
@@ -349,11 +349,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>animate-times</strong>
+    <strong>tokens</strong>
   </nav>
 
 
-        <div data-page="animate-times">
+        <div data-page="tokens">
           
   
     
@@ -378,10 +378,28 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="timing-maps-durations-delays">Timing Maps: Durations &amp;<span class="widont">&nbsp;</span>Delays</h1>
-<p>Manage all your duration &amp; delay patterns
-in a single place -
-with explicitly documented<span class="widont">&nbsp;</span>relationships.</p>
+      <h1 id="quickstart-tokens">QuickStart: Tokens</h1>
+<p>Accoutrement tokens provide a custom syntax,
+using Sass Maps to define “tokens” of various<span class="widont">&nbsp;</span>types:</p>
+<pre><code class="lang-scss">$sizes: (
+  'root': 16px,
+  'gutter': 1em,
+);
+</code></pre>
+<p>Tokens provide design abstractions,
+that can be easily reused across a product or design system.
+There are several reasons for this<span class="widont">&nbsp;</span>approach:</p>
+<ul>
+<li>Sass Maps provide a format that is readable by both humans &amp;<span class="widont">&nbsp;</span>machines</li>
+<li>All related values are stored in a single variable,
+with explicit relationships<span class="widont">&nbsp;</span>intact</li>
+<li>We can build automation tools around meaningful token-groups,
+from <a href="type-fonts.html">font-imports</a>
+to <a href="https://www.oddbird.net/herman">generated style<span class="widont">&nbsp;</span>guides</a></li>
+<li>Unlike <code>YAML</code>, <code>JSON</code>, and other object languages,
+Sass is a <em>style language</em> that understands the values involved,
+and provides specific tools for maintaining those<span class="widont">&nbsp;</span>values</li>
+</ul>
 
       
   
@@ -446,39 +464,262 @@ with explicitly documented<span class="widont">&nbsp;</span>relationships.</p>
 
 
 
-<section class="item" id="variable--times">
+<section class="item" >
   
     
   
   
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+If you want to import the tokens<span class="widont">&nbsp;</span>alone:</p>
+<pre><code class="lang-scss">  @import '&lt;path-to&gt;/accoutrement/sass/tokens';
+</code></pre>
+<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
+you can leave off most of the<span class="widont">&nbsp;</span>path:</p>
+<pre><code class="lang-scss">  @import 'accoutrement/tokens';
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
 
   
   
   
   
+  
+  
 
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
+  
 
-      
-        <a href="#variable--times" class="item-name">$times</a>
-      
 
-      
+  
+  
 
-      
-    </h2>
 
+  
+  
+  
+  
+    
     
   
 
+  
 
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
     
     
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
     
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="token-maps"><a href="core-get.html">Token Maps</a></h2>
+<p>Using the map syntax,
+we can create named tokens for any related<span class="widont">&nbsp;</span>values:</p>
+<pre><code class="lang-scss">$colors: (
+  'brand': rgb(13, 127, 165),
+  'text': black,
+);
+</code></pre>
+<p>We can also create alias tokens
+and explicit relationships,
+using a <code>#token</code> hashtag syntax:</p>
+<pre><code class="lang-scss">$colors: (
+  'brand': rgb(13, 127, 165),
+  'accent': '#brand',
+  'text': '#accent' ('shade': 75%),
+);
+</code></pre>
+<p>Those relationships will be calculated at compile-time,
+using the <code>get-token()</code> function
+(or shortcut functions provided by<span class="widont">&nbsp;</span>plugins):</p>
+<pre><code class="lang-scss">html: (
+  color: get-token($colors, 'text');
+);
+</code></pre>
+<p>See <a href="core-get.html">Token Maps</a> documentation
+for more<span class="widont">&nbsp;</span>detail.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="tokens-css-variables"><a href="core-vars.html">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a></h2>
+<p>CSS Variables provide a DOM-aware alternative
+to the pre-processed Sass variables
+we use to store tokens.
+Rather than using one or the other,
+we recommend defining tokens in Sass
+(where relationships can be stored in an abstract format),
+and then generating CSS Variables<span class="widont">&nbsp;</span>as-necessary.</p>
+<p>See <a href="core-vars.html">CSS Variables</a> documentation
+for more<span class="widont">&nbsp;</span>detail.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
   
     <div class="code-block">
       
@@ -493,94 +734,47 @@ with explicitly documented<span class="widont">&nbsp;</span>relationships.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$times: () !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;_brand&#39;: hsl(120, 50%, 50%),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
+  &#39;border&#39;: &#39;#text&#39;,
+);
+html {
+  // generate CSS Variables based on the map above…
+  @include tokens--($colors);
+  // access CSS Variables with smart fallbacks…
+  border-color: var-token($colors, &#39;border&#39;);
+  color: var-token($colors, &#39;text&#39;);
+}</code></pre>
     </div>
   
+
+    </div>
 
     
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>A variable storing the map of
-all timing globally-avialble on your project.
-Any times added to the <code>$times</code> map will be accesible
-to the <code>time()</code> function by<span class="widont">&nbsp;</span>default.</p>
-<p>Define each time with a <code>name</code>, <code>base-value</code>,
-and optional <code>adjustments</code>…</p>
-<pre><code>$times: (
-  'fast': &lt;base-value&gt;,
-  'slow': &lt;base-value&gt; ('&lt;function-name&gt;': '&lt;arguments&gt;'),
-  // will return: function-name($base-value, $arguments...)
-);
-</code></pre>
-<ul>
-<li>Name your times anything – from abstractions like <code>fast</code>,
-to concrete patterns like <code>button-background-hover</code>.</li>
-<li>Base-values can be CSS-ready times,
-or references other times in the<span class="widont">&nbsp;</span>map.</li>
-<li>Adjustments are a nested map of functions and arguments,
-for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</li>
-</ul>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
   </div>
 
-  
-
-  
-  
-  
-  
-  
-  
-
+      
+    </div>
   
 
 
   
-  
 
-
-  
-  
-  
-  
     
-    
-  
-    
-  <div data-item-section="used-by">
+  <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
 
     
       
+
       
         
-
-        
-          
-          
-  
   
   
   
@@ -593,7 +787,7 @@ for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</
       <span class="item-type">@mixin</span>
       
         <a href="
-  animate-times.html#mixin--add-times" class="item-name">add-times()</a>
+  core-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
       
       
       
@@ -604,258 +798,34 @@ for adjusting times directly in your<span class="widont">&nbsp;</span>palette.</
   </div>
 
 
-        
       
         
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--time">
-  
-    
-  
-  
-
   
   
   
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--time" class="item-name">time()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Access a named time in your <code>$times</code> map.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Accepts <code>$do</code> map argument,
-for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
-<li>NEW: Accepts <code>$source</code> map argument,
-for custom<span class="widont">&nbsp;</span>source-palette</li>
-</ul>
-</div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  core-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
-        <span class="item-name">$time:</span>
       
-      
-      <span class="value-type">(string)</span>
       
     </h4>
 
     
-      
-      <div class="param-details text-block">
-        <p>The name of a time in your<span class="widont">&nbsp;</span>configuration</p>
-
-      </div>
-    
   </div>
 
 
       
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$do:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
-
-      </div>
     
   </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$source:</span>
-      
-      <span class="item-value">$times</span>
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional accoutrement-format map of times to use as the origin<span class="widont">&nbsp;</span>palette</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The calculated length of<span class="widont">&nbsp;</span>time</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
 
   
   
@@ -892,49 +862,44 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
 
 
 
-<section class="item" id="mixin--add-times">
+<section class="item" >
   
     
   
   
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@mixin</span>
-      
-
-      
-        <a href="#mixin--add-times" class="item-name">add-times()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
   
   
 
   
-    <div class="text-block">
-      <p>Merge individual time maps into the global <code>$times</code> variable,
-in case you want to define times in smaller groups
-such as <code>duration-times</code>, <code>delay-times</code>, etc
-before merging them into a single global<span class="widont">&nbsp;</span>times-palette.</p>
+    <div data-item-section="prose" class="text-block">
+      <h2 id="utility-functions"><a href="core-register.html">Utility Functions</a></h2>
+<p>We provide a core set of
+<a href="core-math.html">math utilities</a>,
+<a href="core-lists.html">list</a>,
+and <a href="./core-strings.html">string</a> helpers –
+prefixed to avoid conflict,
+but available un-prefixed inside token<span class="widont">&nbsp;</span>maps.</p>
+<p>You can also <a href="core-register.html">register your own functions</a>,
+or pass along functions from other Sass modules –
+giving them any alias you like.
+This is all handled using the token-map<span class="widont">&nbsp;</span>syntax.</p>
+<pre><code class="lang-scss">  // Create a token-map of captured functions
+  $functions: (
+    'my-function': get-function('my-function'),
+    'rgba': get-function('rgba'),
+    'mine': '#my-function',
+  );
+  // Or add functions &amp; aliases using the provided mixin:
+  @include register-function('my-function', 'alias');
+</code></pre>
+<p>Once a function has been registered with accoutrement,
+it is available to call by name or alias in all token adjustment<span class="widont">&nbsp;</span>maps:</p>
+<pre><code class="lang-scss">  @include register-function('rgba', 'fade');
+  $colors: (
+    'brand': hsl(120, 50%, 50%),
+    'background': '#brand' ('fade': 50%),
+  );
+</code></pre>
 
       
   
@@ -948,8 +913,6 @@ before merging them into a single global<span class="widont">&nbsp;</span>times-
     </div>
   
 
-  </div>
-
   
 
   
@@ -960,119 +923,28 @@ before merging them into a single global<span class="widont">&nbsp;</span>times-
   
 
   
+
+
+  
+  
+
+
+  
+
     
-  <div data-item-section="parameter">
+  <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
 
     
       
-        
-  
-  
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(map...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <ul>
-<li>An updated global <code>$times</code> variable,
-with new maps merged<span class="widont">&nbsp;</span>in.</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
       
         
-        
-        
-
-        
-          
-          
-  
-  
-  
   
   
   
@@ -1085,7 +957,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
       
       
         <a href="
-  animate-times.html#variable--times" class="item-name">$times</a>
+  core-register.html#variable--functions" class="item-name">$functions</a>
       
       
       
@@ -1096,18 +968,15 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
   </div>
 
 
-        
-      
-        
-        
-        
-
-        
       
     
   </div>
 
   
+  
+  
+  
+    
     
   
 

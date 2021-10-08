@@ -23,7 +23,7 @@
 ///     'main-start': ['nav-end' 'main-start' 'footer-start'],
 ///     'small-start': '#main-start' ('remove-nth': 1),
 ///   );
-///   /*! #{inspect(get-token($map, 'small-start'))} */
+///   /*! #{inspect(tools.get($map, 'small-start'))} */
 ///
 /// @param {list} $list -
 ///   The original list to be edited
