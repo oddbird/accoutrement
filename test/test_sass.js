@@ -1,6 +1,9 @@
-var path = require('path');
-const sass = require('sass');
-var sassTrue = require('sass-true');
+/* eslint-env node */
 
-var sassFile = path.join(__dirname, '.', 'index.scss');
-sassTrue.runSass({ file: sassFile }, { sass, describe, it });
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import sassTrue from 'sass-true';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const sassFile = path.join(__dirname, '.', 'index.scss');
+sassTrue.runSass({ file: sassFile }, { describe, it });

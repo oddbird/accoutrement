@@ -71,7 +71,6 @@ display:
 #     type-a11y: 'Accessibility'
 #     type-pseudo: 'Pseudo Elements'
 
-
 herman:
   sass:
     includePaths: ['sass']
