@@ -6,27 +6,20 @@ display:
   access:
     - public
 
-# groups:
+groups:
 #   'Core (API)':
 #     core: 'QuickStart: Core'
-#     core-get: 'Token Maps'
 #     core-vars: 'Tokens » CSS Variables'
-#     core-ratio: 'Ratios & Modular Scales'
-#     core-ratio-vars: 'Ratios » CSS Variables'
-#   'Core (Utilities)':
-#     core-register: 'Function Registration'
-#     core-math: 'Math Functions'
-#     core-lists: 'List Functions'
-#     core-strings: 'String Functions'
-#     core-inspect: 'Inspecting Tokens'
-#   'Init (Normalization)':
-#     init: 'QuickStart: Init'
-#     init-root: 'General'
-#     init-a11y: 'Accessibility'
-#     init-forms: 'Forms'
-#     init-media: 'Media'
-#     init-type: 'Type'
-#   'Plugin/Animate':
+  'Utilities':
+    utils: 'Sass Helper Functions'
+  'Tokens':
+    tokens: 'QuickStart: Tokens'
+    token-config: 'Configuration'
+    token-api: 'Accessing Tokens'
+    token-inspect: 'Inspecting Tokens'
+    token-register: 'Function Registration'
+    token-internal: 'Provided Functions'
+#   'Animate':
 #     animate: 'QuickStart: Animate'
 #     animate-times: 'Timing Maps'
 #     animate-time-vars: 'Times » CSS Variables'
@@ -34,14 +27,14 @@ display:
 #     animate-ease-vars: 'Easing » CSS Variables'
 #     animate-change: 'Combined "Change" Maps'
 #     animate-change-vars: 'Changes » CSS Variables'
-#   'Plugin/Color':
+#   'Color':
 #     color: 'QuickStart: Color'
 #     color-api: 'Color Maps'
 #     color-vars: 'Colors » CSS Variables'
 #     color-contrast: 'Contrast & Accessibility'
 #     color-utils: 'Adjustments'
 #     color-themes: 'Themes'
-#   'Plugin/Layout':
+#   'Layout':
 #     layout: 'QuickStart: Layout'
 #     layout-queries: 'Media Breakpoint Maps'
 #     layout-query-vars: 'Breakpoints » CSS Variables'
@@ -50,12 +43,12 @@ display:
 #     layout-position: 'Positioning'
 #     layout-ratios: 'Fluid Ratios'
 #     layout-z-index: 'Z-Index'
-#   'Plugin/Scale':
+#   'Scale':
 #     scale: 'QuickStart: Scale'
 #     scale-sizes: 'Size Maps'
 #     scale-vars: 'Sizes » CSS Variables'
 #     scale-units: 'Unit Conversion'
-#   'Plugin/Type':
+#   'Type':
 #     type: 'QuickStart: Type'
 #     type-fonts: 'Font Maps'
 #     type-font-vars: 'Fonts » CSS Variables'

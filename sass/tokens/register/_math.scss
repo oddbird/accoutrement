@@ -2,15 +2,6 @@
 @use 'sass:math';
 @use 'sass:meta';
 
-/// # Math Functions
-/// Use these internal math functions
-/// to adjust related numbers in your maps.
-/// The functions are not available directly,
-/// but each can be accessed in accoutrement maps
-/// using a number of un-prefixed alias names.
-/// All the functions from `sass:math` are also available.
-/// @group token-math
-
 // Plus
 // ----
 /// Add two values together in accoutrement maps.
@@ -21,14 +12,14 @@
 ///
 /// @access public
 /// @name plus
-/// @group token-math
+/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
 ///     'margin': 14px,
 ///     'spacer': '#text' ('plus': '#margin'),
 ///   );
-///
+///   /*! spacer: #{tools.get($sizes, 'spacer')} */
 /// @param {string | length} $num1 -
 ///   The name or length of the size you are adding to
 /// @param {string | length} $num2 -
@@ -55,14 +46,14 @@
 ///
 /// @access public
 /// @name minus
-/// @group token-math
+/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
 ///     'margin': 14px,
 ///     'shim': '#text' ('minus': '#margin'),
 ///   );
-///
+///   /*! shim: #{tools.get($sizes, 'shim')} */
 /// @param {string | length} $num1 -
 ///   The name or length of the size you are subtracting from
 /// @param {string | length} $num2 -
@@ -89,13 +80,13 @@
 ///
 /// @access public
 /// @name times
-/// @group token-math
+/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
 ///     'double': '#text' ('times': 2),
 ///   );
-///
+///   /*! double: #{tools.get($sizes, 'double')} */
 /// @param {string | length} $num1 -
 ///   The name or length of the size you are multiplying
 /// @param {string | length} $num2 -
@@ -122,13 +113,13 @@
 ///
 /// @access public
 /// @name divide
-/// @group token-math
+/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
 ///     'half': '#text' ('divide': 2),
 ///   );
-///
+///   /*! half: #{tools.get($sizes, 'half')} */
 /// @param {string | length} $num1 -
 ///   The name or length of the size you are dividing
 /// @param {string | length} $num2 -
@@ -156,20 +147,19 @@
 ///
 /// @access public
 /// @name modulo
-/// @group token-math
+/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 16px,
-///     'half': '#text' ('modulo': 2),
+///     'mod': '#text' ('modulo': 3),
 ///   );
-///
+///   /*! mod: #{tools.get($sizes, 'mod')} */
 /// @param {string | length} $num1 -
 ///   The name or length of the size you are dividing
 /// @param {string | length} $num2 -
 ///   The name or length of the size to use as a division
 /// @return {number} -
-///   The calculated results of dividing
-///   `$num1` by `$num2`
+///   The modulo of two numbers
 @function modulo(
   $num1,
   $num2

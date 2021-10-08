@@ -6,7 +6,7 @@
 $_list: meta.module-functions('list');
 
 $_functions: (
-  'remove-nth': null,
+  'remove-nth': 'list-remove-nth',
 );
 
 @each $name, $alias in $_functions {

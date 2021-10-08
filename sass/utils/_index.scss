@@ -1,3 +1,9 @@
+/// # Utility Functions
+/// We have a few utility functions that extend the Sass core modules,
+/// to help with advanced list, map, and string manipulation.
+/// Each function
+/// @group utils
+
 // no config
 @forward 'list' as list-*;
 @forward 'map' as map-*;

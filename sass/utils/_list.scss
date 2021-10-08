@@ -3,21 +3,17 @@
 @use 'sass:meta';
 @use '../internal/throw';
 
-/// # List Functions
-/// Functions for basic Sass-list manipulation.
-/// While these functions are defined with private prefixes,
-/// they are registered without the prefix for map-access.
-/// @group core-lists
-
-
 // Remove Nth
 // ----------
 /// Remove any item (1-indexed) from a list.
 ///
-/// This function is available in all accoutrement maps
-/// under the `'remove-nth'` alias.
+/// This function has a `list-` prefix added by default
+/// (eg `list-remove-nth()`)
+/// unless it's imported directly.
+/// However, it's available in all accoutrement maps
+/// as `'remove-nth'`.
 ///
-/// @group core-lists
+/// @group utils
 /// @example scss
 ///   $map: (
 ///     'main-start': ['nav-end' 'main-start' 'footer-start'],

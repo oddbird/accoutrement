@@ -52,7 +52,7 @@
 /// @group tokens
 
 
-/// ## [Token Maps](core-get.html)
+/// ## [Token Maps](token-api.html)
 /// Using the map syntax,
 /// we can create named tokens for any related values:
 ///
@@ -76,88 +76,80 @@
 /// ```
 ///
 /// Those relationships will be calculated at compile-time,
-/// using the `get-token()` function
+/// using the `token.get()` function
 /// (or shortcut functions provided by plugins):
 ///
 /// ```scss
-/// html: (
-///   color: get-token($colors, 'text');
-/// );
+/// html {
+///   color: token.get($colors, 'text');
+/// }
 /// ```
 ///
-/// See [Token Maps](core-get.html) documentation
+/// See [Token Maps](token-api.html) documentation
 /// for more detail.
 ///
-/// @see get-token
 /// @group tokens
 
 
-/// ## [Tokens » CSS Variables](core-vars.html)
-/// CSS Variables provide a DOM-aware alternative
-/// to the pre-processed Sass variables
-/// we use to store tokens.
-/// Rather than using one or the other,
-/// we recommend defining tokens in Sass
-/// (where relationships can be stored in an abstract format),
-/// and then generating CSS Variables as-necessary.
-///
-/// See [CSS Variables](core-vars.html) documentation
-/// for more detail.
-///
-/// @example scss
-///   $colors: (
-///     '_brand': hsl(120, 50%, 50%),
-///     'text': '#_brand' ('shade': 50%),
-///     'border': '#text',
-///   );
-///   html {
-///     // generate CSS Variables based on the map above…
-///     @include tokens--($colors);
-///     // access CSS Variables with smart fallbacks…
-///     border-color: var-token($colors, 'border');
-///     color: var-token($colors, 'text');
-///   }
-///
-/// @see tokens--
-/// @see var-token
-/// @group tokens
+// ## [Tokens » CSS Variables](core-vars.html)
+// CSS Variables provide a DOM-aware alternative
+// to the pre-processed Sass variables
+// we use to store tokens.
+// Rather than using one or the other,
+// we recommend defining tokens in Sass
+// (where relationships can be stored in an abstract format),
+// and then generating CSS Variables as-necessary.
+//
+// See [CSS Variables](core-vars.html) documentation
+// for more detail.
+//
+// @example scss
+//   $colors: (
+//     '_brand': hsl(120, 50%, 50%),
+//     'text': '#_brand' ('shade': 50%),
+//     'border': '#text',
+//   );
+//   html {
+//     // generate CSS Variables based on the map above…
+//     @include tokens--($colors);
+//     // access CSS Variables with smart fallbacks…
+//     border-color: var-token($colors, 'border');
+//     color: var-token($colors, 'text');
+//   }
+//
+// @group tokens
 
 
-/// ## [Utility Functions](core-register.html)
-/// We provide a core set of
-/// [math utilities](core-math.html),
-/// [list](core-lists.html),
-/// and [string](./core-strings.html) helpers --
-/// prefixed to avoid conflict,
-/// but available un-prefixed inside token maps.
+/// ## [Utility Functions](token-register.html)
+/// We provide a set of built-in
+/// [math](token-math.html),
+/// [list](utils-list.html),
+/// and [string](utils-string.html) helpers.
 ///
-/// You can also [register your own functions](core-register.html),
-/// or pass along functions from other Sass modules --
+/// You can also use the Sass core functions
+/// (with appropriate module prefixing),
+/// or [register your own functions](token-register.html) --
 /// giving them any alias you like.
-/// This is all handled using the token-map syntax.
 ///
 /// ```scss
-///   // Create a token-map of captured functions
+///   // Create a map of captured functions
 ///   $functions: (
-///     'my-function': get-function('my-function'),
-///     'rgba': get-function('rgba'),
-///     'mine': '#my-function',
+///     'my-function': meta.get-function('my-function'),
+///     'rgba': meta.get-function('rgba'),
 ///   );
 ///   // Or add functions & aliases using the provided mixin:
-///   @include register-function('my-function', 'alias');
+///   @include token.register('my-function', 'alias');
 /// ```
 ///
 /// Once a function has been registered with accoutrement,
 /// it is available to call by name or alias in all token adjustment maps:
 ///
 /// ```scss
-///   @include register-function('rgba', 'fade');
+///   @include token.register('rgba', 'fade');
 ///   $colors: (
 ///     'brand': hsl(120, 50%, 50%),
 ///     'background': '#brand' ('fade': 50%),
 ///   );
 /// ```
 ///
-/// @see $functions
-/// @see register-function
 /// @group tokens

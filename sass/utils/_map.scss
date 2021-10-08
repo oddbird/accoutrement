@@ -6,10 +6,15 @@
 // Map MultiMerge
 // --------------
 /// Merge multiple maps into a single map,
-/// in case you want to define tokens in smaller groups –
-/// such as `brand-colors`, `text-colors`, etc. –
+/// in case you want to define tokens in smaller groups --
+/// such as `brand-colors`, `text-colors`, etc. --
 /// before merging them into a single map.
 ///
+/// This function has a `map-` prefix added by default
+/// (eg `map-merge()`)
+/// unless it's imported directly.
+///
+/// @group utils
 /// @param {maps...} $maps -
 ///   Pass any number of maps to be merged.
 /// @return {map} -

@@ -4,6 +4,7 @@
 
 // Error [function]
 // ----------------
+/// @access private
 /// @param {*} $value -
 ///   The value to check
 /// @param {string | list} $valid -
@@ -35,11 +36,8 @@
 
 // Check [function]
 // ----------------
-/// Validate the type of any value
-///
-/// @since 3.0.0 -
-/// - BREAKING: Returns type rather than value
-///
+/// Check that the value is an acceptable type
+/// @access private
 /// @param {*} $value -
 ///   The value to check
 /// @param {string | list} $valid -
@@ -85,6 +83,20 @@
   @return null;
 }
 
+// Exclude [function]
+// -------------------
+/// Check that the value is not an invalid type
+/// @access private
+/// @param {*} $value -
+///   The value to check
+/// @param {string | list} $invalid -
+///   A list of invalid types to check against
+/// @param {boolean} $throw [false] -
+///   Returns `null` on failure, rather than throwing an error
+/// @return {*} -
+///   The value type, if it passes the type check
+/// @throws `$invalid` is not a string or list
+/// @throws Type-of `$value` is considered invalid
 @function exclude(
   $value,
   $invalid,

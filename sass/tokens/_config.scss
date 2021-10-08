@@ -18,7 +18,7 @@
 ///   - NEW: Provides authors with more Sass-like behavior,
 ///     and more options for managing or testing when a key lookup fails
 /// @author James Camilleri
-/// @group core-get
+/// @group token-config
 /// @type string | null
 $handle-missing-keys: null !default;
 

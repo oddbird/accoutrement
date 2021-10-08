@@ -2,6 +2,7 @@
 // ---------------------
 /// Optionally turn off error output for testing,
 /// with the 'catch-errors' setting
+/// @access private
 $catch-errors: false !default;
 
 
@@ -10,6 +11,7 @@ $catch-errors: false !default;
 /// Optionally return error messages without failing,
 /// as a way to test error cases
 ///
+/// @access private
 /// @param {string} $message -
 ///   A useful error message, explaining the problem
 /// @param {string} $source -
@@ -37,6 +39,7 @@ $catch-errors: false !default;
 /// Optionally output mixin error messages without failing,
 /// as a way to test error cases
 ///
+/// @access private
 /// @param {string} $message -
 ///   A useful error message, explaining the problem
 /// @param {string} $source -
@@ -58,6 +61,7 @@ $catch-errors: false !default;
 /// Optionally return warning messages,
 /// as a way to test error cases
 ///
+/// @access private
 /// @param {string} $message -
 ///   A useful warning message, explaining the problem
 /// @param {string} $source -

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Accoutrement Documentation</title>
+  <title>QuickStart: Tokens | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -57,7 +57,7 @@
     <div class="nav-subsection">
       <h3 class="nav-home">
         
-        <a href="index.html" data-nav="is-active">Accoutrement</a>
+        <a href="index.html" data-nav="is-not-active">Accoutrement</a>
       </h3>
 
       
@@ -102,7 +102,7 @@
                 
   
     <li class="nav-item">
-      <a href="tokens.html" data-nav="is-not-active">QuickStart: Tokens</a>
+      <a href="tokens.html" data-nav="is-active">QuickStart: Tokens</a>
     </li>
   
   
@@ -181,129 +181,393 @@
 
       <main data-region="main">
         
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >Accoutrement</a> »
+    <strong>QuickStart: Tokens</strong>
+  </nav>
 
-        <div data-page="index">
+
+        <div data-page="tokens">
           
   
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
   
-    <ul class="project-links">
-      
-        <li class="project-link-item">
-          <a href="https://www.oddbird.net/accoutrement/" class="project-link">View Project</a>
-        </li>
-      
-      
-        <li class="project-link-item">
-          <a href="https://github.com/oddbird/accoutrement.git" class="project-link">View Source</a>
-        </li>
-      
-    </ul>
+    
+  
+  
+  
   
 
   
-    <div class="text-block">
-      <h1 id="sass-accoutrement">Sass Accoutrement</h1>
-<p><a href="https://travis-ci.com/oddbird/accoutrement"><img src="https://travis-ci.com/oddbird/accoutrement.svg?branch=main" alt="Build Status"></a></p>
-<p><strong>Robust design systems</strong> require
-<em>meaningful</em>, <em>readable</em>, <em>reusable</em> code.
-These Sass utilities are designed to
-help define and manage your design tokens
-(colors, fonts, sizes, etc.)
-in a format that can be understood
-by both humans and parsers –
-opening the door for automation,
-while improving consistency and readability.
-These tools also integrate with <a href="https://www.oddbird.net/herman/">Herman</a>,
-our automated living pattern-library generator
-built on <a href="http://sassdoc.com/">SassDoc</a>.</p>
-<ul>
-<li><a href="https://www.oddbird.net/accoutrement/">Official Site</a></li>
-<li><a href="https://www.oddbird.net/accoutrement/docs/">Documentation</a></li>
-<li><a href="https://github.com/oddbird/accoutrement/">Source Code</a></li>
-<li><a href="https://github.com/oddbird/accoutrement/issues">Issues</a></li>
-</ul>
-<p><em>Brought to you by <a href="https://www.oddbird.net/">OddBird</a> –
-the creators of <a href="https://www.oddbird.net/susy/">Susy</a>,
-<a href="https://www.oddbird.net/true">True</a>,
-and <a href="https://www.oddbird.net/herman/">Herman</a>.</em></p>
-<h2 id="installation">Installation</h2>
-<p>Install the package with npm or<span class="widont">&nbsp;</span>yarn</p>
-<pre><code class="lang-bash">npm install accoutrement [--save-dev]
-yarn add accoutrement [--dev]
+    <div data-item-section="prose" class="text-block">
+      <h1 id="quickstart-tokens">QuickStart: Tokens</h1>
+<p>Accoutrement tokens provide a custom syntax,
+using Sass Maps to define “tokens” of various<span class="widont">&nbsp;</span>types:</p>
+<pre><code class="lang-scss">$sizes: (
+  'root': 16px,
+  'gutter': 1em,
+);
 </code></pre>
-<p>Use what you<span class="widont">&nbsp;</span>need:</p>
-<pre><code class="lang-scss">// all the modules (these are functionally the same)
-@use &quot;&lt;path-to&gt;/accoutrement&quot;;
-@use &quot;&lt;path-to&gt;/accoutrement/sass/tools&quot;;
+<p>Tokens provide design abstractions,
+that can be easily reused across a product or design system.
+There are several reasons for this<span class="widont">&nbsp;</span>approach:</p>
+<ul>
+<li>Sass Maps provide a format that is readable by both humans &amp;<span class="widont">&nbsp;</span>machines</li>
+<li>All related values are stored in a single variable,
+with explicit relationships<span class="widont">&nbsp;</span>intact</li>
+<li>We can build automation tools around meaningful token-groups,
+from <a href="type-fonts.html">font-imports</a>
+to <a href="https://www.oddbird.net/herman">generated style<span class="widont">&nbsp;</span>guides</a></li>
+<li>Unlike <code>YAML</code>, <code>JSON</code>, and other object languages,
+Sass is a <em>style language</em> that understands the values involved,
+and provides specific tools for maintaining those<span class="widont">&nbsp;</span>values</li>
+</ul>
 
-// individual modules (at `/accoutrement/sass/&lt;name&gt;`)
-@use &quot;&lt;path-to&gt;/accoutrement/sass/color&quot;;
-</code></pre>
-<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
-you can use the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
-<pre><code class="lang-scss">@use &quot;accoutrement&quot;;
-</code></pre>
-<h2 id="tokens">Tokens</h2>
-<p>The <strong>Token</strong> module provides
-a special syntax for managing design tokens
-with Sass “map”<span class="widont">&nbsp;</span>objects:</p>
-<pre><code class="lang-scss">$map: (
-  &quot;root&quot;: 16px,
-  &quot;gutter&quot;: 1em,
-);
-</code></pre>
-<p>Using the custom syntax,
-we can extend maps to handle internal reference,
-and functional adjustments –
-capturing meaningful relationships
-between design<span class="widont">&nbsp;</span>tokens:</p>
-<pre><code class="lang-scss">$map: (
-  &quot;root&quot;: 16px,
-  // internal reference &amp; adjustments
-  &quot;gutter&quot;: &quot;#root&quot;
-    (
-      &quot;scale&quot;: ('_major-third', 1),
-      &quot;convert-units&quot;: &quot;rem&quot;,
-    ),
-);
-</code></pre>
-<p>Map storage serves a larger<span class="widont">&nbsp;</span>purpose:</p>
-<ul>
-<li>Related data is grouped explicitly,
-making the code more readable and<span class="widont">&nbsp;</span>maintainable</li>
-<li>The “single source of truth”
-encourages reusable design<span class="widont">&nbsp;</span>patterns</li>
-<li>Meaningful structure allows automation,
-from <a href="https://www.oddbird.net/herman/">automated style guides</a>
-to automated<span class="widont">&nbsp;</span>functionality</li>
-</ul>
-<p>This module provides the generic
-(non data-specific)
-setup and syntax<span class="widont">&nbsp;</span>parsing:</p>
-<ul>
-<li>Retrieve &amp; parse map values
-with <code>token.get()</code>
-and other <a href="https://www.oddbird.net/accoutrement/docs/token-api.html">token api<span class="widont">&nbsp;</span>functions</a></li>
-<li>Use the many <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html">registered functions</a>
-to manipulate tokens in the<span class="widont">&nbsp;</span>map</li>
-<li>Register your own <a href="https://www.oddbird.net/accoutrement/docs/token-register.html">functions</a>,
-for extra<span class="widont">&nbsp;</span>functionality</li>
-</ul>
-<h2 id="also-">Also…</h2>
-<p>While the Token module handles generic data-management,
-we also provide plugins for a few common data<span class="widont">&nbsp;</span>types:</p>
-<ul>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/animate.html">Animate</a></strong> –
-Tools for managing CSS transitions and<span class="widont">&nbsp;</span>animations</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/color.html">Color</a></strong> –
-Tools for managing CSS colors and<span class="widont">&nbsp;</span>contrast-ratios</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a></strong> –
-Tools for managing CSS sizes: typographic scales, spacing,<span class="widont">&nbsp;</span>etc.</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/type.html">Type</a></strong> –
-Tools for managing webfonts, generated content, and other text<span class="widont">&nbsp;</span>needs</li>
-</ul>
+      
+  
+
+      
+  
+
+      
+  
 
     </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+If you want to import the tokens<span class="widont">&nbsp;</span>alone:</p>
+<pre><code class="lang-scss">  @import '&lt;path-to&gt;/accoutrement/sass/tokens';
+</code></pre>
+<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
+you can leave off most of the<span class="widont">&nbsp;</span>path:</p>
+<pre><code class="lang-scss">  @import 'accoutrement/tokens';
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="token-maps"><a href="token-api.html">Token Maps</a></h2>
+<p>Using the map syntax,
+we can create named tokens for any related<span class="widont">&nbsp;</span>values:</p>
+<pre><code class="lang-scss">$colors: (
+  'brand': rgb(13, 127, 165),
+  'text': black,
+);
+</code></pre>
+<p>We can also create alias tokens
+and explicit relationships,
+using a <code>#token</code> hashtag syntax:</p>
+<pre><code class="lang-scss">$colors: (
+  'brand': rgb(13, 127, 165),
+  'accent': '#brand',
+  'text': '#accent' ('shade': 75%),
+);
+</code></pre>
+<p>Those relationships will be calculated at compile-time,
+using the <code>token.get()</code> function
+(or shortcut functions provided by<span class="widont">&nbsp;</span>plugins):</p>
+<pre><code class="lang-scss">html {
+  color: token.get($colors, 'text');
+}
+</code></pre>
+<p>See <a href="token-api.html">Token Maps</a> documentation
+for more<span class="widont">&nbsp;</span>detail.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="utility-functions"><a href="token-register.html">Utility Functions</a></h2>
+<p>We provide a set of built-in
+<a href="token-math.html">math</a>,
+<a href="utils-list.html">list</a>,
+and <a href="utils-string.html">string</a><span class="widont">&nbsp;</span>helpers.</p>
+<p>You can also use the Sass core functions
+(with appropriate module prefixing),
+or <a href="token-register.html">register your own functions</a> –
+giving them any alias you<span class="widont">&nbsp;</span>like.</p>
+<pre><code class="lang-scss">  // Create a map of captured functions
+  $functions: (
+    'my-function': meta.get-function('my-function'),
+    'rgba': meta.get-function('rgba'),
+  );
+  // Or add functions &amp; aliases using the provided mixin:
+  @include token.register('my-function', 'alias');
+</code></pre>
+<p>Once a function has been registered with accoutrement,
+it is available to call by name or alias in all token adjustment<span class="widont">&nbsp;</span>maps:</p>
+<pre><code class="lang-scss">  @include token.register('rgba', 'fade');
+  $colors: (
+    'brand': hsl(120, 50%, 50%),
+    'background': '#brand' ('fade': 50%),
+  );
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
   
 
         </div>

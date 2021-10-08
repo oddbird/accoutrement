@@ -18,7 +18,6 @@ const paths = {
     '!sass/core/**/*.scss',
     '!sass/layout/**/*.scss',
     '!sass/scale/**/*.scss',
-    '!sass/tokens/**/*.scss',
     '!sass/type/**/*.scss',
   ],
   init: function () {

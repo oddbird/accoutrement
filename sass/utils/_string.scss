@@ -6,20 +6,13 @@
 @use '../internal/throw';
 @use '../internal/type';
 
-/// # String functions
-/// Functions for additional Sass-string manipulation.
-/// (These functions are also registered for use
-/// with the token-map syntax)
-/// @group utils-string
-
-
 /// Force
 /// ----
 /// Force most Sass values to their string equivalent.
 /// This does not work for maps.
 ///
 /// @access private
-/// @group utils-string
+/// @group utils
 ///
 /// @param {string | list | number} $value -
 ///   Any Sass value that can be reliably converted to a string
@@ -47,14 +40,17 @@
 /// Replace a substring inside a larger string,
 /// or replace the entirety of the string.
 ///
-/// This function available in accoutrement maps
-/// under the `'replace'` or `'str-replace'` alias.
+/// This function has a `str-` prefix added by default
+/// (eg `str-replace()`)
+/// unless it's imported directly.
+/// However, it's available in all accoutrement maps
+/// as either `'replace'` or `'str-replace'`.
 ///
 /// @since 1.0.0 -
 /// - NEW: Improved handling of non-string values,
 ///   allows you to replace a number within a string, for example
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -134,10 +130,13 @@
 /// Return a string with interpolated values
 /// replacing `%s` placeholders in a format string.
 ///
-/// This function is available in all accoutrement maps
-/// under the `'interpolate'` or `'%s'` aliases.
+/// This function has a `str-` prefix added by default
+/// (eg `str-interpolate()`)
+/// unless it's imported directly.
+/// However, it's available in all accoutrement maps
+/// as either `'interpolate'`, `'str-interpolate'`, or `'%s'`.
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -185,13 +184,16 @@
 /// Splits a string into a list of strings,
 /// using the same logic as JavaScript's `split()` meathod.
 ///
-/// This function is available in all accoutrement maps
-/// under the `'str-split'` or `'split'` aliases.
+/// This function has a `str-` prefix added by default
+/// (eg `str-split()`)
+/// unless it's imported directly.
+/// However, it's available in all accoutrement maps
+/// as either `'str-split'` or `'split'`.
 ///
 /// @since 1.0.0 -
 /// - NEW: Aliased as `str-split`
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   $map: (
 ///     'list': 'hello world' ('split': ' '),
@@ -263,16 +265,17 @@
 // ----
 /// Trims whitespace from the start and end of a string.
 ///
-/// This function isis available in all accoutrement maps
-/// under the `'str-trim'` or `'trim'` aliases.
+/// This function has a `str-` prefix added by default
+/// (eg `str-trim()`)
+/// unless it's imported directly.
+/// However, it's available in all accoutrement maps
+/// as either `'str-trim'` or `'trim'`.
 ///
 /// @since 1.0.0 -
 /// - NEW: Strips whitespace
 /// - NEW: Aliased as `str-trim`
 ///
-/// @access public
-/// @name string.trim
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   $map: (
 ///     // null value is needed for single-argument functions…

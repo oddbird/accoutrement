@@ -7,7 +7,7 @@ $_string: meta.module-functions('string');
 
 $_functions: (
   'replace': 'str-replace',
-  'interpolate': '%s',
+  'interpolate': '%s' 'str-interpolate',
   'split': 'str-split',
   'trim': 'str-trim',
 );
@@ -15,6 +15,6 @@ $_functions: (
 @each $name, $alias in $_functions {
   @include function.internal(
     map.get($_string, $name),
-    $name, $alias
+    $name, $alias...
   );
 }

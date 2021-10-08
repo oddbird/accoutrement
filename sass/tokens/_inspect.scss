@@ -8,7 +8,7 @@
 /// Tools for inspecting accoutrement map token meta-data,
 /// useful for building more complicated logic for
 /// automation and integrations.
-/// @group tokens-inspect
+/// @group token-inspect
 
 
 // Is Private Token
@@ -19,7 +19,7 @@
 /// @since 2.0.0 -
 /// - NEW: Initial release
 ///
-/// @group tokens-inspect
+/// @group token-inspect
 /// @example scss
 ///   /*! #{tools.is-private-token('_private-token')} */
 ///   /*! #{tools.is-private-token('public-token')} */
@@ -56,7 +56,7 @@
 /// @since 2.0.0 -
 /// - NEW: Initial release
 ///
-/// @group tokens-inspect
+/// @group token-inspect
 /// @example scss
 ///   $colors: (
 ///     '_brand': hsl(120, 50%, 50%),
@@ -105,13 +105,14 @@
 /// Find if a token exists in a given map.
 ///
 /// @since 4.0.0 -
-/// - NEW: Initial release
+/// - NEW: Provides a token-syntax-aware alternative to
+///   the Sass internal `map.has-key()` function.
 ///
-/// @group tokens-inspect
+/// @group token-inspect
 /// @example scss
 ///   $colors: (
 ///     'brand': hsl(120, 50%, 50%),
-///     'button: (
+///     'button': (
 ///       'background': '#brand',
 ///     )
 ///   );
