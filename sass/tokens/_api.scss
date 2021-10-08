@@ -256,17 +256,17 @@ $_memo: ();
 ///       'minus': 0.5
 ///     ),
 ///   );
-///   /*! New Value: #{tokens.get($map, 'new-value')} */
+///   /*! New Value: #{tools.get($map, 'new-value')} */
 /// @example scss - Access nested-map tokens
 ///   $map: (
 ///     'outer': (
 ///       'inner': 2,
 ///     ),
 ///   );
-///   /*! Inner: #{tokens.get($map, 'outer->inner')} */
+///   /*! Inner: #{tools.get($map, 'outer->inner')} */
 /// @example scss - Write your own shortcut plugin for specific maps
 ///   @function get($key) {
-///     @return tokens.get($my-map, $key);
+///     @return tools.get($my-map, $key);
 ///   }
 ///
 ///   $my-map: ('main': 32em);
@@ -326,7 +326,7 @@ $_memo: ();
 ///     'times': 2,
 ///     'minus': 0.5
 ///   );
-///   /*! New Value: #{tokens.compile($map, $token)} */
+///   /*! New Value: #{tools.compile($map, $token)} */
 ///
 /// @param {map} $map -
 ///   A map of token definitions to reference against

@@ -61,6 +61,7 @@
   // Is Alias For [function]
   // -----------------------
   @include describe('Is Alias For [function]') {
+    // tracking an alias for a single step
     $test: (
       '_brand': red,
       'private': '#_brand',
@@ -102,9 +103,8 @@
         'private'
       );
     }
-  }
 
-  @include describe('Is Alias cont. [previously `origin()`]') {
+    // tracking an alias to it's origin
     $map: (
       'one': 'hello world',
       'two': '#one' ('str-replace': 'o' '0'),
@@ -149,4 +149,45 @@
     }
   }
 
+  // Has-Token [function]
+  // --------------------
+  @include describe('Has Token [function]') {
+    $map: (
+      a: hello,
+      // there is no b
+      c: (
+        d: (
+          e: hello world,
+          // there is no f
+        ),
+      ),
+    );
+
+    @include it('Returns true if a simple token is found') {
+      @include assert-true(inspect.has-token($map, a));
+      @include assert-true(inspect.has-token($map, 'a'));
+    }
+
+    @include it('Returns true if a nested token-alias is found') {
+      @include assert-true(inspect.has-token($map, 'c->d->e'));
+    }
+
+    @include it('Returns true if a nested token series is found') {
+      @include assert-true(inspect.has-token($map, c, d, e));
+    }
+
+    @include it('Returns false if a simple token is not found') {
+      @include assert-false(inspect.has-token($map, b));
+      @include assert-false(inspect.has-token($map, 'b'));
+    }
+
+    @include it('Returns false if a nested token-alias is not found') {
+      @include assert-false(inspect.has-token($map, 'b->d->f'));
+      @include assert-false(inspect.has-token($map, 'c->d->f'));
+    }
+
+    @include it('Returns false if a nested token series is not found') {
+      @include assert-false(inspect.has-token($map, b, d, f));
+    }
+  }
 }

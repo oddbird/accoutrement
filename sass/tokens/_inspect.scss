@@ -2,12 +2,13 @@
 @use 'sass:list';
 @use 'sass:string';
 @use 'sass:map';
+@use 'parse';
 
 /// # Inspecting Tokens
 /// Tools for inspecting accoutrement map token meta-data,
 /// useful for building more complicated logic for
 /// automation and integrations.
-/// @group core-inspect
+/// @group tokens-inspect
 
 
 // Is Private Token
@@ -18,10 +19,10 @@
 /// @since 2.0.0 -
 /// - NEW: Initial release
 ///
-/// @group core-inspect
+/// @group tokens-inspect
 /// @example scss
-///   /*! #{is-private-token('_private-token')} */
-///   /*! #{is-private-token('public-token')} */
+///   /*! #{tools.is-private-token('_private-token')} */
+///   /*! #{tools.is-private-token('public-token')} */
 ///
 /// @param {*} $key -
 ///   The token key to check for private prefix
@@ -55,7 +56,7 @@
 /// @since 2.0.0 -
 /// - NEW: Initial release
 ///
-/// @group core-inspect
+/// @group tokens-inspect
 /// @example scss
 ///   $colors: (
 ///     '_brand': hsl(120, 50%, 50%),
@@ -63,10 +64,10 @@
 ///     'border': '#text',
 ///     'outline': '#border',
 ///   );
-///   /*! _brand: #{is-alias-for($colors, '_brand')} */
-///   /*! text: #{is-alias-for($colors, 'text')} (_brand is private) */
-///   /*! border: #{is-alias-for($colors, 'border')} */
-///   /*! outline: #{is-alias-for($colors, 'outline', $origin: true)} */
+///   /*! _brand: #{tools.is-alias-for($colors, '_brand')} */
+///   /*! text: #{tools.is-alias-for($colors, 'text')} (_brand is private) */
+///   /*! border: #{tools.is-alias-for($colors, 'border')} */
+///   /*! outline: #{tools.is-alias-for($colors, 'outline', $origin: true)} */
 ///
 /// @param {map} $map -
 ///   A map of terms to reference against
@@ -96,4 +97,44 @@
   }
 
   @return $ref;
+}
+
+
+// Has Token
+// ---------
+/// Find if a token exists in a given map.
+///
+/// @since 4.0.0 -
+/// - NEW: Initial release
+///
+/// @group tokens-inspect
+/// @example scss
+///   $colors: (
+///     'brand': hsl(120, 50%, 50%),
+///     'button: (
+///       'background': '#brand',
+///     )
+///   );
+///   /*! brand: #{tools.has-token($colors, 'brand')} */
+///   /*! text: #{tools.has-token($colors, 'text')} */
+///   /*! button->background: #{tools.has-token($colors, 'button->background')} */
+///   /*! (button, background): #{tools.has-token($colors, 'button', 'background')} */
+///
+/// @param {map} $map -
+///   A map of terms to reference against
+/// @param {*} $token -
+///   The token name or path (using `->`) to lookup
+/// @param {*} $nested... -
+///   Optionally provide a nested token path as an arglist,
+///   rather than using the `->` syntax.
+/// @return {boolean} -
+///   Returns `true` if the requested token exists,
+///   or `false` if there is no token at the given path.
+@function has-token(
+  $map,
+  $token,
+  $nested...
+) {
+  $found: parse.lookup-alias($map, $token, $nested, $handle-missing-keys: null);
+  @return if($found, true, false);
 }

@@ -18,8 +18,7 @@
 ///
 /// ```scss
 /// $functions: (
-///   'times': get-function('times'),
-///   'divide': get-function('divide'),
+///   'inspect': meta.get-function('inspect', $module: 'meta'),
 /// );
 /// ```
 ///

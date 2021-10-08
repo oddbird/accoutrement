@@ -315,8 +315,8 @@ $scale: function.get('color.scale');
 
     @include it('Handles common calc use-case') {
       @include assert-equal(
-        parse.compile-token($map, calc(10px + #alpha->alpha)),
-        calc(10px + 50%)
+        parse.compile-token($map, 'calc(10px + #alpha->alpha)'),
+        'calc(10px + 50%)'
       );
     }
 
