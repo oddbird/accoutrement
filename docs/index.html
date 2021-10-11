@@ -147,41 +147,6 @@
   </ul>
             </li>
             <li class="nav-subsection">
-              <h3 class="nav-title">Init (Normalization)</h3>
-              <ul>
-                
-  
-    <li class="nav-item">
-      <a href="init.html" data-nav="is-not-active">QuickStart: Init</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="init-root.html" data-nav="is-not-active">General</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="init-a11y.html" data-nav="is-not-active">Accessibility</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="init-forms.html" data-nav="is-not-active">Forms</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="init-media.html" data-nav="is-not-active">Media</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="init-type.html" data-nav="is-not-active">Type</a>
-    </li>
-  </ul>
-            </li>
-            <li class="nav-subsection">
               <h3 class="nav-title">Plugin/Animate</h3>
               <ul>
                 
@@ -454,26 +419,23 @@ yarn add accoutrement [--dev]
 </code></pre>
 <p>Import what you<span class="widont">&nbsp;</span>need:</p>
 <pre><code class="lang-scss">// core and all plugins (also available with `/index`)
-@import &quot;&lt;path-to&gt;/accoutrement/sass/tools&quot;;
-
-// init normalization
-@import &quot;&lt;path-to&gt;/accoutrement/sass/init&quot;;
+@import '&lt;path-to&gt;/accoutrement/sass/tools';
 
 // individual plugins (core is required)
-@import &quot;&lt;path-to&gt;/accoutrement/sass/core&quot;;
-@import &quot;&lt;path-to&gt;/accoutrement/sass/plugin/&lt;name&gt;&quot;;
+@import '&lt;path-to&gt;/accoutrement/sass/core';
+@import '&lt;path-to&gt;/accoutrement/sass/plugin/&lt;name&gt;';
 </code></pre>
 <p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
 you can import the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
-<pre><code class="lang-scss">@import &quot;accoutrement&quot;;
+<pre><code class="lang-scss">@import 'accoutrement';
 </code></pre>
 <h2 id="usage">Usage</h2>
 <p>The accoutrement tools are built around
 a shared data-storage syntax
 using Sass “map”<span class="widont">&nbsp;</span>objects:</p>
 <pre><code class="lang-scss">$map: (
-  &quot;root&quot;: 16px,
-  &quot;gutter&quot;: 1em,
+  'root': 16px,
+  'gutter': 1em,
 );
 </code></pre>
 <p>Using a custom syntax,
@@ -482,12 +444,12 @@ and functional adjustments –
 capturing meaningful relationships
 between design<span class="widont">&nbsp;</span>tokens:</p>
 <pre><code class="lang-scss">$map: (
-  &quot;root&quot;: 16px,
+  'root': 16px,
   // internal reference &amp; adjustments
-  &quot;gutter&quot;: &quot;#root&quot;
+  'gutter': '#root'
     (
-      &quot;_major-third&quot;: 1,
-      &quot;convert-units&quot;: &quot;rem&quot;,
+      '_major-third': 1,
+      'convert-units': 'rem',
     ),
 );
 </code></pre>
@@ -514,12 +476,6 @@ with the generic <a href="https://www.oddbird.net/accoutrement/docs/core-get.htm
 <li>Register your own first class <a href="https://www.oddbird.net/accoutrement/docs/core-register.html">functions</a>,
 for reference inside data<span class="widont">&nbsp;</span>maps</li>
 </ul>
-<h2 id="init"><a href="https://www.oddbird.net/accoutrement/docs/init.html">Init</a></h2>
-<p>We provide light-weight browser-normalization,
-as a distinct include.
-This is not part of the <code>accoutrement/sass/tools</code> package
-because it is the only module to produce
-direct CSS<span class="widont">&nbsp;</span>output.</p>
 <h2 id="plugins-">Plugins…</h2>
 <p>While the core module handles generic data-management,
 we also provide plugins for a few common data<span class="widont">&nbsp;</span>types:</p>
