@@ -1,11 +1,9 @@
 # Accoutrement Changelog
 
- <!-- @@@ Todo: Add proper changelog date -->
+## 4.0.0 - UNRELEASED
 
-## 3.0.?? - 10/11/21
-
-- NEW/BREAKING: Accoutrement no longer includes the Init module,
-  which provided light-weight browser normalization. We now recommend
+- NEW/BREAKING: The "init" module, which provided light-weight
+  browser normalization, is no longer included. We now recommend
   using [CSS Remedy](https://github.com/jensimmons/cssremedy).
 
 ## 3.0.1 - 03/01/21
