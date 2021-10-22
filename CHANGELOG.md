@@ -1,5 +1,11 @@
 # Accoutrement Changelog
 
+## 4.0.0 - UNRELEASED
+
+- NEW/BREAKING: The "init" module, which provided light-weight
+  browser normalization, is no longer included. We now recommend
+  using [CSS Remedy](https://github.com/jensimmons/cssremedy).
+
 ## 3.0.1 - 03/01/21
 
 - INTERNAL: Upgrade dev dependencies.
@@ -329,7 +335,6 @@ designing and testing several of these features.
     with proper commas & quotations for CSS output
 
 [core]: https://www.oddbird.net/accoutrement/docs/core.html
-[init]: https://www.oddbird.net/accoutrement/docs/init.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html
 [color]: https://www.oddbird.net/accoutrement/docs/color.html
 [layout]: https://www.oddbird.net/accoutrement/docs/layout.html

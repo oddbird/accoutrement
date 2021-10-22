@@ -47,21 +47,18 @@ Import what you need:
 
 ```scss
 // core and all plugins (also available with `/index`)
-@import "<path-to>/accoutrement/sass/tools";
-
-// init normalization
-@import "<path-to>/accoutrement/sass/init";
+@import '<path-to>/accoutrement/sass/tools';
 
 // individual plugins (core is required)
-@import "<path-to>/accoutrement/sass/core";
-@import "<path-to>/accoutrement/sass/plugin/<name>";
+@import '<path-to>/accoutrement/sass/core';
+@import '<path-to>/accoutrement/sass/plugin/<name>';
 ```
 
 If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 you can import the default "tools" (core + plugins) using only:
 
 ```scss
-@import "accoutrement";
+@import 'accoutrement';
 ```
 
 ## Usage
@@ -72,8 +69,8 @@ using Sass "map" objects:
 
 ```scss
 $map: (
-  "root": 16px,
-  "gutter": 1em,
+  'root': 16px,
+  'gutter': 1em,
 );
 ```
 
@@ -85,12 +82,12 @@ between design tokens:
 
 ```scss
 $map: (
-  "root": 16px,
+  'root': 16px,
   // internal reference & adjustments
-  "gutter": "#root"
+  'gutter': '#root'
     (
-      "_major-third": 1,
-      "convert-units": "rem",
+      '_major-third': 1,
+      'convert-units': 'rem',
     ),
 );
 ```
@@ -128,14 +125,6 @@ setup and syntax parsing:
 [list]: https://www.oddbird.net/accoutrement/docs/core-lists.html
 [string]: https://www.oddbird.net/accoutrement/docs/core-strings.html
 [functions]: https://www.oddbird.net/accoutrement/docs/core-register.html
-
-## [Init](https://www.oddbird.net/accoutrement/docs/init.html)
-
-We provide light-weight browser-normalization,
-as a distinct include.
-This is not part of the `accoutrement/sass/tools` package
-because it is the only module to produce
-direct CSS output.
 
 ## Plugins…
 
