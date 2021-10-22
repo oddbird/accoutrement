@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Configuration | Accoutrement Documentation</title>
+  <title>Sass Lists | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -97,7 +97,7 @@
   
   
     <li class="nav-item">
-      <a href="utils-list.html" data-nav="is-not-active">Sass Lists</a>
+      <a href="utils-list.html" data-nav="is-active">Sass Lists</a>
     </li>
   
   
@@ -122,7 +122,7 @@
   
   
     <li class="nav-item">
-      <a href="token-config.html" data-nav="is-active">Configuration</a>
+      <a href="token-config.html" data-nav="is-not-active">Configuration</a>
     </li>
   
   
@@ -204,11 +204,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Configuration</strong>
+    <strong>Sass Lists</strong>
   </nav>
 
 
-        <div data-page="token-config">
+        <div data-page="utils-list">
           
   
     
@@ -223,7 +223,84 @@
 
 
 
-<section class="item" id="variable--handle-missing-keys">
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="sass-lists">Sass Lists</h1>
+<p>Utility function(s) that extend the Sass core modules,
+to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--remove-nth">
   
     
   
@@ -237,15 +314,13 @@
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type"></span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#variable--handle-missing-keys" class="item-name">$handle-missing-keys</a>
+        <a href="#function--remove-nth" class="item-name">remove-nth()</a>
       
 
-      
-        <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
       
 
       
@@ -257,26 +332,6 @@
 
     
     
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$handle-missing-keys: null !default;</code></pre>
-    </div>
-  
-
-    
   
   
   
@@ -284,50 +339,17 @@
 
   
     <div class="text-block">
-      <p>A configuration option to optionally trigger warnings or errors
-when a token is not<span class="widont">&nbsp;</span>found:</p>
-<ul>
-<li><code>null</code> [default]: Will silently return <code>null</code>
-(mimicking the built-in Sass <code>map.get()</code> function)</li>
-<li><code>warn</code>: Will also throw a<span class="widont">&nbsp;</span>warning</li>
-<li><code>error</code>: Will throw an error, and stop<span class="widont">&nbsp;</span>compilation</li>
-</ul>
+      <p>Remove any item (1-indexed) from a<span class="widont">&nbsp;</span>list.</p>
+<p>This function has a <code>list-</code> prefix added by default
+(eg <code>list-remove-nth()</code>)
+unless it’s imported directly.
+However, it’s available in all accoutrement maps
+as <code>'remove-nth'</code>.</p>
 
       
   
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Removed the <code>silent</code> option,
-to match built-in Sass map access<span class="widont">&nbsp;</span>behavior</li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.2.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Provides authors with more Sass-like behavior,
-and more options for managing or testing when a key lookup<span class="widont">&nbsp;</span>fails</li>
-</ul>
-</div>
-      </section>
-    
-  
 
       
-  
-    
-    <section class="summary-subsection">
-      <h3 class="summary-subtitle">Author:</h3>
-      <ul class="subsection-details">
-        
-          <li><p>James Camilleri</p>
-</li>
-        
-      </ul>
-    </section>
   
 
       
@@ -348,18 +370,337 @@ and more options for managing or testing when a key lookup<span class="widont">&
   
 
   
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
 
-
+    
+      
+        
   
   
 
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$list:</span>
+      
+      
+      <span class="value-type">(list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original list to be<span class="widont">&nbsp;</span>edited</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
 
   
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$index:</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The 1-indexed item to remove from the<span class="widont">&nbsp;</span>list</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
   
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original list, with item<span class="widont">&nbsp;</span>removed</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p><code>$index</code> must be a non-zero<span class="widont">&nbsp;</span>integer</p>
+
+      </div>
+    
+  </div>
+
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p><code>$index</code> is too large for the list<span class="widont">&nbsp;</span>length</p>
+
+      </div>
+    
+  </div>
+
+    
+  
+
+    
+  </div>
+
+  
+
+
   
   
     
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$map: (
+  &#39;main-start&#39;: [&#39;nav-end&#39; &#39;main-start&#39; &#39;footer-start&#39;],
+  &#39;small-start&#39;: &#39;#main-start&#39; (&#39;remove-nth&#39;: 1),
+);
+/*! #{inspect(tools.get($map, &#39;small-start&#39;))} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! [&quot;main-start&quot; &quot;footer-start&quot;] */</code></pre>
+    </div>
+  
+
+    </div>
+
     
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">template()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+      
   
     
   <div data-item-section="used-by">
@@ -390,12 +731,11 @@ and more options for managing or testing when a key lookup<span class="widont">&
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  token-inspect.html#function--has-token" class="item-name">has-token()</a>
+        <span class="item-name">normalize-token()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -437,26 +777,6 @@ and more options for managing or testing when a key lookup<span class="widont">&
         
 
         
-      
-        
-
-        
-      
-        
-
-        
-      
-        
-
-        
-      
-        
-
-        
-      
-        
-
-        
           
           
   
@@ -484,15 +804,12 @@ and more options for managing or testing when a key lookup<span class="widont">&
 
         
       
-        
-
-        
-      
     
   </div>
 
   
 
+    </div>
   
 
   

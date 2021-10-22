@@ -6,13 +6,18 @@
 @use '../internal/throw';
 @use '../internal/type';
 
+/// # Sass Strings
+/// Utility function(s) that extend the Sass core modules,
+/// to help with advanced string manipulation.
+/// @group utils-string
+
 /// Force
 /// ----
 /// Force most Sass values to their string equivalent.
 /// This does not work for maps.
 ///
 /// @access private
-/// @group utils
+/// @group utils-string
 ///
 /// @param {string | list | number} $value -
 ///   Any Sass value that can be reliably converted to a string
@@ -50,7 +55,7 @@
 /// - NEW: Improved handling of non-string values,
 ///   allows you to replace a number within a string, for example
 ///
-/// @group utils
+/// @group utils-string
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -136,7 +141,7 @@
 /// However, it's available in all accoutrement maps
 /// as either `'interpolate'`, `'str-interpolate'`, or `'%s'`.
 ///
-/// @group utils
+/// @group utils-string
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -193,7 +198,7 @@
 /// @since 1.0.0 -
 /// - NEW: Aliased as `str-split`
 ///
-/// @group utils
+/// @group utils-string
 /// @example scss
 ///   $map: (
 ///     'list': 'hello world' ('split': ' '),
@@ -275,7 +280,7 @@
 /// - NEW: Strips whitespace
 /// - NEW: Aliased as `str-trim`
 ///
-/// @group utils
+/// @group utils-string
 /// @example scss
 ///   $map: (
 ///     // null value is needed for single-argument functions…

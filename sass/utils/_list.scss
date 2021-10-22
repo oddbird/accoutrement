@@ -3,6 +3,11 @@
 @use 'sass:meta';
 @use '../internal/throw';
 
+/// # Sass Lists
+/// Utility function(s) that extend the Sass core modules,
+/// to help with advanced list manipulation.
+/// @group utils-list
+
 // Remove Nth
 // ----------
 /// Remove any item (1-indexed) from a list.
@@ -13,7 +18,7 @@
 /// However, it's available in all accoutrement maps
 /// as `'remove-nth'`.
 ///
-/// @group utils
+/// @group utils-list
 /// @example scss
 ///   $map: (
 ///     'main-start': ['nav-end' 'main-start' 'footer-start'],

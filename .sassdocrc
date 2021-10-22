@@ -7,18 +7,19 @@ display:
     - public
 
 groups:
-#   'Core (API)':
-#     core: 'QuickStart: Core'
-#     core-vars: 'Tokens » CSS Variables'
   'Utilities':
-    utils: 'Sass Helper Functions'
+    utils-string: 'Sass Strings'
+    utils-list: 'Sass Lists'
+    utils-map: 'Sass Maps'
+    vars: 'Variables & Custom Properties'
   'Tokens':
     tokens: 'QuickStart: Tokens'
     token-config: 'Configuration'
     token-api: 'Accessing Tokens'
     token-inspect: 'Inspecting Tokens'
     token-register: 'Function Registration'
-    token-internal: 'Provided Functions'
+    token-internal: 'Pre-Registered Functions'
+    token-vars: 'Tokens & Custom Properties'
 #   'Animate':
 #     animate: 'QuickStart: Animate'
 #     animate-times: 'Timing Maps'

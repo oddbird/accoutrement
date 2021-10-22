@@ -3,6 +3,11 @@
 @use '../internal/type';
 @use '../internal/throw';
 
+/// # Sass Maps
+/// Utility function(s) that extend the Sass core modules,
+/// to help with advanced map manipulation.
+/// @group utils-map
+
 // Map MultiMerge
 // --------------
 /// Merge multiple maps into a single map,
@@ -11,15 +16,15 @@
 /// before merging them into a single map.
 ///
 /// This function has a `map-` prefix added by default
-/// (eg `map-merge()`)
+/// (eg `map-multi-merge()`)
 /// unless it's imported directly.
 ///
-/// @group utils
+/// @group utils-map
 /// @param {maps...} $maps -
 ///   Pass any number of maps to be merged.
 /// @return {map} -
 ///   The merged map of easings.
-@function merge(
+@function multi-merge(
   $maps...
 ) {
   $return: ();

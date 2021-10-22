@@ -16,7 +16,7 @@
 
     @include it('Merges multiple maps') {
       @include assert-equal(
-        map.merge($a, $b, $c),
+        map.multi-merge($a, $b, $c),
         (
           'one': 1,
           'two': 'tooooo',
@@ -27,7 +27,7 @@
 
     @include it('Errors on non-map values') {
       @include assert-equal(
-        map.merge($a, 'nope', $c),
+        map.multi-merge($a, 'nope', $c),
         'ERROR [merge] Each value of `$maps...` must be a map, got `[string]: nope`'
       );
     }

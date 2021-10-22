@@ -140,7 +140,7 @@ $WCAG-CONTRAST: (
   $color: map-get($contrast, 'color');
 
   @if ($name != $color) and not is-private-token($name) {
-    $name: _a_var-name($name, $color-var-prefix);
+    $name: dashed-ident($name, $color-var-prefix);
     @return var($name, $color);
   }
 
