@@ -344,11 +344,13 @@ designing and testing several of these features.
 
 ## Older Changelogs, from individual modules:
 
+- [Accoutrement Init][io]
 - [Accoutrement Color][co]
 - [Accoutrement Layout][lo]
 - [Accoutrement Scale][so]
 - [Accoutrement Type][to]
 
+[io]: https://github.com/oddbird/accoutrement-init/blob/master/CHANGELOG.md
 [co]: https://github.com/oddbird/accoutrement-color/blob/master/CHANGELOG.md
 [lo]: https://github.com/oddbird/accoutrement-layout/blob/master/CHANGELOG.md
 [so]: https://github.com/oddbird/accoutrement-scale/blob/master/CHANGELOG.md
