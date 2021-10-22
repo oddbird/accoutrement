@@ -335,7 +335,6 @@ designing and testing several of these features.
     with proper commas & quotations for CSS output
 
 [core]: https://www.oddbird.net/accoutrement/docs/core.html
-[init]: https://www.oddbird.net/accoutrement/docs/init.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html
 [color]: https://www.oddbird.net/accoutrement/docs/color.html
 [layout]: https://www.oddbird.net/accoutrement/docs/layout.html
