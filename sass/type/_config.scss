@@ -1,7 +1,6 @@
 // Font Configuration
 // ==================
 
-
 /// # WebFonts
 ///
 /// Webfont configuration is most useful
@@ -15,14 +14,13 @@
 /// or even documentation and font-specimens
 /// with a tool like [Herman].
 ///
-/// We provide options for maintianing various font-types,
+/// We provide options for maintaining various font-types,
 /// from locally-hosted, to base64 embedded,
 /// and even CDN imports from sites like typekit and google fonts.
 ///
 /// [Herman]: https://www.oddbird.net/herman/
 ///
 /// @group type-fonts
-
 
 // Font Path
 // ---------
@@ -32,11 +30,11 @@
 /// This base-path will be added to the start of
 /// every relative font-path given in your `$fonts` map -
 /// an optional shortcut to keep from writing
-/// long and repetative paths for every font.
+/// long and repetitive paths for every font.
 ///
 /// @since type-4.0.0 -
 /// - BREAKING: The default changed from `'../fonts/'` to `''` --
-///   so that no path is added unless explicity requested.
+///   so that no path is added unless explicitly requested.
 ///
 /// @group type-fonts
 /// @example scss
@@ -45,7 +43,6 @@
 /// @type string
 $font-path: '' !default;
 
-
 // Fonts
 // -----
 /// A map for managing all your fonts on a project.
@@ -53,7 +50,7 @@ $font-path: '' !default;
 /// we can automate `@font-face` imports,
 /// call fonts with a semantic access-key,
 /// define fallback font-stacks,
-/// and genrate font specimens with a tool like [Herman].
+/// and generate font specimens with a tool like [Herman].
 ///
 /// [Herman]: https://www.oddbird.net/herman/
 ///
@@ -80,7 +77,7 @@ $font-path: '' !default;
 ///   use the CSS-friendly `normal` instead
 /// - NEW: Allow explicit configuration maps for each font variant,
 ///   to support variant-specific `local` and `svgid` options,
-///   along with the ability to specificy
+///   along with the ability to specify
 ///   explicit urls for each format desired
 ///   The old string value will be treated the same as
 ///   a map with only `'path'` defined
@@ -195,7 +192,6 @@ $font-path: '' !default;
 ///   or base64 data-URIs for specific formats.
 $fonts: () !default;
 
-
 // Add Font
 // --------
 /// In order to keep our `$fonts` map more manageable,
@@ -228,18 +224,16 @@ $fonts: () !default;
 /// @output An updated global `$fonts` variable,
 ///   with new maps merged in.
 /// @throws Font key already exists. Rename or `$force` to continue
-@mixin add-font(
-  $key,
-  $map,
-  $force: false
-) {
+@mixin add-font($key, $map, $force: false) {
   @if map-get($fonts, $key) and not $force {
     @include _a_error(
       'Font key `#{$key}` already exists. Rename or `$force` to continue',
       'add-font'
     );
   } @else {
-    $new: ($key: $map);
+    $new: (
+      $key: $map,
+    );
     $fonts: map-merge($fonts, $new) !global;
   }
 }
