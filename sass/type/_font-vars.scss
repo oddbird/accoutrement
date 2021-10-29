@@ -1,6 +1,8 @@
+@use 'sass:map';
+@use '../tokens/api';
+
 /// # Fonts » CSS Variables
 /// @group type-font-vars
-
 
 // Font Var Prefix
 // ----------------
@@ -29,7 +31,6 @@
 ///
 /// @type string
 $font-var-prefix: 'font-' !default;
-
 
 // Fonts--
 // --------
@@ -67,14 +68,10 @@ $font-var-prefix: 'font-' !default;
 ///   to use as custom-property values
 /// @output
 ///   Custom properties for all public fonts in the map
-@mixin fonts--(
-  $source: $fonts,
-  $use: 'stack'
-) {
+@mixin fonts--($source: $fonts, $use: 'stack') {
   $source: _a_font-values($source, $use);
   @include tokens--($source, $font-var-prefix);
 }
-
 
 // Font--
 // -------
@@ -127,7 +124,6 @@ $font-var-prefix: 'font-' !default;
   @include token--($source, $font, $value, $fallback, $font-var-prefix);
 }
 
-
 // Var Font
 // ---------
 /// Access the CSS variable associated with a given token,
@@ -166,16 +162,10 @@ $font-var-prefix: 'font-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-font(
-  $font,
-  $fallback: true,
-  $source: $fonts,
-  $use: 'stack'
-) {
+@function var-font($font, $fallback: true, $source: $fonts, $use: 'stack') {
   $source: _a_font-values($source, $use);
-  @return var-token($source, $font, $fallback, $font-var-prefix);
+  @return as-var($source, $font, $fallback, $font-var-prefix);
 }
-
 
 // Font Values
 // -----------
@@ -192,22 +182,29 @@ $font-var-prefix: 'font-' !default;
 /// @return {map} -
 ///   A map of font-keys that contain the requested value,
 ///   and aliases that refer to those fonts.
-@function _a_font-values(
-  $source: $fonts,
-  $value: 'stack'
-) {
+@function _a_font-values($source: $fonts, $value: 'stack') {
   $return: ();
 
   @each $key, $raw in $source {
-    $normal: get-token($source, $key);
+    $normal: api.get($source, $key);
     $normal: _a_normalize-font($normal, $key, $source);
-    $has: map-get($normal, $value);
+    $has: map.get($normal, $value);
 
     @if $has {
       @if is-alias-for($source, $key) {
-        $return: map-merge($return, ($key: $raw));
+        $return: map.merge(
+          $return,
+          (
+            $key: $raw,
+          )
+        );
       } @else {
-        $return: map-merge($return, ($key: $has));
+        $return: map.merge(
+          $return,
+          (
+            $key: $has,
+          )
+        );
       }
     }
   }
