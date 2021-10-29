@@ -1,3 +1,4 @@
+@use 'sass:map';
 // Font Configuration
 // ==================
 
@@ -225,7 +226,7 @@ $fonts: () !default;
 ///   with new maps merged in.
 /// @throws Font key already exists. Rename or `$force` to continue
 @mixin add-font($key, $map, $force: false) {
-  @if map-get($fonts, $key) and not $force {
+  @if map.get($fonts, $key) and not $force {
     @include _a_error(
       'Font key `#{$key}` already exists. Rename or `$force` to continue',
       'add-font'
@@ -234,6 +235,6 @@ $fonts: () !default;
     $new: (
       $key: $map,
     );
-    $fonts: map-merge($fonts, $new) !global;
+    $fonts: map.merge($fonts, $new) !global;
   }
 }
