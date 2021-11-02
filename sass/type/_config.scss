@@ -1,4 +1,6 @@
 @use 'sass:map';
+@use '../internal/throw';
+
 // Font Configuration
 // ==================
 
@@ -227,7 +229,7 @@ $fonts: () !default;
 /// @throws Font key already exists. Rename or `$force` to continue
 @mixin add-font($key, $map, $force: false) {
   @if map.get($fonts, $key) and not $force {
-    @include _a_error(
+    @include throw.error(
       'Font key `#{$key}` already exists. Rename or `$force` to continue',
       'add-font'
     );
