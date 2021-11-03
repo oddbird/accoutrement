@@ -48,8 +48,8 @@ $fonts: (
 
 @use 'type/config';
 @use 'type/a11y';
+@use 'type/pseudo-elements';
 @import 'type/helpers';
 @import 'type/normalize';
 @import 'type/fonts';
 @import 'type/font-vars';
-@import 'type/pseudo-elements';
