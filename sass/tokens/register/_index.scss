@@ -8,7 +8,6 @@
 /// - All the [Accoutrement utilities](#)
 /// - A number of math helpers listed below...
 ///
-/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 14px 16px 24px,
@@ -17,6 +16,7 @@
 ///   );
 ///   /*! small: #{tools.get($sizes, 'small')} */
 ///   /*! medium: #{tools.get($sizes, 'medium')} */
+/// @group token-internal
 
 @use 'math';
 @use 'string';

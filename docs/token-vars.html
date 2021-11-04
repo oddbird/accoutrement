@@ -150,6 +150,26 @@
       <a href="token-vars.html" data-nav="is-active">Tokens &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Ratios</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  </ul>
             </li></ul>
     </div>
 
@@ -669,7 +689,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       <span class="item-type">@function</span>
       
         <a href="
-  token-vars.html#function--as-var" class="item-name">as-var()</a>
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
@@ -1197,7 +1217,7 @@ html {
 
 
 
-<section class="item" id="function--as-var">
+<section class="item" id="function--var-token">
   
     
   
@@ -1215,7 +1235,7 @@ html {
       
 
       
-        <a href="#function--as-var" class="item-name">as-var()</a>
+        <a href="#function--var-token" class="item-name">var-token()</a>
       
 
       
@@ -1241,14 +1261,6 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
 
       
   
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Renamed from <code>var-token()</code> to <code>as-var()</code></li>
-</ul>
-</div>
-      </section>
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
@@ -1496,8 +1508,8 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
   &#39;border&#39;: &#39;#text&#39;,
 );
 .example {
-  border-color: tools.as-var($colors, &#39;border&#39;);
-  color: tools.as-var($colors, &#39;text&#39;, black);
+  border-color: tools.var-token($colors, &#39;border&#39;);
+  color: tools.var-token($colors, &#39;text&#39;, black);
 }</code></pre>
     </div>
   
@@ -1642,6 +1654,37 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
 
     
       
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
       
         
 

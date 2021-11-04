@@ -98,6 +98,8 @@
 ///   A map of keys and values to be converted into custom properties
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix added to each property name
+/// @output -
+///   Custom properties for every key/value pair in a map.
 @mixin custom-props(
   $map,
   $prefix: null,

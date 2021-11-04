@@ -198,47 +198,47 @@
   @include describe('As-Var [function]') {
     @include it('Returns a variable with generated fallback') {
       @include assert-equal(
-        vars.as-var($test, 'text'),
+        vars.var-token($test, 'text'),
         var(--text, token.get($test, 'text'))
       );
     }
 
     @include it('Optionally uses no fallback') {
       @include assert-equal(
-        vars.as-var($test, 'text', false),
+        vars.var-token($test, 'text', false),
         var(--text)
       );
     }
 
     @include it('Optionally uses var fallback') {
       @include assert-equal(
-        vars.as-var($test, 'text', 'border'),
+        vars.var-token($test, 'text', 'border'),
         var(--text, var(--border, token.get($test, 'border')))
       );
     }
 
     @include it('Optionally uses custom fallback') {
       @include assert-equal(
-        vars.as-var($test, 'text', red),
+        vars.var-token($test, 'text', red),
         var(--text, red)
       );
     }
 
     @include it('Optionally adds a prefix') {
       @include assert-equal(
-        vars.as-var($test, 'text', 'border', 'color-'),
+        vars.var-token($test, 'text', 'border', 'color-'),
         var(--color-text, var(--color-border, token.get($test, 'border')))
       );
 
       @include assert-equal(
-        vars.as-var($test, 'text', red, 'color-'),
+        vars.var-token($test, 'text', red, 'color-'),
         var(--color-text, red)
       );
     }
 
     @include it('Accepts private tokens') {
       @include assert-equal(
-        vars.as-var($test, '_brand'),
+        vars.var-token($test, '_brand'),
         var(--_brand, #40bf40)
       );
     }

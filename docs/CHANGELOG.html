@@ -150,6 +150,26 @@
       <a href="token-vars.html" data-nav="is-not-active">Tokens &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Ratios</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  </ul>
             </li></ul>
     </div>
 
@@ -252,12 +272,24 @@ parse &amp; resolve an arbitrary token value,
 without adding it to the map and accessing it by<span class="widont">&nbsp;</span>name</li>
 <li>NEW: All the built-in Sass module functions are registered by default,
 as <code>&lt;module-name&gt;.&lt;function-name&gt;</code></li>
+<li>NEW: <code>has-token()</code> function checks a map
+to see if the given token is<span class="widont">&nbsp;</span>defined.</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/vars.html">Variables</a>:</p>
 <ul>
-<li>@@@</li>
+<li>NEW: <code>ident()</code> function adds <code>--</code> and an optional prefix to any string,
+in order to generate a custom property<span class="widont">&nbsp;</span>identifier.</li>
+<li>NEW: <code>custom-props()</code> mixin generates custom properties
+every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.oddbird.net/accoutrement/docs/ratio.html">Ratios</a>:</p>
+<ul>
+<li>NEW: Built-in named ratios are now available as individual variables,
+(without the <code>_</code> prefix that is applied to built-in<span class="widont">&nbsp;</span>tokens)</li>
 </ul>
 </li>
 </ul>

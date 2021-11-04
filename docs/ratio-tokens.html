@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Variables &amp; Custom Properties | Accoutrement Documentation</title>
+  <title>Ratio Tokens | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -107,7 +107,7 @@
   
   
     <li class="nav-item">
-      <a href="vars.html" data-nav="is-active">Variables &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="vars.html" data-nav="is-not-active">Variables &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -162,7 +162,7 @@
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratio-tokens.html" data-nav="is-active">Ratio Tokens</a>
     </li>
   
   
@@ -224,11 +224,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Variables &amp; Custom Properties</strong>
+    <strong>Ratio Tokens</strong>
   </nav>
 
 
-        <div data-page="vars">
+        <div data-page="ratio-tokens">
           
   
     
@@ -253,17 +253,9 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="tokens-css-variables">Tokens » CSS<span class="widont">&nbsp;</span>Variables</h1>
-<p><em>aka “Custom Properties”</em></p>
-<p>CSS variables are a useful way to manage
-values that might change in relation to the DOM –
-something that Sass variables cannot do.
-In many cases,
-we find it helpful to manage variables in Sass,
-and output CSS properties as-needed.
-These tools help integrate Sass variables
-with CSS custom properties,
-to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
+      <h1 id="ratio-tokens">Ratio Tokens</h1>
+<p>All the tools you need to define and access ratios
+using the token<span class="widont">&nbsp;</span>syntax.</p>
 
       
   
@@ -328,7 +320,287 @@ to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
 
 
 
-<section class="item" id="function--ident">
+<section class="item" id="variable--ratios">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--ratios" class="item-name">$ratios</a>
+      
+
+      
+        <span class="value-type">(map)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$ratios: () !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Define your own ratios,
+or alias built-in named ratios
+(all provided names are prefixed with <code>_</code> in token<span class="widont">&nbsp;</span>maps).</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$ratios: (
+  &#39;line-height&#39;: calc(1 / 3),
+  &#39;hero&#39;: 1.778,
+  &#39;card&#39;: &#39;#_golden&#39;,
+);</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">prose</span>
+      
+        <a href="
+  ratios.html#prose--" class="item-name"></a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ratio-tokens.html#mixin--add-ratios" class="item-name">add-ratios()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--ratio">
   
     
   
@@ -346,7 +618,7 @@ to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
       
 
       
-        <a href="#function--ident" class="item-name">ident()</a>
+        <a href="#function--ratio" class="item-name">ratio()</a>
       
 
       
@@ -367,29 +639,20 @@ to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
 
   
     <div class="text-block">
-      <p>Formats any string
-(like a Sass variable or token name)
-as a CSS “dashed-ident”
-that can be used for CSS custom properties.
-Spaces are replaced with a dash,
-and an optional prefix can be added,
-in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
+      <p>Retrieve a scale ratio by name
+from either the <code>$_DEFAULT-RATIOS</code>
+or user <code>$ratios</code> configurations.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Provided publicly as <code>ident()</code></li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Initial private release as <code>_a_var-name()</code></li>
+<li>NEW: Accepts <code>$do</code> map argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
 </ul>
 </div>
       </section>
@@ -421,7 +684,7 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
@@ -437,17 +700,17 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$name:</span>
+        <span class="item-name">$ratio:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name of the token to be used as a<span class="widont">&nbsp;</span>variable</p>
+        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
 
       </div>
     
@@ -464,17 +727,45 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$prefix:</span>
+        <span class="item-name">$do:</span>
       
       <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Optional prefix added to the token<span class="widont">&nbsp;</span>name</p>
+        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$ratios</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of ratios to use as the origin palette
+(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
 
       </div>
     
@@ -487,6 +778,28 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
   
 
       
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The numeric value of a<span class="widont">&nbsp;</span>ratio</p>
+
+      </div>
+    
+  </div>
+
   
 
       
@@ -543,16 +856,8 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;brand&#39;: mediumvioletred,
-  &#39;action&#39;: teal,
-);
-
-html {
-  @each $name, $value in $colors {
-    #{tools.ident($name, &#39;colors-&#39;)}: #{$value};
-  }
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">/* _octave: #{tools.ratio(&#39;_octave&#39;)} */
+/* _fifth: #{tools.ratio(&#39;_fifth&#39;)} */</code></pre>
     </div>
   
 
@@ -574,10 +879,8 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --colors-brand: mediumvioletred;
-  --colors-action: teal;
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* _octave: 2 */
+/* _fifth: 1.5 */</code></pre>
     </div>
   
 
@@ -595,8 +898,7 @@ html {
   
   
   
-    <div class="requires-wrapper">
-      
+    
     
   <div data-item-section="requires">
     
@@ -631,7 +933,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  utils-string.html#function--replace" class="item-name">replace()</a>
+  token-api.html#function--get" class="item-name">get()</a>
       
       
       
@@ -644,29 +946,15 @@ html {
 
         
       
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
         
-      </h3>
-    
-
-    
-      
-      
+        
         
 
         
           
           
+  
+  
   
   
   
@@ -677,72 +965,10 @@ html {
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      
       
         <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-vars.html#function--var-token" class="item-name">var-token()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  vars.html#mixin--custom-props" class="item-name">custom-props()</a>
+  ratios.html#variable--named-ratios" class="item-name">$named-ratios</a>
       
       
       
@@ -759,8 +985,9 @@ html {
   </div>
 
   
+    
+  
 
-    </div>
   
 
   
@@ -788,7 +1015,7 @@ html {
 
 
 
-<section class="item" id="mixin--custom-props">
+<section class="item" id="mixin--add-ratios">
   
     
   
@@ -806,7 +1033,7 @@ html {
       
 
       
-        <a href="#mixin--custom-props" class="item-name">custom-props()</a>
+        <a href="#mixin--add-ratios" class="item-name">add-ratios()</a>
       
 
       
@@ -827,33 +1054,13 @@ html {
 
   
     <div class="text-block">
-      <p>Converts a map of variable names and values
-into CSS custom properties,
-in the format <code>--&lt;prefix&gt;&lt;map-key&gt;: &lt;map-value&gt;</code>.</p>
-<p>This can be used with manually-generated maps,
-but we can also use the Sass <code>module-variables</code> function
-to generate a map of all the variables in a given<span class="widont">&nbsp;</span>module:</p>
-<pre><code class="lang-scss">  @use 'accoutrement/tools';
-  @use 'sass:meta';
-  @use '_my-colors';
-
-  $my-colors: meta.module-variables('_my-colors');
-  html {
-    @include tools.custom-props($my-colors, 'colors-');
-  }
-</code></pre>
+      <p>Merge individual ratio maps into the global <code>$ratio</code> variable.
+This can be useful for internal organization,
+documentation with <a href="http://sassdoc.com/">SassDoc</a>,
+or integration with our pattern-library generator:
+<a href="https://www.oddbird.net/herman/">Herman</a>.</p>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Initial release</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -897,44 +1104,17 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$maps:</span>
       
       
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of keys and values to be converted into custom<span class="widont">&nbsp;</span>properties</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$prefix:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      <span class="value-type">(map...)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Optional prefix added to each property<span class="widont">&nbsp;</span>name</p>
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
 
       </div>
     
@@ -967,7 +1147,8 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
       
       <div class="param-details text-block">
         <ul>
-<li>Custom properties for every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
+<li>An updated global <code>$ratios</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
 </ul>
 
       </div>
@@ -986,90 +1167,6 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
 
 
   
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;brand&#39;: mediumvioletred,
-  &#39;action&#39;: teal,
-);
-
-html {
-  @include tools.custom-props($colors, &#39;colors-&#39;);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --colors-brand: mediumvioletred;
-  --colors-action: teal;
-}</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
   
 
 
@@ -1112,7 +1209,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
+  utils-map.html#function--multi-merge" class="item-name">multi-merge()</a>
       
       
       
@@ -1122,6 +1219,47 @@ html {
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ratio-tokens.html#variable--ratios" class="item-name">$ratios</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
 
         
       

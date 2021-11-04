@@ -20,6 +20,10 @@ groups:
     token-register: 'Function Registration'
     token-internal: 'Pre-Registered Functions'
     token-vars: 'Tokens & Custom Properties'
+  'Ratios':
+    ratios: Built-In Ratios
+    ratio-tokens: Ratio Tokens
+    ratio-vars: Ratio Tokens » CSS Variables
 #   'Animate':
 #     animate: 'QuickStart: Animate'
 #     animate-times: 'Timing Maps'

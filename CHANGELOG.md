@@ -31,10 +31,18 @@
     without adding it to the map and accessing it by name
   - NEW: All the built-in Sass module functions are registered by default,
     as `<module-name>.<function-name>`
+  - NEW: `has-token()` function checks a map
+    to see if the given token is defined.
 
 - [Variables][vars]:
-  - @@@
+  - NEW: `ident()` function adds `--` and an optional prefix to any string,
+    in order to generate a custom property identifier.
+  - NEW: `custom-props()` mixin generates custom properties
+    every key/value pair in a map.
 
+- [Ratios][ratio]:
+  - NEW: Built-in named ratios are now available as individual variables,
+    (without the `_` prefix that is applied to built-in tokens)
 
 ## 3.0.1 - 03/01/21
 
@@ -367,6 +375,7 @@ designing and testing several of these features.
 [tokens]: https://www.oddbird.net/accoutrement/docs/tokens.html
 [utils]: https://www.oddbird.net/accoutrement/docs/utils.html
 [vars]: https://www.oddbird.net/accoutrement/docs/vars.html
+[ratio]: https://www.oddbird.net/accoutrement/docs/ratio.html
 [core]: https://www.oddbird.net/accoutrement/docs/core.html
 [init]: https://www.oddbird.net/accoutrement/docs/init.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html

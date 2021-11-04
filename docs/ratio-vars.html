@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Sass Strings | Accoutrement Documentation</title>
+  <title>Ratio Tokens » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,7 +92,7 @@
                 
   
     <li class="nav-item">
-      <a href="utils-string.html" data-nav="is-active">Sass Strings</a>
+      <a href="utils-string.html" data-nav="is-not-active">Sass Strings</a>
     </li>
   
   
@@ -167,7 +167,7 @@
   
   
     <li class="nav-item">
-      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="ratio-vars.html" data-nav="is-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li></ul>
@@ -224,11 +224,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Sass Strings</strong>
+    <strong>Ratio Tokens » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="utils-string">
+        <div data-page="ratio-vars">
           
   
     
@@ -253,9 +253,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="sass-strings">Sass Strings</h1>
-<p>Utility function(s) that extend the Sass core modules,
-to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
+      <h1 id="ratio-tokens-css-variables">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -320,7 +318,7 @@ to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
 
 
 
-<section class="item" id="function--replace">
+<section class="item" id="variable--ratio-var-prefix">
   
     
   
@@ -334,13 +332,15 @@ to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type"></span>
       
 
       
-        <a href="#function--replace" class="item-name">replace()</a>
+        <a href="#variable--ratio-var-prefix" class="item-name">$ratio-var-prefix</a>
       
 
+      
+        <span class="value-type">(string)</span>
       
 
       
@@ -352,6 +352,26 @@ to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
 
     
     
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$ratio-var-prefix: &#39;ratio-&#39; !default;</code></pre>
+    </div>
+  
+
+    
   
   
   
@@ -359,22 +379,18 @@ to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
 
   
     <div class="text-block">
-      <p>Replace a substring inside a larger string,
-or replace the entirety of the<span class="widont">&nbsp;</span>string.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-replace()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'replace'</code> or <code>'str-replace'</code>.</p>
+      <p>Set a prefix for all ratio-tokens,
+and we’ll apply it when setting or calling css variables
+based on your ratio maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Improved handling of non-string values,
-allows you to replace a number within a string, for<span class="widont">&nbsp;</span>example</li>
+<li>NEW: Initial release</li>
 </ul>
 </div>
       </section>
@@ -400,164 +416,6 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$string:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original string (or list of strings) to<span class="widont">&nbsp;</span>edit</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$old:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A sub-string to<span class="widont">&nbsp;</span>replace</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$new:</span>
-      
-      <span class="item-value">&#39;&#39;</span>
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A new sub-string to replace the<span class="widont">&nbsp;</span>old</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$all:</span>
-      
-      <span class="item-value">false</span>
-      <span class="value-type">(boolean)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>If true, replace all instances of $old in<span class="widont">&nbsp;</span>$string</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Original string, with substring<span class="widont">&nbsp;</span>replaced</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -604,13 +462,9 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
-// so we can use string-functions to manipulate calc values…
-$map: (
-  &#39;text-size&#39;: calc(1em + 1vw),
-  &#39;large-text&#39;: &#39;#text-size&#39; (&#39;str-replace&#39;: &#39;1vw&#39; &#39;3vw&#39;),
-);
-/*! #{tools.get($map, &#39;large-text&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$ratios: (&#39;my-ratio&#39;: 0.875);
+tools.$ratio-var-prefix: &#39;prefix_&#39;;
+html { @include tools.ratios--; }</code></pre>
     </div>
   
 
@@ -632,7 +486,9 @@ $map: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! calc(1em + 3vw) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --prefix_my-ratio: 0.875;
+}</code></pre>
     </div>
   
 
@@ -650,139 +506,8 @@ $map: (
   
   
   
-    <div class="requires-wrapper">
-      
     
-  <div data-item-section="requires">
     
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">template()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">force()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
-      
   
     
   <div data-item-section="used-by">
@@ -811,40 +536,10 @@ $map: (
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">has-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
         <a href="
-  utils-string.html#function--interpolate" class="item-name">interpolate()</a>
+  ratio-vars.html#mixin--ratios--" class="item-name">ratios--()</a>
       
       
       
@@ -872,10 +567,41 @@ $map: (
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ratio-vars.html#mixin--ratio--" class="item-name">ratio--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       <span class="item-type">@function</span>
       
         <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
+  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
       
       
       
@@ -893,7 +619,6 @@ $map: (
 
   
 
-    </div>
   
 
   
@@ -921,7 +646,7 @@ $map: (
 
 
 
-<section class="item" id="function--interpolate">
+<section class="item" id="mixin--ratios--">
   
     
   
@@ -935,11 +660,11 @@ $map: (
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--interpolate" class="item-name">interpolate()</a>
+        <a href="#mixin--ratios--" class="item-name">ratios--()</a>
       
 
       
@@ -960,15 +685,27 @@ $map: (
 
   
     <div class="text-block">
-      <p>Return a string with interpolated values
-replacing <code>%s</code> placeholders in a format<span class="widont">&nbsp;</span>string.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-interpolate()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'%s'</code>.</p>
+      <p>Convert any ratio-map into CSS variables,
+using the global <code>$ratio-var-prefix</code>.</p>
+<ul>
+<li>Ratio names that start with <code>_</code> or <code>-</code> are considered “private”
+and will not be output as<span class="widont">&nbsp;</span>variables</li>
+<li>Ratios that contain a simple alias with no adjustments
+will be output with a <code>var()</code> value,
+keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
+</ul>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -996,7 +733,7 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -1012,17 +749,18 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
     <h4 class="param-title">
       
       
-        <span class="item-name">$string:</span>
+        <span class="item-name">$source:</span>
       
-      
-      <span class="value-type">(string)</span>
+      <span class="item-value">$ratios</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The original string to be<span class="widont">&nbsp;</span>edited</p>
+        <p>Optionally use a custom
+map of ratios to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -1030,33 +768,9 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
 
 
       
-        
+
+      
   
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$values...:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>New strings, to replace the <code>%s</code> format strings</p>
-
-      </div>
-    
-  </div>
-
-
-      
 
       
   
@@ -1068,17 +782,17 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
     <h4 class="param-title">
       
       
-        <span class="item-name">@return</span>
+        <span class="item-name">{CSS output}</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Original string, with <code>%s</code> format strings<span class="widont">&nbsp;</span>replaced</p>
+        <p>Custom properties for all public ratios in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
@@ -1087,33 +801,6 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
   
 
       
-  
-
-      
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Too many interpolation values given for the<span class="widont">&nbsp;</span>string</p>
-
-      </div>
-    
-  </div>
-
-    
   
 
     
@@ -1164,13 +851,13 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
-// so we can use string-functions to manipulate calc values…
-$map: (
-  &#39;root&#39;: 16px,
-  &#39;responsive&#39;: &#39;calc(%s + %s)&#39; (&#39;%s&#39;: &#39;#root&#39; 0.5vw),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$ratios: (
+  &#39;my-golden&#39;: 1.61803399,
+  &#39;line-height&#39;: &#39;#_major-third&#39;,
 );
-/*! #{tools.get($map, &#39;responsive&#39;)} */</code></pre>
+html {
+  @include tools.ratios--;
+}</code></pre>
     </div>
   
 
@@ -1192,7 +879,10 @@ $map: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! calc(16px + 0.5vw) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --ratio-my-golden: 1.61803399;
+  --ratio-line-height: 1.25;
+}</code></pre>
     </div>
   
 
@@ -1242,78 +932,10 @@ $map: (
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
       
-        <span class="item-name">check()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
       
         <a href="
-  utils-string.html#function--replace" class="item-name">replace()</a>
+  ratios.html#variable--named-ratios" class="item-name">$named-ratios</a>
       
       
       
@@ -1329,6 +951,35 @@ $map: (
         
         
         
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ratio-vars.html#variable--ratio-var-prefix" class="item-name">$ratio-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
 
         
       
@@ -1366,7 +1017,7 @@ $map: (
 
 
 
-<section class="item" id="function--split">
+<section class="item" id="mixin--ratio--">
   
     
   
@@ -1380,11 +1031,11 @@ $map: (
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--split" class="item-name">split()</a>
+        <a href="#mixin--ratio--" class="item-name">ratio--()</a>
       
 
       
@@ -1405,21 +1056,447 @@ $map: (
 
   
     <div class="text-block">
-      <p>Splits a string into a list of strings,
-using the same logic as JavaScript’s <code>split()</code> meathod.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-split()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'str-split'</code> or <code>'split'</code>.</p>
+      <p>Set a single custom property based on a ratio token,
+with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Aliased as <code>str-split</code></li>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$ratio:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Ratio name available in the <code>$source</code> map,
+or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$value:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional value for the variable,
+if different from the given <code>$ratio</code></p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$ratios</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional map of ratios to use as a palette<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$ratios: (
+  &#39;my-golden&#39;: 1.61803399,
+  &#39;line-height&#39;: &#39;#_major-third&#39;,
+);
+.example {
+  @include tools.ratio--(&#39;my-golden&#39;);
+  @include tools.ratio--(&#39;gutter&#39;, &#39;line-height&#39;, 1.4em);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --ratio-my-golden: 1.61803399;
+  --ratio-gutter: var(--ratio-line-height, 1.4em);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ratios.html#variable--named-ratios" class="item-name">$named-ratios</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ratio-vars.html#variable--ratio-var-prefix" class="item-name">$ratio-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-ratio">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--var-ratio" class="item-name">var-ratio()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access the CSS variable associated with a given token,
+along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
 </ul>
 </div>
       </section>
@@ -1467,39 +1544,9 @@ as either <code>'str-split'</code> or <code>'split'</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$string:</span>
+        <span class="item-name">$ratio:</span>
       
       
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original string to be<span class="widont">&nbsp;</span>split</p>
-<ul>
-<li>Empty strings will be returned as a list of one empty<span class="widont">&nbsp;</span>string</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$separator:</span>
-      
-      <span class="item-value">null</span>
       <span class="value-type">(*)</span>
       
     </h4>
@@ -1507,14 +1554,39 @@ as either <code>'str-split'</code> or <code>'split'</code>.</p>
     
       
       <div class="param-details text-block">
-        <p>The string will be split on any instance of the separator,
-and the separators will be<span class="widont">&nbsp;</span>removed</p>
+        <p>Ratio name available in the <code>$source</code> map</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
 <ul>
-<li>Null or unfound separators will return a single-item list
-with the original<span class="widont">&nbsp;</span>string</li>
-<li>Empty-string (<code>''</code>) separators will return a list of
-all characters in the original<span class="widont">&nbsp;</span>string</li>
-<li>Non-string separators will be converted to strings before<span class="widont">&nbsp;</span>splitting</li>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
 </ul>
 
       </div>
@@ -1532,17 +1604,17 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$limit:</span>
+        <span class="item-name">$source:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(integer |<span class="widont">&nbsp;</span>null)</span>
+      
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Maximum length of the returned<span class="widont">&nbsp;</span>list</p>
+        <p>Optional Accoutrement map of ratios to use as<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1564,14 +1636,15 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(list)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Space-delimited list of string-slices from the original<span class="widont">&nbsp;</span>string</p>
+        <p>CSS variable call, in the format:
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
 
       </div>
     
@@ -1633,10 +1706,14 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;list&#39;: &#39;hello world&#39; (&#39;split&#39;: &#39; &#39;),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$ratios: (
+  &#39;my-golden&#39;: 1.61803399,
+  &#39;line-height&#39;: &#39;#_major-third&#39;,
 );
-/*! #{tools.get($map, &#39;list&#39;)} */</code></pre>
+.example {
+  line-height: tools.var-ratio(&#39;line-height&#39;);
+  padding-bottom: calc(1 / #{tools.var-ratio(&#39;my-golden&#39;, 1.6)} * 100%);
+}</code></pre>
     </div>
   
 
@@ -1658,418 +1735,10 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! hello world */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    <div class="requires-wrapper">
-      
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">force()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">has-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">lookup-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--trim">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--trim" class="item-name">trim()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Trims whitespace from the start and end of a<span class="widont">&nbsp;</span>string.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-trim()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'str-trim'</code> or <code>'trim'</code>.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Strips whitespace</li>
-<li>NEW: Aliased as <code>str-trim</code></li>
-</ul>
-</div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$string:</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original string to be<span class="widont">&nbsp;</span>trimmed</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Trimmed string</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  // null value is needed for single-argument functions…
-  &#39;trim&#39;: &#39;  hello world     &#39; (&#39;trim&#39;: null),
-);
-/*! #{tools.get($map, &#39;trim&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! hello world */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  line-height: var(--ratio-line-height, 1.25);
+  padding-bottom: calc(1 / var(--ratio-my-golden, 1.6) * 100%);
+}</code></pre>
     </div>
   
 
@@ -2121,11 +1790,12 @@ as either <code>'str-trim'</code> or <code>'trim'</code>.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">check()</span>
+        <a href="
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -2153,13 +1823,49 @@ as either <code>'str-trim'</code> or <code>'trim'</code>.</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
       
       
+        <a href="
+  ratios.html#variable--named-ratios" class="item-name">$named-ratios</a>
       
-      <span class="item-note">[private]</span>
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ratio-vars.html#variable--ratio-var-prefix" class="item-name">$ratio-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
     </h4>
 
     
