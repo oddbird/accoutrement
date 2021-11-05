@@ -1,4 +1,9 @@
+@use 'config';
+@use 'tokens';
+@use '../internal/function';
 @use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
 
 /// # Contrast & Accessibility
 /// @group color-contrast
@@ -29,25 +34,25 @@ $WCAG-CONTRAST: (
 ///
 /// @group color-contrast
 /// @example scss - max contrast
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     color: contrast(
+///     color: tools.contrast(
 ///       'background',
 ///       'light', 'dark', black, white
 ///     );
 ///   }
 /// @example scss - min contrast
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     color: contrast(
+///     color: tools.contrast(
 ///       'background',
 ///       'light', 'dark', black, white,
 ///       'AAA'
@@ -74,9 +79,9 @@ $WCAG-CONTRAST: (
   $color,
   $options...
 ) {
-  @return _a_best-contrast($color, $options, 'color');
+  @return best-contrast($color, $options, 'color');
 }
-@include register-internal('contrast');
+@include function.internal(meta.get-function('contrast'), 'contrast');
 
 
 // Var-Contrast
@@ -135,9 +140,9 @@ $WCAG-CONTRAST: (
   $color,
   $options...
   ) {
-  $contrast: _a_best-contrast($color, $options);
-  $name: map-get($contrast, 'name');
-  $color: map-get($contrast, 'color');
+  $contrast: best-contrast($color, $options);
+  $name: map.get($contrast, 'name');
+  $color: map.get($contrast, 'color');
 
   @if ($name != $color) and not is-private-token($name) {
     $name: dashed-ident($name, $color-var-prefix);
@@ -391,7 +396,7 @@ $WCAG-CONTRAST: (
 /// @return {color-name | map} -
 ///   Light or dark color-name string,
 ///   or map with `light` and `dark` keys.
-@function _a_default-contrast(
+@function default-contrast(
   $return: 'both'
 ) {
   $both: (
@@ -441,7 +446,7 @@ $WCAG-CONTRAST: (
 ///   or all three together in a map.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
-@function _a_best-contrast(
+@function best-contrast(
   $color,
   $options: null,
   $return: 'map'
@@ -459,9 +464,9 @@ $WCAG-CONTRAST: (
 
   // Establish default options if they are missing
   @if (length($opt-colors) == 0) or (not $opt-colors) {
-    $opt-colors: _a_default-contrast('values');
+    $opt-colors: default-contrast('values');
   } @else if (length($opt-colors) == 1 ){
-    $use: _a_best-contrast(nth($opt-colors, 1), $return: 'name');
+    $use: best-contrast(nth($opt-colors, 1), $return: 'name');
     $opt-colors: append($opt-colors, $use);
   }
 

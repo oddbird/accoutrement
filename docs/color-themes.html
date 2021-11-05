@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>CSS Custom Properties | Accoutrement Documentation</title>
+  <title>Themes | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -97,7 +97,7 @@
   
   
     <li class="nav-item">
-      <a href="vars.html" data-nav="is-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="vars.html" data-nav="is-not-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -182,7 +182,7 @@
   
   
     <li class="nav-item">
-      <a href="color-themes.html" data-nav="is-not-active">Themes</a>
+      <a href="color-themes.html" data-nav="is-active">Themes</a>
     </li>
   
   
@@ -249,11 +249,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>CSS Custom Properties</strong>
+    <strong>Themes</strong>
   </nav>
 
 
-        <div data-page="vars">
+        <div data-page="color-themes">
           
   
     
@@ -278,16 +278,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="css-custom-properties">CSS Custom Properties</h1>
-<p>CSS variables are a useful way to manage
-values that might change in relation to the DOM –
-something that Sass variables cannot do.
-In many cases,
-we find it helpful to manage variables in Sass,
-and output CSS properties as-needed.
-These tools help integrate Sass variables
-with CSS custom properties,
-to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
+      <h1 id="color-themes">Color Themes</h1>
 
       
   
@@ -352,7 +343,7 @@ to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
 
 
 
-<section class="item" id="function--ident">
+<section class="item" id="function--shades-of">
   
     
   
@@ -370,7 +361,7 @@ to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
       
 
       
-        <a href="#function--ident" class="item-name">ident()</a>
+        <a href="#function--shades-of" class="item-name">shades-of()</a>
       
 
       
@@ -391,29 +382,19 @@ to keep that relationship<span class="widont">&nbsp;</span>intact.</p>
 
   
     <div class="text-block">
-      <p>Formats any string
-(like a Sass variable or token name)
-as a CSS “dashed-ident”
-that can be used for CSS custom properties.
-Spaces are replaced with a dash,
-and an optional prefix can be added,
-in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
+      <p>Generates an accoutrement map of light/dark color variations
+from a map of user-defined colors,
+based on luminosity.
+The origin color will be included in the appropriate spot,
+based on it’s own<span class="widont">&nbsp;</span>luminosity.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Provided publicly as <code>ident()</code></li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Initial private release as <code>_a_var-name()</code></li>
+<li>NEW: Generate consistent tint/shade themes from arbitrary<span class="widont">&nbsp;</span>colors</li>
 </ul>
 </div>
       </section>
@@ -461,17 +442,17 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$name:</span>
+        <span class="item-name">$origin:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name of the token to be used as a<span class="widont">&nbsp;</span>variable</p>
+        <p>user-color map to use as a basis for generating the<span class="widont">&nbsp;</span>theme</p>
 
       </div>
     
@@ -488,17 +469,18 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$prefix:</span>
+        <span class="item-name">$range:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      <span class="item-value">3</span>
+      <span class="value-type">(integer)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Optional prefix added to the token<span class="widont">&nbsp;</span>name</p>
+        <p>number of dark and light variations desired,
+in addition to the<span class="widont">&nbsp;</span>midpoint</p>
 
       </div>
     
@@ -567,15 +549,354 @@ in the format <code>--&lt;prefix&gt;&lt;string&gt;</code>.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;brand&#39;: mediumvioletred,
-  &#39;action&#39;: teal,
+      <pre class="hljs-pre"><code class="lang-scss">$user-colors: (
+  &#39;primary&#39;: blue,
+  &#39;accent&#39;: red,
 );
+@include add-colors($user-colors);
 
-html {
-  @each $name, $value in $colors {
-    #{tools.ident($name, &#39;colors-&#39;)}: #{$value};
-  }
+$theme-colors: shades-of($user-colors, 2);
+@include add-colors($theme-colors);
+
+@each $name, $value in $theme-colors {
+/* #{$name}: #{inspect($value)} */
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-api.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--luminance" class="item-name">luminance()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--stripe-colors">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--stripe-colors" class="item-name">stripe-colors()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Create color-stops for a striped gradient background,
+from any number of<span class="widont">&nbsp;</span>colors</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$colors...:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>ArgList of colors</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">[data-theme=&#39;rainbow&#39;] {
+  background: linear-gradient(
+    to right,
+    stripe-colors(red, orange, yellow, green, blue, indigo, violet)
+  );
 }</code></pre>
     </div>
   
@@ -598,9 +919,8 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --colors-brand: mediumvioletred;
-  --colors-action: teal;
+      <pre class="hljs-pre"><code class="lang-css">[data-theme=rainbow] {
+  background: linear-gradient(to right, stripe-colors(red, orange, yellow, green, blue, indigo, violet));
 }</code></pre>
     </div>
   
@@ -655,7 +975,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  utils.html#function--replace" class="item-name">replace()</a>
+  color-api.html#function--color" class="item-name">color()</a>
       
       
       
@@ -665,6 +985,53 @@ html {
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-api.html#variable--colors" class="item-name">$colors</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
 
         
       
@@ -704,69 +1071,7 @@ html {
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-vars.html#function--var-token" class="item-name">var-token()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  vars.html#mixin--custom-props" class="item-name">custom-props()</a>
+  color-themes.html#mixin--stripe-colors" class="item-name">stripe-colors()</a>
       
       
       
@@ -812,7 +1117,7 @@ html {
 
 
 
-<section class="item" id="mixin--custom-props">
+<section class="item" id="mixin--stripe-colors">
   
     
   
@@ -830,7 +1135,7 @@ html {
       
 
       
-        <a href="#mixin--custom-props" class="item-name">custom-props()</a>
+        <a href="#mixin--stripe-colors" class="item-name">stripe-colors()</a>
       
 
       
@@ -851,29 +1156,15 @@ html {
 
   
     <div class="text-block">
-      <p>Converts a map of variable names and values
-into CSS custom properties,
-in the format <code>--&lt;prefix&gt;&lt;map-key&gt;: &lt;map-value&gt;</code>.</p>
-<p>This can be used with manually-generated maps,
-but we can also use the Sass <code>module-variables</code> function
-to generate a map of all the variables in a given<span class="widont">&nbsp;</span>module:</p>
-<pre><code class="lang-scss">  @use 'accoutrement/tools';
-  @use 'sass:meta';
-  @use '_my-colors';
-
-  $my-colors: meta.module-variables('_my-colors');
-  html {
-    @include tools.custom-props($my-colors, 'colors-');
-  }
-</code></pre>
+      <p>Create a striped gradient background from any number of<span class="widont">&nbsp;</span>colors</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Initial release</li>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
 </ul>
 </div>
       </section>
@@ -905,7 +1196,7 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        <span class="item-subtitle-main">Parameters</span>
         
       </h3>
     
@@ -921,17 +1212,17 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$angle...:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(gradient<span class="widont">&nbsp;</span>angle)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A map of keys and values to be converted into custom<span class="widont">&nbsp;</span>properties</p>
+        <p>e.g. <code>to right</code> or <code>35deg</code></p>
 
       </div>
     
@@ -948,17 +1239,17 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
     <h4 class="param-title">
       
       
-        <span class="item-name">$prefix:</span>
+        <span class="item-name">$colors...:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Optional prefix added to each property<span class="widont">&nbsp;</span>name</p>
+        <p>ArgList of colors</p>
 
       </div>
     
@@ -974,30 +1265,6 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
   
 
       
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <ul>
-<li>Custom properties for every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
-</ul>
-
-      </div>
-    
-  </div>
-
   
 
       
@@ -1051,38 +1318,11 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;brand&#39;: mediumvioletred,
-  &#39;action&#39;: teal,
-);
-
-html {
-  @include tools.custom-props($colors, &#39;colors-&#39;);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --colors-brand: mediumvioletred;
-  --colors-action: teal;
+      <pre class="hljs-pre"><code class="lang-scss">[data-theme=&#39;rainbow&#39;] {
+  @include stripe-colors(
+    to right,
+    red, orange, yellow, green, blue, indigo, violet
+  );
 }</code></pre>
     </div>
   
@@ -1136,10 +1376,45 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
+  color-themes.html#function--stripe-colors" class="item-name">stripe-colors()</a>
       
       
       
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-api.html#variable--colors" class="item-name">$colors</a>
+      
+      
+      <span class="value-type">(map)</span>
       
     </h4>
 

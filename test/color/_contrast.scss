@@ -82,7 +82,7 @@
 @include describe('Default Contrast [function]') {
   @include it('Returns the user default values when defined') {
     @include assert-equal(
-      _a_default-contrast(),
+      default-contrast(),
       (
         'light': 'contrast-light',
         'dark': 'contrast-dark',
@@ -92,28 +92,28 @@
 
   @include it('Returns the user light value') {
     @include assert-equal(
-      _a_default-contrast('light'),
+      default-contrast('light'),
       'contrast-light'
     );
   }
 
   @include it('Returns the user dark value') {
     @include assert-equal(
-      _a_default-contrast('dark'),
+      default-contrast('dark'),
       'contrast-dark'
     );
   }
 
   @include it('Returns the user dark value') {
     @include assert-equal(
-      _a_default-contrast('dark'),
+      default-contrast('dark'),
       'contrast-dark'
     );
   }
 
   @include it('Returns a list of values') {
     @include assert-equal(
-      _a_default-contrast('values'),
+      default-contrast('values'),
       ('contrast-light', 'contrast-dark')
     );
   }
@@ -123,7 +123,7 @@
 
   @include it('Returns the factory keys by default') {
     @include assert-equal(
-      _a_default-contrast(),
+      default-contrast(),
       (
         'light': '_contrast-light',
         'dark': '_contrast-dark',
@@ -140,7 +140,7 @@
 @include describe('Best Contrast [function]') {
   @include it('Dark on light') {
     @include assert-equal(
-      _a_best-contrast(#eee),
+      best-contrast(#eee),
       (
         'name': 'contrast-dark',
         'color': color('contrast-dark'),
@@ -152,7 +152,7 @@
 
   @include it('Light on dark') {
     @include assert-equal(
-      _a_best-contrast('dark'),
+      best-contrast('dark'),
       (
         'name': 'contrast-light',
         'color': color('contrast-light'),
@@ -167,7 +167,7 @@
 
   @include it('Default light fallback') {
     @include assert-equal(
-      _a_best-contrast(#000, $return: 'color'),
+      best-contrast(#000, $return: 'color'),
       #fff,
       'Returns white for light contrast when none is given.'
     );
@@ -175,7 +175,7 @@
 
   @include it('Default dark fallback') {
     @include assert-equal(
-      _a_best-contrast(#fff, $return: 'color'),
+      best-contrast(#fff, $return: 'color'),
       #000,
       'Returns black for dark contrast when none is given.'
     );
@@ -185,7 +185,7 @@
 
   @include it('Multiple contrast options') {
     @include assert-equal(
-      _a_best-contrast(
+      best-contrast(
         $color: 'primary',
         $options: (#ff0, #fcc, #0f0, 'light', #003),
         $return: 'name'
@@ -197,7 +197,7 @@
 
   @include it('Return name of a token') {
     @include assert-equal(
-      _a_best-contrast('primary', $return: 'name'),
+      best-contrast('primary', $return: 'name'),
       'contrast-dark',
       'Returns the name of a selected token.'
     );
@@ -205,7 +205,7 @@
 
   @include it('Picks a smart default when only one option is given') {
     @include assert-equal(
-      _a_best-contrast(#eee, #ff0, $return: 'name'),
+      best-contrast(#eee, #ff0, $return: 'name'),
       'contrast-dark'
     );
   }
@@ -216,7 +216,7 @@
 
   @include it('Can selects the minimum-best for a given ratio') {
     @include assert-equal(
-      _a_best-contrast(
+      best-contrast(
         black,
         append(map-keys($colors), 'aa-large'),
         'ratio'
@@ -226,7 +226,7 @@
     );
 
     @include assert-equal(
-      _a_best-contrast(
+      best-contrast(
         black,
         append(map-keys($colors), 'aa'),
         'name'
@@ -236,7 +236,7 @@
     );
 
     @include assert-equal(
-      _a_best-contrast(
+      best-contrast(
         black,
         append(map-keys($colors), 'aaa'),
         'ratio'

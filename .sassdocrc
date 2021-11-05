@@ -30,13 +30,13 @@ groups:
 #     animate-ease-vars: 'Easing » CSS Variables'
 #     animate-change: 'Combined "Change" Maps'
 #     animate-change-vars: 'Changes » CSS Variables'
-#   'Color':
-#     color: 'QuickStart: Color'
-#     color-api: 'Color Maps'
-#     color-vars: 'Colors » CSS Variables'
-#     color-contrast: 'Contrast & Accessibility'
-#     color-utils: 'Adjustments'
-#     color-themes: 'Themes'
+  'Color':
+    color: 'QuickStart: Color'
+    color-contrast: 'Contrast & Accessibility'
+    color-utils: 'Adjustments'
+    color-themes: 'Themes'
+    color-api: 'Color Tokens'
+    color-vars: 'Color Tokens » CSS Variables'
 #   'Layout':
 #     layout: 'QuickStart: Layout'
 #     layout-queries: 'Media Breakpoint Maps'

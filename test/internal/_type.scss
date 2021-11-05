@@ -50,6 +50,13 @@
       );
     }
 
+    @include it('Allows empty lists as maps') {
+      @include assert-equal(
+        type.check((), 'map'),
+        type.check((), 'list')
+      );
+    }
+
     @include it('Can error on improper type') {
       @include assert-equal(
         type.check('hello world', 'list', true),

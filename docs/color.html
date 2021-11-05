@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>MIT License | Accoutrement Documentation</title>
+  <title>QuickStart: Color | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -76,7 +76,7 @@
           
             
             <li class="nav-item">
-              <a href="LICENSE.html" data-nav="is-active">MIT License</a>
+              <a href="LICENSE.html" data-nav="is-not-active">MIT License</a>
             </li>
           
         </ul>
@@ -167,7 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="color.html" data-nav="is-not-active">QuickStart: Color</a>
+      <a href="color.html" data-nav="is-active">QuickStart: Color</a>
     </li>
   
   
@@ -249,31 +249,636 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>MIT License</strong>
+    <strong>QuickStart: Color</strong>
   </nav>
 
 
-        <div data-page="LICENSE">
+        <div data-page="color">
           
-  <div class="text-block">
-    <p>MIT License</p>
-<p>Copyright © 2018–2020<span class="widont">&nbsp;</span>OddBird</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following<span class="widont">&nbsp;</span>conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the<span class="widont">&nbsp;</span>Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<span class="widont">&nbsp;</span>SOFTWARE.</p>
+  
+    
+    
 
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="quickstart-color">QuickStart: Color</h1>
+<p>Tools for managing colors and<span class="widont">&nbsp;</span>palettes.</p>
+<ul>
+<li>Organize all your colors into a single map, or set of<span class="widont">&nbsp;</span>maps</li>
+<li>Document color relationships directly in the<span class="widont">&nbsp;</span>code</li>
+<li>Automate <a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef">WCAG-appropriate</a> contrast<span class="widont">&nbsp;</span>checking</li>
+<li>Generate color-palette documentation with <a href="https://www.oddbird.net/herman/">Herman</a></li>
+</ul>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+You can also import the color module on its<span class="widont">&nbsp;</span>own:</p>
+<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/color';
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="color-tokens">Color Tokens</h2>
+<p>If you are using the token syntax,
+establish your color palette,
+with the standard <a href="tokens.html">Token syntax</a>:</p>
+<pre><code class="lang-scss">tools.$colors: (
+  // set explicit colors
+  'brand-pink': hsl(330, 85%, 62%),
+  'brand-light': #ddf,
+  'brand-dark': #224,
+
+  // reference existing colors
+  'background': '#brand-light',
+  'border': '#brand-dark',
+
+  // make adjustments as needed, using color functions
+  'link': '#brand-pink' ('shade': 25%),
+);
+</code></pre>
+<p>Then access your colors from<span class="widont">&nbsp;</span>anywhere:</p>
+<pre><code class="lang-scss">.example {
+  border-color: tools.color('border');
+}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-api.html#variable--colors" class="item-name">$colors</a>
+      
+      
+      
+      
+    </h4>
+
+    
   </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-api.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="multiple-palettes">Multiple Palettes</h2>
+<p>You can also define your colors in smaller maps,
+and then add them to the global <code>$colors</code> variable
+using the <code>add-colors()</code> mixin.
+Map-references using the <code>#tag</code> format
+will work across maps,
+<em>once they are both added to the global<span class="widont">&nbsp;</span>setting</em>.</p>
+<pre><code class="lang-scss"> $brand: (
+   'brand-pink': hsl(330, 85%, 62%),
+   'brand-light': #ddf,
+   'brand-dark': #224,
+ );
+
+ $patterns: (
+   'background': '#brand-light',
+   'border': '#brand-dark',
+   'link': '#brand-pink' ('shade': 25%),
+ );
+
+ // merge everything into the main $colors map…
+ @include add-colors($brand, $patterns);
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-api.html#mixin--add-colors" class="item-name">add-colors()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="wcag-contrast">WCAG Contrast</h2>
+<p>We’ll also help you calculate WCAG-appropriate color contrasts.
+You can set the <code>$contrast-light</code> &amp; <code>$contrast-dark</code> configuration variables
+(<code>white</code> and <code>black</code> by default)
+or add <code>'contrast-light'</code> and <code>'contrast-dark'</code>
+tokens in your palette (with or without a private <code>_</code> prefix).</p>
+<pre><code class="lang-scss">a:hover {
+  // set a background, and get well-contrasted text
+  @include tools.contrasted('link');
+
+  // or return a contrasting color from a set of options
+  // using either colors or color tokens…
+  border-color: tools.contrast('background', white, rebeccapurple);
+  border-color: tools.contrast(maroon, white, rebeccapurple);
+}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--contrast" class="item-name">contrast()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-contrast.html#mixin--contrasted" class="item-name">contrasted()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
 
         </div>
       </main>

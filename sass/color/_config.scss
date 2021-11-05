@@ -58,63 +58,16 @@
 /// @type map
 $colors: () !default;
 
-
-// Default Colors
+// Contrast Light
 // --------------
-/// These colors are available by default
-/// for color-contrast and tint/shade functions.
-/// Override these defaults in the `$colors` map,
-/// using the same `contrast-*` names.
-///
-/// **Do not edit this variable directly**.
-///
-/// @since 2.0.0 -
-/// - NEW: Default contrast colors are publicly documented,
-///   and available via `color()` functions
-///
-/// @group color-api
-/// @type map
-$_a_COLORS: (
-  '_contrast-light': white,
-  '_contrast-dark': black,
-);
+/// Establish a default light color
+/// for use in contrast functions.
+/// @type color
+$contrast-light: white !default;
 
-
-// Add Colors
-// ----------
-/// Merge individual color maps into the global `$colors` variable,
-/// in case you want to define colors in smaller groups
-/// such as `brand-colors`, `link-colors`, etc
-/// before merging them into a single global color-palette.
-/// This can be useful for internal organization,
-/// documentation with [SassDoc][SassDoc],
-/// or integration with our pattern-library generator:
-/// [Herman][Herman].
-///
-/// [SassDoc]: http://sassdoc.com/
-/// [Herman]: https://www.oddbird.net/herman/
-///
-/// @group color-api
-/// @example scss
-///   $brand-colors: (
-///     'brand-dark': #222,
-///     'brand-pink': hsl(330, 85%, 62%),
-///   );
-///
-///   $text-colors: (
-///     'text': '#brand-dark',
-///     'link': '#brand-pink',
-///   );
-///
-///   @include add-colors($brand-colors, $text-colors);
-///
-/// @param {map...} $maps -
-///   Pass any number of maps to be merged.
-/// @output -
-///   An updated global `$colors` variable,
-///   with new maps merged in.
-@mixin add-colors (
-  $maps...
-) {
-  $colors: _a_map-multimerge($colors, $maps...) !global;
-}
+// Contrast Dark
+// --------------
+/// Establish a default dark color
+/// for use in contrast functions.
+/// @type color
+$contrast-dark: black !default;

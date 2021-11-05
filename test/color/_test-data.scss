@@ -1,0 +1,21 @@
+$colors: (
+  'blue': hsl(195, 85%, 62%),
+  'orange': hsl(24, 100%, 62%),
+  'red': hsl(0, 85%, 62%),
+
+  'simple': #969,
+  'primary': '#red',
+  'secondary': '#primary' (
+    'color.change': ('alpha': 0.5),
+    'color.adjust': ('saturation': 25%),
+  ),
+  'alpha': '#simple' ('color.change': ('alpha': 0.5)),
+  'wtf': '#secondary' ('color.adjust': ('hue': 24deg)),
+  'hello': '#simple',
+
+  'dark': #111,
+  'light': #eee,
+
+  'contrast-dark': '#dark',
+  'contrast-light': '#light',
+);
