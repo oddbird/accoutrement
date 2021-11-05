@@ -139,3 +139,10 @@ setup and syntax parsing:
 [internal]: https://www.oddbird.net/accoutrement/docs/token-internal.html
 [functions]: https://www.oddbird.net/accoutrement/docs/token-register.html
 
+**Note:** We no longer use token maps
+internally at [OddBird](https://oddbird.net),
+since Sass "modules" now provide a way
+to group & namespace normal Sass variables in a meaningful way,
+and [access module variables as a map](https://sass-lang.com/documentation/modules/meta#module-variables).
+By relying on core Sass features,
+we avoid any confusion around the custom token syntax.

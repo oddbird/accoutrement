@@ -8,10 +8,7 @@ display:
 
 groups:
   'Utilities':
-    utils-string: 'Sass Strings'
-    utils-list: 'Sass Lists'
-    utils-map: 'Sass Maps'
-  'Variables':
+    utils: 'Sass Maps, Lists, & Strings'
     vars: 'CSS Custom Properties'
   'Tokens':
     tokens: 'QuickStart: Tokens'

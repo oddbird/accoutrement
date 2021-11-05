@@ -21,6 +21,34 @@
 /// - Unlike `YAML`, `JSON`, and other object languages,
 ///   Sass is a *style language* that understands the values involved,
 ///   and provides specific tools for maintaining those values
+///
+/// **Note:** We no longer use token maps
+/// internally at [OddBird](https://oddbird.net),
+/// since Sass "modules" now provide a way
+/// to group & namespace normal Sass variables in a meaningful way,
+/// and [access module variables as a map](https://sass-lang.com/documentation/modules/meta#module-variables).
+/// By relying on core Sass features,
+/// we avoid any confusion around the custom token syntax.
+///
+/// @since 4.0.0 -
+/// - BREAKING: The `$functions` map no longer accepts alias references
+///   or any other aspects of the token syntax
+/// - BREAKING: Ratios are no longer first-class adjustments
+///   (like functions) in the token syntax
+/// - BREAKING: `tokens.$handle-missing-keys` defaults to `null`,
+///   and no longer supports the legacy `silent` option.
+/// - BREAKING: `get-token()` is renamed `get()`,
+///   and only accepts bare token names (no `#` prefix),
+///   including the `outer->inner` nested token syntax.
+/// - NEW: The new `compile()` function provides direct access to
+///   parse & resolve an arbitrary token value
+///   (including aliases with `#` prefix),
+///   rather than calling a specific token by name.
+/// - NEW: All the built-in Sass module functions are registered by default,
+///   as `<module-name>.<function-name>`
+/// - NEW: `has-token()` function checks a map
+///   to see if the given token is defined,
+///   and supports the `outer->inner` nested token syntax.
 /// @group tokens
 
 

@@ -92,24 +92,9 @@
                 
   
     <li class="nav-item">
-      <a href="utils-string.html" data-nav="is-not-active">Sass Strings</a>
+      <a href="utils.html" data-nav="is-not-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
     </li>
   
-  
-    <li class="nav-item">
-      <a href="utils-list.html" data-nav="is-not-active">Sass Lists</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="utils-map.html" data-nav="is-not-active">Sass Maps</a>
-    </li>
-  </ul>
-            </li>
-            <li class="nav-subsection">
-              <h3 class="nav-title">Variables</h3>
-              <ul>
-                
   
     <li class="nav-item">
       <a href="vars.html" data-nav="is-not-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
@@ -244,46 +229,22 @@
 Legacy versions of Sass (Node &amp; Ruby) are no longer<span class="widont">&nbsp;</span>supported</p>
 </li>
 <li>
-<p>BREAKING: The “init” module, which provided light-weight
+<p>BREAKING: The old “init” module, which provided light-weight
 browser normalization, is no longer included. We now recommend
 using <a href="https://github.com/jensimmons/cssremedy">CSS<span class="widont">&nbsp;</span>Remedy</a>.</p>
 </li>
 <li>
-<p><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:</p>
-<ul>
-<li>BREAKING: The old “core” module has been broken into individual modules
+<p>BREAKING: The old “core” module has been broken into individual modules
 for “utilities” (extending several Sass modules),
 “tokens” (the map syntax parser),
 “variables” (converting Sass variables &amp; maps to CSS custom properties),
-and “ratios” (for typographic scales and layout aspect<span class="widont">&nbsp;</span>ratios)</li>
-</ul>
+and “ratios” (for typographic scales and layout aspect<span class="widont">&nbsp;</span>ratios)</p>
 </li>
 <li>
-<p><a href="https://www.oddbird.net/accoutrement/docs/utils.html">Utilities</a>:</p>
+<p><a href="https://www.oddbird.net/accoutrement/docs/utils.html">Sass Utilities</a>:</p>
 <ul>
 <li>NEW: These functions are now available directly,
 as well as being registered in the map<span class="widont">&nbsp;</span>syntax</li>
-</ul>
-</li>
-<li>
-<p>[Tokens][token]:</p>
-<ul>
-<li>NEW: A module just for the custom map syntax parser &amp; function<span class="widont">&nbsp;</span>registration</li>
-<li>BREAKING: The <code>$functions</code> map no longer accepts alias references
-or any other aspects of the token<span class="widont">&nbsp;</span>syntax</li>
-<li>BREAKING: Ratios are no longer first-class adjustments
-(like functions) in the token<span class="widont">&nbsp;</span>syntax</li>
-<li>BREAKING: <code>tokens.$handle-missing-keys</code> defaults to <code>null</code>,
-and no longer supports the legacy <code>silent</code> option.</li>
-<li>BREAKING: <code>get-token()</code> is renamed <code>get()</code>,
-and only accepts map-keys (including the <code>outer-&gt;inner</code> nested key<span class="widont">&nbsp;</span>syntax)</li>
-<li>NEW: The new <code>compile()</code> function provides direct access to
-parse &amp; resolve an arbitrary token value,
-without adding it to the map and accessing it by<span class="widont">&nbsp;</span>name</li>
-<li>NEW: All the built-in Sass module functions are registered by default,
-as <code>&lt;module-name&gt;.&lt;function-name&gt;</code></li>
-<li>NEW: <code>has-token()</code> function checks a map
-to see if the given token is<span class="widont">&nbsp;</span>defined.</li>
 </ul>
 </li>
 <li>
@@ -296,10 +257,34 @@ every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
 </ul>
 </li>
 <li>
+<p><a href="https://www.oddbird.net/accoutrement/docs/tokens.html">Tokens</a>:</p>
+<ul>
+<li>NEW: A module just for the custom map syntax parser &amp; function<span class="widont">&nbsp;</span>registration</li>
+<li>BREAKING: The <code>$functions</code> map no longer accepts alias references
+or any other aspects of the token<span class="widont">&nbsp;</span>syntax</li>
+<li>BREAKING: Ratios are no longer first-class adjustments
+(like functions) in the token<span class="widont">&nbsp;</span>syntax</li>
+<li>BREAKING: <code>tokens.$handle-missing-keys</code> defaults to <code>null</code>,
+and no longer supports the legacy <code>silent</code> option.</li>
+<li>BREAKING: <code>get-token()</code> is renamed <code>get()</code>,
+and only accepts bare token names (no <code>#</code> prefix),
+including the <code>outer-&gt;inner</code> nested token<span class="widont">&nbsp;</span>syntax.</li>
+<li>NEW: The new <code>compile()</code> function provides direct access to
+parse &amp; resolve an arbitrary token value
+(including aliases with <code>#</code> prefix),
+rather than calling a specific token by<span class="widont">&nbsp;</span>name.</li>
+<li>NEW: All the built-in Sass module functions are registered by default,
+as <code>&lt;module-name&gt;.&lt;function-name&gt;</code></li>
+<li>NEW: <code>has-token()</code> function checks a map
+to see if the given token is defined,
+and supports the <code>outer-&gt;inner</code> nested token<span class="widont">&nbsp;</span>syntax.</li>
+</ul>
+</li>
+<li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/ratio.html">Ratios</a>:</p>
 <ul>
 <li>NEW: Built-in named ratios are now available as individual variables,
-(without the <code>_</code> prefix that is applied to built-in<span class="widont">&nbsp;</span>tokens)</li>
+(without the <code>_</code> prefix that is applied in token<span class="widont">&nbsp;</span>maps)</li>
 </ul>
 </li>
 </ul>
