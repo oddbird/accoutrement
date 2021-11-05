@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Accoutrement Documentation</title>
+  <title>undefined | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -57,7 +57,7 @@
     <div class="nav-subsection">
       <h3 class="nav-home">
         
-        <a href="index.html" data-nav="is-active">Accoutrement</a>
+        <a href="index.html" data-nav="is-not-active">Accoutrement</a>
       </h3>
 
       
@@ -203,7 +203,7 @@
   
   
     <li class="nav-item">
-      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+      <a href="undefined.html" data-nav="is-active">undefined</a>
     </li>
   </ul>
     </div>
@@ -256,141 +256,273 @@
 
       <main data-region="main">
         
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >Accoutrement</a> »
+    <strong>undefined</strong>
+  </nav>
 
-        <div data-page="index">
+
+        <div data-page="undefined">
           
   
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--contrast-light">
   
-    <ul class="project-links">
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
       
-        <li class="project-link-item">
-          <a href="https://www.oddbird.net/accoutrement/" class="project-link">View Project</a>
-        </li>
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--contrast-light" class="item-name">$contrast-light</a>
+      
+
+      
+        <span class="value-type">(color)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
       
       
-        <li class="project-link-item">
-          <a href="https://github.com/oddbird/accoutrement.git" class="project-link">View Source</a>
-        </li>
-      
-    </ul>
+      <pre class="hljs-pre"><code class="lang-scss">$contrast-light: white !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
   
 
   
     <div class="text-block">
-      <h1 id="sass-accoutrement">Sass Accoutrement</h1>
-<p><a href="https://travis-ci.com/oddbird/accoutrement"><img src="https://travis-ci.com/oddbird/accoutrement.svg?branch=main" alt="Build Status"></a></p>
-<p><strong>Robust design systems</strong> require
-<em>meaningful</em>, <em>readable</em>, <em>reusable</em> code.
-These Sass utilities are designed to
-help define and manage your design tokens
-(colors, fonts, sizes, etc.)
-in a format that can be understood
-by both humans and parsers –
-opening the door for automation,
-while improving consistency and readability.
-These tools also integrate with <a href="https://www.oddbird.net/herman/">Herman</a>,
-our automated living pattern-library generator
-built on <a href="http://sassdoc.com/">SassDoc</a>.</p>
-<ul>
-<li><a href="https://www.oddbird.net/accoutrement/">Official Site</a></li>
-<li><a href="https://www.oddbird.net/accoutrement/docs/">Documentation</a></li>
-<li><a href="https://github.com/oddbird/accoutrement/">Source Code</a></li>
-<li><a href="https://github.com/oddbird/accoutrement/issues">Issues</a></li>
-</ul>
-<p><em>Brought to you by <a href="https://www.oddbird.net/">OddBird</a> –
-the creators of <a href="https://www.oddbird.net/susy/">Susy</a>,
-<a href="https://www.oddbird.net/true">True</a>,
-and <a href="https://www.oddbird.net/herman/">Herman</a>.</em></p>
-<h2 id="installation">Installation</h2>
-<p>Install the package with npm or<span class="widont">&nbsp;</span>yarn</p>
-<pre><code class="lang-bash">npm install accoutrement [--save-dev]
-yarn add accoutrement [--dev]
-</code></pre>
-<p>Use what you<span class="widont">&nbsp;</span>need:</p>
-<pre><code class="lang-scss">// all the modules (these are functionally the same)
-@use &quot;&lt;path-to&gt;/accoutrement&quot;;
-@use &quot;&lt;path-to&gt;/accoutrement/sass/tools&quot;;
+      <p>Establish a default light color
+for use in contrast<span class="widont">&nbsp;</span>functions.</p>
 
-// individual modules (at `/accoutrement/sass/&lt;name&gt;`)
-@use &quot;&lt;path-to&gt;/accoutrement/sass/color&quot;;
-</code></pre>
-<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
-you can use the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
-<pre><code class="lang-scss">@use &quot;accoutrement&quot;;
-</code></pre>
-<h2 id="modules-for-common-data-types">Modules for common data<span class="widont">&nbsp;</span>types</h2>
-<ul>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/animate.html">Animate</a></strong> –
-For managing CSS transitions and<span class="widont">&nbsp;</span>animations</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/color.html">Color</a></strong> –
-For managing CSS colors and<span class="widont">&nbsp;</span>contrast-ratios</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a></strong> –
-For managing CSS sizes: typographic scales, spacing,<span class="widont">&nbsp;</span>etc.</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/ratios.html">Type</a></strong> –
-For managing webfonts, generated content, and other text<span class="widont">&nbsp;</span>needs</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/type.html">Ratios</a></strong> –
-For managing aspect and typography ratios
-(several common ratios are<span class="widont">&nbsp;</span>provided)</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/vars.html">Variables</a></strong> –
-For converting Sass maps and variables into CSS custom<span class="widont">&nbsp;</span>properties</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/utils.html">Utilities</a></strong> –
-For helpers with Sass lists, strings, and<span class="widont">&nbsp;</span>maps</li>
-</ul>
-<h2 id="tokens">Tokens</h2>
-<p>The <strong>Token</strong> module provides
-a special syntax for managing design tokens
-with Sass “map”<span class="widont">&nbsp;</span>objects:</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'gutter': 1em,
-);
-</code></pre>
-<p>Using the custom syntax,
-we can extend maps to handle internal reference,
-and functional adjustments –
-capturing meaningful relationships
-between design<span class="widont">&nbsp;</span>tokens:</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  // internal reference &amp; adjustments
-  'gutter': '#root'
-    (
-      &quot;scale&quot;: ('_major-third', 1),
-      &quot;convert-units&quot;: &quot;rem&quot;,
-    ),
-);
-</code></pre>
-<p>Map storage serves a larger<span class="widont">&nbsp;</span>purpose:</p>
-<ul>
-<li>Related data is grouped explicitly,
-making the code more readable and<span class="widont">&nbsp;</span>maintainable</li>
-<li>The “single source of truth”
-encourages reusable design<span class="widont">&nbsp;</span>patterns</li>
-<li>Meaningful structure allows automation,
-from <a href="https://www.oddbird.net/herman/">automated style guides</a>
-to automated<span class="widont">&nbsp;</span>functionality</li>
-</ul>
-<p>This module provides the generic
-(non data-specific)
-setup and syntax<span class="widont">&nbsp;</span>parsing:</p>
-<ul>
-<li>Retrieve &amp; parse map values
-with <code>token.get()</code>
-and other <a href="https://www.oddbird.net/accoutrement/docs/token-api.html">token api<span class="widont">&nbsp;</span>functions</a></li>
-<li>Use the many <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html">registered functions</a>
-to manipulate tokens in the<span class="widont">&nbsp;</span>map</li>
-<li>Register your own <a href="https://www.oddbird.net/accoutrement/docs/token-register.html">functions</a>,
-for extra<span class="widont">&nbsp;</span>functionality</li>
-</ul>
-<p><strong>Note:</strong> We no longer use token maps
-internally at <a href="https://oddbird.net">OddBird</a>,
-since Sass “modules” now provide a way
-to group &amp; namespace normal Sass variables in a meaningful way,
-and <a href="https://sass-lang.com/documentation/modules/meta#module-variables">access module variables as a map</a>.
-By relying on core Sass features,
-we avoid any confusion around the custom token<span class="widont">&nbsp;</span>syntax.</p>
+      
+  
+
+      
+  
+
+      
+  
 
     </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--contrast-dark">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--contrast-dark" class="item-name">$contrast-dark</a>
+      
+
+      
+        <span class="value-type">(color)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$contrast-dark: black !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Establish a default dark color
+for use in contrast<span class="widont">&nbsp;</span>functions.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
   
 
         </div>

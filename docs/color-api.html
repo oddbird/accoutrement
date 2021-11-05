@@ -195,7 +195,17 @@
       <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="color-tokens.html" data-nav="is-not-active">color-tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -255,731 +265,6 @@
 
         <div data-page="color-api">
           
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h1 id="accessing-colors">Accessing Colors</h1>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--color">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--color" class="item-name">color()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>The primary function for
-accessing colors in your palette,
-or making adjustments on the<span class="widont">&nbsp;</span>fly.</p>
-<p>This is more than a wrapper for <code>map-get($colors, $x)</code>.
-It also handles internal color-references, recursion,
-and functional color-adjustments.
-It has access to the global <code>$colors</code> map by default,
-but you can also pass in arbitrary color-palette maps as<span class="widont">&nbsp;</span>well.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Provides access to color-contrast defaults,
-if they haven’t been re-set by the<span class="widont">&nbsp;</span>user</li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Renamed <code>$palette</code> arg to <code>$source</code></li>
-<li>BREAKING: Accepts <code>$do</code> argument
-between <code>$color</code> and <code>$source</code></li>
-</ul>
-</div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$color:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of a color in your palette,
-or a color description in the
-<a href="color-api.html#color-configuration">map configuration<span class="widont">&nbsp;</span>format</a>.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$do:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$source:</span>
-      
-      <span class="item-value">$colors</span>
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional map containing the source color-palette.
-Defaults to the global <code>$colors</code> map.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(color)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A calculated css-ready color,
-based on your global color palette and<span class="widont">&nbsp;</span>adjustments.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;background&#39;: #eee,
-  &#39;text&#39;: #222,
-);
-
-html {
-  background: color(&#39;background&#39;);
-  color: color(&#39;text&#39;);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  background: color(&quot;background&quot;);
-  color: color(&quot;text&quot;);
-}</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    <div class="requires-wrapper">
-      
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$_a_COLORS</span>
-      
-      
-      <span class="value-type">(map)</span>
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  color-contrast.html#mixin--contrasted" class="item-name">contrasted()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-contrast.html#function--luminance" class="item-name">luminance()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-themes.html#function--shades-of" class="item-name">shades-of()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-themes.html#function--stripe-colors" class="item-name">stripe-colors()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-utils.html#function--tint" class="item-name">tint()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-utils.html#function--shade" class="item-name">shade()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">_a_best-contrast()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
   
     
     
@@ -1495,7 +780,7 @@ for internal references and<span class="widont">&nbsp;</span>adjustments</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_default-contrast()</span>
+        <span class="item-name">default-contrast()</span>
       
       
       
@@ -1529,7 +814,7 @@ for internal references and<span class="widont">&nbsp;</span>adjustments</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_best-contrast()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       
@@ -1810,6 +1095,41 @@ $text-colors: (
 
     
       
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  utils.html#function--multi-merge" class="item-name">multi-merge()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
       
         
         

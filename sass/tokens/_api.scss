@@ -286,14 +286,13 @@ $_memo: ();
 ) {
   // check the memo
   $resolved: map.get($_memo, $map, $key);
+  @if $resolved { @return $resolved; }
 
-  @if not $resolved {
-    // lookup the key in the map
-    $lookup: parse.lookup-alias($map, $key);
+  // lookup the key in the map
+  $lookup: parse.lookup-alias($map, $key);
 
-    @if $lookup {
-      $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
-    }
+  @if $lookup {
+    $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
   }
 
   // update the memo

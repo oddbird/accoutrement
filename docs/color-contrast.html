@@ -195,7 +195,17 @@
       <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="color-tokens.html" data-nav="is-not-active">color-tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -576,40 +586,16 @@ or the minimum needed contrast to meet a given accessibility<span class="widont"
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  color: contrast(
+  color: tools.contrast(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white
   );
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  color: contrast(&quot;background&quot;, &quot;light&quot;, &quot;dark&quot;, black, white);
 }</code></pre>
     </div>
   
@@ -656,41 +642,17 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  color: contrast(
+  color: tools.contrast(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white,
     &#39;AAA&#39;
   );
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  color: contrast(&quot;background&quot;, &quot;light&quot;, &quot;dark&quot;, black, white, &quot;AAA&quot;);
 }</code></pre>
     </div>
   
@@ -744,7 +706,7 @@ html {
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_best-contrast()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       
@@ -1248,7 +1210,7 @@ html {
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_best-contrast()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       
@@ -1258,6 +1220,46 @@ html {
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
 
         
       
@@ -1769,7 +1771,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  color-api.html#function--color" class="item-name">color()</a>
+  color-tokens.html#function--color" class="item-name">color()</a>
       
       
       
@@ -2753,7 +2755,7 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_best-contrast()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       
@@ -3025,7 +3027,7 @@ The function will return <code>false</code> if the required ratio is not<span cl
       <span class="item-type">@function</span>
       
         <a href="
-  color-api.html#function--color" class="item-name">color()</a>
+  color-tokens.html#function--color" class="item-name">color()</a>
       
       
       
@@ -3139,7 +3141,7 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_best-contrast()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       

@@ -195,7 +195,17 @@
       <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
-            </li></ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="color-tokens.html" data-nav="is-not-active">color-tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -544,7 +554,7 @@ with the standard <a href="tokens.html">Token syntax</a>:</p>
       <span class="item-type">@function</span>
       
         <a href="
-  color-api.html#function--color" class="item-name">color()</a>
+  color-tokens.html#function--color" class="item-name">color()</a>
       
       
       
@@ -748,13 +758,15 @@ will work across maps,
 You can set the <code>$contrast-light</code> &amp; <code>$contrast-dark</code> configuration variables
 (<code>white</code> and <code>black</code> by default)
 or add <code>'contrast-light'</code> and <code>'contrast-dark'</code>
-tokens in your palette (with or without a private <code>_</code> prefix).</p>
+tokens in your palette (with or without a private <code>_</code> prefix).
+These tools can be used with color values,
+or token<span class="widont">&nbsp;</span>names.</p>
 <pre><code class="lang-scss">a:hover {
   // set a background, and get well-contrasted text
   @include tools.contrasted('link');
+  @include tools.contrasted(rebeccapurple);
 
   // or return a contrasting color from a set of options
-  // using either colors or color tokens…
   border-color: tools.contrast('background', white, rebeccapurple);
   border-color: tools.contrast(maroon, white, rebeccapurple);
 }
