@@ -36,7 +36,7 @@
       $type: meta.type-of($map);
       @return throw.error(
         'Each value of `$maps...` must be a map, got `[#{$type}]: #{$map}`',
-        'merge'
+        'multi-merge'
       );
     }
   }
