@@ -2,6 +2,10 @@
 @use 'sass:map';
 @use 'sass:string';
 @use '../tokens/inspect';
+@use './config';
+@use './helpers';
+@use '../utils/string' as str;
+
 // Normalize Font
 // --------------
 /// Convert font maps into a consistent format -
@@ -28,7 +32,7 @@
 ///   to use as the origin palette
 /// @return {map} -
 ///   A map of font data in consistent longhand format
-@function _a_normalize-font($font, $key: null, $source: $fonts) {
+@function normalize-font($font, $key: null, $source: config.$fonts) {
   // make it a map…
   @if (type-of($font) != 'map') {
     $font: (
@@ -37,7 +41,7 @@
   }
 
   // Normalize name…
-  $name: _a_normalize-font-name($font, $key, $source);
+  $name: normalize-font-name($font, $key, $source);
   $font: if(
     $name,
     map.merge(
@@ -50,7 +54,7 @@
   );
 
   // Normalize the font stack…
-  $stack: _a_normalize-font-stack($font);
+  $stack: normalize-font-stack($font);
   $font: if(
     $stack,
     map.merge(
@@ -63,14 +67,14 @@
   );
 
   // Normalize variants
-  $variants: _a_font-get-variants($font);
+  $variants: helpers.font-get-variants($font);
   @if (length($variants) > 0) {
     $formats: map.get($font, 'formats') or ();
 
     @each $name, $data in $variants {
       $font: map.remove($font, $name);
-      $name: _a_normalize-variant-name($name);
-      $data: _a_normalize-variant-data($data, $formats);
+      $name: normalize-variant-name($name);
+      $data: normalize-variant-data($data, $formats);
       $variant: (
         $name: $data,
       );
@@ -104,7 +108,7 @@
 ///   to use as the origin palette
 /// @return {string} -
 ///   The font-name associated with the given font map
-@function _a_normalize-font-name($font, $key: null, $source: $fonts) {
+@function normalize-font-name($font, $key: null, $source: $fonts) {
   $name: map.get($font, 'name') or null;
 
   // Try reverse lookup
@@ -121,7 +125,7 @@
     @return null;
   }
 
-  $name: $name or is-alias-for($source, $key, 'origin') or $key;
+  $name: $name or inspect.is-alias-for($source, $key, 'origin') or $key;
 
   @if (type-of($name) == 'string') {
     $name: if(
@@ -146,13 +150,13 @@
 ///   The font map
 /// @return {string} -
 ///   The font-stack associated with the given font map
-@function _a_normalize-font-stack($font) {
+@function normalize-font-stack($font) {
   $return: null;
   $stack: map.get($font, 'stack');
   $name: map.get($font, 'name');
 
   @if (type-of($stack) == 'string') and string.index($stack, ',') {
-    $stack: _a_split($stack, ',');
+    $stack: str.split($stack, ',');
   }
 
   @if ($stack or $name) {
@@ -162,7 +166,7 @@
     $stack: list.join($name, $stack);
 
     @each $item in $stack {
-      $item: _a_trim($item);
+      $item: str.trim($item);
       $item: if(
         string.index($item, ' '),
         string.quote($item),
@@ -193,18 +197,18 @@
 ///   A list of font variants, such as `('bold', 'italic')`.
 /// @return {$list} -
 ///   A list of `($weight, $style)`
-@function _a_normalize-variant-name($variant) {
+@function normalize-variant-name($variant) {
   $style: 'normal';
   $weight: 'normal';
 
   @if (type-of($variant) == 'string') and string.index($variant, ' ') {
-    $variant: _a_split($variant, ' ');
+    $variant: str.split($variant, ' ');
   }
 
   @each $item in $variant {
-    @if list.index($_a_FONT-STYLES, $item) {
+    @if list.index(helpers.$FONT-STYLES, $item) {
       $style: $item;
-    } @else if list.index($_a_FONT-WEIGHTS, '' + $item) {
+    } @else if list.index(helpers.$FONT-WEIGHTS, '' + $item) {
       $weight: $item;
     }
   }
@@ -239,7 +243,7 @@
 ///   merging interpolated and explicit format/paths
 ///   into a single map.
 /// @throws Font-path interpolation of `path` requires a list of formats
-@function _a_normalize-variant-data($data, $formats: ()) {
+@function normalize-variant-data($data, $formats: ()) {
   @if (type-of($data) == 'string') {
     $data: (
       'path': $data,

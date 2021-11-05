@@ -2,6 +2,8 @@
 @use 'sass:string';
 @use 'sass:map';
 @use '../tokens/api';
+@use './config';
+@use './normalize';
 
 /// ### Using WebFonts
 ///
@@ -34,9 +36,9 @@
 ///   to use as the origin palette
 /// @return {map} -
 ///   A parsed and normalized map of font-data
-@function font($font, $source: $fonts) {
+@function font($font, $source: config.$fonts) {
   $data: api.get($source, $font);
-  $normal: _a_normalize-font($data, $font, $source);
+  $normal: normalize.normalize-font($data, $font, $source);
   @return $normal;
 }
 
@@ -169,7 +171,7 @@
 /// @output `@font-face` import blocks for any defined font-variants.
 @mixin font-face($key, $source: $fonts) {
   $font: font($key, $source);
-  $variants: _a_font-get-variants($font);
+  $variants: helpers.font-get-variants($font);
   $name: map.get($font, 'name');
 
   @if (length($variants) > 0) {
@@ -179,7 +181,7 @@
     @each $variant, $data in $variants {
       $weight: list.nth($variant, 1);
       $style: list.nth($variant, 2);
-      @include _a_import-font-face(
+      @include helpers.import-font-face(
         $name,
         $weight,
         $style,

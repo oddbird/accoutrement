@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:string';
+@use '../utils/string' as str;
 /// # Internal WebFont Helpers
 /// These internal tools are not safe for public use --
 /// but we've documented the logic for transparency,
@@ -15,7 +16,7 @@
 /// (not including `normal`, which is also a valid weight).
 /// @access private
 /// @group type-helpers
-$_a_FONT-STYLES: ('italic', 'oblique');
+$FONT-STYLES: ('italic', 'oblique');
 
 // Font Weight Options
 // -------------------
@@ -23,7 +24,7 @@ $_a_FONT-STYLES: ('italic', 'oblique');
 /// (not including `normal`, which is also a valid style).
 /// @access private
 /// @group type-helpers
-$_a_FONT-WEIGHTS: (
+$FONT-WEIGHTS: (
   '100',
   '200',
   '300',
@@ -88,7 +89,7 @@ $_a_FONT-FORMATS: (
 ///   Optionally append an `?#iefix` suffix to `eot` fonts.
 /// @return {string} -
 ///   Font-format URL for importing.
-@function _a_font-url($path, $format, $svgid: null, $iefix: false) {
+@function font-url($path, $format, $svgid: null, $iefix: false) {
   $suffix: '';
 
   // some formats need no adjustments
@@ -148,7 +149,7 @@ $_a_FONT-FORMATS: (
   $format-name: if($format-name, format($format-name), '');
 
   // stylelint-disable-next-line function-url-quotes
-  $path: _a_font-url($path, $format, $iefix: true);
+  $path: font-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
 
@@ -214,8 +215,8 @@ $_a_FONT-FORMATS: (
 ///   A map of all the data for a single font.
 /// @return {map} -
 ///   Only the variants provided in the given font-map.
-@function _a_font-get-variants($font) {
-  $var-options: list.join($_a_FONT-STYLES, $_a_FONT-WEIGHTS);
+@function font-get-variants($font) {
+  $var-options: list.join($FONT-STYLES, $FONT-WEIGHTS);
   $var-options: list.append($var-options, 'normal');
   $variants: ();
 
@@ -224,7 +225,7 @@ $_a_FONT-FORMATS: (
     $first: '#{list.nth($key, 1)}';
     $first: if(
       string.index($first, ' '),
-      list.nth(_a_split($first, ' '), 1),
+      list.nth(str.split($first, ' '), 1),
       $first
     );
 
@@ -253,7 +254,7 @@ $_a_FONT-FORMATS: (
 /// @access private
 /// @group type-helpers
 /// @example scss
-///   @include _a_import-font-face(
+///   @include import-font-face(
 ///     $name: 'Franklin Gothic',
 ///     $weight: 'normal',
 ///     $style: 'normal',
@@ -282,7 +283,7 @@ $_a_FONT-FORMATS: (
 /// @output `@font-face` CSS-block for importing a given font variant.
 /// @throws When a generic variant-path is provided
 ///   without formats for interpolation.
-@mixin _a_import-font-face(
+@mixin import-font-face(
   $name,
   $weight,
   $style,
@@ -296,7 +297,7 @@ $_a_FONT-FORMATS: (
   $double: false;
 
   @if $eot {
-    $eot: _a_font-url($eot, 'eot');
+    $eot: font-url($eot, 'eot');
     $eot: font-url($eot);
 
     @if (not string.index($eot, 'data:')) {
