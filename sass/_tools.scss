@@ -1,6 +1,7 @@
 @forward 'utils';
 @forward 'tokens';
-@import 'ratio';
+@forward 'vars';
+@forward 'ratio';
 
 // @import 'plugin/animate';
 // @import 'plugin/color';

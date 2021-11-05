@@ -104,10 +104,15 @@
     <li class="nav-item">
       <a href="utils-map.html" data-nav="is-not-active">Sass Maps</a>
     </li>
-  
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Variables</h3>
+              <ul>
+                
   
     <li class="nav-item">
-      <a href="vars.html" data-nav="is-not-active">Variables &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="vars.html" data-nav="is-not-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -147,7 +152,7 @@
   
   
     <li class="nav-item">
-      <a href="token-vars.html" data-nav="is-not-active">Tokens &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -239,13 +244,18 @@
 Legacy versions of Sass (Node &amp; Ruby) are no longer<span class="widont">&nbsp;</span>supported</p>
 </li>
 <li>
+<p>BREAKING: The “init” module, which provided light-weight
+browser normalization, is no longer included. We now recommend
+using <a href="https://github.com/jensimmons/cssremedy">CSS<span class="widont">&nbsp;</span>Remedy</a>.</p>
+</li>
+<li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:</p>
 <ul>
 <li>BREAKING: The old “core” module has been broken into individual modules
 for “utilities” (extending several Sass modules),
 “tokens” (the map syntax parser),
 “variables” (converting Sass variables &amp; maps to CSS custom properties),
-and ratios have been moved into the existing “scale”<span class="widont">&nbsp;</span>module</li>
+and “ratios” (for typographic scales and layout aspect<span class="widont">&nbsp;</span>ratios)</li>
 </ul>
 </li>
 <li>

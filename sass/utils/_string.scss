@@ -5,6 +5,7 @@
 @use 'list' as l;
 @use '../internal/throw';
 @use '../internal/type';
+@use '../internal/function';
 
 /// # Sass Strings
 /// Utility function(s) that extend the Sass core modules,
@@ -128,6 +129,7 @@
 
   @return $return;
 }
+@include function.internal(meta.get-function('replace'), 'replace', 'str-replace');
 
 
 // Interpolate
@@ -182,6 +184,7 @@
 
   @return $return;
 }
+@include function.internal(meta.get-function('interpolate'), 'interpolate', '%s', 'str-interpolate');
 
 
 // Split
@@ -264,6 +267,7 @@
 
   @return $list;
 }
+@include function.internal(meta.get-function('split'), 'split', 'str-split');
 
 
 // Trim
@@ -310,3 +314,4 @@
 
   @return $string;
 }
+@include function.internal(meta.get-function('trim'), 'trim', 'str-trim');

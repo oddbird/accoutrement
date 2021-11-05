@@ -4,13 +4,16 @@
 
 - BREAKING: Requires Sass modules, and other recent features of Dart Sass.
   Legacy versions of Sass (Node & Ruby) are no longer supported
+- BREAKING: The "init" module, which provided light-weight
+  browser normalization, is no longer included. We now recommend
+  using [CSS Remedy](https://github.com/jensimmons/cssremedy).
 
 - [Core][core]:
   - BREAKING: The old "core" module has been broken into individual modules
     for "utilities" (extending several Sass modules),
     "tokens" (the map syntax parser),
     "variables" (converting Sass variables & maps to CSS custom properties),
-    and ratios have been moved into the existing "scale" module
+    and "ratios" (for typographic scales and layout aspect ratios)
 
 - [Utilities][utils]:
   - NEW: These functions are now available directly,
@@ -377,7 +380,6 @@ designing and testing several of these features.
 [vars]: https://www.oddbird.net/accoutrement/docs/vars.html
 [ratio]: https://www.oddbird.net/accoutrement/docs/ratio.html
 [core]: https://www.oddbird.net/accoutrement/docs/core.html
-[init]: https://www.oddbird.net/accoutrement/docs/init.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html
 [color]: https://www.oddbird.net/accoutrement/docs/color.html
 [layout]: https://www.oddbird.net/accoutrement/docs/layout.html

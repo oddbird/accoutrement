@@ -2,6 +2,7 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use '../internal/throw';
+@use '../internal/function';
 
 /// # Sass Lists
 /// Utility function(s) that extend the Sass core modules,
@@ -65,6 +66,7 @@
 
   @return $result;
 }
+@include function.internal(meta.get-function('remove-nth'), 'remove-nth', 'list-remove-nth');
 
 
 // List From Template

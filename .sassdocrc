@@ -11,7 +11,8 @@ groups:
     utils-string: 'Sass Strings'
     utils-list: 'Sass Lists'
     utils-map: 'Sass Maps'
-    vars: 'Variables & Custom Properties'
+  'Variables':
+    vars: 'CSS Custom Properties'
   'Tokens':
     tokens: 'QuickStart: Tokens'
     token-config: 'Configuration'
@@ -19,7 +20,7 @@ groups:
     token-inspect: 'Inspecting Tokens'
     token-register: 'Function Registration'
     token-internal: 'Pre-Registered Functions'
-    token-vars: 'Tokens & Custom Properties'
+    token-vars: 'Tokens » Custom Properties'
   'Ratios':
     ratios: Built-In Ratios
     ratio-tokens: Ratio Tokens

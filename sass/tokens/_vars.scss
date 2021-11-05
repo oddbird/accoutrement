@@ -1,7 +1,13 @@
 @use 'api';
 @use 'inspect';
-@use '../utils/vars';
+@use '../vars';
 @use 'sass:map';
+
+/// # Tokens » Custom Properties
+/// There are many cases where it can be useful
+/// to convert a Sass token map into CSS custom properties.
+/// Here are some tools to help.
+/// @group token-vars
 
 // Token--
 // -------

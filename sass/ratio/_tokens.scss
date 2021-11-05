@@ -1,6 +1,6 @@
 @use 'utils';
 @use '../tokens';
-@use '../tokens/function';
+@use '../internal/function';
 @use '../utils/map' as utils-map;
 @use 'sass:map';
 @use 'sass:meta';
