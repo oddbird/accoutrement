@@ -7,10 +7,68 @@
 @use 'sass:map' as sass-map;
 @use 'sass:meta';
 
+// Add contrast colors to the token map
 $_config: (
   '_contrast-light': config.$contrast-light,
   '_contrast-dark': config.$contrast-dark,
 );
+
+// Color Map
+// ---------
+/// A variable storing the map of
+/// all colors globally-available on your project.
+/// Any colors added to the `$colors` map will be accessible
+/// to the `color()` function by default.
+///
+/// Define each color with a `name`, `base-value`,
+/// and optional `adjustments`…
+///
+/// ```
+/// $colors: (
+///   'color-name': <base-value>,
+///   'color-two': <base-value> ('<color-function>': '<arguments>'),
+///   // will return: function-name($base-value, $arguments...)
+/// );
+/// ```
+///
+/// - Name your colors anything – from abstractions like `brand-pink`,
+///   to concrete patterns like `button` or `widget-background`.
+/// - Base-values can be CSS-ready colors (hex, rgb, hsla),
+///   or references other colors in the map.
+/// - Adjustments are a nested map of color functions and arguments,
+///   for adjusting colors directly in your palette.
+///
+/// The color-names `contrast-light` and `contrast-dark` are special
+/// (with or without a private `_` prefix).
+/// Use those names to define the default light-and-dark options
+/// for our color-contrast tools.
+/// They default to `white` and `black` respectively.
+///
+/// @since 0.1.0 -
+/// - BREAKING: Uses the new [shared](core.html) map syntax,
+///   for internal references and adjustments
+///
+/// @group color-tokens
+/// @example scss - simple color definitions
+///   $colors: (
+///     'brand-pink': hsl(330, 85%, 62%),
+///     'brand-light': #fff,
+///     'brand-dark': #222,
+///   );
+/// @example scss - reference other colors
+///   $colors: (
+///     'background': '#brand-light',
+///     'text': '#brand-dark',
+///     'link': '#brand-pink',
+///   );
+/// @example scss - adjust referenced colors with any color function
+///   $colors: (
+///     'focus': '#link' ('darken': 15%, 'desaturate': 15%),
+///   );
+///
+/// @type map
+$colors: () !default;
+
 
 // Add Colors
 // ----------
@@ -26,7 +84,7 @@ $_config: (
 /// [SassDoc]: http://sassdoc.com/
 /// [Herman]: https://www.oddbird.net/herman/
 ///
-/// @group color-api
+/// @group color-tokens
 /// @example scss
 ///   $brand-colors: (
 ///     'brand-dark': #222,
@@ -48,7 +106,7 @@ $_config: (
 @mixin add-colors (
   $maps...
 ) {
-  config.$colors: map.multi-merge(config.$colors, $maps...);
+  $colors: map.multi-merge($colors, $maps...) !global;
 }
 
 
@@ -100,7 +158,7 @@ $_config: (
 @function color(
   $color,
   $do: null,
-  $source: config.$colors
+  $source: $colors
 ) {
   $source: sass-map.merge($_config, $source);
 

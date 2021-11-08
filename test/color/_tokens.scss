@@ -1,11 +1,10 @@
 @use '../../node_modules/sass-true/sass/true' as *;
-@use '../../sass/color/config';
 @use '../../sass/color/tokens';
 @use 'test-data' as data;
 @use 'sass:color';
 @use 'sass:map';
 
-$old: config.$colors;
+$old: tokens.$colors;
 
 @include test-module('color/tokens') {
 
@@ -19,8 +18,8 @@ $old: config.$colors;
 
     @include it('Merges colors, and updates global variable') {
       @include assert-equal(
-        config.$colors,
-        map.merge(config.$colors, map.merge($a, $b))
+        tokens.$colors,
+        map.merge(tokens.$colors, map.merge($a, $b))
       );
     }
   }
@@ -28,7 +27,7 @@ $old: config.$colors;
   // Color [function]
   // ----------------
   @include describe('Color [function]') {
-    config.$colors: data.$colors;
+    tokens.$colors: data.$colors;
 
     $secondary: color.adjust(color.change(map.get(data.$colors, 'red'), $alpha: 0.5), $saturation: 25%);
     $wtf: color.adjust($secondary, $hue: 24deg);
@@ -115,4 +114,4 @@ $old: config.$colors;
 
 } // end module
 
-config.$colors: $old;
+tokens.$colors: $old;

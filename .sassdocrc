@@ -12,7 +12,7 @@ groups:
     vars: 'CSS Custom Properties'
   'Tokens':
     tokens: 'QuickStart: Tokens'
-    token-config: 'Configuration'
+    token-config: 'Tokens Configuration'
     token-api: 'Accessing Tokens'
     token-inspect: 'Inspecting Tokens'
     token-register: 'Function Registration'
@@ -31,11 +31,11 @@ groups:
 #     animate-change: 'Combined "Change" Maps'
 #     animate-change-vars: 'Changes » CSS Variables'
   'Color':
-    color: 'QuickStart: Color'
+    color-config: 'Color Configuration'
     color-contrast: 'Contrast & Accessibility'
     color-utils: 'Adjustments'
     color-themes: 'Themes'
-    color-api: 'Color Tokens'
+    color-tokens: 'Color Tokens'
     color-vars: 'Color Tokens » CSS Variables'
 #   'Layout':
 #     layout: 'QuickStart: Layout'

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>color-tokens | Accoutrement Documentation</title>
+  <title>Color Tokens | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -112,7 +112,7 @@
   
   
     <li class="nav-item">
-      <a href="token-config.html" data-nav="is-not-active">Configuration</a>
+      <a href="token-config.html" data-nav="is-not-active">Tokens Configuration</a>
     </li>
   
   
@@ -167,7 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="color.html" data-nav="is-not-active">QuickStart: Color</a>
+      <a href="color-config.html" data-nav="is-not-active">Color Configuration</a>
     </li>
   
   
@@ -187,7 +187,7 @@
   
   
     <li class="nav-item">
-      <a href="color-api.html" data-nav="is-not-active">Color Tokens</a>
+      <a href="color-tokens.html" data-nav="is-active">Color Tokens</a>
     </li>
   
   
@@ -198,12 +198,7 @@
             </li>
   
     <li class="nav-item">
-      <a href="color-tokens.html" data-nav="is-active">color-tokens</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="undefined.html" data-nav="is-not-active">undefined</a>
+      <a href="color.html" data-nav="is-not-active">color</a>
     </li>
   </ul>
     </div>
@@ -259,7 +254,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>color-tokens</strong>
+    <strong>Color Tokens</strong>
   </nav>
 
 
@@ -323,6 +318,859 @@
   
   
     
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--colors">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--colors" class="item-name">$colors</a>
+      
+
+      
+        <span class="value-type">(map)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: () !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A variable storing the map of
+all colors globally-available on your project.
+Any colors added to the <code>$colors</code> map will be accessible
+to the <code>color()</code> function by<span class="widont">&nbsp;</span>default.</p>
+<p>Define each color with a <code>name</code>, <code>base-value</code>,
+and optional <code>adjustments</code>…</p>
+<pre><code>$colors: (
+  'color-name': &lt;base-value&gt;,
+  'color-two': &lt;base-value&gt; ('&lt;color-function&gt;': '&lt;arguments&gt;'),
+  // will return: function-name($base-value, $arguments...)
+);
+</code></pre>
+<ul>
+<li>Name your colors anything – from abstractions like <code>brand-pink</code>,
+to concrete patterns like <code>button</code> or <code>widget-background</code>.</li>
+<li>Base-values can be CSS-ready colors (hex, rgb, hsla),
+or references other colors in the<span class="widont">&nbsp;</span>map.</li>
+<li>Adjustments are a nested map of color functions and arguments,
+for adjusting colors directly in your<span class="widont">&nbsp;</span>palette.</li>
+</ul>
+<p>The color-names <code>contrast-light</code> and <code>contrast-dark</code> are special
+(with or without a private <code>_</code> prefix).
+Use those names to define the default light-and-dark options
+for our color-contrast tools.
+They default to <code>white</code> and <code>black</code> respectively.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: Uses the new <a href="core.html">shared</a> map syntax,
+for internal references and<span class="widont">&nbsp;</span>adjustments</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              simple color definitions
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;brand-pink&#39;: hsl(330, 85%, 62%),
+  &#39;brand-light&#39;: #fff,
+  &#39;brand-dark&#39;: #222,
+);</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              reference other colors
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background&#39;: &#39;#brand-light&#39;,
+  &#39;text&#39;: &#39;#brand-dark&#39;,
+  &#39;link&#39;: &#39;#brand-pink&#39;,
+);</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              adjust referenced colors with any color function
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;focus&#39;: &#39;#link&#39; (&#39;darken&#39;: 15%, &#39;desaturate&#39;: 15%),
+);</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-themes.html#function--stripe-colors" class="item-name">stripe-colors()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-themes.html#mixin--stripe-colors" class="item-name">stripe-colors()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-tokens.html#mixin--add-colors" class="item-name">add-colors()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">default-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">best-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--add-colors">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--add-colors" class="item-name">add-colors()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge individual color maps into the global <code>$colors</code> variable,
+in case you want to define colors in smaller groups
+such as <code>brand-colors</code>, <code>link-colors</code>, etc
+before merging them into a single global color-palette.
+This can be useful for internal organization,
+documentation with <a href="http://sassdoc.com/">SassDoc</a>,
+or integration with our pattern-library generator:
+<a href="https://www.oddbird.net/herman/">Herman</a>.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$maps:</span>
+      
+      
+      <span class="value-type">(map...)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>An updated global <code>$colors</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
+  &#39;brand-dark&#39;: #222,
+  &#39;brand-pink&#39;: hsl(330, 85%, 62%),
+);
+
+$text-colors: (
+  &#39;text&#39;: &#39;#brand-dark&#39;,
+  &#39;link&#39;: &#39;#brand-pink&#39;,
+);
+
+@include add-colors($brand-colors, $text-colors);</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  utils.html#function--multi-merge" class="item-name">multi-merge()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-tokens.html#variable--colors" class="item-name">$colors</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
     
   
 
