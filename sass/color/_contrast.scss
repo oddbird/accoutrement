@@ -1,9 +1,12 @@
-@use 'config';
-@use 'tokens';
 @use '../internal/function';
+@use '../internal/type';
+@use '../internal/throw';
+@use 'tokens';
+@use 'sass:color';
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
+@use 'sass:string';
 
 /// # Contrast & Accessibility
 /// @group color-contrast
@@ -17,9 +20,9 @@
 ///
 /// @access private
 $WCAG-CONTRAST: (
-  'AA-large': 3,
-  'AA': 4.5,
-  'AAA': 7,
+  'aa-large': 3,
+  'aa': 4.5,
+  'aaa': 7,
 );
 
 
@@ -151,7 +154,7 @@ $WCAG-CONTRAST: (
 
   @return $color;
 }
-@include register-internal('var-contrast');
+@include function.internal(meta.get-function('var-contrast'), 'var-contrast');
 
 
 // Contrasted
@@ -298,12 +301,14 @@ $WCAG-CONTRAST: (
 ///   /* black and white: #{contrast-ratio(white, black)} */
 ///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
 ///
-/// @param {string | list | number} $base -
-///   The name of a color in your palette,
-///   any other color value,
-///   or even a pre-calculated numeric luminance.
-/// @param {string | list | number} $contrast -
-///   The name or value of a color to contrast against the first.
+/// @param {color | number} $base -
+///   Color value, color token name,
+///   or pre-calculated numeric luminance
+///   for the base color.
+/// @param {color | number} $contrast -
+///   Color value, color token name,
+///   or pre-calculated numeric luminance
+///   for a contrast color to compare against the base.
 /// @param {'AA' | 'AA-large' | 'AAA' | number | false} $require [false] -
 ///   An optional WCAG contrast ratio to require.
 ///   The function will return `false` if the required ratio is not met.
@@ -314,20 +319,24 @@ $WCAG-CONTRAST: (
   $contrast,
   $require: false
 ) {
-  $is-lumins: (type-of($base) == 'number');
+  $base-lumin: if((meta.type-of($base) == 'number'), $base, luminance($base));
+  $contrast-lumin: if((meta.type-of($contrast) == 'number'), $contrast, luminance($contrast));
 
-  $base-lumin: if($is-lumins, $base, luminance($base));
-  $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
+  $darker: math.min($base-lumin, $contrast-lumin);
+  $lighter: math.max($base-lumin, $contrast-lumin);
 
-  $darker: min($base-lumin, $contrast-lumin);
-  $lighter: max($base-lumin, $contrast-lumin);
+  $ratio: math.div(($lighter + 0.05), ($darker + 0.05));
 
-  $ratio: ($lighter + 0.05) / ($darker + 0.05);
+  @if $require {
+    $require: valid-contrast($require);
 
-  $require: _a_valid-contrast($require);
+    @if not type.check($require, 'number') {
+      @return type.error($require, 'number', 'color.contrast-ratio', '$require');
+    }
 
-  @if $require and ($ratio < $require) {
-    @return false;
+    @if ($ratio < $require) {
+      @return false;
+    }
   }
 
   @return $ratio;
@@ -342,35 +351,35 @@ $WCAG-CONTRAST: (
 /// @link https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
 ///
 /// @param {string | list} $color -
-///   The name or value of a color.
+///   A color value or color token name.
 /// @return {number} -
 ///   WCAG-defined numeric luminance value.
 @function luminance(
   $color
 ) {
-  $color: color($color);
-  $color: _a_type-check($color, 'color', 'luminance', '$color');
+  $color: if(meta.type-of($color) != 'color', token.color($color), $color);
+  $check: type.check($color, 'color', true, 'color.luminance', '$color');
   $luminance: 0;
 
-  @each $component in 'red' 'green' 'blue' {
-    $function: $component;
+  $rgb: (
+    'r': math.div(color.red($color), 255),
+    'g': math.div(color.green($color), 255),
+    'b': math.div(color.blue($color), 255),
+  );
 
-    @if function-exists('get-function') {
-      $function: get-function($component);
-    }
-
-    $value: call($function, $color) / 255;
+  @each $channel, $value in $rgb {
+    $function: $channel;
 
     @if ($value < 0.03928) {
-      $value: $value / 12.92;
+      $value: math.div($value, 12.92);
     } @else {
-      $base: ($value + 0.055) / 1.055;
+      $base: math.div(($value + 0.055), 1.055);
       $value: math.pow($base, 2.4);
     }
 
-    @if ($component == 'red') {
+    @if ($channel == 'r') {
       $value: $value * 0.2126;
-    } @else if ($component == 'green') {
+    } @else if ($channel == 'g') {
       $value: $value * 0.7152;
     } @else {
       $value: $value * 0.0722;
@@ -458,7 +467,7 @@ $WCAG-CONTRAST: (
     @if (type-of($opt) == 'color') or map-has-key($colors, $opt) {
       $opt-colors: append($opt-colors, $opt);
     } @else {
-      $min-ratio: _a_valid-contrast($opt) or $min-ratio;
+      $min-ratio: valid-contrast($opt) or $min-ratio;
     }
   }
 
@@ -518,19 +527,23 @@ $WCAG-CONTRAST: (
 /// @param {'AA' | 'AA-large' | 'AAA' | 0-21} $ratio -
 ///   WCAG or 0-21 contrast ratios will pass validation,
 ///   all other values will return false
-@function _a_valid-contrast(
+@function valid-contrast(
   $ratio
 ) {
-  @if (type-of($ratio) == 'number') and ($ratio >= 1) and ($ratio <= 21) {
+  @if (meta.type-of($ratio) == 'string') {
+    $ratio: map.get($WCAG-CONTRAST, string.to-lower-case($ratio)) or $ratio;
+  }
+
+  @if not type.check($ratio, 'number') {
+    @return type.error($ratio, 'number', 'color.valid-contrast', '$ratio');
+  }
+
+  @if ($ratio >= 0) and ($ratio <= 21) {
     @return $ratio;
   }
 
-  $uppercase: (
-    'aaa': 'AAA',
-    'aa': 'AA',
-    'aa-large': 'AA-large'
+  @return throw.error(
+    'Contrast ratio must be a number between 0 and 21',
+    'color.valid-contrast'
   );
-
-  $ratio: map-get($uppercase, $ratio) or $ratio;
-  @return map-get($WCAG-CONTRAST, $ratio);
 }
