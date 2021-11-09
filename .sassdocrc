@@ -39,7 +39,6 @@ groups:
 #     layout: 'QuickStart: Layout'
 #     layout-queries: 'Media Breakpoint Maps'
 #     layout-query-vars: 'Breakpoints » CSS Variables'
-#     layout-box: 'Box-Sizing'
 #     layout-clearfix: 'Clearfix'
 #     layout-position: 'Positioning'
 #     layout-ratios: 'Fluid Ratios'
