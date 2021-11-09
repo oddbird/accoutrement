@@ -21,7 +21,7 @@
   - NEW: `ident()` function adds `--` and an optional prefix to any string,
     in order to generate a custom property identifier.
   - NEW: `custom-props()` mixin generates custom properties
-    every key/value pair in a map.
+    for every key/value pair in a map.
 
 - [Tokens][token]:
   - NEW: A module just for the custom map syntax parser & function registration

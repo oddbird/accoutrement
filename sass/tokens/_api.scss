@@ -236,7 +236,7 @@ $_memo: ();
 ///
 /// @since 4.0.0 -
 /// - BREAKING: Name changed from `get-token` to `get`
-/// - BREAKING: The `$key` value must be a taken name for lookup,
+/// - BREAKING: The `$key` value must be a token name for lookup,
 ///   not a raw token value to be compiled
 ///   (see the `compile()` function)
 /// @since 2.0.0 -
