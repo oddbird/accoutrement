@@ -6,25 +6,26 @@
 @use '../../../sass/tokens/api';
 @use '../../../sass/type/normalize';
 
-// Test Font Normalization
-// =======================
+$_global: config.$fonts;
+config.$fonts: data.$fonts;
+
 @include test-module('Type: Normalize') {
   // Normalize Font [function]
   // -------------------------
   @include describe('Normalize Font [function]') {
     $test: normalize.normalize-font(map.get(data.$fonts, 'TestFont'));
 
-    /*    @include it('Sets an explicit name, if missing') {
+    @include it('Sets an explicit name, if missing') {
       @include assert-equal(map.get($test, 'name'), 'TestFont');
-    } */
+    }
 
-    /*     @include it('Generates a properly-formatted stack') {
+    @include it('Generates a properly-formatted stack') {
       @include assert-equal(
         map.get($test, 'stack'),
-        ('TestFont', Georgia, serif)
+        (TestFont, Georgia, serif)
       );
     }
- */
+
     $test: normalize.normalize-font(map.get(data.$fonts, 'UniFont'));
     $expect: (
       'name': 'Unicode Test',
@@ -101,13 +102,13 @@
       );
     }
 
-    /*     @include it('Get implicit font name by alias') {
+    @include it('Get implicit font name by alias') {
       $key: 'tf-alias';
       @include assert-equal(
         normalize.normalize-font-name(api.get(data.$fonts, $key), $key),
         'TestFont'
       );
-    } */
+    }
 
     @include it('Get implicit font name by local source') {
       $local: (
@@ -157,7 +158,7 @@
             'stack': 'Helvetica Neue, Helvetica,Arial',
           )
         ),
-        ('Helvetica Neue', 'Helvetica', 'Arial')
+        ('Helvetica Neue', Helvetica, Arial)
       );
     }
   }
@@ -269,3 +270,5 @@
     }
   }
 } // end module
+
+config.$fonts: $_global;

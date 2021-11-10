@@ -129,14 +129,6 @@
 
   $name: $name or inspect.is-alias-for($source, $key, 'origin') or $key;
 
-  @if (meta.type-of($name) == 'string') {
-    $name: if(
-      string.index($name, ''),
-      string.quote($name),
-      string.unquote($name)
-    );
-  }
-
   @return $name;
 }
 
