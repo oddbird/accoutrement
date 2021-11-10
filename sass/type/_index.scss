@@ -8,10 +8,8 @@
 /// @group type
 
 @forward 'config';
-@forward 'helpers' show font-get-variants, import-font-face, $FONT-STYLES,
-  $FONT-WEIGHTS;
-@forward 'normalize' show normalize-font, normalize-variant-name,
-  normalize-variant-data;
+@forward 'helpers';
+@forward 'normalize';
 @forward 'a11y';
 @forward 'fonts';
 @forward 'font-vars';

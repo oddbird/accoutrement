@@ -45,13 +45,3 @@ $fonts: (
   'tf-alias': '#TestFont',
   'tf': '#tf-alias',
 );
-
-// @use 'type/fonts';
-@use 'type/config';
-@use 'type/a11y';
-@use 'type/pseudo-elements';
-
-/* @import 'type/helpers'; */
-/* @import 'type/normalize';
-@import 'type/font-vars';
- */

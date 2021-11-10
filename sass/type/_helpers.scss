@@ -46,7 +46,7 @@ $FONT-WEIGHTS: (
 /// The order given here will also be used in defining font-face src order.
 /// @access private
 /// @group type-helpers
-$_a_FONT-FORMATS: (
+$FONT-FORMATS: (
   'local': null,
   'eot': 'embedded-opentype',
   'woff2': 'woff2',
@@ -145,7 +145,7 @@ $_a_FONT-FORMATS: (
 /// @return {list} -
 ///   CSS-ready `url() format()` combination for font-face `src` output.
 @function _a_font-src($path, $format) {
-  $format-name: map.get($_a_FONT-FORMATS, $format);
+  $format-name: map.get($FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
   // stylelint-disable-next-line function-url-quotes
