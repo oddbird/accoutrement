@@ -31,6 +31,7 @@ groups:
 #     animate-change: 'Combined "Change" Maps'
 #     animate-change-vars: 'Changes » CSS Variables'
   'Color':
+    color: 'QuickStart: Color'
     color-config: 'Color Configuration'
     color-contrast: 'Contrast & Accessibility'
     color-utils: 'Adjustments'

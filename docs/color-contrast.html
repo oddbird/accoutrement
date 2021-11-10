@@ -167,6 +167,11 @@
                 
   
     <li class="nav-item">
+      <a href="color.html" data-nav="is-not-active">QuickStart: Color</a>
+    </li>
+  
+  
+    <li class="nav-item">
       <a href="color-config.html" data-nav="is-not-active">Color Configuration</a>
     </li>
   
@@ -195,12 +200,7 @@
       <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
-            </li>
-  
-    <li class="nav-item">
-      <a href="color.html" data-nav="is-not-active">color</a>
-    </li>
-  </ul>
+            </li></ul>
     </div>
 
     
@@ -595,6 +595,30 @@ html {
     </div>
   
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: white;
+}</code></pre>
+    </div>
+  
+
     </div>
 
     
@@ -648,6 +672,30 @@ html {
     &#39;light&#39;, &#39;dark&#39;, black, white,
     &#39;AAA&#39;
   );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: #eee;
 }</code></pre>
     </div>
   
@@ -1037,13 +1085,13 @@ or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  color: var-contrast(
+  color: tools.var-contrast(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white
   );
@@ -1070,7 +1118,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  color: var-contrast(&quot;background&quot;, &quot;light&quot;, &quot;dark&quot;, black, white);
+  color: white;
 }</code></pre>
     </div>
   
@@ -1117,13 +1165,13 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  color: var-contrast(
+  color: tools.var-contrast(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white,
     &#39;AAA&#39;
@@ -1151,7 +1199,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  color: var-contrast(&quot;background&quot;, &quot;light&quot;, &quot;dark&quot;, black, white, &quot;AAA&quot;);
+  color: #eee;
 }</code></pre>
     </div>
   
@@ -1646,16 +1694,41 @@ or minimum contrast that still meets a given accessibility<span class="widont">&
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  @include contrasted(
+  @include tools.contrasted(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white
   );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: blue;
+  color: white;
 }</code></pre>
     </div>
   
@@ -1702,17 +1775,42 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  @include contrasted(
+  @include tools.contrasted(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white,
     &#39;AAA&#39;
   );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: blue;
+  color: #eee;
 }</code></pre>
     </div>
   
@@ -2093,16 +2191,41 @@ whichever option has better contrast against the given<span class="widont">&nbsp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  @include var-contrasted(
+  @include tools.var-contrasted(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white
   );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var-color(&quot;background&quot;);
+  color: white;
 }</code></pre>
     </div>
   
@@ -2149,17 +2272,42 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;background&#39;: blue,
   &#39;light&#39;: #eee,
   &#39;dark&#39;: #111,
 );
 html {
-  @include var-contrasted(
+  @include tools.var-contrasted(
     &#39;background&#39;,
     &#39;light&#39;, &#39;dark&#39;, black, white,
     &#39;AAA&#39;
   );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var-color(&quot;background&quot;);
+  color: #eee;
 }</code></pre>
     </div>
   
@@ -2391,16 +2539,16 @@ and return <code>false</code> when the contrast-check<span class="widont">&nbsp;
         <span class="item-name">$base:</span>
       
       
-      <span class="value-type">(string | list |<span class="widont">&nbsp;</span>number)</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name of a color in your palette,
-any other color value,
-or even a pre-calculated numeric<span class="widont">&nbsp;</span>luminance.</p>
+        <p>Color value, color token name,
+or pre-calculated numeric luminance
+for the base<span class="widont">&nbsp;</span>color.</p>
 
       </div>
     
@@ -2420,14 +2568,16 @@ or even a pre-calculated numeric<span class="widont">&nbsp;</span>luminance.</p>
         <span class="item-name">$contrast:</span>
       
       
-      <span class="value-type">(string | list |<span class="widont">&nbsp;</span>number)</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or value of a color to contrast against the<span class="widont">&nbsp;</span>first.</p>
+        <p>Color value, color token name,
+or pre-calculated numeric luminance
+for a contrast color to compare against the<span class="widont">&nbsp;</span>base.</p>
 
       </div>
     
@@ -2546,8 +2696,8 @@ The function will return <code>false</code> if the required ratio is not<span cl
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">/* black and white: #{contrast-ratio(white, black)} */
-/* failed &#39;AAA&#39;: #{contrast-ratio(white, #999, &#39;AAA&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">/* black and white: #{tools.contrast-ratio(white, black)} */
+/* failed &#39;AAA&#39;: #{tools.contrast-ratio(white, #999, &#39;AAA&#39;)} */</code></pre>
     </div>
   
 
@@ -2569,8 +2719,8 @@ The function will return <code>false</code> if the required ratio is not<span cl
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/* black and white: contrast-ratio(white, black) */
-/* failed &#39;AAA&#39;: contrast-ratio(white, #999, &quot;AAA&quot;) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* black and white: 21 */
+/* failed &#39;AAA&#39;: false */</code></pre>
     </div>
   
 
@@ -2702,7 +2852,75 @@ The function will return <code>false</code> if the required ratio is not<span cl
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">_a_valid-contrast()</span>
+        <span class="item-name">valid-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
       
       
       
@@ -2891,7 +3109,7 @@ The function will return <code>false</code> if the required ratio is not<span cl
     
       
       <div class="param-details text-block">
-        <p>The name or value of a<span class="widont">&nbsp;</span>color.</p>
+        <p>A color value or color token<span class="widont">&nbsp;</span>name.</p>
 
       </div>
     
@@ -3027,6 +3245,40 @@ The function will return <code>false</code> if the required ratio is not<span cl
       
       
       
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
     </h4>
 
     

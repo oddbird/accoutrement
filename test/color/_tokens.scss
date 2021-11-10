@@ -4,7 +4,7 @@
 @use 'sass:color';
 @use 'sass:map';
 
-$old: tokens.$colors;
+$_old: tokens.$colors;
 
 @include test-module('color/tokens') {
 
@@ -114,4 +114,4 @@ $old: tokens.$colors;
 
 } // end module
 
-tokens.$colors: $old;
+tokens.$colors: $_old;

@@ -7,12 +7,6 @@
 @use 'sass:map' as sass-map;
 @use 'sass:meta';
 
-// Add contrast colors to the token map
-$_config: (
-  '_contrast-light': config.$contrast-light,
-  '_contrast-dark': config.$contrast-dark,
-);
-
 // Color Map
 // ---------
 /// A variable storing the map of
@@ -96,7 +90,7 @@ $colors: () !default;
 ///     'link': '#brand-pink',
 ///   );
 ///
-///   @include add-colors($brand-colors, $text-colors);
+///   @include tools.add-colors($brand-colors, $text-colors);
 ///
 /// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -160,7 +154,7 @@ $colors: () !default;
   $do: null,
   $source: $colors
 ) {
-  $source: sass-map.merge($_config, $source);
+  $source: sass-map.merge(config.contrast-settings(), $source);
 
   @if (meta.type-of($color) == 'color') {
     // apply adjustments

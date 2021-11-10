@@ -1,8 +1,12 @@
 @use '../internal/function';
 @use '../internal/type';
 @use '../internal/throw';
+@use '../tokens' as api;
+@use '../utils';
+@use 'config';
 @use 'tokens';
 @use 'sass:color';
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
@@ -97,25 +101,25 @@ $WCAG-CONTRAST: (
 /// @since 2.1.0 -
 /// - NEW: Provides access to contrast colors as CSS-variables, when defined
 /// @example scss - max contrast / no variable names
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     color: var-contrast(
+///     color: tools.var-contrast(
 ///       'background',
 ///       'light', 'dark', black, white
 ///     );
 ///   }
 /// @example scss - min contrast / variable names
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     color: var-contrast(
+///     color: tools.var-contrast(
 ///       'background',
 ///       'light', 'dark', black, white,
 ///       'AAA'
@@ -167,25 +171,25 @@ $WCAG-CONTRAST: (
 ///
 /// @group color-contrast
 /// @example scss - max contrast
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     @include contrasted(
+///     @include tools.contrasted(
 ///       'background',
 ///       'light', 'dark', black, white
 ///     );
 ///   }
 /// @example scss - min contrast
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     @include contrasted(
+///     @include tools.contrasted(
 ///       'background',
 ///       'light', 'dark', black, white,
 ///       'AAA'
@@ -214,7 +218,7 @@ $WCAG-CONTRAST: (
   $background,
   $options...
 ) {
-  $background: color($background);
+  $background: tokens.color($background);
 
   background-color: $background;
   color: contrast($background, $options...);
@@ -233,25 +237,25 @@ $WCAG-CONTRAST: (
 /// @since 2.1.0 -
 /// - NEW: Applies contrasting colors as CSS-variables, when defined
 /// @example scss - max contrast
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     @include var-contrasted(
+///     @include tools.var-contrasted(
 ///       'background',
 ///       'light', 'dark', black, white
 ///     );
 ///   }
 /// @example scss - min contrast
-///   $colors: (
+///   tools.$colors: (
 ///     'background': blue,
 ///     'light': #eee,
 ///     'dark': #111,
 ///   );
 ///   html {
-///     @include var-contrasted(
+///     @include tools.var-contrasted(
 ///       'background',
 ///       'light', 'dark', black, white,
 ///       'AAA'
@@ -298,8 +302,8 @@ $WCAG-CONTRAST: (
 /// @group color-contrast
 /// @link https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
 /// @example scss
-///   /* black and white: #{contrast-ratio(white, black)} */
-///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
+///   /* black and white: #{tools.contrast-ratio(white, black)} */
+///   /* failed 'AAA': #{tools.contrast-ratio(white, #999, 'AAA')} */
 ///
 /// @param {color | number} $base -
 ///   Color value, color token name,
@@ -357,7 +361,7 @@ $WCAG-CONTRAST: (
 @function luminance(
   $color
 ) {
-  $color: if(meta.type-of($color) != 'color', token.color($color), $color);
+  $color: tokens.color($color);
   $check: type.check($color, 'color', true, 'color.luminance', '$color');
   $luminance: 0;
 
@@ -400,32 +404,32 @@ $WCAG-CONTRAST: (
 /// @since 2.1.0 -
 /// - NEW: Allows for either private or public defaults
 ///
-/// @param {'light' | 'dark' | 'values' | 'map'} $return -
+/// @param {'light' | 'dark' | 'values' | 'map'} $return ['map'] -
 ///   Return the light value, dark value, both values, or a map
 /// @return {color-name | map} -
 ///   Light or dark color-name string,
 ///   or map with `light` and `dark` keys.
 @function default-contrast(
-  $return: 'both'
+  $return: 'map'
 ) {
   $both: (
-    'light': if(
-      map-has-key($colors, 'contrast-light'),
-      'contrast-light',
-      '_contrast-light'
-    ),
-    'dark': if(
-      map-has-key($colors, 'contrast-dark'),
-      'contrast-dark',
-      '_contrast-dark'
-    ),
+    'light': config.$contrast-light,
+    'dark': config.$contrast-dark,
   );
 
-  @if ($return == 'values') {
-    @return map-values($both);
+  @each $color in map.keys($both) {
+    $public: 'contrast-#{$color}';
+    $private: '_#{$public}';
+    $token: if(api.has-token(tokens.$colors, $public), $public, null);
+    $token: $token or if(api.has-token(tokens.$colors, $private), $private, null);
+    $both: if($token, map.set($both, $color, $token), $both);
   }
 
-  @return map-get($both, $return) or $both;
+  @if ($return == 'values') {
+    @return map.values($both);
+  }
+
+  @return map.get($both, $return) or $both;
 }
 
 
@@ -460,27 +464,24 @@ $WCAG-CONTRAST: (
   $options: null,
   $return: 'map'
 ) {
-  $opt-colors: ();
-  $min-ratio: false;
+  $min-ratio: list.nth($options, -1);
 
-  @each $opt in $options {
-    @if (type-of($opt) == 'color') or map-has-key($colors, $opt) {
-      $opt-colors: append($opt-colors, $opt);
-    } @else {
-      $min-ratio: valid-contrast($opt) or $min-ratio;
-    }
+  @if valid-contrast($min-ratio, false) {
+    $options: utils.list-remove-nth($options, -1);
+  } @else {
+    $min-ratio: false;
   }
 
   // Establish default options if they are missing
-  @if (length($opt-colors) == 0) or (not $opt-colors) {
-    $opt-colors: default-contrast('values');
-  } @else if (length($opt-colors) == 1 ){
-    $use: best-contrast(nth($opt-colors, 1), $return: 'name');
-    $opt-colors: append($opt-colors, $use);
+  @if (list.length($options) == 0) or (not $options) {
+    $options: default-contrast('values');
+  } @else if (list.length($options) == 1){
+    $use: best-contrast(nth($options, 1), $return: 'name');
+    $options: list.append($options, $use);
   }
 
   // Get the colors and their contrasts
-  $color-val: color($color);
+  $color-val: tokens.color($color);
   $color-lum: luminance($color-val);
   $best: (
     'name': null,
@@ -488,11 +489,11 @@ $WCAG-CONTRAST: (
     'ratio': null,
   );
 
-  @each $name in $opt-colors {
+  @each $name in $options {
     // 22 is above the highest possible, 0 is below the lowest
-    $best-ratio: map-get($best, 'ratio') or if($min-ratio, 22, 0);
+    $best-ratio: map.get($best, 'ratio') or if($min-ratio, 22, 0);
     $better: false;
-    $value: color($name);
+    $value: tokens.color($name);
     $lum: luminance($value);
     $ratio: contrast-ratio($color-lum, $lum, $min-ratio);
 
@@ -511,8 +512,8 @@ $WCAG-CONTRAST: (
     }
   }
 
-  @if (map-get($best, 'name')) {
-    @return map-get($best, $return) or $best;
+  @if (map.get($best, 'name')) {
+    @return map.get($best, $return) or $best;
   }
 
   @return false;
@@ -528,22 +529,31 @@ $WCAG-CONTRAST: (
 ///   WCAG or 0-21 contrast ratios will pass validation,
 ///   all other values will return false
 @function valid-contrast(
-  $ratio
+  $ratio,
+  $throw: true
 ) {
   @if (meta.type-of($ratio) == 'string') {
     $ratio: map.get($WCAG-CONTRAST, string.to-lower-case($ratio)) or $ratio;
   }
 
   @if not type.check($ratio, 'number') {
-    @return type.error($ratio, 'number', 'color.valid-contrast', '$ratio');
+    @if $throw {
+      @return type.error($ratio, 'number', 'color.valid-contrast', '$ratio');
+    }
+
+    @return false;
   }
 
   @if ($ratio >= 0) and ($ratio <= 21) {
     @return $ratio;
   }
 
-  @return throw.error(
-    'Contrast ratio must be a number between 0 and 21',
-    'color.valid-contrast'
-  );
+  @if $throw {
+    @return throw.error(
+      'Contrast ratio must be a number between 0 and 21',
+      'color.valid-contrast'
+    );
+  }
+
+  @return false;
 }

@@ -167,6 +167,11 @@
                 
   
     <li class="nav-item">
+      <a href="color.html" data-nav="is-not-active">QuickStart: Color</a>
+    </li>
+  
+  
+    <li class="nav-item">
       <a href="color-config.html" data-nav="is-not-active">Color Configuration</a>
     </li>
   
@@ -195,12 +200,7 @@
       <a href="color-vars.html" data-nav="is-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
-            </li>
-  
-    <li class="nav-item">
-      <a href="color.html" data-nav="is-not-active">color</a>
-    </li>
-  </ul>
+            </li></ul>
     </div>
 
     
@@ -496,9 +496,33 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (&#39;my-color&#39;: pink);
-$color-var-prefix: &#39;prefix_&#39;;
-html { @include color--(&#39;my-color&#39;) }</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (&#39;my-color&#39;: pink);
+tools.$color-var-prefix: &#39;prefix_&#39;;
+html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --prefix_my-color: pink;
+}</code></pre>
     </div>
   
 
@@ -892,13 +916,38 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;_brand&#39;: hsl(120, 50%, 50%),
   &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
   &#39;border&#39;: &#39;#text&#39;,
 );
 html {
-  @include colors--;
+  @include tools.colors--;
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --color-text: #206020;
+  --color-border: var(--color-text, #206020);
 }</code></pre>
     </div>
   
@@ -929,41 +978,6 @@ html {
 
     
       
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  token-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
       
         
         
@@ -1298,14 +1312,39 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;_brand&#39;: hsl(120, 50%, 50%),
   &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
   &#39;border&#39;: &#39;#text&#39;,
 );
 .example {
-  @include color--(&#39;border&#39;);
-  @include color--(&#39;outline&#39;, &#39;border&#39;, red);
+  @include tools.color--(&#39;border&#39;);
+  @include tools.color--(&#39;outline&#39;, &#39;border&#39;, red);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --color-border: var(--color-text, #206020);
+  --color-outline: var(--color-border, red);
 }</code></pre>
     </div>
   
@@ -1336,41 +1375,6 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
     
       
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
       
         
         
@@ -1699,14 +1703,14 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;_brand&#39;: hsl(120, 50%, 50%),
   &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
   &#39;border&#39;: &#39;#text&#39;,
 );
 .example {
-  border-color: var-color(&#39;border&#39;);
-  color: var-color(&#39;text&#39;, black);
+  border-color: tools.var-color(&#39;border&#39;);
+  color: tools.var-color(&#39;text&#39;, black);
 }</code></pre>
     </div>
   
@@ -1730,8 +1734,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  border-color: var-color(&quot;border&quot;);
-  color: var-color(&quot;text&quot;, black);
+  border-color: var(--color-border, #206020);
+  color: var(--color-text, black);
 }</code></pre>
     </div>
   

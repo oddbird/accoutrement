@@ -23,3 +23,13 @@ $contrast-light: white !default;
 /// @type color
 /// @group color-config
 $contrast-dark: black !default;
+
+@function contrast-settings(
+  $contrast-light: $contrast-light,
+  $contrast-dark: $contrast-dark,
+) {
+  @return (
+    '_contrast-light': $contrast-light,
+    '_contrast-dark': $contrast-dark,
+  );
+}

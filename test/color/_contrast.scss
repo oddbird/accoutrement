@@ -1,5 +1,12 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/color/contrast';
+@use '../../sass/color/tokens';
+@use 'test-data' as data;
+@use 'sass:map';
+@use 'sass:list';
+
+$_old: tokens.$colors;
+tokens.$colors: data.$colors;
 
 @include test-module('color/contrast') {
 
@@ -42,6 +49,13 @@
         $inspect: true
       );
     }
+
+    @include it('Handles tokens') {
+      @include assert-equal(
+        contrast.luminance('simple'),
+        contrast.luminance(#969),
+      )
+    }
   }
 
   // Valid Contrast [function]
@@ -70,10 +84,26 @@
       );
     }
 
+    @include it('Optionally return false on invalid type') {
+      @include assert-equal(
+        contrast.valid-contrast('nope', false),
+        false
+      );
+      @include assert-equal(
+        contrast.valid-contrast(#fff, false),
+        false
+      );
+    }
+
     @include it('Throws on out-of-range number') {
       $error: 'ERROR [color.valid-contrast] Contrast ratio must be a number between 0 and 21';
       @include assert-equal(contrast.valid-contrast(-3), $error);
       @include assert-equal(contrast.valid-contrast(24), $error);
+    }
+
+    @include it('Optionally return false on out-of-range number') {
+      @include assert-equal(contrast.valid-contrast(-3, false), false);
+      @include assert-equal(contrast.valid-contrast(24, false), false);
     }
   }
 
@@ -110,177 +140,173 @@
   }
 
 
-  // // Default Contrast [function]
-  // // ---------------------------
-  // @include describe('Default Contrast [function]') {
-  //   @include it('Returns the user default values when defined') {
-  //     @include assert-equal(
-  //       default-contrast(),
-  //       (
-  //         'light': 'contrast-light',
-  //         'dark': 'contrast-dark',
-  //       )
-  //     );
-  //   }
+  // Default Contrast [function]
+  // ---------------------------
+  @include describe('Default Contrast [function]') {
+    @include it('Returns the user default values when defined') {
+      @include assert-equal(
+        contrast.default-contrast(),
+        (
+          'light': 'contrast-light',
+          'dark': 'contrast-dark',
+        )
+      );
+    }
 
-  //   @include it('Returns the user light value') {
-  //     @include assert-equal(
-  //       default-contrast('light'),
-  //       'contrast-light'
-  //     );
-  //   }
+    @include it('Returns the user light value') {
+      @include assert-equal(
+        contrast.default-contrast('light'),
+        'contrast-light'
+      );
+    }
 
-  //   @include it('Returns the user dark value') {
-  //     @include assert-equal(
-  //       default-contrast('dark'),
-  //       'contrast-dark'
-  //     );
-  //   }
+    @include it('Returns the user dark value') {
+      @include assert-equal(
+        contrast.default-contrast('dark'),
+        'contrast-dark'
+      );
+    }
 
-  //   @include it('Returns the user dark value') {
-  //     @include assert-equal(
-  //       default-contrast('dark'),
-  //       'contrast-dark'
-  //     );
-  //   }
+    @include it('Returns the user dark value') {
+      @include assert-equal(
+        contrast.default-contrast('dark'),
+        'contrast-dark'
+      );
+    }
 
-  //   @include it('Returns a list of values') {
-  //     @include assert-equal(
-  //       default-contrast('values'),
-  //       ('contrast-light', 'contrast-dark')
-  //     );
-  //   }
+    @include it('Returns a list of values') {
+      @include assert-equal(
+        contrast.default-contrast('values'),
+        ('contrast-light', 'contrast-dark')
+      );
+    }
 
-  //   $original-colors: $colors;
-  //   $colors: () !global;
+    tokens.$colors: ();
 
-  //   @include it('Returns the factory keys by default') {
-  //     @include assert-equal(
-  //       default-contrast(),
-  //       (
-  //         'light': '_contrast-light',
-  //         'dark': '_contrast-dark',
-  //       )
-  //     );
-  //   }
+    @include it('Returns the factory keys by default') {
+      @include assert-equal(
+        contrast.default-contrast(),
+        (
+          'light': white,
+          'dark': black,
+        )
+      );
+    }
 
-  //   $colors: $original-colors !global;
-  // }
+    tokens.$colors: data.$colors;
+  }
 
 
-  // // Best Contrast [function]
-  // // -----------------------
-  // @include describe('Best Contrast [function]') {
-  //   @include it('Dark on light') {
-  //     @include assert-equal(
-  //       best-contrast(#eee),
-  //       (
-  //         'name': 'contrast-dark',
-  //         'color': color('contrast-dark'),
-  //         'ratio': contrast-ratio(#eee, 'contrast-dark'),
-  //       ),
-  //       'Returns a dark color to contrast a light one.'
-  //     );
-  //   }
+  // Best Contrast [function]
+  // -----------------------
+  @include describe('Best Contrast [function]') {
+    @include it('Dark on light') {
+      @include assert-equal(
+        contrast.best-contrast(#eee),
+        (
+          'name': 'contrast-dark',
+          'color': tokens.color('contrast-dark'),
+          'ratio': contrast.contrast-ratio(#eee, 'contrast-dark'),
+        ),
+        'Returns a dark color to contrast a light one.'
+      );
+    }
 
-  //   @include it('Light on dark') {
-  //     @include assert-equal(
-  //       best-contrast('dark'),
-  //       (
-  //         'name': 'contrast-light',
-  //         'color': color('contrast-light'),
-  //         'ratio': contrast-ratio('dark', 'contrast-light'),
-  //       ),
-  //       'Returns a light color to contrast a dark one.'
-  //     );
-  //   }
+    @include it('Light on dark') {
+      @include assert-equal(
+        contrast.best-contrast('dark'),
+        (
+          'name': 'contrast-light',
+          'color': tokens.color('contrast-light'),
+          'ratio': contrast.contrast-ratio('dark', 'contrast-light'),
+        ),
+        'Returns a light color to contrast a dark one.'
+      );
+    }
 
-  //   $original-colors: $colors;
-  //   $colors: () !global;
+    tokens.$colors: ();
 
-  //   @include it('Default light fallback') {
-  //     @include assert-equal(
-  //       best-contrast(#000, $return: 'color'),
-  //       #fff,
-  //       'Returns white for light contrast when none is given.'
-  //     );
-  //   }
+    @include it('Default light fallback') {
+      @include assert-equal(
+        contrast.best-contrast(#000, $return: 'color'),
+        #fff,
+        'Returns white for light contrast when none is given.'
+      );
+    }
 
-  //   @include it('Default dark fallback') {
-  //     @include assert-equal(
-  //       best-contrast(#fff, $return: 'color'),
-  //       #000,
-  //       'Returns black for dark contrast when none is given.'
-  //     );
-  //   }
+    @include it('Default dark fallback') {
+      @include assert-equal(
+        contrast.best-contrast(#fff, $return: 'color'),
+        #000,
+        'Returns black for dark contrast when none is given.'
+      );
+    }
 
-  //   $colors: $original-colors !global;
+    tokens.$colors: data.$colors;
 
-  //   @include it('Multiple contrast options') {
-  //     @include assert-equal(
-  //       best-contrast(
-  //         $color: 'primary',
-  //         $options: (#ff0, #fcc, #0f0, 'light', #003),
-  //         $return: 'name'
-  //       ),
-  //       #003,
-  //       'Returns the best option from the list.'
-  //     );
-  //   }
+    @include it('Multiple contrast options') {
+      @include assert-equal(
+        contrast.best-contrast(
+          $color: 'primary',
+          $options: (#ff0, #fcc, #0f0, 'light', #003),
+          $return: 'name'
+        ),
+        #003,
+        'Returns the best option from the list.'
+      );
+    }
 
-  //   @include it('Return name of a token') {
-  //     @include assert-equal(
-  //       best-contrast('primary', $return: 'name'),
-  //       'contrast-dark',
-  //       'Returns the name of a selected token.'
-  //     );
-  //   }
+    @include it('Return name of a token') {
+      @include assert-equal(
+        contrast.best-contrast('primary', $return: 'name'),
+        'contrast-dark',
+        'Returns the name of a selected token.'
+      );
+    }
 
-  //   @include it('Picks a smart default when only one option is given') {
-  //     @include assert-equal(
-  //       best-contrast(#eee, #ff0, $return: 'name'),
-  //       'contrast-dark'
-  //     );
-  //   }
+    @include it('Picks a smart default when only one option is given') {
+      @include assert-equal(
+        contrast.best-contrast(#eee, #ff0, $return: 'name'),
+        'contrast-dark'
+      );
+    }
 
-  //   $original-colors: $colors;
-  //   $colors: ('gray': gray) !global;
-  //   @include add-colors(shades-of('gray', 5));
+    tokens.$colors: data.$grays;
 
-  //   @include it('Can selects the minimum-best for a given ratio') {
-  //     @include assert-equal(
-  //       best-contrast(
-  //         black,
-  //         append(map-keys($colors), 'aa-large'),
-  //         'ratio'
-  //       ),
-  //       contrast-ratio(black, 'gray-dark-3'),
-  //       'aa-large'
-  //     );
+    @include it('Can selects the minimum-best for a given ratio') {
+      @include assert-equal(
+        contrast.best-contrast(
+          black,
+          list.append(map.keys(tokens.$colors), 'aa-large'),
+          'ratio'
+        ),
+        contrast.contrast-ratio(black, 'gray-dark-3'),
+        'aa-large'
+      );
 
-  //     @include assert-equal(
-  //       best-contrast(
-  //         black,
-  //         append(map-keys($colors), 'aa'),
-  //         'name'
-  //       ),
-  //       'gray',
-  //       'aa'
-  //     );
+      @include assert-equal(
+        contrast.best-contrast(
+          black,
+          list.append(map.keys(tokens.$colors), 'aa'),
+          'name'
+        ),
+        'gray',
+        'aa'
+      );
 
-  //     @include assert-equal(
-  //       best-contrast(
-  //         black,
-  //         append(map-keys($colors), 'aaa'),
-  //         'ratio'
-  //       ),
-  //       contrast-ratio(black, 'gray-0'),
-  //       'aaa'
-  //     );
-  //   }
+      @include assert-equal(
+        contrast.best-contrast(
+          black,
+          list.append(map.keys(tokens.$colors), 'aaa'),
+          'ratio'
+        ),
+        contrast.contrast-ratio(black, 'gray-0'),
+        'aaa'
+      );
+    }
 
-  //   $colors: $original-colors !global;
-  // }
+    tokens.$colors: data.$colors;
+  }
 
 
   // // Contrast [function]
@@ -434,3 +460,5 @@
   // }
 
 } // end module
+
+tokens.$colors: $_old;
