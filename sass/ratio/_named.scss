@@ -1,0 +1,34 @@
+@use 'sass:math';
+
+/// # Built-In Ratios
+/// Some built-in named ratios you can use,
+/// either directly or through the token syntax
+/// (where these values are provided with a `_` prefix).
+///
+/// @since 4.0.0 -
+/// - NEW: Now available as individual variables (without the `_` prefix)
+/// @example scss
+///   @use 'ratio/named';
+///   @each $name, $value in meta.module-variables('named') {
+///   /*! $#{$name}: #{$value}; */
+///   }
+/// @name named-ratios
+/// @group ratios
+
+$octave: 2;
+$major-seventh: math.div(15, 8);
+$minor-seventh: math.div(16, 9);
+$major-sixth: math.div(5, 3);
+$minor-sixth: math.div(8, 5);
+$fifth: math.div(3, 2);
+$augmented-fourth: math.div(45, 32);
+$fourth: math.div(4, 3);
+$major-third: math.div(5, 4);
+$minor-third: math.div(6, 5);
+$major-second: math.div(9, 8);
+$minor-second: math.div(16, 15);
+$photo: $fifth;
+$classic: $fourth;
+$widescreen: $minor-seventh;
+$cinema: 2.39;
+$golden: 1.61803399;

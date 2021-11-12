@@ -1,0 +1,71 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/vars';
+
+@include test-module('utils/vars') {
+  $test: (
+    'brand': #40bf40,
+    'border': medium dashed var(--brand),
+  );
+
+  // Dashed Ident [function]
+  // -----------------------
+  @include describe('Dashed Ident [function]') {
+    @include it('Returns a custom-property formatted token name') {
+      @include assert-equal(
+        vars.ident('test'),
+        --test
+      );
+    }
+
+    @include it('Prepends an optional prefix') {
+      @include assert-equal(
+        vars.ident('test item', 'color-'),
+        --color-test-item
+      );
+    }
+
+    @include it('Converts values to a string') {
+      @include assert-equal(
+        vars.ident(red, 'color-'),
+        --color-red
+      );
+    }
+
+    @include it('Replace spaces with dashes') {
+      @include assert-equal(
+        vars.ident(red 'list', 'color-'),
+        --color-red-list
+      );
+    }
+  }
+
+  // Custom Props [mixin]
+  // --------------------
+  @include describe('Custom Props [mixin]') {
+    @include it('Converts a map into css custom properties') {
+      @include assert {
+        @include output {
+          @include vars.custom-props($test);
+        }
+
+        @include expect {
+          --brand: #40bf40;
+          --border: medium dashed var(--brand);
+        }
+      }
+    }
+
+    @include it('Optionally adds a prefix') {
+      @include assert {
+        @include output {
+          @include vars.custom-props($test, 'test-');
+        }
+
+        @include expect {
+          --test-brand: #40bf40;
+          --test-border: medium dashed var(--brand);
+        }
+      }
+    }
+  }
+}

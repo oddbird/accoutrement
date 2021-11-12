@@ -1,0 +1,75 @@
+/// # QuickStart: Layout
+/// Tools for managing CSS layout:
+/// - Organize named z-index values in a list
+/// - Manage all breakpoints in a map,
+///   and access with media-query helpers
+/// - Use our positioning, clearfix, and box-model utilities
+/// @group layout
+
+
+@import 'box-sizing';
+@import 'clearfix';
+@import 'position';
+@import 'query-utils';
+@import 'queries';
+@import 'ratio';
+@import 'z-index';
+
+
+/// ## Import
+/// If you already imported `accoutrement/sass/tools` you are ready to go.
+/// If you want to import individual plugins,
+/// make sure you first import the shared core:
+///
+/// ```scss
+///   @import '<path-to>/accoutrement/sass/core';
+///   @import '<path-to>/accoutrement/sass/plugin/layout';
+/// ```
+///
+/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
+/// you can leave off most of the path:
+///
+/// ```scss
+///   @import 'accoutrement/core';
+///   @import 'accoutrement/plugin/layout';
+/// ```
+/// @group layout
+
+
+/// ## Media Queries
+/// Establish your media-query breakpoints,
+/// or use sizes from [Accoutrement Scale][scale.html] directly:
+///
+/// ```scss
+/// $sizes: (
+///   'page': 36rem,
+/// );
+///
+/// $breakpoints: (
+///   'banner-text': 24em,
+/// );
+/// ```
+///
+/// Access your breakpoints with
+/// `above()`, `below()`, and `between()` mixins:
+///
+/// ```
+/// .banner-text {
+///   display: none;
+///
+///   @include above('banner-text') {
+///     display: block;
+///   }
+/// }
+///
+/// .container {
+///   @include below('page') {
+///     padding: .5em;
+///   }
+/// }
+/// ```
+///
+/// We remove `.09em` or `1px`
+/// from `max-width` queries,
+/// to account for media-query overlap issues.
+/// @group layout

@@ -2,9 +2,51 @@
 
 ## 4.0.0 - UNRELEASED
 
-- NEW/BREAKING: The "init" module, which provided light-weight
+- BREAKING: Requires Sass modules, and other recent features of Dart Sass.
+  Legacy versions of Sass (Node & Ruby) are no longer supported
+- BREAKING: The old "init" module, which provided light-weight
   browser normalization, is no longer included. We now recommend
   using [CSS Remedy](https://github.com/jensimmons/cssremedy).
+- BREAKING: The old "core" module has been broken into individual modules
+  for "utilities" (extending several Sass modules),
+  "tokens" (the map syntax parser),
+  "variables" (converting Sass variables & maps to CSS custom properties),
+  and "ratios" (for typographic scales and layout aspect ratios)
+
+- [Sass Utilities][utils]:
+  - NEW: These functions are now available directly,
+    as well as being registered in the map syntax
+
+- [Variables][vars]:
+  - NEW: `ident()` function adds `--` and an optional prefix to any string,
+    in order to generate a custom property identifier.
+  - NEW: `custom-props()` mixin generates custom properties
+    for every key/value pair in a map.
+
+- [Tokens][token]:
+  - NEW: A module just for the custom map syntax parser & function registration
+  - BREAKING: The `$functions` map no longer accepts alias references
+    or any other aspects of the token syntax
+  - BREAKING: Ratios are no longer first-class adjustments
+    (like functions) in the token syntax
+  - BREAKING: `tokens.$handle-missing-keys` defaults to `null`,
+    and no longer supports the legacy `silent` option.
+  - BREAKING: `get-token()` is renamed `get()`,
+    and only accepts bare token names (no `#` prefix),
+    including the `outer->inner` nested token syntax.
+  - NEW: The new `compile()` function provides direct access to
+    parse & resolve an arbitrary token value
+    (including aliases with `#` prefix),
+    rather than calling a specific token by name.
+  - NEW: All the built-in Sass module functions are registered by default,
+    as `<module-name>.<function-name>`
+  - NEW: `has-token()` function checks a map
+    to see if the given token is defined,
+    and supports the `outer->inner` nested token syntax.
+
+- [Ratios][ratio]:
+  - NEW: Built-in named ratios are now available as individual variables,
+    (without the `_` prefix that is applied in token maps)
 
 ## 3.0.1 - 03/01/21
 
@@ -334,6 +376,10 @@ designing and testing several of these features.
   - NEW: Automatically formats font-family stacks
     with proper commas & quotations for CSS output
 
+[token]: https://www.oddbird.net/accoutrement/docs/tokens.html
+[utils]: https://www.oddbird.net/accoutrement/docs/utils.html
+[vars]: https://www.oddbird.net/accoutrement/docs/vars.html
+[ratio]: https://www.oddbird.net/accoutrement/docs/ratio.html
 [core]: https://www.oddbird.net/accoutrement/docs/core.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html
 [color]: https://www.oddbird.net/accoutrement/docs/color.html

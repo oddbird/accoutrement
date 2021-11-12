@@ -1,0 +1,45 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use '../internal/type';
+@use '../internal/throw';
+
+/// ## Sass Maps
+/// Utility function(s) that extend the Sass core modules,
+/// to help with advanced map manipulation.
+/// @group utils
+
+// Map MultiMerge
+// --------------
+/// Merge multiple maps into a single map,
+/// in case you want to define tokens in smaller groups --
+/// such as `brand-colors`, `text-colors`, etc. --
+/// before merging them into a single map.
+///
+/// This function has a `map-` prefix added by default
+/// (eg `map-multi-merge()`)
+/// unless it's imported directly.
+///
+/// @group utils
+/// @param {maps...} $maps -
+///   Pass any number of maps to be merged.
+/// @return {map} -
+///   The merged map of easings.
+@function multi-merge(
+  $maps...
+) {
+  $return: ();
+
+  @each $map in $maps {
+    @if type.check($map, 'map') {
+      $return: map.merge($return, $map);
+    } @else {
+      $type: meta.type-of($map);
+      @return throw.error(
+        'Each value of `$maps...` must be a map, got `[#{$type}]: #{$map}`',
+        'multi-merge'
+      );
+    }
+  }
+
+  @return $return;
+}

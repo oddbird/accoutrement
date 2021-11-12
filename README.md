@@ -43,29 +43,47 @@ npm install accoutrement [--save-dev]
 yarn add accoutrement [--dev]
 ```
 
-Import what you need:
+Use what you need:
 
 ```scss
-// core and all plugins (also available with `/index`)
-@import '<path-to>/accoutrement/sass/tools';
+// all the modules (these are functionally the same)
+@use "<path-to>/accoutrement";
+@use "<path-to>/accoutrement/sass/tools";
 
-// individual plugins (core is required)
-@import '<path-to>/accoutrement/sass/core';
-@import '<path-to>/accoutrement/sass/plugin/<name>';
+// individual modules (at `/accoutrement/sass/<name>`)
+@use "<path-to>/accoutrement/sass/color";
 ```
 
 If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-you can import the default "tools" (core + plugins) using only:
+you can use the default "tools" (core + plugins) using only:
 
 ```scss
-@import 'accoutrement';
+@use "accoutrement";
 ```
 
-## Usage
+## Modules for common data types
 
-The accoutrement tools are built around
-a shared data-storage syntax
-using Sass "map" objects:
+- **[Animate](https://www.oddbird.net/accoutrement/docs/animate.html)** --
+  For managing CSS transitions and animations
+- **[Color](https://www.oddbird.net/accoutrement/docs/color.html)** --
+  For managing CSS colors and contrast-ratios
+- **[Scale](https://www.oddbird.net/accoutrement/docs/scale.html)** --
+  For managing CSS sizes: typographic scales, spacing, etc.
+- **[Type](https://www.oddbird.net/accoutrement/docs/ratios.html)** --
+  For managing webfonts, generated content, and other text needs
+- **[Ratios](https://www.oddbird.net/accoutrement/docs/type.html)** --
+  For managing aspect and typography ratios
+  (several common ratios are provided)
+- **[Variables](https://www.oddbird.net/accoutrement/docs/vars.html)** --
+  For converting Sass maps and variables into CSS custom properties
+- **[Utilities](https://www.oddbird.net/accoutrement/docs/utils.html)** --
+  For helpers with Sass lists, strings, and maps
+
+## Tokens
+
+The **Token** module provides
+a special syntax for managing design tokens
+with Sass "map" objects:
 
 ```scss
 $map: (
@@ -74,7 +92,7 @@ $map: (
 );
 ```
 
-Using a custom syntax,
+Using the custom syntax,
 we can extend maps to handle internal reference,
 and functional adjustments --
 capturing meaningful relationships
@@ -86,8 +104,8 @@ $map: (
   // internal reference & adjustments
   'gutter': '#root'
     (
-      '_major-third': 1,
-      'convert-units': 'rem',
+      "scale": ('_major-third', 1),
+      "convert-units": "rem",
     ),
 );
 ```
@@ -101,41 +119,30 @@ Map storage serves a larger purpose:
 - Meaningful structure allows automation,
   from [automated style guides][herman]
   to automated functionality
-  (provided in the plugins)
 
 [herman]: https://www.oddbird.net/herman/
 [type]: https://www.oddbird.net/accoutrement/docs/type.html
 
-## [Core](https://www.oddbird.net/accoutrement/docs/core.html)
-
-The **Core** module provides the generic
+This module provides the generic
 (non data-specific)
 setup and syntax parsing:
 
 - Retrieve & parse map values
-  with the generic [`get-token()`][get] function
-- Use our built-in [math][math], [modular-scale][ratio],
-  [list][list], and [string][string] utilities
-- Register your own first class [functions][functions],
-  for reference inside data maps
+  with `token.get()`
+  and other [token api functions][api]
+- Use the many [registered functions][internal]
+  to manipulate tokens in the map
+- Register your own [functions][functions],
+  for extra functionality
 
-[get]: https://www.oddbird.net/accoutrement/docs/core-get.html
-[math]: https://www.oddbird.net/accoutrement/docs/core-math.html
-[ratio]: https://www.oddbird.net/accoutrement/docs/core-ratio.html
-[list]: https://www.oddbird.net/accoutrement/docs/core-lists.html
-[string]: https://www.oddbird.net/accoutrement/docs/core-strings.html
-[functions]: https://www.oddbird.net/accoutrement/docs/core-register.html
+[api]: https://www.oddbird.net/accoutrement/docs/token-api.html
+[internal]: https://www.oddbird.net/accoutrement/docs/token-internal.html
+[functions]: https://www.oddbird.net/accoutrement/docs/token-register.html
 
-## Plugins…
-
-While the core module handles generic data-management,
-we also provide plugins for a few common data types:
-
-- **[Animate](https://www.oddbird.net/accoutrement/docs/animate.html)** --
-  Tools for managing CSS transitions and animations
-- **[Color](https://www.oddbird.net/accoutrement/docs/color.html)** --
-  Tools for managing CSS colors and contrast-ratios
-- **[Scale](https://www.oddbird.net/accoutrement/docs/scale.html)** --
-  Tools for managing CSS sizes: typographic scales, spacing, etc.
-- **[Type](https://www.oddbird.net/accoutrement/docs/type.html)** --
-  Tools for managing webfonts, generated content, and other text needs
+**Note:** We no longer use token maps
+internally at [OddBird](https://oddbird.net)
+since Sass "modules" now provide a way
+to group & namespace normal Sass variables meaningfully,
+and [access module variables as a map](https://sass-lang.com/documentation/modules/meta#module-variables).
+By relying on core Sass features,
+we avoid any confusion around the custom token syntax.

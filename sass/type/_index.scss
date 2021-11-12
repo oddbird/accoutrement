@@ -1,0 +1,93 @@
+/// # QuickStart: Type
+/// Sass typography and webfont helpers.
+/// - Gather all your fonts into a single map
+/// - Access fonts by name
+/// - Automate webfont imports from a CDN, or relative font files
+/// - Also includes helpers for accessibility
+///   and pseudo-elements.
+/// @group type
+
+
+@import 'config';
+@import 'helpers';
+@import 'normalize';
+@import 'a11y';
+@import 'fonts';
+@import 'font-vars';
+@import 'pseudo-elements';
+
+
+/// ## Import
+/// If you already imported `accoutrement/sass/tools` you are ready to go.
+/// If you want to import individual plugins,
+/// make sure you first import the shared core:
+///
+/// ```scss
+///   @import '<path-to>/accoutrement/sass/core';
+///   @import '<path-to>/accoutrement/sass/plugin/type';
+/// ```
+///
+/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
+/// you can leave off most of the path:
+///
+/// ```scss
+///   @import 'accoutrement/core';
+///   @import 'accoutrement/plugin/type';
+/// ```
+/// @group scale
+
+
+/// ## Webfont Configuration
+///
+/// ```scss
+/// // Set the a path to your fonts directory
+/// $font-path: '../fonts/';
+///
+/// $fonts: (
+///   // describe locally-hosted font files for import and access
+///   'heading': (
+///     'name': 'maven',
+///     'stack': ('helvetica', 'arial', sans-serif),
+///     'formats': 'woff' 'ttf',
+///     'normal': 'maven/maven_pro_regular-webfont',
+///     'bold': 'maven/maven_pro_bold-webfont',
+///   ),
+///
+///   // describe CDN fonts for access
+///   'body': (
+///     'name': 'Source Sans Pro',
+///     'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+///   ),
+///
+///   // provide aliases when useful
+///   'alias': '#body',
+/// );
+/// ```
+/// @group type
+
+
+/// ## Import WebFonts
+/// Import one font at a time with `font-face()`
+/// or all your local webfonts with `import-webfonts()`:
+///
+/// ```scss
+///  // Import one font by configuration key
+///  @include font-face('body');
+///
+///  // Import all local fonts
+///  @include import-webfonts;
+/// ```
+///
+/// Set your font-family anywhere,
+/// using the semantic names you defined earlier:
+///
+/// ```scss
+/// html {
+///   @include font-family('body');
+/// }
+///
+/// h1, h2, h3 {
+///   @include font-family('heading');
+/// }
+/// ```
+/// @group type

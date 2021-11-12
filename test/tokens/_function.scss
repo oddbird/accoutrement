@@ -1,0 +1,71 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/tokens/function';
+@use '../../sass/tokens/register';
+@use 'sass:meta';
+
+$fun: meta.get-function('get', $module: 'function');
+
+$reg: function.$functions;
+function.$functions: ('user': 'got-user');
+
+@include test-module('tokens/function') {
+
+  @include describe('get [function]') {
+    @include it('Returns an internal function') {
+      @include assert-true(function.get('plus'));
+    }
+
+    @include it('Returns a user function') {
+      @include assert-equal(
+        function.get('user', ('source': 'got-source')),
+        'got-user'
+      );
+    }
+
+    @include it('Returns a function from any map') {
+      @include assert-equal(
+        function.get('source', ('source': 'got-source')),
+        'got-source'
+      );
+    }
+
+    @include it('Returns null if no function is found') {
+      @include assert-equal(
+        function.get('nothing'),
+        null
+      );
+    }
+
+    @include it('Optionally throws when the function is not registered') {
+      @include assert-equal(
+        function.get('nothing', $throw: true),
+        'ERROR [function.get] `nothing` is not a registered function'
+      );
+    }
+
+    @include it('Optionally throws when the registered item is not a function') {
+      @include assert-equal(
+        function.get('user', $throw: true),
+        'ERROR [function.get] `user` (`got-user`) is not a valid function for performing token adjustments'
+      );
+    }
+  }
+
+  @include describe('register [mixin]') {
+    @include it('Registers a user function') {
+      @include function.register($fun, 'user-fun', 'user-fun2');
+
+      @include assert-equal(
+        function.$functions,
+        (
+          'user': 'got-user',
+          'user-fun': $fun,
+          'user-fun2': $fun,
+        )
+      )
+    }
+  }
+
+}
+
+function.$functions: $reg;

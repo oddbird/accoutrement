@@ -1,0 +1,76 @@
+/// # QuickStart: Scale
+/// Sass size & scale management tools:
+/// - Gather all your sizes into a single map
+/// - Generate new sizes based on [modular scales][core-ratio.html]
+///   or arbitrary functions
+/// - Convert between relative units
+/// - Access sizes on the fly
+/// @group scale
+
+
+@import 'config';
+@import 'units';
+@import 'size';
+@import 'css-vars';
+
+
+/// ## Import
+/// If you already imported `accoutrement/sass/tools` you are ready to go.
+/// If you want to import individual plugins,
+/// make sure you first import the shared core:
+///
+/// ```scss
+///   @import '<path-to>/accoutrement/sass/core';
+///   @import '<path-to>/accoutrement/sass/plugin/scale';
+/// ```
+///
+/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
+/// you can leave off most of the path:
+///
+/// ```scss
+///   @import 'accoutrement/core';
+///   @import 'accoutrement/plugin/scale';
+/// ```
+/// @group scale
+
+
+/// ## Sizes & Ratios
+/// Establish your palette of ratios (modular scales) and sizes:
+///
+/// ```scss
+/// $ratios: (
+///   'my-ratio': 1.25,
+/// );
+///
+/// $sizes: (
+///   // define explicit values
+///   'root': 24px,
+///   'icons': 1em,
+///   'page': 8in,
+///
+///   // reference existing sizes
+///   'text': '#root'
+///
+///   // apply adjustments and conversions
+///   // using named-ratios or arbitrary functions
+///   'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
+///
+///   'h1': '#root' ('my-ratio': 3),
+///   'h2': '#root' ('my-ratio': 2),
+///   'h3': '#root' ('my-ratio': 1),
+///
+///   // define calc() output based on existing sizes
+///   'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
+/// );
+/// ```
+///
+/// Access your named sizes using the `size()` function,
+/// and even convert-units on-the-fly:
+///
+/// ```scss
+/// .example {
+///   font-size('text');
+///   width: size('page', 'px');
+/// }
+/// ```
+/// @group scale

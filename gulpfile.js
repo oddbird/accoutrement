@@ -1,31 +1,35 @@
 /* eslint-env node */
 
-'use strict';
-
-const beeper = require('beeper');
-const chalk = require('chalk');
-const gulp = require('gulp');
-const log = require('fancy-log');
-const sassdoc = require('sassdoc');
-const sasslint = require("gulp-stylelint");
+import beeper from 'beeper';
+import chalk from 'chalk';
+import gulp from 'gulp';
+import log from 'fancy-log';
+import sassdoc from 'sassdoc';
+import sasslint from 'gulp-stylelint';
 
 const paths = {
   TEST_DIR: 'test/',
   SASS_DIR: 'sass/',
-  IGNORE: [
-    '!**/.#*',
-    '!**/flycheck_*'
+  IGNORE: ['!**/.#*', '!**/flycheck_*'],
+  // @@@ remove these as they are migrated
+  IGNORE_SASS: [
+    '!sass/animate/**/*.scss',
+    '!sass/color/**/*.scss',
+    '!sass/core/**/*.scss',
+    '!sass/layout/**/*.scss',
+    '!sass/scale/**/*.scss',
+    '!sass/type/**/*.scss',
   ],
   init: function () {
-    this.SASS = [
-      this.SASS_DIR + '**/*.scss'
-    ].concat(this.IGNORE);
+    this.SASS = [this.SASS_DIR + '**/*.scss']
+      .concat(this.IGNORE)
+      .concat(this.IGNORE_SASS);
     this.ALL_SASS = [
       this.SASS_DIR + '**/*.scss',
-      this.TEST_DIR + '**/*.scss'
+      this.TEST_DIR + '**/*.scss',
     ].concat(this.IGNORE);
     return this;
-  }
+  },
 }.init();
 
 const onError = function (err) {
@@ -37,34 +41,25 @@ const onError = function (err) {
 const sasslintTask = (src, failOnError, shouldLog) => {
   if (shouldLog) {
     const cmd = `sasslint ${src}`;
-    log("Running", `'${chalk.cyan(cmd)}'...`);
+    log('Running', `'${chalk.cyan(cmd)}'...`);
   }
   const stream = gulp.src(src).pipe(
     sasslint({
-      reporters: [{ formatter: "string", console: true }],
-      failAfterError: failOnError
-    })
+      reporters: [{ formatter: 'string', console: true }],
+      failAfterError: failOnError,
+    }),
   );
   if (!failOnError) {
-    stream.on("error", onError);
+    stream.on('error', onError);
   }
   return stream;
 };
 
-gulp.task(
-  "sasslint",
-  () => sasslintTask(paths.SASS, true)
-);
+gulp.task('sasslint', () => sasslintTask(paths.SASS, true));
 
-gulp.task(
-  "sasslint-nofail",
-  () => sasslintTask(paths.SASS)
-);
+gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
 
-gulp.task(
-  'sassdoc',
-  () => gulp.src(paths.SASS).pipe(sassdoc())
-);
+gulp.task('sassdoc', () => gulp.src(paths.SASS).pipe(sassdoc()));
 
 gulp.task('watch', (cb) => {
   gulp.watch(paths.SASS, gulp.parallel('sassdoc'));
