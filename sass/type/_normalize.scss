@@ -260,7 +260,7 @@
   @if $path {
     @if (list.length($formats) > 0) {
       @each $format in $formats {
-        $url: helpers.font-url($path, $format, $svgid);
+        $url: helpers.format-url($path, $format, $svgid);
         $implicit: map.merge(
           $implicit,
           (
@@ -281,7 +281,7 @@
 
   @each $key, $value in $data {
     @if map.has-key(helpers.$FONT-FORMATS, $key) {
-      $url: helpers.font-url($value, $key, $svgid);
+      $url: helpers.format-url($value, $key, $svgid);
       $explicit: map.merge(
         $explicit,
         (

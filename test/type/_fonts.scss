@@ -1,6 +1,7 @@
 @use '../../../node_modules/sass-true/sass/true' as *;
 @use '../../../sass/type/config';
 @use '../../../sass/type/fonts';
+@use '../../../sass/type/helpers';
 @use 'test-data' as data;
 
 $_global: config.$fonts;
@@ -84,14 +85,14 @@ config.$font-path: data.$font-path;
   @include describe('font-url [function]') {
     @include it('Prepend font folder to font path') {
       @include assert-equal(
-        fonts.font-url('myfont.woff'),
+        helpers.font-url('myfont.woff'),
         url('../fonts/myfont.woff')
       );
     }
 
     @include it('Leaves data-fonts without additional path info') {
       @include assert-equal(
-        fonts.font-url('data:something'),
+        helpers.font-url('data:something'),
         url('data:something')
       );
     }
@@ -169,7 +170,7 @@ config.$font-path: data.$font-path;
 
   // Font Face [mixin]
   // -----------------
-  /*   @include describe('Font Face [mixin]') {
+  @include describe('Font Face [mixin]') {
     @include it('Font-face imports for each variant') {
       @include assert {
         @include output(false) {
@@ -251,7 +252,7 @@ config.$font-path: data.$font-path;
         }
       }
     }
-  } */
+  }
 
   // Import Webfonts [mixin]
   // -----------------------

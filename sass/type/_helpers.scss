@@ -2,6 +2,8 @@
 @use 'sass:map';
 @use 'sass:string';
 @use '../utils/string' as str;
+@use './config';
+
 /// # Internal WebFont Helpers
 /// These internal tools are not safe for public use --
 /// but we've documented the logic for transparency,
@@ -58,7 +60,7 @@ $FONT-FORMATS: (
 );
 
 // stylelint-disable function-url-quotes
-// Font URL
+// Format URL
 // --------
 /// Interpolate a font path and format-type
 /// to create the proper font-src import URL.
@@ -68,6 +70,7 @@ $FONT-FORMATS: (
 /// [font-url]: fonts.html#function--font-url
 ///
 /// @since type-4.0.0 -
+/// - BREAKING: Name changed from `font-url` to `format-url`
 /// - NEW: Added to format font-paths correctly,
 ///   with file extension and suffix.
 ///
@@ -89,7 +92,7 @@ $FONT-FORMATS: (
 ///   Optionally append an `?#iefix` suffix to `eot` fonts.
 /// @return {string} -
 ///   Font-format URL for importing.
-@function font-url($path, $format, $svgid: null, $iefix: false) {
+@function format-url($path, $format, $svgid: null, $iefix: false) {
   $suffix: '';
 
   // some formats need no adjustments
@@ -149,7 +152,7 @@ $FONT-FORMATS: (
   $format-name: if($format-name, format($format-name), '');
 
   // stylelint-disable-next-line function-url-quotes
-  $path: font-url($path, $format, $iefix: true);
+  $path: format-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
 
@@ -297,7 +300,7 @@ $FONT-FORMATS: (
   $double: false;
 
   @if $eot {
-    $eot: font-url($eot, 'eot');
+    $eot: format-url($eot, 'eot');
     $eot: font-url($eot);
 
     @if (not string.index($eot, 'data:')) {
@@ -362,4 +365,32 @@ $FONT-FORMATS: (
       unicode-range: $unicode;
     }
   }
+}
+
+// Font-URL [function]
+// -------------------
+/// This is a wrapper for the CSS `url()` function,
+/// which simply prepends the global `$font-path` when appropriate.
+///
+/// @since type-4.0.0 -
+/// - BUGFIX: Supports Base64 data URI's, without prepending font-path
+///
+/// @group type-fonts
+/// @example scss
+///   $font-path: '../fonts/';
+///   $src: font-url('sans/my-sans-font.woff2');
+///   /* #{$src} */
+///
+/// @param {string} $path -
+///   A path relative to the fonts directory.
+/// @return {string} -
+///   The full path to a font file, in CSS `url('my/path')` format.
+@function font-url($path) {
+  @if not string.index($path, 'data:') {
+    $path: config.$font-path + $path;
+  }
+
+  @return url(string.quote(
+    $path
+  )); // stylelint-disable-line function-url-quotes
 }
