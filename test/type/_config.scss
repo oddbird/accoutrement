@@ -1,6 +1,10 @@
 @use 'sass:map';
 @use '../../../node_modules/sass-true/sass/true' as *;
+@use 'test-data' as data;
 @use '../../../sass/type/config';
+
+$_global: config.$fonts;
+config.$fonts: data.$fonts;
 
 // Configuration Tests
 // ===================
@@ -61,3 +65,5 @@
     }
   }
 } // end module
+
+config.$fonts: $_global;

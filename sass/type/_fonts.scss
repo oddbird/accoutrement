@@ -4,6 +4,8 @@
 @use '../tokens/api';
 @use './config';
 @use './normalize';
+@use './helpers';
+@use '../tokens/inspect';
 
 /// ### Using WebFonts
 ///
@@ -62,7 +64,7 @@
 ///   The full path to a font file, in CSS `url('my/path')` format.
 @function font-url($path) {
   @if not string.index($path, 'data:') {
-    $path: $font-path + $path;
+    $path: config.$font-path + $path;
   }
 
   @return url(string.quote(
@@ -91,7 +93,7 @@
 ///   );
 ///
 ///   html {
-///     font-family: font-family('sans');
+///     font-family: tools.font-family('sans');
 ///   }
 ///
 /// @param {string} $key -
@@ -102,7 +104,7 @@
 /// @return {String} -
 ///   The full font-stack for the given font,
 ///   ready for output with the `font-family` property.
-@function font-family($key, $source: $fonts) {
+@function font-family($key, $source: config.$fonts) {
   $font: font($key, $source);
   @return map.get($font, 'stack');
 }
@@ -125,7 +127,7 @@
 ///   );
 ///
 ///   html {
-///     @include font-family('sans');
+///     @include tools.font-family('sans');
 ///   }
 ///
 /// @param {string} $key -
@@ -133,7 +135,7 @@
 /// @param {map} $source [$fonts] -
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
-@mixin font-family($key, $source: $fonts) {
+@mixin font-family($key, $source: config.$fonts) {
   font-family: font-family($key, $source);
 }
 
@@ -169,7 +171,7 @@
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output `@font-face` import blocks for any defined font-variants.
-@mixin font-face($key, $source: $fonts) {
+@mixin font-face($key, $source: config.$fonts) {
   $font: font($key, $source);
   $variants: helpers.font-get-variants($font);
   $name: map.get($font, 'name');
@@ -224,15 +226,18 @@
 ///       'source': 'https://fonts.google.com/',
 ///     ),
 ///   );
-///   @include import-webfonts;
+///   @include tools.import-webfonts;
 ///
 /// @param {map} $source [$fonts] -
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output Any number of `@font-face` blocks.
-@mixin import-webfonts($source: $fonts) {
+@mixin import-webfonts($source: config.$fonts) {
   @each $key, $font in $source {
-    @if not is-alias-for($source, $key) and not is-private-token($key) {
+    @if not
+      inspect.is-alias-for($source, $key) and not
+      inspect.is-private-token($key)
+    {
       @include font-face($key);
     }
   }

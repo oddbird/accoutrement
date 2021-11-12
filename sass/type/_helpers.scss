@@ -174,7 +174,7 @@ $FONT-FORMATS: (
   $src: ();
 
   // Use best-practice format order
-  @each $format in map.keys($_a_FONT-FORMATS) {
+  @each $format in map.keys($FONT-FORMATS) {
     $url: map.get($data, $format);
 
     @if $url {
