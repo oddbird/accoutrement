@@ -130,7 +130,7 @@ $FONT-FORMATS: (
 /// Get the font `src` value for a given font path and format,
 /// including both `url()` and `format()`.
 /// This also sorts formats,
-/// organizing them into the proper output order for browser-compatability.
+/// organizing them into the proper output order for browser-compatibility.
 ///
 /// @since type-4.0.0 -
 /// - BREAKING: No longer accepts the `$format` parameter.
@@ -147,7 +147,7 @@ $FONT-FORMATS: (
 ///   SVG or EOT-iefix suffix to be added to font url.
 /// @return {list} -
 ///   CSS-ready `url() format()` combination for font-face `src` output.
-@function _a_font-src($path, $format) {
+@function font-src($path, $format) {
   $format-name: map.get($FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
@@ -173,7 +173,7 @@ $FONT-FORMATS: (
 /// @return {list} -
 ///   Compiled list of `url() format()` pairs,
 ///   ready to apply in the `src` property.
-@function _a_font-src-list($data) {
+@function font-src-list($data) {
   $src: ();
 
   // Use best-practice format order
@@ -189,7 +189,7 @@ $FONT-FORMATS: (
           $item: list.append($item, $li, 'comma');
         }
       } @else {
-        $li: _a_font-src($url, $format);
+        $li: font-src($url, $format);
         $item: list.append($item, $li, 'comma');
       }
 
@@ -350,7 +350,7 @@ $FONT-FORMATS: (
       font-style: $style;
       font-weight: $weight;
       font-display: $display;
-      src: _a_font-src-list($data);
+      src: font-src-list($data);
       unicode-range: $unicode;
     }
   } @else {
@@ -361,7 +361,7 @@ $FONT-FORMATS: (
       font-weight: $weight;
       font-display: $display;
       src: $eot;
-      src: _a_font-src-list($data);
+      src: font-src-list($data);
       unicode-range: $unicode;
     }
   }
