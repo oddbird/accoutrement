@@ -173,7 +173,7 @@ $font-var-prefix: 'font-' !default;
   $use: 'stack'
 ) {
   $source: font-values($source, $use);
-  @return vars.as-var($source, $font, $fallback, $font-var-prefix);
+  @return vars.var-token($source, $font, $fallback, $font-var-prefix);
 }
 
 // Font Values
