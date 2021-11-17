@@ -17,22 +17,13 @@
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// If you want to import individual plugins,
-/// make sure you first import the shared core:
+/// You can also import the type module on its own:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/core';
-///   @import '<path-to>/accoutrement/sass/plugin/type';
+///   @use '<path-to>/accoutrement/sass/type';
 /// ```
-///
-/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-/// you can leave off most of the path:
-///
-/// ```scss
-///   @import 'accoutrement/core';
-///   @import 'accoutrement/plugin/type';
-/// ```
-/// @group scale
+
+/// @group type
 
 /// ## Webfont Configuration
 ///
@@ -68,10 +59,10 @@
 ///
 /// ```scss
 ///  // Import one font by configuration key
-///  @include font-face('body');
+///  @include tools.font-face('body');
 ///
 ///  // Import all local fonts
-///  @include import-webfonts;
+///  @include tools.import-webfonts;
 /// ```
 ///
 /// Set your font-family anywhere,
@@ -79,11 +70,11 @@
 ///
 /// ```scss
 /// html {
-///   @include font-family('body');
+///   @include tools.font-family('body');
 /// }
 ///
 /// h1, h2, h3 {
-///   @include font-family('heading');
+///   @include tools.font-family('heading');
 /// }
 /// ```
 /// @group type
