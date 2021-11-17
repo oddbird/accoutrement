@@ -217,7 +217,7 @@ $fonts: () !default;
 ///     'stack': ('Helvetica', 'Arial', 'sans-serif'),
 ///   );
 ///
-///   @include add-font('heading', $franklin);
+///   @include tools.add-font('heading', $franklin);
 ///
 /// @param {map} $key -
 ///   Give your font a semantic access-key

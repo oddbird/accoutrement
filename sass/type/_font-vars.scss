@@ -64,7 +64,7 @@ $font-var-prefix: 'font-' !default;
 ///     @include tools.fonts--;
 ///   }
 ///
-/// @param {map} $source [config.$fonts] -
+/// @param {map} $source [$fonts] -
 ///   Optionally use a custom
 ///   map of fonts to set as css variables
 /// @param {string | list} $use ['stack'] -
@@ -115,7 +115,7 @@ $font-var-prefix: 'font-' !default;
 /// @param {string | list} $use ['stack'] -
 ///   Font-map value (such as 'name' or 'stack')
 ///   to use as custom-property values
-/// @param {map} $source [config.$fonts] -
+/// @param {map} $source [$fonts] -
 ///   Optional map of fonts to use as a palette source
 @mixin font--(
   $font,
@@ -147,7 +147,7 @@ $font-var-prefix: 'font-' !default;
 ///     'sans': '#text',
 ///   );
 ///   .example {
-///     font-family: tools.var-font('sans', sans-serif);
+///     tools.font-family: tools.var-font('sans', sans-serif);
 ///   }
 ///
 /// @param {*} $font -
@@ -158,7 +158,7 @@ $font-var-prefix: 'font-' !default;
 ///   - A token name will fallback to the value of that
 ///     css-variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
-/// @param {map} $source [config.$fonts] -
+/// @param {map} $source [$fonts] -
 ///   Optional Accoutrement map of fonts to use as source
 /// @param {string | list} $use ['stack'] -
 ///   Font-map value (such as 'name' or 'stack')
@@ -184,7 +184,7 @@ $font-var-prefix: 'font-' !default;
 ///
 /// @access private
 ///
-/// @param {map} $source [config.$fonts] -
+/// @param {map} $source [$fonts] -
 ///   Accoutrement map of fonts to use as source
 /// @param {string | list} $value ['stack'] -
 ///   Font-map value to use as filter

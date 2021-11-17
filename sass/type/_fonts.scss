@@ -135,7 +135,7 @@
 ///       'bold': 'sans/sourcesanspro-bold-webfont',
 ///     ),
 ///   );
-///   @include font-face('body-font');
+///   @include tools.font-face('body-font');
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map

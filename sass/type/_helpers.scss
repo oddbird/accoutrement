@@ -257,7 +257,7 @@ $FONT-FORMATS: (
 /// @access private
 /// @group type-helpers
 /// @example scss
-///   @include import-font-face(
+///   @include tools.import-font-face(
 ///     $name: 'Franklin Gothic',
 ///     $weight: 'normal',
 ///     $style: 'normal',
