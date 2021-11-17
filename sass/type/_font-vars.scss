@@ -1,5 +1,9 @@
 @use 'sass:map';
+@use './config';
+@use './normalize';
 @use '../tokens/api';
+@use '../tokens/inspect';
+@use '../tokens/vars';
 
 /// # Fonts » CSS Variables
 /// @group type-font-vars
@@ -11,7 +15,7 @@
 /// Accoutrement maps help solve that problem in Sass,
 /// so we wanted to carry that over into our CSS variable support.
 /// Set a prefix for all font-tokens,
-/// and we'll apply it when setting or calling css variables
+/// and we'll apply it when setting or calling CSS variables
 /// based on your font maps.
 /// Set to `null` or `''` (empty string) for no prefix.
 ///
@@ -27,7 +31,7 @@
 ///    )
 /// );
 /// $font-var-prefix: 'prefix_';
-/// html { @include font--('my-font') }
+/// html { @include tools.font--('my-font') }
 ///
 /// @type string
 $font-var-prefix: 'font-' !default;
@@ -57,10 +61,10 @@ $font-var-prefix: 'font-' !default;
 ///     'sans': '#text',
 ///   );
 ///   html {
-///     @include fonts--;
+///     @include tools.fonts--;
 ///   }
 ///
-/// @param {map} $source [$fonts] -
+/// @param {map} $source [config.$fonts] -
 ///   Optionally use a custom
 ///   map of fonts to set as css variables
 /// @param {string | list} $use ['stack'] -
@@ -68,9 +72,9 @@ $font-var-prefix: 'font-' !default;
 ///   to use as custom-property values
 /// @output
 ///   Custom properties for all public fonts in the map
-@mixin fonts--($source: $fonts, $use: 'stack') {
-  $source: _a_font-values($source, $use);
-  @include tokens--($source, $font-var-prefix);
+@mixin fonts--($source: config.$fonts, $use: 'stack') {
+  $source: font-values($source, $use);
+  @include vars.tokens--($source, $font-var-prefix);
 }
 
 // Font--
@@ -92,8 +96,8 @@ $font-var-prefix: 'font-' !default;
 ///     'sans': '#text',
 ///   );
 ///   .example {
-///     @include font--('text');
-///     @include font--('headline', 'sans', sans-serif);
+///     @include tools.font--('text');
+///     @include tools.font--('headline', 'sans', sans-serif);
 ///   }
 ///
 /// @param {*} $font -
@@ -106,22 +110,22 @@ $font-var-prefix: 'font-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {string | list} $use ['stack'] -
 ///   Font-map value (such as 'name' or 'stack')
 ///   to use as custom-property values
-/// @param {map} $source [$fonts] -
+/// @param {map} $source [config.$fonts] -
 ///   Optional map of fonts to use as a palette source
 @mixin font--(
   $font,
   $value: null,
   $fallback: true,
-  $source: $fonts,
+  $source: config.$fonts,
   $use: 'stack'
 ) {
-  $source: _a_font-values($source, $use);
-  @include token--($source, $font, $value, $fallback, $font-var-prefix);
+  $source: font-values($source, $use);
+  @include vars.token--($source, $font, $value, $fallback, $font-var-prefix);
 }
 
 // Var Font
@@ -143,7 +147,7 @@ $font-var-prefix: 'font-' !default;
 ///     'sans': '#text',
 ///   );
 ///   .example {
-///     font-family: var-font('sans', sans-serif);
+///     font-family: tools.var-font('sans', sans-serif);
 ///   }
 ///
 /// @param {*} $font -
@@ -154,7 +158,7 @@ $font-var-prefix: 'font-' !default;
 ///   - A token name will fallback to the value of that
 ///     css-variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
-/// @param {map} $source [$fonts] -
+/// @param {map} $source [config.$fonts] -
 ///   Optional Accoutrement map of fonts to use as source
 /// @param {string | list} $use ['stack'] -
 ///   Font-map value (such as 'name' or 'stack')
@@ -162,9 +166,14 @@ $font-var-prefix: 'font-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-font($font, $fallback: true, $source: $fonts, $use: 'stack') {
-  $source: _a_font-values($source, $use);
-  @return as-var($source, $font, $fallback, $font-var-prefix);
+@function var-font(
+  $font,
+  $fallback: true,
+  $source: config.$fonts,
+  $use: 'stack'
+) {
+  $source: font-values($source, $use);
+  @return vars.as-var($source, $font, $fallback, $font-var-prefix);
 }
 
 // Font Values
@@ -175,23 +184,23 @@ $font-var-prefix: 'font-' !default;
 ///
 /// @access private
 ///
-/// @param {map} $source [$fonts] -
+/// @param {map} $source [config.$fonts] -
 ///   Accoutrement map of fonts to use as source
 /// @param {string | list} $value ['stack'] -
 ///   Font-map value to use as filter
 /// @return {map} -
 ///   A map of font-keys that contain the requested value,
 ///   and aliases that refer to those fonts.
-@function _a_font-values($source: $fonts, $value: 'stack') {
+@function font-values($source: config.$fonts, $value: 'stack') {
   $return: ();
 
   @each $key, $raw in $source {
     $normal: api.get($source, $key);
-    $normal: _a_normalize-font($normal, $key, $source);
+    $normal: normalize.normalize-font($normal, $key, $source);
     $has: map.get($normal, $value);
 
     @if $has {
-      @if is-alias-for($source, $key) {
+      @if inspect.is-alias-for($source, $key) {
         $return: map.merge(
           $return,
           (
