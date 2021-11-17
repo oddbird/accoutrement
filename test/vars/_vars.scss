@@ -1,5 +1,5 @@
 @use '../../node_modules/sass-true/sass/true' as *;
-@use '../../sass/utils/vars';
+@use '../../sass/vars';
 
 @include test-module('utils/vars') {
   $test: (

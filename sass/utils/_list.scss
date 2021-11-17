@@ -2,11 +2,12 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use '../internal/throw';
+@use '../internal/function';
 
-/// # Sass Lists
+/// ## Sass Lists
 /// Utility function(s) that extend the Sass core modules,
 /// to help with advanced list manipulation.
-/// @group utils-list
+/// @group utils
 
 // Remove Nth
 // ----------
@@ -18,7 +19,7 @@
 /// However, it's available in all accoutrement maps
 /// as `'remove-nth'`.
 ///
-/// @group utils-list
+/// @group utils
 /// @example scss
 ///   $map: (
 ///     'main-start': ['nav-end' 'main-start' 'footer-start'],
@@ -65,6 +66,7 @@
 
   @return $result;
 }
+@include function.internal(meta.get-function('remove-nth'), 'remove-nth', 'list-remove-nth');
 
 
 // List From Template

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Function Registration | Accoutrement Documentation</title>
+  <title>Ratio Tokens | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -127,7 +127,7 @@
   
   
     <li class="nav-item">
-      <a href="token-register.html" data-nav="is-active">Function Registration</a>
+      <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   
   
@@ -152,7 +152,7 @@
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratio-tokens.html" data-nav="is-active">Ratio Tokens</a>
     </li>
   
   
@@ -214,11 +214,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Function Registration</strong>
+    <strong>Ratio Tokens</strong>
   </nav>
 
 
-        <div data-page="token-register">
+        <div data-page="ratio-tokens">
           
   
     
@@ -243,11 +243,9 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="function-registration">Function Registration</h1>
-<p>Because Sass 3.5+ requires first-class functions,
-we provide tools for capturing functions
-and making them available to the Accoutrement map parser.
-This also provides the ability to alias functions as you<span class="widont">&nbsp;</span>like.</p>
+      <h1 id="ratio-tokens">Ratio Tokens</h1>
+<p>All the tools you need to define and access ratios
+using the token<span class="widont">&nbsp;</span>syntax.</p>
 
       
   
@@ -312,7 +310,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
 
 
-<section class="item" id="variable--functions">
+<section class="item" id="variable--ratios">
   
     
   
@@ -330,7 +328,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
       
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
+        <a href="#variable--ratios" class="item-name">$ratios</a>
       
 
       
@@ -361,7 +359,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$ratios: () !default;</code></pre>
     </div>
   
 
@@ -373,29 +371,11 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
   
     <div class="text-block">
-      <p>We provide a single map to store &amp; manage functions
-that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<pre><code class="lang-scss">$functions: (
-  'inspect': meta.get-function('inspect', $module: 'meta'),
-);
-</code></pre>
-<p>Functions can be registered multiple times,
-under any aliases,
-but function maps are not able to use
-the alias<span class="widont">&nbsp;</span>syntax.</p>
+      <p>Define your own ratios,
+or alias built-in named ratios
+(all provided names are prefixed with <code>_</code> in token<span class="widont">&nbsp;</span>maps).</p>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Supports the <a href="core.html">core</a> map-reference syntax,
-for creating function<span class="widont">&nbsp;</span>aliases</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -419,67 +399,110 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
   
 
   
+
+
+  
+  
     
-  <div data-item-section="property">
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$ratios: (
+  &#39;line-height&#39;: calc(1 / 3),
+  &#39;hero&#39;: 1.778,
+  &#39;card&#39;: &#39;#_golden&#39;,
+);</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+
+    
+  <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
 
     
       
+
+      
         
+  
+  
+  
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">prose</span>
+      
+        <a href="
+  ratios.html#prose--" class="item-name"></a>
       
       
-        <span class="item-name">&lt;alias&gt;:</span>
       
-      
-      <span class="value-type">(function)</span>
       
     </h4>
 
     
-      
-      <div class="param-details text-block">
-        <p>Each alias key in the map
-should refer to a captured<span class="widont">&nbsp;</span>function</p>
-
-      </div>
-    
   </div>
 
 
       
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
     
   </div>
-
-  
-
-
-  
-  
-
 
   
   
@@ -515,40 +538,10 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-register.html#mixin--register" class="item-name">register()</a>
+  ratio-tokens.html#mixin--add-ratios" class="item-name">add-ratios()</a>
       
       
       
@@ -597,7 +590,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
 
 
-<section class="item" id="mixin--register">
+<section class="item" id="function--ratio">
   
     
   
@@ -611,11 +604,11 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@mixin</span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#mixin--register" class="item-name">register()</a>
+        <a href="#function--ratio" class="item-name">ratio()</a>
       
 
       
@@ -636,7 +629,425 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
   
     <div class="text-block">
-      <p>Register functions with<span class="widont">&nbsp;</span>accoutrement.</p>
+      <p>Retrieve a scale ratio by name
+from either the <code>$_DEFAULT-RATIOS</code>
+or user <code>$ratios</code> configurations.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Accepts <code>$do</code> map argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$ratio:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$do:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$ratios</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of ratios to use as the origin palette
+(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The numeric value of a<span class="widont">&nbsp;</span>ratio</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">/* _octave: #{tools.ratio(&#39;_octave&#39;)} */
+/* _fifth: #{tools.ratio(&#39;_fifth&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/* _octave: 2 */
+/* _fifth: 1.5 */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  ratios.html#variable--named-ratios" class="item-name">$named-ratios</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--add-ratios">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--add-ratios" class="item-name">add-ratios()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge individual ratio maps into the global <code>$ratio</code> variable.
+This can be useful for internal organization,
+documentation with <a href="http://sassdoc.com/">SassDoc</a>,
+or integration with our pattern-library generator:
+<a href="https://www.oddbird.net/herman/">Herman</a>.</p>
 
       
   
@@ -682,45 +1093,17 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$function:</span>
+        <span class="item-name">$maps:</span>
       
       
-      <span class="value-type">(function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The first-class function to be<span class="widont">&nbsp;</span>registered</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$names...:</span>
-      
-      <span class="item-value">$function</span>
-      <span class="value-type">(strings)</span>
+      <span class="value-type">(map...)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>One or more alias names (strings)
-to use for map-access to the<span class="widont">&nbsp;</span>function</p>
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
 
       </div>
     
@@ -752,9 +1135,10 @@ to use for map-access to the<span class="widont">&nbsp;</span>function</p>
     
       
       <div class="param-details text-block">
-        <p>{map} $_ACCOUTREMENT_APP -
-Functions are registered in a map
-under any number of<span class="widont">&nbsp;</span>aliases</p>
+        <ul>
+<li>An updated global <code>$ratios</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
 
       </div>
     
@@ -813,11 +1197,12 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">set()</span>
+        <a href="
+  utils.html#function--multi-merge" class="item-name">multi-merge()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -848,7 +1233,7 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
       
       
         <a href="
-  token-register.html#variable--functions" class="item-name">$functions</a>
+  ratio-tokens.html#variable--ratios" class="item-name">$ratios</a>
       
       
       <span class="value-type">(map)</span>

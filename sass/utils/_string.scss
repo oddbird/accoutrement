@@ -5,11 +5,12 @@
 @use 'list' as l;
 @use '../internal/throw';
 @use '../internal/type';
+@use '../internal/function';
 
-/// # Sass Strings
+/// ## Sass Strings
 /// Utility function(s) that extend the Sass core modules,
 /// to help with advanced string manipulation.
-/// @group utils-string
+/// @group utils
 
 /// Force
 /// ----
@@ -17,7 +18,7 @@
 /// This does not work for maps.
 ///
 /// @access private
-/// @group utils-string
+/// @group utils
 ///
 /// @param {string | list | number} $value -
 ///   Any Sass value that can be reliably converted to a string
@@ -55,7 +56,7 @@
 /// - NEW: Improved handling of non-string values,
 ///   allows you to replace a number within a string, for example
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -128,6 +129,7 @@
 
   @return $return;
 }
+@include function.internal(meta.get-function('replace'), 'replace', 'str-replace');
 
 
 // Interpolate
@@ -141,7 +143,7 @@
 /// However, it's available in all accoutrement maps
 /// as either `'interpolate'`, `'str-interpolate'`, or `'%s'`.
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   // sass treats calc() as a string,
 ///   // so we can use string-functions to manipulate calc values…
@@ -182,12 +184,13 @@
 
   @return $return;
 }
+@include function.internal(meta.get-function('interpolate'), 'interpolate', '%s', 'str-interpolate');
 
 
 // Split
 // -----
 /// Splits a string into a list of strings,
-/// using the same logic as JavaScript's `split()` meathod.
+/// using the same logic as JavaScript's `split()` method.
 ///
 /// This function has a `str-` prefix added by default
 /// (eg `str-split()`)
@@ -198,7 +201,7 @@
 /// @since 1.0.0 -
 /// - NEW: Aliased as `str-split`
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   $map: (
 ///     'list': 'hello world' ('split': ' '),
@@ -264,6 +267,7 @@
 
   @return $list;
 }
+@include function.internal(meta.get-function('split'), 'split', 'str-split');
 
 
 // Trim
@@ -280,7 +284,7 @@
 /// - NEW: Strips whitespace
 /// - NEW: Aliased as `str-trim`
 ///
-/// @group utils-string
+/// @group utils
 /// @example scss
 ///   $map: (
 ///     // null value is needed for single-argument functions…
@@ -310,3 +314,4 @@
 
   @return $string;
 }
+@include function.internal(meta.get-function('trim'), 'trim', 'str-trim');

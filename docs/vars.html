@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Variables &amp; Custom Properties | Accoutrement Documentation</title>
+  <title>CSS Custom Properties | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,22 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="utils-string.html" data-nav="is-not-active">Sass Strings</a>
+      <a href="utils.html" data-nav="is-not-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="utils-list.html" data-nav="is-not-active">Sass Lists</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="utils-map.html" data-nav="is-not-active">Sass Maps</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="vars.html" data-nav="is-active">Variables &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="vars.html" data-nav="is-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -147,7 +137,27 @@
   
   
     <li class="nav-item">
-      <a href="token-vars.html" data-nav="is-not-active">Tokens &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Ratios</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li></ul>
@@ -204,7 +214,7 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Variables &amp; Custom Properties</strong>
+    <strong>CSS Custom Properties</strong>
   </nav>
 
 
@@ -233,8 +243,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="tokens-css-variables">Tokens » CSS<span class="widont">&nbsp;</span>Variables</h1>
-<p><em>aka “Custom Properties”</em></p>
+      <h1 id="css-custom-properties">CSS Custom Properties</h1>
 <p>CSS variables are a useful way to manage
 values that might change in relation to the DOM –
 something that Sass variables cannot do.
@@ -611,7 +620,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  utils-string.html#function--replace" class="item-name">replace()</a>
+  utils.html#function--replace" class="item-name">replace()</a>
       
       
       
@@ -691,7 +700,7 @@ html {
       <span class="item-type">@function</span>
       
         <a href="
-  token-vars.html#function--as-var" class="item-name">as-var()</a>
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
@@ -861,7 +870,7 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -930,6 +939,30 @@ to generate a map of all the variables in a given<span class="widont">&nbsp;</sp
   
 
       
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>Custom properties for every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
   
 
       

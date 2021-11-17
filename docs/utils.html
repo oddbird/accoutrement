@@ -1,0 +1,3286 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-herman="root">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <title>Sass Maps, Lists, &amp; Strings | Accoutrement Documentation</title>
+
+  <link href="assets/img/favicon.ico" rel="shortcut icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  
+
+  
+</head>
+<body data-herman="body">
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+  <symbol id="icon-logo" viewBox="0 0 16 16">
+    <path d="M.2 8 0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 28">
+    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
+  </symbol>
+</svg>
+
+  <div data-region="app">
+    <header data-region="banner">
+      
+  <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" type="button" data-toggle-synced="false">
+    
+  <svg data-icon="menu" data-icon-size="nav-icon" ><title>menu</title><use xlink:href="#icon-menu" />
+  </svg>
+
+  </button>
+
+
+      <div class="project-title">
+        <a href="index.html" rel="home" class="project-name">Accoutrement</a>
+        
+          <span class="project-version">3.0.1</span>
+        
+      </div>
+    </header>
+
+    <div data-region="container">
+      
+  <nav data-region="nav" data-toggle="target" id="nav" data-target-id="nav" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
+
+    <div class="nav-subsection">
+      <h3 class="nav-home">
+        
+        <a href="index.html" data-nav="is-not-active">Accoutrement</a>
+      </h3>
+
+      
+      
+        <ul>
+          
+            
+            <li class="nav-item">
+              <a href="CHANGELOG.html" data-nav="is-not-active">Changelog</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="CONTRIBUTING.html" data-nav="is-not-active">Contributing</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="LICENSE.html" data-nav="is-not-active">MIT License</a>
+            </li>
+          
+        </ul>
+      
+    </div>
+
+    
+    <div class="nav-subsection">
+      <ul>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Utilities</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="utils.html" data-nav="is-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="vars.html" data-nav="is-not-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Tokens</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="tokens.html" data-nav="is-not-active">QuickStart: Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="token-config.html" data-nav="is-not-active">Configuration</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="token-api.html" data-nav="is-not-active">Accessing Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="token-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Ratios</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  </ul>
+            </li></ul>
+    </div>
+
+    
+    
+      <div class="nav-subsection">
+        <h3 class="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          
+            <li class="nav-item">
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement Site</a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="https://www.oddbird.net/" data-nav="is-not-active">OddBird</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <aside class="footer-credit">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
+          
+  <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
+  </svg>
+
+        </a>
+        <span>
+          Documented with
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="https://www.oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
+    
+  </nav>
+
+
+      <main data-region="main">
+        
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >Accoutrement</a> »
+    <strong>Sass Maps, Lists, &amp; Strings</strong>
+  </nav>
+
+
+        <div data-page="utils">
+          
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="sass-utilities">Sass Utilities</h1>
+<p>We use a number of Sass utilities
+to help manage strings, maps, and lists.
+As more functions are added to the Sass core,
+we hope to be able to remove some or all of these over<span class="widont">&nbsp;</span>time.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="sass-lists">Sass Lists</h2>
+<p>Utility function(s) that extend the Sass core modules,
+to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--remove-nth">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--remove-nth" class="item-name">remove-nth()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Remove any item (1-indexed) from a<span class="widont">&nbsp;</span>list.</p>
+<p>This function has a <code>list-</code> prefix added by default
+(eg <code>list-remove-nth()</code>)
+unless it’s imported directly.
+However, it’s available in all accoutrement maps
+as <code>'remove-nth'</code>.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$list:</span>
+      
+      
+      <span class="value-type">(list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original list to be<span class="widont">&nbsp;</span>edited</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$index:</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The 1-indexed item to remove from the<span class="widont">&nbsp;</span>list</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original list, with item<span class="widont">&nbsp;</span>removed</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p><code>$index</code> must be a non-zero<span class="widont">&nbsp;</span>integer</p>
+
+      </div>
+    
+  </div>
+
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p><code>$index</code> is too large for the list<span class="widont">&nbsp;</span>length</p>
+
+      </div>
+    
+  </div>
+
+    
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$map: (
+  &#39;main-start&#39;: [&#39;nav-end&#39; &#39;main-start&#39; &#39;footer-start&#39;],
+  &#39;small-start&#39;: &#39;#main-start&#39; (&#39;remove-nth&#39;: 1),
+);
+/*! #{inspect(tools.get($map, &#39;small-start&#39;))} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! [&quot;main-start&quot; &quot;footer-start&quot;] */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">template()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">normalize-token()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">has-alias()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">lookup-alias()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="sass-maps">Sass Maps</h2>
+<p>Utility function(s) that extend the Sass core modules,
+to help with advanced map<span class="widont">&nbsp;</span>manipulation.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--multi-merge">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--multi-merge" class="item-name">multi-merge()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge multiple maps into a single map,
+in case you want to define tokens in smaller groups –
+such as <code>brand-colors</code>, <code>text-colors</code>, etc. –
+before merging them into a single<span class="widont">&nbsp;</span>map.</p>
+<p>This function has a <code>map-</code> prefix added by default
+(eg <code>map-multi-merge()</code>)
+unless it’s imported<span class="widont">&nbsp;</span>directly.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$maps:</span>
+      
+      
+      <span class="value-type">(maps...)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The merged map of<span class="widont">&nbsp;</span>easings.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ratio-tokens.html#mixin--add-ratios" class="item-name">add-ratios()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="sass-strings">Sass Strings</h2>
+<p>Utility function(s) that extend the Sass core modules,
+to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--replace">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--replace" class="item-name">replace()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Replace a substring inside a larger string,
+or replace the entirety of the<span class="widont">&nbsp;</span>string.</p>
+<p>This function has a <code>str-</code> prefix added by default
+(eg <code>str-replace()</code>)
+unless it’s imported directly.
+However, it’s available in all accoutrement maps
+as either <code>'replace'</code> or <code>'str-replace'</code>.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Improved handling of non-string values,
+allows you to replace a number within a string, for<span class="widont">&nbsp;</span>example</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$string:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original string (or list of strings) to<span class="widont">&nbsp;</span>edit</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$old:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A sub-string to<span class="widont">&nbsp;</span>replace</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$new:</span>
+      
+      <span class="item-value">&#39;&#39;</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A new sub-string to replace the<span class="widont">&nbsp;</span>old</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$all:</span>
+      
+      <span class="item-value">false</span>
+      <span class="value-type">(boolean)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>If true, replace all instances of $old in<span class="widont">&nbsp;</span>$string</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Original string, with substring<span class="widont">&nbsp;</span>replaced</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
+// so we can use string-functions to manipulate calc values…
+$map: (
+  &#39;text-size&#39;: calc(1em + 1vw),
+  &#39;large-text&#39;: &#39;#text-size&#39; (&#39;str-replace&#39;: &#39;1vw&#39; &#39;3vw&#39;),
+);
+/*! #{tools.get($map, &#39;large-text&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! calc(1em + 3vw) */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">template()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">force()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">has-alias()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  utils.html#function--interpolate" class="item-name">interpolate()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  vars.html#function--ident" class="item-name">ident()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--interpolate">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--interpolate" class="item-name">interpolate()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Return a string with interpolated values
+replacing <code>%s</code> placeholders in a format<span class="widont">&nbsp;</span>string.</p>
+<p>This function has a <code>str-</code> prefix added by default
+(eg <code>str-interpolate()</code>)
+unless it’s imported directly.
+However, it’s available in all accoutrement maps
+as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'%s'</code>.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$string:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original string to be<span class="widont">&nbsp;</span>edited</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$values...:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>New strings, to replace the <code>%s</code> format strings</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Original string, with <code>%s</code> format strings<span class="widont">&nbsp;</span>replaced</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Too many interpolation values given for the<span class="widont">&nbsp;</span>string</p>
+
+      </div>
+    
+  </div>
+
+    
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
+// so we can use string-functions to manipulate calc values…
+$map: (
+  &#39;root&#39;: 16px,
+  &#39;responsive&#39;: &#39;calc(%s + %s)&#39; (&#39;%s&#39;: &#39;#root&#39; 0.5vw),
+);
+/*! #{tools.get($map, &#39;responsive&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! calc(16px + 0.5vw) */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  utils.html#function--replace" class="item-name">replace()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--split">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--split" class="item-name">split()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Splits a string into a list of strings,
+using the same logic as JavaScript’s <code>split()</code> meathod.</p>
+<p>This function has a <code>str-</code> prefix added by default
+(eg <code>str-split()</code>)
+unless it’s imported directly.
+However, it’s available in all accoutrement maps
+as either <code>'str-split'</code> or <code>'split'</code>.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Aliased as <code>str-split</code></li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$string:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original string to be<span class="widont">&nbsp;</span>split</p>
+<ul>
+<li>Empty strings will be returned as a list of one empty<span class="widont">&nbsp;</span>string</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$separator:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The string will be split on any instance of the separator,
+and the separators will be<span class="widont">&nbsp;</span>removed</p>
+<ul>
+<li>Null or unfound separators will return a single-item list
+with the original<span class="widont">&nbsp;</span>string</li>
+<li>Empty-string (<code>''</code>) separators will return a list of
+all characters in the original<span class="widont">&nbsp;</span>string</li>
+<li>Non-string separators will be converted to strings before<span class="widont">&nbsp;</span>splitting</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$limit:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(integer |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Maximum length of the returned<span class="widont">&nbsp;</span>list</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Space-delimited list of string-slices from the original<span class="widont">&nbsp;</span>string</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$map: (
+  &#39;list&#39;: &#39;hello world&#39; (&#39;split&#39;: &#39; &#39;),
+);
+/*! #{tools.get($map, &#39;list&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! hello world */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">force()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">has-alias()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">lookup-alias()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--trim">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--trim" class="item-name">trim()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Trims whitespace from the start and end of a<span class="widont">&nbsp;</span>string.</p>
+<p>This function has a <code>str-</code> prefix added by default
+(eg <code>str-trim()</code>)
+unless it’s imported directly.
+However, it’s available in all accoutrement maps
+as either <code>'str-trim'</code> or <code>'trim'</code>.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Strips whitespace</li>
+<li>NEW: Aliased as <code>str-trim</code></li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$string:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original string to be<span class="widont">&nbsp;</span>trimmed</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Trimmed string</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$map: (
+  // null value is needed for single-argument functions…
+  &#39;trim&#39;: &#39;  hello world     &#39; (&#39;trim&#39;: null),
+);
+/*! #{tools.get($map, &#39;trim&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! hello world */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
+</body>
+</html>

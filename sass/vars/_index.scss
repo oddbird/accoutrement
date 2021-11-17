@@ -1,0 +1,15 @@
+/// # CSS Custom Properties
+///
+/// CSS variables are a useful way to manage
+/// values that might change in relation to the DOM –
+/// something that Sass variables cannot do.
+/// In many cases,
+/// we find it helpful to manage variables in Sass,
+/// and output CSS properties as-needed.
+/// These tools help integrate Sass variables
+/// with CSS custom properties,
+/// to keep that relationship intact.
+///
+/// @group vars
+
+@forward 'vars';

@@ -12,11 +12,11 @@
 /// - `error`: Will throw an error, and stop compilation
 ///
 /// @since 4.0.0 -
-///   - BREAKING: Removed the `silent` option,
-///     to match built-in Sass map access behavior
+/// - BREAKING: Removed the `silent` option,
+///   to match built-in Sass map access behavior
 /// @since 2.2.0 -
-///   - NEW: Provides authors with more Sass-like behavior,
-///     and more options for managing or testing when a key lookup fails
+/// - NEW: Provides authors with more Sass-like behavior,
+///   and more options for managing or testing when a key lookup fails
 /// @author James Camilleri
 /// @group token-config
 /// @type string | null

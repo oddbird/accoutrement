@@ -15,8 +15,8 @@ In either case,
 please provide:
 
 - A minimum code sample that demonstrates the issue,
-  and steps to reporoduce
-- Excpected behavior and actual results
+  and steps to reproduce
+- Expected behavior and actual results
 - How you've attempted to solve the problem
 
 [issues]: https://github.com/oddbird/accoutrement/issues
