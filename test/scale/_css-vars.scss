@@ -133,5 +133,5 @@
     }
   }
 
-  $sizes: $global !global;
+  config.$sizes: $global;
 } // end module

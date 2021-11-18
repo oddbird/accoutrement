@@ -1,5 +1,7 @@
 @use 'sass:map';
+@use 'sass:math';
 @use '../../sass/tokens/function';
+@use '../../sass/scale/config';
 
 // Scale Tests
 // ===========
@@ -98,13 +100,13 @@ $test-sizes: (
     (
       'divide': 'test-value',
     ),
-  'round': 10rem / 3
+  'round': math.div(10rem, 3)
     (
       'round': null,
     ),
   'calc-simple': calc(1em + 2vw),
   'calc': (
-    '%value': 'calc(%s + %s / %s)',
+    '%value': 'calc(math.div(%s + %s, %s))',
     '%s': (
       '#root'
         (
@@ -120,5 +122,5 @@ $test-sizes: (
   'calc-ref': '#calc',
 );
 
-$sizes: map.merge($sizes, $test-sizes);
-@include function.register('round');
+$sizes: map.merge(config.$sizes, $test-sizes);
+//@include function.register('round');
