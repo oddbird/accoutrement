@@ -1,6 +1,8 @@
+@use './config';
+@use '../tokens/vars';
+
 /// # Sizes » CSS Variables
 /// @group scale-vars
-
 
 // Size Var Prefix
 // ---------------
@@ -9,7 +11,7 @@
 /// Accoutrement maps help solve that problem in Sass,
 /// so we wanted to carry that over into our CSS variable support.
 /// Set a prefix for all size-tokens,
-/// and we'll apply it when setting or calling css variables
+/// and we'll apply it when setting or calling CSS variables
 /// based on your size maps.
 /// Set to `null` or `''` (empty string) for no prefix.
 ///
@@ -19,13 +21,12 @@
 /// @group scale-vars
 ///
 /// @example scss
-///   $sizes: ('my-size': 3em);
-///   $size-var-prefix: 'prefix_';
-///   html { @include size--('my-size') }
+///   tools.$sizes: ('my-size': 3em);
+///   tools.$size-var-prefix: 'prefix_';
+///   html { @include tools.size--('my-size') }
 ///
 /// @type string
 $size-var-prefix: 'size-' !default;
-
 
 // Sizes--
 // -------
@@ -43,13 +44,13 @@ $size-var-prefix: 'size-' !default;
 ///
 /// @group scale-vars
 /// @example scss
-///   $sizes: (
+///   tools.$sizes: (
 ///     '_root': 16px,
 ///     'rhythm': '#_root' ('times': 1.5),
 ///     'line': '#rhythm',
 ///   );
 ///   html {
-///     @include sizes--;
+///     @include tools.sizes--;
 ///   }
 ///
 /// @param {map} $source [$sizes] -
@@ -57,12 +58,9 @@ $size-var-prefix: 'size-' !default;
 ///   map of sizes to set as css variables
 /// @output
 ///   Custom properties for all public sizes in the map
-@mixin sizes--(
-  $source: $sizes
-) {
-  @include tokens--($source, $size-var-prefix);
+@mixin sizes--($source: config.$sizes) {
+  @include vars.tokens--($source, $size-var-prefix);
 }
-
 
 // Size--
 // ------
@@ -74,14 +72,14 @@ $size-var-prefix: 'size-' !default;
 ///
 /// @group scale-vars
 /// @example scss
-///   $sizes: (
+///   tools.$sizes: (
 ///     '_root': 16px,
 ///     'rhythm': '#_root' ('times': 1.5),
 ///     'line': '#rhythm',
 ///   );
 ///   .example {
-///     @include size--('line');
-///     @include size--('padding', 'line', 1.5rem);
+///     @include tools.size--('line');
+///     @include tools.size--('padding', 'line', 1.5rem);
 ///   }
 ///
 /// @param {*} $size -
@@ -98,15 +96,9 @@ $size-var-prefix: 'size-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$sizes] -
 ///   Optional map of sizes to use as a palette source
-@mixin size--(
-  $size,
-  $value: null,
-  $fallback: true,
-  $source: $sizes
-) {
-  @include token--($source, $size, $value, $fallback, $size-var-prefix);
+@mixin size--($size, $value: null, $fallback: true, $source: config.$sizes) {
+  @include vars.token--($source, $size, $value, $fallback, $size-var-prefix);
 }
-
 
 // Var Size
 // --------
@@ -118,14 +110,14 @@ $size-var-prefix: 'size-' !default;
 ///
 /// @group scale-vars
 /// @example scss
-///   $sizes: (
+///   tools.$sizes: (
 ///     '_root': 16px,
 ///     'rhythm': '#_root' ('times': 1.5),
 ///     'line': '#rhythm',
 ///   );
 ///   .example {
-///     line-height: var-size('line');
-///     padding: var-size('rhythm', 1.5em);
+///     line-height: tools.var-size('line');
+///     padding: tools.var-size('rhythm', 1.5em);
 ///   }
 ///
 /// @param {*} $size -
@@ -141,10 +133,6 @@ $size-var-prefix: 'size-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-size(
-  $size,
-  $fallback: true,
-  $source: $sizes
-) {
-  @return var-token($source, $size, $fallback, $size-var-prefix);
+@function var-size($size, $fallback: true, $source: config.$sizes) {
+  @return vars.var-token($source, $size, $fallback, $size-var-prefix);
 }
