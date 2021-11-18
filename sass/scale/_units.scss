@@ -1,6 +1,6 @@
+@use './config';
 /// # Converting Units
 /// @group scale-units
-
 
 // Get PX [function]
 // -----------------
@@ -12,13 +12,10 @@
 ///   The number to be converted to px if comparable.
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
-@function _a_get-px(
-  $length
-) {
+@function _a_get-px($length) {
   // stylelint-disable-next-line length-zero-no-unit
   @return if(comparable($length, 1px), 0px + $length, false);
 }
-
 
 // Get Number [function]
 // ---------------------
@@ -30,10 +27,7 @@
 ///   The unit to return as a number.
 /// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
-@function _a_get-number(
-  $unit,
-  $relative: false
-) {
+@function _a_get-number($unit, $relative: false) {
   // stylelint-disable length-zero-no-unit
   $_absolute: (
     'in': 0in,
@@ -64,7 +58,6 @@
 
   @return map-get($_absolute, $unit);
 }
-
 
 // Convert Units [function]
 // ------------------------
@@ -103,11 +96,17 @@
   $to-context: $from-context
 ) {
   $_convertable: (
-    'in', 'mm', 'cm',
-    'pt', 'pc',
+    'in',
+    'mm',
+    'cm',
+    'pt',
+    'pc',
     'px',
-    'em', 'rem', 'browser-ems',
-    '%', 'ex',
+    'em',
+    'rem',
+    'browser-ems',
+    '%',
+    'ex'
   );
   $length: size($length);
   $from-unit: unit($length);
@@ -127,7 +126,7 @@
   // Easily comparable units
   $to-zero: _a_get-number($to-unit);
 
-  @if $to-zero and comparable($length, $to-zero)  {
+  @if $to-zero and comparable($length, $to-zero) {
     @return $to-zero + $length;
   }
 
@@ -142,7 +141,7 @@
   }
 
   // Establish root size
-  $root-size: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE;
+  $root-size: map-get($sizes, 'root') or config.$BROWSER-DEFAULT-FONT-SIZE;
   $root-size: size($root-size);
   $root-size: _a_get-px($root-size);
 
@@ -163,7 +162,7 @@
   // Special conversion for browser-default ems (needed in media-queries)
   @if ($to-unit == 'browser-ems') {
     $size: convert-units($length, 'px', $from-context);
-    @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
+    @return $size / config.$BROWSER-DEFAULT-FONT-SIZE * 1em;
   }
 
   // Convert relative length to pixels
@@ -177,7 +176,7 @@
     $px-length: $length * $root-size / 1rem;
   } @else if $from-unit == '%' {
     $px-length: $length * $from-context / 100%;
-  } @else if $from-unit == 'ex'  {
+  } @else if $from-unit == 'ex' {
     $px-length: $length * $from-context / 2ex;
   }
 
