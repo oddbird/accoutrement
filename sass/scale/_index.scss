@@ -7,42 +7,29 @@
 /// - Access sizes on the fly
 /// @group scale
 
-
-@import 'config';
-@import 'units';
-@import 'size';
-@import 'css-vars';
-
+@forward 'config';
+@forward 'units';
+@forward 'size';
+@forward 'css-vars';
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// If you want to import individual plugins,
-/// make sure you first import the shared core:
+/// You can also import the scale module on its own:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/core';
-///   @import '<path-to>/accoutrement/sass/plugin/scale';
-/// ```
-///
-/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-/// you can leave off most of the path:
-///
-/// ```scss
-///   @import 'accoutrement/core';
-///   @import 'accoutrement/plugin/scale';
+///   @use '<path-to>/accoutrement/sass/scale';
 /// ```
 /// @group scale
-
 
 /// ## Sizes & Ratios
 /// Establish your palette of ratios (modular scales) and sizes:
 ///
 /// ```scss
-/// $ratios: (
+/// tools.$ratios: (
 ///   'my-ratio': 1.25,
 /// );
 ///
-/// $sizes: (
+/// tools.$sizes: (
 ///   // define explicit values
 ///   'root': 24px,
 ///   'icons': 1em,
@@ -70,7 +57,7 @@
 /// ```scss
 /// .example {
 ///   font-size('text');
-///   width: size('page', 'px');
+///   width: tools.size('page', 'px');
 /// }
 /// ```
 /// @group scale
