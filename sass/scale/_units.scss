@@ -32,7 +32,7 @@
 ///   The unit to return as a number.
 /// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
-@function _a_get-number($unit, $relative: false) {
+@function get-number($unit, $relative: false) {
   // stylelint-disable length-zero-no-unit
   $_absolute: (
     'in': 0in,
