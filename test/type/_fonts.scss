@@ -256,7 +256,7 @@ config.$font-path: data.$font-path;
 
   // Import Webfonts [mixin]
   // -----------------------
-  /*   @include describe('Import Webfonts [mixin]') {
+  @include describe('Import Webfonts [mixin]') {
     @include it('Font-face imports for all local fonts & variants') {
       @include assert {
         @include output(false) {
@@ -325,33 +325,10 @@ config.$font-path: data.$font-path;
             src: url('../fonts/path/to/normal.woff2') format('woff2');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6;
           }
-
-          @font-face {
-            font-family: 'FranklinGothic';
-            font-style: normal;
-            font-weight: normal;
-            src: (
-              url('../fonts/franklingothic-regular-filename.woff2')
-                format('woff2'),
-              url('../fonts/franklingothic-regular-filename.woff')
-                format('woff')
-            );
-          }
-
-          @font-face {
-            font-family: 'FranklinGothic';
-            font-style: normal;
-            font-weight: bold;
-            src: (
-              url('../fonts/franklingothic-bold-filename.woff2') format('woff2'),
-              url('../fonts/franklingothic-bold-filename.woff') format('woff')
-            );
-          }
         }
       }
     }
-  } */
+  }
 } // end module
 
-config.$fonts: $_global;
-config.$font-path: $_global;
+//config.$fonts: $_global;
