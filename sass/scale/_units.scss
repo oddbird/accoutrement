@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
 @use './config';
 @use './size';
 @use '../internal/function';
@@ -205,4 +206,9 @@
   @warn '#{$warn} returning original value';
   @return $length;
 }
-@include function.internal('convert-units', 'convert', 'units', 'to');
+@include function.internal(
+  meta.get-function('convert-units'),
+  'convert',
+  'units',
+  'to'
+);
