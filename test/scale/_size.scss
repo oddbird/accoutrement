@@ -3,7 +3,7 @@
 @use '../../sass/scale/config';
 @use './test-data' as data;
 
-$global: config.$sizes;
+$_global: config.$sizes;
 config.$sizes: data.$test-sizes;
 
 // Scale Tests
@@ -19,7 +19,7 @@ config.$sizes: data.$test-sizes;
     @include it('Get size from unit adjustment') {
       @include assert-equal(size.size('text'), 1rem);
     }
-
+   
     @include it('Get size from linear adjustment') {
       @include assert-equal(size.size('h3'), 2rem);
     }
@@ -152,3 +152,4 @@ config.$sizes: data.$test-sizes;
     }*/
   }
 } // end module
+config.$sizes: $_global;

@@ -1,6 +1,10 @@
 @use '../../node_modules/sass-true' as *;
+@use '../../sass/scale/config';
 @use '../../sass/scale/units';
+@use './test-data' as data;
 
+$_global: config.$sizes;
+config.$sizes: data.$test-sizes;
 // Unit Tests
 // ==========
 @include test-module('Scale: Units') {
@@ -26,15 +30,16 @@
 
   // Convert Units
   // -------------
-  /* @include describe('convert-units [function]') {
+  /*
+  @include describe('convert-units [function]') {
     @include it('Converts px size to browser em size') {
-      @include assert-equal(convert-units(24px, 'browser-ems'), 1.5em);
+      @include assert-equal(units.convert-units(24px, 'browser-ems'), 1.5em);
     }
-
+  
     @include it('Converts rem size to browser em size') {
       @include assert-equal(convert-units(2rem, 'browser-ems'), 2.5em);
     }
-
+  
     @include it('No conversion for equal units') {
       @include assert-equal(convert-units(6em, 'em'), 6em);
     }
@@ -104,3 +109,4 @@
     }
   } */
 } // end module
+config.$sizes: $_global;
