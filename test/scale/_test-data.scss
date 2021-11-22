@@ -6,6 +6,7 @@
 // Scale Tests
 // ===========
 
+$global: config.$sizes;
 // Config
 $test-sizes: (
   'root': 20px,
@@ -100,13 +101,13 @@ $test-sizes: (
     (
       'divide': 'test-value',
     ),
-  'round': math.div(10rem, 3)
+  'round': 10rem / 3
     (
       'round': null,
     ),
   'calc-simple': calc(1em + 2vw),
   'calc': (
-    '%value': 'calc(math.div(%s + %s, %s))',
+    '%value': 'calc(%s + %s / %s)',
     '%s': (
       '#root'
         (
@@ -124,3 +125,4 @@ $test-sizes: (
 
 $sizes: map.merge(config.$sizes, $test-sizes);
 //@include function.register('round');
+config.$sizes: $global;

@@ -1,11 +1,11 @@
+@use '../../sass/scale/units';
 @use '../../node_modules/sass-true' as *;
 @use '../../sass/scale/size';
 @use '../../sass/scale/config';
-@use '../../sass/scale/units';
 @use './test-data' as data;
 
 $_global: config.$sizes;
-config.$sizes: data.$test-sizes;
+config.$sizes: data.$sizes;
 
 // Scale Tests
 // ===========

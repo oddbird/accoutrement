@@ -208,6 +208,7 @@
 }
 @include function.internal(
   meta.get-function('convert-units'),
+  'convert-units',
   'convert',
   'units',
   'to'
