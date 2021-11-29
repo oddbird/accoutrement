@@ -2,9 +2,11 @@
 @use '../internal/type';
 @use '../internal/throw';
 @use '../tokens' as api;
+@use '../vars';
 @use '../utils';
 @use 'config';
 @use 'tokens';
+@use 'css-vars' as cv;
 @use 'sass:color';
 @use 'sass:list';
 @use 'sass:math';
@@ -151,8 +153,8 @@ $WCAG-CONTRAST: (
   $name: map.get($contrast, 'name');
   $color: map.get($contrast, 'color');
 
-  @if ($name != $color) and not is-private-token($name) {
-    $name: dashed-ident($name, $color-var-prefix);
+  @if ($name != $color) and not api.is-private-token($name) {
+    $name: vars.ident($name, cv.$color-var-prefix);
     @return var($name, $color);
   }
 
@@ -283,7 +285,7 @@ $WCAG-CONTRAST: (
   $background,
   $options...
 ) {
-  background-color: var-color($background);
+  background-color: cv.var-color($background);
   color: var-contrast($background, $options...);
 }
 
@@ -464,6 +466,7 @@ $WCAG-CONTRAST: (
   $options: null,
   $return: 'map'
 ) {
+  $options: if(list.length($options) > 0, $options, null);
   $min-ratio: list.nth($options, -1);
 
   @if valid-contrast($min-ratio, false) {

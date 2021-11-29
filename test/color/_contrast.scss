@@ -1,6 +1,7 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/color/contrast';
 @use '../../sass/color/tokens';
+@use '../../sass/color/css-vars' as vars;
 @use 'test-data' as data;
 @use 'sass:map';
 @use 'sass:list';
@@ -224,6 +225,13 @@ tokens.$colors: data.$colors;
       );
     }
 
+    @include it('Accepts either null or empty list of options') {
+      @include assert-equal(
+        contrast.best-contrast('dark', null),
+        contrast.best-contrast('dark', ())
+      );
+    }
+
     tokens.$colors: ();
 
     @include it('Default light fallback') {
@@ -309,155 +317,154 @@ tokens.$colors: data.$colors;
   }
 
 
-  // // Contrast [function]
-  // // -------------------
-  // @include describe('Contrast [function]') {
-  //   @include it('Dark on light') {
-  //     @include assert-equal(
-  //       contrast(#eee),
-  //       color('contrast-dark'),
-  //       'Returns a dark color to contrast a light one.'
-  //     );
-  //   }
+  // Contrast [function]
+  // -------------------
+  @include describe('Contrast [function]') {
+    @include it('Dark on light') {
+      @include assert-equal(
+        contrast.contrast(#eee),
+        tokens.color('contrast-dark'),
+        'Returns a dark color to contrast a light one.'
+      );
+    }
 
-  //   @include it('Light on dark') {
-  //     @include assert-equal(
-  //       contrast('dark'),
-  //       color('contrast-light'),
-  //       'Returns a light color to contrast a dark one.'
-  //     );
-  //   }
+    @include it('Light on dark') {
+      @include assert-equal(
+        contrast.contrast('dark'),
+        tokens.color('contrast-light'),
+        'Returns a light color to contrast a dark one.'
+      );
+    }
 
-  //   $original-colors: $colors;
-  //   $colors: () !global;
+    tokens.$colors: ();
 
-  //   @include it('Default light fallback') {
-  //     @include assert-equal(
-  //       contrast(#000),
-  //       #fff,
-  //       'Returns white for light contrast when none is given.'
-  //     );
-  //   }
+    @include it('Default light fallback') {
+      @include assert-equal(
+        contrast.contrast(#000),
+        #fff,
+        'Returns white for light contrast when none is given.'
+      );
+    }
 
-  //   @include it('Default dark fallback') {
-  //     @include assert-equal(
-  //       contrast(#fff),
-  //       #000,
-  //       'Returns black for dark contrast when none is given.'
-  //     );
-  //   }
+    @include it('Default dark fallback') {
+      @include assert-equal(
+        contrast.contrast(#fff),
+        #000,
+        'Returns black for dark contrast when none is given.'
+      );
+    }
 
-  //   $colors: $original-colors !global;
+    tokens.$colors: data.$colors;
 
-  //   @include it('Multiple contrast options') {
-  //     @include assert-equal(
-  //       contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
-  //       #003,
-  //       'Returns the best option from the list.'
-  //     );
-  //   }
+    @include it('Multiple contrast options') {
+      @include assert-equal(
+        contrast.contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
+        #003,
+        'Returns the best option from the list.'
+      );
+    }
 
-  //   @include it('Picks a smart default when given a single option') {
-  //     @include assert-equal(
-  //       contrast('primary', #ff0),
-  //       color('contrast-dark')
-  //     );
-  //   }
+    @include it('Picks a smart default when given a single option') {
+      @include assert-equal(
+        contrast.contrast('primary', #ff0),
+        tokens.color('contrast-dark')
+      );
+    }
 
-  //   @include it('Returns the minimum contrast for a given ratio') {
-  //     @include assert-equal(
-  //       contrast(
-  //         'primary',
-  //         #ff0, #fcc, #0f0, 'light', #003,
-  //         'AA-large'
-  //       ),
-  //       #eee
-  //     );
-  //   }
-  // }
-
-
-  // // Contrasted [mixin]
-  // // ------------------
-  // @include describe('contrasted [mixin]') {
-  //   @include it('Dark on light') {
-  //     @include assert('Use a dark color on a light background.') {
-  //       @include output {
-  //         @include contrasted(#eee);
-  //       }
-
-  //       @include expect {
-  //         background-color: #eee;
-  //         color: color('contrast-dark');
-  //       }
-  //     }
-  //   }
-
-  //   @include it('Light on dark') {
-  //     @include assert('Use a light color on a dark background.') {
-  //       @include output {
-  //         @include contrasted('dark');
-  //       }
-
-  //       @include expect {
-  //         background-color: color('dark');
-  //         color: color('contrast-light');
-  //       }
-  //     }
-  //   }
-
-  //   @include it('Returns the minimum contrast for a given ratio') {
-  //     @include assert {
-  //       @include output {
-  //         @include contrasted(
-  //           'primary',
-  //           #ff0, #fcc, #0f0, 'light', #003,
-  //           'AA-large'
-  //         );
-  //       }
-  //       @include expect {
-  //         background-color: color('primary');
-  //         color: #eee;
-  //       }
-  //     }
-  //   }
-  // }
+    @include it('Returns the minimum contrast for a given ratio') {
+      @include assert-equal(
+        contrast.contrast(
+          'primary',
+          #ff0, #fcc, #0f0, 'light', #003,
+          'AA-large'
+        ),
+        #eee
+      );
+    }
+  }
 
 
-  // // var-contrast [function]
-  // // -----------------------
-  // @include describe('var-contrast [function]') {
-  //   @include it('Returns a contrasting CSS variable when available') {
-  //     @include assert-equal(
-  //       var-contrast('blue', 'dark', 'light'),
-  //       var(--color-dark, #111)
-  //     );
-  //   }
+  // Contrasted [mixin]
+  // ------------------
+  @include describe('contrasted [mixin]') {
+    @include it('Dark on light') {
+      @include assert('Use a dark color on a light background.') {
+        @include output {
+          @include contrast.contrasted(#eee);
+        }
 
-  //   @include it('Returns a contrasting color when no variable') {
-  //     @include assert-equal(
-  //       var-contrast('blue', #111, #eee),
-  //       #111
-  //     );
-  //   }
-  // }
+        @include expect {
+          background-color: #eee;
+          color: tokens.color('contrast-dark');
+        }
+      }
+    }
 
-  // // var-contrasted [function]
-  // // -------------------------
-  // @include describe('var-contrasted [function]') {
-  //   @include it('Creates a background and contrasting color with CSS variables') {
-  //     @include assert {
-  //       @include output {
-  //         @include var-contrasted('blue', 'light', 'dark');
-  //       }
+    @include it('Light on dark') {
+      @include assert('Use a light color on a dark background.') {
+        @include output {
+          @include contrast.contrasted('dark');
+        }
 
-  //       @include expect {
-  //         background-color: var-color('blue');
-  //         color: var-color('dark');
-  //       }
-  //     }
-  //   }
-  // }
+        @include expect {
+          background-color: tokens.color('dark');
+          color: tokens.color('contrast-light');
+        }
+      }
+    }
+
+    @include it('Returns the minimum contrast for a given ratio') {
+      @include assert {
+        @include output {
+          @include contrast.contrasted(
+            'primary',
+            #ff0, #fcc, #0f0, 'light', #003,
+            'AA-large'
+          );
+        }
+        @include expect {
+          background-color: tokens.color('primary');
+          color: #eee;
+        }
+      }
+    }
+  }
+
+
+  // var-contrast [function]
+  // -----------------------
+  @include describe('var-contrast [function]') {
+    @include it('Returns a contrasting CSS variable when available') {
+      @include assert-equal(
+        contrast.var-contrast('blue', 'dark', 'light'),
+        var(--color-dark, #111)
+      );
+    }
+
+    @include it('Returns a contrasting color when no variable') {
+      @include assert-equal(
+        contrast.var-contrast('blue', #111, #eee),
+        #111
+      );
+    }
+  }
+
+  // var-contrasted [function]
+  // -------------------------
+  @include describe('var-contrasted [function]') {
+    @include it('Creates a background and contrasting color with CSS variables') {
+      @include assert {
+        @include output {
+          @include contrast.var-contrasted('blue', 'light', 'dark');
+        }
+
+        @include expect {
+          background-color: vars.var-color('blue');
+          color: vars.var-color('dark');
+        }
+      }
+    }
+  }
 
 } // end module
 
