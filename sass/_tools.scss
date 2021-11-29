@@ -3,8 +3,8 @@
 @forward 'vars';
 @forward 'ratio';
 
-// @import 'plugin/animate';
-// @import 'plugin/color';
+// @forward 'animate';
+@forward 'color';
 @forward 'layout';
-// @import 'plugin/scale';
-// @import 'plugin/type';
+// @forward 'scale';
+// @forward 'type';

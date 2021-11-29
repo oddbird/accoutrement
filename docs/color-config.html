@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>MIT License | Accoutrement Documentation</title>
+  <title>Color Configuration | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -76,7 +76,7 @@
           
             
             <li class="nav-item">
-              <a href="LICENSE.html" data-nav="is-active">MIT License</a>
+              <a href="LICENSE.html" data-nav="is-not-active">MIT License</a>
             </li>
           
         </ul>
@@ -172,7 +172,7 @@
   
   
     <li class="nav-item">
-      <a href="color-config.html" data-nav="is-not-active">Color Configuration</a>
+      <a href="color-config.html" data-nav="is-active">Color Configuration</a>
     </li>
   
   
@@ -254,31 +254,445 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>MIT License</strong>
+    <strong>Color Configuration</strong>
   </nav>
 
 
-        <div data-page="LICENSE">
+        <div data-page="color-config">
           
-  <div class="text-block">
-    <p>MIT License</p>
-<p>Copyright © 2018–2020<span class="widont">&nbsp;</span>OddBird</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following<span class="widont">&nbsp;</span>conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the<span class="widont">&nbsp;</span>Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<span class="widont">&nbsp;</span>SOFTWARE.</p>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="color-configuration">Color Configuration</h1>
+<p>The color module provides several functions &amp; mixins
+for managing color contrast,
+as well as <code>tint</code> and <code>shade</code> functions
+for mixing colors with white or black.
+In both cases, it can be useful to establish your own
+light &amp; dark contrast colors to work with
+in place of true white or<span class="widont">&nbsp;</span>black.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--contrast-light">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--contrast-light" class="item-name">$contrast-light</a>
+      
+
+      
+        <span class="value-type">(color)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$contrast-light: white !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Establish a default light color
+for use in contrast<span class="widont">&nbsp;</span>functions.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
 
   </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">default-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--contrast-dark">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--contrast-dark" class="item-name">$contrast-dark</a>
+      
+
+      
+        <span class="value-type">(color)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$contrast-dark: black !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Establish a default dark color
+for use in contrast<span class="widont">&nbsp;</span>functions.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">default-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
 
         </div>
       </main>
