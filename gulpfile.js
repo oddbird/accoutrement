@@ -47,7 +47,7 @@ const sasslintTask = (src, failOnError, shouldLog) => {
     sasslint({
       reporters: [{ formatter: 'string', console: true }],
       failAfterError: failOnError,
-    }),
+    })
   );
   if (!failOnError) {
     stream.on('error', onError);

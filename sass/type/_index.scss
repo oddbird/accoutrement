@@ -28,9 +28,9 @@
 ///
 /// ```scss
 /// // Set the a path to your fonts directory
-/// $font-path: '../fonts/';
+/// tools.$font-path: '../fonts/';
 ///
-/// $fonts: (
+/// tools.$fonts: (
 ///   // describe locally-hosted font files for import and access
 ///   'heading': (
 ///     'name': 'maven',

@@ -147,7 +147,7 @@ $font-var-prefix: 'font-' !default;
 ///     'sans': '#text',
 ///   );
 ///   .example {
-///     tools.font-family: tools.var-font('sans', sans-serif);
+///     font-family: tools.var-font('sans', sans-serif);
 ///   }
 ///
 /// @param {*} $font -

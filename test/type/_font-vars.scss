@@ -78,7 +78,6 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.fonts--;
         }
-        // prettier-ignore
         @include expect {
           --font-body-font: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           --font-TestFont: TestFont, Georgia, serif;
@@ -157,7 +156,6 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.font--('alias');
         }
-        // prettier-ignore
         @include expect {
           --font-alias: var(--font-body-font, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
         }
@@ -169,7 +167,6 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.font--('alias-2', 'alias');
         }
-        // prettier-ignore
         @include expect {
           --font-alias-2: var(--font-alias, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
         }
