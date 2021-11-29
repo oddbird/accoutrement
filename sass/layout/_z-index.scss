@@ -1,7 +1,5 @@
 @use 'sass:meta';
 @use 'sass:list';
-@use 'sass:string';
-@use 'sass:map';
 
 // Z-Index
 // =======
@@ -54,9 +52,9 @@ $z-index: ();
     @return $index;
   } @else {
     @for $i from 1 through list.length($z-index) {
-      $stack: nth($z-index, $i);
+      $stack: list.nth($z-index, $i);
       $index: $i;
-      $nested: index($stack, $layer);
+      $nested: list.index($stack, $layer);
 
       @if meta.type-of($nested) == 'number' {
         @if $nested == 1 {
