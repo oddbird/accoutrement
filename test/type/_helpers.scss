@@ -180,8 +180,7 @@ config.$font-path: data.$font-path;
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data:
-              normalize.normalize-variant-data('path/to/myFont', 'woff' 'svg')
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'svg')
           );
         }
 
@@ -206,8 +205,7 @@ config.$font-path: data.$font-path;
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data:
-              normalize.normalize-variant-data('path/to/myFont', 'woff' 'svg'),
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'svg'),
             $unicode: (
               'U+0000-00FF',
               'U+0131',
@@ -239,8 +237,7 @@ config.$font-path: data.$font-path;
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data:
-              normalize.normalize-variant-data('path/to/myFont', 'woff' 'svg'),
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'svg'),
             $display: 'fallback'
           );
         }
@@ -296,8 +293,7 @@ config.$font-path: data.$font-path;
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data:
-              normalize.normalize-variant-data('path/to/myFont', 'woff' 'eot')
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'eot')
           );
         }
 
@@ -325,7 +321,7 @@ config.$font-path: data.$font-path;
             $weight: 'bold',
             $style: 'normal',
             $data:
-              normalize.normalize-variant-data(
+              normalize.variant-data(
                 (
                   'path': 'path/to/myFont',
                   'woff2':

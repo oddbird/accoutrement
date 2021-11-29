@@ -34,7 +34,7 @@
 ///   to use as the origin palette
 /// @return {map} -
 ///   A map of font data in consistent longhand format
-@function normalize-font($font, $key: null, $source: config.$fonts) {
+@function font($font, $key: null, $source: config.$fonts) {
   // make it a map…
   @if (meta.type-of($font) != 'map') {
     $font: (
@@ -43,7 +43,7 @@
   }
 
   // Normalize name…
-  $name: normalize-font-name($font, $key, $source);
+  $name: font-name($font, $key, $source);
   $font: if(
     $name,
     map.merge(
@@ -56,7 +56,7 @@
   );
 
   // Normalize the font stack…
-  $stack: normalize-font-stack($font);
+  $stack: font-stack($font);
   $font: if(
     $stack,
     map.merge(
@@ -75,8 +75,8 @@
 
     @each $name, $data in $variants {
       $font: map.remove($font, $name);
-      $name: normalize-variant-name($name);
-      $data: normalize-variant-data($data, $formats);
+      $name: variant-name($name);
+      $data: variant-data($data, $formats);
       $variant: (
         $name: $data,
       );
@@ -110,7 +110,7 @@
 ///   to use as the origin palette
 /// @return {string} -
 ///   The font-name associated with the given font map
-@function normalize-font-name($font, $key: null, $source: config.$fonts) {
+@function font-name($font, $key: null, $source: config.$fonts) {
   $name: map.get($font, 'name') or null;
 
   // Try reverse lookup
@@ -152,7 +152,7 @@
 ///   The font map
 /// @return {string} -
 ///   The font-stack associated with the given font map
-@function normalize-font-stack($font) {
+@function font-stack($font) {
   $return: null;
   $stack: map.get($font, 'stack');
   $name: map.get($font, 'name');
@@ -199,7 +199,7 @@
 ///   A list of font variants, such as `('bold', 'italic')`.
 /// @return {$list} -
 ///   A list of `($weight, $style)`
-@function normalize-variant-name($variant) {
+@function variant-name($variant) {
   $style: 'normal';
   $weight: 'normal';
 
@@ -245,7 +245,7 @@
 ///   merging interpolated and explicit format/paths
 ///   into a single map.
 /// @throws Font-path interpolation of `path` requires a list of formats
-@function normalize-variant-data($data, $formats: ()) {
+@function variant-data($data, $formats: ()) {
   @if (meta.type-of($data) == 'string') {
     $data: (
       'path': $data,

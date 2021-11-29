@@ -196,7 +196,7 @@ $font-var-prefix: 'font-' !default;
 
   @each $key, $raw in $source {
     $normal: api.get($source, $key);
-    $normal: normalize.normalize-font($normal, $key, $source);
+    $normal: normalize.font($normal, $key, $source);
     $has: map.get($normal, $value);
 
     @if $has {

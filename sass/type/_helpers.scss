@@ -377,8 +377,8 @@ $FONT-FORMATS: (
 ///
 /// @group type-fonts
 /// @example scss
-///   $font-path: '../fonts/';
-///   $src: font-url('sans/my-sans-font.woff2');
+///   tools.$font-path: '../fonts/';
+///   $src: tools.font-url('sans/my-sans-font.woff2');
 ///   /* #{$src} */
 ///
 /// @param {string} $path -

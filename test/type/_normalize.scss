@@ -13,7 +13,7 @@ config.$fonts: data.$fonts;
   // Normalize Font [function]
   // -------------------------
   @include describe('Normalize Font [function]') {
-    $test: normalize.normalize-font(map.get(data.$fonts, 'TestFont'));
+    $test: normalize.font(map.get(data.$fonts, 'TestFont'));
 
     @include it('Sets an explicit name, if missing') {
       @include assert-equal(map.get($test, 'name'), 'TestFont');
@@ -26,7 +26,7 @@ config.$fonts: data.$fonts;
       );
     }
 
-    $test: normalize.normalize-font(map.get(data.$fonts, 'UniFont'));
+    $test: normalize.font(map.get(data.$fonts, 'UniFont'));
     $expect: (
       'name': 'Unicode Test',
       'formats': 'woff2',
@@ -59,13 +59,13 @@ config.$fonts: data.$fonts;
         ),
       );
       $font: api.get($local, 'new');
-      $normal: normalize.normalize-font($font, 'new', $local);
+      $normal: normalize.font($font, 'new', $local);
       @include assert-equal(map.get($normal, 'name'), 'new');
     }
 
     @include it('Generates a font map from stack string/list') {
       @include assert-equal(
-        normalize.normalize-font(map.get(data.$fonts, '_shared-stack')),
+        normalize.font(map.get(data.$fonts, '_shared-stack')),
         (
           stack: (
             'Helvetica Neue',
@@ -83,21 +83,21 @@ config.$fonts: data.$fonts;
   @include describe('Normalize Font Name [function]') {
     @include it('Get explicit font name directly') {
       @include assert-equal(
-        normalize.normalize-font-name(api.get(data.$fonts, 'body-font')),
+        normalize.font-name(api.get(data.$fonts, 'body-font')),
         'Source Sans Pro'
       );
     }
 
     @include it('Get implicit font name directly') {
       @include assert-equal(
-        normalize.normalize-font-name(data.$fonts, 'TestFont'),
+        normalize.font-name(data.$fonts, 'TestFont'),
         'TestFont'
       );
     }
 
     @include it('Get explicit font name by alias') {
       @include assert-equal(
-        normalize.normalize-font-name(api.get(data.$fonts, 'kevin bacon')),
+        normalize.font-name(api.get(data.$fonts, 'kevin bacon')),
         'Source Sans Pro'
       );
     }
@@ -105,7 +105,7 @@ config.$fonts: data.$fonts;
     @include it('Get implicit font name by alias') {
       $key: 'tf-alias';
       @include assert-equal(
-        normalize.normalize-font-name(api.get(data.$fonts, $key), $key),
+        normalize.font-name(api.get(data.$fonts, $key), $key),
         'TestFont'
       );
     }
@@ -117,7 +117,7 @@ config.$fonts: data.$fonts;
         ),
       );
       @include assert-equal(
-        normalize.normalize-font-name(api.get($local, 'new'), 'new', $local),
+        normalize.font-name(api.get($local, 'new'), 'new', $local),
         'new'
       );
     }
@@ -127,7 +127,7 @@ config.$fonts: data.$fonts;
   // -------------------------------
   @include describe('Normalize Font Stack [function]') {
     @include it('Normalizes stack format') {
-      $stack: normalize.normalize-font-stack(
+      $stack: normalize.font-stack(
         (
           'stack': 'Helvetica Neue' 'Arial',
         )
@@ -137,7 +137,7 @@ config.$fonts: data.$fonts;
     }
 
     @include it('Prepends name if available') {
-      $stack: normalize.normalize-font-stack(
+      $stack: normalize.font-stack(
         (
           'name': 'hello',
           'stack': 'Helvetica Neue' 'Arial',
@@ -153,7 +153,7 @@ config.$fonts: data.$fonts;
 
     @include it('Splits a string stack at commas') {
       @include assert-equal(
-        normalize.normalize-font-stack(
+        normalize.font-stack(
           (
             'stack': 'Helvetica Neue, Helvetica,Arial',
           )
@@ -167,29 +167,23 @@ config.$fonts: data.$fonts;
   // ----------------------
   @include describe('Normalize Variant Name [function]') {
     @include it('Single variant') {
-      @include assert-equal(
-        normalize.normalize-variant-name('bold'),
-        ('bold', 'normal')
-      );
+      @include assert-equal(normalize.variant-name('bold'), ('bold', 'normal'));
     }
 
     @include it('Weight as string') {
-      @include assert-equal(
-        normalize.normalize-variant-name('200'),
-        ('200', 'normal')
-      );
+      @include assert-equal(normalize.variant-name('200'), ('200', 'normal'));
     }
 
     @include it('Multiple variants') {
       @include assert-equal(
-        normalize.normalize-variant-name(500 'italic'),
+        normalize.variant-name(500 'italic'),
         (500, 'italic')
       );
     }
 
     @include it('Splits multi-variant strings') {
       @include assert-equal(
-        normalize.normalize-variant-name('500 italic'),
+        normalize.variant-name('500 italic'),
         ('500', 'italic')
       );
     }
@@ -200,17 +194,14 @@ config.$fonts: data.$fonts;
   @include describe('Normalize Variant Data [function]') {
     @include it('Errors with path but no formats') {
       @include assert-equal(
-        normalize.normalize-variant-data($data: 'my/path', $formats: ()),
+        normalize.variant-data($data: 'my/path', $formats: ()),
         'ERROR [normalize-font] Font-path interpolation of `my/path` requires a list of formats'
       );
     }
 
     @include it('Interpolates a string and formats') {
       @include assert-equal(
-        normalize.normalize-variant-data(
-          $data: 'my/path',
-          $formats: 'woff' 'ttf'
-        ),
+        normalize.variant-data($data: 'my/path', $formats: 'woff' 'ttf'),
         (
           'woff': 'my/path.woff',
           'ttf': 'my/path.ttf',
@@ -220,7 +211,7 @@ config.$fonts: data.$fonts;
 
     @include it('Interpolates a map and formats') {
       @include assert-equal(
-        normalize.normalize-variant-data(
+        normalize.variant-data(
           $data: (
             'path': 'my/path',
             'svgid': 'myID',
@@ -235,7 +226,7 @@ config.$fonts: data.$fonts;
     }
 
     @include it('Explicit settings override path & svgid') {
-      $test: normalize.normalize-variant-data(
+      $test: normalize.variant-data(
         $data: (
           'path': 'my/path',
           'local': 'hello',
@@ -258,7 +249,7 @@ config.$fonts: data.$fonts;
 
     @include it('Leaves local list as-is') {
       @include assert-equal(
-        normalize.normalize-variant-data(
+        normalize.variant-data(
           $data: (
             'local': 'this' 'another',
           )

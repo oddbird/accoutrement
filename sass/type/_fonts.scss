@@ -40,7 +40,7 @@
 ///   A parsed and normalized map of font-data
 @function font($font, $source: config.$fonts) {
   $data: api.get($source, $font);
-  $normal: normalize.normalize-font($data, $font, $source);
+  $normal: normalize.font($data, $font, $source);
   @return $normal;
 }
 
@@ -148,7 +148,7 @@
   $variants: helpers.font-get-variants($font);
   $name: map.get($font, 'name');
 
-  @if (length($variants) > 0) {
+  @if (list.length($variants) > 0) {
     $unicode: map.get($font, 'unicode-range');
     $display: map.get($font, 'display');
 
