@@ -1,6 +1,10 @@
 // Layout Tests
 // ============
 
+@forward 'query-utils';
+@forward 'queries';
+@forward 'z-index';
+
 $sizes: (
   'off-canvas': 30em,
   'page': 50em,
@@ -22,7 +26,3 @@ $z-index: (
   'message',
   'modal',
 );
-
-@import 'layout/query-utils';
-@import 'layout/queries';
-@import 'layout/z-index';

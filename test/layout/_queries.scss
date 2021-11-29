@@ -1,3 +1,7 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/layout/queries';
+@use 'sass:math';
+
 // Media Query Tests
 // =================
 @include test-module('Layout: Queries') {

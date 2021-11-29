@@ -2,8 +2,8 @@
 @use 'sass:meta';
 @use '../internal/throw';
 
-// Media Queries
-// =============
+/// # Media Queries
+/// @group layout-queries
 
 
 // Breakpoints
@@ -24,12 +24,12 @@
 /// @link https://zellwk.com/blog/media-query-units/
 ///   PX, EM, or REM Media Queries?
 /// @example scss - defining breakpoints
-///   $breakpoints: (
+///   tools.$breakpoints: (
 ///     'small': 30em,
 ///     'medium': 45em,
 ///   );
 /// @example scss - using accoutrement-scale
-///   $breakpoints: (
+///   tools.$breakpoints: (
 ///     'small': 30em ('convert-units': 'browser-ems'),
 ///     'medium': '#small' ('times': 1.5),
 ///   );
@@ -114,7 +114,7 @@ $breakpoints: () !default;
 ///     html { background: red; }
 ///   }
 /// @example scss
-///   $breakpoints: ('red': 30em);
+///   tools.$breakpoints: ('red': 30em);
 ///
 ///   @include tools.below('red') {
 ///     html { background: red; }
