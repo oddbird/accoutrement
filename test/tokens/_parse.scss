@@ -154,6 +154,13 @@ $scale: function.get('color.scale');
       );
     }
 
+    @include it('Accepts non-string alias values') {
+      @include assert-equal(
+        parse.lookup-alias($map, red),
+        null
+      );
+    }
+
 
     @include it('Optionally warn if the lookup fails') {
       @include assert-equal(

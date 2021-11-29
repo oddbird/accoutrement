@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Sass Lists | Accoutrement Documentation</title>
+  <title>Built-In Ratios | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,22 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="utils-string.html" data-nav="is-not-active">Sass Strings</a>
+      <a href="utils.html" data-nav="is-not-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="utils-list.html" data-nav="is-active">Sass Lists</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="utils-map.html" data-nav="is-not-active">Sass Maps</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="vars.html" data-nav="is-not-active">Variables &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="vars.html" data-nav="is-not-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -147,7 +137,27 @@
   
   
     <li class="nav-item">
-      <a href="token-vars.html" data-nav="is-not-active">Tokens &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Ratios</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="ratios.html" data-nav="is-active">Built-In Ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li></ul>
@@ -204,11 +214,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Sass Lists</strong>
+    <strong>Built-In Ratios</strong>
   </nav>
 
 
-        <div data-page="utils-list">
+        <div data-page="ratios">
           
   
     
@@ -233,11 +243,22 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="sass-lists">Sass Lists</h1>
-<p>Utility function(s) that extend the Sass core modules,
-to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
+      <h1 id="built-in-ratios">Built-In Ratios</h1>
+<p>Some built-in named ratios you can use,
+either directly or through the token syntax
+(where these values are provided with a <code>_</code> prefix).</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Now available as individual variables (without the <code>_</code> prefix)</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -257,267 +278,6 @@ to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
   
   
   
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--remove-nth">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--remove-nth" class="item-name">remove-nth()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Remove any item (1-indexed) from a<span class="widont">&nbsp;</span>list.</p>
-<p>This function has a <code>list-</code> prefix added by default
-(eg <code>list-remove-nth()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as <code>'remove-nth'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$list:</span>
-      
-      
-      <span class="value-type">(list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original list to be<span class="widont">&nbsp;</span>edited</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$index:</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The 1-indexed item to remove from the<span class="widont">&nbsp;</span>list</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original list, with item<span class="widont">&nbsp;</span>removed</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p><code>$index</code> must be a non-zero<span class="widont">&nbsp;</span>integer</p>
-
-      </div>
-    
-  </div>
-
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p><code>$index</code> is too large for the list<span class="widont">&nbsp;</span>length</p>
-
-      </div>
-    
-  </div>
-
-    
-  
-
-    
-  </div>
 
   
 
@@ -564,11 +324,10 @@ as <code>'remove-nth'</code>.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;main-start&#39;: [&#39;nav-end&#39; &#39;main-start&#39; &#39;footer-start&#39;],
-  &#39;small-start&#39;: &#39;#main-start&#39; (&#39;remove-nth&#39;: 1),
-);
-/*! #{inspect(tools.get($map, &#39;small-start&#39;))} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;ratio/named&#39;;
+@each $name, $value in meta.module-variables(&#39;named&#39;) {
+/*! $#{$name}: #{$value}; */
+}</code></pre>
     </div>
   
 
@@ -590,7 +349,23 @@ as <code>'remove-nth'</code>.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! [&quot;main-start&quot; &quot;footer-start&quot;] */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/*! $octave: 2; */
+/*! $major-seventh: 1.875; */
+/*! $minor-seventh: 1.7777777778; */
+/*! $major-sixth: 1.6666666667; */
+/*! $minor-sixth: 1.6; */
+/*! $fifth: 1.5; */
+/*! $augmented-fourth: 1.40625; */
+/*! $fourth: 1.3333333333; */
+/*! $major-third: 1.25; */
+/*! $minor-third: 1.2; */
+/*! $major-second: 1.125; */
+/*! $minor-second: 1.0666666667; */
+/*! $photo: 1.5; */
+/*! $classic: 1.3333333333; */
+/*! $widescreen: 1.7777777778; */
+/*! $cinema: 2.39; */
+/*! $golden: 1.61803399; */</code></pre>
     </div>
   
 
@@ -608,99 +383,8 @@ as <code>'remove-nth'</code>.</p>
   
   
   
-    <div class="requires-wrapper">
-      
     
-  <div data-item-section="requires">
     
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">template()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
-      
   
     
   <div data-item-section="used-by">
@@ -731,11 +415,74 @@ as <code>'remove-nth'</code>.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">normalize-token()</span>
+        <a href="
+  ratio-tokens.html#function--ratio" class="item-name">ratio()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ratio-vars.html#mixin--ratios--" class="item-name">ratios--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  ratio-vars.html#mixin--ratio--" class="item-name">ratio--()</a>
+      
+      
+      
+      
     </h4>
 
     
@@ -761,41 +508,12 @@ as <code>'remove-nth'</code>.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">has-alias()</span>
+        <a href="
+  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
       
       
       
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
       
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">lookup-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -809,7 +527,6 @@ as <code>'remove-nth'</code>.</p>
 
   
 
-    </div>
   
 
   

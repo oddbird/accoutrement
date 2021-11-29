@@ -126,7 +126,7 @@ $_stack: ();
   }
 
   // parse the component keys of a deep alias
-  @if string.index($alias, '->') {
+  @if (meta.type-of($alias) == 'string') and string.index($alias, '->') {
     $parts: str.split($alias, '->');
     $deep: lookup-alias(
       $map,
@@ -182,10 +182,10 @@ $_stack: ();
   }
 
   @if ($args) {
-    @return call($function, $value, $args...);
+    @return meta.call($function, $value, $args...);
   }
 
-  @return call($function, $value);
+  @return meta.call($function, $value);
 }
 
 

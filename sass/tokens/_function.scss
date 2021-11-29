@@ -3,6 +3,7 @@
 @use 'sass:list';
 @use '../internal/type';
 @use '../internal/throw';
+@use '../internal/function';
 
 /// # Function Registration
 /// Because Sass 3.5+ requires first-class functions,
@@ -39,25 +40,13 @@
 ///   should refer to a captured function
 $functions: () !default;
 
-// Internal Functions
-// ------------------
-/// These functions are defined internally,
-/// and can be called by name without first being captured
-/// using the Sass `get-function()` approach.
-/// User should not make changes to this map.
-///
-/// @access private
-/// @group token-register
-/// @type map
-$internal: ();
-
 
 // Get Function
 // ------------
 /// Get a function from registration.
 ///
 /// @access private
-/// @group token-register
+/// @group function-register
 ///
 /// @param {string} $name -
 ///   The name (string) of a registered function
@@ -73,7 +62,7 @@ $internal: ();
   $source: (),
   $throw: false,
 ) {
-  $function: map.get($source, $name) or map.get($functions, $name) or map.get($internal, $name);
+  $function: map.get($source, $name) or map.get($functions, $name) or map.get(function.$internal, $name);
 
   // optional error handling
   @if $throw and (meta.type-of($function) != 'function') {
@@ -87,74 +76,6 @@ $internal: ();
   }
 
   @return $function;
-}
-
-
-// Registration
-// ------------
-/// This function provides the shared logic used by
-/// `function.register()` (for user registration)
-/// and `function.internal()` (for internal use).
-///
-/// @access private
-/// @group token-register
-///
-/// @param {map} $source -
-///   The original map source in which to register a function
-/// @param {function} $function -
-///   The function to be registered
-/// @param {string | arglist} $names... -
-///   One or more alias names (strings)
-///   to use for map-access to the function
-/// @return {map} -
-///   Updated registration map
-/// @throws `$function` is not available to register with Accoutrement
-@function set(
-  $source,
-  $function,
-  $names...
-) {
-  $origin: 'function-register';
-
-  @if not type.check($function, 'function') {
-    @return type.error($function, 'function', $origin, '$function');
-  }
-
-  @if (list.length($names) == 0) {
-    $error: 'Provide at least one name for this function';
-    @return throw.error($error, $origin);
-  }
-
-  // register captured functions
-  @each $name in $names {
-    @if get($name, $source) {
-      $error: 'A function has already been registered under the name `#{$name}`';
-      @return throw.error($error, $origin);
-    }
-
-    $source: map.merge($source, ($name: $function));
-  }
-
-  @return $source;
-}
-
-
-// Internal [mixin]
-// ----------------
-/// Register internal functions.
-///
-/// @access private
-/// @group token-register
-/// @param {function} $function -
-///   The function to be registered
-/// @param {string | arglist} $names... -
-///   One or more alias names (strings)
-///   to use for map-access to the function
-@mixin internal(
-  $function,
-  $names...
-) {
-  $internal: set($internal, $function, $names...) !global;
 }
 
 
@@ -176,5 +97,5 @@ $internal: ();
   $function,
   $names...
 ) {
-  $functions: set($functions, $function, $names...) !global;
+  $functions: function.set($functions, $function, $names...) !global;
 }

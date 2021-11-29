@@ -6,7 +6,7 @@
 
   // Merge [function]
   // ----------------
-  @include describe('Merge [function]') {
+  @include describe('Multi-Merge [function]') {
     $a: (
       'one': 1,
       'two': 2,
@@ -28,7 +28,14 @@
     @include it('Errors on non-map values') {
       @include assert-equal(
         map.multi-merge($a, 'nope', $c),
-        'ERROR [merge] Each value of `$maps...` must be a map, got `[string]: nope`'
+        'ERROR [multi-merge] Each value of `$maps...` must be a map, got `[string]: nope`'
+      );
+    }
+
+    @include it('Accepts empty maps') {
+      @include assert-equal(
+        map.multi-merge($a, ()),
+        $a
       );
     }
   }

@@ -92,22 +92,12 @@
                 
   
     <li class="nav-item">
-      <a href="utils-string.html" data-nav="is-not-active">Sass Strings</a>
+      <a href="utils.html" data-nav="is-not-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="utils-list.html" data-nav="is-not-active">Sass Lists</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="utils-map.html" data-nav="is-not-active">Sass Maps</a>
-    </li>
-  
-  
-    <li class="nav-item">
-      <a href="vars.html" data-nav="is-not-active">Variables &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="vars.html" data-nav="is-not-active">CSS Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -147,7 +137,27 @@
   
   
     <li class="nav-item">
-      <a href="token-vars.html" data-nav="is-not-active">Tokens &amp; Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Ratios</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="ratio-vars.html" data-nav="is-not-active">Ratio Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li></ul>
@@ -263,13 +273,31 @@ yarn add accoutrement [--dev]
 you can use the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
 <pre><code class="lang-scss">@use &quot;accoutrement&quot;;
 </code></pre>
+<h2 id="modules-for-common-data-types">Modules for common data<span class="widont">&nbsp;</span>types</h2>
+<ul>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/animate.html">Animate</a></strong> –
+For managing CSS transitions and<span class="widont">&nbsp;</span>animations</li>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/color.html">Color</a></strong> –
+For managing CSS colors and<span class="widont">&nbsp;</span>contrast-ratios</li>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a></strong> –
+For managing CSS sizes: typographic scales, spacing,<span class="widont">&nbsp;</span>etc.</li>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/ratios.html">Type</a></strong> –
+For managing webfonts, generated content, and other text<span class="widont">&nbsp;</span>needs</li>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/type.html">Ratios</a></strong> –
+For managing aspect and typography ratios
+(several common ratios are<span class="widont">&nbsp;</span>provided)</li>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/vars.html">Variables</a></strong> –
+For converting Sass maps and variables into CSS custom<span class="widont">&nbsp;</span>properties</li>
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/utils.html">Utilities</a></strong> –
+For helpers with Sass lists, strings, and<span class="widont">&nbsp;</span>maps</li>
+</ul>
 <h2 id="tokens">Tokens</h2>
 <p>The <strong>Token</strong> module provides
 a special syntax for managing design tokens
 with Sass “map”<span class="widont">&nbsp;</span>objects:</p>
 <pre><code class="lang-scss">$map: (
-  &quot;root&quot;: 16px,
-  &quot;gutter&quot;: 1em,
+  'root': 16px,
+  'gutter': 1em,
 );
 </code></pre>
 <p>Using the custom syntax,
@@ -278,9 +306,9 @@ and functional adjustments –
 capturing meaningful relationships
 between design<span class="widont">&nbsp;</span>tokens:</p>
 <pre><code class="lang-scss">$map: (
-  &quot;root&quot;: 16px,
+  'root': 16px,
   // internal reference &amp; adjustments
-  &quot;gutter&quot;: &quot;#root&quot;
+  'gutter': '#root'
     (
       &quot;scale&quot;: ('_major-third', 1),
       &quot;convert-units&quot;: &quot;rem&quot;,
@@ -309,19 +337,13 @@ to manipulate tokens in the<span class="widont">&nbsp;</span>map</li>
 <li>Register your own <a href="https://www.oddbird.net/accoutrement/docs/token-register.html">functions</a>,
 for extra<span class="widont">&nbsp;</span>functionality</li>
 </ul>
-<h2 id="also-">Also…</h2>
-<p>While the Token module handles generic data-management,
-we also provide plugins for a few common data<span class="widont">&nbsp;</span>types:</p>
-<ul>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/animate.html">Animate</a></strong> –
-Tools for managing CSS transitions and<span class="widont">&nbsp;</span>animations</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/color.html">Color</a></strong> –
-Tools for managing CSS colors and<span class="widont">&nbsp;</span>contrast-ratios</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a></strong> –
-Tools for managing CSS sizes: typographic scales, spacing,<span class="widont">&nbsp;</span>etc.</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/type.html">Type</a></strong> –
-Tools for managing webfonts, generated content, and other text<span class="widont">&nbsp;</span>needs</li>
-</ul>
+<p><strong>Note:</strong> We no longer use token maps
+internally at <a href="https://oddbird.net">OddBird</a>,
+since Sass “modules” now provide a way
+to group &amp; namespace normal Sass variables in a meaningful way,
+and <a href="https://sass-lang.com/documentation/modules/meta#module-variables">access module variables as a map</a>.
+By relying on core Sass features,
+we avoid any confusion around the custom token<span class="widont">&nbsp;</span>syntax.</p>
 
     </div>
   

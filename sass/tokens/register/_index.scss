@@ -5,10 +5,10 @@
 ///
 /// - All the [built-in Sass modules](https://sass-lang.com/documentation/modules),
 ///   prefixed with the module name in a dot notation (e.g. `'list.index'`)
-/// - All the [Accoutrement utilities](#)
+/// - All the [Accoutrement utilities](https://www.oddbird.net/accoutrement/docs/utils.html)
+///   and individual module functions.
 /// - A number of math helpers listed below...
 ///
-/// @group token-internal
 /// @example scss
 ///   $sizes: (
 ///     'text': 14px 16px 24px,
@@ -17,8 +17,7 @@
 ///   );
 ///   /*! small: #{tools.get($sizes, 'small')} */
 ///   /*! medium: #{tools.get($sizes, 'medium')} */
+/// @group token-internal
 
 @use 'math';
-@use 'string';
-@use 'list';
 @use 'sass';

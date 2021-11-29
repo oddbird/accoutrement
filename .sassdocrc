@@ -8,10 +8,8 @@ display:
 
 groups:
   'Utilities':
-    utils-string: 'Sass Strings'
-    utils-list: 'Sass Lists'
-    utils-map: 'Sass Maps'
-    vars: 'Variables & Custom Properties'
+    utils: 'Sass Maps, Lists, & Strings'
+    vars: 'CSS Custom Properties'
   'Tokens':
     tokens: 'QuickStart: Tokens'
     token-config: 'Configuration'
@@ -19,7 +17,11 @@ groups:
     token-inspect: 'Inspecting Tokens'
     token-register: 'Function Registration'
     token-internal: 'Pre-Registered Functions'
-    token-vars: 'Tokens & Custom Properties'
+    token-vars: 'Tokens » Custom Properties'
+  'Ratios':
+    ratios: Built-In Ratios
+    ratio-tokens: Ratio Tokens
+    ratio-vars: Ratio Tokens » CSS Variables
 #   'Animate':
 #     animate: 'QuickStart: Animate'
 #     animate-times: 'Timing Maps'
