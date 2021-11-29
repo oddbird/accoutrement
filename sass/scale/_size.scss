@@ -43,8 +43,19 @@
     );
   }
 
-  $size: api.get($source, $size, $do);
-  @return if((meta.type-of($size) == 'string'), string.unquote($size), $size);
+  $return: $size;
+
+  @if (meta.type-of($size) == 'number') {
+    // apply adjustments
+    @if $do {
+      $return: tokens.compile($source, $size $do);
+    }
+  } @else {
+    // get the desired token
+    $return: api.get($source, $size, $do);
+  }
+
+  @return if((meta.type-of($return) == 'string'), string.unquote($return), $return);
 }
 
 // Negative [function]

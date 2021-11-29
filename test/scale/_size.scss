@@ -2,10 +2,11 @@
 @use '../../node_modules/sass-true' as *;
 @use '../../sass/scale/size';
 @use '../../sass/scale/config';
+@use '../../sass/tokens';
 @use './test-data' as data;
 
 $_global: config.$sizes;
-config.$sizes: data.$sizes;
+config.$sizes: data.$test-sizes;
 
 // Scale Tests
 // ===========
@@ -16,15 +17,16 @@ config.$sizes: data.$sizes;
     @include it('Get size from map setting') {
       @include assert-equal(size.size('root'), 20px);
     }
-    /*
+
     @include it('Get size from unit adjustment') {
       @include assert-equal(size.size('text'), 1rem);
     }
- 
+
+    /*
     @include it('Get size from linear adjustment') {
       @include assert-equal(size.size('h3'), 2rem);
     }
-    
+
     @include it('Get size from ratio adjustment') {
       @include assert-equal(size.size('big'), 7.59375rem);
     }

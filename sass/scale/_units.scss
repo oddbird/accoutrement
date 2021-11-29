@@ -116,7 +116,7 @@
     '%',
     'ex'
   );
-  $length: size.size($length);
+  $length: if(meta.type-of($length == 'number'), $length, size.size($length));
   $from-unit: math.unit($length);
 
   // No conversion needed
