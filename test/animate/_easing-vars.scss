@@ -1,0 +1,140 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/animate/easing';
+@use '../../sass/animate/easing-vars' as vars;
+@use 'test-data' as data;
+@use 'sass:map';
+
+$_old: easing.$easing;
+easing.$easing: data.$easing;
+
+// Easing Tests
+// ============
+@include test-module('animate/easing') {
+
+
+  // Easing-- [mixin]
+  // ------------------
+  @include describe('Easing-- [mixin]') {
+    @include it('Generates CSS variables from the default easing map') {
+      @include assert {
+        @include output {
+          @include vars.easing--;
+        }
+
+        @include expect {
+          --ease-alias: ease;
+          --ease-thread: var(--ease-alias, ease);
+          --ease-sidebar-in: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+          --ease-elastic: cubic-bezier(0.5, -0.4, 0.5, 1.4);
+        }
+      }
+    }
+
+    @include it('Generates CSS variables for any easing map') {
+      @include assert {
+        @include output {
+          @include vars.easing--(('mine': ease-in));
+        }
+
+        @include expect {
+          --ease-mine: ease-in;
+        }
+      }
+    }
+  }
+
+
+  // Ease-- [mixin]
+  // -----------------
+  @include describe('Ease-- [mixin]') {
+    @include it('Generates a single variable from a token') {
+      @include assert {
+        @include output {
+          @include vars.ease--('elastic');
+        }
+
+        @include expect {
+          --ease-elastic: cubic-bezier(0.5, -0.4, 0.5, 1.4);
+        }
+      }
+    }
+
+    @include it('Generates a reference variable from a token') {
+      @include assert {
+        @include output {
+          @include vars.ease--('thread');
+        }
+
+        @include expect {
+          --ease-thread: var(--ease-alias, ease);
+        }
+      }
+    }
+
+
+    @include it('Generate reference to default easing') {
+      @include assert {
+        @include output {
+          @include vars.ease--('sidebar-in');
+        }
+
+        @include expect {
+          --ease-sidebar-in: #{easing.ease('_in-out-quad')};
+        }
+      }
+    }
+
+    @include it('Generates a new variable alias') {
+      @include assert {
+        @include output {
+          @include vars.ease--('new', 'thread');
+        }
+
+        @include expect {
+          --ease-new: var(--ease-thread, ease);
+        }
+      }
+    }
+  }
+
+
+  // Var-Ease [function]
+  // -------------------
+  @include describe('Var-Ease [function]') {
+    @include it('Accesses an easing variable with default fallback') {
+      @include assert-equal(
+        vars.var-ease('alias'),
+        var(--ease-alias, easing.ease('alias'))
+      );
+    }
+
+    @include it('Allows custom fallback') {
+      @include assert-equal(
+        vars.var-ease('alias', ease-out),
+        var(--ease-alias, ease-out)
+      );
+    }
+
+    @include it('Allows false fallback') {
+      @include assert-equal(
+        vars.var-ease('alias', false),
+        var(--ease-alias)
+      );
+    }
+
+    @include it('Accepts custom palette') {
+      $my-palette: (
+        'my-base': ease-in,
+        'my-adjustment': '#my-base' ('str-replace': '-in' ''),
+      );
+
+      @include assert-equal(
+        vars.var-ease('my-adjustment', $source: $my-palette),
+        var(--ease-my-adjustment, ease)
+      );
+    }
+  }
+
+} // end module
+
+easing.$easing: $_old;

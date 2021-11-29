@@ -5,12 +5,12 @@
 /// @group animate
 
 
-@import 'easing';
-@import 'easing-vars';
-@import 'times';
-@import 'time-vars';
-@import 'change';
-@import 'change-vars';
+@forward 'easing' hide $EASING;
+@forward 'easing-vars';
+// @import 'times';
+// @import 'time-vars';
+// @import 'change';
+// @import 'change-vars';
 
 
 /// ## Import
