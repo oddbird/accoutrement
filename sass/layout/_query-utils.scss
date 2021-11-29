@@ -47,7 +47,7 @@ $adjust-query-overlap: 'max' !default;
 /// @return {length} -
 ///   The adjusted value, if `$is` and `$nudge` match,
 ///   otherwise the original value is returned
-@function _a_nudge-query(
+@function nudge-query(
   $value,
   $is,
   $nudge: $adjust-query-overlap

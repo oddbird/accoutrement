@@ -15,11 +15,6 @@ $breakpoints: (
   'adjust': 20em ('times': 2),
 );
 
-$aspect-ratios: (
-  'mine': 13 / 4,
-  'retro': '#_classic',
-);
-
 $z-index: (
   'main',
   'sidebar',
@@ -28,8 +23,6 @@ $z-index: (
   'modal',
 );
 
-@import 'layout/position';
 @import 'layout/query-utils';
 @import 'layout/queries';
-@import 'layout/ratio';
 @import 'layout/z-index';

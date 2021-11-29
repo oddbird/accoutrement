@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../internal/throw';
+
 // Media Queries
 // =============
 
@@ -70,7 +73,7 @@ $breakpoints: () !default;
   $scale: true
 ) {
   @if ($scale) and variable-exists('sizes') and (type-of($sizes) == 'map') {
-    $source: map-merge($sizes, $source);
+    $source: map.merge($sizes, $source);
   }
 
   // get breakpoint
@@ -78,7 +81,7 @@ $breakpoints: () !default;
 
   // validate
   @if (type-of($break) != 'number') or unitless($break) {
-    @return _a_error(
+    @include throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'
     );
@@ -106,13 +109,13 @@ $breakpoints: () !default;
 ///
 /// @group layout-queries
 /// @example scss
-///   @include below(30em) {
+///   @include tools.below(30em) {
 ///     html { background: red; }
 ///   }
 /// @example scss
 ///   $breakpoints: ('red': 30em);
 ///
-///   @include below('red') {
+///   @include tools.below('red') {
 ///     html { background: red; }
 ///   }
 ///
@@ -127,7 +130,7 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value: break($max);
-  $value: _a_nudge-query($value, 'max');
+  $value: nudge-query($value, 'max');
 
   @media (max-#{$prop}: #{$value}) {
     @content;
@@ -153,13 +156,13 @@ $breakpoints: () !default;
 ///
 /// @group layout-queries
 /// @example scss
-///   @include above(50em) {
+///   @include tools.above(50em) {
 ///     html { background: green; }
 ///   }
 /// @example scss
 ///   $breakpoints: ('green': 50em);
 ///
-///   @include above('green') {
+///   @include tools.above('green') {
 ///     html { background: green; }
 ///   }
 ///
@@ -174,7 +177,7 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value: break($min);
-  $value: _a_nudge-query($value, 'min');
+  $value: nudge-query($value, 'min');
 
   @media (min-#{$prop}: #{$value}) {
     @content;
@@ -200,7 +203,7 @@ $breakpoints: () !default;
 ///
 /// @group layout-queries
 /// @example scss
-///   @include between(30em, 50em) {
+///   @include tools.between(30em, 50em) {
 ///     html { background: yellow; }
 ///   }
 /// @example scss
@@ -209,7 +212,7 @@ $breakpoints: () !default;
 ///     'green': 50em,
 ///   );
 ///
-///   @include between('red', 'green') {
+///   @include tools.between('red', 'green') {
 ///     html { background: yellow; }
 ///   }
 ///
@@ -228,9 +231,9 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value-min: break($min);
-  $value-max: _a_nudge-query($value-min, 'min');
+  $value-max: nudge-query($value-min, 'min');
   $value-max: break($max);
-  $value-max: _a_nudge-query($value-max, 'max');
+  $value-max: nudge-query($value-max, 'max');
 
   @media (min-#{$prop}: #{$value-min}) and (max-#{$prop}: #{$value-max}) {
     @content;
