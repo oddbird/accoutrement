@@ -48,6 +48,10 @@
   - NEW: Built-in named ratios are now available as individual variables,
     (without the `_` prefix that is applied in token maps)
 
+- [Layout][layout]:
+  - BREAKING: Removed box-sizing
+  - BREAKING: Removed clearfix
+
 ## 3.0.1 - 03/01/21
 
 - INTERNAL: Upgrade dev dependencies.

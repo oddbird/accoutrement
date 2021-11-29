@@ -3,11 +3,9 @@
 /// - Organize named z-index values in a list
 /// - Manage all breakpoints in a map,
 ///   and access with media-query helpers
-/// - Use our positioning, clearfix, and box-model utilities
 /// @group layout
 
 
-@import 'clearfix';
 @import 'position';
 @import 'query-utils';
 @import 'queries';
