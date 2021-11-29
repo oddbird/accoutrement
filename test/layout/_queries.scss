@@ -1,6 +1,6 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/layout/queries';
-@use 'sass:math';
+@use '../../sass/tokens/register/math';
 
 // Media Query Tests
 // =================

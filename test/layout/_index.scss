@@ -1,28 +1,3 @@
-// Layout Tests
-// ============
-
 @forward 'query-utils';
 @forward 'queries';
 @forward 'z-index';
-
-$sizes: (
-  'off-canvas': 30em,
-  'page': 50em,
-);
-
-$breakpoints: (
-  'off-canvas': 45em,
-  'recursive': '#off-canvas',
-  'meta': '#recursive',
-  'useful': '#meta',
-  'p-break': '#page',
-  'adjust': 20em ('times': 2),
-);
-
-$z-index: (
-  'main',
-  'sidebar',
-  'banner' 'active-nav' 'dropdown',
-  'message',
-  'modal',
-);
