@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Tokens » Custom Properties | Accoutrement Documentation</title>
+  <title>Color Tokens » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -137,7 +137,7 @@
   
   
     <li class="nav-item">
-      <a href="token-vars.html" data-nav="is-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -197,7 +197,7 @@
   
   
     <li class="nav-item">
-      <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-vars.html" data-nav="is-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li></ul>
@@ -254,11 +254,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Tokens » Custom Properties</strong>
+    <strong>Color Tokens » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="token-vars">
+        <div data-page="color-vars">
           
   
     
@@ -283,10 +283,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="tokens-custom-properties">Tokens » Custom<span class="widont">&nbsp;</span>Properties</h1>
-<p>There are many cases where it can be useful
-to convert a Sass token map into CSS custom properties.
-Here are some tools to<span class="widont">&nbsp;</span>help.</p>
+      <h1 id="colors-css-variables">Colors » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -351,7 +348,7 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
 
 
 
-<section class="item" id="mixin--token--">
+<section class="item" id="variable--color-var-prefix">
   
     
   
@@ -365,13 +362,15 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@mixin</span>
+        <span class="item-type"></span>
       
 
       
-        <a href="#mixin--token--" class="item-name">token--()</a>
+        <a href="#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
       
 
+      
+        <span class="value-type">(string)</span>
       
 
       
@@ -383,6 +382,26 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
 
     
     
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$color-var-prefix: &#39;color-&#39; !default;</code></pre>
+    </div>
+  
+
+    
   
   
   
@@ -390,8 +409,14 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
 
   
     <div class="text-block">
-      <p>Set a single custom property based on a map-token,
-with optional alias, fallback, and<span class="widont">&nbsp;</span>prefixing</p>
+      <p>Since CSS variables are often defined in a global space,
+it can be useful to prefix different variable types.
+Accoutrement maps help solve that problem in Sass,
+so we wanted to carry that over into our CSS variable support.
+Set a prefix for all color-tokens,
+and we’ll apply it when setting or calling css variables
+based on your color maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
   
@@ -425,175 +450,6 @@ with optional alias, fallback, and<span class="widont">&nbsp;</span>prefixing</p
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$map:</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Accoutrement map of tokens to use as<span class="widont">&nbsp;</span>source</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$token:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Token name available in the source <code>$map</code></p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$value:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional new value for the given<span class="widont">&nbsp;</span>token</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$fallback:</span>
-      
-      <span class="item-value">true</span>
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The optional fallback value for a <code>var()</code> function:</p>
-<ul>
-<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
-<li>A token name will fallback to the value of that
-css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
-<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$prefix:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional prefix used for naming token<span class="widont">&nbsp;</span>variables</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -640,15 +496,9 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;color.scale&#39;: (&#39;lightness&#39;: -50%)),
-  &#39;border&#39;: &#39;#text&#39;,
-);
-.example {
-  @include tools.token--($colors, &#39;border&#39;);
-  @include tools.token--($colors, &#39;outline&#39;, &#39;border&#39;, red);
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (&#39;my-color&#39;: pink);
+tools.$color-var-prefix: &#39;prefix_&#39;;
+html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
     </div>
   
 
@@ -670,9 +520,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
-  --border: var(--text, #206020);
-  --outline: var(--border, red);
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --prefix_my-color: pink;
 }</code></pre>
     </div>
   
@@ -691,164 +540,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   
   
   
-    <div class="requires-wrapper">
-      
     
-  <div data-item-section="requires">
     
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-inspect.html#function--is-alias-for" class="item-name">is-alias-for()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-vars.html#function--var-token" class="item-name">var-token()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-      
   
     
   <div data-item-section="used-by">
@@ -877,10 +570,103 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
+  color-vars.html#mixin--colors--" class="item-name">colors--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-vars.html#mixin--color--" class="item-name">color--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-vars.html#function--var-color" class="item-name">var-color()</a>
       
       
       
@@ -898,7 +684,6 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
   
 
-    </div>
   
 
   
@@ -926,7 +711,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
 
 
-<section class="item" id="mixin--tokens--">
+<section class="item" id="mixin--colors--">
   
     
   
@@ -944,7 +729,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
 
       
-        <a href="#mixin--tokens--" class="item-name">tokens--()</a>
+        <a href="#mixin--colors--" class="item-name">colors--()</a>
       
 
       
@@ -965,12 +750,12 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
   
     <div class="text-block">
-      <p>Convert any Accoutrement Tokens map
-into CSS custom properties (aka<span class="widont">&nbsp;</span>variables).</p>
+      <p>Convert any color-map into CSS variables,
+using the global <code>$color-var-prefix</code>.</p>
 <ul>
-<li>Token names that start with <code>_</code> or <code>-</code> are considered “private”
+<li>Color names that start with <code>_</code> or <code>-</code> are considered “private”
 and will not be output as<span class="widont">&nbsp;</span>variables</li>
-<li>Tokens that contain a simple alias with no adjustments
+<li>Colors that contain a simple alias with no adjustments
 will be output with a <code>var()</code> value,
 keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 </ul>
@@ -1029,9 +814,9 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$source:</span>
       
-      
+      <span class="item-value">$colors</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1039,34 +824,8 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
     
       
       <div class="param-details text-block">
-        <p>Accoutrement map of tokens to set as css<span class="widont">&nbsp;</span>variables</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$prefix:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional prefix for naming token<span class="widont">&nbsp;</span>variables</p>
+        <p>Optionally use a custom
+map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -1098,7 +857,7 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
     
       
       <div class="param-details text-block">
-        <p>Custom properties for all public tokens in the<span class="widont">&nbsp;</span>map</p>
+        <p>Custom properties for all public colors in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
@@ -1157,13 +916,13 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;color.scale&#39;: (&#39;lightness&#39;: -50%)),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
   &#39;border&#39;: &#39;#text&#39;,
 );
 html {
-  @include tools.tokens--($colors, &#39;color-&#39;);
+  @include tools.colors--;
 }</code></pre>
     </div>
   
@@ -1239,48 +998,13 @@ html {
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      
       
         <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
+  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
       
       
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
-      
-      
-      
+      <span class="value-type">(string)</span>
       
     </h4>
 
@@ -1324,7 +1048,404 @@ html {
 
 
 
-<section class="item" id="function--var-token">
+<section class="item" id="mixin--color--">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--color--" class="item-name">color--()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Set a single custom property based on a map-color,
+with optional alias and<span class="widont">&nbsp;</span>fallback</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Color name available in the <code>$source</code> map,
+or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$value:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional value for the variable,
+if different from the given <code>$color</code></p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$colors</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional map of colors to use as a palette<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;_brand&#39;: hsl(120, 50%, 50%),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
+  &#39;border&#39;: &#39;#text&#39;,
+);
+.example {
+  @include tools.color--(&#39;border&#39;);
+  @include tools.color--(&#39;outline&#39;, &#39;border&#39;, red);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --color-border: var(--color-text, #206020);
+  --color-outline: var(--color-border, red);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-color">
   
     
   
@@ -1342,7 +1463,7 @@ html {
       
 
       
-        <a href="#function--var-token" class="item-name">var-token()</a>
+        <a href="#function--var-color" class="item-name">var-color()</a>
       
 
       
@@ -1420,34 +1541,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Accoutrement map of tokens to use as<span class="widont">&nbsp;</span>source</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$token:</span>
+        <span class="item-name">$color:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1457,7 +1551,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     
       
       <div class="param-details text-block">
-        <p>Token name available in the source <code>$map</code></p>
+        <p>Color name available in the <code>$source</code> map</p>
 
       </div>
     
@@ -1486,9 +1580,9 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
       <div class="param-details text-block">
         <p>The optional fallback value for a <code>var()</code> function:</p>
 <ul>
-<li><code>true</code> will try to generate a fallback based on the color<span class="widont">&nbsp;</span>value</li>
-<li>A color name will fallback to the value of that
-css-variable and then to the color’s calculated<span class="widont">&nbsp;</span>value</li>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
 <li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
 </ul>
 
@@ -1507,17 +1601,17 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
     <h4 class="param-title">
       
       
-        <span class="item-name">$prefix:</span>
+        <span class="item-name">$source:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Optional prefix used for naming token<span class="widont">&nbsp;</span>variables</p>
+        <p>Optional Accoutrement map of colors to use as<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1547,7 +1641,7 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
       
       <div class="param-details text-block">
         <p>CSS variable call, in the format:
-<code>var(--&lt;color&gt;, &lt;fallback&gt;)</code></p>
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
 
       </div>
     
@@ -1609,14 +1703,14 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
   &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;color.scale&#39;: (&#39;lightness&#39;: -50%)),
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
   &#39;border&#39;: &#39;#text&#39;,
 );
 .example {
-  border-color: tools.var-token($colors, &#39;border&#39;);
-  color: tools.var-token($colors, &#39;text&#39;, black);
+  border-color: tools.var-color(&#39;border&#39;);
+  color: tools.var-color(&#39;text&#39;, black);
 }</code></pre>
     </div>
   
@@ -1640,8 +1734,8 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  border-color: var(--border, #206020);
-  color: var(--text, black);
+  border-color: var(--color-border, #206020);
+  color: var(--color-text, black);
 }</code></pre>
     </div>
   
@@ -1696,7 +1790,7 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
       <span class="item-type">@function</span>
       
         <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
@@ -1728,13 +1822,14 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
       
       
+        <a href="
+  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
       
-      <span class="item-note">[private]</span>
+      
+      <span class="value-type">(string)</span>
+      
     </h4>
 
     
@@ -1776,72 +1871,10 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-vars.html#function--var-color" class="item-name">var-color()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
+  color-contrast.html#mixin--var-contrasted" class="item-name">var-contrasted()</a>
       
       
       

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Sass Maps, Lists, &amp; Strings | Accoutrement Documentation</title>
+  <title>Contrast &amp; Accessibility | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -92,7 +92,7 @@
                 
   
     <li class="nav-item">
-      <a href="utils.html" data-nav="is-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
+      <a href="utils.html" data-nav="is-not-active">Sass Maps, Lists, &amp;<span class="widont">&nbsp;</span>Strings</a>
     </li>
   
   
@@ -177,7 +177,7 @@
   
   
     <li class="nav-item">
-      <a href="color-contrast.html" data-nav="is-not-active">Contrast &amp;<span class="widont">&nbsp;</span>Accessibility</a>
+      <a href="color-contrast.html" data-nav="is-active">Contrast &amp;<span class="widont">&nbsp;</span>Accessibility</a>
     </li>
   
   
@@ -254,11 +254,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Sass Maps, Lists, &amp; Strings</strong>
+    <strong>Contrast &amp; Accessibility</strong>
   </nav>
 
 
-        <div data-page="utils">
+        <div data-page="color-contrast">
           
   
     
@@ -283,11 +283,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="sass-utilities">Sass Utilities</h1>
-<p>We use a number of Sass utilities
-to help manage strings, maps, and lists.
-As more functions are added to the Sass core,
-we hope to be able to remove some or all of these over<span class="widont">&nbsp;</span>time.</p>
+      <h1 id="contrast-accessibility">Contrast &amp; Accessibility</h1>
 
       
   
@@ -352,84 +348,7 @@ we hope to be able to remove some or all of these over<span class="widont">&nbsp
 
 
 
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="sass-lists">Sass Lists</h2>
-<p>Utility function(s) that extend the Sass core modules,
-to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--remove-nth">
+<section class="item" id="function--contrast">
   
     
   
@@ -447,7 +366,7 @@ to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
       
 
       
-        <a href="#function--remove-nth" class="item-name">remove-nth()</a>
+        <a href="#function--contrast" class="item-name">contrast()</a>
       
 
       
@@ -468,12 +387,12 @@ to help with advanced list<span class="widont">&nbsp;</span>manipulation.</p>
 
   
     <div class="text-block">
-      <p>Remove any item (1-indexed) from a<span class="widont">&nbsp;</span>list.</p>
-<p>This function has a <code>list-</code> prefix added by default
-(eg <code>list-remove-nth()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as <code>'remove-nth'</code>.</p>
+      <p>For any color, select the best contrast among a set of options.
+For best results, pass in a combination of light and dark colors
+to contrast against – 
+or define default <code>contrast-light</code> and <code>contrast-dark</code> values
+(with or without a private <code>_</code> prefix)
+in your global <code>$colors</code> map.</p>
 
       
   
@@ -519,17 +438,17 @@ as <code>'remove-nth'</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$list:</span>
+        <span class="item-name">$color:</span>
       
       
-      <span class="value-type">(list)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The original list to be<span class="widont">&nbsp;</span>edited</p>
+        <p>The name or value of a<span class="widont">&nbsp;</span>color.</p>
 
       </div>
     
@@ -546,17 +465,27 @@ as <code>'remove-nth'</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$index:</span>
+        <span class="item-name">$options...:</span>
       
       
-      <span class="value-type">(number)</span>
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The 1-indexed item to remove from the<span class="widont">&nbsp;</span>list</p>
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
 
       </div>
     
@@ -578,14 +507,15 @@ as <code>'remove-nth'</code>.</p>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(list)</span>
+      <span class="value-type">(color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The original list, with item<span class="widont">&nbsp;</span>removed</p>
+        <p>Whichever color-option has the highest contrast-ratio to <code>$color</code>,
+or the minimum needed contrast to meet a given accessibility<span class="widont">&nbsp;</span>ratio.</p>
 
       </div>
     
@@ -597,52 +527,6 @@ as <code>'remove-nth'</code>.</p>
   
 
       
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p><code>$index</code> must be a non-zero<span class="widont">&nbsp;</span>integer</p>
-
-      </div>
-    
-  </div>
-
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p><code>$index</code> is too large for the list<span class="widont">&nbsp;</span>length</p>
-
-      </div>
-    
-  </div>
-
-    
   
 
     
@@ -657,7 +541,7 @@ as <code>'remove-nth'</code>.</p>
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
+        <span class="item-subtitle-main">Examples</span>
       </h3>
 
       
@@ -688,16 +572,26 @@ as <code>'remove-nth'</code>.</p>
           </span>
 
           
+            <span class='code-description'>
+              max contrast
+            </span>
+          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;main-start&#39;: [&#39;nav-end&#39; &#39;main-start&#39; &#39;footer-start&#39;],
-  &#39;small-start&#39;: &#39;#main-start&#39; (&#39;remove-nth&#39;: 1),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
 );
-/*! #{inspect(tools.get($map, &#39;small-start&#39;))} */</code></pre>
+html {
+  color: tools.contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
+}</code></pre>
     </div>
   
 
@@ -719,7 +613,90 @@ as <code>'remove-nth'</code>.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! [&quot;main-start&quot; &quot;footer-start&quot;] */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: white;
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              min contrast
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  color: tools.contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: #eee;
+}</code></pre>
     </div>
   
 
@@ -772,505 +749,7 @@ as <code>'remove-nth'</code>.</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">template()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">normalize-token()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">has-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">lookup-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="sass-maps">Sass Maps</h2>
-<p>Utility function(s) that extend the Sass core modules,
-to help with advanced map<span class="widont">&nbsp;</span>manipulation.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--multi-merge">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--multi-merge" class="item-name">multi-merge()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Merge multiple maps into a single map,
-in case you want to define tokens in smaller groups –
-such as <code>brand-colors</code>, <code>text-colors</code>, etc. –
-before merging them into a single<span class="widont">&nbsp;</span>map.</p>
-<p>This function has a <code>map-</code> prefix added by default
-(eg <code>map-multi-merge()</code>)
-unless it’s imported<span class="widont">&nbsp;</span>directly.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$maps:</span>
-      
-      
-      <span class="value-type">(maps...)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The merged map of<span class="widont">&nbsp;</span>easings.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    <div class="requires-wrapper">
-      
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">check()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       
@@ -1319,38 +798,7 @@ unless it’s imported<span class="widont">&nbsp;</span>directly.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  color-tokens.html#mixin--add-colors" class="item-name">add-colors()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  ratio-tokens.html#mixin--add-ratios" class="item-name">add-ratios()</a>
+  color-contrast.html#mixin--contrasted" class="item-name">contrasted()</a>
       
       
       
@@ -1396,84 +844,7 @@ unless it’s imported<span class="widont">&nbsp;</span>directly.</p>
 
 
 
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="sass-strings">Sass Strings</h2>
-<p>Utility function(s) that extend the Sass core modules,
-to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--replace">
+<section class="item" id="function--var-contrast">
   
     
   
@@ -1491,7 +862,7 @@ to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
       
 
       
-        <a href="#function--replace" class="item-name">replace()</a>
+        <a href="#function--var-contrast" class="item-name">var-contrast()</a>
       
 
       
@@ -1512,22 +883,17 @@ to help with advanced string<span class="widont">&nbsp;</span>manipulation.</p>
 
   
     <div class="text-block">
-      <p>Replace a substring inside a larger string,
-or replace the entirety of the<span class="widont">&nbsp;</span>string.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-replace()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'replace'</code> or <code>'str-replace'</code>.</p>
+      <p>An extension of the <code>contrast</code> function,
+designed to output CSS variables
+rather than simple color<span class="widont">&nbsp;</span>values.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Improved handling of non-string values,
-allows you to replace a number within a string, for<span class="widont">&nbsp;</span>example</li>
+<li>NEW: Provides access to contrast colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
 </ul>
 </div>
       </section>
@@ -1575,7 +941,7 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
     <h4 class="param-title">
       
       
-        <span class="item-name">$string:</span>
+        <span class="item-name">$color:</span>
       
       
       <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
@@ -1585,7 +951,7 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
     
       
       <div class="param-details text-block">
-        <p>The original string (or list of strings) to<span class="widont">&nbsp;</span>edit</p>
+        <p>The name or value of a<span class="widont">&nbsp;</span>color.</p>
 
       </div>
     
@@ -1602,71 +968,27 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
     <h4 class="param-title">
       
       
-        <span class="item-name">$old:</span>
+        <span class="item-name">$options...:</span>
       
       
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A sub-string to<span class="widont">&nbsp;</span>replace</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$new:</span>
-      
-      <span class="item-value">&#39;&#39;</span>
-      <span class="value-type">(*)</span>
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A new sub-string to replace the<span class="widont">&nbsp;</span>old</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$all:</span>
-      
-      <span class="item-value">false</span>
-      <span class="value-type">(boolean)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>If true, replace all instances of $old in<span class="widont">&nbsp;</span>$string</p>
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
 
       </div>
     
@@ -1688,14 +1010,16 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>var())</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Original string, with substring<span class="widont">&nbsp;</span>replaced</p>
+        <p>CSS Variable for the color-option
+that has the highest contrast-ratio to <code>$color</code>,
+or the color if no variable<span class="widont">&nbsp;</span>exists.</p>
 
       </div>
     
@@ -1721,7 +1045,7 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
+        <span class="item-subtitle-main">Examples</span>
       </h3>
 
       
@@ -1752,18 +1076,26 @@ allows you to replace a number within a string, for<span class="widont">&nbsp;</
           </span>
 
           
+            <span class='code-description'>
+              max contrast / no variable names
+            </span>
+          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
-// so we can use string-functions to manipulate calc values…
-$map: (
-  &#39;text-size&#39;: calc(1em + 1vw),
-  &#39;large-text&#39;: &#39;#text-size&#39; (&#39;str-replace&#39;: &#39;1vw&#39; &#39;3vw&#39;),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
 );
-/*! #{tools.get($map, &#39;large-text&#39;)} */</code></pre>
+html {
+  color: tools.var-contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
+}</code></pre>
     </div>
   
 
@@ -1785,7 +1117,90 @@ $map: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! calc(1em + 3vw) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: white;
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              min contrast / variable names
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  color: tools.var-contrast(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  color: var(--color-light, #eee);
+}</code></pre>
     </div>
   
 
@@ -1838,7 +1253,7 @@ $map: (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">error()</span>
+        <span class="item-name">best-contrast()</span>
       
       
       
@@ -1872,41 +1287,7 @@ $map: (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">template()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">force()</span>
+        <span class="item-name">get()</span>
       
       
       
@@ -1930,60 +1311,10 @@ $map: (
         
 
         
-      
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
           
           
   
   
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">has-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
   
   
   
@@ -1997,7 +1328,7 @@ $map: (
       <span class="item-type">@function</span>
       
         <a href="
-  utils.html#function--interpolate" class="item-name">interpolate()</a>
+  token-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
       
       
       
@@ -2011,10 +1342,14 @@ $map: (
         
       
         
+        
+        
 
         
           
           
+  
+  
   
   
   
@@ -2041,6 +1376,90 @@ $map: (
 
         
       
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-contrast.html#mixin--var-contrasted" class="item-name">var-contrasted()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
     
   </div>
 
@@ -2074,7 +1493,7 @@ $map: (
 
 
 
-<section class="item" id="function--interpolate">
+<section class="item" id="mixin--contrasted">
   
     
   
@@ -2088,11 +1507,11 @@ $map: (
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--interpolate" class="item-name">interpolate()</a>
+        <a href="#mixin--contrasted" class="item-name">contrasted()</a>
       
 
       
@@ -2113,13 +1532,11 @@ $map: (
 
   
     <div class="text-block">
-      <p>Return a string with interpolated values
-replacing <code>%s</code> placeholders in a format<span class="widont">&nbsp;</span>string.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-interpolate()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'%s'</code>.</p>
+      <p>Apply any background color,
+along with the highest-contrast text color from a set of options.
+This works the same as the <code>contrast</code> function,
+but applies the resulting values to <code>background-color</code>
+and text <code>color</code> properties.</p>
 
       
   
@@ -2149,7 +1566,7 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -2165,17 +1582,17 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
     <h4 class="param-title">
       
       
-        <span class="item-name">$string:</span>
+        <span class="item-name">$background:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The original string to be<span class="widont">&nbsp;</span>edited</p>
+        <p>The name or value of your desired background<span class="widont">&nbsp;</span>color.</p>
 
       </div>
     
@@ -2192,17 +1609,27 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
     <h4 class="param-title">
       
       
-        <span class="item-name">$values...:</span>
+        <span class="item-name">$options...:</span>
       
       
-      <span class="value-type">(*)</span>
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>New strings, to replace the <code>%s</code> format strings</p>
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
 
       </div>
     
@@ -2210,6 +1637,9 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
 
 
       
+
+      
+  
 
       
   
@@ -2221,17 +1651,22 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
     <h4 class="param-title">
       
       
-        <span class="item-name">@return</span>
+        <span class="item-name">{CSS output}</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Original string, with <code>%s</code> format strings<span class="widont">&nbsp;</span>replaced</p>
+        <ul>
+<li>Sets the <code>background-color</code> to <code>$background</code>
+and <code>color</code> to the option with
+highest contrast against that background,
+or minimum contrast that still meets a given accessibility<span class="widont">&nbsp;</span>ratio.</li>
+</ul>
 
       </div>
     
@@ -2240,33 +1675,6 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
   
 
       
-  
-
-      
-  
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Too many interpolation values given for the<span class="widont">&nbsp;</span>string</p>
-
-      </div>
-    
-  </div>
-
-    
   
 
     
@@ -2281,7 +1689,7 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
+        <span class="item-subtitle-main">Examples</span>
       </h3>
 
       
@@ -2312,18 +1720,26 @@ as either <code>'interpolate'</code>, <code>'str-interpolate'</code>, or <code>'
           </span>
 
           
+            <span class='code-description'>
+              max contrast
+            </span>
+          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// sass treats calc() as a string,
-// so we can use string-functions to manipulate calc values…
-$map: (
-  &#39;root&#39;: 16px,
-  &#39;responsive&#39;: &#39;calc(%s + %s)&#39; (&#39;%s&#39;: &#39;#root&#39; 0.5vw),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
 );
-/*! #{tools.get($map, &#39;responsive&#39;)} */</code></pre>
+html {
+  @include tools.contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
+}</code></pre>
     </div>
   
 
@@ -2345,7 +1761,92 @@ $map: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! calc(16px + 0.5vw) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: blue;
+  color: white;
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              min contrast
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  @include tools.contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: blue;
+  color: #eee;
+}</code></pre>
     </div>
   
 
@@ -2397,45 +1898,12 @@ $map: (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">check()</span>
+        <a href="
+  color-tokens.html#function--color" class="item-name">color()</a>
       
       
       
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
       
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -2466,7 +1934,7 @@ $map: (
       <span class="item-type">@function</span>
       
         <a href="
-  utils.html#function--replace" class="item-name">replace()</a>
+  color-contrast.html#function--contrast" class="item-name">contrast()</a>
       
       
       
@@ -2476,12 +1944,6 @@ $map: (
     
   </div>
 
-
-        
-      
-        
-        
-        
 
         
       
@@ -2519,7 +1981,7 @@ $map: (
 
 
 
-<section class="item" id="function--split">
+<section class="item" id="mixin--var-contrasted">
   
     
   
@@ -2533,11 +1995,11 @@ $map: (
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--split" class="item-name">split()</a>
+        <a href="#mixin--var-contrasted" class="item-name">var-contrasted()</a>
       
 
       
@@ -2558,25 +2020,514 @@ $map: (
 
   
     <div class="text-block">
-      <p>Splits a string into a list of strings,
-using the same logic as JavaScript’s <code>split()</code> meathod.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-split()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'str-split'</code> or <code>'split'</code>.</p>
+      <p>Apply any background color as a CSS variable,
+along with the highest-contrast text color from a set of options.
+This works the same as the <code>var-contrast</code> function,
+but applies the resulting values to <code>background-color</code>
+and text <code>color</code> properties.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Aliased as <code>str-split</code></li>
+<li>NEW: Applies contrasting colors as CSS-variables, when<span class="widont">&nbsp;</span>defined</li>
 </ul>
 </div>
       </section>
     
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$background:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or value of your desired background<span class="widont">&nbsp;</span>color.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$options...:</span>
+      
+      
+      <span class="value-type">(colors |<span class="widont">&nbsp;</span>min-contrast)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>List of colors to contrast against.
+This function will choose the best contrast
+of all the options provided,
+or the <code>contrast-light</code> and <code>contrast-dark</code> defaults
+defined in your color palette or the factory<span class="widont">&nbsp;</span>settings.</p>
+<ul>
+<li>Any  <code>{'AA' | 'AA-large' | 'AAA' | 0-21 }</code> values
+will be treated as a minimum color-contrast ratio –
+and will return the minimum accessible option,
+rather than the maximum<span class="widont">&nbsp;</span>contrast.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>Sets the <code>background-color</code> to <code>$background</code>
+and the foreground <code>color</code> to
+whichever option has better contrast against the given<span class="widont">&nbsp;</span>background.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              max contrast
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  @include tools.var-contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var(--color-background, blue);
+  color: white;
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+            <span class='code-description'>
+              min contrast
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
+  &#39;background&#39;: blue,
+  &#39;light&#39;: #eee,
+  &#39;dark&#39;: #111,
+);
+html {
+  @include tools.var-contrasted(
+    &#39;background&#39;,
+    &#39;light&#39;, &#39;dark&#39;, black, white,
+    &#39;AAA&#39;
+  );
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  background-color: var(--color-background, blue);
+  color: var(--color-light, #eee);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-vars.html#function--var-color" class="item-name">var-color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--contrast-ratio">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--contrast-ratio" class="item-name">contrast-ratio()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Compare two colors using the WCAG comparison algorithm,
+and return the resulting contrast-ratio.
+Optionally pass in a standard (AA, AAA, AA-large)
+and return <code>false</code> when the contrast-check<span class="widont">&nbsp;</span>fails.</p>
+<ul>
+<li>‘AA-large’ == <code>3:1</code></li>
+<li>‘AA’ == <code>4.5:1</code></li>
+<li>‘AAA’ == <code>7:1</code></li>
+</ul>
+
+      
   
 
       
@@ -2620,20 +2571,19 @@ as either <code>'str-split'</code> or <code>'split'</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$string:</span>
+        <span class="item-name">$base:</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The original string to be<span class="widont">&nbsp;</span>split</p>
-<ul>
-<li>Empty strings will be returned as a list of one empty<span class="widont">&nbsp;</span>string</li>
-</ul>
+        <p>Color value, color token name,
+or pre-calculated numeric luminance
+for the base<span class="widont">&nbsp;</span>color.</p>
 
       </div>
     
@@ -2650,25 +2600,19 @@ as either <code>'str-split'</code> or <code>'split'</code>.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$separator:</span>
+        <span class="item-name">$contrast:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(*)</span>
+      
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The string will be split on any instance of the separator,
-and the separators will be<span class="widont">&nbsp;</span>removed</p>
-<ul>
-<li>Null or unfound separators will return a single-item list
-with the original<span class="widont">&nbsp;</span>string</li>
-<li>Empty-string (<code>''</code>) separators will return a list of
-all characters in the original<span class="widont">&nbsp;</span>string</li>
-<li>Non-string separators will be converted to strings before<span class="widont">&nbsp;</span>splitting</li>
-</ul>
+        <p>Color value, color token name,
+or pre-calculated numeric luminance
+for a contrast color to compare against the<span class="widont">&nbsp;</span>base.</p>
 
       </div>
     
@@ -2685,17 +2629,18 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$limit:</span>
+        <span class="item-name">$require:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(integer |<span class="widont">&nbsp;</span>null)</span>
+      <span class="item-value">false</span>
+      <span class="value-type">(&#39;AA&#39; | &#39;AA-large&#39; | &#39;AAA&#39; | number |<span class="widont">&nbsp;</span>false)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Maximum length of the returned<span class="widont">&nbsp;</span>list</p>
+        <p>An optional WCAG contrast ratio to require.
+The function will return <code>false</code> if the required ratio is not<span class="widont">&nbsp;</span>met.</p>
 
       </div>
     
@@ -2717,14 +2662,14 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(list)</span>
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Space-delimited list of string-slices from the original<span class="widont">&nbsp;</span>string</p>
+        <p>The WCAG-defined contrast-ratio of two<span class="widont">&nbsp;</span>colors.</p>
 
       </div>
     
@@ -2786,10 +2731,8 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;list&#39;: &#39;hello world&#39; (&#39;split&#39;: &#39; &#39;),
-);
-/*! #{tools.get($map, &#39;list&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">/* black and white: #{tools.contrast-ratio(white, black)} */
+/* failed &#39;AAA&#39;: #{tools.contrast-ratio(white, #999, &#39;AAA&#39;)} */</code></pre>
     </div>
   
 
@@ -2811,7 +2754,8 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! hello world */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* black and white: 21 */
+/* failed &#39;AAA&#39;: false */</code></pre>
     </div>
   
 
@@ -2824,6 +2768,44 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
     </div>
   
 
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef" class="item-name">WCAG Contrast Definition</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
 
   
   
@@ -2864,11 +2846,12 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">force()</span>
+        <a href="
+  color-contrast.html#function--luminance" class="item-name">luminance()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -2883,29 +2866,15 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
         
       
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
         
-      </h3>
-    
-
-    
-      
-      
+        
         
 
         
           
           
+  
+  
   
   
   
@@ -2918,7 +2887,7 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">has-alias()</span>
+        <span class="item-name">valid-contrast()</span>
       
       
       
@@ -2930,328 +2899,6 @@ all characters in the original<span class="widont">&nbsp;</span>string</li>
 
 
         
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">lookup-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--trim">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--trim" class="item-name">trim()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Trims whitespace from the start and end of a<span class="widont">&nbsp;</span>string.</p>
-<p>This function has a <code>str-</code> prefix added by default
-(eg <code>str-trim()</code>)
-unless it’s imported directly.
-However, it’s available in all accoutrement maps
-as either <code>'str-trim'</code> or <code>'trim'</code>.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Strips whitespace</li>
-<li>NEW: Aliased as <code>str-trim</code></li>
-</ul>
-</div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$string:</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The original string to be<span class="widont">&nbsp;</span>trimmed</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Trimmed string</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  // null value is needed for single-argument functions…
-  &#39;trim&#39;: &#39;  hello world     &#39; (&#39;trim&#39;: null),
-);
-/*! #{tools.get($map, &#39;trim&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! hello world */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
       
         
         
@@ -3325,9 +2972,480 @@ as either <code>'str-trim'</code> or <code>'trim'</code>.</p>
   </div>
 
   
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">best-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--luminance">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--luminance" class="item-name">luminance()</a>
+      
+
+      
+
+      
+    </h2>
+
     
   
 
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Get the WCAG luminance of a color in your<span class="widont">&nbsp;</span>palette.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A color value or color token<span class="widont">&nbsp;</span>name.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>WCAG-defined numeric luminance<span class="widont">&nbsp;</span>value.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef" class="item-name">WCAG Relative Luminance</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-tokens.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--contrast-ratio" class="item-name">contrast-ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-themes.html#function--shades-of" class="item-name">shades-of()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">best-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
   
 
   

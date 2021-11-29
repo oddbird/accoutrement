@@ -1,3 +1,11 @@
+@use 'tokens';
+@use 'contrast';
+@use 'utils';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:map';
+
 /// # Color Themes
 /// @group color-themes
 
@@ -19,10 +27,10 @@
 ///     'primary': blue,
 ///     'accent': red,
 ///   );
-///   @include add-colors($user-colors);
+///   @include tools.add-colors($user-colors);
 ///
-///   $theme-colors: shades-of($user-colors, 2);
-///   @include add-colors($theme-colors);
+///   $theme-colors: tools.shades-of($user-colors, 2);
+///   @include tools.add-colors($theme-colors);
 ///
 ///   @each $name, $value in $theme-colors {
 ///   /* #{$name}: #{inspect($value)} */
@@ -46,27 +54,27 @@
   $count: (2 * $range + 1);
 
   @each $name, $color in $origin {
-    $color: color($name);
-    $light: lightness($color);
+    $color: tokens.color($name);
+    $light: color.lightness($color);
     $light: if($light == 0, 0.00000001%, $light);
-    $lum: luminance($color);
-    $avg: (($light / 100%) + $lum) / 2;
-    $pos: (ceil($avg * $count) - ($range + 1));
+    $lum: contrast.luminance($color);
+    $avg: math.div((math.div($light, 100%) + $lum), 2);
+    $pos: (math.ceil($avg * $count) - ($range + 1));
 
     @for $i from (0 - $range) through $range {
       $diff: $i - $pos;
       $do: if($diff > 0, 'light', if($diff < 0, 'dark', null));
-      $is: if($i > 0, 'light-#{abs($i)}', if($i < 0, 'dark-#{abs($i)}', '0'));
+      $is: if($i > 0, 'light-#{math.abs($i)}', if($i < 0, 'dark-#{math.abs($i)}', '0'));
       $value: '##{$name}';
 
       @if ($do) {
-        $distance: abs(if(($do == 'dark'), (0 - $range), $range) - $pos);
-        $interval: percentage(1 / ($distance + 0.25));
-        $amount: (abs($diff) - 0.5) * $interval;
-        $value: $value (map-get($adjust, $do): $amount);
+        $distance: math.abs(if(($do == 'dark'), (0 - $range), $range) - $pos);
+        $interval: math.percentage(math.div(1, ($distance + 0.25)));
+        $amount: (math.abs($diff) - 0.5) * $interval;
+        $value: $value (map.get($adjust, $do): $amount);
       }
 
-      $theme: map-merge($theme, ('#{$name}-#{$is}': $value));
+      $theme: map.merge($theme, ('#{$name}-#{$is}': $value));
     }
   }
 
@@ -87,7 +95,7 @@
 ///   [data-theme='rainbow'] {
 ///     background: linear-gradient(
 ///       to right,
-///       stripe-colors(red, orange, yellow, green, blue, indigo, violet)
+///       tools.stripe-colors(red, orange, yellow, green, blue, indigo, violet)
 ///     );
 ///   }
 ///
@@ -99,12 +107,12 @@
   $colors...
 ) {
   $gradient: ();
-  $width: 100% / length($colors);
+  $width: math.div(100%, list.length($colors));
 
-  @for $i from 1 through length($colors) {
-    $pop: color(nth($colors, $i));
+  @for $i from 1 through list.length($colors) {
+    $pop: tokens.color(nth($colors, $i));
     $new: $pop ($width * ($i - 1)) ($width * $i);
-    $gradient: append($gradient, $new, comma);
+    $gradient: list.append($gradient, $new, comma);
   }
 
   @return $gradient;
@@ -121,7 +129,7 @@
 /// @group color-themes
 /// @example scss
 ///   [data-theme='rainbow'] {
-///     @include stripe-colors(
+///     @include tools.stripe-colors(
 ///       to right,
 ///       red, orange, yellow, green, blue, indigo, violet
 ///     );
