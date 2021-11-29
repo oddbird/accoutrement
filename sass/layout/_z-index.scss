@@ -1,3 +1,8 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
+
 // Z-Index
 // =======
 
@@ -42,18 +47,18 @@ $z-index: ();
 @function z-index(
   $layer
 ) {
-  $index: index($z-index, $layer);
+  $index: list.index($z-index, $layer);
   $nested: null;
 
   @if $index {
     @return $index;
   } @else {
-    @for $i from 1 through length($z-index) {
+    @for $i from 1 through list.length($z-index) {
       $stack: nth($z-index, $i);
       $index: $i;
       $nested: index($stack, $layer);
 
-      @if type-of($nested) == 'number' {
+      @if meta.type-of($nested) == 'number' {
         @if $nested == 1 {
           @return $index;
         } @else if $nested > 1 {
