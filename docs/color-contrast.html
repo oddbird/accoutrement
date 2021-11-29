@@ -1199,7 +1199,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  color: #eee;
+  color: var(--color-light, #eee);
 }</code></pre>
     </div>
   
@@ -1329,6 +1329,41 @@ html {
       
         <a href="
   token-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  vars.html#function--ident" class="item-name">ident()</a>
       
       
       
@@ -2224,7 +2259,7 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: var-color(&quot;background&quot;);
+  background-color: var(--color-background, blue);
   color: white;
 }</code></pre>
     </div>
@@ -2306,8 +2341,8 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  background-color: var-color(&quot;background&quot;);
-  color: #eee;
+  background-color: var(--color-background, blue);
+  color: var(--color-light, #eee);
 }</code></pre>
     </div>
   
