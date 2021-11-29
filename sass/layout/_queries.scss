@@ -70,11 +70,11 @@ $breakpoints: () !default;
 @function break(
   $break,
   $do: null,
-  $source: config.$breakpoints,
+  $source: $breakpoints,
   $scale: true
 ) {
   @if ($scale) and variable-exists('sizes') and (meta.type-of($sizes) == 'map') {
-    $source: map.merge(config.$sizes, $source);
+    $source: map.merge($sizes, $source);
   }
 
   // get breakpoint
@@ -161,7 +161,7 @@ $breakpoints: () !default;
 ///     html { background: green; }
 ///   }
 /// @example scss
-///   $breakpoints: ('green': 50em);
+///   tools.$breakpoints: ('green': 50em);
 ///
 ///   @include tools.above('green') {
 ///     html { background: green; }
@@ -208,7 +208,7 @@ $breakpoints: () !default;
 ///     html { background: yellow; }
 ///   }
 /// @example scss
-///   $breakpoints: (
+///   tools.$breakpoints: (
 ///     'red': 30em,
 ///     'green': 50em,
 ///   );
