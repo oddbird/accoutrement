@@ -49,8 +49,12 @@
     (without the `_` prefix that is applied in token maps)
 
 - [Layout][layout]:
-  - BREAKING: Removed box-sizing
-  - BREAKING: Removed clearfix
+  - BREAKING: Removed `global-box-sizing`
+  - BREAKING: Removed `clearfix`
+  - BREAKING: Removed `fluid-ratio`
+  - BREAKING: Removed `position`. Can achieve the majority of functionality in CSS using 
+    [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
+ 
 
 ## 3.0.1 - 03/01/21
 

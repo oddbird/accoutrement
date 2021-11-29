@@ -6,11 +6,9 @@
 /// @group layout
 
 
-@import 'position';
-@import 'query-utils';
-@import 'queries';
-@import 'ratio';
-@import 'z-index';
+@forward 'query-utils';
+@forward 'queries';
+@forward 'z-index';
 
 
 /// ## Import
@@ -54,13 +52,13 @@
 /// .banner-text {
 ///   display: none;
 ///
-///   @include above('banner-text') {
+///   @include tools.above('banner-text') {
 ///     display: block;
 ///   }
 /// }
 ///
 /// .container {
-///   @include below('page') {
+///   @include tools.below('page') {
 ///     padding: .5em;
 ///   }
 /// }
