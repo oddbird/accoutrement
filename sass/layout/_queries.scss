@@ -1,6 +1,8 @@
 @use 'sass:map';
 @use 'sass:meta';
+@use 'sass:math';
 @use '../internal/throw';
+@use 'query-utils' as utils;
 
 /// # Media Queries
 /// @group layout-queries
@@ -81,7 +83,7 @@ $breakpoints: () !default;
   $break: tools.get($source, $break, $do);
 
   // validate
-  @if (meta.type-of($break) != 'number') or unitless($break) {
+  @if (meta.type-of($break) != 'number') or math.unitless($break) {
     @return throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'
@@ -131,7 +133,7 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value: break($max);
-  $value: nudge-query($value, 'max');
+  $value: utils.nudge-query($value, 'max');
 
   @media (max-#{$prop}: #{$value}) {
     @content;
@@ -178,7 +180,7 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value: break($min);
-  $value: nudge-query($value, 'min');
+  $value: utils.nudge-query($value, 'min');
 
   @media (min-#{$prop}: #{$value}) {
     @content;
@@ -232,9 +234,9 @@ $breakpoints: () !default;
   $prop: 'width'
 ) {
   $value-min: break($min);
-  $value-max: nudge-query($value-min, 'min');
+  $value-max: utils.nudge-query($value-min, 'min');
   $value-max: break($max);
-  $value-max: nudge-query($value-max, 'max');
+  $value-max: utils.nudge-query($value-max, 'max');
 
   @media (min-#{$prop}: #{$value-min}) and (max-#{$prop}: #{$value-max}) {
     @content;
