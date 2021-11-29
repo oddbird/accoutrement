@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '../internal/throw';
 
 // Media Queries
@@ -69,19 +70,19 @@ $breakpoints: () !default;
 @function break(
   $break,
   $do: null,
-  $source: $breakpoints,
+  $source: config.$breakpoints,
   $scale: true
 ) {
-  @if ($scale) and variable-exists('sizes') and (type-of($sizes) == 'map') {
+  @if ($scale) and variable-exists('sizes') and (meta.type-of($sizes) == 'map') {
     $source: map.merge($sizes, $source);
   }
 
   // get breakpoint
-  $break: get-token($source, $break, $do);
+  $break: get.token($source, $break, $do);
 
   // validate
-  @if (type-of($break) != 'number') or unitless($break) {
-    @include throw.error(
+  @if (meta.type-of($break) != 'number') or unitless($break) {
+    @return throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'
     );
