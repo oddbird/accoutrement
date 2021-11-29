@@ -6,44 +6,36 @@
 /// - Generate color-palette documentation with [Herman][Herman]
 ///
 /// [wcag]: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+/// [Herman]: https://www.oddbird.net/herman/
 /// @group color
 
 
-@import 'utils';
-@import 'config';
-@import 'api';
-@import 'css-vars';
-@import 'contrast';
-@import 'themes';
+@forward 'config';
+@forward 'tokens';
+@forward 'contrast';
+@forward 'utils';
+@forward 'themes';
+@forward 'css-vars';
 
 
 /// ## Import
 ///
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// If you want to import individual plugins,
-/// make sure you first import the shared core:
+/// You can also import the color module on its own:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/core';
-///   @import '<path-to>/accoutrement/sass/plugin/color';
-/// ```
-///
-/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-/// you can leave off most of the path:
-///
-/// ```scss
-///   @import 'accoutrement/core';
-///   @import 'accoutrement/plugin/color';
+///   @use '<path-to>/accoutrement/sass/color';
 /// ```
 /// @group color
 
 
-/// ## Color Palette
-/// Establish your color palette,
-/// with the standard [Accoutrement syntax](core.html):
+/// ## Color Tokens
+/// If you are using the token syntax,
+/// establish your color palette,
+/// with the standard [Token syntax](tokens.html):
 ///
 /// ```scss
-/// $colors: (
+/// tools.$colors: (
 ///   // set explicit colors
 ///   'brand-pink': hsl(330, 85%, 62%),
 ///   'brand-light': #ddf,
@@ -54,7 +46,7 @@
 ///   'border': '#brand-dark',
 ///
 ///   // make adjustments as needed, using color functions
-///   'link': '#brand-pink' ('shade': 25%, 'desaturate': 15%),
+///   'link': '#brand-pink' ('shade': 25%),
 /// );
 /// ```
 ///
@@ -62,7 +54,7 @@
 ///
 /// ```scss
 /// .example {
-///   border-color: color('border');
+///   border-color: tools.color('border');
 /// }
 /// ```
 /// @see $colors
@@ -100,19 +92,22 @@
 
 /// ## WCAG Contrast
 /// We'll also help you calculate WCAG-appropriate color contrasts.
-/// We default to `white` and `black` options,
-/// but you can also set
-/// `'contrast-light'` and `'contrast-dark'`
-/// keys in your palette (with or without a private `_` prefix),
-/// or pass in options.
+/// You can set the `$contrast-light` & `$contrast-dark` configuration variables
+/// (`white` and `black` by default)
+/// or add `'contrast-light'` and `'contrast-dark'`
+/// tokens in your palette (with or without a private `_` prefix).
+/// These tools can be used with color values,
+/// or token names.
 ///
 /// ```scss
 /// a:hover {
 ///   // set a background, and get well-contrasted text
-///   @include contrasted('link');
+///   @include tools.contrasted('link');
+///   @include tools.contrasted(rebeccapurple);
 ///
-///   // or return a contrasting color from a set of options…
-///   border-color: contrast('background', white, rebeccapurple);
+///   // or return a contrasting color from a set of options
+///   border-color: tools.contrast('background', white, rebeccapurple);
+///   border-color: tools.contrast(maroon, white, rebeccapurple);
 /// }
 /// ```
 /// @see contrast

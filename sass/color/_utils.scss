@@ -1,3 +1,9 @@
+@use '../internal/function';
+@use 'tokens';
+@use 'contrast';
+@use 'sass:color';
+@use 'sass:meta';
+
 /// # Color Utility Functions
 /// @group color-utils
 
@@ -31,10 +37,10 @@
   $percentage,
   $light: null
 ) {
-  $light: $light or _a_default-contrast('light');
-  @return mix(color($light), color($color), $percentage);
+  $light: $light or contrast.default-contrast('light');
+  @return color.mix(tokens.color($light), tokens.color($color), $percentage);
 }
-@include register-internal('tint');
+@include function.internal(meta.get-function('tint'), 'tint');
 
 
 // Shade
@@ -66,7 +72,7 @@
   $percentage,
   $dark: null
 ) {
-  $dark: $dark or _a_default-contrast('dark');
-  @return mix(color($dark), color($color), $percentage);
+  $dark: $dark or contrast.default-contrast('dark');
+  @return color.mix(tokens.color($dark), tokens.color($color), $percentage);
 }
-@include register-internal('shade');
+@include function.internal(meta.get-function('shade'), 'shade');

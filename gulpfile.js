@@ -14,7 +14,6 @@ const paths = {
   // @@@ remove these as they are migrated
   IGNORE_SASS: [
     '!sass/animate/**/*.scss',
-    '!sass/color/**/*.scss',
     '!sass/core/**/*.scss',
     '!sass/layout/**/*.scss',
     '!sass/scale/**/*.scss',
