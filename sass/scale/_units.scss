@@ -171,7 +171,7 @@
   // Special conversion for browser-default ems (needed in media-queries)
   @if ($to-unit == 'browser-ems') {
     $size: convert-units($length, 'px', $from-context);
-    @return math.div($size, (config.$BROWSER-DEFAULT-FONT-SIZE * 1em));
+    @return math.div($size, config.$BROWSER-DEFAULT-FONT-SIZE * 1em);
   }
 
   // Convert relative length to pixels
