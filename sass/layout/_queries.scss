@@ -75,7 +75,7 @@ $breakpoints: () !default;
   $source: $breakpoints,
   $scale: true
 ) {
-  @if ($scale) and variable-exists('sizes') and (meta.type-of($sizes) == 'map') {
+  @if ($scale) and meta.variable-exists('sizes') and (meta.type-of($sizes) == 'map') {
     $source: map.merge($sizes, $source);
   }
 
