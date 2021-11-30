@@ -1,3 +1,9 @@
+@use "sass:string";
+@use 'sass:meta';
+@use 'sass:map';
+@use '../tokens';
+@use '../internal/function';
+@use '../utils/map' as utils;
 /// # Timing Maps: Durations & Delays
 /// Manage all your duration & delay patterns
 /// in a single place -
@@ -8,8 +14,8 @@
 // Timing Map
 // ----------
 /// A variable storing the map of
-/// all timing globally-avialble on your project.
-/// Any times added to the `$times` map will be accesible
+/// all timing globally-available on your project.
+/// Any times added to the `$times` map will be accessible
 /// to the `time()` function by default.
 ///
 /// Define each time with a `name`, `base-value`,
@@ -59,10 +65,10 @@ $times: () !default;
   $do: null,
   $source: $times
 ) {
-  $time: get-token($source, $time, $do);
-  @return if((type-of($time) == 'string'), unquote($time), $time);
+  $time: tokens.get($source, $time, $do);
+  @return if((meta.type-of($time) == 'string'), string.unquote($time), $time);
 }
-@include register-internal('time');
+@include function.internal(meta.get-function('time'), 'time');
 
 
 // Add Times
@@ -82,5 +88,5 @@ $times: () !default;
 @mixin add-times(
   $maps...
 ) {
-  $times: _a_map-multimerge($times, $maps...) !global;
+  $times: utils.multi-merge($times, $maps...) !global;
 }
