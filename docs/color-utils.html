@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Built-In Ratios | Accoutrement Documentation</title>
+  <title>Adjustments | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -147,7 +147,7 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-active">Built-In Ratios</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -182,7 +182,7 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-not-active">Adjustments</a>
+      <a href="color-utils.html" data-nav="is-active">Adjustments</a>
     </li>
   
   
@@ -254,11 +254,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Built-In Ratios</strong>
+    <strong>Adjustments</strong>
   </nav>
 
 
-        <div data-page="ratios">
+        <div data-page="color-utils">
           
   
     
@@ -283,18 +283,124 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="built-in-ratios">Built-In Ratios</h1>
-<p>Some built-in named ratios you can use,
-either directly or through the token syntax
-(where these values are provided with a <code>_</code> prefix).</p>
+      <h1 id="color-utility-functions">Color Utility Functions</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--tint">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--tint" class="item-name">tint()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Mix a color with <code>contrast-light</code>
+(defaults to <code>white</code>)
+to get a lighter tint of your color.
+Make sure to override <code>$light</code> when using <code>tint</code>
+to define the value of <code>contrast-light</code></p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Now available as individual variables (without the <code>_</code> prefix)</li>
+<li>BREAKING: Use <code>contrast-light</code> for default mix, rather than <code>white</code>.</li>
+<li>NEW: Accept <code>$light</code> color to use in place of <code>contrast-light</code> default</li>
 </ul>
 </div>
       </section>
@@ -310,26 +416,55 @@ either directly or through the token syntax
     </div>
   
 
-  
-
-  
-  
-  
-  
-  
-  
+  </div>
 
   
 
-
   
+  
+  
+  
+  
+  
+
   
     
-
-    <div data-item-section="examples">
+  <div data-item-section="parameter">
+    
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
       </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a color in your palette,
+with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
+
+      </div>
+    
+  </div>
+
 
       
         
@@ -337,85 +472,98 @@ either directly or through the token syntax
   
 
   
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$percentage:</span>
+      
+      
+      <span class="value-type">(percentage)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The percentage of a <code>$light</code> color to mix in.
+Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
   
   
 
   
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
+  <div class="param-list">
+    <h4 class="param-title">
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@use &#39;ratio/named&#39;;
-@each $name, $value in meta.module-variables(&#39;named&#39;) {
-/*! $#{$name}: #{$value}; */
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
+        <span class="item-name">$light:</span>
       
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
+      <span class="item-value">null</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
+      
+    </h4>
 
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
+    
+      
+      <div class="param-details text-block">
+        <p>The lighter color to be mixed in for<span class="widont">&nbsp;</span>tinting.</p>
+
+      </div>
+    
+  </div>
+
+
       
 
       
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! $octave: 2; */
-/*! $major-seventh: 1.875; */
-/*! $minor-seventh: 1.7777777778; */
-/*! $major-sixth: 1.6666666667; */
-/*! $minor-sixth: 1.6; */
-/*! $fifth: 1.5; */
-/*! $augmented-fourth: 1.40625; */
-/*! $fourth: 1.3333333333; */
-/*! $major-third: 1.25; */
-/*! $minor-third: 1.2; */
-/*! $major-second: 1.125; */
-/*! $minor-second: 1.0666666667; */
-/*! $photo: 1.5; */
-/*! $classic: 1.3333333333; */
-/*! $widescreen: 1.7777777778; */
-/*! $cinema: 2.39; */
-/*! $golden: 1.61803399; */</code></pre>
-    </div>
   
 
-    </div>
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
 
     
   </div>
 
-      
-    </div>
+  
+
+
+  
   
 
 
@@ -425,12 +573,10 @@ either directly or through the token syntax
   
     
     
-  
-    
-  <div data-item-section="used-by">
+  <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
@@ -439,10 +585,48 @@ either directly or through the token syntax
       
       
         
+        
+        
 
         
           
           
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">default-contrast()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
   
   
   
@@ -456,7 +640,7 @@ either directly or through the token syntax
       <span class="item-type">@function</span>
       
         <a href="
-  ratio-tokens.html#function--ratio" class="item-name">ratio()</a>
+  color-tokens.html#function--color" class="item-name">color()</a>
       
       
       
@@ -470,10 +654,290 @@ either directly or through the token syntax
         
       
         
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--shade">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--shade" class="item-name">shade()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Mix a color with <code>contrast-dark</code>
+(defaults to <code>black</code>)
+to get a darker shade of your color.
+Make sure to override <code>$dark</code> when using <code>shade</code>
+to define the value of <code>contrast-dark</code></p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: Use <code>contrast-dark</code> for mix, rather than <code>black</code></li>
+<li>NEW: Accept <code>$dark</code> color to use in place of <code>contrast-dark</code> default</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a color in your palette,
+with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$percentage:</span>
+      
+      
+      <span class="value-type">(Percentage)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The percentage of a <code>$dark</code> color to mix in.
+Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$dark:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The darker color to be mixed in for<span class="widont">&nbsp;</span>shading.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
 
         
           
           
+  
+  
   
   
   
@@ -484,14 +948,13 @@ either directly or through the token syntax
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
-        <a href="
-  ratio-vars.html#mixin--ratios--" class="item-name">ratios--()</a>
-      
+        <span class="item-name">default-contrast()</span>
       
       
       
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -501,41 +964,14 @@ either directly or through the token syntax
         
       
         
-
         
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  ratio-vars.html#mixin--ratio--" class="item-name">ratio--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
         
 
         
           
           
+  
+  
   
   
   
@@ -549,7 +985,7 @@ either directly or through the token syntax
       <span class="item-type">@function</span>
       
         <a href="
-  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
+  color-tokens.html#function--color" class="item-name">color()</a>
       
       
       
@@ -562,9 +998,17 @@ either directly or through the token syntax
 
         
       
+        
+        
+        
+
+        
+      
     
   </div>
 
+  
+    
   
 
   

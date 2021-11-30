@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Pre-Registered Functions | Accoutrement Documentation</title>
+  <title>Themes | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -132,7 +132,7 @@
   
   
     <li class="nav-item">
-      <a href="token-internal.html" data-nav="is-active">Pre-Registered Functions</a>
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
     </li>
   
   
@@ -187,7 +187,7 @@
   
   
     <li class="nav-item">
-      <a href="color-themes.html" data-nav="is-not-active">Themes</a>
+      <a href="color-themes.html" data-nav="is-active">Themes</a>
     </li>
   
   
@@ -254,11 +254,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Pre-Registered Functions</strong>
+    <strong>Themes</strong>
   </nav>
 
 
-        <div data-page="token-internal">
+        <div data-page="color-themes">
           
   
     
@@ -283,18 +283,127 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="registered-functions">Registered Functions</h1>
-<p>We provide a number of pre-registered functions
-to help with token management,<span class="widont">&nbsp;</span>including:</p>
-<ul>
-<li>All the <a href="https://sass-lang.com/documentation/modules">built-in Sass modules</a>,
-prefixed with the module name in a dot notation (e.g. <code>'list.index'</code>)</li>
-<li>All the <a href="https://www.oddbird.net/accoutrement/docs/utils.html">Accoutrement utilities</a>
-and individual module<span class="widont">&nbsp;</span>functions.</li>
-<li>A number of math helpers listed<span class="widont">&nbsp;</span>below…</li>
+      <h1 id="color-themes">Color Themes</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--shades-of">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--shades-of" class="item-name">shades-of()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Generates an accoutrement map of light/dark color variations
+from a map of user-defined colors,
+based on luminosity.
+The origin color will be included in the appropriate spot,
+based on it’s own<span class="widont">&nbsp;</span>luminosity.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Generate consistent tint/shade themes from arbitrary<span class="widont">&nbsp;</span>colors</li>
 </ul>
-
-      
+</div>
+      </section>
+    
   
 
       
@@ -306,6 +415,8 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
     </div>
   
 
+  </div>
+
   
 
   
@@ -314,6 +425,89 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
   
   
   
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$origin:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>user-color map to use as a basis for generating the<span class="widont">&nbsp;</span>theme</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$range:</span>
+      
+      <span class="item-value">3</span>
+      <span class="value-type">(integer)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>number of dark and light variations desired,
+in addition to the<span class="widont">&nbsp;</span>midpoint</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
 
   
 
@@ -360,13 +554,18 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 14px 16px 24px,
-  &#39;small&#39;: &#39;#text&#39; (&#39;list.nth&#39;: 1),
-  &#39;medium&#39;: &#39;#text&#39; (&#39;list.nth&#39;: 2),
+      <pre class="hljs-pre"><code class="lang-scss">$user-colors: (
+  &#39;primary&#39;: blue,
+  &#39;accent&#39;: red,
 );
-/*! small: #{tools.get($sizes, &#39;small&#39;)} */
-/*! medium: #{tools.get($sizes, &#39;medium&#39;)} */</code></pre>
+@include tools.add-colors($user-colors);
+
+$theme-colors: tools.shades-of($user-colors, 2);
+@include tools.add-colors($theme-colors);
+
+@each $name, $value in $theme-colors {
+/* #{$name}: #{inspect($value)} */
+}</code></pre>
     </div>
   
 
@@ -388,8 +587,16 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! small: 14px */
-/*! medium: 16px */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* primary-dark-2: &quot;#primary&quot; (&quot;shade&quot;: 40%) */
+/* primary-dark-1: &quot;#primary&quot; */
+/* primary-0: &quot;#primary&quot; (&quot;tint&quot;: 15.3846153846%) */
+/* primary-light-1: &quot;#primary&quot; (&quot;tint&quot;: 46.1538461538%) */
+/* primary-light-2: &quot;#primary&quot; (&quot;tint&quot;: 76.9230769231%) */
+/* accent-dark-2: &quot;#accent&quot; (&quot;shade&quot;: 40%) */
+/* accent-dark-1: &quot;#accent&quot; */
+/* accent-0: &quot;#accent&quot; (&quot;tint&quot;: 15.3846153846%) */
+/* accent-light-1: &quot;#accent&quot; (&quot;tint&quot;: 46.1538461538%) */
+/* accent-light-2: &quot;#accent&quot; (&quot;tint&quot;: 76.9230769231%) */</code></pre>
     </div>
   
 
@@ -408,6 +615,126 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
   
   
     
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-tokens.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-contrast.html#function--luminance" class="item-name">luminance()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
     
   
 
@@ -438,7 +765,7 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
 
 
-<section class="item" id="function--plus">
+<section class="item" id="function--stripe-colors">
   
     
   
@@ -456,7 +783,7 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
       
 
       
-        <a href="#function--plus" class="item-name">plus()</a>
+        <a href="#function--stripe-colors" class="item-name">stripe-colors()</a>
       
 
       
@@ -477,12 +804,20 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
   
     <div class="text-block">
-      <p>Add two values together in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'plus'</code>, <code>'add'</code>, or <code>'+'</code>.</p>
+      <p>Create color-stops for a striped gradient background,
+from any number of<span class="widont">&nbsp;</span>colors</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -526,44 +861,17 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num1:</span>
+        <span class="item-name">$colors...:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are adding<span class="widont">&nbsp;</span>to</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or length of the size being<span class="widont">&nbsp;</span>added</p>
+        <p>ArgList of colors</p>
 
       </div>
     
@@ -585,15 +893,14 @@ but it is available in all accoutrement maps as
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(number)</span>
+      <span class="value-type">(color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The calculated results of adding
-<code>$num1</code> and <code>$num2</code></p>
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
 
       </div>
     
@@ -655,12 +962,12 @@ but it is available in all accoutrement maps as
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;margin&#39;: 14px,
-  &#39;spacer&#39;: &#39;#text&#39; (&#39;plus&#39;: &#39;#margin&#39;),
-);
-/*! spacer: #{tools.get($sizes, &#39;spacer&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">[data-theme=&#39;rainbow&#39;] {
+  background: linear-gradient(
+    to right,
+    tools.stripe-colors(red, orange, yellow, green, blue, indigo, violet)
+  );
+}</code></pre>
     </div>
   
 
@@ -682,7 +989,9 @@ but it is available in all accoutrement maps as
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! spacer: 30px */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">[data-theme=rainbow] {
+  background: linear-gradient(to right, red 0% 14.2857142857%, orange 14.2857142857% 28.5714285714%, yellow 28.5714285714% 42.8571428571%, green 42.8571428571% 57.1428571429%, blue 57.1428571429% 71.4285714286%, indigo 71.4285714286% 85.7142857143%, violet 85.7142857143% 100%);
+}</code></pre>
     </div>
   
 
@@ -700,10 +1009,157 @@ but it is available in all accoutrement maps as
   
   
   
+    <div class="requires-wrapper">
+      
     
+  <div data-item-section="requires">
     
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
   
 
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-tokens.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  color-tokens.html#variable--colors" class="item-name">$colors</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  color-themes.html#mixin--stripe-colors" class="item-name">stripe-colors()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
   
 
   
@@ -731,7 +1187,7 @@ but it is available in all accoutrement maps as
 
 
 
-<section class="item" id="function--minus">
+<section class="item" id="mixin--stripe-colors">
   
     
   
@@ -745,11 +1201,11 @@ but it is available in all accoutrement maps as
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--minus" class="item-name">minus()</a>
+        <a href="#mixin--stripe-colors" class="item-name">stripe-colors()</a>
       
 
       
@@ -770,12 +1226,19 @@ but it is available in all accoutrement maps as
 
   
     <div class="text-block">
-      <p>Subtract one value from another in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'minus'</code>, <code>'subtract'</code>, or <code>'-'</code>.</p>
+      <p>Create a striped gradient background from any number of<span class="widont">&nbsp;</span>colors</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.1.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Especially useful for viewing generated color<span class="widont">&nbsp;</span>palettes</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -803,7 +1266,7 @@ but it is available in all accoutrement maps as
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters</span>
         
       </h3>
     
@@ -819,17 +1282,17 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num1:</span>
+        <span class="item-name">$angle...:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      <span class="value-type">(gradient<span class="widont">&nbsp;</span>angle)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or length of the size you are subtracting<span class="widont">&nbsp;</span>from</p>
+        <p>e.g. <code>to right</code> or <code>35deg</code></p>
 
       </div>
     
@@ -846,17 +1309,17 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num2:</span>
+        <span class="item-name">$colors...:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>color)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or length of the size to<span class="widont">&nbsp;</span>subtract</p>
+        <p>ArgList of colors</p>
 
       </div>
     
@@ -869,29 +1332,6 @@ but it is available in all accoutrement maps as
   
 
       
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The calculated results of subtracting
-<code>$num2</code> from <code>$num1</code></p>
-
-      </div>
-    
-  </div>
-
   
 
       
@@ -948,12 +1388,12 @@ but it is available in all accoutrement maps as
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;margin&#39;: 14px,
-  &#39;shim&#39;: &#39;#text&#39; (&#39;minus&#39;: &#39;#margin&#39;),
-);
-/*! shim: #{tools.get($sizes, &#39;shim&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">[data-theme=&#39;rainbow&#39;] {
+  @include tools.stripe-colors(
+    to right,
+    red, orange, yellow, green, blue, indigo, violet
+  );
+}</code></pre>
     </div>
   
 
@@ -975,7 +1415,9 @@ but it is available in all accoutrement maps as
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! shim: 2px */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">[data-theme=rainbow] {
+  background-image: linear-gradient(to right, red 0% 14.2857142857%, orange 14.2857142857% 28.5714285714%, yellow 28.5714285714% 42.8571428571%, green 42.8571428571% 57.1428571429%, blue 57.1428571429% 71.4285714286%, indigo 71.4285714286% 85.7142857143%, violet 85.7142857143% 100%);
+}</code></pre>
     </div>
   
 
@@ -995,115 +1437,65 @@ but it is available in all accoutrement maps as
   
     
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--times">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--times" class="item-name">times()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Multiplty two values in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'times'</code>, <code>'multiply'</code>, or <code>'*'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
+  <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
 
     
       
+      
         
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  color-themes.html#function--stripe-colors" class="item-name">stripe-colors()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
   
   
 
@@ -1112,764 +1504,24 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num1:</span>
+        <a href="
+  color-tokens.html#variable--colors" class="item-name">$colors</a>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are<span class="widont">&nbsp;</span>multiplying</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>multiple</p>
-
-      </div>
-    
   </div>
 
 
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The calculated results of multiplying
-<code>$num1</code> by <code>$num2</code></p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
         
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
       
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;double&#39;: &#39;#text&#39; (&#39;times&#39;: 2),
-);
-/*! double: #{tools.get($sizes, &#39;double&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! double: 32px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--divide">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--divide" class="item-name">divide()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Divide two values in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'divide'</code>, or <code>'/'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num1:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are<span class="widont">&nbsp;</span>dividing</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>division</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The calculated results of dividing
-<code>$num1</code> by <code>$num2</code></p>
-
-      </div>
     
   </div>
 
   
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;half&#39;: &#39;#text&#39; (&#39;divide&#39;: 2),
-);
-/*! half: #{tools.get($sizes, &#39;half&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! half: 8px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--modulo">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--modulo" class="item-name">modulo()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Divide two values in accoutrement maps,
-and return the<span class="widont">&nbsp;</span>remainder.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'modulo'</code>, <code>'remainder'</code>, <code>'mod'</code>, or <code>'%'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num1:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are<span class="widont">&nbsp;</span>dividing</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>division</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The modulo of two<span class="widont">&nbsp;</span>numbers</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;mod&#39;: &#39;#text&#39; (&#39;modulo&#39;: 3),
-);
-/*! mod: #{tools.get($sizes, &#39;mod&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! mod: 1px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
     
   
 
