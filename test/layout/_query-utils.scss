@@ -57,7 +57,8 @@
     );
   }
 
-  $adjust-query-overlap: 'min' !global;
+$_old: utils.$adjust-query-overlap;
+utils.$adjust-query-overlap: 'min';
 
   @include it('Adds 1px to min px values') {
     @include assert-equal(
@@ -66,7 +67,7 @@
     );
   }
 
-  @include it('Adds 0.01 to non-px min values') {
+   @include it('Adds 0.01 to non-px min values') {
     @include assert-equal(
       utils.nudge-query(20em, 'min'),
       20.01em
@@ -76,9 +77,8 @@
       utils.nudge-query(20ch, 'min'),
       20.01ch
     );
-  }
+  }  
 
-  $adjust-query-overlap: 'max' !global;
-}
-
+  utils.$adjust-query-overlap: $_old;
+} 
 } // end module
