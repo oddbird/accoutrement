@@ -35,7 +35,7 @@
 /// with the standard [Token syntax](tokens.html):
 ///
 /// ```scss
-/// tools.$colors: (
+/// $colors: (
 ///   // set explicit colors
 ///   'brand-pink': hsl(330, 85%, 62%),
 ///   'brand-light': #ddf,
@@ -54,7 +54,7 @@
 ///
 /// ```scss
 /// .example {
-///   border-color: tools.color('border');
+///   border-color: color('border');
 /// }
 /// ```
 /// @see $colors
@@ -102,12 +102,12 @@
 /// ```scss
 /// a:hover {
 ///   // set a background, and get well-contrasted text
-///   @include tools.contrasted('link');
-///   @include tools.contrasted(rebeccapurple);
+///   @include contrasted('link');
+///   @include contrasted(rebeccapurple);
 ///
 ///   // or return a contrasting color from a set of options
-///   border-color: tools.contrast('background', white, rebeccapurple);
-///   border-color: tools.contrast(maroon, white, rebeccapurple);
+///   border-color: contrast('background', white, rebeccapurple);
+///   border-color: contrast(maroon, white, rebeccapurple);
 /// }
 /// ```
 /// @see contrast

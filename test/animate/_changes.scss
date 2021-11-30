@@ -1,6 +1,30 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/animate/times';
+@use '../../sass/animate/easing';
+@use '../../sass/animate/change';
+@use 'test-data' as data;
+@use 'sass:map';
+
+$_old-times: times.$times;
+times.$times: data.$times;
+$_old-easing: easing.$easing;
+easing.$easing: data.$easing;
+
+$changes: (
+  'slide': transform times.time('fast'),
+  'fade': opacity times.time('fade') easing.ease('_out-quad'),
+  'slide-in': '#slide' easing.ease('_out-back'),
+  'sidebar-in': ('#slide-in', '#fade' times.time('delay')),
+  'modal-in': '#sidebar-in',
+  'animation': slide-frames 1 times.time('fast') easing.ease('_out-back'),
+  'animation-ref': '#animation' both,
+);
+$_old-changes: change.$changes;
+change.$changes: $changes;
+
 // Change Tests
 // ============
-@include test-module('Animate: Changes') {
+@include test-module('animate/changes') {
 
 
 // Change [function]
@@ -8,25 +32,25 @@
 @include describe('Change [function]') {
   @include it('Get change from map setting') {
     @include assert-equal(
-      change('modal-in'),
+      change.change('modal-in'),
       (
-        (transform time('fast')) ease('_out-back'),
-        (opacity time('fade') ease('_out-quad')) time('delay'),
+        (transform times.time('fast')) easing.ease('_out-back'),
+        (opacity times.time('fade') easing.ease('_out-quad')) times.time('delay'),
       )
     );
   }
 
   @include it('Applies on-the-fly adjustments') {
     @include assert-equal(
-      change('slide', ('str-replace': 'transform' '-ms-transform')),
-      -ms-transform time('fast')
+      change.change('slide', ('str-replace': 'transform' '-ms-transform')),
+      -ms-transform times.time('fast')
     );
   }
 
   @include it('Get change from local source') {
     $local: ('new': opacity 34ms);
     @include assert-equal(
-      change('new', $source: $local),
+      change.change('new', $source: $local),
       opacity 34ms
     );
   }
@@ -36,20 +60,20 @@
 // Add Changes [mixin]
 // -------------------
 @include describe('Add Changes [mixin]') {
-  $old: $changes;
-  $a: ('glow': glow time('slow') ease('_in') infinite alternate);
-  $b: ('slide-out': '#slide' ease('_in'));
+  $outer: change.$changes;
+  $a: ('glow': glow times.time('slow') easing.ease('_in') infinite alternate);
+  $b: ('slide-out': '#slide' easing.ease('_in'));
 
-  @include add-changes($a, $b);
+  @include change.add-changes($a, $b);
 
   @include it('Merges changes, and updates global variable') {
     @include assert-equal(
-      $changes,
-      map-merge($old, map-merge($a, $b))
+      change.$changes,
+      map.merge($outer, map.merge($a, $b))
     );
   }
 
-  $changes: $old !global;
+  change.$changes: $outer;
 }
 
 
@@ -59,10 +83,10 @@
   @include it('Outputs a named animation to CSS') {
     @include assert {
       @include output {
-        @include animate('animation');
+        @include change.animate('animation');
       }
       @include expect {
-        animation: slide-frames 1 time('fast') ease('_out-back');
+        animation: slide-frames 1 times.time('fast') easing.ease('_out-back');
       }
     }
   }
@@ -70,10 +94,10 @@
   @include it('Handles recursive animations') {
     @include assert {
       @include output {
-        @include animate('animation-ref');
+        @include change.animate('animation-ref');
       }
       @include expect {
-        animation: slide-frames 1 time('fast') ease('_out-back') both;
+        animation: slide-frames 1 times.time('fast') easing.ease('_out-back') both;
       }
     }
   }
@@ -81,12 +105,12 @@
   @include it('Handles multiple animations') {
     @include assert {
       @include output {
-        @include animate('animation', 'animation-ref');
+        @include change.animate('animation', 'animation-ref');
       }
       @include expect {
         animation:
-          slide-frames 1 time('fast') ease('_out-back'),
-          slide-frames 1 time('fast') ease('_out-back') both
+          slide-frames 1 times.time('fast') easing.ease('_out-back'),
+          slide-frames 1 times.time('fast') easing.ease('_out-back') both
         ;
       }
     }
@@ -100,10 +124,10 @@
   @include it('Outputs a named transition to CSS') {
     @include assert {
       @include output {
-        @include transition('slide');
+        @include change.transition('slide');
       }
       @include expect {
-        transition:  transform time('fast');
+        transition:  transform times.time('fast');
       }
     }
   }
@@ -111,10 +135,10 @@
   @include it('Handles recursive transitions') {
     @include assert {
       @include output {
-        @include transition('slide-in');
+        @include change.transition('slide-in');
       }
       @include expect {
-        transition:  transform time('fast') ease('_out-back');
+        transition:  transform times.time('fast') easing.ease('_out-back');
       }
     }
   }
@@ -122,13 +146,13 @@
   @include it('Handles multiple transitions') {
     @include assert {
       @include output {
-        @include transition('modal-in', 'fade');
+        @include change.transition('modal-in', 'fade');
       }
       @include expect {
         transition:
-          transform time('fast') ease('_out-back'),
-          opacity time('fade') ease('_out-quad') time('delay'),
-          opacity time('fade') ease('_out-quad')
+          transform times.time('fast') easing.ease('_out-back'),
+          opacity times.time('fade') easing.ease('_out-quad') times.time('delay'),
+          opacity times.time('fade') easing.ease('_out-quad')
         ;
       }
     }
@@ -136,3 +160,7 @@
 }
 
 } // end module
+
+times.$times: $_old-times;
+easing.$easing: $_old-easing;
+change.$changes: $_old-changes;

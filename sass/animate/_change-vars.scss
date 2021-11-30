@@ -1,3 +1,7 @@
+@use 'change';
+@use '../tokens';
+@use 'sass:map';
+
 /// # Changes » CSS Variables
 /// @group animate-change-vars
 
@@ -19,9 +23,9 @@
 /// @group animate-change-vars
 ///
 /// @example scss
-///   $changes: ('my-change': pink);
-///   $change-var-prefix: 'prefix_';
-///   html { @include change--('my-change') }
+///   tools.$changes: ('my-change': pink);
+///   tools.$change-var-prefix: 'prefix_';
+///   html { @include tools.change--('my-change') }
 ///
 /// @type string
 $change-var-prefix: 'change-' !default;
@@ -43,13 +47,13 @@ $change-var-prefix: 'change-' !default;
 ///
 /// @group animate-change-vars
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     '_brand': hsl(120, 50%, 50%),
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
 ///   html {
-///     @include changes--;
+///     @include tools.changes--;
 ///   }
 ///
 /// @param {map} $source [$changes] -
@@ -58,9 +62,9 @@ $change-var-prefix: 'change-' !default;
 /// @output
 ///   Custom properties for all public changes in the map
 @mixin changes--(
-  $source: $changes
+  $source: change.$changes
 ) {
-  @include tokens--($source, $change-var-prefix);
+  @include tokens.tokens--($source, $change-var-prefix);
 }
 
 
@@ -74,14 +78,14 @@ $change-var-prefix: 'change-' !default;
 ///
 /// @group animate-change-vars
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     '_brand': hsl(120, 50%, 50%),
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
 ///   .example {
-///     @include change--('border');
-///     @include change--('outline', 'border', red);
+///     @include tools.change--('border');
+///     @include tools.change--('outline', 'border', red);
 ///   }
 ///
 /// @param {*} $change -
@@ -102,9 +106,9 @@ $change-var-prefix: 'change-' !default;
   $change,
   $value: null,
   $fallback: true,
-  $source: $changes
+  $source: change.$changes
 ) {
-  @include token--($source, $change, $value, $fallback, $change-var-prefix);
+  @include tokens.token--($source, $change, $value, $fallback, $change-var-prefix);
 }
 
 
@@ -118,14 +122,14 @@ $change-var-prefix: 'change-' !default;
 ///
 /// @group animate-change-vars
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     '_brand': hsl(120, 50%, 50%),
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
 ///   .example {
-///     border-change: var-change('border');
-///     change: var-change('text', black);
+///     border-change: tools.var-change('border');
+///     change: tools.var-change('text', black);
 ///   }
 ///
 /// @param {*} $change -
@@ -144,7 +148,7 @@ $change-var-prefix: 'change-' !default;
 @function var-change(
   $change,
   $fallback: true,
-  $source: $changes
+  $source: change.$changes
 ) {
-  @return var-token($source, $change, $fallback, $change-var-prefix);
+  @return tokens.var-token($source, $change, $fallback, $change-var-prefix);
 }

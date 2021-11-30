@@ -8,27 +8,17 @@
 @forward 'easing' hide $EASING;
 @forward 'easing-vars';
 @forward 'times';
-// @import 'time-vars';
-// @import 'change';
-// @import 'change-vars';
+@forward 'time-vars';
+@forward 'change';
+@forward 'change-vars';
 
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// If you want to import individual plugins,
-/// make sure you first import the shared core:
+/// You can also import the color module on its own:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/core';
-///   @import '<path-to>/accoutrement/sass/plugin/animate';
-/// ```
-///
-/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-/// you can leave off most of the path:
-///
-/// ```scss
-///   @import 'accoutrement/core';
-///   @import 'accoutrement/plugin/animate';
+///   @use '<path-to>/accoutrement/sass/animate';
 /// ```
 /// @group animate
 

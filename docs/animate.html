@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Adjustments | Accoutrement Documentation</title>
+  <title>QuickStart: Animate | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -167,7 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
+      <a href="animate.html" data-nav="is-active">QuickStart: Animate</a>
     </li>
   
   
@@ -222,7 +222,7 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-active">Adjustments</a>
+      <a href="color-utils.html" data-nav="is-not-active">Adjustments</a>
     </li>
   
   
@@ -294,11 +294,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Adjustments</strong>
+    <strong>QuickStart: Animate</strong>
   </nav>
 
 
-        <div data-page="color-utils">
+        <div data-page="animate">
           
   
     
@@ -323,7 +323,12 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="color-utility-functions">Color Utility Functions</h1>
+      <h1 id="quickstart-animate">QuickStart: Animate</h1>
+<p>Tools for managing animations &amp;<span class="widont">&nbsp;</span>transitions.</p>
+<ul>
+<li>Organize all your timing, easing, and transitions into<span class="widont">&nbsp;</span>maps</li>
+<li>Document relationships directly in the<span class="widont">&nbsp;</span>code</li>
+</ul>
 
       
   
@@ -388,63 +393,23 @@
 
 
 
-<section class="item" id="function--tint">
+<section class="item" >
   
     
   
   
-
-  
-  
   
   
 
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--tint" class="item-name">tint()</a>
-      
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+You can also import the color module on its<span class="widont">&nbsp;</span>own:</p>
+<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/animate';
+</code></pre>
 
       
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Mix a color with <code>contrast-light</code>
-(defaults to <code>white</code>)
-to get a lighter tint of your color.
-Make sure to override <code>$light</code> when using <code>tint</code>
-to define the value of <code>contrast-light</code></p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Use <code>contrast-light</code> for default mix, rather than <code>white</code>.</li>
-<li>NEW: Accept <code>$light</code> color to use in place of <code>contrast-light</code> default</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -456,8 +421,6 @@ to define the value of <code>contrast-light</code></p>
     </div>
   
 
-  </div>
-
   
 
   
@@ -466,139 +429,6 @@ to define the value of <code>contrast-light</code></p>
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$color:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of a color in your palette,
-with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$percentage:</span>
-      
-      
-      <span class="value-type">(percentage)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The percentage of a <code>$light</code> color to mix in.
-Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$light:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The lighter color to be mixed in for<span class="widont">&nbsp;</span>tinting.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(color)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -612,97 +442,6 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
   
   
     
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">default-contrast()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-tokens.html#function--color" class="item-name">color()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
     
   
 
@@ -733,63 +472,39 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
 
 
 
-<section class="item" id="function--shade">
+<section class="item" >
   
     
   
   
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--shade" class="item-name">shade()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
   
   
 
   
-    <div class="text-block">
-      <p>Mix a color with <code>contrast-dark</code>
-(defaults to <code>black</code>)
-to get a darker shade of your color.
-Make sure to override <code>$dark</code> when using <code>shade</code>
-to define the value of <code>contrast-dark</code></p>
+    <div data-item-section="prose" class="text-block">
+      <h2 id="timing-easing">Timing &amp; Easing</h2>
+<p>Establish your timing and easing palettes,
+with the standard <a href="core.html">Accoutrement syntax</a>:</p>
+<pre><code class="lang-scss">$times: (
+  'fast': 150ms,
+  'medium': '#fast' ('times': 2),
+);
+
+$easing: (
+  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  'fade-in': '#in-out-quad',
+);
+</code></pre>
+<p>Access them anywhere:</p>
+<pre><code class="lang-scss">.example {
+  animation: slide-in time('fast') ease('in-out-quad') 1 both;
+  transition-delay: time('fast');
+  transition-duration: time('medium');
+  transition-timing-function: ease('elastic');
+}
+</code></pre>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Use <code>contrast-dark</code> for mix, rather than <code>black</code></li>
-<li>NEW: Accept <code>$dark</code> color to use in place of <code>contrast-dark</code> default</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -801,8 +516,6 @@ to define the value of <code>contrast-dark</code></p>
     </div>
   
 
-  </div>
-
   
 
   
@@ -813,172 +526,28 @@ to define the value of <code>contrast-dark</code></p>
   
 
   
+
+
+  
+  
+
+
+  
+
     
-  <div data-item-section="parameter">
+  <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
 
     
       
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$color:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of a color in your palette,
-with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
-
-      </div>
-    
-  </div>
-
 
       
         
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$percentage:</span>
-      
-      
-      <span class="value-type">(Percentage)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The percentage of a <code>$dark</code> color to mix in.
-Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$dark:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The darker color to be mixed in for<span class="widont">&nbsp;</span>shading.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(color)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
   
   
   
@@ -988,31 +557,22 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">default-contrast()</span>
       
       
+        <a href="
+  animate-times.html#variable--times" class="item-name">$times</a>
       
-      <span class="item-note">[private]</span>
+      
+      
+      
     </h4>
 
     
   </div>
 
 
-        
       
         
-        
-        
-
-        
-          
-          
-  
-  
-  
   
   
   
@@ -1025,7 +585,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
       <span class="item-type">@function</span>
       
         <a href="
-  color-tokens.html#function--color" class="item-name">color()</a>
+  animate-times.html#function--time" class="item-name">time()</a>
       
       
       
@@ -1036,18 +596,280 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
   </div>
 
 
-        
       
         
-        
-        
+  
+  
+  
+  
+  
 
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--easing" class="item-name">$easing</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
         
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
       
     
   </div>
 
   
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="transitions-animations">Transitions &amp; Animations</h2>
+<p>Use your timing and easing patterns
+to compose reusable “changes” –
+including transitions and<span class="widont">&nbsp;</span>animations:</p>
+<pre><code class="lang-scss">$changes: (
+  'slide-in': slide-in time('fast') ease('in-out-quad') 1 both,
+  'delay-in': '#slide-in' time('medium'),
+  'fade-ease': time('medium') ease(in),
+  'fade-colors': color '#fade-ease', background-color '#fade-ease',
+);
+</code></pre>
+<p>Access them anywhere:</p>
+<pre><code class="lang-scss">.example {
+  animation: change('slide-in');
+  transition: change('fade-colors');
+}
+</code></pre>
+<p>Or use the mixin<span class="widont">&nbsp;</span>shortcuts:</p>
+<pre><code class="lang-scss">.example {
+  @include animate('slide-in');
+  @include transition('fade-colors');
+}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-change.html#variable--changes" class="item-name">$changes</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-change.html#function--change" class="item-name">change()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-change.html#mixin--animate" class="item-name">animate()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-change.html#mixin--transition" class="item-name">transition()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
     
   
 

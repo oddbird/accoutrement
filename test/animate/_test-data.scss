@@ -14,13 +14,3 @@ $times: (
   'math-tests': 2,
   'plus-name': '#fast' ('plus': '#math-tests'),
 );
-
-// $changes: (
-//   'slide': transform time('fast'),
-//   'fade': opacity time('fade') ease('_out-quad'),
-//   'slide-in': '#slide' ease('_out-back'),
-//   'sidebar-in': ('#slide-in', '#fade' time('delay')),
-//   'modal-in': '#sidebar-in',
-//   'animation': slide-frames 1 time('fast') ease('_out-back'),
-//   'animation-ref': '#animation' both,
-// );
