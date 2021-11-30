@@ -2,7 +2,9 @@
 @use '../../sass/layout/queries';
 @use '../../sass/layout/query-utils' as utils;
 @use '../../sass/tokens/register/math';
-@use '../../sass/internal/function';
+@use 'test-data' as data;
+@use 'sass:list';
+@use 'sass:map';
 
 
 // Media Query Tests
@@ -12,114 +14,120 @@
 
 // Break
 // -----
-@include describe('Break [function]') {
-  @include it('Returns an explicit length directly') {
-    @include assert-equal(
-      queries.break(30em),
-      30em
-    );
-  }
+// @include describe('Break [function]') {
+//   @include it('Returns an explicit length directly') {
+//     @include assert-equal(
+//       queries.break(30em),
+//       30em
+//     );
+//   }
 
   @include it('Returns a named breakpoint from the proper map') {
     @include assert-equal(
+      map.get(data.$breakpoints, 'off-canvas'),
       queries.break('off-canvas'),
       45em
     );
   }
 
-  @include it('Returns a recursively named breakpoint') {
-    @include assert-equal(
-      queries.break('useful'),
-      45em
-    );
-  }
+//   @include it('Returns a recursively named breakpoint') {
+//     @include assert-equal(
+//       map.get(data.$breakpoints, 'useful'),
+//       queries.break('useful'),
+//       45em
+//     );
+//   }
 
-  @include it('Returns a named size from accoutrement-scale') {
-    @include assert-equal(
-      queries.break('page'),
-      50em
-    );
-  }
+//   @include it('Returns a named size from accoutrement-scale') {
+//     @include assert-equal(
+//       map.get(data.$sizes, 'page'),
+//       queries.break('page'),
+//       50em
+//     );
+//   }
 
-  @include it('Returns a named size from both maps cross-referenced') {
-    @include assert-equal(
-      queries.break('p-break'),
-      50em
-    );
-  }
+//   @include it('Returns a named size from both maps cross-referenced') {
+//     @include assert-equal(
+//       map.get(data.$breakpoints, 'p-break'),
+//       queries.break('p-break'),
+//       50em
+//     );
+//   }
 
-  @include it('Allows adjustment functions') {
-    @include assert-equal(
-      queries.break('adjust'),
-      40em
-    );
-  }
+//   @include it('Allows adjustment functions') {
+//     @include assert-equal(
+//       map.get(data.$breakpoints, 'adjust'),
+//       queries.break('adjust'),
+//       40em
+//     );
+//   }
 
-  @include it('Allows on-the-fly adjustments') {
-    @include assert-equal(
-      queries.break('adjust', ('times': 2)),
-      80em
-    );
-  }
+//   @include it('Allows on-the-fly adjustments') {
+//     @include assert-equal(
+//       map.get(data.$breakpoints, 'adjust'),
+//       queries.break('adjust', ('times': 2)),
+//       80em
+//     );
+//   }
 
-  @include it('Get breakpoint from local source') {
-    $local: ('new': 40em);
-    @include assert-equal(
-      queries.break('new', $source: $local),
-      40em
-    );
-  }
+//   @include it('Get breakpoint from local source') {
+//     $local: ('new': 40em);
+//     @include assert-equal(
+//       queries.break('new', $source: $local),
+//       40em
+//     );
+//   }
 
-  @include it('Can turn off access to $sizes') {
-    $local: ('new': '#adjust');
-    @include assert-equal(
-      queries.break('new', $source: $local, $scale: false),
-      'ERROR [break] `#adjust` is not a valid length or keyword for $break'
-    );
-  }
-}
+//   @include it('Can turn off access to $sizes') {
+//     $local: ('new': '#adjust');
+//     @include assert-equal(
+//       queries.break('new', $source: $local, $scale: false),
+//       'ERROR [break] `#adjust` is not a valid length or keyword for $break'
+//     );
+//   }
+// }
 
 
-// Below
-// -----
-@include describe('Below [mixin]') {
-  @include it('Applies max-width query, with ~1px subtracted') {
-    @include assert {
-      @include output {
-        @include queries.below(30em) {
-          test: content;
-        }
-      }
+// // Below
+// // -----
+// @include describe('Below [mixin]') {
+//   @include it('Applies max-width query, with ~1px subtracted') {
+//     @include assert {
+//       @include output {
+//         @include queries.below(30em) {
+//           test: content;
+//         }
+//       }
 
-      @include expect {
-        @media (max-width: 29.99em) {
-          test: content;
-        }
-      }
-    }
-  }
-}
+//       @include expect {
+//         @media (max-width: 29.99em) {
+//           test: content;
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 // Above
 // -----
-@include describe('Above [mixin]') {
-  @include it('Applies min-width query') {
-    @include assert {
-      @include output {
-        @include queries.above(30em) {
-          test: content;
-        }
-      }
+// @include describe('Above [mixin]') {
+//   @include it('Applies min-width query') {
+//     @include assert {
+//       @include output {
+//         @include queries.above(30em) {
+//           test: content;
+//         }
+//       }
 
-      @include expect {
-        @media (min-width: 30em) {
-          test: content;
-        }
-      }
-    }
-  }
-}
+//       @include expect {
+//         @media (min-width: 30em) {
+//           test: content;
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 // Between
