@@ -7,9 +7,9 @@
 $_old: easing.$easing;
 easing.$easing: data.$easing;
 
-// Easing Tests
-// ============
-@include test-module('animate/easing') {
+// Easing Var Tests
+// ================
+@include test-module('animate/easing-vars') {
 
 
   // Easing-- [mixin]

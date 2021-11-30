@@ -8,7 +8,7 @@ time.$times: data.$times;
 
 // Time Tests
 // ==========
-@include test-module('Animate: Times') {
+@include test-module('animate/times') {
   // Time [function]
   // ---------------
   @include describe('Time [function]') {

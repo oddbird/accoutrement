@@ -7,6 +7,9 @@ $easing: (
 );
 
 $times: (
+  '_private': 5s,
+  'alias': '#_private',
+  'thread': '#alias',
   'fast': 150ms,
   'math-tests': 2,
   'plus-name': '#fast' ('plus': '#math-tests'),
