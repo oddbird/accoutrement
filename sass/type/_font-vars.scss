@@ -25,7 +25,7 @@
 /// @group type-font-vars
 ///
 /// @example scss
-/// $fonts: (
+/// tools.$fonts: (
 ///   'my-font': (
 ///     'stack': (arial, helvetica, sans-serif),
 ///    )
@@ -87,7 +87,7 @@ $font-var-prefix: 'font-' !default;
 ///
 /// @group type-font-vars
 /// @example scss
-///   $fonts: (
+///   tools.$fonts: (
 ///     '_TestFont': (
 ///       'name': 'My Test Font',
 ///       'stack': ('Georgia', 'serif'),

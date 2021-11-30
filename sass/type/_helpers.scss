@@ -375,7 +375,7 @@ $FONT-FORMATS: (
 /// @since type-4.0.0 -
 /// - BUGFIX: Supports Base64 data URI's, without prepending font-path
 ///
-/// @group type-fonts
+/// @group type-helpers
 /// @example scss
 ///   tools.$font-path: '../fonts/';
 ///   $src: tools.font-url('sans/my-sans-font.woff2');

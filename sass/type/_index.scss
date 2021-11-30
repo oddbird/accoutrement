@@ -8,7 +8,7 @@
 /// @group type
 
 @forward 'config';
-@forward 'helpers' show font-url;
+@forward 'helpers' show font-url, import-font-face;
 @forward 'a11y';
 @forward 'fonts';
 @forward 'font-vars';
