@@ -3,7 +3,6 @@
 @use 'sass:meta';
 @use '../internal/throw';
 @use '../internal/function';
-/// 
 
 @function scale ($value, $ratio, $steps: 1, $source: tokens.$ratios) {
    $ratio: if((meta.type-of($ratio) == 'number') or ($ratio == 'linear'), $ratio, tokens.ratio($ratio, $source: $source));
@@ -19,11 +18,7 @@
    'Ratio must be either a number or "linear", got `#{$ratio}`', 'scale'
   );
 }
-
 @include function.internal(
   meta.get-function('scale'),
   'scale',
 );
-
-
- 
