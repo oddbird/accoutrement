@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:math';
+@use '../../sass/tokens/api' as token;
 @use '../internal/throw';
 @use 'query-utils' as utils;
 
@@ -80,7 +81,7 @@ $breakpoints: () !default;
   }
 
   // get breakpoint
-  $break: tools.get($source, $break, $do);
+  $break: token.get($source, $break, $do);
 
   // validate
   @if (meta.type-of($break) != 'number') or math.unitless($break) {
