@@ -83,7 +83,7 @@ config.$sizes: data.$test-sizes;
 
 /*     @include it('Allow compiled calc values') {
       @include assert-equal(size.size('calc'), calc(60px + math.div(2vw, 3)));
-    } */
+    }  */
 
   /*    @include it('Allow calc references') {
       @include assert-equal(size.size('calc-ref'), calc(60px + math.div(2vw, 3)));
