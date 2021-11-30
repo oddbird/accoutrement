@@ -48,7 +48,7 @@
   @if (meta.type-of($size) == 'number') {
     // apply adjustments
     @if $do {
-      $return: tokens.compile($source, $size $do);
+      $return: api.compile($source, $size $do);
     }
   } @else {
     // get the desired token

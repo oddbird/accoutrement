@@ -1,10 +1,14 @@
 @use '../../node_modules/sass-true' as *;
 @use '../../sass/scale/config';
 @use '../../sass/scale/units';
+@use '../../sass/scale/size';
 @use './test-data' as data;
 
 $_global: config.$sizes;
 config.$sizes: data.$test-sizes;
+
+@debug size.size('rhythm');
+
 // Unit Tests
 // ==========
 @include test-module('Scale: Units') {
@@ -99,7 +103,7 @@ config.$sizes: data.$test-sizes;
         units.convert-units('rhythm', 'browser-ems', 'root'),
         1.875em
       );
-    }
+    } 
  
      @include it('Errors on non-px/falsey context values') {
       @include assert-equal(
@@ -107,6 +111,8 @@ config.$sizes: data.$test-sizes;
         'ERROR [convert-units] Context parameters must resolve to a value in pixel units'
       );
     }  
-  } 
+  }
 } // end module
+
 config.$sizes: $_global;
+

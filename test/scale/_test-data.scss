@@ -2,7 +2,6 @@
 @use 'sass:math';
 @use '../../sass/tokens/function';
 @use '../../sass/scale/config';
-
 // Scale Tests
 // ===========
 
@@ -10,14 +9,14 @@
 $test-sizes: (
   'root': 20px,
   'text': '#root' ('convert-units': 'rem'),
-  'rhythm': '#text' ('_fifth': 1),
+  'rhythm': '#text' (scale: '_fifth' 1),
 
-  'h1': '#text' ('linear': 4),
-  'h2': '#text' ('linear': 3),
-  'h3': '#text' ('linear': 2),
+  'h1': '#text' (scale: 'linear' 4),
+  'h2': '#text' (scale: 'linear' 3),
+  'h3': '#text' (scale: 'linear' 2),
 
-  'big': '#text' ('_fifth': 5),
-  'small': '#text' ('_octave': -1),
+  'big': '#text' (scale: '_fifth' 5),
+  'small': '#text' (scale: '_octave' -1),
   'viewport': 10vw,
   'percent': 20%,
   'medium-page': 30em ('convert-units': 'browser-ems' 40px),
