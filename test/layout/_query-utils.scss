@@ -1,14 +1,13 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/layout/query-utils' as utils;
 @use '../../sass/tokens/function';
-@use '../../sass/tokens/register/math';
 @use 'test-data' as data;
 
 // Query Util Tests
 // ================
 @include test-module('Layout: Query Utils') {
 
-
+  
 // Nudge Query
 // -----------
 @include describe('Nudge Query [function]') {
@@ -58,7 +57,7 @@
     );
   }
 
-  utils.$adjust-query-overlap: 'min' !global;
+  $adjust-query-overlap: 'min' !global;
 
   @include it('Adds 1px to min px values') {
     @include assert-equal(
@@ -79,7 +78,7 @@
     );
   }
 
-  utils.$adjust-query-overlap: 'max' !global;
+  $adjust-query-overlap: 'max' !global;
 }
 
 } // end module
