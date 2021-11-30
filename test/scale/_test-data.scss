@@ -1,5 +1,7 @@
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
+@use '../../sass/internal/function' as f;
 @use '../../sass/tokens/function';
 @use '../../sass/scale/config';
 // Scale Tests
@@ -42,8 +44,13 @@ $test-sizes: (
   'round': math.div(10rem, 3) ('round': null),
   'calc-simple': calc(1em + 2vw),
   'calc': (
-    '%value': 'calc(%s + math.div(%s, %s))',
+    '%value': 'calc(%s + (math.div(%s, %s)))',
     '%s': ('#root' ('times': 3), '#test-value' ('convert-units': 'vw'), 3),
   ),
   'calc-ref': '#calc',
+);
+
+@include f.internal(
+  meta.get-function('round'),
+  'round',
 );

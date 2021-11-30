@@ -3,6 +3,7 @@
 @use '../../sass/scale/size';
 @use '../../sass/scale/config';
 @use '../../sass/tokens';
+@use 'sass:math';
 @use './test-data' as data;
 
 $_global: config.$sizes;
@@ -60,10 +61,10 @@ config.$sizes: data.$test-sizes;
       @include assert-equal(size.size('medium-page'), 75em);
     }
 
-/*     @include it('Get rounded size') {
+    @include it('Get rounded size') {
       @include assert-equal(size.size('round'), 3rem);
     }
- */
+
     @include it('Dont adjust non-comparable units') {
       @include assert-equal(size.size(24vmin), 24vmin);
     }
@@ -76,17 +77,17 @@ config.$sizes: data.$test-sizes;
       @include assert-equal(size.size('percent'), 20%);
     }
 
-    /* @include it('Allow simple calc values') {
+    @include it('Allow simple calc values') {
       @include assert-equal(size.size('calc-simple'), calc(1em + 2vw));
     }
 
-    @include it('Allow compiled calc values') {
-      @include assert-equal(size.size('calc'), calc(60px + 2vw / 3));
-    }
+/*     @include it('Allow compiled calc values') {
+      @include assert-equal(size.size('calc'), calc(60px + math.div(2vw, 3)));
+    } */
 
-    @include it('Allow calc references') {
-      @include assert-equal(size.size('calc-ref'), calc(60px + 2vw / 3));
-    }
+  /*    @include it('Allow calc references') {
+      @include assert-equal(size.size('calc-ref'), calc(60px + math.div(2vw, 3)));
+    }  */
 
     @include it('Gets size from local source') {
       $local: (
@@ -107,12 +108,12 @@ config.$sizes: data.$test-sizes;
       @include assert-equal(size.negative('rhythm', 'px'), -30px);
     }
 
-    @include it('Generates a negative calc size') {
+/*      @include it('Generates a negative calc size') {
       @include assert-equal(
         size.negative('calc-ref'),
-        calc(-1 * (60px + 2vw / 3))
+        calc(-1 * (60px + math.div(2vw, 3)))
       );
-    }
+    } */ 
 
     @include it('Gets negative from local source') {
       $local: (
@@ -152,7 +153,7 @@ config.$sizes: data.$test-sizes;
           width: 35em;
         }
       }
-    } */
+    } 
   }
 } // end module
 config.$sizes: $_global;
