@@ -1,7 +1,8 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/layout/query-utils' as utils;
+@use '../../sass/tokens/function';
+@use '../../sass/tokens/register/math';
 @use 'test-data' as data;
-@use 'sass:math';
 
 // Query Util Tests
 // ================
@@ -57,7 +58,7 @@
     );
   }
 
-  $adjust-query-overlap: 'min' !global;
+  utils.$adjust-query-overlap: 'min' !global;
 
   @include it('Adds 1px to min px values') {
     @include assert-equal(
@@ -78,7 +79,7 @@
     );
   }
 
-  $adjust-query-overlap: 'max' !global;
+  utils.$adjust-query-overlap: 'max' !global;
 }
 
 } // end module

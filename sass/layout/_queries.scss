@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:math';
-@use '../../sass/tokens/api' as token;
+@use '../../sass/tokens/api' as tokens;
 @use '../internal/throw';
 @use 'query-utils' as utils;
 
@@ -81,10 +81,10 @@ $breakpoints: () !default;
   }
 
   // get breakpoint
-  $break: token.get($source, $break, $do);
+  $break: tokens.get($source, $break, $do);
 
   // validate
-  @if (meta.type-of($break) != 'number') or math.unitless($break) {
+  @if (meta.type-of($break) != 'number') or math.is-unitless($break) {
     @return throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'

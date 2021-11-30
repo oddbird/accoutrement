@@ -1,3 +1,5 @@
+@use '../../sass/layout/z-index';
+
 // Z-Index Tests
 // =============
 @include test-module('Layout: Z-Index') {
@@ -8,26 +10,26 @@
 @include describe('Z-Index [function]') {
   @include it('Simple index list') {
     @include assert-equal(
-      z-index('modal'),
+      z-index.z-index('modal'),
       5
     );
   }
 
   @include it('First item in a nested list') {
     @include assert-equal(
-      z-index('banner'),
+      z-index.z-index('banner'),
       3
     );
   }
 
   @include it('Nested list index') {
     @include assert-equal(
-      z-index('active-nav'),
+      z-index.z-index('active-nav'),
       1
     );
 
     @include assert-equal(
-      z-index('dropdown'),
+      z-index.z-index('dropdown'),
       2
     );
   }
@@ -40,7 +42,7 @@
   @include it('Set z-index property') {
     @include assert('Z-Index property is set based on list index') {
       @include output {
-        @include z-index('dropdown');
+        @include z-index.z-index('dropdown');
       }
 
       @include expect {

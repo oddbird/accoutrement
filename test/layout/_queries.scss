@@ -1,6 +1,9 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/layout/queries';
+@use '../../sass/layout/query-utils' as utils;
 @use '../../sass/tokens/register/math';
+@use '../../sass/internal/function';
+
 
 // Media Query Tests
 // =================
@@ -12,49 +15,49 @@
 @include describe('Break [function]') {
   @include it('Returns an explicit length directly') {
     @include assert-equal(
-      break(30em),
+      queries.break(30em),
       30em
     );
   }
 
   @include it('Returns a named breakpoint from the proper map') {
     @include assert-equal(
-      break('off-canvas'),
+      queries.break('off-canvas'),
       45em
     );
   }
 
   @include it('Returns a recursively named breakpoint') {
     @include assert-equal(
-      break('useful'),
+      queries.break('useful'),
       45em
     );
   }
 
   @include it('Returns a named size from accoutrement-scale') {
     @include assert-equal(
-      break('page'),
+      queries.break('page'),
       50em
     );
   }
 
   @include it('Returns a named size from both maps cross-referenced') {
     @include assert-equal(
-      break('p-break'),
+      queries.break('p-break'),
       50em
     );
   }
 
   @include it('Allows adjustment functions') {
     @include assert-equal(
-      break('adjust'),
+      queries.break('adjust'),
       40em
     );
   }
 
   @include it('Allows on-the-fly adjustments') {
     @include assert-equal(
-      break('adjust', ('times': 2)),
+      queries.break('adjust', ('times': 2)),
       80em
     );
   }
@@ -62,7 +65,7 @@
   @include it('Get breakpoint from local source') {
     $local: ('new': 40em);
     @include assert-equal(
-      break('new', $source: $local),
+      queries.break('new', $source: $local),
       40em
     );
   }
@@ -70,7 +73,7 @@
   @include it('Can turn off access to $sizes') {
     $local: ('new': '#adjust');
     @include assert-equal(
-      break('new', $source: $local, $scale: false),
+      queries.break('new', $source: $local, $scale: false),
       'ERROR [break] `#adjust` is not a valid length or keyword for $break'
     );
   }
@@ -83,7 +86,7 @@
   @include it('Applies max-width query, with ~1px subtracted') {
     @include assert {
       @include output {
-        @include below(30em) {
+        @include queries.below(30em) {
           test: content;
         }
       }
@@ -104,7 +107,7 @@
   @include it('Applies min-width query') {
     @include assert {
       @include output {
-        @include above(30em) {
+        @include queries.above(30em) {
           test: content;
         }
       }
@@ -125,7 +128,7 @@
   @include it('Applies min and max-width queries') {
     @include assert {
       @include output {
-        @include between(30em, 40em) {
+        @include queries.between(30em, 40em) {
           test: content;
         }
       }
