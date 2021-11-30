@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:math';
+@use '../scale';
 @use '../../sass/tokens/api' as tokens;
 @use '../internal/throw';
 @use 'query-utils' as utils;
@@ -76,8 +77,8 @@ $breakpoints: () !default;
   $source: $breakpoints,
   $scale: true
 ) {
-  @if ($scale) and meta.variable-exists('sizes') and (meta.type-of($sizes) == 'map') {
-    $source: map.merge($sizes, $source);
+  @if ($scale) {
+    $source: map.merge(scale.$sizes, $source);
   }
 
   // get breakpoint
