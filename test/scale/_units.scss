@@ -94,19 +94,19 @@ config.$sizes: data.$test-sizes;
       );
     }
 
-/*     @include it('Convert a named size based on named context') {
+    @include it('Convert a named size based on named context') {
       @include assert-equal(
         units.convert-units('rhythm', 'browser-ems', 'root'),
         1.875em
       );
     }
- */
-/*     @include it('Errors on non-px/falsey context values') {
+ 
+     @include it('Errors on non-px/falsey context values') {
       @include assert-equal(
         units.convert-units('rhythm', 'em', 10%),
         'ERROR [convert-units] Context parameters must resolve to a value in pixel units'
       );
-    }  */
+    }  
   } 
 } // end module
 config.$sizes: $_global;
