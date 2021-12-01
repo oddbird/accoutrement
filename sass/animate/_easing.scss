@@ -3,6 +3,7 @@
 @use '../utils/map' as utils;
 @use 'sass:map';
 @use 'sass:meta';
+@use 'sass:string';
 
 /// # Easing Maps: Curves & Steps
 /// Whether you are using CSS-named easing,
@@ -112,7 +113,7 @@ $EASING: (
 ) {
   $source: map.merge($EASING, $source);
   $name: tokens.get($source, $name, $do);
-  @return if((type-of($name) == 'string'), unquote($name), $name);
+  @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
 }
 @include function.internal(meta.get-function('ease'), 'ease');
 

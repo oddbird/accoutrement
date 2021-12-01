@@ -23,7 +23,7 @@
 /// or use interpolation to compose more complex changes.
 ///
 /// ```
-/// tools.$changes: (
+/// $changes: (
 ///   // single animation
 ///   'glow': glow time('slow') ease('in-out-quad') infinite alternate,
 ///
