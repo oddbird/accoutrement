@@ -1,7 +1,6 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/layout/queries' as q;
 @use '../../sass/layout/query-utils' as utils;
-@use 'test-data' as data;
 @use '../../sass/scale/config' as size;
 @use 'sass:list';
 @use 'sass:map';
@@ -25,144 +24,143 @@
     'adjust': 20em ('times': 2),
   );
 
-$_old-b: q.$breakpoints;
-$_old-s: size.$sizes;
-q.$breakpoints: $test-breakpoints;
-size.$sizes: $test-sizes;
+  $_old-b: q.$breakpoints;
+  $_old-s: size.$sizes;
+  q.$breakpoints: $test-breakpoints;
+  size.$sizes: $test-sizes;
 
 
-// Break
-// -----
-@include describe('Break [function]') {
-  @include it('Returns an explicit length directly') {
-    @include assert-equal(
-      q.break(30em),
-      30em
-    );
+  // Break
+  // -----
+  @include describe('Break [function]') {
+    @include it('Returns an explicit length directly') {
+      @include assert-equal(
+        q.break(30em),
+        30em
+      );
+    }
+
+    @include it('Returns a named breakpoint from the proper map') {
+      @include assert-equal(
+        q.break('off-canvas'),
+        45em
+      );
+    }
+
+    @include it('Returns a recursively named breakpoint') {
+      @include assert-equal(
+        q.break('useful'),
+        45em
+      );
+    }
+
+    @include it('Returns a named size from accoutrement-scale') {
+      @include assert-equal(
+        q.break('page'),
+        50em
+      );
+    }
+
+    @include it('Returns a named size from both maps cross-referenced') {
+      @include assert-equal(
+        q.break('p-break'),
+        50em
+      );
+    }
+
+    // @include it('Allows adjustment functions') {
+    //   @include assert-equal(
+    //     q.break('adjust'),
+    //     40em
+    //   );
+    // }
+
+    // @include it('Allows on-the-fly adjustments') {
+    //   @include assert-equal(
+    //     q.break('adjust', ('times': 2)),
+    //     80em
+    //   );
+    // }
+
+    @include it('Get breakpoint from local source') {
+      $local: ('new': 40em);
+      @include assert-equal(
+        q.break('new', $source: $local),
+        40em
+      );
+    }
+
+    // @include it('Can turn off access to $sizes') {
+    //   $local: ('new': '#adjust');
+    //   @include assert-equal(
+    //     q.break('new', $source: $local, $scale: false),
+    //     'ERROR [break] `#adjust` is not a valid length or keyword for $break'
+    //   );
+    // }
   }
 
-  @include it('Returns a named breakpoint from the proper map') {
-    @include assert-equal(
-      q.break('off-canvas'),
-      45em
-    );
-  }
 
-  @include it('Returns a recursively named breakpoint') {
-    @include assert-equal(
-      q.break('useful'),
-      45em
-    );
-  }
-
-  @include it('Returns a named size from accoutrement-scale') {
-    @include assert-equal(
-      q.break('page'),
-      50em
-    );
-  }
-
-  @include it('Returns a named size from both maps cross-referenced') {
-    @include assert-equal(
-      q.break('p-break'),
-      50em
-    );
-  }
-
-  @include it('Allows adjustment functions') {
-    @include assert-equal(
-      q.break('adjust'),
-      40em
-    );
-  }
-
-  @include it('Allows on-the-fly adjustments') {
-    @include assert-equal(
-      q.break('adjust', ('times': 2)),
-      80em
-    );
-  }
-
-  @include it('Get breakpoint from local source') {
-    $local: ('new': 40em);
-    @include assert-equal(
-      q.break('new', $source: $local),
-      40em
-    );
-  }
-
-  @include it('Can turn off access to $sizes') {
-    $local: ('new': '#adjust');
-    @include assert-equal(
-      q.break('new', $source: $local, $scale: false),
-      'ERROR [break] `#adjust` is not a valid length or keyword for $break'
-    );
-  }
-}
-
-
-// Below
-// -----
-@include describe('Below [mixin]') {
-  @include it('Applies max-width query, with ~1px subtracted') {
-    @include assert {
-      @include output {
-        @include q.below(30em) {
-          test: content;
+  // Below
+  // -----
+  @include describe('Below [mixin]') {
+    @include it('Applies max-width query, with ~1px subtracted') {
+      @include assert {
+        @include output {
+          @include q.below(30em) {
+            test: content;
+          }
         }
-      }
 
-      @include expect {
-        @media (max-width: 29.99em) {
-          test: content;
+        @include expect {
+          @media (max-width: 29.99em) {
+            test: content;
+          }
         }
       }
     }
   }
-}
 
-
-Above
------
-@include describe('Above [mixin]') {
-  @include it('Applies min-width query') {
-    @include assert {
-      @include output {
-        @include q.above(30em) {
-          test: content;
+  // Above
+  // -----
+  @include describe('Above [mixin]') {
+    @include it('Applies min-width query') {
+      @include assert {
+        @include output {
+          @include q.above(30em) {
+            test: content;
+          }
         }
-      }
 
-      @include expect {
-        @media (min-width: 30em) {
-          test: content;
-        }
-      }
-    }
-  }
-}
-
-
-// Between
-// -------
-@include describe('Between [mixin]') {
-  @include it('Applies min and max-width queries') {
-    @include assert {
-      @include output {
-        @include q.between(30em, 40em) {
-          test: content;
-        }
-      }
-
-      @include expect {
-        @media (min-width: 30em) and (max-width: 39.99em) {
-          test: content;
+        @include expect {
+          @media (min-width: 30em) {
+            test: content;
+          }
         }
       }
     }
   }
-}
 
-q.$breakpoints: $_old-b;
-size.$sizes: $_old-s;
+
+  // Between
+  // -------
+  @include describe('Between [mixin]') {
+    @include it('Applies min and max-width queries') {
+      @include assert {
+        @include output {
+          @include q.between(30em, 40em) {
+            test: content;
+          }
+        }
+
+        @include expect {
+          @media (min-width: 30em) and (max-width: 39.99em) {
+            test: content;
+          }
+        }
+      }
+    }
+  }
+
+  q.$breakpoints: $_old-b;
+  size.$sizes: $_old-s;
 } // end module

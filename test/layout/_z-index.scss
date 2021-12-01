@@ -16,8 +16,8 @@
     'modal',
   );
 
-$_old: z.$z-index;
-z.$z-index: $test;
+  $_old: z.$z-index;
+  z.$z-index: $test;
 
 
   // Z-Index (function)
@@ -68,4 +68,5 @@ z.$z-index: $test;
   }
 
   z.$z-index: $_old;
+
 } // end module

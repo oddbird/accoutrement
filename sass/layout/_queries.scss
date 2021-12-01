@@ -2,7 +2,7 @@
 @use 'sass:meta';
 @use 'sass:math';
 @use '../scale';
-@use '../../sass/tokens/api' as tokens;
+@use '../../sass/tokens';
 @use '../internal/throw';
 @use 'query-utils' as utils;
 
@@ -85,7 +85,7 @@ $breakpoints: () !default;
   $break: tokens.get($source, $break, $do);
 
   // validate
-  @if (meta.type-of($break) != 'number') or math.is-unitless($break) {
+  @if (meta.type-of($break) != 'number') or (math.is-unitless($break)) {
     @return throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'
