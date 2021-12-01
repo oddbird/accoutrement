@@ -28,12 +28,16 @@
     "test": "mocha",
     "lint": "stylelint '**/*.scss' --fix",
     "docs": "sassdoc ./sass",
-    "commit": "yarn test && yarn lint && yarn docs"
+    "commit": "yarn test && yarn lint && yarn docs",
+    "watch:sass": "chokidar '**/*.scss' -c yarn lint",
+    "watch:tests": "chokidar './test/**' -c yarn test",
+    "watch:docs": "chokidar '**/*.scss' -c yarn docs"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement/issues"
   },
   "devDependencies": {
+    "chokidar-cli": "^3.0.0",
     "mocha": "^9.1.3",
     "sass": "^1.44.0",
     "sass-true": "^6.0.1",
