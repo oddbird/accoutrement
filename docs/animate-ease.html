@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Function Registration | Accoutrement Documentation</title>
+  <title>animate-ease | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -127,7 +127,7 @@
   
   
     <li class="nav-item">
-      <a href="token-register.html" data-nav="is-active">Function Registration</a>
+      <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   
   
@@ -218,7 +218,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-ease.html" data-nav="is-not-active">animate-ease</a>
+      <a href="animate-ease.html" data-nav="is-active">animate-ease</a>
     </li>
   
   
@@ -369,11 +369,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Function Registration</strong>
+    <strong>animate-ease</strong>
   </nav>
 
 
-        <div data-page="token-register">
+        <div data-page="animate-ease">
           
   
     
@@ -398,11 +398,15 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="function-registration">Function Registration</h1>
-<p>Because Sass 3.5+ requires first-class functions,
-we provide tools for capturing functions
-and making them available to the Accoutrement map parser.
-This also provides the ability to alias functions as you<span class="widont">&nbsp;</span>like.</p>
+      <h1 id="easing-maps-curves-steps">Easing Maps: Curves &amp;<span class="widont">&nbsp;</span>Steps</h1>
+<p>Whether you are using CSS-named easing,
+like <code>ease-in-out</code> and <code>linear</code>,
+or defining your own easing
+with <code>cubic-bezier()</code> and <code>steps()</code>/<code>frames()</code> –
+we’ll help you organize and standardize your values
+in a single location.
+We also provide a classic set of built-in easing functions,
+which you can rename, access, or override as<span class="widont">&nbsp;</span>desired.</p>
 
       
   
@@ -467,7 +471,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
 
 
-<section class="item" id="variable--functions">
+<section class="item" id="variable--easing">
   
     
   
@@ -485,11 +489,9 @@ This also provides the ability to alias functions as you<span class="widont">&nb
       
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
+        <a href="#variable--easing" class="item-name">$easing</a>
       
 
-      
-        <span class="value-type">(map)</span>
       
 
       
@@ -516,7 +518,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$easing: () !default;</code></pre>
     </div>
   
 
@@ -528,29 +530,27 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
   
     <div class="text-block">
-      <p>We provide a single map to store &amp; manage functions
-that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<pre><code class="lang-scss">$functions: (
-  'inspect': meta.get-function('inspect', $module: 'meta'),
+      <p>A variable storing the map of
+all easing globally-available on your project.
+Any easing added to the <code>$easing</code> map will be accessible
+to the <code>ease()</code> function by<span class="widont">&nbsp;</span>default.</p>
+<p>Define each easing with a <code>name</code> and <code>value</code>…</p>
+<pre><code>$easing: (
+  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  'sidebar-in': ease-out,
+  'sidebar-out': '#_in-back',
+  'modal-in': '#sidebar-in',
 );
 </code></pre>
-<p>Functions can be registered multiple times,
-under any aliases,
-but function maps are not able to use
-the alias<span class="widont">&nbsp;</span>syntax.</p>
+<ul>
+<li>Name your easing anything –
+from abstractions like <code>elastic</code>,
+to concrete patterns like <code>sidebar-in</code>.</li>
+<li>Values can be CSS-ready easing functions,
+or references other easings in the<span class="widont">&nbsp;</span>map.</li>
+</ul>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Supports the <a href="core.html">core</a> map-reference syntax,
-for creating function<span class="widont">&nbsp;</span>aliases</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -574,60 +574,213 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
   
 
   
+
+
+  
+  
+
+
+  
+  
+  
+  
     
-  <div data-item-section="property">
+    
+  
+    
+  <div data-item-section="used-by">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
+        <span class="item-subtitle-main">Used By</span>
         
       </h3>
     
 
     
       
+      
         
+
+        
+          
+          
+  
+  
+  
+  
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease.html#mixin--add-easing" class="item-name">add-easing()</a>
       
       
-        <span class="item-name">&lt;alias&gt;:</span>
       
-      
-      <span class="value-type">(function)</span>
       
     </h4>
 
     
-      
-      <div class="param-details text-block">
-        <p>Each alias key in the map
-should refer to a captured<span class="widont">&nbsp;</span>function</p>
-
-      </div>
-    
   </div>
 
 
+        
       
+        
 
+        
       
+    
+  </div>
+
   
 
-      
   
 
-      
+  
   
 
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--_a_EASING">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
       
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--_a_EASING" class="item-name">$_a_EASING</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$_a_EASING: (
+  &#39;_in&#39;: ease-in,
+  &#39;_out&#39;: ease-out,
+  &#39;_in-out&#39;: ease-in-out,
+  &#39;_in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  &#39;_in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
+  &#39;_in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+  &#39;_in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
+  &#39;_in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
+  &#39;_in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
+  &#39;_in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
+  &#39;_in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
+  &#39;_out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  &#39;_out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
+  &#39;_out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
+  &#39;_out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
+  &#39;_out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
+  &#39;_out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
+  &#39;_out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
+  &#39;_out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  &#39;_in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
+  &#39;_in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
+  &#39;_in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
+  &#39;_in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
+  &#39;_in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  &#39;_in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
+  &#39;_in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
+  &#39;_in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+);</code></pre>
+    </div>
   
 
     
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A classic set of built-in easing functions,
+if you don’t want to define your own.
+Don’t edit this map directly,
+but feel free to reference these values
+from the user-defined <code>$easing</code> map.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
   </div>
+
+  
+
+  
+  
+  
+  
+  
+  
 
   
 
@@ -672,11 +825,12 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">get()</span>
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -703,7 +857,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-register.html#mixin--register" class="item-name">register()</a>
+  animate-ease-vars.html#mixin--easing--" class="item-name">easing--()</a>
       
       
       
@@ -717,6 +871,64 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
         
       
         
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--ease--" class="item-name">ease--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease-vars.html#function--var-ease" class="item-name">var-ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
       
@@ -752,7 +964,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
 
 
-<section class="item" id="mixin--register">
+<section class="item" id="function--ease">
   
     
   
@@ -766,11 +978,11 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@mixin</span>
+        <span class="item-type">@function</span>
       
 
       
-        <a href="#mixin--register" class="item-name">register()</a>
+        <a href="#function--ease" class="item-name">ease()</a>
       
 
       
@@ -791,7 +1003,312 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
   
     <div class="text-block">
-      <p>Register functions with<span class="widont">&nbsp;</span>accoutrement.</p>
+      <p>Access a named easing function in your <code>$easing</code> map.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Accepts <code>$do</code> map argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$name:</span>
+      
+      <span class="item-value">&#39;ease&#39;</span>
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of an easing in your<span class="widont">&nbsp;</span>configuration</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$do:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$easing</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of easings to use as the origin palette
+(in additional to the provided<span class="widont">&nbsp;</span>defaults)</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The pre-defined easing</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--_a_EASING" class="item-name">$_a_EASING</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--add-easing">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--add-easing" class="item-name">add-easing()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge individual easing maps into the global <code>$easing</code> variable,
+in case you want to define easings in smaller groups
+such as <code>fade-easing</code>, <code>slide-easing</code>, etc
+before merging them into a single global<span class="widont">&nbsp;</span>easing-palette.</p>
 
       
   
@@ -837,45 +1354,17 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$function:</span>
+        <span class="item-name">$maps:</span>
       
       
-      <span class="value-type">(function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The first-class function to be<span class="widont">&nbsp;</span>registered</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$names...:</span>
-      
-      <span class="item-value">$function</span>
-      <span class="value-type">(strings)</span>
+      <span class="value-type">(map...)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>One or more alias names (strings)
-to use for map-access to the<span class="widont">&nbsp;</span>function</p>
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
 
       </div>
     
@@ -907,9 +1396,10 @@ to use for map-access to the<span class="widont">&nbsp;</span>function</p>
     
       
       <div class="param-details text-block">
-        <p>{map} $_ACCOUTREMENT_APP -
-Functions are registered in a map
-under any number of<span class="widont">&nbsp;</span>aliases</p>
+        <ul>
+<li>An updated global <code>$easing</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
 
       </div>
     
@@ -966,47 +1456,13 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">set()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
       
       
         <a href="
-  token-register.html#variable--functions" class="item-name">$functions</a>
+  animate-ease.html#variable--easing" class="item-name">$easing</a>
       
       
-      <span class="value-type">(map)</span>
+      
       
     </h4>
 

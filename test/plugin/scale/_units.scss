@@ -9,7 +9,7 @@
   @include it('Absolute') {
     @include assert-equal(
       _a_get-number('px'),
-      0px
+      0
     );
   }
 
@@ -20,7 +20,7 @@
   @include it('Relative') {
     @include assert-equal(
       _a_get-number('ch', 'relative'),
-      0ch
+      0
     );
   }
 

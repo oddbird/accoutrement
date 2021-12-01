@@ -70,7 +70,7 @@
   // CSS Output
   bottom: $bottom;
   left: $left;
-  position: unquote($type);
+  position: $type;
   right: $right;
   top: $top;
 }

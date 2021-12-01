@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Function Registration | Accoutrement Documentation</title>
+  <title>scale | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -127,7 +127,7 @@
   
   
     <li class="nav-item">
-      <a href="token-register.html" data-nav="is-active">Function Registration</a>
+      <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   
   
@@ -273,7 +273,7 @@
   
   
     <li class="nav-item">
-      <a href="scale.html" data-nav="is-not-active">scale</a>
+      <a href="scale.html" data-nav="is-active">scale</a>
     </li>
   
   
@@ -369,11 +369,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Function Registration</strong>
+    <strong>scale</strong>
   </nav>
 
 
-        <div data-page="token-register">
+        <div data-page="scale">
           
   
     
@@ -398,11 +398,15 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="function-registration">Function Registration</h1>
-<p>Because Sass 3.5+ requires first-class functions,
-we provide tools for capturing functions
-and making them available to the Accoutrement map parser.
-This also provides the ability to alias functions as you<span class="widont">&nbsp;</span>like.</p>
+      <h1 id="quickstart-scale">QuickStart: Scale</h1>
+<p>Sass size &amp; scale management<span class="widont">&nbsp;</span>tools:</p>
+<ul>
+<li>Gather all your sizes into a single<span class="widont">&nbsp;</span>map</li>
+<li>Generate new sizes based on [modular scales][core-ratio.html]
+or arbitrary<span class="widont">&nbsp;</span>functions</li>
+<li>Convert between relative<span class="widont">&nbsp;</span>units</li>
+<li>Access sizes on the<span class="widont">&nbsp;</span>fly</li>
+</ul>
 
       
   
@@ -467,59 +471,94 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
 
 
-<section class="item" id="variable--functions">
+<section class="item" >
   
     
   
   
-
-  
-  
   
   
 
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+If you want to import individual plugins,
+make sure you first import the shared<span class="widont">&nbsp;</span>core:</p>
+<pre><code class="lang-scss">  @import '&lt;path-to&gt;/accoutrement/sass/core';
+  @import '&lt;path-to&gt;/accoutrement/sass/plugin/scale';
+</code></pre>
+<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
+you can leave off most of the<span class="widont">&nbsp;</span>path:</p>
+<pre><code class="lang-scss">  @import 'accoutrement/core';
+  @import 'accoutrement/plugin/scale';
+</code></pre>
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
-      
-
-      
-        <span class="value-type">(map)</span>
-      
-
-      
-    </h2>
-
-    
   
 
-
-    
-    
-    
+      
   
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
 
       
-      
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
+  
+
     </div>
   
 
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
     
   
   
@@ -527,30 +566,43 @@ This also provides the ability to alias functions as you<span class="widont">&nb
   
 
   
-    <div class="text-block">
-      <p>We provide a single map to store &amp; manage functions
-that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<pre><code class="lang-scss">$functions: (
-  'inspect': meta.get-function('inspect', $module: 'meta'),
+    <div data-item-section="prose" class="text-block">
+      <h2 id="sizes-ratios">Sizes &amp; Ratios</h2>
+<p>Establish your palette of ratios (modular scales) and<span class="widont">&nbsp;</span>sizes:</p>
+<pre><code class="lang-scss">$ratios: (
+  'my-ratio': 1.25,
+);
+
+$sizes: (
+  // define explicit values
+  'root': 24px,
+  'icons': 1em,
+  'page': 8in,
+
+  // reference existing sizes
+  'text': '#root'
+
+  // apply adjustments and conversions
+  // using named-ratios or arbitrary functions
+  'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
+
+  'h1': '#root' ('my-ratio': 3),
+  'h2': '#root' ('my-ratio': 2),
+  'h3': '#root' ('my-ratio': 1),
+
+  // define calc() output based on existing sizes
+  'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
 );
 </code></pre>
-<p>Functions can be registered multiple times,
-under any aliases,
-but function maps are not able to use
-the alias<span class="widont">&nbsp;</span>syntax.</p>
+<p>Access your named sizes using the <code>size()</code> function,
+and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
+<pre><code class="lang-scss">.example {
+  font-size('text');
+  width: size('page', 'px');
+}
+</code></pre>
 
       
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Supports the <a href="core.html">core</a> map-reference syntax,
-for creating function<span class="widont">&nbsp;</span>aliases</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -562,8 +614,6 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
     </div>
   
 
-  </div>
-
   
 
   
@@ -572,62 +622,6 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
   
   
   
-
-  
-    
-  <div data-item-section="property">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">&lt;alias&gt;:</span>
-      
-      
-      <span class="value-type">(function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Each alias key in the map
-should refer to a captured<span class="widont">&nbsp;</span>function</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -642,87 +636,6 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   
     
     
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  token-register.html#mixin--register" class="item-name">register()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-    
-  </div>
-
   
 
   
@@ -752,46 +665,28 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
 
 
-<section class="item" id="mixin--register">
+<section class="item" >
   
     
   
   
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@mixin</span>
-      
-
-      
-        <a href="#mixin--register" class="item-name">register()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
   
   
 
   
-    <div class="text-block">
-      <p>Register functions with<span class="widont">&nbsp;</span>accoutrement.</p>
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+If you want to import individual plugins,
+make sure you first import the shared<span class="widont">&nbsp;</span>core:</p>
+<pre><code class="lang-scss">  @import '&lt;path-to&gt;/accoutrement/sass/core';
+  @import '&lt;path-to&gt;/accoutrement/sass/plugin/type';
+</code></pre>
+<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
+you can leave off most of the<span class="widont">&nbsp;</span>path:</p>
+<pre><code class="lang-scss">  @import 'accoutrement/core';
+  @import 'accoutrement/plugin/type';
+</code></pre>
 
       
   
@@ -805,8 +700,6 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     </div>
   
 
-  </div>
-
   
 
   
@@ -815,113 +708,6 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$function:</span>
-      
-      
-      <span class="value-type">(function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The first-class function to be<span class="widont">&nbsp;</span>registered</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$names...:</span>
-      
-      <span class="item-value">$function</span>
-      <span class="value-type">(strings)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>One or more alias names (strings)
-to use for map-access to the<span class="widont">&nbsp;</span>function</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>{map} $_ACCOUTREMENT_APP -
-Functions are registered in a map
-under any number of<span class="widont">&nbsp;</span>aliases</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -935,97 +721,6 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
   
   
     
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">set()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  token-register.html#variable--functions" class="item-name">$functions</a>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
     
   
 

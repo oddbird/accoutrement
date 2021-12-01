@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Accessing Tokens | Accoutrement Documentation</title>
+  <title>scale-vars | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -117,7 +117,7 @@
   
   
     <li class="nav-item">
-      <a href="token-api.html" data-nav="is-active">Accessing Tokens</a>
+      <a href="token-api.html" data-nav="is-not-active">Accessing Tokens</a>
     </li>
   
   
@@ -288,7 +288,7 @@
   
   
     <li class="nav-item">
-      <a href="scale-vars.html" data-nav="is-not-active">scale-vars</a>
+      <a href="scale-vars.html" data-nav="is-active">scale-vars</a>
     </li>
   
   
@@ -369,11 +369,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Accessing Tokens</strong>
+    <strong>scale-vars</strong>
   </nav>
 
 
-        <div data-page="token-api">
+        <div data-page="scale-vars">
           
   
     
@@ -398,21 +398,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="token-maps">Token Maps</h1>
-<p>We use “token” as a generic term
-for named values inside accoutrement maps.
-In the following map,
-<code>root</code> and <code>gutter</code> are considered<span class="widont">&nbsp;</span>accoutrement-tokens:</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'gutter': 1em,
-);
-</code></pre>
-<p>Our core API provides token-map syntax parsing,
-and general token access with <code>get-token()</code> (below).
-Additional plugins provide shortcuts and utilities
-for managing and accessing common token-types,
-like colors, fonts, sizes, and<span class="widont">&nbsp;</span>animations.</p>
+      <h1 id="sizes-css-variables">Sizes » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -477,103 +463,59 @@ like colors, fonts, sizes, and<span class="widont">&nbsp;</span>animations.</p>
 
 
 
-<section class="item" >
+<section class="item" id="variable--size-var-prefix">
   
     
   
   
+
+  
+  
   
   
 
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="internal-reference">Internal Reference</h2>
-<p>The core module provides a generic map-parsing syntax,
-for internal reference &amp; adjustments –
-establishing dynamic relationships between map values.
-To reference another key in the same map,
-use the <code>#tag</code> hashtag format:</p>
-<pre><code class="lang-scss">// 'gutter' == 16px
-$map: (
-  'root': 16px,
-  'gutter': '#root',
-);
-</code></pre>
-<p>Reference hashtags don’t have to stand alone,
-but can be embedded inside a longer<span class="widont">&nbsp;</span>string:</p>
-<pre><code class="lang-scss">// 'responsive' == calc(16px + 1vw)
-$map: (
-  'root': 16px,
-  'scale': 1vw,
-  'responsive': 'calc(#root + #scale)',
-);
-</code></pre>
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
 
       
-  
+        <a href="#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
+      
 
       
-  
+        <span class="value-type">(string)</span>
+      
 
       
+    </h2>
+
+    
   
 
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$size-var-prefix: &#39;size-&#39; !default;</code></pre>
     </div>
   
 
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
     
   
   
@@ -581,630 +523,23 @@ $map: (
   
 
   
-    <div data-item-section="prose" class="text-block">
-      <h2 id="nested-references">Nested References</h2>
-<p>You can define nested tokens in accoutrement maps,
-and access them using a <code>#first-&gt;second-&gt;third</code> syntax:</p>
-<pre><code class="lang-scss">// 'large-screen-&gt;h2' == 24px
-$sizes: (
-  'root': 16px,
-  'headings': (
-    'h1': '#root' ('times': 2),
-    'h2': '#root' ('times': 1.5),
-  ),
-  'pull-quote': '#headings-&gt;h2',
-);
-</code></pre>
-<p>All <code>-&gt;</code> nested references
-are resolved relative to the outermost<span class="widont">&nbsp;</span>map:</p>
-<pre><code class="lang-scss">// 'large-screen-&gt;text' == 24px
-$map: (
-  'root': 16px,
-  'large-screen': (
-    'root': 24px,
-    'text': '#large-screen-&gt;root'
-  ),
-);
-</code></pre>
+    <div class="text-block">
+      <p>Since CSS variables are often defined in a global space,
+it can be useful to prefix different variable types.
+Accoutrement maps help solve that problem in Sass,
+so we wanted to carry that over into our CSS variable support.
+Set a prefix for all size-tokens,
+and we’ll apply it when setting or calling css variables
+based on your size maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
   
     
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"></div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="functional-adjustments">Functional Adjustments</h2>
-<p>In many cases, we’ll want to reference a value
-and then make adjustments to it.
-The explicit long-hand syntax uses a map
-with <code>'%value'</code> as the first key.
-Each additional key provides a function name
-along with arguments for that<span class="widont">&nbsp;</span>function:</p>
-<pre><code class="lang-scss">// convert-units(16px, 'rem')
-$map: (
-  'root': 16px,
-  'gutter': (
-    '%value': '#root',
-    'times': 1.5,
-    'convert-units': 'rem',
-  ),
-);
-</code></pre>
-<p>You can also string together multiple functions,
-to create more complex<span class="widont">&nbsp;</span>relationships:</p>
-<pre><code class="lang-scss">// convert-units(times(16px, 1.5), 'rem')
-$map: (
-  'root': 16px,
-  'gutter': (
-    '%value': '#root',
-    'times': 1.5,
-    'convert-units': 'rem',
-  ),
-);
-</code></pre>
-<p>Each function in the function map
-(e.g. <code>times</code> &amp; <code>convert-units</code> above)
-will be run in order –
-with any associated arguments included.
-The <code>value</code> is always passed as the first<span class="widont">&nbsp;</span>argument.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="adjustment-shorthand">Adjustment Shorthand</h2>
-<p>We also provide a shorthand syntax
-to simplify adjustments in most cases.
-Here, the value is written first (any data type),
-and a map of adjustments can be provided
-at the end of the<span class="widont">&nbsp;</span>definition:</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'gutter': '#root' ('times': 1.5, 'convert-units': 'rem'),
-);
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="adjustments-with-references">Adjustments with References</h2>
-<p>Adjustment-function arguments
-can also reference keys in the map.
-In this example,
-we’re multiplying the <code>root</code> &amp; <code>line-height</code> values
-to generate a <code>rhythm</code> token.</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'line-height': 1.4,
-  'rhythm': '#root' ('times': '#line-height'),
-);
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="string-interpolation">String Interpolation</h2>
-<p>For CSS features like <code>calc()</code>
-you can create format-strings
-and interpolate values into the string.
-Use <code>%s</code> as a placeholder,
-and call the <code>interpolate</code> (or <code>%s</code>) adjustment function
-with replacement values for each<span class="widont">&nbsp;</span>placeholder:</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'scale': 1vw,
-  'responsive': (
-    '%value': 'calc(%s + %s)',
-    '%s': '#root' '#scale',
-  ),
-);
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  utils.html#function--interpolate" class="item-name">interpolate()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-    
-  </div>
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="nested-adjustments">Nested Adjustments</h2>
-<p>Since adjustment formats and values
-are parsed the same as any other value,
-it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustments:</p>
-<pre><code class="lang-scss">$map: (
-  'root': 16px,
-  'scale': 1vw,
-  'responsive': (
-    '%value': 'calc(%s + %s)',
-    '%s': (
-      '#root' ('convert-units': 'rem'),
-      '#scale' ('times': 2),
-    ),
-  ),
-);
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="escaping-references">Escaping References</h2>
-<ul>
-<li>If you need to use the <code>#</code> character without creating an alias reference,
-you can prefix it with an (also-escaped) back-slash:
-<code>'this is \\#not-an-alias'</code></li>
-<li>If you need to end an alias without using punctuation or spaces,
-the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></li>
-</ul>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.2.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Added to help manage more complex missing-key<span class="widont">&nbsp;</span>options</li>
+<li>NEW: Initial release</li>
 </ul>
 </div>
       </section>
@@ -1220,19 +555,75 @@ the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></l
     </div>
   
 
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
   
 
   
   
   
-  
+
   
   
 
   
-
+  
 
   
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (&#39;my-size&#39;: 3em);
+$size-var-prefix: &#39;prefix_&#39;;
+html { @include size--(&#39;my-size&#39;) }</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
   
 
 
@@ -1242,6 +633,115 @@ the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></l
   
     
     
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  scale-vars.html#mixin--sizes--" class="item-name">sizes--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  scale-vars.html#mixin--size--" class="item-name">size--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  scale-vars.html#function--var-size" class="item-name">var-size()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
   
 
   
@@ -1271,7 +771,7 @@ the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></l
 
 
 
-<section class="item" id="function--get">
+<section class="item" id="mixin--sizes--">
   
     
   
@@ -1285,11 +785,11 @@ the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></l
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--get" class="item-name">get()</a>
+        <a href="#mixin--sizes--" class="item-name">sizes--()</a>
       
 
       
@@ -1310,41 +810,23 @@ the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></l
 
   
     <div class="text-block">
-      <p>The primary function for accessing and parsing
-accoutrement map-syntax values.
-Each accoutrement plugin provides a shortcut function
-for the specific map associated with that data-type.
-You can do the same, or use it directly
-to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>map.</p>
+      <p>Convert any size-map into CSS variables,
+using the global <code>$size-var-prefix</code>.</p>
+<ul>
+<li>Size names that start with <code>_</code> or <code>-</code> are considered “private”
+and will not be output as<span class="widont">&nbsp;</span>variables</li>
+<li>Sizes that contain a simple alias with no adjustments
+will be output with a <code>var()</code> value,
+keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
+</ul>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Name changed from <code>get-token</code> to <code>get</code></li>
-<li>BREAKING: The <code>$key</code> value must be a token name for lookup,
-not a raw token value to be compiled
-(see the <code>compile()</code> function)</li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Handles access to nested-map tokens
-using the <code>get-token($map, 'first-&gt;second-&gt;third')</code> syntax</li>
-</ul>
-</div>
-      </section>
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Accepts <code>$do</code> map argument,
-for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Initial release</li>
 </ul>
 </div>
       </section>
@@ -1376,7 +858,7 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -1392,9 +874,9 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$source:</span>
       
-      
+      <span class="item-value">$sizes</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1402,7 +884,8 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
     
       
       <div class="param-details text-block">
-        <p>A map of token definitions to reference<span class="widont">&nbsp;</span>against</p>
+        <p>Optionally use a custom
+map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -1410,60 +893,9 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 
 
       
-        
+
+      
   
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$key:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A key to get from the map (can use nested <code>key-&gt;subkey</code> syntax)</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$do:</span>
-      
-      
-      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of functional adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
-
-      </div>
-    
-  </div>
-
-
-      
 
       
   
@@ -1475,25 +907,22 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">@return</span>
+        <span class="item-name">{CSS output}</span>
       
       
-      <span class="value-type">(*)</span>
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The parsed value of any key in a given<span class="widont">&nbsp;</span>map</p>
+        <p>Custom properties for all public sizes in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
   </div>
 
-  
-
-      
   
 
       
@@ -1511,7 +940,7 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Examples</span>
+        <span class="item-subtitle-main">Example</span>
       </h3>
 
       
@@ -1542,191 +971,19 @@ for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
           </span>
 
           
-            <span class='code-description'>
-              Access a map directly
-            </span>
-          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;original-value&#39;: 3em,
-  &#39;new-value&#39;: &#39;#original-value&#39; (
-    &#39;times&#39;: 2,
-    &#39;minus&#39;: 0.5
-  ),
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
 );
-/*! New Value: #{tools.get($map, &#39;new-value&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! New Value: 5.5em */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-            <span class='code-description'>
-              Access nested-map tokens
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;outer&#39;: (
-    &#39;inner&#39;: 2,
-  ),
-);
-/*! Inner: #{tools.get($map, &#39;outer-&gt;inner&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! Inner: 2 */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-            <span class='code-description'>
-              Write your own shortcut plugin for specific maps
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">@function get($key) {
-  @return tools.get($my-map, $key);
-}
-
-$my-map: (&#39;main&#39;: 32em);
-/*! Main: #{get(&#39;main&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! Main: 32em */</code></pre>
+html {
+  @include sizes--;
+}</code></pre>
     </div>
   
 
@@ -1776,13 +1033,14 @@ $my-map: (&#39;main&#39;: 32em);
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
-        <span class="item-name">lookup-alias()</span>
+        <a href="
+  token-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -1810,104 +1068,19 @@ $my-map: (&#39;main&#39;: 32em);
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">compile-token()</span>
       
       
+        <a href="
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
       
-      <span class="item-note">[private]</span>
+      
+      <span class="value-type">(string)</span>
+      
     </h4>
 
     
   </div>
 
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">set()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$_memo</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
 
         
       
@@ -1945,7 +1118,7 @@ $my-map: (&#39;main&#39;: 32em);
 
 
 
-<section class="item" id="function--compile">
+<section class="item" id="mixin--size--">
   
     
   
@@ -1959,11 +1132,11 @@ $my-map: (&#39;main&#39;: 32em);
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--compile" class="item-name">compile()</a>
+        <a href="#mixin--size--" class="item-name">size--()</a>
       
 
       
@@ -1984,17 +1157,423 @@ $my-map: (&#39;main&#39;: 32em);
 
   
     <div class="text-block">
-      <p>Allows you to compile arbitrary token values
-in reference to a map,
-without the initial step of referencing a single<span class="widont">&nbsp;</span>key.</p>
+      <p>Set a single custom property based on a map-size,
+with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Added to handle direct token parsing, without map-key<span class="widont">&nbsp;</span>lookup</li>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$size:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Size name available in the <code>$source</code> map,
+or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$value:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional value for the variable,
+if different from the given <code>$size</code></p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional map of sizes to use as a palette<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
+);
+.example {
+  @include size--(&#39;line&#39;);
+  @include size--(&#39;padding&#39;, &#39;line&#39;, 1.5rem);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  token-vars.html#mixin--token--" class="item-name">token--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-size">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--var-size" class="item-name">var-size()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access the CSS variable associated with a given token,
+along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
 </ul>
 </div>
       </section>
@@ -2042,17 +1621,17 @@ without the initial step of referencing a single<span class="widont">&nbsp;</spa
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$size:</span>
       
       
-      <span class="value-type">(map)</span>
+      <span class="value-type">(*)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A map of token definitions to reference<span class="widont">&nbsp;</span>against</p>
+        <p>Size name available in the <code>$source</code> map</p>
 
       </div>
     
@@ -2069,9 +1648,9 @@ without the initial step of referencing a single<span class="widont">&nbsp;</spa
     <h4 class="param-title">
       
       
-        <span class="item-name">$token:</span>
+        <span class="item-name">$fallback:</span>
       
-      
+      <span class="item-value">true</span>
       <span class="value-type">(*)</span>
       
     </h4>
@@ -2079,7 +1658,40 @@ without the initial step of referencing a single<span class="widont">&nbsp;</spa
     
       
       <div class="param-details text-block">
-        <p>The original key to get from the<span class="widont">&nbsp;</span>map</p>
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional Accoutrement map of sizes to use as<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -2101,14 +1713,15 @@ without the initial step of referencing a single<span class="widont">&nbsp;</spa
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(*)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The parsed value of any key in a given<span class="widont">&nbsp;</span>map</p>
+        <p>CSS variable call, in the format:
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
 
       </div>
     
@@ -2165,23 +1778,20 @@ without the initial step of referencing a single<span class="widont">&nbsp;</spa
           </span>
 
           
-            <span class='code-description'>
-              Access a map directly
-            </span>
-          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$map: (
-  &#39;original-value&#39;: 3em,
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
 );
-$token: &#39;#original-value&#39; (
-  &#39;times&#39;: 2,
-  &#39;minus&#39;: 0.5
-);
-/*! New Value: #{tools.compile($map, $token)} */</code></pre>
+.example {
+  line-height: var-size(&#39;line&#39;);
+  padding: var-size(&#39;rhythm&#39;, 1.5em);
+}</code></pre>
     </div>
   
 
@@ -2203,7 +1813,10 @@ $token: &#39;#original-value&#39; (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! New Value: 5.5em */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  line-height: var-size(&quot;line&quot;);
+  padding: var-size(&quot;rhythm&quot;, 1.5em);
+}</code></pre>
     </div>
   
 
@@ -2221,8 +1834,7 @@ $token: &#39;#original-value&#39; (
   
   
   
-    <div class="requires-wrapper">
-      
+    
     
   <div data-item-section="requires">
     
@@ -2256,11 +1868,12 @@ $token: &#39;#original-value&#39; (
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">compile-token()</span>
+        <a href="
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -2269,29 +1882,15 @@ $token: &#39;#original-value&#39; (
 
         
       
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
         
-      </h3>
-    
-
-    
-      
-      
+        
         
 
         
           
           
+  
+  
   
   
   
@@ -2302,13 +1901,13 @@ $token: &#39;#original-value&#39; (
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      
       
         <a href="
-  color-tokens.html#function--color" class="item-name">color()</a>
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
       
       
-      
+      <span class="value-type">(string)</span>
       
     </h4>
 
@@ -2322,8 +1921,9 @@ $token: &#39;#original-value&#39; (
   </div>
 
   
+    
+  
 
-    </div>
   
 
   

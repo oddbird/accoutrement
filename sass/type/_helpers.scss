@@ -318,9 +318,9 @@ $_a_FONT-FORMATS: (
 
   // Format values for CSS
   $name: quote($name);
-  $style: unquote($style);
-  $weight: unquote($weight);
-  $display: if($display, unquote($display), null);
+  $style: $style;
+  $weight: $weight;
+  $display: $display), null;
 
   @if $unicode {
     $new: ();

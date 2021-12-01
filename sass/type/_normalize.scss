@@ -144,7 +144,7 @@
 
     @each $item in $stack {
       $item: _a_trim($item);
-      $item: if(str-index($item, ' '), quote($item), unquote($item));
+      $item: $item);
       $return: append($return, $item);
     }
   }

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Function Registration | Accoutrement Documentation</title>
+  <title>animate-change | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -127,7 +127,7 @@
   
   
     <li class="nav-item">
-      <a href="token-register.html" data-nav="is-active">Function Registration</a>
+      <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   
   
@@ -208,7 +208,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-change.html" data-nav="is-not-active">animate-change</a>
+      <a href="animate-change.html" data-nav="is-active">animate-change</a>
     </li>
   
   
@@ -369,11 +369,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Function Registration</strong>
+    <strong>animate-change</strong>
   </nav>
 
 
-        <div data-page="token-register">
+        <div data-page="animate-change">
           
   
     
@@ -398,11 +398,11 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="function-registration">Function Registration</h1>
-<p>Because Sass 3.5+ requires first-class functions,
-we provide tools for capturing functions
-and making them available to the Accoutrement map parser.
-This also provides the ability to alias functions as you<span class="widont">&nbsp;</span>like.</p>
+      <h1 id="combined-change-maps-animations-transitions">Combined “Change” Maps: Animations &amp;<span class="widont">&nbsp;</span>Transitions</h1>
+<p>Combine your <code>$times</code> and <code>$easing</code> values
+to create entire transitions and animations –
+all stored in one place and easy to access
+for consistent “changes” across your<span class="widont">&nbsp;</span>project.</p>
 
       
   
@@ -467,7 +467,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
 
 
-<section class="item" id="variable--functions">
+<section class="item" id="variable--changes">
   
     
   
@@ -485,11 +485,9 @@ This also provides the ability to alias functions as you<span class="widont">&nb
       
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
+        <a href="#variable--changes" class="item-name">$changes</a>
       
 
-      
-        <span class="value-type">(map)</span>
       
 
       
@@ -516,7 +514,7 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$functions: () !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$changes: () !default;</code></pre>
     </div>
   
 
@@ -528,25 +526,208 @@ This also provides the ability to alias functions as you<span class="widont">&nb
 
   
     <div class="text-block">
-      <p>We provide a single map to store &amp; manage functions
-that you would like to use inside Accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<pre><code class="lang-scss">$functions: (
-  'inspect': meta.get-function('inspect', $module: 'meta'),
+      <p>A variable storing the map of
+all your standardized changes (transitions and animations).
+Any changes added to the <code>$changes</code> map will be accesible
+to the <code>change()</code> function by<span class="widont">&nbsp;</span>default.</p>
+<p>Define each change with a <code>name</code> and <code>value</code>,
+or use interpolation to compose more complex<span class="widont">&nbsp;</span>changes.</p>
+<pre><code>$changes: (
+  // single animation
+  'glow': glow time('slow') ease('in-out-quad') infinite alternate,
+
+  // single transitions
+  'slide': transform time('fast'),
+  'fade': opacity time('fade') ease('out-quad'),
+
+  // interolate using '#name' (quotes optional)
+  // to build on existing &quot;changes&quot;
+  'slide-in': #slide ease('out-back'),
+  'slide-out': '#slide' ease('in'),
+
+  // or string together multiple &quot;changes&quot;
+  'sidebar-in': ('#slide-in', '#fade' time('delay')),
+
+  // or create a 1-to-1 alias
+  'modal-in': #sidebar-in,
 );
 </code></pre>
-<p>Functions can be registered multiple times,
-under any aliases,
-but function maps are not able to use
-the alias<span class="widont">&nbsp;</span>syntax.</p>
+<ul>
+<li>Name your changes anything –
+from abstractions like <code>fade</code>,
+to concrete patterns like <code>sidebar-in</code>.</li>
+<li>Values can be CSS-ready values,
+references other changes in the map,
+or format strings to<span class="widont">&nbsp;</span>interpolate.</li>
+</ul>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-change.html#mixin--add-changes" class="item-name">add-changes()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--change">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--change" class="item-name">change()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access a named change in your <code>$changes</code> map.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Supports the <a href="core.html">core</a> map-reference syntax,
-for creating function<span class="widont">&nbsp;</span>aliases</li>
+<li>NEW: Accepts <code>$do</code> map argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
 </ul>
 </div>
       </section>
@@ -575,10 +756,10 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
 
   
     
-  <div data-item-section="property">
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
@@ -594,18 +775,71 @@ for creating function<span class="widont">&nbsp;</span>aliases</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">&lt;alias&gt;:</span>
+        <span class="item-name">$name:</span>
       
       
-      <span class="value-type">(function)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Each alias key in the map
-should refer to a captured<span class="widont">&nbsp;</span>function</p>
+        <p>The name of a change in your configuration (e.g. <code>fade-in</code>)</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$do:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$changes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of changes to use as the origin<span class="widont">&nbsp;</span>palette</p>
 
       </div>
     
@@ -618,6 +852,28 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   
 
       
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The change value<span class="widont">&nbsp;</span>requested</p>
+
+      </div>
+    
+  </div>
+
   
 
       
@@ -670,13 +926,14 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
-        <span class="item-name">get()</span>
+        <a href="
+  animate-change.html#mixin--animate" class="item-name">animate()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -703,7 +960,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-register.html#mixin--register" class="item-name">register()</a>
+  animate-change.html#mixin--transition" class="item-name">transition()</a>
       
       
       
@@ -713,10 +970,6 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     
   </div>
 
-
-        
-      
-        
 
         
       
@@ -752,7 +1005,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
 
 
-<section class="item" id="mixin--register">
+<section class="item" id="mixin--add-changes">
   
     
   
@@ -770,7 +1023,7 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
       
 
       
-        <a href="#mixin--register" class="item-name">register()</a>
+        <a href="#mixin--add-changes" class="item-name">add-changes()</a>
       
 
       
@@ -791,7 +1044,10 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
 
   
     <div class="text-block">
-      <p>Register functions with<span class="widont">&nbsp;</span>accoutrement.</p>
+      <p>Merge individual change maps into the global <code>$changes</code> variable,
+in case you want to define changes in smaller groups –
+such as <code>button-changes</code>, <code>page-changes</code>, etc –
+before merging them into a single global<span class="widont">&nbsp;</span>changes-palette.</p>
 
       
   
@@ -837,45 +1093,17 @@ should refer to a captured<span class="widont">&nbsp;</span>function</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$function:</span>
+        <span class="item-name">$maps:</span>
       
       
-      <span class="value-type">(function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The first-class function to be<span class="widont">&nbsp;</span>registered</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$names...:</span>
-      
-      <span class="item-value">$function</span>
-      <span class="value-type">(strings)</span>
+      <span class="value-type">(map...)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>One or more alias names (strings)
-to use for map-access to the<span class="widont">&nbsp;</span>function</p>
+        <p>Pass any number of maps to be merged and<span class="widont">&nbsp;</span>added</p>
 
       </div>
     
@@ -907,9 +1135,10 @@ to use for map-access to the<span class="widont">&nbsp;</span>function</p>
     
       
       <div class="param-details text-block">
-        <p>{map} $_ACCOUTREMENT_APP -
-Functions are registered in a map
-under any number of<span class="widont">&nbsp;</span>aliases</p>
+        <ul>
+<li>An updated global <code>$changes</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
 
       </div>
     
@@ -966,13 +1195,14 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">set()</span>
       
       
+        <a href="
+  animate-change.html#variable--changes" class="item-name">$changes</a>
       
-      <span class="item-note">[private]</span>
+      
+      
+      
     </h4>
 
     
@@ -980,6 +1210,271 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
 
 
         
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--animate">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--animate" class="item-name">animate()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access named animations in your <code>$changes</code> map,
+and apply them to the <code>animation</code> property.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$names:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Named animations to<span class="widont">&nbsp;</span>apply</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>The requested animations, applied in<span class="widont">&nbsp;</span>CSS</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$changes: (
+  &#39;fade-in&#39;: fade-in 300ms ease-out both,
+);
+.example {
+  @include animate(&#39;fade-in&#39;);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
       
         
         
@@ -1000,13 +1495,13 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      
+      <span class="item-type">@function</span>
       
         <a href="
-  token-register.html#variable--functions" class="item-name">$functions</a>
+  animate-change.html#function--change" class="item-name">change()</a>
       
       
-      <span class="value-type">(map)</span>
+      
       
     </h4>
 
@@ -1016,9 +1511,297 @@ under any number of<span class="widont">&nbsp;</span>aliases</p>
 
         
       
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--transition">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--transition" class="item-name">transition()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access named transitions in your <code>$changes</code> map,
+and apply them to the <code>transition</code> property.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$names:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Named transitions to<span class="widont">&nbsp;</span>apply</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>The requested transitions, applied in<span class="widont">&nbsp;</span>CSS</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$changes: (
+  &#39;fade&#39;: opacity 300ms ease-out,
+);
+.example {
+  @include transition(&#39;fade&#39;);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
         
         
         
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-change.html#function--change" class="item-name">change()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
       

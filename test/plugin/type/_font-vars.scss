@@ -46,14 +46,14 @@
       }
 
       @include expect {
-        --font-body-font: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        --font-TestFont: TestFont, Georgia, serif;
+        --font-body-font: "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif;
+        --font-TestFont: testfont, georgia, serif;
         --font-UniFont: "Unicode Test";
         --font-alias: var(--font-body-font, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
         --font-kevin-bacon: var(--font-alias, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
         --font-tf-alias: var(--font-TestFont, TestFont, Georgia, serif);
         --font-tf: var(--font-tf-alias, TestFont, Georgia, serif);
-        --font-sans: FranklinGothic, Helvetica, Arial, sans-serif;
+        --font-sans: franklingothic, helvetica, arial, sans-serif;
       }
     }
   }
@@ -94,7 +94,7 @@
       }
 
       @include expect {
-        --font-TestFont: TestFont, Georgia, serif;
+        --font-TestFont: testfont, georgia, serif;
       }
     }
   }
@@ -106,7 +106,7 @@
       }
 
       @include expect {
-        --font-TestFont: TestFont;
+        --font-TestFont: testfont;
       }
     }
   }
