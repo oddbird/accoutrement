@@ -17,7 +17,6 @@ const paths = {
     '!sass/core/**/*.scss',
     '!sass/layout/**/*.scss',
     '!sass/scale/**/*.scss',
-    '!sass/type/**/*.scss',
   ],
   init: function () {
     this.SASS = [this.SASS_DIR + '**/*.scss']
