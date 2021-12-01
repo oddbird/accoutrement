@@ -16,7 +16,6 @@ const paths = {
     '!sass/animate/**/*.scss',
     '!sass/core/**/*.scss',
     '!sass/layout/**/*.scss',
-    '!sass/scale/**/*.scss',
     '!sass/type/**/*.scss',
   ],
   init: function () {

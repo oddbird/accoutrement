@@ -44,8 +44,12 @@ $test-sizes: (
   'round': math.div(10rem, 3) ('round': null),
   'calc-simple': calc(1em + 2vw),
   'calc': (
-    '%value': 'calc(%s + (math.div(%s, %s)))',
-    '%s': ('#root' ('times': 3), '#test-value' ('convert-units': 'vw'), 3),
+    '%value': 'calc(%s + (%s / %s))',
+    '%s': (
+      '#root',
+      '#h3',
+      3
+    ),
   ),
   'calc-ref': '#calc',
 );

@@ -17,6 +17,20 @@
         '[a 2 c]'
       );
     }
+
+    @include it('Will not convert a map') {
+      @include assert-equal(
+        string.force((hello: world)),
+        'ERROR [string-force] Maps cannot be converted to strings'
+      );
+    }
+
+    @include it('Will not convert a map inside a list') {
+      @include assert-equal(
+        string.force(one (hello: world) three),
+        'one ERROR [string-force] Maps cannot be converted to strings three'
+      );
+    }
   }
 
   // String Replace

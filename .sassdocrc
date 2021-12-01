@@ -47,11 +47,11 @@ groups:
 #     layout-position: 'Positioning'
 #     layout-ratios: 'Fluid Ratios'
 #     layout-z-index: 'Z-Index'
-#   'Scale':
-#     scale: 'QuickStart: Scale'
-#     scale-sizes: 'Size Maps'
-#     scale-vars: 'Sizes » CSS Variables'
-#     scale-units: 'Unit Conversion'
+  'Scale':
+    scale: 'QuickStart: Scale'
+    scale-sizes: 'Size Maps'
+    scale-vars: 'Sizes » CSS Variables'
+    scale-units: 'Unit Conversion'
 #   'Type':
 #     type: 'QuickStart: Type'
 #     type-fonts: 'Font Maps'
