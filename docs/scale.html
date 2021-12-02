@@ -472,11 +472,11 @@ You can also import the scale module on its<span class="widont">&nbsp;</span>own
     <div data-item-section="prose" class="text-block">
       <h2 id="sizes-ratios">Sizes &amp; Ratios</h2>
 <p>Establish your palette of ratios (modular scales) and<span class="widont">&nbsp;</span>sizes:</p>
-<pre><code class="lang-scss">tools.$ratios: (
+<pre><code class="lang-scss">$ratios: (
   'my-ratio': 1.25,
 );
 
-tools.$sizes: (
+$sizes: (
   // define explicit values
   'root': 24px,
   'icons': 1em,
@@ -501,7 +501,7 @@ tools.$sizes: (
 and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
 <pre><code class="lang-scss">.example {
   font-size('text');
-  width: tools.size('page', 'px');
+  width: size('page', 'px');
 }
 </code></pre>
 

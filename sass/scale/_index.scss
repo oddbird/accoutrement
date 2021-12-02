@@ -26,11 +26,11 @@
 /// Establish your palette of ratios (modular scales) and sizes:
 ///
 /// ```scss
-/// tools.$ratios: (
+/// $ratios: (
 ///   'my-ratio': 1.25,
 /// );
 ///
-/// tools.$sizes: (
+/// $sizes: (
 ///   // define explicit values
 ///   'root': 24px,
 ///   'icons': 1em,
@@ -58,7 +58,7 @@
 /// ```scss
 /// .example {
 ///   font-size('text');
-///   width: tools.size('page', 'px');
+///   width: size('page', 'px');
 /// }
 /// ```
 /// @group scale
