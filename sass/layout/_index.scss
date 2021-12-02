@@ -27,11 +27,11 @@
 /// or use sizes from [Accoutrement Scale](scale.html) directly:
 ///
 /// ```scss
-/// tools.$sizes: (
+/// $sizes: (
 ///   'page': 36rem,
 /// );
 ///
-/// tools.$breakpoints: (
+/// $breakpoints: (
 ///   'banner-text': 24em,
 /// );
 /// ```
