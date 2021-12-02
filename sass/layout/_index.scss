@@ -24,7 +24,7 @@
 
 /// ## Media Queries
 /// Establish your media-query breakpoints,
-/// or use sizes from [Accoutrement Scale][scale.html] directly:
+/// or use sizes from [Accoutrement Scale](scale.html) directly:
 ///
 /// ```scss
 /// tools.$sizes: (
@@ -43,13 +43,13 @@
 /// .banner-text {
 ///   display: none;
 ///
-///   @include tools.above('banner-text') {
+///   @include above('banner-text') {
 ///     display: block;
 ///   }
 /// }
 ///
 /// .container {
-///   @include tools.below('page') {
+///   @include below('page') {
 ///     padding: .5em;
 ///   }
 /// }

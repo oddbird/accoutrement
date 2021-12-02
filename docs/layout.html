@@ -315,13 +315,13 @@
     <li class="nav-item">
       <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
     </li>
-  </ul>
-            </li>
+  
   
     <li class="nav-item">
-      <a href="type-helpers.html" data-nav="is-not-active">type-helpers</a>
+      <a href="type-helpers.html" data-nav="is-not-active">Type Helpers</a>
     </li>
   </ul>
+            </li></ul>
     </div>
 
     
@@ -566,7 +566,7 @@ You can also import the layout module on its<span class="widont">&nbsp;</span>ow
     <div data-item-section="prose" class="text-block">
       <h2 id="media-queries">Media Queries</h2>
 <p>Establish your media-query breakpoints,
-or use sizes from [Accoutrement Scale][scale.html]<span class="widont">&nbsp;</span>directly:</p>
+or use sizes from <a href="scale.html">Accoutrement Scale</a><span class="widont">&nbsp;</span>directly:</p>
 <pre><code class="lang-scss">tools.$sizes: (
   'page': 36rem,
 );
@@ -580,13 +580,13 @@ tools.$breakpoints: (
 <pre><code>.banner-text {
   display: none;
 
-  @include tools.above('banner-text') {
+  @include above('banner-text') {
     display: block;
   }
 }
 
 .container {
-  @include tools.below('page') {
+  @include below('page') {
     padding: .5em;
   }
 }

@@ -54,6 +54,7 @@ groups:
     type-font-vars: 'Fonts » CSS Variables'
     type-a11y: 'Accessibility'
     type-pseudo: 'Pseudo Elements'
+    type-helpers: 'Type Helpers'
 
 herman:
   sass:
