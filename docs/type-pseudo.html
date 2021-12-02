@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>QuickStart: Animate | Accoutrement Documentation</title>
+  <title>Pseudo Elements | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -167,7 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="animate.html" data-nav="is-active">QuickStart: Animate</a>
+      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
     </li>
   
   
@@ -292,7 +292,7 @@
   
   
     <li class="nav-item">
-      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+      <a href="type-pseudo.html" data-nav="is-active">Pseudo Elements</a>
     </li>
   </ul>
             </li>
@@ -354,11 +354,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>QuickStart: Animate</strong>
+    <strong>Pseudo Elements</strong>
   </nav>
 
 
-        <div data-page="animate">
+        <div data-page="type-pseudo">
           
   
     
@@ -383,12 +383,8 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="quickstart-animate">QuickStart: Animate</h1>
-<p>Tools for managing animations &amp;<span class="widont">&nbsp;</span>transitions.</p>
-<ul>
-<li>Organize all your timing, easing, and transitions into<span class="widont">&nbsp;</span>maps</li>
-<li>Document relationships directly in the<span class="widont">&nbsp;</span>code</li>
-</ul>
+      <h1 id="pseudo-elements">Pseudo-Elements</h1>
+<p>Some shortcuts for creating <code>::before</code> and <code>::after</code> pseudo-elements.</p>
 
       
   
@@ -453,8 +449,37 @@
 
 
 
-<section class="item" >
+<section class="item" id="mixin--before">
   
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--before" class="item-name">before()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
     
   
   
@@ -462,12 +487,8 @@
   
 
   
-    <div data-item-section="prose" class="text-block">
-      <h2 id="import">Import</h2>
-<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
-You can also import the color module on its<span class="widont">&nbsp;</span>own:</p>
-<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/animate';
-</code></pre>
+    <div class="text-block">
+      <p>Add generated content <code>:before</code> an element.</p>
 
       
   
@@ -481,136 +502,30 @@ You can also import the color module on its<span class="widont">&nbsp;</span>own
     </div>
   
 
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
+  </div>
 
   
 
   
   
-
-
   
   
-
   
   
-
-</section>
 
   
     
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="timing-easing">Timing &amp; Easing</h2>
-<p>Establish your timing and easing palettes,
-with the standard <a href="core.html">Accoutrement syntax</a>:</p>
-<pre><code class="lang-scss">$times: (
-  'fast': 150ms,
-  'medium': '#fast' ('times': 2),
-);
-
-$easing: (
-  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
-  'fade-in': '#in-out-quad',
-);
-</code></pre>
-<p>Access them anywhere:</p>
-<pre><code class="lang-scss">.example {
-  animation: slide-in time('fast') ease('in-out-quad') 1 both;
-  transition-delay: time('fast');
-  transition-duration: time('medium');
-  transition-timing-function: ease('elastic');
-}
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  <div data-item-section="related">
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
+        <span class="item-subtitle-main">Parameters</span>
         
       </h3>
     
 
     
       
-
-      
         
-  
-  
-  
   
   
 
@@ -619,96 +534,46 @@ $easing: (
     <h4 class="param-title">
       
       
-        <a href="
-  animate-times.html#variable--times" class="item-name">$times</a>
+        <span class="item-name">$content:</span>
       
       
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-times.html#function--time" class="item-name">time()</a>
-      
-      
-      
+      <span class="value-type">(String)</span>
       
     </h4>
 
     
-  </div>
+      
+      <div class="param-details text-block">
+        <p>A value for the <code>content</code> property.</p>
 
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-ease.html#variable--easing" class="item-name">$easing</a>
-      
-      
-      
-      
-    </h4>
-
+      </div>
     
   </div>
 
 
       
-        
-  
-  
-  
-  
+
+      
   
 
+      
   
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
+
       
-        <a href="
-  animate-ease.html#function--ease" class="item-name">ease()</a>
+  
+
       
-      
-      
-      
-    </h4>
+  
 
     
   </div>
 
+  
 
-      
-    
-  </div>
+
+  
+  
+
 
   
   
@@ -745,8 +610,37 @@ $easing: (
 
 
 
-<section class="item" >
+<section class="item" id="mixin--after">
   
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--after" class="item-name">after()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
     
   
   
@@ -754,30 +648,8 @@ $easing: (
   
 
   
-    <div data-item-section="prose" class="text-block">
-      <h2 id="transitions-animations">Transitions &amp; Animations</h2>
-<p>Use your timing and easing patterns
-to compose reusable “changes” –
-including transitions and<span class="widont">&nbsp;</span>animations:</p>
-<pre><code class="lang-scss">$changes: (
-  'slide-in': slide-in time('fast') ease('in-out-quad') 1 both,
-  'delay-in': '#slide-in' time('medium'),
-  'fade-ease': time('medium') ease(in),
-  'fade-colors': color '#fade-ease', background-color '#fade-ease',
-);
-</code></pre>
-<p>Access them anywhere:</p>
-<pre><code class="lang-scss">.example {
-  animation: change('slide-in');
-  transition: change('fade-colors');
-}
-</code></pre>
-<p>Or use the mixin<span class="widont">&nbsp;</span>shortcuts:</p>
-<pre><code class="lang-scss">.example {
-  @include animate('slide-in');
-  @include transition('fade-colors');
-}
-</code></pre>
+    <div class="text-block">
+      <p>Add generated content <code>:after</code> an element.</p>
 
       
   
@@ -791,41 +663,30 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
     </div>
   
 
-  
-
-  
-  
-  
-  
-  
-  
+  </div>
 
   
 
-
+  
+  
+  
+  
   
   
 
-
   
-
     
-  <div data-item-section="related">
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
+        <span class="item-subtitle-main">Parameters</span>
         
       </h3>
     
 
     
       
-
-      
         
-  
-  
-  
   
   
 
@@ -834,96 +695,208 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
     <h4 class="param-title">
       
       
-        <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
+        <span class="item-name">$content:</span>
       
       
-      
+      <span class="value-type">(String)</span>
       
     </h4>
 
+    
+      
+      <div class="param-details text-block">
+        <p>A value for the <code>content</code> property.</p>
+
+      </div>
     
   </div>
 
 
       
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--wrap-content">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--wrap-content" class="item-name">wrap-content()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Add generated content <code>:before</code> and <code>:after</code> an element.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
         
-  
-  
-  
+      </h3>
+    
+
+    
+      
+        
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-change.html#function--change" class="item-name">change()</a>
       
       
+        <span class="item-name">$content:</span>
       
       
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-change.html#mixin--animate" class="item-name">animate()</a>
-      
-      
-      
+      <span class="value-type">(List)</span>
       
     </h4>
 
     
-  </div>
+      
+      <div class="param-details text-block">
+        <p>One or two values to be used for the <code>content</code> property.
+A single string will be used <code>:before</code> and <code>:after</code>.</p>
 
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-change.html#mixin--transition" class="item-name">transition()</a>
-      
-      
-      
-      
-    </h4>
-
+      </div>
     
   </div>
 
 
       
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
     
   </div>
+
+  
+
+
+  
+  
+
 
   
   
