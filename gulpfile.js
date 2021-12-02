@@ -13,6 +13,7 @@ const paths = {
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   // @@@ remove these as they are migrated
   IGNORE_SASS: [],
+
   init: function () {
     this.SASS = [this.SASS_DIR + '**/*.scss']
       .concat(this.IGNORE)
