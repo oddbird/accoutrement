@@ -20,7 +20,7 @@
 ///   The number to be converted to px if comparable.
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
-@function _a_get-px($length) {
+@function get-px($length) {
   // stylelint-disable-next-line length-zero-no-unit
   @return if(math.compatible($length, 1px), 0px + $length, false);
 }
@@ -152,13 +152,13 @@
   $root-size: map.get(config.$sizes, 'root') or
     config.$BROWSER-DEFAULT-FONT-SIZE;
   $root-size: size.size($root-size);
-  $root-size: _a_get-px($root-size);
+  $root-size: get-px($root-size);
 
   // Establish relative context
   $from-context: size.size($from-context);
   $to-context: size.size($to-context);
-  $from-context: if($from-context, _a_get-px($from-context), $root-size);
-  $to-context: if($to-context, _a_get-px($to-context), $root-size);
+  $from-context: if($from-context, get-px($from-context), $root-size);
+  $to-context: if($to-context, get-px($to-context), $root-size);
 
   // Context values must be in px
   @if (not $from-context) or (not $to-context) {
@@ -175,7 +175,7 @@
   }
 
   // Convert relative length to pixels
-  $px-length: _a_get-px($length) or $length;
+  $px-length: get-px($length) or $length;
   $from-unit: math.unit($px-length);
 
   // Convert relative units using the from-context parameter.
