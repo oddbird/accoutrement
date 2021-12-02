@@ -1,3 +1,9 @@
+@use '../internal/function';
+@use '../tokens';
+@use '../utils/map' as utils;
+@use 'sass:meta';
+@use 'sass:list';
+
 /// # Combined "Change" Maps: Animations & Transitions
 /// Combine your `$times` and `$easing` values
 /// to create entire transitions and animations --
@@ -74,9 +80,9 @@ $changes: () !default;
   $do: null,
   $source: $changes
 ) {
-  @return get-token($source, $name, $do);
+  @return tokens.get($source, $name, $do);
 }
-@include register-internal('change');
+@include function.internal(meta.get-function('change'), 'change');
 
 
 // Add Changes
@@ -96,7 +102,7 @@ $changes: () !default;
 @mixin add-changes(
   $maps...
 ) {
-  $changes: _a_map-multimerge($changes, $maps...) !global;
+  $changes: utils.multi-merge($changes, $maps...) !global;
 }
 
 
@@ -107,11 +113,11 @@ $changes: () !default;
 ///
 /// @group animate-change
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     'fade-in': fade-in 300ms ease-out both,
 ///   );
 ///   .example {
-///     @include animate('fade-in');
+///     @include tools.animate('fade-in');
 ///   }
 ///
 /// @param {string} $names -
@@ -121,10 +127,10 @@ $changes: () !default;
 @mixin animate(
   $names...
 ) {
-  $animation: join((), (), 'comma');
+  $animation: list.join((), (), 'comma');
 
   @each $name in $names {
-    $animation: append($animation, change($name));
+    $animation: list.append($animation, change($name));
   }
 
   animation: $animation;
@@ -138,11 +144,11 @@ $changes: () !default;
 ///
 /// @group animate-change
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     'fade': opacity 300ms ease-out,
 ///   );
 ///   .example {
-///     @include transition('fade');
+///     @include tools.transition('fade');
 ///   }
 ///
 /// @param {string} $names -
@@ -152,10 +158,10 @@ $changes: () !default;
 @mixin transition(
   $names...
 ) {
-  $transition: join((), (), 'comma');
+  $transition: list.join((), (), 'comma');
 
   @each $name in $names {
-    $transition: append($transition, change($name));
+    $transition: list.append($transition, change($name));
   }
 
   transition: $transition;

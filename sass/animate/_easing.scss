@@ -1,3 +1,10 @@
+@use '../internal/function';
+@use '../tokens';
+@use '../utils/map' as utils;
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+
 /// # Easing Maps: Curves & Steps
 /// Whether you are using CSS-named easing,
 /// like `ease-in-out` and `linear`,
@@ -42,12 +49,12 @@ $easing: () !default;
 // ---------------
 /// A classic set of built-in easing functions,
 /// if you don't want to define your own.
-/// Don't edit this map directly,
+/// This map is not available to be edited directly,
 /// but feel free to reference these values
 /// from the user-defined `$easing` map.
 /// @group animate-ease
 /// @access public
-$_a_EASING: (
+$EASING: (
   '_in': ease-in,
   '_out': ease-out,
   '_in-out': ease-in-out,
@@ -104,11 +111,11 @@ $_a_EASING: (
   $do: null,
   $source: $easing
 ) {
-  $source: map-merge($_a_EASING, $source);
-  $name: get-token($source, $name, $do);
-  @return if((type-of($name) == 'string'), unquote($name), $name);
+  $source: map.merge($EASING, $source);
+  $name: tokens.get($source, $name, $do);
+  @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
 }
-@include register-internal('ease');
+@include function.internal(meta.get-function('ease'), 'ease');
 
 
 // Add Easing
@@ -128,5 +135,5 @@ $_a_EASING: (
 @mixin add-easing(
   $maps...
 ) {
-  $easing: _a_map-multimerge($easing, $maps...) !global;
+  $easing: utils.multi-merge($easing, $maps...) !global;
 }

@@ -162,6 +162,46 @@
   </ul>
             </li>
             <li class="nav-subsection">
+              <h3 class="nav-title">Animate</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-times.html" data-nav="is-not-active">Timing Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-ease.html" data-nav="is-not-active">Easing Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-ease-vars.html" data-nav="is-not-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change.html" data-nav="is-not-active">Combined &quot;Change&quot;<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change-vars.html" data-nav="is-not-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
               <h3 class="nav-title">Color</h3>
               <ul>
                 
@@ -483,7 +523,7 @@ You can also import the color module on its<span class="widont">&nbsp;</span>own
 <p>If you are using the token syntax,
 establish your color palette,
 with the standard <a href="tokens.html">Token syntax</a>:</p>
-<pre><code class="lang-scss">tools.$colors: (
+<pre><code class="lang-scss">$colors: (
   // set explicit colors
   'brand-pink': hsl(330, 85%, 62%),
   'brand-light': #ddf,
@@ -499,7 +539,7 @@ with the standard <a href="tokens.html">Token syntax</a>:</p>
 </code></pre>
 <p>Then access your colors from<span class="widont">&nbsp;</span>anywhere:</p>
 <pre><code class="lang-scss">.example {
-  border-color: tools.color('border');
+  border-color: color('border');
 }
 </code></pre>
 
@@ -793,12 +833,12 @@ These tools can be used with color values,
 or token<span class="widont">&nbsp;</span>names.</p>
 <pre><code class="lang-scss">a:hover {
   // set a background, and get well-contrasted text
-  @include tools.contrasted('link');
-  @include tools.contrasted(rebeccapurple);
+  @include contrasted('link');
+  @include contrasted(rebeccapurple);
 
   // or return a contrasting color from a set of options
-  border-color: tools.contrast('background', white, rebeccapurple);
-  border-color: tools.contrast(maroon, white, rebeccapurple);
+  border-color: contrast('background', white, rebeccapurple);
+  border-color: contrast(maroon, white, rebeccapurple);
 }
 </code></pre>
 
