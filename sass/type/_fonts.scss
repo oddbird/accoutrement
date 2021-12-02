@@ -1,3 +1,12 @@
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
+@use '../tokens/api';
+@use './config';
+@use './normalize';
+@use './helpers';
+@use '../tokens/inspect';
+
 /// ### Using WebFonts
 ///
 /// Once you've configured your webfont data into a map,
@@ -6,7 +15,6 @@
 /// to calling font-families by any given alias.
 ///
 /// @group type-fonts
-
 
 // Font [function]
 // ---------------
@@ -30,44 +38,11 @@
 ///   to use as the origin palette
 /// @return {map} -
 ///   A parsed and normalized map of font-data
-@function font(
-  $font,
-  $source: $fonts
-) {
-  $data: get-token($source, $font);
-  $normal: _a_normalize-font($data, $font, $source);
+@function font($font, $source: config.$fonts) {
+  $data: api.get($source, $font);
+  $normal: normalize.font($data, $font, $source);
   @return $normal;
 }
-
-
-// Font-URL [function]
-// -------------------
-/// This is a wrapper for the CSS `url()` function,
-/// which simply prepends the global `$font-path` when appropriate.
-///
-/// @since type-4.0.0 -
-/// - BUGFIX: Supports Base64 data URI's, without prepending font-path
-///
-/// @group type-fonts
-/// @example scss
-///   $font-path: '../fonts/';
-///   $src: font-url('sans/my-sans-font.woff2');
-///   /* #{$src} */
-///
-/// @param {string} $path -
-///   A path relative to the fonts directory.
-/// @return {string} -
-///   The full path to a font file, in CSS `url('my/path')` format.
-@function font-url(
-  $path
-) {
-  @if not str-index($path, 'data:') {
-    $path: $font-path + $path;
-  }
-
-  @return url(quote($path)); // stylelint-disable-line function-url-quotes
-}
-
 
 // Font Family [function]
 // ----------------------
@@ -90,7 +65,7 @@
 ///   );
 ///
 ///   html {
-///     font-family: font-family('sans');
+///     font-family: tools.font-family('sans');
 ///   }
 ///
 /// @param {string} $key -
@@ -101,14 +76,10 @@
 /// @return {String} -
 ///   The full font-stack for the given font,
 ///   ready for output with the `font-family` property.
-@function font-family(
-  $key,
-  $source: $fonts
-) {
+@function font-family($key, $source: config.$fonts) {
   $font: font($key, $source);
-  @return map-get($font, 'stack');
+  @return map.get($font, 'stack');
 }
-
 
 // Font Family [mixin]
 // -------------------
@@ -128,7 +99,7 @@
 ///   );
 ///
 ///   html {
-///     @include font-family('sans');
+///     @include tools.font-family('sans');
 ///   }
 ///
 /// @param {string} $key -
@@ -136,13 +107,9 @@
 /// @param {map} $source [$fonts] -
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
-@mixin font-family(
-  $key,
-  $source: $fonts
-) {
+@mixin font-family($key, $source: config.$fonts) {
   font-family: font-family($key, $source);
 }
-
 
 // Font Face [mixin]
 // -----------------
@@ -168,7 +135,7 @@
 ///       'bold': 'sans/sourcesanspro-bold-webfont',
 ///     ),
 ///   );
-///   @include font-face('body-font');
+///   @include tools.font-face('body-font');
 ///
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map
@@ -176,26 +143,29 @@
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output `@font-face` import blocks for any defined font-variants.
-@mixin font-face(
-  $key,
-  $source: $fonts
-) {
+@mixin font-face($key, $source: config.$fonts) {
   $font: font($key, $source);
-  $variants: _a_font-get-variants($font);
-  $name: map-get($font, 'name');
+  $variants: helpers.font-get-variants($font);
+  $name: map.get($font, 'name');
 
-  @if (length($variants) > 0) {
-    $unicode: map-get($font, 'unicode-range');
-    $display: map-get($font, 'display');
+  @if (list.length($variants) > 0) {
+    $unicode: map.get($font, 'unicode-range');
+    $display: map.get($font, 'display');
 
     @each $variant, $data in $variants {
-      $weight: nth($variant, 1);
-      $style: nth($variant, 2);
-      @include _a_import-font-face($name, $weight, $style, $data, $unicode, $display);
+      $weight: list.nth($variant, 1);
+      $style: list.nth($variant, 2);
+      @include helpers.import-font-face(
+        $name,
+        $weight,
+        $style,
+        $data,
+        $unicode,
+        $display
+      );
     }
   }
 }
-
 
 // Import WebFonts [mixin]
 // -----------------------
@@ -228,17 +198,18 @@
 ///       'source': 'https://fonts.google.com/',
 ///     ),
 ///   );
-///   @include import-webfonts;
+///   @include tools.import-webfonts;
 ///
 /// @param {map} $source [$fonts] -
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output Any number of `@font-face` blocks.
-@mixin import-webfonts(
-  $source: $fonts
-) {
+@mixin import-webfonts($source: config.$fonts) {
   @each $key, $font in $source {
-    @if not is-alias-for($source, $key) and not is-private-token($key) {
+    @if not
+      inspect.is-alias-for($source, $key) and not
+      inspect.is-private-token($key)
+    {
       @include font-face($key);
     }
   }

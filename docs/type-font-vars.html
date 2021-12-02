@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Times » CSS Variables | Accoutrement Documentation</title>
+  <title>Fonts » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -177,7 +177,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-time-vars.html" data-nav="is-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -257,7 +257,7 @@
   
   
     <li class="nav-item">
-      <a href="type-font-vars.html" data-nav="is-not-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="type-font-vars.html" data-nav="is-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -329,11 +329,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Times » CSS Variables</strong>
+    <strong>Fonts » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="animate-time-vars">
+        <div data-page="type-font-vars">
           
   
     
@@ -358,7 +358,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="times-css-variables">Times » CSS<span class="widont">&nbsp;</span>Variables</h1>
+      <h1 id="fonts-css-variables">Fonts » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -423,7 +423,7 @@
 
 
 
-<section class="item" id="variable--time-var-prefix">
+<section class="item" id="variable--font-var-prefix">
   
     
   
@@ -441,7 +441,7 @@
       
 
       
-        <a href="#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
+        <a href="#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
 
       
@@ -472,7 +472,7 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$time-var-prefix: &#39;time-&#39; !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$font-var-prefix: &#39;font-&#39; !default;</code></pre>
     </div>
   
 
@@ -488,9 +488,9 @@
 it can be useful to prefix different variable types.
 Accoutrement maps help solve that problem in Sass,
 so we wanted to carry that over into our CSS variable support.
-Set a prefix for all time-tokens,
-and we’ll apply it when setting or calling css variables
-based on your time maps.
+Set a prefix for all font-tokens,
+and we’ll apply it when setting or calling CSS variables
+based on your font maps.
 Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
@@ -571,9 +571,13 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (&#39;my-time&#39;: 1s);
-tools.$time-var-prefix: &#39;prefix_&#39;;
-html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$fonts: (
+  &#39;my-font&#39;: (
+    &#39;stack&#39;: (arial, helvetica, sans-serif),
+   )
+);
+$font-var-prefix: &#39;prefix_&#39;;
+html { @include tools.font--(&#39;my-font&#39;) }</code></pre>
     </div>
   
 
@@ -596,7 +600,7 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  --prefix_my-time: 1s;
+  --font-my-font: my-font, arial, helvetica, sans-serif;
 }</code></pre>
     </div>
   
@@ -648,7 +652,7 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
       <span class="item-type">@mixin</span>
       
         <a href="
-  animate-time-vars.html#mixin--times--" class="item-name">times--()</a>
+  type-font-vars.html#mixin--fonts--" class="item-name">fonts--()</a>
       
       
       
@@ -679,7 +683,7 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
       <span class="item-type">@mixin</span>
       
         <a href="
-  animate-time-vars.html#mixin--time--" class="item-name">time--()</a>
+  type-font-vars.html#mixin--font--" class="item-name">font--()</a>
       
       
       
@@ -710,7 +714,7 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
       <span class="item-type">@function</span>
       
         <a href="
-  animate-time-vars.html#function--var-time" class="item-name">var-time()</a>
+  type-font-vars.html#function--var-font" class="item-name">var-font()</a>
       
       
       
@@ -755,7 +759,7 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
 
 
 
-<section class="item" id="mixin--times--">
+<section class="item" id="mixin--fonts--">
   
     
   
@@ -773,7 +777,7 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
       
 
       
-        <a href="#mixin--times--" class="item-name">times--()</a>
+        <a href="#mixin--fonts--" class="item-name">fonts--()</a>
       
 
       
@@ -794,12 +798,12 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
 
   
     <div class="text-block">
-      <p>Convert any time-map into CSS variables,
-using the global <code>$time-var-prefix</code>.</p>
+      <p>Convert any font-map into CSS variables,
+using the global <code>$font-var-prefix</code>.</p>
 <ul>
-<li>Time names that start with <code>_</code> or <code>-</code> are considered “private”
+<li>Font names that start with <code>_</code> or <code>-</code> are considered “private”
 and will not be output as<span class="widont">&nbsp;</span>variables</li>
-<li>Times that contain a simple alias with no adjustments
+<li>Fonts that contain a simple alias with no adjustments
 will be output with a <code>var()</code> value,
 keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 </ul>
@@ -860,7 +864,7 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
       
         <span class="item-name">$source:</span>
       
-      <span class="item-value">$times</span>
+      <span class="item-value">$fonts</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -869,7 +873,35 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
       
       <div class="param-details text-block">
         <p>Optionally use a custom
-map of times to set as css<span class="widont">&nbsp;</span>variables</p>
+map of fonts to set as css<span class="widont">&nbsp;</span>variables</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$use:</span>
+      
+      <span class="item-value">&#39;stack&#39;</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Font-map value (such as ‘name’ or ‘stack’)
+to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       </div>
     
@@ -901,7 +933,7 @@ map of times to set as css<span class="widont">&nbsp;</span>variables</p>
     
       
       <div class="param-details text-block">
-        <p>Custom properties for all public times in the<span class="widont">&nbsp;</span>map</p>
+        <p>Custom properties for all public fonts in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
@@ -960,38 +992,16 @@ map of times to set as css<span class="widont">&nbsp;</span>variables</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (
-  &#39;_fast&#39;: 200ms,
-  &#39;text&#39;: &#39;#_fast&#39;,
-  &#39;fade&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">$fonts: (
+  &#39;_TestFont&#39;: (
+    &#39;name&#39;: &#39;My Test Font&#39;,
+    &#39;stack&#39;: (&#39;Georgia&#39;, &#39;serif&#39;),
+   ),
+  &#39;text&#39;: &#39;#_TestFont&#39;,
+  &#39;sans&#39;: &#39;#text&#39;,
 );
 html {
-  @include tools.times--;
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --time-text: 200ms;
-  --time-fade: var(--time-text, 200ms);
+  @include tools.fonts--;
 }</code></pre>
     </div>
   
@@ -1042,10 +1052,44 @@ html {
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">font-values()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
       
         <a href="
-  animate-time-vars.html#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
+  type-font-vars.html#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1092,7 +1136,7 @@ html {
 
 
 
-<section class="item" id="mixin--time--">
+<section class="item" id="mixin--font--">
   
     
   
@@ -1110,7 +1154,7 @@ html {
       
 
       
-        <a href="#mixin--time--" class="item-name">time--()</a>
+        <a href="#mixin--font--" class="item-name">font--()</a>
       
 
       
@@ -1131,7 +1175,7 @@ html {
 
   
     <div class="text-block">
-      <p>Set a single custom property based on a map-time,
+      <p>Set a single custom property based on a map-font,
 with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
@@ -1188,7 +1232,7 @@ with optional alias and<span class="widont">&nbsp;</span>fallback</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$time:</span>
+        <span class="item-name">$font:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1198,7 +1242,7 @@ with optional alias and<span class="widont">&nbsp;</span>fallback</p>
     
       
       <div class="param-details text-block">
-        <p>Time name available in the <code>$source</code> map,
+        <p>Font name available in the <code>$source</code> map,
 or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
 
       </div>
@@ -1227,7 +1271,7 @@ or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
       
       <div class="param-details text-block">
         <p>Optional value for the variable,
-if different from the given <code>$time</code></p>
+if different from the given <code>$font</code></p>
 
       </div>
     
@@ -1258,7 +1302,7 @@ if different from the given <code>$time</code></p>
 <ul>
 <li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
 <li>A token name will fallback to the value of that
-css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+CSS variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
 <li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
 </ul>
 
@@ -1277,9 +1321,37 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     <h4 class="param-title">
       
       
+        <span class="item-name">$use:</span>
+      
+      <span class="item-value">&#39;stack&#39;</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Font-map value (such as ‘name’ or ‘stack’)
+to use as custom-property<span class="widont">&nbsp;</span>values</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
         <span class="item-name">$source:</span>
       
-      <span class="item-value">$times</span>
+      <span class="item-value">$fonts</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1287,7 +1359,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     
       
       <div class="param-details text-block">
-        <p>Optional map of times to use as a palette<span class="widont">&nbsp;</span>source</p>
+        <p>Optional map of fonts to use as a palette<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1356,14 +1428,17 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (
-  &#39;_brand&#39;: 200ms,
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;plus&#39;: 50ms),
-  &#39;fade&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">tools.$fonts: (
+  &#39;_TestFont&#39;: (
+    &#39;name&#39;: &#39;My Test Font&#39;,
+    &#39;stack&#39;: (&#39;Georgia&#39;, &#39;serif&#39;),
+   ),
+  &#39;text&#39;: &#39;#_TestFont&#39;,
+  &#39;sans&#39;: &#39;#text&#39;,
 );
 .example {
-  @include tools.time--(&#39;fade&#39;);
-  @include tools.time--(&#39;color-change&#39;, &#39;fade&#39;, 0.2s);
+  @include tools.font--(&#39;text&#39;);
+  @include tools.font--(&#39;headline&#39;, &#39;sans&#39;, sans-serif);
 }</code></pre>
     </div>
   
@@ -1387,8 +1462,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  --time-fade: var(--time-text, 250ms);
-  --time-color-change: var(--time-fade, 0.2s);
+  --font-text: &quot;My Test Font&quot;, Georgia, serif;
+  --font-headline: var(--font-sans, sans-serif);
 }</code></pre>
     </div>
   
@@ -1439,10 +1514,44 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">font-values()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
       
         <a href="
-  animate-time-vars.html#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
+  type-font-vars.html#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1489,7 +1598,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
 
 
-<section class="item" id="function--var-time">
+<section class="item" id="function--var-font">
   
     
   
@@ -1507,7 +1616,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
 
       
-        <a href="#function--var-time" class="item-name">var-time()</a>
+        <a href="#function--var-font" class="item-name">var-font()</a>
       
 
       
@@ -1585,7 +1694,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$time:</span>
+        <span class="item-name">$font:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1595,7 +1704,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     
       
       <div class="param-details text-block">
-        <p>Time name available in the <code>$source</code> map</p>
+        <p>Font name available in the <code>$source</code> map</p>
 
       </div>
     
@@ -1647,7 +1756,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
         <span class="item-name">$source:</span>
       
-      
+      <span class="item-value">$fonts</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1655,7 +1764,35 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     
       
       <div class="param-details text-block">
-        <p>Optional Accoutrement map of times to use as<span class="widont">&nbsp;</span>source</p>
+        <p>Optional Accoutrement map of fonts to use as<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$use:</span>
+      
+      <span class="item-value">&#39;stack&#39;</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Font-map value (such as ‘name’ or ‘stack’)
+to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       </div>
     
@@ -1747,13 +1884,16 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (
-  &#39;_fast&#39;: 200ms,
-  &#39;text&#39;: &#39;#_fast&#39; (&#39;plus&#39;: 50ms),
-  &#39;fade&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">$fonts: (
+  &#39;_TestFont&#39;: (
+    &#39;name&#39;: &#39;My Test Font&#39;,
+    &#39;stack&#39;: (&#39;Georgia&#39;, &#39;serif&#39;),
+   ),
+  &#39;text&#39;: &#39;#_TestFont&#39;,
+  &#39;sans&#39;: &#39;#text&#39;,
 );
 .example {
-  transition: opacity tools.var-time(&#39;fade&#39;), color tools.var-time(&#39;text&#39;, 150ms);
+  font-family: tools.var-font(&#39;sans&#39;, sans-serif);
 }</code></pre>
     </div>
   
@@ -1777,7 +1917,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  transition: opacity var(--time-fade, 250ms), color var(--time-text, 150ms);
+  font-family: var(--font-sans, sans-serif);
 }</code></pre>
     </div>
   
@@ -1808,6 +1948,40 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
     
       
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">font-values()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
       
         
         
@@ -1866,7 +2040,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
         <a href="
-  animate-time-vars.html#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
+  type-font-vars.html#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
       
       <span class="value-type">(string)</span>

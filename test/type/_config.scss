@@ -1,0 +1,69 @@
+@use 'sass:map';
+@use '../../../node_modules/sass-true/sass/true' as *;
+@use 'test-data' as data;
+@use '../../../sass/type/config';
+
+$_global: config.$fonts;
+config.$fonts: data.$fonts;
+
+// Configuration Tests
+// ===================
+@include test-module('type/config') {
+  @include describe('Add Font [mixin]') {
+    $partial: (
+      'name': 'FranklinGothic',
+      'stack': (
+        'Helvetica',
+        'Arial',
+        'sans-serif',
+      ),
+    );
+
+    $franklin: (
+      'name': 'FranklinGothic',
+      'stack': (
+        'Helvetica',
+        'Arial',
+        'sans-serif',
+      ),
+      'normal': 'franklingothic-regular-filename',
+      'bold': 'franklingothic-bold-filename',
+      'formats': 'woff2' 'woff',
+    );
+
+    @include it('Adds a font to the global variable') {
+      @include assert-false(map.get(config.$fonts, 'sans'));
+
+      @include config.add-font('sans', $partial);
+
+      @include assert-equal(map.get(config.$fonts, 'sans'), $partial);
+    }
+
+    @include it('Allows you to override with a force argument') {
+      @include assert-unequal(map.get(config.$fonts, 'sans'), $franklin);
+
+      @include config.add-font('sans', $franklin, 'force');
+
+      @include assert-equal(map.get(config.$fonts, 'sans'), $franklin);
+    }
+
+    @include it('Errors on existing font-key') {
+      $has: map.get(config.$fonts, 'sans');
+      @include assert-true($has);
+
+      @include assert {
+        @include output {
+          @include config.add-font('sans', 'any');
+        }
+
+        @include expect {
+          --accoutrement-error: 'ERROR [add-font] Font key `sans` already exists. Rename or `$force` to continue';
+        }
+      }
+
+      @include assert-equal(map.get(config.$fonts, 'sans'), $has);
+    }
+  }
+} // end module
+
+config.$fonts: $_global;

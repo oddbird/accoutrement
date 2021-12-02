@@ -15,7 +15,6 @@ const paths = {
   IGNORE_SASS: [
     '!sass/layout/**/*.scss',
     '!sass/scale/**/*.scss',
-    '!sass/type/**/*.scss',
   ],
   init: function () {
     this.SASS = [this.SASS_DIR + '**/*.scss']
@@ -44,7 +43,7 @@ const sasslintTask = (src, failOnError, shouldLog) => {
     sasslint({
       reporters: [{ formatter: 'string', console: true }],
       failAfterError: failOnError,
-    }),
+    })
   );
   if (!failOnError) {
     stream.on('error', onError);
