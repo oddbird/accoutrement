@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Color Tokens » CSS Variables | Accoutrement Documentation</title>
+  <title>Times » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -177,7 +177,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="animate-time-vars.html" data-nav="is-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -237,7 +237,7 @@
   
   
     <li class="nav-item">
-      <a href="color-vars.html" data-nav="is-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li></ul>
@@ -294,11 +294,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Color Tokens » CSS Variables</strong>
+    <strong>Times » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="color-vars">
+        <div data-page="animate-time-vars">
           
   
     
@@ -323,7 +323,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="colors-css-variables">Colors » CSS<span class="widont">&nbsp;</span>Variables</h1>
+      <h1 id="times-css-variables">Times » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -388,7 +388,7 @@
 
 
 
-<section class="item" id="variable--color-var-prefix">
+<section class="item" id="variable--time-var-prefix">
   
     
   
@@ -406,7 +406,7 @@
       
 
       
-        <a href="#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+        <a href="#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
       
 
       
@@ -437,7 +437,7 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$color-var-prefix: &#39;color-&#39; !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$time-var-prefix: &#39;time-&#39; !default;</code></pre>
     </div>
   
 
@@ -453,9 +453,9 @@
 it can be useful to prefix different variable types.
 Accoutrement maps help solve that problem in Sass,
 so we wanted to carry that over into our CSS variable support.
-Set a prefix for all color-tokens,
+Set a prefix for all time-tokens,
 and we’ll apply it when setting or calling css variables
-based on your color maps.
+based on your time maps.
 Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
@@ -536,9 +536,9 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (&#39;my-color&#39;: pink);
-tools.$color-var-prefix: &#39;prefix_&#39;;
-html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (&#39;my-time&#39;: 1s);
+tools.$time-var-prefix: &#39;prefix_&#39;;
+html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
     </div>
   
 
@@ -561,7 +561,7 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  --prefix_my-color: pink;
+  --prefix_my-time: 1s;
 }</code></pre>
     </div>
   
@@ -610,10 +610,10 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
         <a href="
-  color-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
+  animate-time-vars.html#mixin--times--" class="item-name">times--()</a>
       
       
       
@@ -644,38 +644,7 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
       <span class="item-type">@mixin</span>
       
         <a href="
-  color-vars.html#mixin--colors--" class="item-name">colors--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  color-vars.html#mixin--color--" class="item-name">color--()</a>
+  animate-time-vars.html#mixin--time--" class="item-name">time--()</a>
       
       
       
@@ -706,7 +675,7 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
       <span class="item-type">@function</span>
       
         <a href="
-  color-vars.html#function--var-color" class="item-name">var-color()</a>
+  animate-time-vars.html#function--var-time" class="item-name">var-time()</a>
       
       
       
@@ -751,7 +720,7 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
 
 
 
-<section class="item" id="mixin--colors--">
+<section class="item" id="mixin--times--">
   
     
   
@@ -769,7 +738,7 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
       
 
       
-        <a href="#mixin--colors--" class="item-name">colors--()</a>
+        <a href="#mixin--times--" class="item-name">times--()</a>
       
 
       
@@ -790,12 +759,12 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
 
   
     <div class="text-block">
-      <p>Convert any color-map into CSS variables,
-using the global <code>$color-var-prefix</code>.</p>
+      <p>Convert any time-map into CSS variables,
+using the global <code>$time-var-prefix</code>.</p>
 <ul>
-<li>Color names that start with <code>_</code> or <code>-</code> are considered “private”
+<li>Time names that start with <code>_</code> or <code>-</code> are considered “private”
 and will not be output as<span class="widont">&nbsp;</span>variables</li>
-<li>Colors that contain a simple alias with no adjustments
+<li>Times that contain a simple alias with no adjustments
 will be output with a <code>var()</code> value,
 keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 </ul>
@@ -856,7 +825,7 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
       
         <span class="item-name">$source:</span>
       
-      <span class="item-value">$colors</span>
+      <span class="item-value">$times</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -865,7 +834,7 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
       
       <div class="param-details text-block">
         <p>Optionally use a custom
-map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
+map of times to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -897,7 +866,7 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
     
       
       <div class="param-details text-block">
-        <p>Custom properties for all public colors in the<span class="widont">&nbsp;</span>map</p>
+        <p>Custom properties for all public times in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
@@ -956,13 +925,13 @@ map of colors to set as css<span class="widont">&nbsp;</span>variables</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
-  &#39;border&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (
+  &#39;_fast&#39;: 200ms,
+  &#39;text&#39;: &#39;#_fast&#39;,
+  &#39;fade&#39;: &#39;#text&#39;,
 );
 html {
-  @include tools.colors--;
+  @include tools.times--;
 }</code></pre>
     </div>
   
@@ -986,8 +955,8 @@ html {
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  --color-text: #206020;
-  --color-border: var(--color-text, #206020);
+  --time-text: 200ms;
+  --time-fade: var(--time-text, 200ms);
 }</code></pre>
     </div>
   
@@ -1041,7 +1010,7 @@ html {
       
       
         <a href="
-  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+  animate-time-vars.html#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1088,7 +1057,7 @@ html {
 
 
 
-<section class="item" id="mixin--color--">
+<section class="item" id="mixin--time--">
   
     
   
@@ -1106,7 +1075,7 @@ html {
       
 
       
-        <a href="#mixin--color--" class="item-name">color--()</a>
+        <a href="#mixin--time--" class="item-name">time--()</a>
       
 
       
@@ -1127,7 +1096,7 @@ html {
 
   
     <div class="text-block">
-      <p>Set a single custom property based on a map-color,
+      <p>Set a single custom property based on a map-time,
 with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
@@ -1184,7 +1153,7 @@ with optional alias and<span class="widont">&nbsp;</span>fallback</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$color:</span>
+        <span class="item-name">$time:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1194,7 +1163,7 @@ with optional alias and<span class="widont">&nbsp;</span>fallback</p>
     
       
       <div class="param-details text-block">
-        <p>Color name available in the <code>$source</code> map,
+        <p>Time name available in the <code>$source</code> map,
 or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
 
       </div>
@@ -1223,7 +1192,7 @@ or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
       
       <div class="param-details text-block">
         <p>Optional value for the variable,
-if different from the given <code>$color</code></p>
+if different from the given <code>$time</code></p>
 
       </div>
     
@@ -1275,7 +1244,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
         <span class="item-name">$source:</span>
       
-      <span class="item-value">$colors</span>
+      <span class="item-value">$times</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1283,7 +1252,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     
       
       <div class="param-details text-block">
-        <p>Optional map of colors to use as a palette<span class="widont">&nbsp;</span>source</p>
+        <p>Optional map of times to use as a palette<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1352,14 +1321,14 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
-  &#39;border&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (
+  &#39;_brand&#39;: 200ms,
+  &#39;text&#39;: &#39;#_brand&#39; (&#39;plus&#39;: 50ms),
+  &#39;fade&#39;: &#39;#text&#39;,
 );
 .example {
-  @include tools.color--(&#39;border&#39;);
-  @include tools.color--(&#39;outline&#39;, &#39;border&#39;, red);
+  @include tools.time--(&#39;fade&#39;);
+  @include tools.time--(&#39;color-change&#39;, &#39;fade&#39;, 0.2s);
 }</code></pre>
     </div>
   
@@ -1383,8 +1352,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  --color-border: var(--color-text, #206020);
-  --color-outline: var(--color-border, red);
+  --time-fade: var(--time-text, 250ms);
+  --time-color-change: var(--time-fade, 0.2s);
 }</code></pre>
     </div>
   
@@ -1438,7 +1407,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
         <a href="
-  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+  animate-time-vars.html#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1485,7 +1454,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
 
 
-<section class="item" id="function--var-color">
+<section class="item" id="function--var-time">
   
     
   
@@ -1503,7 +1472,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
 
       
-        <a href="#function--var-color" class="item-name">var-color()</a>
+        <a href="#function--var-time" class="item-name">var-time()</a>
       
 
       
@@ -1581,7 +1550,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$color:</span>
+        <span class="item-name">$time:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1591,7 +1560,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     
       
       <div class="param-details text-block">
-        <p>Color name available in the <code>$source</code> map</p>
+        <p>Time name available in the <code>$source</code> map</p>
 
       </div>
     
@@ -1651,7 +1620,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     
       
       <div class="param-details text-block">
-        <p>Optional Accoutrement map of colors to use as<span class="widont">&nbsp;</span>source</p>
+        <p>Optional Accoutrement map of times to use as<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1743,14 +1712,13 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
-  &#39;border&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">tools.$times: (
+  &#39;_fast&#39;: 200ms,
+  &#39;text&#39;: &#39;#_fast&#39; (&#39;plus&#39;: 50ms),
+  &#39;fade&#39;: &#39;#text&#39;,
 );
 .example {
-  border-color: tools.var-color(&#39;border&#39;);
-  color: tools.var-color(&#39;text&#39;, black);
+  transition: opacity tools.var-time(&#39;fade&#39;), color tools.var-time(&#39;text&#39;, 150ms);
 }</code></pre>
     </div>
   
@@ -1774,8 +1742,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  border-color: var(--color-border, #206020);
-  color: var(--color-text, black);
+  transition: opacity var(--time-fade, 250ms), color var(--time-text, 150ms);
 }</code></pre>
     </div>
   
@@ -1794,8 +1761,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   
   
   
-    <div class="requires-wrapper">
-      
+    
     
   <div data-item-section="requires">
     
@@ -1865,7 +1831,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
         <a href="
-  color-vars.html#variable--color-var-prefix" class="item-name">$color-var-prefix</a>
+  animate-time-vars.html#variable--time-var-prefix" class="item-name">$time-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1882,57 +1848,9 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   </div>
 
   
-      
-  
     
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
   
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  color-contrast.html#mixin--var-contrasted" class="item-name">var-contrasted()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
   
 
   
