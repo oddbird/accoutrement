@@ -11,10 +11,7 @@
   // -----------------------
   @include describe('Dashed Ident [function]') {
     @include it('Returns a custom-property formatted token name') {
-      @include assert-equal(
-        vars.ident('test'),
-        --test
-      );
+      @include assert-equal(vars.ident('test'), --test);
     }
 
     @include it('Prepends an optional prefix') {
@@ -25,17 +22,11 @@
     }
 
     @include it('Converts values to a string') {
-      @include assert-equal(
-        vars.ident(red, 'color-'),
-        --color-red
-      );
+      @include assert-equal(vars.ident(red, 'color-'), --color-red);
     }
 
     @include it('Replace spaces with dashes') {
-      @include assert-equal(
-        vars.ident(red 'list', 'color-'),
-        --color-red-list
-      );
+      @include assert-equal(vars.ident(red 'list', 'color-'), --color-red-list);
     }
   }
 

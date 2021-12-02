@@ -2,7 +2,6 @@
 @use '../../sass/internal/throw';
 
 @include test-module('internal/throw') {
-
   // Error [function]
   // ----------------
   @include describe('Error [function]') {
@@ -29,5 +28,4 @@
       }
     }
   }
-
 }

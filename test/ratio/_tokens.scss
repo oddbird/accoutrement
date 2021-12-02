@@ -4,30 +4,27 @@
 @use 'sass:math';
 
 @include test-module('ratio/tokens') {
-  tokens.$ratios: (
-    'new': '#_octave',
-  );
+  tokens.$ratios: ('new': '#_octave');
 
   // Ratio [function]
   // ----------------
   @include describe('Ratio [function]') {
     @include it('Returns a named ratio with _ prefix') {
-      @include assert-equal(
-        tokens.ratio('_fifth'),
-        math.div(3, 2)
-      );
+      @include assert-equal(tokens.ratio('_fifth'), math.div(3, 2));
     }
 
     @include it('Returns a recursive ratio') {
-      @include assert-equal(
-        tokens.ratio('new'),
-        tokens.ratio('_octave')
-      );
+      @include assert-equal(tokens.ratio('new'), tokens.ratio('_octave'));
     }
 
     @include it('Accepts $do adjustments') {
       @include assert-equal(
-        tokens.ratio('new', ('plus': 1)),
+        tokens.ratio(
+          'new',
+          (
+            'plus': 1,
+          )
+        ),
         tokens.ratio('_octave') + 1
       );
     }
@@ -45,7 +42,6 @@
     }
   }
 
-
   @include describe('Add Ratios [mixin]') {
     $old: tokens.$ratios;
     $new1: (
@@ -53,7 +49,7 @@
       'other': calc(1 / 2),
     );
     $new2: (
-      'test': calc(16 / 9)
+      'test': calc(16 / 9),
     );
     @include tokens.add-ratios($new1, $new2);
     @include it('Adds maps to the $ratios global') {
@@ -64,5 +60,4 @@
     }
     tokens.$ratios: $old;
   }
-
 } // end module

@@ -27,14 +27,10 @@
 /// @return {number} -
 ///   The calculated results of adding
 ///   `$num1` and `$num2`
-@function plus(
-  $num1,
-  $num2
-) {
+@function plus($num1, $num2) {
   @return $num1 + $num2;
 }
 @include function.internal(meta.get-function('plus'), 'plus', 'add', '+');
-
 
 // Minus
 // -----
@@ -61,14 +57,15 @@
 /// @return {number} -
 ///   The calculated results of subtracting
 ///   `$num2` from `$num1`
-@function minus(
-  $num1,
-  $num2
-) {
+@function minus($num1, $num2) {
   @return $num1 - $num2;
 }
-@include function.internal(meta.get-function('minus'), 'minus', 'subtract', '-');
-
+@include function.internal(
+  meta.get-function('minus'),
+  'minus',
+  'subtract',
+  '-'
+);
 
 // Times
 // -----
@@ -94,14 +91,15 @@
 /// @return {number} -
 ///   The calculated results of multiplying
 ///   `$num1` by `$num2`
-@function times(
-  $num1,
-  $num2
-) {
+@function times($num1, $num2) {
   @return $num1 * $num2;
 }
-@include function.internal(meta.get-function('times'), 'times', 'multiply', '*');
-
+@include function.internal(
+  meta.get-function('times'),
+  'times',
+  'multiply',
+  '*'
+);
 
 // Divide
 // ------
@@ -127,14 +125,10 @@
 /// @return {number} -
 ///   The calculated results of dividing
 ///   `$num1` by `$num2`
-@function divide(
-  $num1,
-  $num2
-) {
+@function divide($num1, $num2) {
   @return math.div($num1, $num2);
 }
 @include function.internal(meta.get-function('divide'), 'divide', '/');
-
 
 // Modulo
 // ------
@@ -160,10 +154,13 @@
 ///   The name or length of the size to use as a division
 /// @return {number} -
 ///   The modulo of two numbers
-@function modulo(
-  $num1,
-  $num2
-) {
+@function modulo($num1, $num2) {
   @return $num1 % $num2;
 }
-@include function.internal(meta.get-function('modulo'), 'modulo', 'remainder', 'mod', '%');
+@include function.internal(
+  meta.get-function('modulo'),
+  'modulo',
+  'remainder',
+  'mod',
+  '%'
+);

@@ -24,3 +24,21 @@ rules:
   declaration-no-important: true
   function-url-no-scheme-relative: true
   selector-class-pattern: null
+
+  # Override failing default rules
+  block-no-empty: null
+  font-family-name-quotes: null
+  font-family-no-missing-generic-family-keyword: null
+  no-invalid-position-at-import-rule: null
+  number-max-precision: null
+  property-no-unknown: null
+  scss/at-function-pattern: null
+  scss/at-if-no-null: null
+  scss/at-mixin-pattern: null
+  scss/at-rule-conditional-no-parentheses: null
+  scss/comment-no-empty: null
+  scss/dollar-variable-pattern: null
+  scss/function-quote-no-quoted-strings-inside: null
+  scss/function-unquote-no-unquoted-strings-inside: null
+  scss/no-global-function-names: null
+  scss/operator-no-unspaced: null

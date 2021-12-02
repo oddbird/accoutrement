@@ -11,7 +11,6 @@
 /// for consistent "changes" across your project.
 /// @group animate-change
 
-
 // Changes Map
 // -----------
 /// A variable storing the map of
@@ -54,7 +53,6 @@
 /// @group animate-change
 $changes: () !default;
 
-
 // Change [function]
 // -----------------
 /// Access a named change in your `$changes` map.
@@ -75,15 +73,10 @@ $changes: () !default;
 ///   Optional accoutrement-format map of changes to use as the origin palette
 /// @return {length} -
 ///   The change value requested
-@function change(
-  $name,
-  $do: null,
-  $source: $changes
-) {
+@function change($name, $do: null, $source: $changes) {
   @return tokens.get($source, $name, $do);
 }
 @include function.internal(meta.get-function('change'), 'change');
-
 
 // Add Changes
 // -----------
@@ -99,12 +92,9 @@ $changes: () !default;
 /// @output -
 ///   An updated global `$changes` variable,
 ///   with new maps merged in.
-@mixin add-changes(
-  $maps...
-) {
+@mixin add-changes($maps...) {
   $changes: utils.multi-merge($changes, $maps...) !global;
 }
-
 
 // Animate [mixin]
 // ---------------
@@ -124,9 +114,7 @@ $changes: () !default;
 ///   Named animations to apply
 /// @output -
 ///   The requested animations, applied in CSS
-@mixin animate(
-  $names...
-) {
+@mixin animate($names...) {
   $animation: list.join((), (), 'comma');
 
   @each $name in $names {
@@ -135,7 +123,6 @@ $changes: () !default;
 
   animation: $animation;
 }
-
 
 // Transition [mixin]
 // ------------------
@@ -155,9 +142,7 @@ $changes: () !default;
 ///   Named transitions to apply
 /// @output -
 ///   The requested transitions, applied in CSS
-@mixin transition(
-  $names...
-) {
+@mixin transition($names...) {
   $transition: list.join((), (), 'comma');
 
   @each $name in $names {

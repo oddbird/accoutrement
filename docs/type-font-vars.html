@@ -599,7 +599,9 @@ html { @include tools.font--(&#39;my-font&#39;) }</code></pre>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+html {
   --font-my-font: my-font, arial, helvetica, sans-serif;
 }</code></pre>
     </div>
@@ -1003,6 +1005,29 @@ to use as custom-property<span class="widont">&nbsp;</span>values</p>
 html {
   @include tools.fonts--;
 }</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */</code></pre>
     </div>
   
 
@@ -1461,7 +1486,9 @@ to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+.example {
   --font-text: &quot;My Test Font&quot;, Georgia, serif;
   --font-headline: var(--font-sans, sans-serif);
 }</code></pre>
@@ -1916,7 +1943,9 @@ to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+.example {
   font-family: var(--font-sans, sans-serif);
 }</code></pre>
     </div>

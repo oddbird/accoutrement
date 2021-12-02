@@ -121,7 +121,6 @@ config.$font-path: data.$font-path;
         'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
         'eot': 'sourcesanspro-bold-webfont',
       );
-
       $src: (
         local('source-sans-pro-bold'),
         local('Source Sans Pro bold'),
@@ -153,7 +152,6 @@ config.$font-path: data.$font-path;
         '400': 'path-to-font',
         200: 'path-to-font',
       );
-
       $expect: (
         'normal': 'something',
         'bold' 'italic':

@@ -595,7 +595,9 @@ html { @include tools.time--(&#39;my-time&#39;) }</code></pre>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+html {
   --prefix_my-time: 1s;
 }</code></pre>
     </div>
@@ -989,7 +991,9 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+html {
   --time-text: 200ms;
   --time-fade: var(--time-text, 200ms);
 }</code></pre>
@@ -1386,7 +1390,9 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+.example {
   --time-fade: var(--time-text, 250ms);
   --time-color-change: var(--time-fade, 0.2s);
 }</code></pre>
@@ -1776,7 +1782,9 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+.example {
   transition: opacity var(--time-fade, 250ms), color var(--time-text, 150ms);
 }</code></pre>
     </div>

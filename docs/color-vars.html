@@ -595,7 +595,9 @@ html { @include tools.color--(&#39;my-color&#39;) }</code></pre>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+html {
   --prefix_my-color: pink;
 }</code></pre>
     </div>
@@ -1020,7 +1022,9 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+html {
   --color-text: #206020;
   --color-border: var(--color-text, #206020);
 }</code></pre>
@@ -1417,7 +1421,9 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+.example {
   --color-border: var(--color-text, #206020);
   --color-outline: var(--color-border, red);
 }</code></pre>
@@ -1808,7 +1814,9 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable function-url-quotes */
+/* stylelint-enable function-url-quotes */
+.example {
   border-color: var(--color-border, #206020);
   color: var(--color-text, black);
 }</code></pre>

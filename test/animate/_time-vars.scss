@@ -10,8 +10,6 @@ times.$times: data.$times;
 // Time Tests
 // ============
 @include test-module('animate/time-vars') {
-
-
   // Times-- [mixin]
   // ------------------
   @include describe('Times-- [mixin]') {
@@ -34,7 +32,11 @@ times.$times: data.$times;
     @include it('Generates CSS variables for any time map') {
       @include assert {
         @include output {
-          @include vars.times--(('mine': 300ms));
+          @include vars.times--(
+            (
+              'mine': 300ms,
+            )
+          );
         }
 
         @include expect {
@@ -43,7 +45,6 @@ times.$times: data.$times;
       }
     }
   }
-
 
   // Time-- [mixin]
   // -----------------
@@ -85,7 +86,6 @@ times.$times: data.$times;
     }
   }
 
-
   // Var-Time [function]
   // -------------------
   @include describe('Var-Time [function]') {
@@ -97,23 +97,20 @@ times.$times: data.$times;
     }
 
     @include it('Allows custom fallback') {
-      @include assert-equal(
-        vars.var-time('alias', 2s),
-        var(--time-alias, 2s)
-      );
+      @include assert-equal(vars.var-time('alias', 2s), var(--time-alias, 2s));
     }
 
     @include it('Allows false fallback') {
-      @include assert-equal(
-        vars.var-time('alias', false),
-        var(--time-alias)
-      );
+      @include assert-equal(vars.var-time('alias', false), var(--time-alias));
     }
 
     @include it('Accepts custom palette') {
       $my-palette: (
         'my-base': 3s,
-        'my-adjustment': '#my-base' ('times': 2),
+        'my-adjustment': '#my-base'
+          (
+            'times': 2,
+          ),
       );
 
       @include assert-equal(
@@ -122,7 +119,6 @@ times.$times: data.$times;
       );
     }
   }
-
 } // end module
 
 times.$times: $_old;

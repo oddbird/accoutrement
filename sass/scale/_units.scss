@@ -1,7 +1,6 @@
 /// # Converting Units
 /// @group scale-units
 
-
 // Get PX [function]
 // -----------------
 /// If a value can be converted to px by Sass, do it.
@@ -12,13 +11,10 @@
 ///   The number to be converted to px if comparable.
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
-@function _a_get-px(
-  $length
-) {
-  // stylelint-disable-next-line length-zero-no-unit
+@function _a_get-px($length) {
+  /* stylelint-disable-next-line length-zero-no-unit */
   @return if(comparable($length, 1px), 0px + $length, false);
 }
-
 
 // Get Number [function]
 // ---------------------
@@ -30,11 +26,8 @@
 ///   The unit to return as a number.
 /// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
-@function _a_get-number(
-  $unit,
-  $relative: false
-) {
-  // stylelint-disable length-zero-no-unit
+@function _a_get-number($unit, $relative: false) {
+  /* stylelint-disable length-zero-no-unit */
   $_absolute: (
     'in': 0in,
     'mm': 0mm,
@@ -43,7 +36,6 @@
     'pc': 0pc,
     'px': 0px,
   );
-
   $_relative: (
     'em': 0em,
     'rem': 0rem,
@@ -56,7 +48,7 @@
     'vmax': 0vmax,
     'fr': 0fr,
   );
-  // stylelint-enable
+  /* stylelint-enable length-zero-no-unit */
 
   @if $relative {
     @return map-get($_absolute, $unit) or map-get($_relative, $unit);
@@ -64,7 +56,6 @@
 
   @return map-get($_absolute, $unit);
 }
-
 
 // Convert Units [function]
 // ------------------------
@@ -103,11 +94,17 @@
   $to-context: $from-context
 ) {
   $_convertable: (
-    'in', 'mm', 'cm',
-    'pt', 'pc',
+    'in',
+    'mm',
+    'cm',
+    'pt',
+    'pc',
     'px',
-    'em', 'rem', 'browser-ems',
-    '%', 'ex',
+    'em',
+    'rem',
+    'browser-ems',
+    '%',
+    'ex'
   );
   $length: size($length);
   $from-unit: unit($length);
@@ -127,7 +124,7 @@
   // Easily comparable units
   $to-zero: _a_get-number($to-unit);
 
-  @if $to-zero and comparable($length, $to-zero)  {
+  @if $to-zero and comparable($length, $to-zero) {
     @return $to-zero + $length;
   }
 
@@ -177,7 +174,7 @@
     $px-length: $length * $root-size / 1rem;
   } @else if $from-unit == '%' {
     $px-length: $length * $from-context / 100%;
-  } @else if $from-unit == 'ex'  {
+  } @else if $from-unit == 'ex' {
     $px-length: $length * $from-context / 2ex;
   }
 

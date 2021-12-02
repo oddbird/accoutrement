@@ -6,7 +6,6 @@
 /// # Colors » CSS Variables
 /// @group color-vars
 
-
 // Color Var Prefix
 // ----------------
 /// Since CSS variables are often defined in a global space,
@@ -30,7 +29,6 @@
 ///
 /// @type string
 $color-var-prefix: 'color-' !default;
-
 
 // Colors--
 // --------
@@ -62,13 +60,10 @@ $color-var-prefix: 'color-' !default;
 ///   map of colors to set as css variables
 /// @output
 ///   Custom properties for all public colors in the map
-@mixin colors--(
-  $source: tokens.$colors
-) {
+@mixin colors--($source: tokens.$colors) {
   $source: map.merge(config.contrast-settings(), $source);
   @include api.tokens--($source, $color-var-prefix);
 }
-
 
 // Color--
 // -------
@@ -104,16 +99,10 @@ $color-var-prefix: 'color-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$colors] -
 ///   Optional map of colors to use as a palette source
-@mixin color--(
-  $color,
-  $value: null,
-  $fallback: true,
-  $source: tokens.$colors
-) {
+@mixin color--($color, $value: null, $fallback: true, $source: tokens.$colors) {
   $source: map.merge(config.contrast-settings(), $source);
   @include api.token--($source, $color, $value, $fallback, $color-var-prefix);
 }
-
 
 // Var Color
 // ---------
@@ -148,11 +137,7 @@ $color-var-prefix: 'color-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-color(
-  $color,
-  $fallback: true,
-  $source: tokens.$colors
-) {
+@function var-color($color, $fallback: true, $source: tokens.$colors) {
   $source: map.merge(config.contrast-settings(), $source);
   @return api.var-token($source, $color, $fallback, $color-var-prefix);
 }

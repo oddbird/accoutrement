@@ -1,4 +1,6 @@
-@use '../sass/internal/throw' with ($catch-errors: true);
+@use '../sass/internal/throw' with (
+  $catch-errors: true
+);
 
 // tests…
 @use 'internal';
@@ -8,6 +10,7 @@
 @use 'ratio';
 @use 'animate';
 @use 'color';
+
 // @import 'plugin/layout';
 // @import 'plugin/scale';
 @use 'type';

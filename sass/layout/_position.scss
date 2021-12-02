@@ -1,7 +1,6 @@
 // Position Utility
 // ================
 
-
 // Position
 // --------
 /// Shortcut for positioning an element,
@@ -38,9 +37,7 @@
 /// @output -
 ///   `top`, `right`, `bottom`, `left`, and `position` properties
 /// @throws Unknown positioning value
-@mixin position(
-  $position: null
-) {
+@mixin position($position: null) {
   $types: 'static' 'relative' 'absolute' 'fixed' 'sticky';
   $values: ('auto', null);
   $type: 'absolute';
@@ -53,10 +50,7 @@
     } @else if index($types, $item) {
       $type: $item;
     } @else {
-      @include _a_error(
-        'Unknown positioning value: `#{$item}`',
-        'position'
-      );
+      @include _a_error('Unknown positioning value: `#{$item}`', 'position');
     }
   }
 

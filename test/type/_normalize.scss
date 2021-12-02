@@ -236,7 +236,6 @@ config.$fonts: data.$fonts;
         ),
         $formats: 'woff' 'svg',
       );
-
       $expect: (
         'local': 'hello',
         'woff': 'my/path.woff',

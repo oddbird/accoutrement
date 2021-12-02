@@ -8,7 +8,6 @@ $_old: tokens.$colors;
 tokens.$colors: data.$colors;
 
 @include test-module('color/themes') {
-
   // Shades Of [function]
   // --------------------
   @include describe('Shades Of [function]') {
@@ -18,11 +17,31 @@ tokens.$colors: data.$colors;
       @include assert-equal(
         themes.shades-of('simple', 2),
         (
-          'simple-dark-2': '#simple' ('shade': (0.5 * $dint)),
+          'simple-dark-2': '#simple'
+            (
+              'shade': (
+                0.5 * $dint,
+              ),
+            ),
           'simple-dark-1': '#simple',
-          'simple-0': '#simple' ('tint': (0.5 * $lint)),
-          'simple-light-1': '#simple' ('tint': (1.5 * $lint)),
-          'simple-light-2': '#simple' ('tint': (2.5 * $lint))
+          'simple-0': '#simple'
+            (
+              'tint': (
+                0.5 * $lint,
+              ),
+            ),
+          'simple-light-1': '#simple'
+            (
+              'tint': (
+                1.5 * $lint,
+              ),
+            ),
+          'simple-light-2': '#simple'
+            (
+              'tint': (
+                2.5 * $lint,
+              ),
+            ),
         )
       );
     }
@@ -38,17 +57,44 @@ tokens.$colors: data.$colors;
       @include assert-equal(
         themes.shades-of($map, 1),
         (
-          'one-dark-1': ('#one' ('shade': (0.5 * $int1))),
+          'one-dark-1': (
+            '#one'
+              (
+                'shade': (
+                  0.5 * $int1,
+                )
+              ),
+          ),
           'one-0': '#one',
-          'one-light-1': ('#one' ('tint': (0.5 * $int1))),
-          'two-dark-1': ('#two' ('shade': (1.5 * $int2))),
-          'two-0': ('#two' ('shade': (0.5 * $int2))),
-          'two-light-1': '#two'
+          'one-light-1': (
+            '#one'
+              (
+                'tint': (
+                  0.5 * $int1,
+                )
+              ),
+          ),
+          'two-dark-1': (
+            '#two'
+              (
+                'shade': (
+                  1.5 * $int2,
+                )
+              ),
+          ),
+          'two-0': (
+            '#two'
+              (
+                'shade': (
+                  0.5 * $int2,
+                )
+              ),
+          ),
+          'two-light-1': '#two',
         )
       );
     }
   }
-
 
   // Stripe Colors [function]
   // ------------------------
@@ -60,12 +106,11 @@ tokens.$colors: data.$colors;
           red 0% 25%,
           orange 25% 50%,
           yellow 50% 75%,
-          tokens.color('primary') 75% 100%,
+          tokens.color('primary') 75% 100%
         )
       );
     }
   }
-
 
   // Stripe Colors [mixin]
   // ---------------------
@@ -73,7 +118,13 @@ tokens.$colors: data.$colors;
     @include it('Generates a striped gradient') {
       @include assert {
         @include output {
-          @include themes.stripe-colors(to right, red, orange, yellow, 'primary');
+          @include themes.stripe-colors(
+            to right,
+            red,
+            orange,
+            yellow,
+            'primary'
+          );
         }
         @include expect {
           background-image: linear-gradient(
@@ -84,8 +135,6 @@ tokens.$colors: data.$colors;
       }
     }
   }
-
-
 } // end module
 
 tokens.$colors: $_old;

@@ -5,12 +5,14 @@ $easing: (
   'sidebar-in': '#_in-out-quad',
   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
 );
-
 $times: (
   '_private': 5s,
   'alias': '#_private',
   'thread': '#alias',
   'fast': 150ms,
   'math-tests': 2,
-  'plus-name': '#fast' ('plus': '#math-tests'),
+  'plus-name': '#fast'
+    (
+      'plus': '#math-tests',
+    ),
 );
