@@ -13,8 +13,6 @@ const paths = {
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   // @@@ remove these as they are migrated
   IGNORE_SASS: [
-    '!sass/animate/**/*.scss',
-    '!sass/core/**/*.scss',
     '!sass/layout/**/*.scss',
     '!sass/type/**/*.scss',
   ],

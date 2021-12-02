@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Unit Conversion | Accoutrement Documentation</title>
+  <title>Easing Maps | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -182,7 +182,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-ease.html" data-nav="is-not-active">Easing Maps</a>
+      <a href="animate-ease.html" data-nav="is-active">Easing Maps</a>
     </li>
   
   
@@ -262,7 +262,7 @@
   
   
     <li class="nav-item">
-      <a href="scale-units.html" data-nav="is-active">Unit Conversion</a>
+      <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
   </ul>
             </li></ul>
@@ -319,11 +319,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Unit Conversion</strong>
+    <strong>Easing Maps</strong>
   </nav>
 
 
-        <div data-page="scale-units">
+        <div data-page="animate-ease">
           
   
     
@@ -348,7 +348,15 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="converting-units">Converting Units</h1>
+      <h1 id="easing-maps-curves-steps">Easing Maps: Curves &amp;<span class="widont">&nbsp;</span>Steps</h1>
+<p>Whether you are using CSS-named easing,
+like <code>ease-in-out</code> and <code>linear</code>,
+or defining your own easing
+with <code>cubic-bezier()</code> and <code>steps()</code>/<code>frames()</code> –
+we’ll help you organize and standardize your values
+in a single location.
+We also provide a classic set of built-in easing functions,
+which you can rename, access, or override as<span class="widont">&nbsp;</span>desired.</p>
 
       
   
@@ -413,7 +421,500 @@
 
 
 
-<section class="item" id="function--convert-units">
+<section class="item" id="variable--easing">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--easing" class="item-name">$easing</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$easing: () !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A variable storing the map of
+all easing globally-available on your project.
+Any easing added to the <code>$easing</code> map will be accessible
+to the <code>ease()</code> function by<span class="widont">&nbsp;</span>default.</p>
+<p>Define each easing with a <code>name</code> and <code>value</code>…</p>
+<pre><code>$easing: (
+  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  'sidebar-in': ease-out,
+  'sidebar-out': '#_in-back',
+  'modal-in': '#sidebar-in',
+);
+</code></pre>
+<ul>
+<li>Name your easing anything –
+from abstractions like <code>elastic</code>,
+to concrete patterns like <code>sidebar-in</code>.</li>
+<li>Values can be CSS-ready easing functions,
+or references other easings in the<span class="widont">&nbsp;</span>map.</li>
+</ul>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease.html#mixin--add-easing" class="item-name">add-easing()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--EASING">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--EASING" class="item-name">$EASING</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$EASING: (
+  &#39;_in&#39;: ease-in,
+  &#39;_out&#39;: ease-out,
+  &#39;_in-out&#39;: ease-in-out,
+  &#39;_in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  &#39;_in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
+  &#39;_in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+  &#39;_in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
+  &#39;_in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
+  &#39;_in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
+  &#39;_in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
+  &#39;_in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
+  &#39;_out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  &#39;_out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
+  &#39;_out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
+  &#39;_out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
+  &#39;_out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
+  &#39;_out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
+  &#39;_out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
+  &#39;_out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  &#39;_in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
+  &#39;_in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
+  &#39;_in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
+  &#39;_in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
+  &#39;_in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  &#39;_in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
+  &#39;_in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
+  &#39;_in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+);</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>A classic set of built-in easing functions,
+if you don’t want to define your own.
+This map is not available to be edited directly,
+but feel free to reference these values
+from the user-defined <code>$easing</code> map.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--easing--" class="item-name">easing--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--ease--" class="item-name">ease--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease-vars.html#function--var-ease" class="item-name">var-ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--ease">
   
     
   
@@ -431,7 +932,7 @@
       
 
       
-        <a href="#function--convert-units" class="item-name">convert-units()</a>
+        <a href="#function--ease" class="item-name">ease()</a>
       
 
       
@@ -452,12 +953,7 @@
 
   
     <div class="text-block">
-      <p>Convert lengths between comparable units.
-You can also convert to <code>browser-ems</code>,
-relative to the browser default rather than the site root –
-useful for media queries.
-Aliased as <code>convert-units</code>, <code>convert</code>, <code>units</code>, and <code>to</code>
-in all Accoutrement<span class="widont">&nbsp;</span>maps.</p>
+      <p>Access a named easing function in your <code>$easing</code> map.</p>
 
       
   
@@ -465,7 +961,10 @@ in all Accoutrement<span class="widont">&nbsp;</span>maps.</p>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Aliased as <code>to</code> in accoutrement-maps</li>
+<li>NEW: Accepts <code>$do</code> map argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom<span class="widont">&nbsp;</span>source-palette</li>
 </ul>
 </div>
       </section>
@@ -513,36 +1012,9 @@ in all Accoutrement<span class="widont">&nbsp;</span>maps.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$length:</span>
+        <span class="item-name">$name:</span>
       
-      
-      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The length or named size to be<span class="widont">&nbsp;</span>converted.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$to-unit:</span>
-      
-      
+      <span class="item-value">&#39;ease&#39;</span>
       <span class="value-type">(string)</span>
       
     </h4>
@@ -550,8 +1022,7 @@ in all Accoutrement<span class="widont">&nbsp;</span>maps.</p>
     
       
       <div class="param-details text-block">
-        <p>The desired units to convert to.
-Some units (<code>ch</code>, <code>vw</code>, <code>vh</code>, <code>vmin</code>, <code>vmax</code>) cannot be<span class="widont">&nbsp;</span>converted.</p>
+        <p>The name of an easing in your<span class="widont">&nbsp;</span>configuration</p>
 
       </div>
     
@@ -568,21 +1039,17 @@ Some units (<code>ch</code>, <code>vw</code>, <code>vh</code>, <code>vmin</code>
     <h4 class="param-title">
       
       
-        <span class="item-name">$from-context:</span>
+        <span class="item-name">$do:</span>
       
-      <span class="item-value">false</span>
-      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      <span class="item-value">null</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>When converting from relative units,
-the absolute length (in px) to which $length refers -
-e.g. for <code>$lengths</code> in em units, would normally be the
-font-size of the current element.
-<code>false</code> and <code>null</code> will resolve to your ‘root’ setting or<span class="widont">&nbsp;</span>16px</p>
+        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
 
       </div>
     
@@ -599,19 +1066,18 @@ font-size of the current element.
     <h4 class="param-title">
       
       
-        <span class="item-name">$to-context:</span>
+        <span class="item-name">$source:</span>
       
-      <span class="item-value">$from-context</span>
-      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      <span class="item-value">$easing</span>
+      <span class="value-type">(map)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>For converting <em>to</em> relative units,
-the absolute length in px to which the output value will refer.
-Defaults to the same as <code>$from-context</code>, since it is rarely<span class="widont">&nbsp;</span>needed.</p>
+        <p>Optional accoutrement-format map of easings to use as the origin palette
+(in additional to the provided<span class="widont">&nbsp;</span>defaults)</p>
 
       </div>
     
@@ -625,19 +1091,119 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
 
       
   
-
-      
-  
-
-      
-  
     
-      
   <div class="param-list">
     <h4 class="param-title">
       
       
-        <span class="item-name">@error</span>
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The pre-defined easing</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
       
       
       
@@ -645,15 +1211,187 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
     </h4>
 
     
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--add-easing">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--add-easing" class="item-name">add-easing()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Merge individual easing maps into the global <code>$easing</code> variable,
+in case you want to define easings in smaller groups
+such as <code>fade-easing</code>, <code>slide-easing</code>, etc
+before merging them into a single global<span class="widont">&nbsp;</span>easing-palette.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$maps:</span>
+      
+      
+      <span class="value-type">(map...)</span>
+      
+    </h4>
+
+    
       
       <div class="param-details text-block">
-        <p>Context parameters must resolve to a value in pixel<span class="widont">&nbsp;</span>units</p>
+        <p>Pass any number of maps to be<span class="widont">&nbsp;</span>merged.</p>
 
       </div>
     
   </div>
 
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
     
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>An updated global <code>$easing</code> variable,
+with new maps merged<span class="widont">&nbsp;</span>in.</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+  
+
+      
   
 
     
@@ -705,7 +1443,7 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
       <span class="item-type">@function</span>
       
         <a href="
-  scale-sizes.html#function--size" class="item-name">size()</a>
+  utils.html#function--multi-merge" class="item-name">multi-merge()</a>
       
       
       
@@ -715,184 +1453,6 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
     
   </div>
 
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get-number()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get-px()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">error()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
 
         
       
@@ -918,45 +1478,11 @@ Defaults to the same as <code>$from-context</code>, since it is rarely<span clas
       
       
         <a href="
-  scale-sizes.html#variable--sizes" class="item-name">$sizes</a>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$BROWSER-DEFAULT-FONT-SIZE</span>
+  animate-ease.html#variable--easing" class="item-name">$easing</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     

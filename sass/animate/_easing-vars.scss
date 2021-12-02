@@ -1,3 +1,7 @@
+@use 'easing';
+@use '../tokens';
+@use 'sass:map';
+
 /// # Easing » CSS Variables
 /// @group animate-ease-vars
 
@@ -19,9 +23,9 @@
 /// @group animate-ease-vars
 ///
 /// @example scss
-///   $easing: ('my-ease': '#_in-out-back');
-///   $easing-var-prefix: 'prefix_';
-///   html { @include ease--('my-ease') }
+///   tools.$easing: ('my-ease': '#_in-out-back');
+///   tools.$easing-var-prefix: 'prefix_';
+///   html { @include tools.ease--('my-ease') }
 ///
 /// @type string
 $easing-var-prefix: 'ease-' !default;
@@ -43,13 +47,13 @@ $easing-var-prefix: 'ease-' !default;
 ///
 /// @group animate-ease-vars
 /// @example scss
-///   $easing: (
+///   tools.$easing: (
 ///     '_elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
 ///     'modal': '#_elastic',
 ///     'error-message': '#modal',
 ///   );
 ///   html {
-///     @include easing--;
+///     @include tools.easing--;
 ///   }
 ///
 /// @param {map} $source [$easing] -
@@ -58,10 +62,10 @@ $easing-var-prefix: 'ease-' !default;
 /// @output
 ///   Custom properties for all public easing in the map
 @mixin easing--(
-  $source: $easing
+  $source: easing.$easing
 ) {
-  $source: map-merge($_a_EASING, $source);
-  @include tokens--($source, $easing-var-prefix);
+  $source: map.merge(easing.$EASING, $source);
+  @include tokens.tokens--($source, $easing-var-prefix);
 }
 
 
@@ -75,14 +79,14 @@ $easing-var-prefix: 'ease-' !default;
 ///
 /// @group animate-ease-vars
 /// @example scss
-///   $easing: (
+///   tools.$easing: (
 ///     '_elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
 ///     'modal': '#_elastic',
 ///     'error-message': '#modal',
 ///   );
 ///   .example {
-///     @include ease--('modal');
-///     @include ease--('toast', 'modal', ease-in);
+///     @include tools.ease--('modal');
+///     @include tools.ease--('toast', 'modal', ease-in);
 ///   }
 ///
 /// @param {*} $ease -
@@ -103,10 +107,10 @@ $easing-var-prefix: 'ease-' !default;
   $ease,
   $value: null,
   $fallback: true,
-  $source: $easing
+  $source: easing.$easing
 ) {
-  $source: map-merge($_a_EASING, $source);
-  @include token--($source, $ease, $value, $fallback, $easing-var-prefix);
+  $source: map.merge(easing.$EASING, $source);
+  @include tokens.token--($source, $ease, $value, $fallback, $easing-var-prefix);
 }
 
 
@@ -120,13 +124,13 @@ $easing-var-prefix: 'ease-' !default;
 ///
 /// @group animate-ease-vars
 /// @example scss
-///   $easing: (
+///   tools.$easing: (
 ///     '_elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
 ///     'modal': '#_elastic',
 ///     'error-message': '#modal',
 ///   );
 ///   .example {
-///     animation: fade 1s var-ease('error-message', ease-in);
+///     animation: fade 1s tools.var-ease('error-message', ease-in);
 ///     transition: translate var-ease('modal');
 ///   }
 ///
@@ -147,8 +151,8 @@ $easing-var-prefix: 'ease-' !default;
 @function var-ease(
   $ease,
   $fallback: true,
-  $source: $easing
+  $source: easing.$easing
 ) {
-  $source: map-merge($_a_EASING, $source);
-  @return var-token($source, $ease, $fallback, $easing-var-prefix);
+  $source: map.merge(easing.$EASING, $source);
+  @return tokens.var-token($source, $ease, $fallback, $easing-var-prefix);
 }

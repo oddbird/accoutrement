@@ -1,0 +1,64 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/animate/times';
+@use 'test-data' as data;
+@use 'sass:map';
+
+$_old: times.$times;
+times.$times: data.$times;
+
+// Time Tests
+// ==========
+@include test-module('animate/times') {
+  // Time [function]
+  // ---------------
+  @include describe('Time [function]') {
+    @include it('Get time from map setting') {
+      @include assert-equal(times.time('fast'), 150ms);
+    }
+
+       @include it('Get adjusted times') {
+    @include assert-equal(
+      times.time('plus-name'),
+      152ms
+    );
+  }
+
+  @include it('Makes on-the-fly adjustments') {
+    @include assert-equal(
+      times.time('plus-name', ('times': 2)),
+      304ms
+    );
+  }
+
+
+  @include it('Get time from local source') {
+    $local: ('new': 34ms);
+    @include assert-equal(
+      times.time('new', $source: $local),
+      34ms
+    );
+  }
+}
+
+
+// Add Times [mixin]
+// -----------------
+@include describe('Add Times [mixin]') {
+  $old: data.$times;
+  $a: ('short': 150ms);
+  $b: ('long': 2s);
+
+  @include times.add-times($a, $b);
+
+  @include it('Merges times, and updates global variable') {
+    @include assert-equal(
+      times.$times,
+      map.merge($old, map.merge($a, $b))
+    );
+  }
+
+  data.$times: $old;
+}
+} // end module
+
+times.$times: $_old;

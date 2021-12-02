@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Pre-Registered Functions | Accoutrement Documentation</title>
+  <title>Easing » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -132,7 +132,7 @@
   
   
     <li class="nav-item">
-      <a href="token-internal.html" data-nav="is-active">Pre-Registered Functions</a>
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
     </li>
   
   
@@ -187,7 +187,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-ease-vars.html" data-nav="is-not-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="animate-ease-vars.html" data-nav="is-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -319,11 +319,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Pre-Registered Functions</strong>
+    <strong>Easing » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="token-internal">
+        <div data-page="animate-ease-vars">
           
   
     
@@ -348,19 +348,464 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="registered-functions">Registered Functions</h1>
-<p>We provide a number of pre-registered functions
-to help with token management,<span class="widont">&nbsp;</span>including:</p>
+      <h1 id="easing-css-variables">Easing » CSS<span class="widont">&nbsp;</span>Variables</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--easing-var-prefix">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--easing-var-prefix" class="item-name">$easing-var-prefix</a>
+      
+
+      
+        <span class="value-type">(string)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$easing-var-prefix: &#39;ease-&#39; !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Since CSS variables are often defined in a global space,
+it can be useful to prefix different variable types.
+Accoutrement maps help solve that problem in Sass,
+so we wanted to carry that over into our CSS variable support.
+Set a prefix for all easing-tokens,
+and we’ll apply it when setting or calling css variables
+based on your easing maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$easing: (&#39;my-ease&#39;: &#39;#_in-out-back&#39;);
+tools.$easing-var-prefix: &#39;prefix_&#39;;
+html { @include tools.ease--(&#39;my-ease&#39;) }</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --prefix_my-ease: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--easing--" class="item-name">easing--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--ease--" class="item-name">ease--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease-vars.html#function--var-ease" class="item-name">var-ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--easing--">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--easing--" class="item-name">easing--()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Convert any easing-map into CSS variables,
+using the global <code>$easing-var-prefix</code>.</p>
 <ul>
-<li>All the <a href="https://sass-lang.com/documentation/modules">built-in Sass modules</a>,
-prefixed with the module name in a dot notation (e.g. <code>'list.index'</code>)</li>
-<li>All the <a href="https://www.oddbird.net/accoutrement/docs/utils.html">Accoutrement utilities</a>
-and individual module<span class="widont">&nbsp;</span>functions.</li>
-<li>A number of math helpers listed<span class="widont">&nbsp;</span>below…</li>
+<li>Easing names that start with <code>_</code> or <code>-</code> are considered “private”
+and will not be output as<span class="widont">&nbsp;</span>variables</li>
+<li>Easing values that contain a simple alias with no adjustments
+will be output with a <code>var()</code> value,
+keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 </ul>
 
       
   
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
 
       
   
@@ -371,6 +816,8 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
     </div>
   
 
+  </div>
+
   
 
   
@@ -379,6 +826,84 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
   
   
   
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$easing</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optionally use a custom
+map of easing tokens to set as css<span class="widont">&nbsp;</span>variables</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">{CSS output}</span>
+      
+      
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Custom properties for all public easing in the<span class="widont">&nbsp;</span>map</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+    
+  </div>
 
   
 
@@ -425,13 +950,14 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 14px 16px 24px,
-  &#39;small&#39;: &#39;#text&#39; (&#39;list.nth&#39;: 1),
-  &#39;medium&#39;: &#39;#text&#39; (&#39;list.nth&#39;: 2),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$easing: (
+  &#39;_elastic&#39;: cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  &#39;modal&#39;: &#39;#_elastic&#39;,
+  &#39;error-message&#39;: &#39;#modal&#39;,
 );
-/*! small: #{tools.get($sizes, &#39;small&#39;)} */
-/*! medium: #{tools.get($sizes, &#39;medium&#39;)} */</code></pre>
+html {
+  @include tools.easing--;
+}</code></pre>
     </div>
   
 
@@ -453,8 +979,10 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! small: 14px */
-/*! medium: 16px */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --ease-modal: cubic-bezier(0.5, -0.4, 0.5, 1.4);
+  --ease-error-message: var(--ease-modal, cubic-bezier(0.5, -0.4, 0.5, 1.4));
+}</code></pre>
     </div>
   
 
@@ -473,6 +1001,92 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
   
   
     
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease-vars.html#variable--easing-var-prefix" class="item-name">$easing-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
     
   
 
@@ -503,7 +1117,7 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
 
 
-<section class="item" id="function--plus">
+<section class="item" id="mixin--ease--">
   
     
   
@@ -517,11 +1131,11 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--plus" class="item-name">plus()</a>
+        <a href="#mixin--ease--" class="item-name">ease--()</a>
       
 
       
@@ -542,12 +1156,452 @@ and individual module<span class="widont">&nbsp;</span>functions.</li>
 
   
     <div class="text-block">
-      <p>Add two values together in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'plus'</code>, <code>'add'</code>, or <code>'+'</code>.</p>
+      <p>Set a single custom property based on a map-easing,
+with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$ease:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Easing name available in the <code>$source</code> map,
+or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$value:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional value for the variable,
+if different from the given <code>$ease</code></p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$easing</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional map of easing to use as a palette<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$easing: (
+  &#39;_elastic&#39;: cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  &#39;modal&#39;: &#39;#_elastic&#39;,
+  &#39;error-message&#39;: &#39;#modal&#39;,
+);
+.example {
+  @include tools.ease--(&#39;modal&#39;);
+  @include tools.ease--(&#39;toast&#39;, &#39;modal&#39;, ease-in);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --ease-modal: cubic-bezier(0.5, -0.4, 0.5, 1.4);
+  --ease-toast: var(--ease-modal, ease-in);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  animate-ease-vars.html#variable--easing-var-prefix" class="item-name">$easing-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-ease">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--var-ease" class="item-name">var-ease()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access the CSS variable associated with a given token,
+along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -591,17 +1645,17 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num1:</span>
+        <span class="item-name">$ease:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      <span class="value-type">(*)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or length of the size you are adding<span class="widont">&nbsp;</span>to</p>
+        <p>Easing name available in the <code>$source</code> map</p>
 
       </div>
     
@@ -618,17 +1672,51 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num2:</span>
+        <span class="item-name">$fallback:</span>
       
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name or length of the size being<span class="widont">&nbsp;</span>added</p>
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional Accoutrement map of easing tokens
+to use as<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -650,15 +1738,15 @@ but it is available in all accoutrement maps as
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(number)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The calculated results of adding
-<code>$num1</code> and <code>$num2</code></p>
+        <p>CSS variable call, in the format:
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
 
       </div>
     
@@ -720,12 +1808,15 @@ but it is available in all accoutrement maps as
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;margin&#39;: 14px,
-  &#39;spacer&#39;: &#39;#text&#39; (&#39;plus&#39;: &#39;#margin&#39;),
+      <pre class="hljs-pre"><code class="lang-scss">tools.$easing: (
+  &#39;_elastic&#39;: cubic-bezier(0.5, -0.4, 0.5, 1.4),
+  &#39;modal&#39;: &#39;#_elastic&#39;,
+  &#39;error-message&#39;: &#39;#modal&#39;,
 );
-/*! spacer: #{tools.get($sizes, &#39;spacer&#39;)} */</code></pre>
+.example {
+  animation: fade 1s tools.var-ease(&#39;error-message&#39;, ease-in);
+  transition: translate var-ease(&#39;modal&#39;);
+}</code></pre>
     </div>
   
 
@@ -747,7 +1838,10 @@ but it is available in all accoutrement maps as
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! spacer: 30px */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  animation: fade 1s var(--ease-error-message, ease-in);
+  transition: translate var-ease(&quot;modal&quot;);
+}</code></pre>
     </div>
   
 
@@ -767,115 +1861,65 @@ but it is available in all accoutrement maps as
   
     
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--minus">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--minus" class="item-name">minus()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Subtract one value from another in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'minus'</code>, <code>'subtract'</code>, or <code>'-'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
+  <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
 
     
       
+      
         
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
   
   
 
@@ -884,25 +1928,33 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num1:</span>
+        <a href="
+  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
       
     </h4>
 
     
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are subtracting<span class="widont">&nbsp;</span>from</p>
-
-      </div>
-    
   </div>
 
 
+        
       
         
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
   
   
 
@@ -911,1030 +1963,24 @@ but it is available in all accoutrement maps as
     <h4 class="param-title">
       
       
-        <span class="item-name">$num2:</span>
+        <a href="
+  animate-ease-vars.html#variable--easing-var-prefix" class="item-name">$easing-var-prefix</a>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to<span class="widont">&nbsp;</span>subtract</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
+      <span class="value-type">(string)</span>
       
     </h4>
 
     
-      
-      <div class="param-details text-block">
-        <p>The calculated results of subtracting
-<code>$num2</code> from <code>$num1</code></p>
-
-      </div>
-    
   </div>
 
-  
 
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
         
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
       
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;margin&#39;: 14px,
-  &#39;shim&#39;: &#39;#text&#39; (&#39;minus&#39;: &#39;#margin&#39;),
-);
-/*! shim: #{tools.get($sizes, &#39;shim&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! shim: 2px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--times">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--times" class="item-name">times()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Multiplty two values in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'times'</code>, <code>'multiply'</code>, or <code>'*'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num1:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are<span class="widont">&nbsp;</span>multiplying</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>multiple</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The calculated results of multiplying
-<code>$num1</code> by <code>$num2</code></p>
-
-      </div>
     
   </div>
 
   
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;double&#39;: &#39;#text&#39; (&#39;times&#39;: 2),
-);
-/*! double: #{tools.get($sizes, &#39;double&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! double: 32px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--divide">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--divide" class="item-name">divide()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Divide two values in accoutrement<span class="widont">&nbsp;</span>maps.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'divide'</code>, or <code>'/'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num1:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are<span class="widont">&nbsp;</span>dividing</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>division</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The calculated results of dividing
-<code>$num1</code> by <code>$num2</code></p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;half&#39;: &#39;#text&#39; (&#39;divide&#39;: 2),
-);
-/*! half: #{tools.get($sizes, &#39;half&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! half: 8px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--modulo">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--modulo" class="item-name">modulo()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Divide two values in accoutrement maps,
-and return the<span class="widont">&nbsp;</span>remainder.</p>
-<p>Direct access to this function is prefixed,
-but it is available in all accoutrement maps as
-<code>'modulo'</code>, <code>'remainder'</code>, <code>'mod'</code>, or <code>'%'</code>.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num1:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size you are<span class="widont">&nbsp;</span>dividing</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$num2:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>division</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(number)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The modulo of two<span class="widont">&nbsp;</span>numbers</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;text&#39;: 16px,
-  &#39;mod&#39;: &#39;#text&#39; (&#39;modulo&#39;: 3),
-);
-/*! mod: #{tools.get($sizes, &#39;mod&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! mod: 1px */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    
     
   
 
