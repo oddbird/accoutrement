@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Tokens » Custom Properties | Accoutrement Documentation</title>
+  <title>Media Breakpoint Maps | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -137,7 +137,7 @@
   
   
     <li class="nav-item">
-      <a href="token-vars.html" data-nav="is-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
+      <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
     </li>
   </ul>
             </li>
@@ -252,7 +252,7 @@
   
   
     <li class="nav-item">
-      <a href="layout-queries.html" data-nav="is-not-active">Media Breakpoint<span class="widont">&nbsp;</span>Maps</a>
+      <a href="layout-queries.html" data-nav="is-active">Media Breakpoint<span class="widont">&nbsp;</span>Maps</a>
     </li>
   
   
@@ -375,11 +375,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Tokens » Custom Properties</strong>
+    <strong>Media Breakpoint Maps</strong>
   </nav>
 
 
-        <div data-page="token-vars">
+        <div data-page="layout-queries">
           
   
     
@@ -404,10 +404,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="tokens-custom-properties">Tokens » Custom<span class="widont">&nbsp;</span>Properties</h1>
-<p>There are many cases where it can be useful
-to convert a Sass token map into CSS custom properties.
-Here are some tools to<span class="widont">&nbsp;</span>help.</p>
+      <h1 id="media-queries">Media Queries</h1>
 
       
   
@@ -472,7 +469,7 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
 
 
 
-<section class="item" id="mixin--token--">
+<section class="item" id="variable--breakpoints">
   
     
   
@@ -486,13 +483,15 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@mixin</span>
+        <span class="item-type"></span>
       
 
       
-        <a href="#mixin--token--" class="item-name">token--()</a>
+        <a href="#variable--breakpoints" class="item-name">$breakpoints</a>
       
 
+      
+        <span class="value-type">(map)</span>
       
 
       
@@ -504,6 +503,26 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
 
     
     
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$breakpoints: () !default;</code></pre>
+    </div>
+  
+
+    
   
   
   
@@ -511,16 +530,21 @@ Here are some tools to<span class="widont">&nbsp;</span>help.</p>
 
   
     <div class="text-block">
-      <p>Set a single custom property based on a map-token,
-with optional alias, fallback, and<span class="widont">&nbsp;</span>prefixing</p>
+      <p>Establish a map of named<span class="widont">&nbsp;</span>breakpoints.</p>
+<p>If using <a href="https://www.oddbird.net/accoutrement/docs/scale.html">Accoutrement Scale</a>,
+you can use the scale syntax
+for describing size-relationships and adjustments –
+and even reference <code>$sizes</code> as though they are <code>$breakpoints</code>.
+Otherwise, the map should contain only valid CSS length<span class="widont">&nbsp;</span>values.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Initial release</li>
+<li>BREAKING: Uses the new <a href="core.html">shared</a> map syntax,
+for internal references and<span class="widont">&nbsp;</span>adjustments</li>
 </ul>
 </div>
       </section>
@@ -548,175 +572,6 @@ with optional alias, fallback, and<span class="widont">&nbsp;</span>prefixing</p
   
 
   
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$map:</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Accoutrement map of tokens to use as<span class="widont">&nbsp;</span>source</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$token:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Token name available in the source <code>$map</code></p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$value:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional new value for the given<span class="widont">&nbsp;</span>token</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$fallback:</span>
-      
-      <span class="item-value">true</span>
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The optional fallback value for a <code>var()</code> function:</p>
-<ul>
-<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
-<li>A token name will fallback to the value of that
-css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
-<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$prefix:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional prefix used for naming token<span class="widont">&nbsp;</span>variables</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
 
 
   
@@ -725,7 +580,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
+        <span class="item-subtitle-main">Examples</span>
       </h3>
 
       
@@ -756,34 +611,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
           </span>
 
           
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;color.scale&#39;: (&#39;lightness&#39;: -50%)),
-  &#39;border&#39;: &#39;#text&#39;,
-);
-.example {
-  @include tools.token--($colors, &#39;border&#39;);
-  @include tools.token--($colors, &#39;outline&#39;, &#39;border&#39;, red);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
             <span class='code-description'>
-              compiled
+              defining breakpoints
             </span>
           
         </div>
@@ -791,10 +620,10 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
-  --border: var(--text, #206020);
-  --outline: var(--border, red);
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$breakpoints: (
+  &#39;small&#39;: 30em,
+  &#39;medium&#39;: 45em,
+);</code></pre>
     </div>
   
 
@@ -802,448 +631,6 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
     
   </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    <div class="requires-wrapper">
-      
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-inspect.html#function--is-alias-for" class="item-name">is-alias-for()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-vars.html#function--var-token" class="item-name">var-token()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  token-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="mixin--tokens--">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@mixin</span>
-      
-
-      
-        <a href="#mixin--tokens--" class="item-name">tokens--()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Convert any Accoutrement Tokens map
-into CSS custom properties (aka<span class="widont">&nbsp;</span>variables).</p>
-<ul>
-<li>Token names that start with <code>_</code> or <code>-</code> are considered “private”
-and will not be output as<span class="widont">&nbsp;</span>variables</li>
-<li>Tokens that contain a simple alias with no adjustments
-will be output with a <code>var()</code> value,
-keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
-</ul>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Initial release</li>
-</ul>
-</div>
-      </section>
-    
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$map:</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Accoutrement map of tokens to set as css<span class="widont">&nbsp;</span>variables</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$prefix:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional prefix for naming token<span class="widont">&nbsp;</span>variables</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">{CSS output}</span>
-      
-      
-      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Custom properties for all public tokens in the<span class="widont">&nbsp;</span>map</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
 
       
         
@@ -1273,33 +660,8 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
           </span>
 
           
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;color.scale&#39;: (&#39;lightness&#39;: -50%)),
-  &#39;border&#39;: &#39;#text&#39;,
-);
-html {
-  @include tools.tokens--($colors, &#39;color-&#39;);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
             <span class='code-description'>
-              compiled
+              using accoutrement-scale
             </span>
           
         </div>
@@ -1307,10 +669,10 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --color-text: #206020;
-  --color-border: var(--color-text, #206020);
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$breakpoints: (
+  &#39;small&#39;: 30em (&#39;convert-units&#39;: &#39;browser-ems&#39;),
+  &#39;medium&#39;: &#39;#small&#39; (&#39;times&#39;: 1.5),
+);</code></pre>
     </div>
   
 
@@ -1325,96 +687,48 @@ html {
 
 
   
-  
-  
-  
+
     
-    
-  <div data-item-section="requires">
+  <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
 
     
       
-      
         
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
   
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
       
-        <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
       
+        <a href="https://zellwk.com/blog/media-query-units/" class="item-name">PX, EM, or REM Media Queries?</a>
       
       
       
+      <span class="item-note">[external]</span>
     </h4>
 
     
   </div>
 
 
-        
       
-        
-        
-        
 
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
       
     
   </div>
 
   
+  
+  
+  
+    
     
   
 
@@ -1445,7 +759,7 @@ html {
 
 
 
-<section class="item" id="function--var-token">
+<section class="item" id="function--break">
   
     
   
@@ -1463,7 +777,7 @@ html {
       
 
       
-        <a href="#function--var-token" class="item-name">var-token()</a>
+        <a href="#function--break" class="item-name">break()</a>
       
 
       
@@ -1484,16 +798,21 @@ html {
 
   
     <div class="text-block">
-      <p>Access the CSS variable associated with a given token,
-along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
+      <p>Return a breakpoint from the <code>$breakpoint</code> map,
+or the accoutrement-scale <code>$sizes</code> map if it’s<span class="widont">&nbsp;</span>available.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Initial release</li>
+<li>NEW: Accepts <code>$do</code> map argument,
+for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
+<li>NEW: Accepts <code>$source</code> map argument,
+for custom breakpoint<span class="widont">&nbsp;</span>source-palette</li>
+<li>NEW: Accepts <code>$scale</code> boolean argument,
+to turn off access to <a href="scale.html">scale</a> plugin <code>$sizes</code> map</li>
 </ul>
 </div>
       </section>
@@ -1541,9 +860,63 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$break:</span>
       
       
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or value of a<span class="widont">&nbsp;</span>breakpoint</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$do:</span>
+      
+      <span class="item-value">null</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A map of function/ratio adjustments to run on the returned<span class="widont">&nbsp;</span>value</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$breakpoints</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1551,7 +924,8 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     
       
       <div class="param-details text-block">
-        <p>Accoutrement map of tokens to use as<span class="widont">&nbsp;</span>source</p>
+        <p>Optional accoutrement-format map of breakpoints
+to use as the origin<span class="widont">&nbsp;</span>palette</p>
 
       </div>
     
@@ -1568,77 +942,19 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$token:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Token name available in the source <code>$map</code></p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$fallback:</span>
+        <span class="item-name">$scale:</span>
       
       <span class="item-value">true</span>
-      <span class="value-type">(*)</span>
+      <span class="value-type">(boolean)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The optional fallback value for a <code>var()</code> function:</p>
-<ul>
-<li><code>true</code> will try to generate a fallback based on the color<span class="widont">&nbsp;</span>value</li>
-<li>A color name will fallback to the value of that
-css-variable and then to the color’s calculated<span class="widont">&nbsp;</span>value</li>
-<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
-</ul>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$prefix:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optional prefix used for naming token<span class="widont">&nbsp;</span>variables</p>
+        <p>By default, we merge in any <code>$sizes</code> available
+from the <a href="scale.html">scale</a> plugin –
+making both <code>$breakpoints</code> and <code>$sizes</code> keys available</p>
 
       </div>
     
@@ -1660,15 +976,14 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(string)</span>
+      <span class="value-type">(length)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>CSS variable call, in the format:
-<code>var(--&lt;color&gt;, &lt;fallback&gt;)</code></p>
+        <p>The retrieved value of a named<span class="widont">&nbsp;</span>breakpoint</p>
 
       </div>
     
@@ -1681,6 +996,30 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
 
       
   
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p><code>$break</code> is not a valid length or<span class="widont">&nbsp;</span>keyword</p>
+
+      </div>
+    
+  </div>
+
+    
+  
 
     
   </div>
@@ -1689,91 +1028,6 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
 
 
   
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;color.scale&#39;: (&#39;lightness&#39;: -50%)),
-  &#39;border&#39;: &#39;#text&#39;,
-);
-.example {
-  border-color: tools.var-token($colors, &#39;border&#39;);
-  color: tools.var-token($colors, &#39;text&#39;, black);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.example {
-  border-color: var(--border, #206020);
-  color: var(--text, black);
-}</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
   
 
 
@@ -1817,7 +1071,7 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
       <span class="item-type">@function</span>
       
         <a href="
-  vars.html#function--ident" class="item-name">ident()</a>
+  token-api.html#function--compile" class="item-name">compile()</a>
       
       
       
@@ -1864,6 +1118,75 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
 
         
       
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  scale-sizes.html#variable--sizes" class="item-name">$sizes</a>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
     
   </div>
 
@@ -1897,165 +1220,10 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
         <a href="
-  animate-change-vars.html#function--var-change" class="item-name">var-change()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease-vars.html#function--var-ease" class="item-name">var-ease()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-time-vars.html#function--var-time" class="item-name">var-time()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-vars.html#function--var-color" class="item-name">var-color()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  scale-vars.html#function--var-size" class="item-name">var-size()</a>
+  layout-queries.html#mixin--below" class="item-name">below()</a>
       
       
       
@@ -2086,7 +1254,7 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
+  layout-queries.html#mixin--above" class="item-name">above()</a>
       
       
       
@@ -2114,10 +1282,10 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
         <a href="
-  type-font-vars.html#function--var-font" class="item-name">var-font()</a>
+  layout-queries.html#mixin--between" class="item-name">between()</a>
       
       
       
@@ -2130,12 +1298,1651 @@ css-variable and then to the color’s calculated<span class="widont">&nbsp;</sp
 
         
       
+        
+
+        
+      
     
   </div>
 
   
 
     </div>
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--below">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--below" class="item-name">below()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Generate a max–&lt;<code>width</code>/<code>height</code>&gt; query,
+for styling elements below the given viewport<span class="widont">&nbsp;</span>width.</p>
+<p>To help with overlapping min/max queries,
+we remove <code>1px</code> (or <code>0.01em</code>) from every max value by default.
+You can adjust that setting
+to adjust min values
+or avoid adjustments
+using the global <code>$adjust-query-overlap</code> setting.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: min/max adjustments applied to all units (not only<span class="widont">&nbsp;</span>px/em/rem)</li>
+<li>NEW: min/max adjustments respect <code>$adjust-query-overlap</code> global setting</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$max:</span>
+      
+      
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a documented breakpoint/size,
+or an arbitarty length to use in the<span class="widont">&nbsp;</span>query.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$prop:</span>
+      
+      <span class="item-value">&#39;width&#39;</span>
+      <span class="value-type">(&#39;width&#39; |<span class="widont">&nbsp;</span>&#39;height&#39;)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The property (width or height) to test against,
+for a result of e.g. <code>(max-width: 30em)</code>.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">@include tools.below(30em) {
+  html { background: red; }
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">@media (max-width: 29.99em) {
+  html {
+    background: red;
+  }
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$breakpoints: (&#39;red&#39;: 30em);
+
+@include tools.below(&#39;red&#39;) {
+  html { background: red; }
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">@media (max-width: 29.99em) {
+  html {
+    background: red;
+  }
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  layout-queries.html#function--break" class="item-name">break()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">nudge-query()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--above">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--above" class="item-name">above()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Generate a min-&lt;<code>width</code>/<code>height</code>&gt; query,
+for styling elements above the given viewport<span class="widont">&nbsp;</span>width.</p>
+<p>To help with overlapping min/max queries,
+we remove <code>1px</code> (or <code>0.01em</code>) from max values by default.
+You can adjust that setting
+to adjust min values
+or avoid adjustments
+using the global <code>$adjust-query-overlap</code> setting.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: min/max adjustments applied to all units (not only<span class="widont">&nbsp;</span>px/em/rem)</li>
+<li>NEW: min/max adjustments respect <code>$adjust-query-overlap</code> global setting</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$min:</span>
+      
+      
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a documented breakpoint/size,
+or an arbitrary length to use in the<span class="widont">&nbsp;</span>query.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$prop:</span>
+      
+      <span class="item-value">&#39;width&#39;</span>
+      <span class="value-type">(&#39;width&#39; |<span class="widont">&nbsp;</span>&#39;height&#39;)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The property (width or height) to test against,
+for a result of e.g. <code>(min-width: 30em)</code>.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">@include tools.above(50em) {
+  html { background: green; }
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">@media (min-width: 50em) {
+  html {
+    background: green;
+  }
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$breakpoints: (&#39;green&#39;: 50em);
+
+@include tools.above(&#39;green&#39;) {
+  html { background: green; }
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">@media (min-width: 50em) {
+  html {
+    background: green;
+  }
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  layout-queries.html#function--break" class="item-name">break()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">nudge-query()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="mixin--between">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@mixin</span>
+      
+
+      
+        <a href="#mixin--between" class="item-name">between()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Generate a min-and-max-&lt;<code>width</code>/<code>height</code>&gt; query,
+for styling elements between given viewport<span class="widont">&nbsp;</span>widths.</p>
+<p>To help with overlapping min/max queries,
+we remove <code>1px</code> (or <code>0.01em</code>) from every max value by default.
+You can adjust that setting
+to adjust min values
+or avoid adjustments
+using the global <code>$adjust-query-overlap</code> setting.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: min/max adjustments applied to all units (not only<span class="widont">&nbsp;</span>px/em/rem)</li>
+<li>NEW: min/max adjustments respect <code>$adjust-query-overlap</code> global setting</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$min:</span>
+      
+      
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a documented breakpoint/size,
+or an arbitarty length to use as a minimum in the<span class="widont">&nbsp;</span>query.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$max:</span>
+      
+      
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a documented breakpoint/size,
+or an arbitarty length to use as a maximum in the<span class="widont">&nbsp;</span>query.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$prop:</span>
+      
+      <span class="item-value">&#39;width&#39;</span>
+      <span class="value-type">(&#39;width&#39; |<span class="widont">&nbsp;</span>&#39;height&#39;)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The property (width or height) to test against,
+for a result of e.g. <code>(min-width: 30em)</code>.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Examples</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">@include tools.between(30em, 50em) {
+  html { background: yellow; }
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">@media (min-width: 30em) and (max-width: 49.99em) {
+  html {
+    background: yellow;
+  }
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$breakpoints: (
+  &#39;red&#39;: 30em,
+  &#39;green&#39;: 50em,
+);
+
+@include tools.between(&#39;red&#39;, &#39;green&#39;) {
+  html { background: yellow; }
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">@media (min-width: 30em) and (max-width: 49.99em) {
+  html {
+    background: yellow;
+  }
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  layout-queries.html#function--break" class="item-name">break()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">nudge-query()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="query-utils">Query Utils</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--adjust-query-overlap">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--adjust-query-overlap" class="item-name">$adjust-query-overlap</a>
+      
+
+      
+        <span class="value-type">(&#39;min&#39; | &#39;max&#39; |<span class="widont">&nbsp;</span>false)</span>
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$adjust-query-overlap: &#39;max&#39; !default;</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>When using both <code>min-</code> and <code>max-</code> media-queries,
+you will often get a <code>1px</code> or <code>1em</code> overlap
+where neither or both queries are applied.
+In order to avoid that,
+we nudge the <code>max-</code> value down by default.
+Set this variable to <code>min</code> to nudge <code>min-</code> values up,
+or <code>false</code> to keep both min and max values<span class="widont">&nbsp;</span>un-adjusted,</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Allows you to override global max-adjustment<span class="widont">&nbsp;</span>default</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="https://tzi.fr/css/prevent-double-breakpoint/" class="item-name">Prevent Double Breakpoints</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+
   
 
   

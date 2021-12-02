@@ -1,5 +1,13 @@
-// Media Queries
-// =============
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use '../scale';
+@use '../../sass/tokens';
+@use '../internal/throw';
+@use 'query-utils' as utils;
+
+/// # Media Queries
+/// @group layout-queries
 
 // Breakpoints
 // -----------
@@ -19,12 +27,12 @@
 /// @link https://zellwk.com/blog/media-query-units/
 ///   PX, EM, or REM Media Queries?
 /// @example scss - defining breakpoints
-///   $breakpoints: (
+///   tools.$breakpoints: (
 ///     'small': 30em,
 ///     'medium': 45em,
 ///   );
 /// @example scss - using accoutrement-scale
-///   $breakpoints: (
+///   tools.$breakpoints: (
 ///     'small': 30em ('convert-units': 'browser-ems'),
 ///     'medium': '#small' ('times': 1.5),
 ///   );
@@ -62,22 +70,32 @@ $breakpoints: () !default;
 ///   The retrieved value of a named breakpoint
 /// @throws `$break` is not a valid length or keyword
 @function break($break, $do: null, $source: $breakpoints, $scale: true) {
-  @if ($scale) and variable-exists('sizes') and (type-of($sizes) == 'map') {
-    $source: map-merge($sizes, $source);
+  @if ($scale) {
+    $source: map.merge(scale.$sizes, $source);
+  }
+
+  @if (meta.type-of($break) == 'number') and (math.unit($break)) {
+    // apply adjustments
+    @if $do {
+      @return tokens.compile($source, $break $do);
+    }
+
+    // return color without changes
+    @return $break;
   }
 
   // get breakpoint
-  $break: get-token($source, $break, $do);
+  $return: tokens.get($source, $break, $do);
 
   // validate
-  @if (type-of($break) != 'number') or unitless($break) {
-    @return _a_error(
+  @if (meta.type-of($return) != 'number') or (math.is-unitless($return)) {
+    @return throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'
     );
   }
 
-  @return $break;
+  @return $return;
 }
 
 // Below [mixin]
@@ -98,13 +116,13 @@ $breakpoints: () !default;
 ///
 /// @group layout-queries
 /// @example scss
-///   @include below(30em) {
+///   @include tools.below(30em) {
 ///     html { background: red; }
 ///   }
 /// @example scss
-///   $breakpoints: ('red': 30em);
+///   tools.$breakpoints: ('red': 30em);
 ///
-///   @include below('red') {
+///   @include tools.below('red') {
 ///     html { background: red; }
 ///   }
 ///
@@ -116,7 +134,7 @@ $breakpoints: () !default;
 ///   for a result of e.g. `(max-width: 30em)`.
 @mixin below($max, $prop: 'width') {
   $value: break($max);
-  $value: _a_nudge-query($value, 'max');
+  $value: utils.nudge-query($value, 'max');
 
   @media (max-#{$prop}: #{$value}) {
     @content;
@@ -141,13 +159,13 @@ $breakpoints: () !default;
 ///
 /// @group layout-queries
 /// @example scss
-///   @include above(50em) {
+///   @include tools.above(50em) {
 ///     html { background: green; }
 ///   }
 /// @example scss
-///   $breakpoints: ('green': 50em);
+///   tools.$breakpoints: ('green': 50em);
 ///
-///   @include above('green') {
+///   @include tools.above('green') {
 ///     html { background: green; }
 ///   }
 ///
@@ -159,7 +177,7 @@ $breakpoints: () !default;
 ///   for a result of e.g. `(min-width: 30em)`.
 @mixin above($min, $prop: 'width') {
   $value: break($min);
-  $value: _a_nudge-query($value, 'min');
+  $value: utils.nudge-query($value, 'min');
 
   @media (min-#{$prop}: #{$value}) {
     @content;
@@ -184,16 +202,16 @@ $breakpoints: () !default;
 ///
 /// @group layout-queries
 /// @example scss
-///   @include between(30em, 50em) {
+///   @include tools.between(30em, 50em) {
 ///     html { background: yellow; }
 ///   }
 /// @example scss
-///   $breakpoints: (
+///   tools.$breakpoints: (
 ///     'red': 30em,
 ///     'green': 50em,
 ///   );
 ///
-///   @include between('red', 'green') {
+///   @include tools.between('red', 'green') {
 ///     html { background: yellow; }
 ///   }
 ///
@@ -208,9 +226,9 @@ $breakpoints: () !default;
 ///   for a result of e.g. `(min-width: 30em)`.
 @mixin between($min, $max, $prop: 'width') {
   $value-min: break($min);
-  $value-max: _a_nudge-query($value-min, 'min');
+  $value-max: utils.nudge-query($value-min, 'min');
   $value-max: break($max);
-  $value-max: _a_nudge-query($value-max, 'max');
+  $value-max: utils.nudge-query($value-max, 'max');
 
   @media (min-#{$prop}: #{$value-min}) and (max-#{$prop}: #{$value-max}) {
     @content;

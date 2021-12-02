@@ -37,26 +37,23 @@ groups:
     color-themes: 'Themes'
     color-tokens: 'Color Tokens'
     color-vars: 'Color Tokens » CSS Variables'
-#   'Layout':
-#     layout: 'QuickStart: Layout'
-#     layout-queries: 'Media Breakpoint Maps'
-#     layout-query-vars: 'Breakpoints » CSS Variables'
-#     layout-box: 'Box-Sizing'
-#     layout-clearfix: 'Clearfix'
-#     layout-position: 'Positioning'
-#     layout-ratios: 'Fluid Ratios'
-#     layout-z-index: 'Z-Index'
-#   'Scale':
-#     scale: 'QuickStart: Scale'
-#     scale-sizes: 'Size Maps'
-#     scale-vars: 'Sizes » CSS Variables'
-#     scale-units: 'Unit Conversion'
+  'Layout':
+    layout: 'QuickStart: Layout'
+    layout-queries: 'Media Breakpoint Maps'
+    layout-query-vars: 'Breakpoints » CSS Variables'
+    layout-z-index: 'Z-Index'
+  'Scale':
+    scale: 'QuickStart: Scale'
+    scale-sizes: 'Size Maps'
+    scale-vars: 'Sizes » CSS Variables'
+    scale-units: 'Unit Conversion'
   'Type':
     type: 'QuickStart: Type'
     type-fonts: 'Font Maps'
     type-font-vars: 'Fonts » CSS Variables'
     type-a11y: 'Accessibility'
     type-pseudo: 'Pseudo Elements'
+    type-helpers: 'Type Helpers'
 
 herman:
   sass:

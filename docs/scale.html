@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Adjustments | Accoutrement Documentation</title>
+  <title>QuickStart: Scale | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -222,7 +222,7 @@
   
   
     <li class="nav-item">
-      <a href="color-utils.html" data-nav="is-active">Adjustments</a>
+      <a href="color-utils.html" data-nav="is-not-active">Adjustments</a>
     </li>
   
   
@@ -268,7 +268,7 @@
                 
   
     <li class="nav-item">
-      <a href="scale.html" data-nav="is-not-active">QuickStart: Scale</a>
+      <a href="scale.html" data-nav="is-active">QuickStart: Scale</a>
     </li>
   
   
@@ -375,11 +375,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Adjustments</strong>
+    <strong>QuickStart: Scale</strong>
   </nav>
 
 
-        <div data-page="color-utils">
+        <div data-page="scale">
           
   
     
@@ -404,7 +404,15 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="color-utility-functions">Color Utility Functions</h1>
+      <h1 id="quickstart-scale">QuickStart: Scale</h1>
+<p>Sass size &amp; scale management<span class="widont">&nbsp;</span>tools:</p>
+<ul>
+<li>Gather all your sizes into a single<span class="widont">&nbsp;</span>map</li>
+<li>Generate new sizes based on <a href="core-ratio.html">modular scales</a>
+or arbitrary<span class="widont">&nbsp;</span>functions</li>
+<li>Convert between relative<span class="widont">&nbsp;</span>units</li>
+<li>Access sizes on the<span class="widont">&nbsp;</span>fly</li>
+</ul>
 
       
   
@@ -469,63 +477,23 @@
 
 
 
-<section class="item" id="function--tint">
+<section class="item" >
   
     
   
   
-
-  
-  
   
   
 
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--tint" class="item-name">tint()</a>
-      
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="import">Import</h2>
+<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+You can also import the scale module on its<span class="widont">&nbsp;</span>own:</p>
+<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/scale';
+</code></pre>
 
       
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Mix a color with <code>contrast-light</code>
-(defaults to <code>white</code>)
-to get a lighter tint of your color.
-Make sure to override <code>$light</code> when using <code>tint</code>
-to define the value of <code>contrast-light</code></p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>BREAKING: Use <code>contrast-light</code> for default mix, rather than <code>white</code>.</li>
-<li>NEW: Accept <code>$light</code> color to use in place of <code>contrast-light</code> default</li>
-</ul>
-</div>
-      </section>
-    
   
 
       
@@ -537,8 +505,6 @@ to define the value of <code>contrast-light</code></p>
     </div>
   
 
-  </div>
-
   
 
   
@@ -547,139 +513,6 @@ to define the value of <code>contrast-light</code></p>
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$color:</span>
-      
-      
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The name of a color in your palette,
-with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$percentage:</span>
-      
-      
-      <span class="value-type">(percentage)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The percentage of a <code>$light</code> color to mix in.
-Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$light:</span>
-      
-      <span class="item-value">null</span>
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The lighter color to be mixed in for<span class="widont">&nbsp;</span>tinting.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(color)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -693,97 +526,6 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
   
   
     
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">default-contrast()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-tokens.html#function--color" class="item-name">color()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
     
   
 
@@ -814,7 +556,115 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
 
 
 
-<section class="item" id="function--shade">
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h2 id="sizes-ratios">Sizes &amp; Ratios</h2>
+<p>Establish your palette of ratios [modular scales] and<span class="widont">&nbsp;</span>sizes:</p>
+<pre><code class="lang-scss">$ratios: (
+  'my-ratio': 1.25,
+);
+
+$sizes: (
+  // define explicit values
+  'root': 24px,
+  'icons': 1em,
+  'page': 8in,
+
+  // reference existing sizes
+  'text': '#root'
+
+  // apply adjustments and conversions
+  // using named-ratios or arbitrary functions
+  'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
+
+  'h1': '#root' ('my-ratio': 3),
+  'h2': '#root' ('my-ratio': 2),
+  'h3': '#root' ('my-ratio': 1),
+
+  // define calc() output based on existing sizes
+  'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
+);
+</code></pre>
+<p>Access your named sizes using the <code>size()</code> function,
+and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
+<pre><code class="lang-scss">.example {
+  font-size('text');
+  width: size('page', 'px');
+}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--scale">
   
     
   
@@ -832,7 +682,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
       
 
       
-        <a href="#function--shade" class="item-name">shade()</a>
+        <a href="#function--scale" class="item-name">scale()</a>
       
 
       
@@ -853,20 +703,19 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
 
   
     <div class="text-block">
-      <p>Mix a color with <code>contrast-dark</code>
-(defaults to <code>black</code>)
-to get a darker shade of your color.
-Make sure to override <code>$dark</code> when using <code>shade</code>
-to define the value of <code>contrast-dark</code></p>
+      <p>Apply a modular or linear scale to any value,
+moving up or down the scale by a given number of steps.
+(linear scaling is simple multiplication,
+and may not be particularly useful where the scale is<span class="widont">&nbsp;</span>known).</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>BREAKING: Use <code>contrast-dark</code> for mix, rather than <code>black</code></li>
-<li>NEW: Accept <code>$dark</code> color to use in place of <code>contrast-dark</code> default</li>
+<li>NEW: Provides direct access to scales,
+without needing to use the token<span class="widont">&nbsp;</span>map.</li>
 </ul>
 </div>
       </section>
@@ -914,18 +763,17 @@ to define the value of <code>contrast-dark</code></p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$color:</span>
+        <span class="item-name">$value:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      <span class="value-type">(token |<span class="widont">&nbsp;</span>number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The name of a color in your palette,
-with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
+        <p>The original value to be<span class="widont">&nbsp;</span>scaled</p>
 
       </div>
     
@@ -942,18 +790,17 @@ with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&
     <h4 class="param-title">
       
       
-        <span class="item-name">$percentage:</span>
+        <span class="item-name">$ratio:</span>
       
       
-      <span class="value-type">(Percentage)</span>
+      <span class="value-type">(token | number |<span class="widont">&nbsp;</span>&#39;linear&#39;)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The percentage of a <code>$dark</code> color to mix in.
-Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
+        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
 
       </div>
     
@@ -970,17 +817,45 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
     <h4 class="param-title">
       
       
-        <span class="item-name">$dark:</span>
+        <span class="item-name">$steps:</span>
       
-      <span class="item-value">null</span>
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>String)</span>
+      
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The darker color to be mixed in for<span class="widont">&nbsp;</span>shading.</p>
+        <p>The number of steps to move along a<span class="widont">&nbsp;</span>scale</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">ratio.$ratios</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of ratios to use as the origin palette
+(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
 
       </div>
     
@@ -1002,14 +877,14 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(color)</span>
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+        <p>The scaled value.</p>
 
       </div>
     
@@ -1022,6 +897,32 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
 
       
   
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>Ratio must be either a number or<span class="widont">&nbsp;</span>“linear”</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+    
+  
 
     
   </div>
@@ -1030,6 +931,84 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
 
 
   
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">/* _widescreen: #{tools.scale(700px, &#39;_widescreen&#39;)} */
+/* 1.4: #{tools.scale(24px, 1.4, -1)} */
+/* linear: #{tools.scale(16px, &#39;linear&#39;, 2)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/* _widescreen: 1244.4444444444px */
+/* 1.4: 17.1428571429px */
+/* linear: 32px */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
   
 
 
@@ -1071,7 +1050,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">default-contrast()</span>
+        <span class="item-name">check()</span>
       
       
       
@@ -1106,7 +1085,7 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
       <span class="item-type">@function</span>
       
         <a href="
-  color-tokens.html#function--color" class="item-name">color()</a>
+  scale-sizes.html#function--size" class="item-name">size()</a>
       
       
       
@@ -1116,6 +1095,99 @@ Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tin
     
   </div>
 
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  ratio-tokens.html#function--is-ratio" class="item-name">is-ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
 
         
       

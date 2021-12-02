@@ -30,7 +30,7 @@
     "lint:nofix": "stylelint '**/*.scss'",
     "lint:other": "prettier --write '**/*.{json,md,yml}'",
     "lint": "run-p lint:sass lint:other",
-    "docs": "sassdoc 'sass/**/!(layout|scale)/*.scss'",
+    "docs": "sassdoc 'sass/**/*.scss'",
     "commit": "run-s lint test docs",
     "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:nofix'",
     "watch:tests": "chokidar 'test/**' -c 'yarn test'",

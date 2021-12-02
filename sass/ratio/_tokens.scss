@@ -1,6 +1,7 @@
 @use 'utils';
 @use '../tokens';
 @use '../internal/function';
+@use '../internal/type';
 @use '../utils/map' as utils-map;
 @use 'sass:map';
 @use 'sass:meta';
@@ -80,4 +81,43 @@ $ratios: () !default;
 ///   with new maps merged in.
 @mixin add-ratios($maps...) {
   $ratios: utils-map.multi-merge($ratios, $maps...) !global;
+}
+
+// Is Ratio [function]
+// -------------------
+/// Check to see if a ratio is valid,
+/// converting tokens in the process.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides type-checking of ratios
+///   in addition to converting ratio tokens.
+///
+/// @group ratio-tokens
+/// @example scss
+///   /* _octave: #{tools.is-ratio('_octave')} */
+///   /* 1.4: #{tools.is-ratio(1.4)} */
+///   /* linear: #{tools.is-ratio('linear')} */
+///   /* blue: #{tools.is-ratio(blue)} */
+///
+/// @param {string | number} $ratio -
+///   The key-name or value of a ratio
+/// @param {map} $source [$ratios] -
+///   Optional accoutrement-format map of ratios to use as the origin palette
+///   (in addition to the provided defaults)
+/// @param {bool} $allow-tokens [true] -
+///   Optionally turn off token-parsing.
+/// @return {number | 'linear' | false} -
+///   The numeric value of a ratio, the 'linear' keyword,
+///   or `false` if the value is not a valid ratio.
+@function is-ratio($ratio, $source: $ratios, $allow-tokens: true) {
+  @if ($ratio == 'linear') or type.check($ratio, 'number') {
+    @return $ratio;
+  }
+
+  @if ($allow-tokens) {
+    $token: ratio($ratio, $source: $source);
+    @return is-ratio($token, $allow-tokens: false);
+  }
+
+  @return false;
 }

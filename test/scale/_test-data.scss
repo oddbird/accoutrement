@@ -1,3 +1,10 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use '../../sass/internal/function' as f;
+@use '../../sass/tokens/function';
+@use '../../sass/scale/config';
+
 // Scale Tests
 // ===========
 
@@ -10,27 +17,27 @@ $test-sizes: (
     ),
   'rhythm': '#text'
     (
-      '_fifth': 1,
+      scale: '_fifth' 1,
     ),
   'h1': '#text'
     (
-      'linear': 4,
+      scale: 'linear' 4,
     ),
   'h2': '#text'
     (
-      'linear': 3,
+      scale: 'linear' 3,
     ),
   'h3': '#text'
     (
-      'linear': 2,
+      scale: 'linear' 2,
     ),
   'big': '#text'
     (
-      '_fifth': 5,
+      scale: '_fifth' 5,
     ),
   'small': '#text'
     (
-      '_octave': -1,
+      scale: '_octave' -1,
     ),
   'viewport': 10vw,
   'percent': 20%,
@@ -66,61 +73,49 @@ $test-sizes: (
     (
       'divide': 2,
     ),
-  'test-value': 2,
+  '#test-value': 2,
   'add-name': '#root'
     (
-      'add': 'test-value',
+      'add': '#test-value',
     ),
   'plus-name': '#root'
     (
-      'plus': 'test-value',
+      'plus': '#test-value',
     ),
   'minus-name': '#root'
     (
-      'minus': 'test-value',
+      'minus': '#test-value',
     ),
   'subtract-name': '#root'
     (
-      'subtract': 'test-value',
+      'subtract': '#test-value',
     ),
   'times-name': '#root'
     (
-      'times': 'test-value',
+      'times': '#test-value',
     ),
   'multiply-name': '#root'
     (
-      'multiply': 'test-value',
+      'multiply': '#test-value',
     ),
   'divide-name': '#root'
     (
-      'divide': 'test-value',
+      'divide': '#test-value',
     ),
-  'round': 10rem / 3
+  'round': math.div(10rem, 3)
     (
       'round': null,
     ),
   'calc-simple': calc(1em + 2vw),
   'calc': (
-    '%value': 'calc(%s + %s / %s)',
+    '%value': 'calc(%s + (%s / %s))',
     '%s': (
-      '#root'
-        (
-          'times': 3,
-        ),
-      '#test-value'
-        (
-          'convert-units': 'vw',
-        ),
+      '#root',
+      '#h3',
       3,
     ),
   ),
   'calc-ref': '#calc',
 );
-$sizes: map-merge($sizes, $test-sizes);
-@include register-function('round');
 
-// Tests
-@import 'scale/config';
-@import 'scale/units';
-@import 'scale/size';
-@import 'scale/css-vars';
+@include f.internal(meta.get-function('round'), 'round');

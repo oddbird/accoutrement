@@ -1,3 +1,5 @@
+@use '../utils/map';
+
 /// # Scale Configuration
 ///
 /// @group scale-sizes
@@ -7,7 +9,7 @@
 // -------------------------
 /// The default font-size used by most browsers.
 /// @access private
-$_BROWSER-DEFAULT-FONT-SIZE: 16px;
+$BROWSER-DEFAULT-FONT-SIZE: 16px;
 
 // Sizes
 // -----
@@ -47,7 +49,7 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 ///   used for calculating relative sizes.
 ///   This should match the size applied to your html element.
 $sizes: (
-  'root': $_BROWSER-DEFAULT-FONT-SIZE,
+  'root': $BROWSER-DEFAULT-FONT-SIZE,
 ) !default;
 
 // Add Sizes
@@ -70,7 +72,7 @@ $sizes: (
 ///     'root': 24px,
 ///     'h1': '#root' ('times': 2),
 ///   );
-///   @include add-sizes($text-sizes);
+///   @include tools.add-sizes($text-sizes);
 ///
 /// @param {map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -78,5 +80,5 @@ $sizes: (
 ///   An updated global `$sizes` variable,
 ///   with new maps merged in.
 @mixin add-sizes($maps...) {
-  $sizes: _a_map-multimerge($sizes, $maps...) !global;
+  $sizes: map.multi-merge($sizes, $maps...) !global;
 }

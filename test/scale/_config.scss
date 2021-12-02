@@ -1,8 +1,14 @@
+@use '../../node_modules/sass-true' as *;
+@use '../../sass/scale/config';
+@use '../../sass/utils/map';
+
+$_global: config.$sizes;
+
 // Scale Config Tests
 // ==================
 @include test-module('Scale: Config') {
   @include describe('Add Sizes [mixin]') {
-    $old: $sizes;
+    $old: config.$sizes;
     $new1: (
       'test': 3em,
       'other': 1vw,
@@ -10,11 +16,9 @@
     $new2: (
       'test': 4em,
     );
-    @include add-sizes($new1, $new2);
+    @include config.add-sizes($new1, $new2);
     @include it('Adds maps to the $sizes global') {
-      @include assert-equal($sizes, _a_map-multimerge($old, $new1, $new2));
+      @include assert-equal(config.$sizes, map.multi-merge($old, $new1, $new2));
     }
-
-    $sizes: $old !global;
   }
 } // end module

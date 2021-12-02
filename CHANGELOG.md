@@ -48,8 +48,23 @@
     and supports the `outer->inner` nested token syntax.
 
 - [Ratios][ratio]:
+
   - NEW: Built-in named ratios are now available as individual variables,
     (without the `_` prefix that is applied in token maps)
+  - NEW: `is-ratio()` function can be used to type-check ratios,
+    including ratio tokens.
+
+- [Scale][scale]:
+
+  - NEW: `scale()` function applies a modular scale to any value,
+    allowing you to move up or down the scale any number of steps.
+
+- [Layout][layout]:
+  - BREAKING: Removed `global-box-sizing`
+  - BREAKING: Removed `clearfix`
+  - BREAKING: Removed `fluid-ratio`
+  - BREAKING: Removed `position`. Can achieve the majority of functionality in CSS using
+    [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
 
 ## 3.0.1 - 03/01/21
 

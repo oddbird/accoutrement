@@ -1,3 +1,8 @@
+@use '../../node_modules/sass-true' as *;
+@use '../../sass/scale/config';
+@use '../../sass/scale/css-vars';
+@use '../../sass/scale/size';
+
 // Scale Var Tests
 // ===============
 @include test-module('Scale: CSS Vars') {
@@ -7,8 +12,8 @@
     'kevin': '#_private',
     'thread': '#kevin',
   );
-  $global: $sizes;
-  $sizes: $test !global;
+  $global: config.$sizes;
+  config.$sizes: $test;
 
   // Sizes-- [mixin]
   // ------------------
@@ -16,7 +21,7 @@
     @include it('Generates CSS variables from the default size map') {
       @include assert {
         @include output {
-          @include sizes--;
+          @include css-vars.sizes--;
         }
 
         @include expect {
@@ -30,7 +35,7 @@
     @include it('Generates CSS variables for any size map') {
       @include assert {
         @include output {
-          @include sizes--(
+          @include css-vars.sizes--(
             (
               'mine': 12pt,
             )
@@ -50,7 +55,7 @@
     @include it('Generates a single variable from a token') {
       @include assert {
         @include output {
-          @include size--('simple');
+          @include css-vars.size--('simple');
         }
 
         @include expect {
@@ -62,7 +67,7 @@
     @include it('Generates a reference variable from a token') {
       @include assert {
         @include output {
-          @include size--('thread');
+          @include css-vars.size--('thread');
         }
 
         @include expect {
@@ -74,7 +79,7 @@
     @include it('Generates a new variable alias') {
       @include assert {
         @include output {
-          @include size--('alias', 'thread');
+          @include css-vars.size--('alias', 'thread');
         }
 
         @include expect {
@@ -89,20 +94,23 @@
   @include describe('Var-Size [function]') {
     @include it('Accesses a size variable with default fallback') {
       @include assert-equal(
-        var-size('simple'),
-        var(--size-simple, size('simple'))
+        css-vars.var-size('simple'),
+        var(--size-simple, size.size('simple'))
       );
     }
 
     @include it('Allows custom fallback') {
       @include assert-equal(
-        var-size('simple', 1.5em),
+        css-vars.var-size('simple', 1.5em),
         var(--size-simple, 1.5em)
       );
     }
 
     @include it('Allows false fallback') {
-      @include assert-equal(var-size('simple', false), var(--size-simple));
+      @include assert-equal(
+        css-vars.var-size('simple', false),
+        var(--size-simple)
+      );
     }
 
     @include it('Accepts custom palette') {
@@ -115,11 +123,14 @@
       );
 
       @include assert-equal(
-        var-size('my-adjustment', $source: $my-palette),
-        var(--size-my-adjustment, size('my-adjustment', $source: $my-palette))
+        css-vars.var-size('my-adjustment', $source: $my-palette),
+        var(
+          --size-my-adjustment,
+          size.size('my-adjustment', $source: $my-palette)
+        )
       );
     }
   }
 
-  $sizes: $global !global;
+  config.$sizes: $global;
 } // end module

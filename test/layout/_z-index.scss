@@ -1,21 +1,34 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/layout/z-index' as z;
+
 // Z-Index Tests
 // =============
 @include test-module('Layout: Z-Index') {
+  $test: (
+    'main',
+    'sidebar',
+    'banner' 'active-nav' 'dropdown',
+    'message',
+    'modal'
+  );
+  $_old: z.$z-index;
+  z.$z-index: $test;
+
   // Z-Index (function)
   // ------------------
   @include describe('Z-Index [function]') {
     @include it('Simple index list') {
-      @include assert-equal(z-index('modal'), 5);
+      @include assert-equal(z.z-index('modal'), 5);
     }
 
     @include it('First item in a nested list') {
-      @include assert-equal(z-index('banner'), 3);
+      @include assert-equal(z.z-index('banner'), 3);
     }
 
     @include it('Nested list index') {
-      @include assert-equal(z-index('active-nav'), 1);
+      @include assert-equal(z.z-index('active-nav'), 1);
 
-      @include assert-equal(z-index('dropdown'), 2);
+      @include assert-equal(z.z-index('dropdown'), 2);
     }
   }
 
@@ -25,7 +38,7 @@
     @include it('Set z-index property') {
       @include assert('Z-Index property is set based on list index') {
         @include output {
-          @include z-index('dropdown');
+          @include z.z-index('dropdown');
         }
 
         @include expect {
@@ -34,4 +47,6 @@
       }
     }
   }
+
+  z.$z-index: $_old;
 } // end module
