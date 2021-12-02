@@ -59,7 +59,7 @@ $FONT-FORMATS: (
   'svgz': 'svg',
 );
 
-/* stylelint-disable function-url-quotes */
+// stylelint-disable function-url-quotes
 // Format URL
 // --------
 /// Interpolate a font path and format-type
@@ -123,7 +123,7 @@ $FONT-FORMATS: (
   // compile and return
   @return $path + $ext + $suffix;
 }
-/* stylelint-enable function-url-quotes */
+// stylelint-enable function-url-quotes
 
 // Font Src
 // --------
@@ -151,7 +151,7 @@ $FONT-FORMATS: (
   $format-name: map.get($FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
-  /* stylelint-disable-next-line function-url-quotes */
+  // stylelint-disable-next-line function-url-quotes
   $path: format-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
@@ -389,7 +389,6 @@ $FONT-FORMATS: (
   @if not string.index($path, 'data:') {
     $path: config.$font-path + $path;
   }
-
-  /* stylelint-disable-next-line function-url-quotes */
+  // stylelint-disable-next-line function-url-quotes
   @return url(string.quote($path));
 }

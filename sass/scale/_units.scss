@@ -12,7 +12,7 @@
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
 @function _a_get-px($length) {
-  /* stylelint-disable-next-line length-zero-no-unit */
+  // stylelint-disable-next-line length-zero-no-unit
   @return if(comparable($length, 1px), 0px + $length, false);
 }
 
@@ -27,7 +27,7 @@
 /// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
 @function _a_get-number($unit, $relative: false) {
-  /* stylelint-disable length-zero-no-unit */
+  // stylelint-disable length-zero-no-unit
   $_absolute: (
     'in': 0in,
     'mm': 0mm,
@@ -48,7 +48,7 @@
     'vmax': 0vmax,
     'fr': 0fr,
   );
-  /* stylelint-enable length-zero-no-unit */
+  // stylelint-enable length-zero-no-unit
 
   @if $relative {
     @return map-get($_absolute, $unit) or map-get($_relative, $unit);
