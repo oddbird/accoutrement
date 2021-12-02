@@ -1,6 +1,10 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use './config';
+@use '../tokens/api';
+
 /// # Accessing Sizes
 /// @group scale-sizes
-
 
 // Size [function]
 // ---------------
@@ -32,19 +36,27 @@
 ///   Optional accoutrement-format map of sizes to use as the origin palette
 /// @return {length} -
 ///   The calculated length, in the requested units.
-@function size(
-  $size,
-  $do: null,
-  $source: $sizes
-) {
-  @if ($do) and (type-of($do) != 'map') {
-    $do: ('to': $do);
+@function size($size, $do: null, $source: config.$sizes) {
+  @if ($do) and (meta.type-of($do) != 'map') {
+    $do: (
+      'to': $do,
+    );
   }
 
-  $size: get-token($source, $size, $do);
-  @return if((type-of($size) == 'string'), unquote($size), $size);
-}
+  $return: $size;
 
+  @if (meta.type-of($size) == 'number') {
+    // apply adjustments
+    @if $do {
+      $return: api.compile($source, $size $do);
+    }
+  } @else {
+    // get the desired token
+    $return: api.get($source, $size, $do);
+  }
+
+  @return if((meta.type-of($return) == 'string'), string.unquote($return), $return);
+}
 
 // Negative [function]
 // -------------------
@@ -82,16 +94,12 @@
 ///   Optional accoutrement-format map of sizes to use as the origin palette
 /// @return {length} -
 ///   The calculated negative length, in the requested units.
-@function negative(
-  $size,
-  $do: null,
-  $source: $sizes
-) {
+@function negative($size, $do: null, $source: config.$sizes) {
   $size: size($size, $do, $source);
 
-  @if (type-of($size) == 'string') {
-    @if (str-index($size, 'calc(') == 1) {
-      $size: str-slice($size, 6, -2);
+  @if (meta.type-of($size) == 'string') {
+    @if (string.index($size, 'calc(') == 1) {
+      $size: string.slice($size, 6, -2);
     }
 
     @return 'calc(-1 * (#{$size}))';
@@ -99,7 +107,6 @@
 
   @return -1 * $size;
 }
-
 
 // Square [mixin]
 // --------------
@@ -138,11 +145,7 @@
 /// @output -
 ///   Equal CSS height and width properties,
 ///   set to the given size and units.
-@mixin square(
-  $size,
-  $do: null,
-  $source: $sizes
-) {
+@mixin square($size, $do: null, $source: config.$sizes) {
   $size: size($size, $do, $source);
 
   height: $size;

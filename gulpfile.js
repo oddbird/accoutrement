@@ -14,7 +14,6 @@ const paths = {
   // @@@ remove these as they are migrated
   IGNORE_SASS: [
     '!sass/layout/**/*.scss',
-    '!sass/scale/**/*.scss',
   ],
   init: function () {
     this.SASS = [this.SASS_DIR + '**/*.scss']

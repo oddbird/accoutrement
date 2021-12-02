@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>QuickStart: Animate | Accoutrement Documentation</title>
+  <title>Unit Conversion | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -167,7 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="animate.html" data-nav="is-active">QuickStart: Animate</a>
+      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
     </li>
   
   
@@ -262,7 +262,7 @@
   
   
     <li class="nav-item">
-      <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
+      <a href="scale-units.html" data-nav="is-active">Unit Conversion</a>
     </li>
   </ul>
             </li>
@@ -354,11 +354,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>QuickStart: Animate</strong>
+    <strong>Unit Conversion</strong>
   </nav>
 
 
-        <div data-page="animate">
+        <div data-page="scale-units">
           
   
     
@@ -383,93 +383,128 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="quickstart-animate">QuickStart: Animate</h1>
-<p>Tools for managing animations &amp;<span class="widont">&nbsp;</span>transitions.</p>
-<ul>
-<li>Organize all your timing, easing, and transitions into<span class="widont">&nbsp;</span>maps</li>
-<li>Document relationships directly in the<span class="widont">&nbsp;</span>code</li>
+      <h1 id="converting-units">Converting Units</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--convert-units">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--convert-units" class="item-name">convert-units()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Convert lengths between comparable units.
+You can also convert to <code>browser-ems</code>,
+relative to the browser default rather than the site root –
+useful for media queries.
+Aliased as <code>convert-units</code>, <code>convert</code>, <code>units</code>, and <code>to</code>
+in all Accoutrement<span class="widont">&nbsp;</span>maps.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>1.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Aliased as <code>to</code> in accoutrement-maps</li>
 </ul>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
+</div>
+      </section>
     
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="import">Import</h2>
-<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
-You can also import the color module on its<span class="widont">&nbsp;</span>own:</p>
-<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/animate';
-</code></pre>
-
-      
   
 
       
@@ -481,136 +516,30 @@ You can also import the color module on its<span class="widont">&nbsp;</span>own
     </div>
   
 
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
+  </div>
 
   
 
   
   
-
-
   
   
-
   
   
-
-</section>
 
   
     
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="timing-easing">Timing &amp; Easing</h2>
-<p>Establish your timing and easing palettes,
-with the standard <a href="core.html">Accoutrement syntax</a>:</p>
-<pre><code class="lang-scss">$times: (
-  'fast': 150ms,
-  'medium': '#fast' ('times': 2),
-);
-
-$easing: (
-  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
-  'fade-in': '#in-out-quad',
-);
-</code></pre>
-<p>Access them anywhere:</p>
-<pre><code class="lang-scss">.example {
-  animation: slide-in time('fast') ease('in-out-quad') 1 both;
-  transition-delay: time('fast');
-  transition-duration: time('medium');
-  transition-timing-function: ease('elastic');
-}
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  <div data-item-section="related">
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
 
     
       
-
-      
         
-  
-  
-  
   
   
 
@@ -619,14 +548,19 @@ $easing: (
     <h4 class="param-title">
       
       
-        <a href="
-  animate-times.html#variable--times" class="item-name">$times</a>
+        <span class="item-name">$length:</span>
       
       
-      
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
       
     </h4>
 
+    
+      
+      <div class="param-details text-block">
+        <p>The length or named size to be<span class="widont">&nbsp;</span>converted.</p>
+
+      </div>
     
   </div>
 
@@ -635,23 +569,26 @@ $easing: (
         
   
   
-  
-  
-  
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-times.html#function--time" class="item-name">time()</a>
       
       
+        <span class="item-name">$to-unit:</span>
       
+      
+      <span class="value-type">(string)</span>
       
     </h4>
 
+    
+      
+      <div class="param-details text-block">
+        <p>The desired units to convert to.
+Some units (<code>ch</code>, <code>vw</code>, <code>vh</code>, <code>vmin</code>, <code>vmax</code>) cannot be<span class="widont">&nbsp;</span>converted.</p>
+
+      </div>
     
   </div>
 
@@ -660,23 +597,29 @@ $easing: (
         
   
   
-  
-  
-  
 
   
   <div class="param-list">
     <h4 class="param-title">
       
       
-        <a href="
-  animate-ease.html#variable--easing" class="item-name">$easing</a>
+        <span class="item-name">$from-context:</span>
       
-      
-      
+      <span class="item-value">false</span>
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
       
     </h4>
 
+    
+      
+      <div class="param-details text-block">
+        <p>When converting from relative units,
+the absolute length (in px) to which $length refers -
+e.g. for <code>$lengths</code> in em units, would normally be the
+font-size of the current element.
+<code>false</code> and <code>null</code> will resolve to your ‘root’ setting or<span class="widont">&nbsp;</span>16px</p>
+
+      </div>
     
   </div>
 
@@ -685,17 +628,51 @@ $easing: (
         
   
   
-  
-  
-  
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
       
-        <a href="
-  animate-ease.html#function--ease" class="item-name">ease()</a>
+      
+        <span class="item-name">$to-context:</span>
+      
+      <span class="item-value">$from-context</span>
+      <span class="value-type">(length |<span class="widont">&nbsp;</span>string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>For converting <em>to</em> relative units,
+the absolute length in px to which the output value will refer.
+Defaults to the same as <code>$from-context</code>, since it is rarely<span class="widont">&nbsp;</span>needed.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
       
       
       
@@ -703,151 +680,54 @@ $easing: (
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>Context parameters must resolve to a value in pixel<span class="widont">&nbsp;</span>units</p>
+
+      </div>
+    
   </div>
 
+    
+  
 
-      
     
   </div>
 
   
+
+
+  
+  
+
+
+  
   
   
   
     
     
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h2 id="transitions-animations">Transitions &amp; Animations</h2>
-<p>Use your timing and easing patterns
-to compose reusable “changes” –
-including transitions and<span class="widont">&nbsp;</span>animations:</p>
-<pre><code class="lang-scss">$changes: (
-  'slide-in': slide-in time('fast') ease('in-out-quad') 1 both,
-  'delay-in': '#slide-in' time('medium'),
-  'fade-ease': time('medium') ease(in),
-  'fade-colors': color '#fade-ease', background-color '#fade-ease',
-);
-</code></pre>
-<p>Access them anywhere:</p>
-<pre><code class="lang-scss">.example {
-  animation: change('slide-in');
-  transition: change('fade-colors');
-}
-</code></pre>
-<p>Or use the mixin<span class="widont">&nbsp;</span>shortcuts:</p>
-<pre><code class="lang-scss">.example {
-  @include animate('slide-in');
-  @include transition('fade-colors');
-}
-</code></pre>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  <div data-item-section="related">
+  <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
 
     
       
-
       
         
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
         
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -860,7 +740,7 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
       <span class="item-type">@function</span>
       
         <a href="
-  animate-change.html#function--change" class="item-name">change()</a>
+  scale-sizes.html#function--size" class="item-name">size()</a>
       
       
       
@@ -871,8 +751,18 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   </div>
 
 
+        
       
         
+        
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -882,22 +772,37 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
-        <a href="
-  animate-change.html#mixin--animate" class="item-name">animate()</a>
-      
+        <span class="item-name">get-number()</span>
       
       
       
+      <span class="item-note">[private]</span>
     </h4>
 
     
   </div>
 
 
+        
       
         
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -907,13 +812,151 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">get()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">get-px()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">error()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
       
         <a href="
-  animate-change.html#mixin--transition" class="item-name">transition()</a>
+  scale-sizes.html#variable--sizes" class="item-name">$sizes</a>
       
       
-      
+      <span class="value-type">(map)</span>
       
     </h4>
 
@@ -921,15 +964,52 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   </div>
 
 
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$BROWSER-DEFAULT-FONT-SIZE</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
       
     
   </div>
 
   
-  
-  
-  
-    
     
   
 

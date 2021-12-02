@@ -1,0 +1,62 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/scale/scale';
+@use '../../sass/ratio/tokens';
+
+$_old: tokens.$ratios;
+tokens.$ratios: (
+  'new': '#_octave',
+  'token': 'linear',
+  'bad': red,
+);
+
+@include test-module('scale/scale') {
+
+  // Scale [function]
+  // ----------------
+  @include describe('Scale [function]') {
+    @include it('Scales linear ratio') {
+      @include assert-equal(
+        scale.scale(2, 'linear', 4),
+        8
+      );
+    }
+
+    @include it('Scales exponential ratios') {
+      @include assert-equal(
+        scale.scale(16, 1.5, 2),
+        36
+      );
+    }
+
+    @include it('Scales token lookup') {
+      @include assert-equal(
+        scale.scale(2, 'new', 2),
+        8
+      );
+    }
+
+    @include it('Error on bad token-lookup') {
+      @include assert-equal(
+        scale.scale(1, 'bad'),
+        'ERROR [scale] $ratio must be either a number or "linear", got [string] `bad`'
+      );
+      @include assert-equal(
+        scale.scale(1, 'missing'),
+        'ERROR [scale] $ratio must be either a number or "linear", got [string] `missing`'
+      );
+    }
+
+    @include it('Error on bad values') {
+      @include assert-equal(
+        scale.scale(1, green),
+        'ERROR [scale] $ratio must be either a number or "linear", got [color] `green`'
+      );
+      @include assert-equal(
+        scale.scale(1, false),
+        'ERROR [scale] $ratio must be either a number or "linear", got [bool] `false`'
+      );
+    }
+  }
+} // end module
+
+tokens.$ratios: $_old;

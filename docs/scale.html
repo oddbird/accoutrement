@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>QuickStart: Animate | Accoutrement Documentation</title>
+  <title>QuickStart: Scale | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -167,7 +167,7 @@
                 
   
     <li class="nav-item">
-      <a href="animate.html" data-nav="is-active">QuickStart: Animate</a>
+      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
     </li>
   
   
@@ -247,7 +247,7 @@
                 
   
     <li class="nav-item">
-      <a href="scale.html" data-nav="is-not-active">QuickStart: Scale</a>
+      <a href="scale.html" data-nav="is-active">QuickStart: Scale</a>
     </li>
   
   
@@ -354,11 +354,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>QuickStart: Animate</strong>
+    <strong>QuickStart: Scale</strong>
   </nav>
 
 
-        <div data-page="animate">
+        <div data-page="scale">
           
   
     
@@ -383,11 +383,14 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="quickstart-animate">QuickStart: Animate</h1>
-<p>Tools for managing animations &amp;<span class="widont">&nbsp;</span>transitions.</p>
+      <h1 id="quickstart-scale">QuickStart: Scale</h1>
+<p>Sass size &amp; scale management<span class="widont">&nbsp;</span>tools:</p>
 <ul>
-<li>Organize all your timing, easing, and transitions into<span class="widont">&nbsp;</span>maps</li>
-<li>Document relationships directly in the<span class="widont">&nbsp;</span>code</li>
+<li>Gather all your sizes into a single<span class="widont">&nbsp;</span>map</li>
+<li>Generate new sizes based on [modular scales][core-ratio.html]
+or arbitrary<span class="widont">&nbsp;</span>functions</li>
+<li>Convert between relative<span class="widont">&nbsp;</span>units</li>
+<li>Access sizes on the<span class="widont">&nbsp;</span>fly</li>
 </ul>
 
       
@@ -465,8 +468,8 @@
     <div data-item-section="prose" class="text-block">
       <h2 id="import">Import</h2>
 <p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
-You can also import the color module on its<span class="widont">&nbsp;</span>own:</p>
-<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/animate';
+You can also import the scale module on its<span class="widont">&nbsp;</span>own:</p>
+<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/scale';
 </code></pre>
 
       
@@ -542,25 +545,38 @@ You can also import the color module on its<span class="widont">&nbsp;</span>own
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="timing-easing">Timing &amp; Easing</h2>
-<p>Establish your timing and easing palettes,
-with the standard <a href="core.html">Accoutrement syntax</a>:</p>
-<pre><code class="lang-scss">$times: (
-  'fast': 150ms,
-  'medium': '#fast' ('times': 2),
+      <h2 id="sizes-ratios">Sizes &amp; Ratios</h2>
+<p>Establish your palette of ratios (modular scales) and<span class="widont">&nbsp;</span>sizes:</p>
+<pre><code class="lang-scss">$ratios: (
+  'my-ratio': 1.25,
 );
 
-$easing: (
-  'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
-  'fade-in': '#in-out-quad',
+$sizes: (
+  // define explicit values
+  'root': 24px,
+  'icons': 1em,
+  'page': 8in,
+
+  // reference existing sizes
+  'text': '#root'
+
+  // apply adjustments and conversions
+  // using named-ratios or arbitrary functions
+  'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
+
+  'h1': '#root' ('my-ratio': 3),
+  'h2': '#root' ('my-ratio': 2),
+  'h3': '#root' ('my-ratio': 1),
+
+  // define calc() output based on existing sizes
+  'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
 );
 </code></pre>
-<p>Access them anywhere:</p>
+<p>Access your named sizes using the <code>size()</code> function,
+and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
 <pre><code class="lang-scss">.example {
-  animation: slide-in time('fast') ease('in-out-quad') 1 both;
-  transition-delay: time('fast');
-  transition-duration: time('medium');
-  transition-timing-function: ease('elastic');
+  font-size('text');
+  width: size('page', 'px');
 }
 </code></pre>
 
@@ -591,124 +607,6 @@ $easing: (
   
   
 
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-times.html#variable--times" class="item-name">$times</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-times.html#function--time" class="item-name">time()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  animate-ease.html#variable--easing" class="item-name">$easing</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease.html#function--ease" class="item-name">ease()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-    
-  </div>
 
   
   
@@ -745,8 +643,37 @@ $easing: (
 
 
 
-<section class="item" >
+<section class="item" id="function--scale">
   
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--scale" class="item-name">scale()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
     
   
   
@@ -754,32 +681,24 @@ $easing: (
   
 
   
-    <div data-item-section="prose" class="text-block">
-      <h2 id="transitions-animations">Transitions &amp; Animations</h2>
-<p>Use your timing and easing patterns
-to compose reusable “changes” –
-including transitions and<span class="widont">&nbsp;</span>animations:</p>
-<pre><code class="lang-scss">$changes: (
-  'slide-in': slide-in time('fast') ease('in-out-quad') 1 both,
-  'delay-in': '#slide-in' time('medium'),
-  'fade-ease': time('medium') ease(in),
-  'fade-colors': color '#fade-ease', background-color '#fade-ease',
-);
-</code></pre>
-<p>Access them anywhere:</p>
-<pre><code class="lang-scss">.example {
-  animation: change('slide-in');
-  transition: change('fade-colors');
-}
-</code></pre>
-<p>Or use the mixin<span class="widont">&nbsp;</span>shortcuts:</p>
-<pre><code class="lang-scss">.example {
-  @include animate('slide-in');
-  @include transition('fade-colors');
-}
-</code></pre>
+    <div class="text-block">
+      <p>Apply a modular or linear scale to any value,
+moving up or down the scale by a given number of steps.
+(linear scaling is simple multiplication,
+and may not be particularly useful where the scale is<span class="widont">&nbsp;</span>known).</p>
 
       
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Provides direct access to scales,
+without needing to use the token<span class="widont">&nbsp;</span>map.</li>
+</ul>
+</div>
+      </section>
+    
   
 
       
@@ -791,38 +710,314 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
     </div>
   
 
-  
-
-  
-  
-  
-  
-  
-  
+  </div>
 
   
 
-
+  
+  
+  
+  
   
   
 
-
   
-
     
-  <div data-item-section="related">
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
 
     
       
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$value:</span>
+      
+      
+      <span class="value-type">(token |<span class="widont">&nbsp;</span>number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The original value to be<span class="widont">&nbsp;</span>scaled</p>
+
+      </div>
+    
+  </div>
+
 
       
         
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$ratio:</span>
+      
+      
+      <span class="value-type">(token | number |<span class="widont">&nbsp;</span>&#39;linear&#39;)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$steps:</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The number of steps to move along a<span class="widont">&nbsp;</span>scale</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">ratio.$ratios</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of ratios to use as the origin palette
+(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The scaled value.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+    
+      
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@error</span>
+      
+      
+      
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <ul>
+<li>Ratio must be either a number or<span class="widont">&nbsp;</span>“linear”</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+    
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">/* _widescreen: #{tools.scale(700px, &#39;_widescreen&#39;)} */
+/* 1.4: #{tools.scale(24px, 1.4, -1)} */
+/* linear: #{tools.scale(16px, &#39;linear&#39;, 2)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/* _widescreen: 1244.4444444444px */
+/* 1.4: 17.1428571429px */
+/* linear: 32px */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -832,22 +1027,31 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
       
-      
-        <a href="
-  animate-change.html#variable--changes" class="item-name">$changes</a>
-      
+        <span class="item-name">check()</span>
       
       
       
+      <span class="item-note">[private]</span>
     </h4>
 
     
   </div>
 
 
+        
       
         
+        
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -860,7 +1064,7 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
       <span class="item-type">@function</span>
       
         <a href="
-  animate-change.html#function--change" class="item-name">change()</a>
+  scale-sizes.html#function--size" class="item-name">size()</a>
       
       
       
@@ -871,8 +1075,24 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   </div>
 
 
+        
       
         
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -882,22 +1102,43 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
-        <a href="
-  animate-change.html#mixin--animate" class="item-name">animate()</a>
-      
+        <span class="item-name">error()</span>
       
       
       
+      <span class="item-note">[private]</span>
     </h4>
 
     
   </div>
 
 
+        
       
         
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
   
   
   
@@ -907,10 +1148,10 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@mixin</span>
+      <span class="item-type">@function</span>
       
         <a href="
-  animate-change.html#mixin--transition" class="item-name">transition()</a>
+  ratio-tokens.html#function--is-ratio" class="item-name">is-ratio()</a>
       
       
       
@@ -921,15 +1162,24 @@ including transitions and<span class="widont">&nbsp;</span>animations:</p>
   </div>
 
 
+        
+      
+        
+        
+        
+
+        
+      
+        
+        
+        
+
+        
       
     
   </div>
 
   
-  
-  
-  
-    
     
   
 

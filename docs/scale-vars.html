@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Inspecting Tokens | Accoutrement Documentation</title>
+  <title>Sizes » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -122,7 +122,7 @@
   
   
     <li class="nav-item">
-      <a href="token-inspect.html" data-nav="is-active">Inspecting Tokens</a>
+      <a href="token-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
     </li>
   
   
@@ -257,7 +257,7 @@
   
   
     <li class="nav-item">
-      <a href="scale-vars.html" data-nav="is-not-active">Sizes » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="scale-vars.html" data-nav="is-active">Sizes » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -354,11 +354,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Inspecting Tokens</strong>
+    <strong>Sizes » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="token-inspect">
+        <div data-page="scale-vars">
           
   
     
@@ -383,10 +383,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="inspecting-tokens">Inspecting Tokens</h1>
-<p>Tools for inspecting accoutrement map token meta-data,
-useful for building more complicated logic for
-automation and<span class="widont">&nbsp;</span>integrations.</p>
+      <h1 id="sizes-css-variables">Sizes » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -451,7 +448,7 @@ automation and<span class="widont">&nbsp;</span>integrations.</p>
 
 
 
-<section class="item" id="function--is-private-token">
+<section class="item" id="variable--size-var-prefix">
   
     
   
@@ -465,13 +462,15 @@ automation and<span class="widont">&nbsp;</span>integrations.</p>
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type"></span>
       
 
       
-        <a href="#function--is-private-token" class="item-name">is-private-token()</a>
+        <a href="#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
       
 
+      
+        <span class="value-type">(string)</span>
       
 
       
@@ -483,6 +482,26 @@ automation and<span class="widont">&nbsp;</span>integrations.</p>
 
     
     
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$size-var-prefix: &#39;size-&#39; !default;</code></pre>
+    </div>
+  
+
+    
   
   
   
@@ -490,8 +509,14 @@ automation and<span class="widont">&nbsp;</span>integrations.</p>
 
   
     <div class="text-block">
-      <p>Check if a token key is marked as private
-with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;</span>character</p>
+      <p>Since CSS variables are often defined in a global space,
+it can be useful to prefix different variable types.
+Accoutrement maps help solve that problem in Sass,
+so we wanted to carry that over into our CSS variable support.
+Set a prefix for all size-tokens,
+and we’ll apply it when setting or calling CSS variables
+based on your size maps.
+Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
   
@@ -525,84 +550,6 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$key:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The token key to check for private prefix
-(only string and list keys can be marked as<span class="widont">&nbsp;</span>private)</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(boolean)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>True if the key is private, otherwise<span class="widont">&nbsp;</span>false</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -649,8 +596,9 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">/*! #{tools.is-private-token(&#39;_private-token&#39;)} */
-/*! #{tools.is-private-token(&#39;public-token&#39;)} */</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$sizes: (&#39;my-size&#39;: 3em);
+tools.$size-var-prefix: &#39;prefix_&#39;;
+html { @include tools.size--(&#39;my-size&#39;) }</code></pre>
     </div>
   
 
@@ -672,8 +620,9 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! true */
-/*! false */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --prefix_my-size: 3em;
+}</code></pre>
     </div>
   
 
@@ -721,41 +670,10 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
+      <span class="item-type">@mixin</span>
       
         <a href="
-  color-contrast.html#function--var-contrast" class="item-name">var-contrast()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  token-inspect.html#function--is-alias-for" class="item-name">is-alias-for()</a>
+  scale-vars.html#mixin--sizes--" class="item-name">sizes--()</a>
       
       
       
@@ -786,38 +704,7 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
       <span class="item-type">@mixin</span>
       
         <a href="
-  token-vars.html#mixin--tokens--" class="item-name">tokens--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  type-fonts.html#mixin--import-webfonts" class="item-name">import-webfonts()</a>
+  scale-vars.html#mixin--size--" class="item-name">size--()</a>
       
       
       
@@ -847,20 +734,17 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">font-name()</span>
+        <a href="
+  scale-vars.html#function--var-size" class="item-name">var-size()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
   </div>
 
-
-        
-      
-        
 
         
       
@@ -896,7 +780,7 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
 
 
 
-<section class="item" id="function--is-alias-for">
+<section class="item" id="mixin--sizes--">
   
     
   
@@ -910,11 +794,11 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--is-alias-for" class="item-name">is-alias-for()</a>
+        <a href="#mixin--sizes--" class="item-name">sizes--()</a>
       
 
       
@@ -935,10 +819,15 @@ with <code>_</code> or <code>-</code> as the starting<span class="widont">&nbsp;
 
   
     <div class="text-block">
-      <p>Find if a token is simply an alias,
-and (if so) what token it represents –
-either directly,
-or following the thread to it’s<span class="widont">&nbsp;</span>origin.</p>
+      <p>Convert any size-map into CSS variables,
+using the global <code>$size-var-prefix</code>.</p>
+<ul>
+<li>Size names that start with <code>_</code> or <code>-</code> are considered “private”
+and will not be output as<span class="widont">&nbsp;</span>variables</li>
+<li>Sizes that contain a simple alias with no adjustments
+will be output with a <code>var()</code> value,
+keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
+</ul>
 
       
   
@@ -978,7 +867,7 @@ or following the thread to it’s<span class="widont">&nbsp;</span>origin.</p>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -994,9 +883,9 @@ or following the thread to it’s<span class="widont">&nbsp;</span>origin.</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$source:</span>
       
-      
+      <span class="item-value">$sizes</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1004,7 +893,8 @@ or following the thread to it’s<span class="widont">&nbsp;</span>origin.</p>
     
       
       <div class="param-details text-block">
-        <p>A map of terms to reference<span class="widont">&nbsp;</span>against</p>
+        <p>Optionally use a custom
+map of sizes to set as css<span class="widont">&nbsp;</span>variables</p>
 
       </div>
     
@@ -1012,61 +902,9 @@ or following the thread to it’s<span class="widont">&nbsp;</span>origin.</p>
 
 
       
-        
+
+      
   
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$token:</span>
-      
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The token name to be<span class="widont">&nbsp;</span>traced</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$origin:</span>
-      
-      <span class="item-value">false</span>
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>False to trace the alias one step back,
-or <code>true</code> to trace an alias thread back to the original source<span class="widont">&nbsp;</span>token</p>
-
-      </div>
-    
-  </div>
-
-
-      
 
       
   
@@ -1078,27 +916,22 @@ or <code>true</code> to trace an alias thread back to the original source<span c
     <h4 class="param-title">
       
       
-        <span class="item-name">@return</span>
+        <span class="item-name">{CSS output}</span>
       
       
-      <span class="value-type">(*)</span>
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p><code>false</code> for non-alias tokens,
-or the name of an alias source
-(either one step back, or the full origin of multiple<span class="widont">&nbsp;</span>aliases)</p>
+        <p>Custom properties for all public sizes in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
   </div>
 
-  
-
-      
   
 
       
@@ -1152,16 +985,14 @@ or the name of an alias source
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39;,
-  &#39;border&#39;: &#39;#text&#39;,
-  &#39;outline&#39;: &#39;#border&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">tools.$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
 );
-/*! _brand: #{tools.is-alias-for($colors, &#39;_brand&#39;)} */
-/*! text: #{tools.is-alias-for($colors, &#39;text&#39;)} (_brand is private) */
-/*! border: #{tools.is-alias-for($colors, &#39;border&#39;)} */
-/*! outline: #{tools.is-alias-for($colors, &#39;outline&#39;, $origin: true)} */</code></pre>
+html {
+  @include tools.sizes--;
+}</code></pre>
     </div>
   
 
@@ -1183,10 +1014,10 @@ or the name of an alias source
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! _brand: false */
-/*! text: false (_brand is private) */
-/*! border: text */
-/*! outline: text */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">html {
+  --size-rhythm: 24px;
+  --size-line: var(--size-rhythm, 24px);
+}</code></pre>
     </div>
   
 
@@ -1204,8 +1035,7 @@ or the name of an alias source
   
   
   
-    <div class="requires-wrapper">
-      
+    
     
   <div data-item-section="requires">
     
@@ -1237,96 +1067,13 @@ or the name of an alias source
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
       
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
       
         <a href="
-  token-inspect.html#function--is-private-token" class="item-name">is-private-token()</a>
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
       
       
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-      
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  token-vars.html#mixin--token--" class="item-name">token--()</a>
-      
-      
-      
+      <span class="value-type">(string)</span>
       
     </h4>
 
@@ -1336,103 +1083,13 @@ or the name of an alias source
 
         
       
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  type-fonts.html#mixin--import-webfonts" class="item-name">import-webfonts()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">font-name()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">font-values()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
     
   </div>
 
   
+    
+  
 
-    </div>
   
 
   
@@ -1460,7 +1117,7 @@ or the name of an alias source
 
 
 
-<section class="item" id="function--has-token">
+<section class="item" id="mixin--size--">
   
     
   
@@ -1474,11 +1131,11 @@ or the name of an alias source
   <div data-item-section="header">
     <h2 class="item-title">
       
-        <span class="item-type">@function</span>
+        <span class="item-type">@mixin</span>
       
 
       
-        <a href="#function--has-token" class="item-name">has-token()</a>
+        <a href="#mixin--size--" class="item-name">size--()</a>
       
 
       
@@ -1499,16 +1156,16 @@ or the name of an alias source
 
   
     <div class="text-block">
-      <p>Find if a token exists in a given<span class="widont">&nbsp;</span>map.</p>
+      <p>Set a single custom property based on a map-size,
+with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Provides a token-syntax-aware alternative to
-the Sass internal <code>map.has-key()</code> function.</li>
+<li>NEW: Initial release</li>
 </ul>
 </div>
       </section>
@@ -1540,7 +1197,7 @@ the Sass internal <code>map.has-key()</code> function.</li>
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        <span class="item-subtitle-main">Parameters</span>
         
       </h3>
     
@@ -1556,34 +1213,7 @@ the Sass internal <code>map.has-key()</code> function.</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of terms to reference<span class="widont">&nbsp;</span>against</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$token:</span>
+        <span class="item-name">$size:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1593,7 +1223,8 @@ the Sass internal <code>map.has-key()</code> function.</li>
     
       
       <div class="param-details text-block">
-        <p>The token name or path (using <code>-&gt;</code>) to lookup</p>
+        <p>Size name available in the <code>$source</code> map,
+or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
 
       </div>
     
@@ -1610,255 +1241,203 @@ the Sass internal <code>map.has-key()</code> function.</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$nested...:</span>
+        <span class="item-name">$value:</span>
       
-      
-      <span class="value-type">(*)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Optionally provide a nested token path as an arglist,
-rather than using the <code>-&gt;</code> syntax.</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(boolean)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Returns <code>true</code> if the requested token exists,
-or <code>false</code> if there is no token at the given<span class="widont">&nbsp;</span>path.</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$colors: (
-  &#39;brand&#39;: hsl(120, 50%, 50%),
-  &#39;button&#39;: (
-    &#39;background&#39;: &#39;#brand&#39;,
-  )
-);
-/*! brand: #{tools.has-token($colors, &#39;brand&#39;)} */
-/*! text: #{tools.has-token($colors, &#39;text&#39;)} */
-/*! button-&gt;background: #{tools.has-token($colors, &#39;button-&gt;background&#39;)} */
-/*! (button, background): #{tools.has-token($colors, &#39;button&#39;, &#39;background&#39;)} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! brand: true */
-/*! text: false */
-/*! button-&gt;background: true */
-/*! (button, background): true */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-  
-  
-  
-    <div class="requires-wrapper">
-      
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">lookup-alias()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="
-  token-config.html#variable--handle-missing-keys" class="item-name">$handle-missing-keys</a>
-      
-      
+      <span class="item-value">null</span>
       <span class="value-type">(string |<span class="widont">&nbsp;</span>null)</span>
       
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>Optional value for the variable,
+if different from the given <code>$size</code></p>
+
+      </div>
+    
   </div>
 
 
+      
         
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$sizes</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional map of sizes to use as a palette<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+
+      
+  
+
+      
+  
+
     
   </div>
 
   
-      
+
+
+  
   
     
-  <div data-item-section="used-by">
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
+);
+.example {
+  @include tools.size--(&#39;line&#39;);
+  @include tools.size--(&#39;padding&#39;, &#39;line&#39;, 1.5rem);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  --size-line: var(--size-rhythm, 24px);
+  --size-padding: var(--size-line, 1.5rem);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
@@ -1867,10 +1446,405 @@ or <code>false</code> if there is no token at the given<span class="widont">&nbs
       
       
         
+        
+        
 
         
           
           
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--var-size">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--var-size" class="item-name">var-size()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Access the CSS variable associated with a given token,
+along with a fallback value based on the token<span class="widont">&nbsp;</span>itself</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>2.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Initial release</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$size:</span>
+      
+      
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Size name available in the <code>$source</code> map</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$fallback:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(*)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The optional fallback value for a <code>var()</code> function:</p>
+<ul>
+<li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
+<li>A token name will fallback to the value of that
+css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+<li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
+</ul>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional Accoutrement map of sizes to use as<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>CSS variable call, in the format:
+<code>var(--&lt;token&gt;, &lt;fallback&gt;)</code></p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">tools.$sizes: (
+  &#39;_root&#39;: 16px,
+  &#39;rhythm&#39;: &#39;#_root&#39; (&#39;times&#39;: 1.5),
+  &#39;line&#39;: &#39;#rhythm&#39;,
+);
+.example {
+  line-height: tools.var-size(&#39;line&#39;);
+  padding: tools.var-size(&#39;rhythm&#39;, 1.5em);
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.example {
+  line-height: var(--size-line, 24px);
+  padding: var(--size-rhythm, 1.5em);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
   
   
   
@@ -1883,11 +1857,12 @@ or <code>false</code> if there is no token at the given<span class="widont">&nbs
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <span class="item-name">default-contrast()</span>
+        <a href="
+  token-vars.html#function--var-token" class="item-name">var-token()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -1897,6 +1872,37 @@ or <code>false</code> if there is no token at the given<span class="widont">&nbs
         
       
         
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  scale-vars.html#variable--size-var-prefix" class="item-name">$size-var-prefix</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
 
         
       
@@ -1904,8 +1910,9 @@ or <code>false</code> if there is no token at the given<span class="widont">&nbs
   </div>
 
   
+    
+  
 
-    </div>
   
 
   
