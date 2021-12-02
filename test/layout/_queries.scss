@@ -68,19 +68,19 @@
       );
     }
 
-    // @include it('Allows adjustment functions') {
-    //   @include assert-equal(
-    //     q.break('adjust'),
-    //     40em
-    //   );
-    // }
+    @include it('Allows adjustment functions') {
+      @include assert-equal(
+        q.break('adjust'),
+        40em
+      );
+    }
 
-    // @include it('Allows on-the-fly adjustments') {
-    //   @include assert-equal(
-    //     q.break('adjust', ('times': 2)),
-    //     80em
-    //   );
-    // }
+    @include it('Allows on-the-fly adjustments') {
+      @include assert-equal(
+        q.break('adjust', ('times': 2)),
+        80em
+      );
+    }
 
     @include it('Get breakpoint from local source') {
       $local: ('new': 40em);
@@ -90,13 +90,13 @@
       );
     }
 
-    // @include it('Can turn off access to $sizes') {
-    //   $local: ('new': '#adjust');
-    //   @include assert-equal(
-    //     q.break('new', $source: $local, $scale: false),
-    //     'ERROR [break] `#adjust` is not a valid length or keyword for $break'
-    //   );
-    // }
+    @include it('Can turn off access to $sizes') {
+      $local: ('new': '#adjust');
+      @include assert-equal(
+        q.break('new', $source: $local, $scale: false),
+        'ERROR [break] `#adjust` is not a valid length or keyword for $break'
+      );
+    }
   }
 
 
