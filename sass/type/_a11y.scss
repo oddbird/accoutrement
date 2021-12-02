@@ -1,6 +1,7 @@
 // Hidden
 // ======
 
+
 /// # Accessibility
 ///
 /// A simple set of utilities
@@ -10,19 +11,23 @@
 ///
 /// @group type-a11y
 
+
 // Is Hidden
 // ---------
 /// Hide an element using either the `clip` or `position` method.
 /// @group type-a11y
 /// @param {'clip' | 'position'} $method ['clip'] -
 ///   The hiding method to use.
-@mixin is-hidden($method: 'clip') {
+@mixin is-hidden(
+  $method: 'clip'
+) {
   @if $method == 'position' {
     @include _a_is-hidden--position;
   } @else {
     @include _a_is-hidden--clip;
   }
 }
+
 
 // Is Hidden -- Position
 // ---------------------
@@ -35,6 +40,7 @@
   position: absolute;
   top: -9999px;
 }
+
 
 // Is Hidden -- Clip
 // -----------------

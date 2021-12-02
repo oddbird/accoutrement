@@ -1,6 +1,7 @@
 // Box Sizing
 // ==========
 
+
 // Global Box Sizing
 // -----------------
 /// Establish gloabl box-sizing within any scope.
@@ -17,7 +18,9 @@
 ///
 /// @param {border-box | content-box} $box [border-box] -
 ///   The box-sizing model to establish globally.
-@mixin global-box-sizing($box: border-box) {
+@mixin global-box-sizing(
+  $box: border-box
+) {
   * {
     &,
     &::before,

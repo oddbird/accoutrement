@@ -4,14 +4,10 @@
 @use '../../sass/tokens/vars';
 
 @include test-module('tokens/vars') {
+
   $test: (
-    '_brand': hsl(120deg 50% 50%),
-    'text': '#_brand'
-      (
-        'color.scale': (
-          'lightness': -50%,
-        ),
-      ),
+    '_brand': hsl(120, 50%, 50%),
+    'text': '#_brand' ('color.scale': ('lightness': -50%)),
     'border': '#text',
     'private-alias': '#_brand',
     'multi': '#border',
@@ -51,6 +47,7 @@
     }
   }
 
+
   // Token-- [mixin]
   // ---------------
   @include describe('Token-- [mixin]') {
@@ -58,7 +55,7 @@
       '_private': blue,
       'simple': red,
       'kevin': '#_private',
-      'thread': '#kevin',
+      'thread': '#kevin'
     );
 
     @include it('Generates a single variable from a token') {
@@ -96,6 +93,7 @@
         }
       }
     }
+
 
     @include it('Optionally adds a fallback value') {
       @include assert {
@@ -194,6 +192,7 @@
     }
   }
 
+
   // As-Var [function]
   // -----------------
   @include describe('As-Var [function]') {
@@ -205,7 +204,10 @@
     }
 
     @include it('Optionally uses no fallback') {
-      @include assert-equal(vars.var-token($test, 'text', false), var(--text));
+      @include assert-equal(
+        vars.var-token($test, 'text', false),
+        var(--text)
+      );
     }
 
     @include it('Optionally uses var fallback') {
@@ -241,6 +243,7 @@
       );
     }
   }
+
 
   // Token-- [mixin]
   // -----------------

@@ -63,6 +63,7 @@
 /// @type map
 $colors: () !default;
 
+
 // Add Colors
 // ----------
 /// Merge individual color maps into the global `$colors` variable,
@@ -96,9 +97,12 @@ $colors: () !default;
 /// @output -
 ///   An updated global `$colors` variable,
 ///   with new maps merged in.
-@mixin add-colors($maps...) {
+@mixin add-colors (
+  $maps...
+) {
   $colors: map.multi-merge($colors, $maps...) !global;
 }
+
 
 // Color
 // -----
@@ -145,7 +149,11 @@ $colors: () !default;
 /// @return {color} -
 ///   A calculated css-ready color,
 ///   based on your global color palette and adjustments.
-@function color($color, $do: null, $source: $colors) {
+@function color(
+  $color,
+  $do: null,
+  $source: $colors
+) {
   $source: sass-map.merge(config.contrast-settings(), $source);
 
   @if (meta.type-of($color) == 'color') {

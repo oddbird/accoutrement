@@ -1,6 +1,7 @@
 /// # Accessing Sizes
 /// @group scale-sizes
 
+
 // Size [function]
 // ---------------
 /// Access a named size in your `$sizes` map,
@@ -31,16 +32,19 @@
 ///   Optional accoutrement-format map of sizes to use as the origin palette
 /// @return {length} -
 ///   The calculated length, in the requested units.
-@function size($size, $do: null, $source: $sizes) {
+@function size(
+  $size,
+  $do: null,
+  $source: $sizes
+) {
   @if ($do) and (type-of($do) != 'map') {
-    $do: (
-      'to': $do,
-    );
+    $do: ('to': $do);
   }
 
   $size: get-token($source, $size, $do);
   @return if((type-of($size) == 'string'), unquote($size), $size);
 }
+
 
 // Negative [function]
 // -------------------
@@ -78,7 +82,11 @@
 ///   Optional accoutrement-format map of sizes to use as the origin palette
 /// @return {length} -
 ///   The calculated negative length, in the requested units.
-@function negative($size, $do: null, $source: $sizes) {
+@function negative(
+  $size,
+  $do: null,
+  $source: $sizes
+) {
   $size: size($size, $do, $source);
 
   @if (type-of($size) == 'string') {
@@ -91,6 +99,7 @@
 
   @return -1 * $size;
 }
+
 
 // Square [mixin]
 // --------------
@@ -129,7 +138,11 @@
 /// @output -
 ///   Equal CSS height and width properties,
 ///   set to the given size and units.
-@mixin square($size, $do: null, $source: $sizes) {
+@mixin square(
+  $size,
+  $do: null,
+  $source: $sizes
+) {
   $size: size($size, $do, $source);
 
   height: $size;

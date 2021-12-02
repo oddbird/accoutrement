@@ -7,32 +7,21 @@
 ///   and pseudo-elements.
 /// @group type
 
-@import 'config';
-@import 'helpers';
-@import 'normalize';
-@import 'a11y';
-@import 'fonts';
-@import 'font-vars';
-@import 'pseudo-elements';
+@forward 'config';
+@forward 'helpers' show font-url, import-font-face;
+@forward 'a11y';
+@forward 'fonts';
+@forward 'font-vars';
+@forward 'pseudo-elements';
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// If you want to import individual plugins,
-/// make sure you first import the shared core:
+/// You can also import the type module on its own:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/core';
-///   @import '<path-to>/accoutrement/sass/plugin/type';
+///   @use '<path-to>/accoutrement/sass/type';
 /// ```
-///
-/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-/// you can leave off most of the path:
-///
-/// ```scss
-///   @import 'accoutrement/core';
-///   @import 'accoutrement/plugin/type';
-/// ```
-/// @group scale
+/// @group type
 
 /// ## Webfont Configuration
 ///

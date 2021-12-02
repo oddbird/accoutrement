@@ -51,12 +51,12 @@ groups:
 #     scale-sizes: 'Size Maps'
 #     scale-vars: 'Sizes » CSS Variables'
 #     scale-units: 'Unit Conversion'
-#   'Type':
-#     type: 'QuickStart: Type'
-#     type-fonts: 'Font Maps'
-#     type-font-vars: 'Fonts » CSS Variables'
-#     type-a11y: 'Accessibility'
-#     type-pseudo: 'Pseudo Elements'
+  'Type':
+    type: 'QuickStart: Type'
+    type-fonts: 'Font Maps'
+    type-font-vars: 'Fonts » CSS Variables'
+    type-a11y: 'Accessibility'
+    type-pseudo: 'Pseudo Elements'
 
 herman:
   sass:

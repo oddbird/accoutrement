@@ -16,6 +16,7 @@
 /// which you can rename, access, or override as desired.
 /// @group animate-ease
 
+
 // Easing Map
 // ----------
 /// A variable storing the map of
@@ -42,6 +43,7 @@
 ///
 /// @group animate-ease
 $easing: () !default;
+
 
 // Deafalt Easings
 // ---------------
@@ -82,6 +84,7 @@ $EASING: (
   '_in-out-back': cubic-bezier(0.68, -0.55, 0.265, 1.55),
 );
 
+
 // Ease [function]
 // ---------------
 /// Access a named easing function in your `$easing` map.
@@ -103,12 +106,17 @@ $EASING: (
 ///   (in additional to the provided defaults)
 /// @return {length} -
 ///   The pre-defined easing
-@function ease($name: 'ease', $do: null, $source: $easing) {
+@function ease(
+  $name: 'ease',
+  $do: null,
+  $source: $easing
+) {
   $source: map.merge($EASING, $source);
   $name: tokens.get($source, $name, $do);
   @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
 }
 @include function.internal(meta.get-function('ease'), 'ease');
+
 
 // Add Easing
 // ----------
@@ -124,6 +132,8 @@ $EASING: (
 /// @output -
 ///   An updated global `$easing` variable,
 ///   with new maps merged in.
-@mixin add-easing($maps...) {
+@mixin add-easing(
+  $maps...
+) {
   $easing: utils.multi-merge($easing, $maps...) !global;
 }

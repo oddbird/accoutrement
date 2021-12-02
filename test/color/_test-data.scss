@@ -1,80 +1,38 @@
 @use '../../sass/color/utils'; /* in order to register tint/shade */
 
 $colors: (
-  'blue': hsl(195deg 85% 62%),
-  'orange': hsl(24deg 100% 62%),
-  'red': hsl(0deg 85% 62%),
+  'blue': hsl(195, 85%, 62%),
+  'orange': hsl(24, 100%, 62%),
+  'red': hsl(0, 85%, 62%),
+
   'simple': #969,
   'primary': '#red',
-  'secondary': '#primary'
-    (
-      'color.change': (
-        'alpha': 0.5,
-      ),
-      'color.adjust': (
-        'saturation': 25%,
-      ),
-    ),
-  'alpha': '#simple'
-    (
-      'color.change': (
-        'alpha': 0.5,
-      ),
-    ),
-  'wtf': '#secondary'
-    (
-      'color.adjust': (
-        'hue': 24deg,
-      ),
-    ),
+  'secondary': '#primary' (
+    'color.change': ('alpha': 0.5),
+    'color.adjust': ('saturation': 25%),
+  ),
+  'alpha': '#simple' ('color.change': ('alpha': 0.5)),
+  'wtf': '#secondary' ('color.adjust': ('hue': 24deg)),
   'hello': '#simple',
+
   'dark': #111,
   'light': #eee,
+
   'contrast-dark': '#dark',
   'contrast-light': '#light',
 );
 
 $grays: (
   'gray': gray,
-  'gray-dark-5': '#gray'
-    (
-      'shade': 76.9230769231%,
-    ),
-  'gray-dark-4': '#gray'
-    (
-      'shade': 46.1538461538%,
-    ),
-  'gray-dark-3': '#gray'
-    (
-      'shade': 15.3846153846%,
-    ),
+  'gray-dark-5': '#gray' ('shade': 76.9230769231%),
+  'gray-dark-4': '#gray' ('shade': 46.1538461538%),
+  'gray-dark-3': '#gray' ('shade': 15.3846153846%),
   'gray-dark-2': '#gray',
-  'gray-dark-1': '#gray'
-    (
-      'tint': 6.8965517241%,
-    ),
-  'gray-0': '#gray'
-    (
-      'tint': 20.6896551724%,
-    ),
-  'gray-light-1': '#gray'
-    (
-      'tint': 34.4827586207%,
-    ),
-  'gray-light-2': '#gray'
-    (
-      'tint': 48.275862069%,
-    ),
-  'gray-light-3': '#gray'
-    (
-      'tint': 62.0689655172%,
-    ),
-  'gray-light-4': '#gray'
-    (
-      'tint': 75.8620689655%,
-    ),
-  'gray-light-5': '#gray'
-    (
-      'tint': 89.6551724138%,
-    ),
+  'gray-dark-1': '#gray' ('tint': 6.8965517241%),
+  'gray-0': '#gray' ('tint': 20.6896551724%),
+  'gray-light-1': '#gray' ('tint': 34.4827586207%),
+  'gray-light-2': '#gray' ('tint': 48.275862069%),
+  'gray-light-3': '#gray' ('tint': 62.0689655172%),
+  'gray-light-4': '#gray' ('tint': 75.8620689655%),
+  'gray-light-5': '#gray' ('tint': 89.6551724138%),
 );

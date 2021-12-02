@@ -1,6 +1,14 @@
+@use 'sass:map';
+@use '../../../node_modules/sass-true/sass/true' as *;
+@use 'test-data' as data;
+@use '../../../sass/type/config';
+
+$_global: config.$fonts;
+config.$fonts: data.$fonts;
+
 // Configuration Tests
 // ===================
-@include test-module('Type: Config') {
+@include test-module('type/config') {
   @include describe('Add Font [mixin]') {
     $partial: (
       'name': 'FranklinGothic',
@@ -24,28 +32,28 @@
     );
 
     @include it('Adds a font to the global variable') {
-      @include assert-false(map-get($fonts, 'sans'));
+      @include assert-false(map.get(config.$fonts, 'sans'));
 
-      @include add-font('sans', $partial);
+      @include config.add-font('sans', $partial);
 
-      @include assert-equal(map-get($fonts, 'sans'), $partial);
+      @include assert-equal(map.get(config.$fonts, 'sans'), $partial);
     }
 
     @include it('Allows you to override with a force argument') {
-      @include assert-unequal(map-get($fonts, 'sans'), $franklin);
+      @include assert-unequal(map.get(config.$fonts, 'sans'), $franklin);
 
-      @include add-font('sans', $franklin, 'force');
+      @include config.add-font('sans', $franklin, 'force');
 
-      @include assert-equal(map-get($fonts, 'sans'), $franklin);
+      @include assert-equal(map.get(config.$fonts, 'sans'), $franklin);
     }
 
     @include it('Errors on existing font-key') {
-      $has: map-get($fonts, 'sans');
+      $has: map.get(config.$fonts, 'sans');
       @include assert-true($has);
 
       @include assert {
         @include output {
-          @include add-font('sans', 'any');
+          @include config.add-font('sans', 'any');
         }
 
         @include expect {
@@ -53,7 +61,9 @@
         }
       }
 
-      @include assert-equal(map-get($fonts, 'sans'), $has);
+      @include assert-equal(map.get(config.$fonts, 'sans'), $has);
     }
   }
 } // end module
+
+config.$fonts: $_global;

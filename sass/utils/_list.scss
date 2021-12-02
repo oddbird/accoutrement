@@ -35,13 +35,16 @@
 ///   The original list, with item removed
 /// @throws `$index` must be a non-zero integer
 /// @throws `$index` is too large for the list length
-@function remove-nth($list, $index) {
+@function remove-nth(
+  $list,
+  $index
+) {
   $result: template($list);
   $type: meta.type-of($index);
   $length: list.length($list);
 
   @if ($type != 'number') or ($index == 0) or (math.round($index) != $index) {
-    $got: 'got (#{$type}) `#{if(($type == ' null '), ' null ', $index)}`';
+    $got: 'got (#{$type}) `#{if(($type == 'null'), 'null', $index)}`';
     @return throw.error(
       '$index must be a non-zero integer, #{$got}',
       'remove-nth'
@@ -63,11 +66,8 @@
 
   @return $result;
 }
-@include function.internal(
-  meta.get-function('remove-nth'),
-  'remove-nth',
-  'list-remove-nth'
-);
+@include function.internal(meta.get-function('remove-nth'), 'remove-nth', 'list-remove-nth');
+
 
 // List From Template
 // ------------------
@@ -80,7 +80,12 @@
 ///   The original list to be matched
 /// @return {list} -
 ///   An empty list that matches the template
-@function template($template: ()) {
+@function template(
+  $template: ()
+) {
   // return the same type of list we were given…
-  @return join((), (), list.separator($template), list.is-bracketed($template));
+  @return join((), (),
+    list.separator($template),
+    list.is-bracketed($template)
+  );
 }

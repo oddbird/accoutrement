@@ -51,6 +51,7 @@
 ///   and supports the `outer->inner` nested token syntax.
 /// @group tokens
 
+
 // function registration
 // ---------------------
 @use 'register';
@@ -78,6 +79,7 @@
 ///   @import 'accoutrement/tokens';
 /// ```
 /// @group tokens
+
 
 /// ## [Token Maps](token-api.html)
 /// Using the map syntax,
@@ -117,6 +119,7 @@
 ///
 /// @group tokens
 
+
 // ## [Tokens » CSS Variables](core-vars.html)
 // CSS Variables provide a DOM-aware alternative
 // to the pre-processed Sass variables
@@ -144,6 +147,7 @@
 //   }
 //
 // @group tokens
+
 
 /// ## [Utility Functions](token-register.html)
 /// We provide a set of built-in

@@ -12,10 +12,7 @@ $breakpoints: (
   'meta': '#recursive',
   'useful': '#meta',
   'p-break': '#page',
-  'adjust': 20em
-    (
-      'times': 2,
-    ),
+  'adjust': 20em ('times': 2),
 );
 
 $aspect-ratios: (
@@ -28,7 +25,7 @@ $z-index: (
   'sidebar',
   'banner' 'active-nav' 'dropdown',
   'message',
-  'modal'
+  'modal',
 );
 
 @import 'layout/box-sizing';

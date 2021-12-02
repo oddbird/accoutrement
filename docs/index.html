@@ -240,7 +240,42 @@
       <a href="color-vars.html" data-nav="is-not-active">Color Tokens » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
-            </li></ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Type</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="type.html" data-nav="is-not-active">QuickStart: Type</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-fonts.html" data-nav="is-not-active">Font Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-font-vars.html" data-nav="is-not-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-a11y.html" data-nav="is-not-active">Accessibility</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="type-pseudo.html" data-nav="is-not-active">Pseudo Elements</a>
+    </li>
+  </ul>
+            </li>
+  
+    <li class="nav-item">
+      <a href="type-helpers.html" data-nav="is-not-active">type-helpers</a>
+    </li>
+  </ul>
     </div>
 
     
@@ -343,15 +378,15 @@ yarn add accoutrement [--dev]
 </code></pre>
 <p>Use what you<span class="widont">&nbsp;</span>need:</p>
 <pre><code class="lang-scss">// all the modules (these are functionally the same)
-@use '&lt;path-to&gt;/accoutrement';
-@use '&lt;path-to&gt;/accoutrement/sass/tools';
+@use &quot;&lt;path-to&gt;/accoutrement&quot;;
+@use &quot;&lt;path-to&gt;/accoutrement/sass/tools&quot;;
 
 // individual modules (at `/accoutrement/sass/&lt;name&gt;`)
-@use '&lt;path-to&gt;/accoutrement/sass/color';
+@use &quot;&lt;path-to&gt;/accoutrement/sass/color&quot;;
 </code></pre>
 <p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
 you can use the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
-<pre><code class="lang-scss">@use 'accoutrement';
+<pre><code class="lang-scss">@use &quot;accoutrement&quot;;
 </code></pre>
 <h2 id="modules-for-common-data-types">Modules for common data<span class="widont">&nbsp;</span>types</h2>
 <ul>
@@ -390,11 +425,8 @@ between design<span class="widont">&nbsp;</span>tokens:</p>
   // internal reference &amp; adjustments
   'gutter': '#root'
     (
-      'scale': (
-        '_major-third',
-        1,
-      ),
-      'convert-units': 'rem',
+      &quot;scale&quot;: ('_major-third', 1),
+      &quot;convert-units&quot;: &quot;rem&quot;,
     ),
 );
 </code></pre>

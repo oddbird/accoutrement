@@ -24,7 +24,9 @@
 ///   Pass any number of maps to be merged.
 /// @return {map} -
 ///   The merged map of easings.
-@function multi-merge($maps...) {
+@function multi-merge(
+  $maps...
+) {
   $return: ();
 
   @each $map in $maps {

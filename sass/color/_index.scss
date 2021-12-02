@@ -9,12 +9,14 @@
 /// [Herman]: https://www.oddbird.net/herman/
 /// @group color
 
+
 @forward 'config';
 @forward 'tokens';
 @forward 'contrast';
 @forward 'utils';
 @forward 'themes';
 @forward 'css-vars';
+
 
 /// ## Import
 ///
@@ -25,6 +27,7 @@
 ///   @use '<path-to>/accoutrement/sass/color';
 /// ```
 /// @group color
+
 
 /// ## Color Tokens
 /// If you are using the token syntax,
@@ -58,6 +61,7 @@
 /// @see color
 /// @group color
 
+
 /// ## Multiple Palettes
 /// You can also define your colors in smaller maps,
 /// and then add them to the global `$colors` variable
@@ -84,6 +88,7 @@
 /// ```
 /// @see add-colors
 /// @group color
+
 
 /// ## WCAG Contrast
 /// We'll also help you calculate WCAG-appropriate color contrasts.

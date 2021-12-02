@@ -16,49 +16,49 @@ times.$times: data.$times;
       @include assert-equal(times.time('fast'), 150ms);
     }
 
-    @include it('Get adjusted times') {
-      @include assert-equal(times.time('plus-name'), 152ms);
-    }
-
-    @include it('Makes on-the-fly adjustments') {
-      @include assert-equal(
-        times.time(
-          'plus-name',
-          (
-            'times': 2,
-          )
-        ),
-        304ms
-      );
-    }
-
-    @include it('Get time from local source') {
-      $local: (
-        'new': 34ms,
-      );
-      @include assert-equal(times.time('new', $source: $local), 34ms);
-    }
+       @include it('Get adjusted times') {
+    @include assert-equal(
+      times.time('plus-name'),
+      152ms
+    );
   }
 
-  // Add Times [mixin]
-  // -----------------
-  @include describe('Add Times [mixin]') {
-    $old: data.$times;
-    $a: (
-      'short': 150ms,
+  @include it('Makes on-the-fly adjustments') {
+    @include assert-equal(
+      times.time('plus-name', ('times': 2)),
+      304ms
     );
-    $b: (
-      'long': 2s,
-    );
-
-    @include times.add-times($a, $b);
-
-    @include it('Merges times, and updates global variable') {
-      @include assert-equal(times.$times, map.merge($old, map.merge($a, $b)));
-    }
-
-    data.$times: $old;
   }
+
+
+  @include it('Get time from local source') {
+    $local: ('new': 34ms);
+    @include assert-equal(
+      times.time('new', $source: $local),
+      34ms
+    );
+  }
+}
+
+
+// Add Times [mixin]
+// -----------------
+@include describe('Add Times [mixin]') {
+  $old: data.$times;
+  $a: ('short': 150ms);
+  $b: ('long': 2s);
+
+  @include times.add-times($a, $b);
+
+  @include it('Merges times, and updates global variable') {
+    @include assert-equal(
+      times.$times,
+      map.merge($old, map.merge($a, $b))
+    );
+  }
+
+  data.$times: $old;
+}
 } // end module
 
 times.$times: $_old;

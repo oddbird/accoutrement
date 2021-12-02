@@ -1,13 +1,16 @@
+@use '../../../node_modules/sass-true/sass/true' as *;
+@use '../../../sass/type/a11y';
+
 // A11y Tests
 // ==========
-@include test-module('Type: A11y') {
+@include test-module('type/a11y') {
   // Is Hidden
   // ---------
   @include describe('is-hidden [mixin]') {
     @include it('clip method') {
       @include assert('Hides content with clip property') {
         @include output {
-          @include is-hidden('clip');
+          @include a11y.is-hidden('clip');
         }
 
         @include expect {
@@ -25,7 +28,7 @@
     @include it('position method') {
       @include assert('Hides content with position property') {
         @include output {
-          @include is-hidden('position');
+          @include a11y.is-hidden('position');
         }
 
         @include expect {

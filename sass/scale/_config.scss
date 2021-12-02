@@ -3,11 +3,13 @@
 /// @group scale-sizes
 /// @access public
 
+
 // Browser Default Font Size
 // -------------------------
 /// The default font-size used by most browsers.
 /// @access private
 $_BROWSER-DEFAULT-FONT-SIZE: 16px;
+
 
 // Sizes
 // -----
@@ -50,6 +52,7 @@ $sizes: (
   'root': $_BROWSER-DEFAULT-FONT-SIZE,
 ) !default;
 
+
 // Add Sizes
 // ---------
 /// Merge individual size maps into the global `$sizes` variable,
@@ -77,6 +80,8 @@ $sizes: (
 /// @output -
 ///   An updated global `$sizes` variable,
 ///   with new maps merged in.
-@mixin add-sizes($maps...) {
+@mixin add-sizes(
+  $maps...
+) {
   $sizes: _a_map-multimerge($sizes, $maps...) !global;
 }

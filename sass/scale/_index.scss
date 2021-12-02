@@ -7,10 +7,12 @@
 /// - Access sizes on the fly
 /// @group scale
 
+
 @import 'config';
 @import 'units';
 @import 'size';
 @import 'css-vars';
+
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
@@ -30,6 +32,7 @@
 ///   @import 'accoutrement/plugin/scale';
 /// ```
 /// @group scale
+
 
 /// ## Sizes & Ratios
 /// Establish your palette of ratios (modular scales) and sizes:

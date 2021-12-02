@@ -29,7 +29,7 @@
     "lint:sass": "stylelint '**/*.scss' --fix",
     "lint:other": "prettier --write '**/*.{json,md,yml}'",
     "lint": "run-p lint:sass lint:other",
-    "docs": "sassdoc \"sass/**/!(layout|scale|type)/*.scss\"",
+    "docs": "sassdoc \"sass/**/!(layout|scale)/*.scss\"",
     "commit": "yarn test && yarn lint && yarn docs",
     "watch:sass": "chokidar '**/*.scss' -c yarn lint",
     "watch:tests": "chokidar './test/**' -c yarn test",

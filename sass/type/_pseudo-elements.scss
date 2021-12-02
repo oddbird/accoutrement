@@ -1,3 +1,4 @@
+@use 'sass:list';
 // Pseudo Elements
 // ===============
 
@@ -41,7 +42,7 @@
 ///   One or two values to be used for the `content` property.
 ///   A single string will be used `:before` and `:after`.
 @mixin wrap-content($content: '“' '”') {
-  $_before: nth($content, 1);
+  $_before: list.nth($content, 1);
 
   &::before,
   &::after {
@@ -49,9 +50,9 @@
     @content;
   }
 
-  @if length($content) > 1 {
+  @if list.length($content) > 1 {
     &::after {
-      content: nth($content, 2);
+      content: list.nth($content, 2);
     }
   }
 }

@@ -4,11 +4,15 @@
 @use 'sass:list' as l;
 
 @include test-module('utils/list') {
+
   // Remove Nth
   // ----------
   @include describe('Remove Nth [function]') {
     @include it('Returns a list with item removed') {
-      @include assert-equal(list.remove-nth('one' 'two' 3, 2), 'one' 3);
+      @include assert-equal(
+        list.remove-nth('one' 'two' 3, 2),
+        'one' 3
+      );
     }
 
     @include it('Returns a list with negative-indexed item removed') {
@@ -47,13 +51,14 @@
     }
   }
 
+
   // List Template
   // -------------
   @include describe('List Template [function]') {
     $space: 'one' 'two';
     $comma: ('one', 'two');
-    $b-space: [ 'one' 'two' ];
-    $b-comma: [ 'one', 'two' ];
+    $b-space: ['one' 'two'];
+    $b-comma: ['one', 'two'];
 
     @include it('Returns an empty list') {
       @include assert-equal(
@@ -69,21 +74,38 @@
     }
 
     @include it('Keeps the original space list-separator') {
-      @include assert-equal(l.separator(list.template($space)), 'space');
+      @include assert-equal(
+        l.separator(list.template($space)),
+        'space'
+      );
 
-      @include assert-equal(l.separator(list.template($b-space)), 'space');
+      @include assert-equal(
+        l.separator(list.template($b-space)),
+        'space'
+      );
     }
 
     @include it('Keeps the original comma list-separator') {
-      @include assert-equal(l.separator(list.template($b-comma)), 'comma');
+      @include assert-equal(
+        l.separator(list.template($b-comma)),
+        'comma'
+      );
 
-      @include assert-equal(l.separator(list.template($comma)), 'comma');
+      @include assert-equal(
+        l.separator(list.template($comma)),
+        'comma'
+      );
     }
 
     @include it('Keeps the original brackets or lack-of') {
-      @include assert-false(l.is-bracketed(list.template($comma)));
+      @include assert-false(
+        l.is-bracketed(list.template($comma))
+      );
 
-      @include assert-true(l.is-bracketed(list.template($b-space)));
+      @include assert-true(
+        l.is-bracketed(list.template($b-space))
+      );
     }
   }
+
 }

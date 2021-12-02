@@ -1,3 +1,13 @@
+@use '../../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/type/helpers';
+@use '../../sass/type/normalize';
+@use '../../../sass/type/config';
+@use 'test-data' as data;
+
+$_global: config.$fonts;
+config.$fonts: data.$fonts;
+config.$font-path: data.$font-path;
+
 // Test Font Helpers
 // =================
 @include test-module('Type: Helpers') {
@@ -6,19 +16,22 @@
   @include describe('Font URL [function]') {
     @include it('Returns base64 data with no changes') {
       $data: 'data:application/x-font-woff;charset=utf-8;base64...';
-      @include assert-equal(_a_font-url($data, 'woff'), $data);
+      @include assert-equal(helpers.format-url($data, 'woff'), $data);
     }
 
     @include it('Returns local names with no changes') {
       $local: 'this' 'and that';
-      @include assert-equal(_a_font-url($local, 'local'), $local);
+      @include assert-equal(helpers.format-url($local, 'local'), $local);
     }
 
     @include it('Adds file format extension when needed') {
-      @include assert-equal(_a_font-url('this-file', 'ttf'), 'this-file.ttf');
+      @include assert-equal(
+        helpers.format-url('this-file', 'ttf'),
+        'this-file.ttf'
+      );
 
       @include assert-equal(
-        _a_font-url('this-file.ttf', 'ttf'),
+        helpers.format-url('this-file.ttf', 'ttf'),
         'this-file.ttf',
         'no change when extension is provided'
       );
@@ -26,23 +39,23 @@
 
     @include it('Adds svgid when needed') {
       @include assert-equal(
-        _a_font-url('this-file', 'svgz', 'myID'),
+        helpers.format-url('this-file', 'svgz', 'myID'),
         'this-file.svgz#myID'
       );
 
       @include assert-equal(
-        _a_font-url('this-file.svg', 'svg', '#myID'),
+        helpers.format-url('this-file.svg', 'svg', '#myID'),
         'this-file.svg#myID'
       );
 
       @include assert-equal(
-        _a_font-url('this-file', 'ttf', 'myID'),
+        helpers.format-url('this-file', 'ttf', 'myID'),
         'this-file.ttf',
         'no change when wrong file type'
       );
 
       @include assert-equal(
-        _a_font-url('this-file.svg#myOtherID', 'svg', 'myID'),
+        helpers.format-url('this-file.svg#myOtherID', 'svg', 'myID'),
         'this-file.svg#myOtherID',
         'no change when hash exists'
       );
@@ -50,19 +63,19 @@
 
     @include it('Adds iefix when needed') {
       @include assert-equal(
-        _a_font-url('this-file', 'eot', $iefix: true),
+        helpers.format-url('this-file', 'eot', $iefix: true),
         'this-file.eot?#iefix',
         'adds hash if absent and requested'
       );
 
       @include assert-equal(
-        _a_font-url('this-file.eot?#iefix', 'eot', $iefix: true),
+        helpers.format-url('this-file.eot?#iefix', 'eot', $iefix: true),
         'this-file.eot?#iefix',
         'hash remains when present and requested'
       );
 
       @include assert-equal(
-        _a_font-url('this-file', 'eot', $iefix: false),
+        helpers.format-url('this-file', 'eot', $iefix: false),
         'this-file.eot',
         'no iefix by default'
       );
@@ -74,21 +87,21 @@
   @include describe('Font Src [function]') {
     @include it('Builds a src-list item based on path interpolation') {
       @include assert-equal(
-        _a_font-src('myfont', 'eot'),
-        font-url('myfont.eot?#iefix') format('embedded-opentype')
+        helpers.font-src('myfont', 'eot'),
+        helpers.font-url('myfont.eot?#iefix') format('embedded-opentype')
       );
     }
 
     @include it('Builds a src-list item based on explicit path') {
       @include assert-equal(
-        _a_font-src('myfont.eot?#ie', 'eot'),
-        font-url('myfont.eot?#ie') format('embedded-opentype')
+        helpers.font-src('myfont.eot?#ie', 'eot'),
+        helpers.font-url('myfont.eot?#ie') format('embedded-opentype')
       );
     }
 
-    @include it('Builds a src-list item based on dara-uri') {
+    @include it('Builds a src-list item based on data-uri') {
       @include assert-equal(
-        _a_font-src(
+        helpers.font-src(
           'data:application/font-ttf;charset=utf-8;base64,d09GMgABAAA',
           'ttf'
         ),
@@ -119,7 +132,7 @@
           format('woff')
       );
 
-      @include assert-equal(_a_font-src-list($variant), $src);
+      @include assert-equal(helpers.font-src-list($variant), $src);
     }
   }
 
@@ -153,7 +166,7 @@
         200: 'path-to-font',
       );
 
-      @include assert-equal(_a_font-get-variants($test), $expect);
+      @include assert-equal(helpers.font-get-variants($test), $expect);
     }
   }
 
@@ -163,11 +176,11 @@
     @include it('Creates a font-face import from font data') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data: _a_normalize-variant-data('path/to/myFont', 'woff' 'svg')
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'svg')
           );
         }
 
@@ -188,11 +201,11 @@
     @include it('Allows unicode range') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data: _a_normalize-variant-data('path/to/myFont', 'woff' 'svg'),
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'svg'),
             $unicode: (
               'U+0000-00FF',
               'U+0131',
@@ -220,11 +233,11 @@
     @include it('Allows font-display setting') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data: _a_normalize-variant-data('path/to/myFont', 'woff' 'svg'),
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'svg'),
             $display: 'fallback'
           );
         }
@@ -247,7 +260,7 @@
     @include it('Allows local font src') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
@@ -276,11 +289,11 @@
     @include it('Special handling for eot files') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
-            $data: _a_normalize-variant-data('path/to/myFont', 'woff' 'eot')
+            $data: normalize.variant-data('path/to/myFont', 'woff' 'eot')
           );
         }
 
@@ -303,12 +316,12 @@
     @include it('Special handling for eot files + data') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
             $data:
-              _a_normalize-variant-data(
+              normalize.variant-data(
                 (
                   'path': 'path/to/myFont',
                   'woff2':
@@ -344,7 +357,7 @@
     @include it('Special handling for eot files + local()') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
@@ -381,7 +394,7 @@
     @include it('Single block if eot files use base64') {
       @include assert {
         @include output(false) {
-          @include _a_import-font-face(
+          @include helpers.import-font-face(
             $name: 'Source Sans Pro',
             $weight: 'bold',
             $style: 'normal',
@@ -411,3 +424,6 @@
     }
   }
 } // end module
+
+config.$fonts: $_global;
+config.$font-path: $_global;

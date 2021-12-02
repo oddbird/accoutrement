@@ -9,6 +9,8 @@ easing.$easing: data.$easing;
 // Easing Tests
 // ============
 @include test-module('animate/easing') {
+
+
   // Ease [function]
   // ---------------
   @include describe('Ease [function]') {
@@ -35,34 +37,28 @@ easing.$easing: data.$easing;
 
     @include it('Applies on-the-fly adjustments') {
       @include assert-equal(
-        easing.ease(
-          'sidebar-in',
-          (
-            'str-replace': 0.03 0.25,
-          )
-        ),
+        easing.ease('sidebar-in', ('str-replace': 0.03 0.25)),
         cubic-bezier(0.455, 0.25, 0.515, 0.955)
       );
     }
 
     @include it('Get easing from local map') {
-      $local: (
-        'name': 'ease-in-out',
+      $local: ('name': 'ease-in-out');
+      @include assert-equal(
+        easing.ease('name', $source: $local),
+        ease-in-out
       );
-      @include assert-equal(easing.ease('name', $source: $local), ease-in-out);
     }
+
   }
+
 
   // Add Ease [mixin]
   // ----------------
   @include describe('Add Ease [mixin]') {
     $outer: easing.$easing;
-    $a: (
-      'sidebar-in': '#_in-out-quad',
-    );
-    $b: (
-      'elastic': '#_in-out-back',
-    );
+    $a: ('sidebar-in': '#_in-out-quad');
+    $b: ('elastic': '#_in-out-back');
 
     @include easing.add-easing($a, $b);
 
@@ -75,6 +71,7 @@ easing.$easing: data.$easing;
 
     easing.$easing: $outer;
   }
+
 } // end module
 
 easing.$easing: $_old;
