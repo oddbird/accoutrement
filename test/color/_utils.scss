@@ -8,6 +8,7 @@ $_old: tokens.$colors;
 tokens.$colors: data.$colors;
 
 @include test-module('color/utils') {
+
   // Tint [function]
   // ---------------
   @include describe('Tint [function]') {
@@ -27,6 +28,7 @@ tokens.$colors: data.$colors;
     }
   }
 
+
   // Shade [function]
   // ----------------
   @include describe('Shade [function]') {
@@ -45,6 +47,7 @@ tokens.$colors: data.$colors;
       );
     }
   }
+
 } // end module
 
 tokens.$colors: $_old;

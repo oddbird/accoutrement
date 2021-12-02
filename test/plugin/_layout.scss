@@ -5,27 +5,27 @@ $sizes: (
   'off-canvas': 30em,
   'page': 50em,
 );
+
 $breakpoints: (
   'off-canvas': 45em,
   'recursive': '#off-canvas',
   'meta': '#recursive',
   'useful': '#meta',
   'p-break': '#page',
-  'adjust': 20em
-    (
-      'times': 2,
-    ),
+  'adjust': 20em ('times': 2),
 );
+
 $aspect-ratios: (
   'mine': 13 / 4,
   'retro': '#_classic',
 );
+
 $z-index: (
   'main',
   'sidebar',
   'banner' 'active-nav' 'dropdown',
   'message',
-  'modal'
+  'modal',
 );
 
 @import 'layout/box-sizing';

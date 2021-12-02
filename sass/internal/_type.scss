@@ -16,14 +16,22 @@
 /// @return {string} -
 ///   The error message as a string, if errors are being caught
 /// @throws A compiled error message with all the details
-@function error($value, $valid, $origin: null, $arg: null) {
+@function error(
+  $value,
+  $valid,
+  $origin: null,
+  $arg: null
+) {
   $type: meta.type-of($value);
   $in: if((list.length($valid) > 1), 'in types:', 'a');
   $arg: if($arg, ' `#{$arg}`', '');
   $start: 'Argument#{$arg} must be #{$in} #{$valid};';
   $value: if($value == null, '`null`', '(#{$type}) `#{$value}`');
 
-  @return throw.error('#{$start} got #{$value}', $origin);
+  @return throw.error(
+    '#{$start} got #{$value}',
+    $origin
+  );
 }
 
 // Check [function]
@@ -49,7 +57,7 @@
   $valid,
   $throw: false,
   $origin: 'type.check',
-  $arg: '$valid'
+  $arg: '$valid',
 ) {
   // validate types
   @if not list.index('list' 'string', meta.type-of($valid)) {
@@ -68,7 +76,7 @@
   }
 
   // error
-  @if  $throw {
+  @if ($throw) {
     @return error($value, $valid, $origin, $arg);
   }
 
@@ -90,7 +98,11 @@
 ///   The value type, if it passes the type check
 /// @throws `$invalid` is not a string or list
 /// @throws Type-of `$value` is considered invalid
-@function exclude($value, $invalid, $throw: false) {
+@function exclude(
+  $value,
+  $invalid,
+  $throw: false
+) {
   // validate types
   @if not list.index('list' 'string', meta.type-of($invalid)) {
     @return throw.error(
@@ -104,7 +116,7 @@
 
   @if list.index($invalid, $type) {
     // error
-    @if  $throw {
+    @if ($throw) {
       @return error($value, $invalid);
     }
 

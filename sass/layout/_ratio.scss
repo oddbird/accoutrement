@@ -1,6 +1,7 @@
 // Ratios
 // ------
 
+
 // Fluid Ratio [mixin]
 // -------------------
 /// Establish a fluid-height container based on an aspect ratio.
@@ -39,6 +40,7 @@
   width: $width;
 }
 
+
 // Fluid Ratio [function]
 // ----------------------
 /// Return a padding-height
@@ -67,7 +69,11 @@
 ///   (in addition to the provided defaults)
 /// @return {percentage} -
 ///   A fluid height, based on the width and ratio.
-@function fluid-ratio($ratio: '_widescreen', $width: 100%, $source: $ratios) {
+@function fluid-ratio(
+  $ratio: '_widescreen',
+  $width: 100%,
+  $source: $ratios
+) {
   $ratio: ratio($ratio, $source: $source);
 
   @return (1 / $ratio) * $width;

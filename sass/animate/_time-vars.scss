@@ -1,5 +1,10 @@
+@use 'times';
+@use '../tokens';
+@use 'sass:map';
+
 /// # Times » CSS Variables
 /// @group animate-time-vars
+
 
 // Time Var Prefix
 // ----------------
@@ -18,12 +23,13 @@
 /// @group animate-time-vars
 ///
 /// @example scss
-///   $times: ('my-time': 1s);
-///   $time-var-prefix: 'prefix_';
-///   html { @include time--('my-time') }
+///   tools.$times: ('my-time': 1s);
+///   tools.$time-var-prefix: 'prefix_';
+///   html { @include tools.time--('my-time') }
 ///
 /// @type string
 $time-var-prefix: 'time-' !default;
+
 
 // Times--
 // --------
@@ -41,13 +47,13 @@ $time-var-prefix: 'time-' !default;
 ///
 /// @group animate-time-vars
 /// @example scss
-///   $times: (
+///   tools.$times: (
 ///     '_fast': 200ms,
 ///     'text': '#_fast',
 ///     'fade': '#text',
 ///   );
 ///   html {
-///     @include times--;
+///     @include tools.times--;
 ///   }
 ///
 /// @param {map} $source [$times] -
@@ -55,9 +61,12 @@ $time-var-prefix: 'time-' !default;
 ///   map of times to set as css variables
 /// @output
 ///   Custom properties for all public times in the map
-@mixin times--($source: $times) {
-  @include tokens--($source, $time-var-prefix);
+@mixin times--(
+  $source: times.$times
+) {
+  @include tokens.tokens--($source, $time-var-prefix);
 }
+
 
 // Time--
 // -------
@@ -69,14 +78,14 @@ $time-var-prefix: 'time-' !default;
 ///
 /// @group animate-time-vars
 /// @example scss
-///   $times: (
+///   tools.$times: (
 ///     '_brand': 200ms,
 ///     'text': '#_brand' ('plus': 50ms),
 ///     'fade': '#text',
 ///   );
 ///   .example {
-///     @include time--('fade');
-///     @include time--('color-change', 'fade', 0.2s);
+///     @include tools.time--('fade');
+///     @include tools.time--('color-change', 'fade', 0.2s);
 ///   }
 ///
 /// @param {*} $time -
@@ -93,9 +102,15 @@ $time-var-prefix: 'time-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$times] -
 ///   Optional map of times to use as a palette source
-@mixin time--($time, $value: null, $fallback: true, $source: $times) {
-  @include token--($source, $time, $value, $fallback, $time-var-prefix);
+@mixin time--(
+  $time,
+  $value: null,
+  $fallback: true,
+  $source: times.$times
+) {
+  @include tokens.token--($source, $time, $value, $fallback, $time-var-prefix);
 }
+
 
 // Var Time
 // ---------
@@ -107,13 +122,13 @@ $time-var-prefix: 'time-' !default;
 ///
 /// @group animate-time-vars
 /// @example scss
-///   $times: (
+///   tools.$times: (
 ///     '_fast': 200ms,
 ///     'text': '#_fast' ('plus': 50ms),
 ///     'fade': '#text',
 ///   );
 ///   .example {
-///     transition: opacity var-time('fade'), color var-time('text', 150ms);
+///     transition: opacity tools.var-time('fade'), color tools.var-time('text', 150ms);
 ///   }
 ///
 /// @param {*} $time -
@@ -129,6 +144,10 @@ $time-var-prefix: 'time-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-time($time, $fallback: true, $source: $times) {
-  @return var-token($source, $time, $fallback, $time-var-prefix);
+@function var-time(
+  $time,
+  $fallback: true,
+  $source: times.$times
+) {
+  @return tokens.var-token($source, $time, $fallback, $time-var-prefix);
 }

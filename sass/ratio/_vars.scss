@@ -6,6 +6,7 @@
 /// # Ratio Tokens » CSS Variables
 /// @group ratio-vars
 
+
 // Ratio Var Prefix
 // ----------------
 /// Set a prefix for all ratio-tokens,
@@ -25,6 +26,7 @@
 ///
 /// @type string
 $ratio-var-prefix: 'ratio-' !default;
+
 
 // Ratios--
 // --------
@@ -55,10 +57,13 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   map of ratios to set as css variables
 /// @output
 ///   Custom properties for all public ratios in the map
-@mixin ratios--($source: tokens.$ratios) {
+@mixin ratios--(
+  $source: tokens.$ratios
+) {
   $source: map.merge(utils.$named-ratios, $source);
   @include vars.tokens--($source, $ratio-var-prefix);
 }
+
 
 // Ratio--
 // -------
@@ -93,10 +98,16 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$ratios] -
 ///   Optional map of ratios to use as a palette source
-@mixin ratio--($ratio, $value: null, $fallback: true, $source: tokens.$ratios) {
+@mixin ratio--(
+  $ratio,
+  $value: null,
+  $fallback: true,
+  $source: tokens.$ratios
+) {
   $source: map.merge(utils.$named-ratios, $source);
   @include vars.token--($source, $ratio, $value, $fallback, $ratio-var-prefix);
 }
+
 
 // Var Ratio
 // ---------
@@ -130,7 +141,11 @@ $ratio-var-prefix: 'ratio-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-ratio($ratio, $fallback: true, $source: tokens.$ratios) {
+@function var-ratio(
+  $ratio,
+  $fallback: true,
+  $source: tokens.$ratios
+) {
   $source: map.merge(utils.$named-ratios, $source);
   @return vars.var-token($source, $ratio, $fallback, $ratio-var-prefix);
 }

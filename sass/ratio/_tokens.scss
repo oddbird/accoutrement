@@ -28,6 +28,7 @@
 /// @see named-ratios
 $ratios: () !default;
 
+
 // Ratio [function]
 // ----------------
 /// Retrieve a scale ratio by name
@@ -54,11 +55,16 @@ $ratios: () !default;
 ///   (in addition to the provided defaults)
 /// @return {number} -
 ///   The numeric value of a ratio
-@function ratio($ratio, $do: null, $source: $ratios) {
+@function ratio(
+  $ratio,
+  $do: null,
+  $source: $ratios
+) {
   $source: map.merge(utils.$named-ratios, $source);
   @return tokens.get($source, $ratio, $do);
 }
 @include function.internal(meta.get-function('ratio'), 'ratio');
+
 
 // Add Ratios
 // ----------
@@ -78,6 +84,8 @@ $ratios: () !default;
 /// @output -
 ///   An updated global `$ratios` variable,
 ///   with new maps merged in.
-@mixin add-ratios($maps...) {
+@mixin add-ratios(
+  $maps...
+) {
   $ratios: utils-map.multi-merge($ratios, $maps...) !global;
 }

@@ -1,9 +1,16 @@
+@use '../internal/function';
+@use '../tokens';
+@use '../utils/map' as utils;
+@use 'sass:meta';
+@use 'sass:list';
+
 /// # Combined "Change" Maps: Animations & Transitions
 /// Combine your `$times` and `$easing` values
 /// to create entire transitions and animations --
 /// all stored in one place and easy to access
 /// for consistent "changes" across your project.
 /// @group animate-change
+
 
 // Changes Map
 // -----------
@@ -47,6 +54,7 @@
 /// @group animate-change
 $changes: () !default;
 
+
 // Change [function]
 // -----------------
 /// Access a named change in your `$changes` map.
@@ -67,10 +75,15 @@ $changes: () !default;
 ///   Optional accoutrement-format map of changes to use as the origin palette
 /// @return {length} -
 ///   The change value requested
-@function change($name, $do: null, $source: $changes) {
-  @return get-token($source, $name, $do);
+@function change(
+  $name,
+  $do: null,
+  $source: $changes
+) {
+  @return tokens.get($source, $name, $do);
 }
-@include register-internal('change');
+@include function.internal(meta.get-function('change'), 'change');
+
 
 // Add Changes
 // -----------
@@ -86,9 +99,12 @@ $changes: () !default;
 /// @output -
 ///   An updated global `$changes` variable,
 ///   with new maps merged in.
-@mixin add-changes($maps...) {
-  $changes: _a_map-multimerge($changes, $maps...) !global;
+@mixin add-changes(
+  $maps...
+) {
+  $changes: utils.multi-merge($changes, $maps...) !global;
 }
+
 
 // Animate [mixin]
 // ---------------
@@ -97,26 +113,29 @@ $changes: () !default;
 ///
 /// @group animate-change
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     'fade-in': fade-in 300ms ease-out both,
 ///   );
 ///   .example {
-///     @include animate('fade-in');
+///     @include tools.animate('fade-in');
 ///   }
 ///
 /// @param {string} $names -
 ///   Named animations to apply
 /// @output -
 ///   The requested animations, applied in CSS
-@mixin animate($names...) {
-  $animation: join((), (), 'comma');
+@mixin animate(
+  $names...
+) {
+  $animation: list.join((), (), 'comma');
 
   @each $name in $names {
-    $animation: append($animation, change($name));
+    $animation: list.append($animation, change($name));
   }
 
   animation: $animation;
 }
+
 
 // Transition [mixin]
 // ------------------
@@ -125,22 +144,24 @@ $changes: () !default;
 ///
 /// @group animate-change
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     'fade': opacity 300ms ease-out,
 ///   );
 ///   .example {
-///     @include transition('fade');
+///     @include tools.transition('fade');
 ///   }
 ///
 /// @param {string} $names -
 ///   Named transitions to apply
 /// @output -
 ///   The requested transitions, applied in CSS
-@mixin transition($names...) {
-  $transition: join((), (), 'comma');
+@mixin transition(
+  $names...
+) {
+  $transition: list.join((), (), 'comma');
 
   @each $name in $names {
-    $transition: append($transition, change($name));
+    $transition: list.append($transition, change($name));
   }
 
   transition: $transition;

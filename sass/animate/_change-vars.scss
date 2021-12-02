@@ -1,5 +1,10 @@
+@use 'change';
+@use '../tokens';
+@use 'sass:map';
+
 /// # Changes » CSS Variables
 /// @group animate-change-vars
+
 
 // Change Var Prefix
 // ----------------
@@ -18,12 +23,13 @@
 /// @group animate-change-vars
 ///
 /// @example scss
-///   $changes: ('my-change': pink);
-///   $change-var-prefix: 'prefix_';
-///   html { @include change--('my-change') }
+///   tools.$changes: ('my-change': pink);
+///   tools.$change-var-prefix: 'prefix_';
+///   html { @include tools.change--('my-change') }
 ///
 /// @type string
 $change-var-prefix: 'change-' !default;
+
 
 // Changes--
 // --------
@@ -41,13 +47,13 @@ $change-var-prefix: 'change-' !default;
 ///
 /// @group animate-change-vars
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     '_brand': hsl(120, 50%, 50%),
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
 ///   html {
-///     @include changes--;
+///     @include tools.changes--;
 ///   }
 ///
 /// @param {map} $source [$changes] -
@@ -55,9 +61,12 @@ $change-var-prefix: 'change-' !default;
 ///   map of changes to set as css variables
 /// @output
 ///   Custom properties for all public changes in the map
-@mixin changes--($source: $changes) {
-  @include tokens--($source, $change-var-prefix);
+@mixin changes--(
+  $source: change.$changes
+) {
+  @include tokens.tokens--($source, $change-var-prefix);
 }
+
 
 // Change--
 // -------
@@ -69,14 +78,14 @@ $change-var-prefix: 'change-' !default;
 ///
 /// @group animate-change-vars
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     '_brand': hsl(120, 50%, 50%),
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
 ///   .example {
-///     @include change--('border');
-///     @include change--('outline', 'border', red);
+///     @include tools.change--('border');
+///     @include tools.change--('outline', 'border', red);
 ///   }
 ///
 /// @param {*} $change -
@@ -93,9 +102,15 @@ $change-var-prefix: 'change-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$changes] -
 ///   Optional map of changes to use as a palette source
-@mixin change--($change, $value: null, $fallback: true, $source: $changes) {
-  @include token--($source, $change, $value, $fallback, $change-var-prefix);
+@mixin change--(
+  $change,
+  $value: null,
+  $fallback: true,
+  $source: change.$changes
+) {
+  @include tokens.token--($source, $change, $value, $fallback, $change-var-prefix);
 }
+
 
 // Var Change
 // ---------
@@ -107,14 +122,14 @@ $change-var-prefix: 'change-' !default;
 ///
 /// @group animate-change-vars
 /// @example scss
-///   $changes: (
+///   tools.$changes: (
 ///     '_brand': hsl(120, 50%, 50%),
 ///     'text': '#_brand' ('shade': 50%),
 ///     'border': '#text',
 ///   );
 ///   .example {
-///     border-change: var-change('border');
-///     change: var-change('text', black);
+///     border-change: tools.var-change('border');
+///     change: tools.var-change('text', black);
 ///   }
 ///
 /// @param {*} $change -
@@ -130,6 +145,10 @@ $change-var-prefix: 'change-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-change($change, $fallback: true, $source: $changes) {
-  @return var-token($source, $change, $fallback, $change-var-prefix);
+@function var-change(
+  $change,
+  $fallback: true,
+  $source: change.$changes
+) {
+  @return tokens.var-token($source, $change, $fallback, $change-var-prefix);
 }

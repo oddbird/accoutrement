@@ -3,6 +3,7 @@
 @use '../../sass/internal/type';
 
 @include test-module('utils/map') {
+
   // Merge [function]
   // ----------------
   @include describe('Multi-Merge [function]') {
@@ -10,12 +11,8 @@
       'one': 1,
       'two': 2,
     );
-    $b: (
-      'two': 'tooooo',
-    );
-    $c: (
-      'three': 3,
-    );
+    $b: ('two': 'tooooo');
+    $c: ('three': 3);
 
     @include it('Merges multiple maps') {
       @include assert-equal(
@@ -36,7 +33,11 @@
     }
 
     @include it('Accepts empty maps') {
-      @include assert-equal(map.multi-merge($a, ()), $a);
+      @include assert-equal(
+        map.multi-merge($a, ()),
+        $a
+      );
     }
   }
+
 }

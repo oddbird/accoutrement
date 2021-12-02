@@ -24,16 +24,22 @@
 ///   Any Sass value that can be reliably converted to a string
 /// @return {string} -
 ///   The stringified value
-@function force($value) {
+@function force(
+  $value,
+) {
   $value: $value or '';
   $type: type.exclude($value, 'map');
 
-  @if  not $type {
-    @return throw.error('Maps cannot be converted to strings', 'string-force');
+  @if (not $type) {
+    @return throw.error(
+      'Maps cannot be converted to strings',
+      'string-force'
+    );
   }
 
   @return if(($type == 'string'), $value, '#{$value}');
 }
+
 
 // String Replace
 // --------------
@@ -70,19 +76,21 @@
 ///   If true, replace all instances of $old in $string
 /// @return {string} -
 ///   Original string, with substring replaced
-@function replace($string, $old, $new: '', $all: false) {
+@function replace(
+  $string,
+  $old,
+  $new: '',
+  $all: false
+) {
   $return: $string;
   $type: meta.type-of($string);
 
-  @if  type-of($string) == 'map' {
-    @return throw.error(
-      '`$string` parameter cannot be a map',
-      'string-replace'
-    );
+  @if (type-of($string) == 'map') {
+    @return throw.error('`$string` parameter cannot be a map', 'string-replace');
   }
 
   // Loops lists
-  @if  $type == 'list' {
+  @if ($type == 'list') {
     $return: l.template($string);
     @each $item in $string {
       $item: replace($item, $old, $new, $all);
@@ -121,11 +129,8 @@
 
   @return $return;
 }
-@include function.internal(
-  meta.get-function('replace'),
-  'replace',
-  'str-replace'
-);
+@include function.internal(meta.get-function('replace'), 'replace', 'str-replace');
+
 
 // Interpolate
 // -----------
@@ -155,7 +160,10 @@
 /// @return {string} -
 ///   Original string, with `%s` format strings replaced
 /// @throws Too many interpolation values given for the string
-@function interpolate($string, $values...) {
+@function interpolate(
+  $string,
+  $values...
+) {
   @if not type.check($string, 'string') {
     @return type.error($string, 'string', 'interpolate', '$string');
   }
@@ -176,12 +184,8 @@
 
   @return $return;
 }
-@include function.internal(
-  meta.get-function('interpolate'),
-  'interpolate',
-  '%s',
-  'str-interpolate'
-);
+@include function.internal(meta.get-function('interpolate'), 'interpolate', '%s', 'str-interpolate');
+
 
 // Split
 // -----
@@ -219,10 +223,14 @@
 ///   Maximum length of the returned list
 /// @return {list} -
 ///   Space-delimited list of string-slices from the original string
-@function split($string, $separator: null, $limit: null) {
+@function split(
+  $string,
+  $separator: null,
+  $limit: null
+) {
   $list: ();
 
-  @if  not $separator) or ($string == '' {
+  @if (not $separator) or ($string == '') {
     @return list.append($list, $string);
   }
 
@@ -233,20 +241,20 @@
   $index: string.index($string, $separator);
 
   @for $i from 1 through $limit {
-    @if  $string {
+    @if ($string) {
       $slice: null;
 
-      @if  $separator == '' {
+      @if ($separator == '') {
         $length: string.length($string);
 
-        @if  $length > 1 {
+        @if ($length > 1) {
           $slice: string.slice($string, 1, 1);
           $string: string.slice($string, 2);
         } @else {
           $slice: if(($length == 1), $string, '');
           $string: null;
         }
-      } @else if $index {
+      } @else if ($index) {
         $slice: string.slice($string, 1, $index - 1);
         $string: string.slice($string, $index + string.length($separator));
         $index: string.index($string, $separator);
@@ -260,6 +268,7 @@
   @return $list;
 }
 @include function.internal(meta.get-function('split'), 'split', 'str-split');
+
 
 // Trim
 // ----
@@ -287,7 +296,9 @@
 ///   The original string to be trimmed
 /// @return {string} -
 ///   Trimmed string
-@function trim($string) {
+@function trim(
+  $string
+) {
   @if not type.check($string, 'string') {
     @return type.error($string, 'string', 'trim', '$string');
   }
@@ -295,7 +306,7 @@
   $first: (string.slice($string, 1, 1) == ' ');
   $last: (string.slice($string, -1) == ' ');
 
-  @if  $first or $last {
+  @if ($first or $last) {
     $string: if($first, string.slice($string, 2), $string);
     $string: if($last, string.slice($string, 1, -2), $string);
     $string: trim($string);

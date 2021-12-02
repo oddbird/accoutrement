@@ -9,12 +9,14 @@
 /// [Herman]: https://www.oddbird.net/herman/
 /// @group color
 
+
 @forward 'config';
 @forward 'tokens';
 @forward 'contrast';
 @forward 'utils';
 @forward 'themes';
 @forward 'css-vars';
+
 
 /// ## Import
 ///
@@ -26,13 +28,14 @@
 /// ```
 /// @group color
 
+
 /// ## Color Tokens
 /// If you are using the token syntax,
 /// establish your color palette,
 /// with the standard [Token syntax](tokens.html):
 ///
 /// ```scss
-/// tools.$colors: (
+/// $colors: (
 ///   // set explicit colors
 ///   'brand-pink': hsl(330, 85%, 62%),
 ///   'brand-light': #ddf,
@@ -51,12 +54,13 @@
 ///
 /// ```scss
 /// .example {
-///   border-color: tools.color('border');
+///   border-color: color('border');
 /// }
 /// ```
 /// @see $colors
 /// @see color
 /// @group color
+
 
 /// ## Multiple Palettes
 /// You can also define your colors in smaller maps,
@@ -85,6 +89,7 @@
 /// @see add-colors
 /// @group color
 
+
 /// ## WCAG Contrast
 /// We'll also help you calculate WCAG-appropriate color contrasts.
 /// You can set the `$contrast-light` & `$contrast-dark` configuration variables
@@ -97,12 +102,12 @@
 /// ```scss
 /// a:hover {
 ///   // set a background, and get well-contrasted text
-///   @include tools.contrasted('link');
-///   @include tools.contrasted(rebeccapurple);
+///   @include contrasted('link');
+///   @include contrasted(rebeccapurple);
 ///
 ///   // or return a contrasting color from a set of options
-///   border-color: tools.contrast('background', white, rebeccapurple);
-///   border-color: tools.contrast(maroon, white, rebeccapurple);
+///   border-color: contrast('background', white, rebeccapurple);
+///   border-color: contrast(maroon, white, rebeccapurple);
 /// }
 /// ```
 /// @see contrast

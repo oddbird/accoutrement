@@ -3,6 +3,7 @@
 @use '../../sass/color/tokens';
 
 @include test-module('color/css-vars') {
+
   $test: (
     '_private': blue,
     'simple': red,
@@ -10,6 +11,7 @@
     'thread': '#kevin',
     'default': '#_contrast-light',
   );
+
   $global: tokens.$colors;
   tokens.$colors: $test;
 
@@ -34,11 +36,7 @@
     @include it('Generates CSS variables for any color map') {
       @include assert {
         @include output {
-          @include vars.colors--(
-            (
-              'mine': green,
-            )
-          );
+          @include vars.colors--(('mine': green));
         }
 
         @include expect {
@@ -47,6 +45,7 @@
       }
     }
   }
+
 
   // Color-- [mixin]
   // -----------------
@@ -75,6 +74,7 @@
       }
     }
 
+
     @include it('Generate reference to default color') {
       @include assert {
         @include output {
@@ -99,6 +99,7 @@
       }
     }
   }
+
 
   // Var-Color [function]
   // --------------------
@@ -127,18 +128,12 @@
     @include it('Accepts custom palette') {
       $my-palette: (
         'my-base': #393,
-        'my-adjustment': '#my-base'
-          (
-            'shade': 10%,
-          ),
+        'my-adjustment': '#my-base' ('shade': 10%),
       );
 
       @include assert-equal(
         vars.var-color('my-adjustment', $source: $my-palette),
-        var(
-          --color-my-adjustment,
-          tokens.color('my-adjustment', $source: $my-palette)
-        )
+        var(--color-my-adjustment, tokens.color('my-adjustment', $source: $my-palette))
       );
     }
   }

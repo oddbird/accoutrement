@@ -43,12 +43,18 @@
 ///   - Any other fallback will be passed through unchanged
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix used for naming token variables
-@mixin token--($map, $token, $value: null, $fallback: true, $prefix: null) {
+@mixin token--(
+  $map,
+  $token,
+  $value: null,
+  $fallback: true,
+  $prefix: null
+) {
   $prop: vars.ident($token, $prefix);
   $val: $value or $token;
   $ref: $value or inspect.is-alias-for($map, $val);
 
-  @if  $ref {
+  @if ($ref) {
     $val: var-token($map, $ref, $fallback, $prefix);
   } @else {
     $val: api.get($map, $val);
@@ -56,6 +62,7 @@
 
   #{$prop}: $val;
 }
+
 
 // Tokens--
 // --------
@@ -88,13 +95,17 @@
 ///   Optional prefix for naming token variables
 /// @output
 ///   Custom properties for all public tokens in the map
-@mixin tokens--($map, $prefix: null) {
+@mixin tokens--(
+  $map,
+  $prefix: null
+) {
   @each $token in map.keys($map) {
     @if not inspect.is-private-token($token) {
       @include token--($map, $token, $prefix: $prefix);
     }
   }
 }
+
 
 // As-Var
 // ------
@@ -131,10 +142,15 @@
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<color>, <fallback>)`
-@function var-token($map, $token, $fallback: true, $prefix: null) {
+@function var-token(
+  $map,
+  $token,
+  $fallback: true,
+  $prefix: null
+) {
   $var: vars.ident($token, $prefix);
 
-  @if  $fallback == true {
+  @if ($fallback == true) {
     @if map.has-key($map, $token) {
       @return var($var, api.get($map, $token));
     }

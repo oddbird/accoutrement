@@ -2,6 +2,7 @@
 @use '../../sass/internal/type';
 
 @include test-module('internal/type') {
+
   // Error [function]
   // ----------------
   @include describe('Error [function]') {
@@ -31,7 +32,10 @@
   // ----------------
   @include describe('Check [function]') {
     @include it('Returns a properly-typed value') {
-      @include assert-equal(type.check('hello world', 'string'), 'string');
+      @include assert-equal(
+        type.check('hello world', 'string'),
+        'string'
+      );
     }
 
     @include it('Returns properly multi-typed values') {
@@ -47,7 +51,10 @@
     }
 
     @include it('Allows empty lists as maps') {
-      @include assert-equal(type.check((), 'map'), type.check((), 'list'));
+      @include assert-equal(
+        type.check((), 'map'),
+        type.check((), 'list')
+      );
     }
 
     @include it('Can error on improper type') {
@@ -58,7 +65,10 @@
     }
 
     @include it('Fails silently by default, returning null') {
-      @include assert-equal(type.check('hello world', 'list'), null);
+      @include assert-equal(
+        type.check('hello world', 'list'),
+        null
+      );
     }
 
     @include it('Errors on improper valid-type') {
@@ -68,4 +78,5 @@
       );
     }
   }
+
 }

@@ -1,14 +1,21 @@
+@use "sass:string";
+@use 'sass:meta';
+@use 'sass:map';
+@use '../tokens';
+@use '../internal/function';
+@use '../utils/map' as utils;
 /// # Timing Maps: Durations & Delays
 /// Manage all your duration & delay patterns
 /// in a single place -
 /// with explicitly documented relationships.
 /// @group animate-times
 
+
 // Timing Map
 // ----------
 /// A variable storing the map of
-/// all timing globally-avialble on your project.
-/// Any times added to the `$times` map will be accesible
+/// all timing globally-available on your project.
+/// Any times added to the `$times` map will be accessible
 /// to the `time()` function by default.
 ///
 /// Define each time with a `name`, `base-value`,
@@ -32,6 +39,7 @@
 /// @group animate-times
 $times: () !default;
 
+
 // Time [function]
 // ---------------
 /// Access a named time in your `$times` map.
@@ -52,11 +60,16 @@ $times: () !default;
 ///   Optional accoutrement-format map of times to use as the origin palette
 /// @return {length} -
 ///   The calculated length of time
-@function time($time, $do: null, $source: $times) {
-  $time: get-token($source, $time, $do);
-  @return if((type-of($time) == 'string'), unquote($time), $time);
+@function time(
+  $time,
+  $do: null,
+  $source: $times
+) {
+  $time: tokens.get($source, $time, $do);
+  @return if((meta.type-of($time) == 'string'), string.unquote($time), $time);
 }
-@include register-internal('time');
+@include function.internal(meta.get-function('time'), 'time');
+
 
 // Add Times
 // ---------
@@ -72,6 +85,8 @@ $times: () !default;
 /// @output -
 ///   An updated global `$times` variable,
 ///   with new maps merged in.
-@mixin add-times($maps...) {
-  $times: _a_map-multimerge($times, $maps...) !global;
+@mixin add-times(
+  $maps...
+) {
+  $times: utils.multi-merge($times, $maps...) !global;
 }

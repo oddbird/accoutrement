@@ -3,10 +3,12 @@
 @use 'sass:meta';
 
 $fun: meta.get-function('set', $module: 'function');
+
 $int: function.$internal;
 function.$internal: ('internal': 'got-internal');
 
 @include test-module('internal/function') {
+
   @include describe('set [function]') {
     @include it('Throws if $function is not a function') {
       @include assert-equal(
@@ -24,28 +26,14 @@ function.$internal: ('internal': 'got-internal');
 
     @include it('Throws if a name is previously registered') {
       @include assert-equal(
-        function.set(
-          (
-            'set': true,
-          ),
-          $fun,
-          'set'
-        ),
+        function.set(('set': true), $fun, 'set'),
         'ERROR [function-register] A function has already been registered under the name `set`'
       );
     }
 
     @include it('Registers a function under any number of names') {
       @include assert-equal(
-        function.set(
-          (
-            'existing': true,
-          ),
-          $fun,
-          'set',
-          'any',
-          'names'
-        ),
+        function.set(('existing': true), $fun, 'set', 'any', 'names'),
         (
           'existing': true,
           'set': $fun,
@@ -67,9 +55,10 @@ function.$internal: ('internal': 'got-internal');
           'int-fun': $fun,
           'int-fun2': $fun,
         )
-      );
+      )
     }
   }
+
 }
 
 function.$internal: $int;

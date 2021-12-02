@@ -1,6 +1,7 @@
 /// # Converting Units
 /// @group scale-units
 
+
 // Get PX [function]
 // -----------------
 /// If a value can be converted to px by Sass, do it.
@@ -11,10 +12,13 @@
 ///   The number to be converted to px if comparable.
 /// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
-@function _a_get-px($length) {
+@function _a_get-px(
+  $length
+) {
   // stylelint-disable-next-line length-zero-no-unit
   @return if(comparable($length, 1px), 0px + $length, false);
 }
+
 
 // Get Number [function]
 // ---------------------
@@ -26,7 +30,10 @@
 ///   The unit to return as a number.
 /// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
-@function _a_get-number($unit, $relative: false) {
+@function _a_get-number(
+  $unit,
+  $relative: false
+) {
   // stylelint-disable length-zero-no-unit
   $_absolute: (
     'in': 0in,
@@ -36,6 +43,7 @@
     'pc': 0pc,
     'px': 0px,
   );
+
   $_relative: (
     'em': 0em,
     'rem': 0rem,
@@ -56,6 +64,7 @@
 
   @return map-get($_absolute, $unit);
 }
+
 
 // Convert Units [function]
 // ------------------------
@@ -94,37 +103,31 @@
   $to-context: $from-context
 ) {
   $_convertable: (
-    'in',
-    'mm',
-    'cm',
-    'pt',
-    'pc',
+    'in', 'mm', 'cm',
+    'pt', 'pc',
     'px',
-    'em',
-    'rem',
-    'browser-ems',
-    '%',
-    'ex'
+    'em', 'rem', 'browser-ems',
+    '%', 'ex',
   );
   $length: size($length);
   $from-unit: unit($length);
 
   // No conversion needed
-  @if  $from-unit == $to-unit {
+  @if ($from-unit == $to-unit) {
     @return $length;
   }
 
   // No units
-  @if  $from-unit == '' {
+  @if ($from-unit == '') {
     @return _a_get-number($to-unit, 'allow-relative') + $length;
-  } @else if $to-unit == '' {
+  } @else if ($to-unit == '') {
     @return $length / ($length * 0 + 1);
   }
 
   // Easily comparable units
   $to-zero: _a_get-number($to-unit);
 
-  @if $to-zero and comparable($length, $to-zero) {
+  @if $to-zero and comparable($length, $to-zero)  {
     @return $to-zero + $length;
   }
 
@@ -150,7 +153,7 @@
   $to-context: if($to-context, _a_get-px($to-context), $root-size);
 
   // Context values must be in px
-  @if  not $from-context) or (not $to-context {
+  @if (not $from-context) or (not $to-context) {
     @return _a_error(
       'Context paremeters must resolve to a value in pixel units',
       'convert-units'
@@ -158,7 +161,7 @@
   }
 
   // Special conversion for browser-default ems (needed in media-queries)
-  @if  $to-unit == 'browser-ems' {
+  @if ($to-unit == 'browser-ems') {
     $size: convert-units($length, 'px', $from-context);
     @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
   }
@@ -174,7 +177,7 @@
     $px-length: $length * $root-size / 1rem;
   } @else if $from-unit == '%' {
     $px-length: $length * $from-context / 100%;
-  } @else if $from-unit == 'ex' {
+  } @else if $from-unit == 'ex'  {
     $px-length: $length * $from-context / 2ex;
   }
 

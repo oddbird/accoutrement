@@ -1,3 +1,10 @@
+@use '../internal/function';
+@use '../tokens';
+@use '../utils/map' as utils;
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+
 /// # Easing Maps: Curves & Steps
 /// Whether you are using CSS-named easing,
 /// like `ease-in-out` and `linear`,
@@ -8,6 +15,7 @@
 /// We also provide a classic set of built-in easing functions,
 /// which you can rename, access, or override as desired.
 /// @group animate-ease
+
 
 // Easing Map
 // ----------
@@ -36,16 +44,17 @@
 /// @group animate-ease
 $easing: () !default;
 
+
 // Deafalt Easings
 // ---------------
 /// A classic set of built-in easing functions,
 /// if you don't want to define your own.
-/// Don't edit this map directly,
+/// This map is not available to be edited directly,
 /// but feel free to reference these values
 /// from the user-defined `$easing` map.
 /// @group animate-ease
 /// @access public
-$_a_EASING: (
+$EASING: (
   '_in': ease-in,
   '_out': ease-out,
   '_in-out': ease-in-out,
@@ -75,6 +84,7 @@ $_a_EASING: (
   '_in-out-back': cubic-bezier(0.68, -0.55, 0.265, 1.55),
 );
 
+
 // Ease [function]
 // ---------------
 /// Access a named easing function in your `$easing` map.
@@ -96,12 +106,17 @@ $_a_EASING: (
 ///   (in additional to the provided defaults)
 /// @return {length} -
 ///   The pre-defined easing
-@function ease($name: 'ease', $do: null, $source: $easing) {
-  $source: map-merge($_a_EASING, $source);
-  $name: get-token($source, $name, $do);
-  @return if((type-of($name) == 'string'), unquote($name), $name);
+@function ease(
+  $name: 'ease',
+  $do: null,
+  $source: $easing
+) {
+  $source: map.merge($EASING, $source);
+  $name: tokens.get($source, $name, $do);
+  @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
 }
-@include register-internal('ease');
+@include function.internal(meta.get-function('ease'), 'ease');
+
 
 // Add Easing
 // ----------
@@ -117,6 +132,8 @@ $_a_EASING: (
 /// @output -
 ///   An updated global `$easing` variable,
 ///   with new maps merged in.
-@mixin add-easing($maps...) {
-  $easing: _a_map-multimerge($easing, $maps...) !global;
+@mixin add-easing(
+  $maps...
+) {
+  $easing: utils.multi-merge($easing, $maps...) !global;
 }

@@ -7,6 +7,7 @@
 /// # Color Utility Functions
 /// @group color-utils
 
+
 // Tint
 // ----
 /// Mix a color with `contrast-light`
@@ -31,11 +32,16 @@
 ///   The lighter color to be mixed in for tinting.
 /// @return {color} -
 ///   A calculated css-ready color-value based on your global color palette.
-@function tint($color, $percentage, $light: null) {
+@function tint(
+  $color,
+  $percentage,
+  $light: null
+) {
   $light: $light or contrast.default-contrast('light');
   @return color.mix(tokens.color($light), tokens.color($color), $percentage);
 }
 @include function.internal(meta.get-function('tint'), 'tint');
+
 
 // Shade
 // -----
@@ -61,7 +67,11 @@
 ///   The darker color to be mixed in for shading.
 /// @return {color} -
 ///   A calculated css-ready color-value based on your global color palette.
-@function shade($color, $percentage, $dark: null) {
+@function shade(
+  $color,
+  $percentage,
+  $dark: null
+) {
   $dark: $dark or contrast.default-contrast('dark');
   @return color.mix(tokens.color($dark), tokens.color($color), $percentage);
 }

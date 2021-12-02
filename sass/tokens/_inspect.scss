@@ -10,6 +10,7 @@
 /// automation and integrations.
 /// @group token-inspect
 
+
 // Is Private Token
 // ----------------
 /// Check if a token key is marked as private
@@ -28,21 +29,22 @@
 ///   (only string and list keys can be marked as private)
 /// @return {boolean} -
 ///   True if the key is private, otherwise false
-@function is-private-token($key) {
+@function is-private-token(
+  $key
+) {
   $pre: '_' '-';
 
-  @if  meta.type-of($key) == 'list' {
+  @if (meta.type-of($key) == 'list') {
     $key: list.nth($key, 1);
   }
 
-  @if (meta.type-of($key) == 'string') and
-    (list.index($pre, string.slice($key, 1, 1)))
-  {
+  @if (meta.type-of($key) == 'string') and (list.index($pre, string.slice($key, 1, 1))) {
     @return true;
   }
 
   @return false;
 }
+
 
 // Is Alias For
 // ------------
@@ -78,11 +80,15 @@
 ///   `false` for non-alias tokens,
 ///   or the name of an alias source
 ///   (either one step back, or the full origin of multiple aliases)
-@function is-alias-for($map, $token, $origin: false) {
+@function is-alias-for(
+  $map,
+  $token,
+  $origin: false
+) {
   $ref: false;
   $val: map.get($map, $token);
 
-  @if  meta.type-of($val) == 'string') and (string.index($val, '#') == 1 {
+  @if (meta.type-of($val) == 'string') and (string.index($val, '#') == 1) {
     $try: string.slice($val, 2);
 
     @if map.has-key($map, $try) and not is-private-token($try) {
@@ -92,6 +98,7 @@
 
   @return $ref;
 }
+
 
 // Has Token
 // ---------
@@ -124,7 +131,11 @@
 /// @return {boolean} -
 ///   Returns `true` if the requested token exists,
 ///   or `false` if there is no token at the given path.
-@function has-token($map, $token, $nested...) {
+@function has-token(
+  $map,
+  $token,
+  $nested...
+) {
   $found: parse.lookup-alias($map, $token, $nested, $handle-missing-keys: null);
   @return if($found, true, false);
 }
