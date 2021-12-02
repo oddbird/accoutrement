@@ -26,14 +26,16 @@
   },
   "scripts": {
     "test": "mocha",
-    "lint:sass": "stylelint '**/*.scss' --fix",
+    "lint:sass": "yarn lint:nofix --fix",
+    "lint:nofix": "stylelint '**/*.scss'",
     "lint:other": "prettier --write '**/*.{json,md,yml}'",
     "lint": "run-p lint:sass lint:other",
     "docs": "sassdoc 'sass/**/!(layout|scale)/*.scss'",
-    "commit": "yarn test && yarn lint && yarn docs",
-    "watch:sass": "chokidar '**/*.scss' -c yarn lint",
-    "watch:tests": "chokidar './test/**' -c yarn test",
-    "watch:docs": "chokidar '**/*.scss' -c yarn docs"
+    "commit": "run-s lint test docs",
+    "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:nofix'",
+    "watch:tests": "chokidar 'test/**' -c 'yarn test'",
+    "watch:docs": "chokidar 'sass/**/*.scss' './.sassdocrc' -c 'yarn docs'",
+    "watch": "run-p watch:sass watch:tests watch:docs"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement/issues"
