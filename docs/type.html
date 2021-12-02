@@ -582,19 +582,19 @@ $fonts: (
 <p>Import one font at a time with <code>font-face()</code>
 or all your local webfonts with <code>import-webfonts()</code>:</p>
 <pre><code class="lang-scss"> // Import one font by configuration key
- @include tools.font-face('body');
+ @include font-face('body');
 
  // Import all local fonts
- @include tools.import-webfonts;
+ @include import-webfonts;
 </code></pre>
 <p>Set your font-family anywhere,
 using the semantic names you defined<span class="widont">&nbsp;</span>earlier:</p>
 <pre><code class="lang-scss">html {
-  @include tools.font-family('body');
+  @include font-family('body');
 }
 
 h1, h2, h3 {
-  @include tools.font-family('heading');
+  @include font-family('heading');
 }
 </code></pre>
 

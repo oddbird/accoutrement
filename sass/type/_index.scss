@@ -57,10 +57,10 @@
 ///
 /// ```scss
 ///  // Import one font by configuration key
-///  @include tools.font-face('body');
+///  @include font-face('body');
 ///
 ///  // Import all local fonts
-///  @include tools.import-webfonts;
+///  @include import-webfonts;
 /// ```
 ///
 /// Set your font-family anywhere,
@@ -68,11 +68,11 @@
 ///
 /// ```scss
 /// html {
-///   @include tools.font-family('body');
+///   @include font-family('body');
 /// }
 ///
 /// h1, h2, h3 {
-///   @include tools.font-family('heading');
+///   @include font-family('heading');
 /// }
 /// ```
 /// @group type
