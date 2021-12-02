@@ -41,7 +41,7 @@
   $length: list.length($list);
 
   @if ($type != 'number') or ($index == 0) or (math.round($index) != $index) {
-    $got: 'got (#{$type}) `#{if(($type == ' null '), ' null ', $index)}`';
+    $got: 'got (#{$type}) `#{if(($type == "null"), "null", $index)}`';
     @return throw.error(
       '$index must be a non-zero integer, #{$got}',
       'remove-nth'

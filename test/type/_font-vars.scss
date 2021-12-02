@@ -1,3 +1,5 @@
+/* stylelint-disable prettier/prettier, value-keyword-case */
+
 @use '../../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/type/font-vars';
 @use '../../sass/tokens/api';
@@ -78,27 +80,13 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.fonts--;
         }
+
         @include expect {
-          --font-body-font: 'Source Sans Pro', 'Helvetica Neue', helvetica,
-            arial, sans-serif;
-          --font-TestFont: testfont, georgia, serif;
+          --font-body-font: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          --font-TestFont: TestFont, Georgia, serif;
           --font-UniFont: 'Unicode Test';
-          --font-alias: var(
-            --font-body-font,
-            'Source Sans Pro',
-            'Helvetica Neue',
-            Helvetica,
-            Arial,
-            sans-serif
-          );
-          --font-kevin-bacon: var(
-            --font-alias,
-            'Source Sans Pro',
-            'Helvetica Neue',
-            Helvetica,
-            Arial,
-            sans-serif
-          );
+          --font-alias: var(--font-body-font, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+          --font-kevin-bacon: var(--font-alias, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
           --font-tf-alias: var(--font-TestFont, TestFont, Georgia, serif);
           --font-tf: var(--font-tf-alias, TestFont, Georgia, serif);
         }
@@ -149,7 +137,7 @@ config.$fonts: data.$fonts;
         }
 
         @include expect {
-          --font-TestFont: testfont, georgia, serif;
+          --font-TestFont: TestFont, Georgia, serif;
         }
       }
     }
@@ -161,7 +149,7 @@ config.$fonts: data.$fonts;
         }
 
         @include expect {
-          --font-TestFont: testfont;
+          --font-TestFont: TestFont;
         }
       }
     }
@@ -171,15 +159,9 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.font--('alias');
         }
+
         @include expect {
-          --font-alias: var(
-            --font-body-font,
-            'Source Sans Pro',
-            'Helvetica Neue',
-            Helvetica,
-            Arial,
-            sans-serif
-          );
+          --font-alias: var(--font-body-font, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
         }
       }
     }
@@ -189,15 +171,9 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.font--('alias-2', 'alias');
         }
+
         @include expect {
-          --font-alias-2: var(
-            --font-alias,
-            'Source Sans Pro',
-            'Helvetica Neue',
-            Helvetica,
-            Arial,
-            sans-serif
-          );
+          --font-alias-2: var(--font-alias, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
         }
       }
     }

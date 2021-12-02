@@ -25,8 +25,9 @@ rules:
   function-url-no-scheme-relative: true
   selector-class-pattern: null
 
-  # Override failing default rules
+  # @@@ Override failing default rules
   block-no-empty: null
+  color-function-notation: null
   font-family-name-quotes: null
   font-family-no-missing-generic-family-keyword: null
   no-invalid-position-at-import-rule: null

@@ -1,3 +1,5 @@
+/* stylelint-disable prettier/prettier */
+
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/animate/times';
 @use '../../sass/animate/easing';
@@ -44,15 +46,10 @@ change.$changes: $changes;
           --change-alias: transform 150ms;
           --change-thread: var(--change-alias, transform 150ms);
           --change-fade: opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          --change-slide-in: transform 150ms
-            cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          --change-sidebar-in: transform 150ms
-              cubic-bezier(0.175, 0.885, 0.32, 1.275),
-            opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          --change-animation: slide-frames 1 150ms
-            cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          --change-animation-ref: slide-frames 1 150ms
-            cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+          --change-slide-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-animation: slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          --change-animation-ref: slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
       }
     }
@@ -60,11 +57,7 @@ change.$changes: $changes;
     @include it('Generates CSS variables for any changes map') {
       @include assert {
         @include output {
-          @include vars.changes--(
-            (
-              'mine': all 150ms ease,
-            )
-          );
+          @include vars.changes--(('mine': all 150ms ease));
         }
 
         @include expect {
@@ -108,9 +101,7 @@ change.$changes: $changes;
         }
 
         @include expect {
-          --change-sidebar-in: transform 150ms
-              cubic-bezier(0.175, 0.885, 0.32, 1.275),
-            opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
       }
     }
@@ -155,10 +146,7 @@ change.$changes: $changes;
     @include it('Accepts custom palette') {
       $my-palette: (
         'my-base': ease-in,
-        'my-adjustment': '#my-base'
-          (
-            'str-replace': '-in' '',
-          ),
+        'my-adjustment': '#my-base' ('str-replace': '-in' ''),
       );
 
       @include assert-equal(

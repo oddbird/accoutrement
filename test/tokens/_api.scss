@@ -51,10 +51,10 @@
       'fta': '#foo->three->abc',
       'ftb': '#foo->three->def',
       // These two tests illustrate the tolerance for `->` in keys/values
-      'bar': '#this->that',
       // 1 [-> used in valid key]
-      'bip': 'this->that',
+      'bar': '#this->that',
       // this->that [not a hashtag]
+      'bip': 'this->that',
       'dop': '#ofo->nope',
       'dip': '#that->baz',
     );
