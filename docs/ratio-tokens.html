@@ -162,6 +162,46 @@
   </ul>
             </li>
             <li class="nav-subsection">
+              <h3 class="nav-title">Animate</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="animate.html" data-nav="is-not-active">QuickStart: Animate</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-times.html" data-nav="is-not-active">Timing Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-time-vars.html" data-nav="is-not-active">Times » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-ease.html" data-nav="is-not-active">Easing Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-ease-vars.html" data-nav="is-not-active">Easing » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change.html" data-nav="is-not-active">Combined &quot;Change&quot;<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="animate-change-vars.html" data-nav="is-not-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
               <h3 class="nav-title">Color</h3>
               <ul>
                 
@@ -219,6 +259,31 @@
   
     <li class="nav-item">
       <a href="layout-z-index.html" data-nav="is-not-active">Z-Index</a>
+    </li>
+  </ul>
+            </li>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Scale</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="scale.html" data-nav="is-not-active">QuickStart: Scale</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="scale-sizes.html" data-nav="is-not-active">Size Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="scale-vars.html" data-nav="is-not-active">Sizes » CSS<span class="widont">&nbsp;</span>Variables</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="scale-units.html" data-nav="is-not-active">Unit Conversion</a>
     </li>
   </ul>
             </li></ul>
@@ -949,7 +1014,8 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
   
   
   
-    
+    <div class="requires-wrapper">
+      
     
   <div data-item-section="requires">
     
@@ -1035,9 +1101,57 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
   </div>
 
   
+      
+  
     
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
   
 
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  ratio-tokens.html#function--is-ratio" class="item-name">is-ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
   
 
   
@@ -1320,6 +1434,471 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
     
   
 
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--is-ratio">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--is-ratio" class="item-name">is-ratio()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Check to see if a ratio is valid,
+converting tokens in the<span class="widont">&nbsp;</span>process.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Provides type-checking of ratios
+in addition to converting ratio<span class="widont">&nbsp;</span>tokens.</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$ratio:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$ratios</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optional accoutrement-format map of ratios to use as the origin palette
+(in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$allow-tokens:</span>
+      
+      <span class="item-value">true</span>
+      <span class="value-type">(bool)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Optionally turn off<span class="widont">&nbsp;</span>token-parsing.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number | &#39;linear&#39; |<span class="widont">&nbsp;</span>false)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The numeric value of a ratio, the ‘linear’ keyword,
+or <code>false</code> if the value is not a valid<span class="widont">&nbsp;</span>ratio.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">/* _octave: #{tools.is-ratio(&#39;_octave&#39;)} */
+/* 1.4: #{tools.is-ratio(1.4)} */
+/* linear: #{tools.is-ratio(&#39;linear&#39;)} */
+/* blue: #{tools.is-ratio(blue)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/* _octave: 2 */
+/* 1.4: 1.4 */
+/* linear: linear */
+/* blue: false */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    <div class="requires-wrapper">
+      
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">check()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  ratio-tokens.html#function--ratio" class="item-name">ratio()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  scale.html#function--scale" class="item-name">scale()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+    </div>
   
 
   

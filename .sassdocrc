@@ -22,14 +22,14 @@ groups:
     ratios: Built-In Ratios
     ratio-tokens: Ratio Tokens
     ratio-vars: Ratio Tokens » CSS Variables
-#   'Animate':
-#     animate: 'QuickStart: Animate'
-#     animate-times: 'Timing Maps'
-#     animate-time-vars: 'Times » CSS Variables'
-#     animate-ease: 'Easing Maps'
-#     animate-ease-vars: 'Easing » CSS Variables'
-#     animate-change: 'Combined "Change" Maps'
-#     animate-change-vars: 'Changes » CSS Variables'
+  'Animate':
+    animate: 'QuickStart: Animate'
+    animate-times: 'Timing Maps'
+    animate-time-vars: 'Times » CSS Variables'
+    animate-ease: 'Easing Maps'
+    animate-ease-vars: 'Easing » CSS Variables'
+    animate-change: 'Combined "Change" Maps'
+    animate-change-vars: 'Changes » CSS Variables'
   'Color':
     color: 'QuickStart: Color'
     color-config: 'Color Configuration'
@@ -43,11 +43,11 @@ groups:
     layout-queries: 'Media Breakpoint Maps'
     layout-query-vars: 'Breakpoints » CSS Variables'
     layout-z-index: 'Z-Index'
-#   'Scale':
-#     scale: 'QuickStart: Scale'
-#     scale-sizes: 'Size Maps'
-#     scale-vars: 'Sizes » CSS Variables'
-#     scale-units: 'Unit Conversion'
+  'Scale':
+    scale: 'QuickStart: Scale'
+    scale-sizes: 'Size Maps'
+    scale-vars: 'Sizes » CSS Variables'
+    scale-units: 'Unit Conversion'
 #   'Type':
 #     type: 'QuickStart: Type'
 #     type-fonts: 'Font Maps'

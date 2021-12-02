@@ -81,6 +81,16 @@ $breakpoints: () !default;
     $source: map.merge(scale.$sizes, $source);
   }
 
+  @if (meta.type-of($break) == 'number') and (math.unit($break)) {
+    // apply adjustments
+    @if $do {
+      @return tokens.compile($source, $break $do);
+    }
+
+    // return color without changes
+    @return $break;
+  }
+
   // get breakpoint
   $break: tokens.get($source, $break, $do);
 

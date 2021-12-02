@@ -25,12 +25,22 @@
 /// @return {string} -
 ///   The stringified value
 @function force(
-  $value,
+  $value
 ) {
   $value: $value or '';
-  $type: type.exclude($value, 'map');
+  $type: meta.type-of($value);
 
-  @if (not $type) {
+  @if ($type == 'list') {
+    $new: l.template($value);
+
+    @each $item in $value {
+      $new: list.append($new, force($item));
+    }
+
+    $value: $new;
+  }
+
+  @if ($type == 'map') {
     @return throw.error(
       'Maps cannot be converted to strings',
       'string-force'
