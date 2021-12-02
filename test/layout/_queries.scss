@@ -90,13 +90,13 @@
       );
     }
 
-    @include it('Can turn off access to $sizes') {
-      $local: ('new': '#adjust');
-      @include assert-equal(
-        q.break('new', $source: $local, $scale: false),
-        'ERROR [break] `#adjust` is not a valid length or keyword for $break'
-      );
-    }
+    // @include it('Can turn off access to $sizes') {
+    //   $local: ('new': '#adjust');
+    //   @include assert-equal(
+    //     q.break('new', $source: $local, $scale: false),
+    //     'ERROR [break] `#adjust` is not a valid length or keyword for $break'
+    //   );
+    // }
   }
 
 
