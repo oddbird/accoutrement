@@ -10,8 +10,6 @@ easing.$easing: data.$easing;
 // Easing Var Tests
 // ================
 @include test-module('animate/easing-vars') {
-
-
   // Easing-- [mixin]
   // ------------------
   @include describe('Easing-- [mixin]') {
@@ -33,7 +31,11 @@ easing.$easing: data.$easing;
     @include it('Generates CSS variables for any easing map') {
       @include assert {
         @include output {
-          @include vars.easing--(('mine': ease-in));
+          @include vars.easing--(
+            (
+              'mine': ease-in,
+            )
+          );
         }
 
         @include expect {
@@ -42,7 +44,6 @@ easing.$easing: data.$easing;
       }
     }
   }
-
 
   // Ease-- [mixin]
   // -----------------
@@ -71,7 +72,6 @@ easing.$easing: data.$easing;
       }
     }
 
-
     @include it('Generate reference to default easing') {
       @include assert {
         @include output {
@@ -97,7 +97,6 @@ easing.$easing: data.$easing;
     }
   }
 
-
   // Var-Ease [function]
   // -------------------
   @include describe('Var-Ease [function]') {
@@ -116,16 +115,16 @@ easing.$easing: data.$easing;
     }
 
     @include it('Allows false fallback') {
-      @include assert-equal(
-        vars.var-ease('alias', false),
-        var(--ease-alias)
-      );
+      @include assert-equal(vars.var-ease('alias', false), var(--ease-alias));
     }
 
     @include it('Accepts custom palette') {
       $my-palette: (
         'my-base': ease-in,
-        'my-adjustment': '#my-base' ('str-replace': '-in' ''),
+        'my-adjustment': '#my-base'
+          (
+            'str-replace': '-in' '',
+          ),
       );
 
       @include assert-equal(
@@ -134,7 +133,6 @@ easing.$easing: data.$easing;
       );
     }
   }
-
 } // end module
 
 easing.$easing: $_old;

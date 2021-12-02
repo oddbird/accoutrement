@@ -12,5 +12,8 @@ $times: (
   'thread': '#alias',
   'fast': 150ms,
   'math-tests': 2,
-  'plus-name': '#fast' ('plus': '#math-tests'),
+  'plus-name': '#fast'
+    (
+      'plus': '#math-tests',
+    ),
 );

@@ -2,27 +2,19 @@
 @use '../../sass/utils/string';
 
 @include test-module('utils/string') {
-
   // Force [function]
   // ----------------
   @include describe('Force [function]') {
     @include it('Converts any value to a string') {
-      @include assert-equal(
-        string.force(2em),
-        '2em'
-      );
+      @include assert-equal(string.force(2em), '2em');
 
-      @include assert-equal(
-        string.force([a 2 c]),
-        '[a 2 c]'
-      );
+      @include assert-equal(string.force([a 2 c]), '[a 2 c]');
     }
   }
 
   // String Replace
   // --------------
   @include describe('String Replace [function]') {
-
     @include it('Replaces a sub-string with another string') {
       @include assert-equal(
         string.replace('hello terrible world!', 'terrible', 'beautiful'),
@@ -31,10 +23,7 @@
     }
 
     @include it('Replaces a full string, with any type') {
-      @include assert-equal(
-        string.replace('hello', 'hello', 300ms),
-        300ms
-      );
+      @include assert-equal(string.replace('hello', 'hello', 300ms), 300ms);
     }
 
     @include it('Replaces a sub-string with nothing (false)') {
@@ -54,13 +43,15 @@
     @include it('Replaces all instances of a sub-string') {
       @include assert-equal(
         string.replace('hello world', 'o', '000', true),
-        'hell000 w000rld');
+        'hell000 w000rld'
+      );
     }
 
     @include it('Replaces sub-strings in a list of strings') {
       @include assert-equal(
         string.replace('hello' 'world', 'o', '000', true),
-        'hell000' 'w000rld');
+        'hell000' 'w000rld'
+      );
     }
 
     @include it('Forces $old and $new values to string type') {
@@ -72,13 +63,17 @@
 
     @include it('Errors when passed a map') {
       @include assert-equal(
-        string.replace(('goodbye': 'world'), 'one', 'two'),
+        string.replace(
+          (
+            'goodbye': 'world',
+          ),
+          'one',
+          'two'
+        ),
         'ERROR [string-replace] `$string` parameter cannot be a map'
       );
     }
-
   }
-
 
   // Interpolate
   // -----------
@@ -98,15 +93,11 @@
     }
   }
 
-
   // String Split [function]
   // -----------------------
   @include describe('String Split [function]') {
     @include it('Splits a string on a given separator') {
-      @include assert-equal(
-        string.split('hello@world', '@'),
-        'hello' 'world'
-      );
+      @include assert-equal(string.split('hello@world', '@'), 'hello' 'world');
     }
 
     @include it('Splits a string on a complex separator') {
@@ -117,10 +108,7 @@
     }
 
     @include it('Limits the number of splits') {
-      @include assert-equal(
-        string.split('he@llo@wor@ld', '@', 2),
-        'he' 'llo'
-      );
+      @include assert-equal(string.split('he@llo@wor@ld', '@', 2), 'he' 'llo');
 
       @include assert-equal(
         string.split('he@llo@wor@ld', '@', 1),
@@ -136,10 +124,7 @@
     }
 
     @include it('Returns empty string as single-item list') {
-      @include assert-equal(
-        string.split('', '@'),
-        join((), '')
-      );
+      @include assert-equal(string.split('', '@'), join((), ''));
     }
 
     @include it('Returns null-separator as single-item list') {
@@ -164,22 +149,15 @@
     }
 
     @include it('Forces $string to a string') {
-      @include assert-equal(
-        string.split(34.5, '.'),
-        '34' '5'
-      );
+      @include assert-equal(string.split(34.5, '.'), '34' '5');
     }
   }
-
 
   // Trim [function]
   // ---------------
   @include describe('Trim [function]') {
     @include it('Strips whitespace from start and end of a string') {
-      @include assert-equal(
-        string.trim('  hello world     '),
-        'hello world'
-      );
+      @include assert-equal(string.trim('  hello world     '), 'hello world');
     }
 
     @include it('Errors on invalid $string type') {
@@ -189,6 +167,4 @@
       );
     }
   }
-
-
 }

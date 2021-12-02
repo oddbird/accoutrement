@@ -7,12 +7,15 @@
 $_old: tokens.$colors;
 
 @include test-module('color/tokens') {
-
   // Add Colors [mixin]
   // ------------------
   @include describe('Add Colors [mixin]') {
-    $a: ('red': #f33);
-    $b: ('green': #3f3);
+    $a: (
+      'red': #f33,
+    );
+    $b: (
+      'green': #3f3,
+    );
 
     @include tokens.add-colors($a, $b);
 
@@ -29,35 +32,32 @@ $_old: tokens.$colors;
   @include describe('Color [function]') {
     tokens.$colors: data.$colors;
 
-    $secondary: color.adjust(color.change(map.get(data.$colors, 'red'), $alpha: 0.5), $saturation: 25%);
+    $secondary: color.adjust(
+      color.change(map.get(data.$colors, 'red'), $alpha: 0.5),
+      $saturation: 25%
+    );
     $wtf: color.adjust($secondary, $hue: 24deg);
 
     @include it('Sass color is passed through') {
-      @include assert-equal(
-        tokens.color(red),
-        red
-      );
+      @include assert-equal(tokens.color(red), red);
     }
 
     @include it('Returns named color token') {
       @include assert-equal(
         tokens.color('simple'),
-        map.get(data.$colors, 'simple'),
+        map.get(data.$colors, 'simple')
       );
     }
 
     @include it('Returns color from alias token reference') {
       @include assert-equal(
         tokens.color('primary'),
-        map.get(data.$colors, 'red'),
+        map.get(data.$colors, 'red')
       );
     }
 
     @include it('Returns an adjusted token') {
-      @include assert-equal(
-        tokens.color('secondary'),
-        $secondary,
-      );
+      @include assert-equal(tokens.color('secondary'), $secondary);
     }
 
     @include it('Complex nesting of colors') {
@@ -70,13 +70,27 @@ $_old: tokens.$colors;
 
     @include it('Handles on-the-fly adjustments argument') {
       @include assert-equal(
-        tokens.color(red, ('color.adjust': ('hue': 24deg))),
+        tokens.color(
+          red,
+          (
+            'color.adjust': (
+              'hue': 24deg,
+            ),
+          )
+        ),
         color.adjust(red, $hue: 24deg),
         'adjusting a sass color directly'
       );
 
       @include assert-equal(
-        tokens.color('red', ('color.adjust': ('hue': 24deg))),
+        tokens.color(
+          'red',
+          (
+            'color.adjust': (
+              'hue': 24deg,
+            ),
+          )
+        ),
         color.adjust(map.get(data.$colors, 'red'), $hue: 24deg),
         'adjusting a color token'
       );
@@ -84,7 +98,10 @@ $_old: tokens.$colors;
 
     $my-palette: (
       'my-base': #393,
-      'my-adjustment': '#my-base' ('color.mix': black 10%),
+      'my-adjustment': '#my-base'
+        (
+          'color.mix': black 10%,
+        ),
     );
 
     @include it('Works with a custom palette') {
@@ -111,7 +128,6 @@ $_old: tokens.$colors;
       );
     }
   }
-
 } // end module
 
 tokens.$colors: $_old;

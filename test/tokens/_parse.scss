@@ -9,21 +9,22 @@ $alpha: function.get('color.alpha');
 $scale: function.get('color.scale');
 
 @include test-module('tokens/parse') {
-
   @include describe('normalize [function]') {
     @include it('Handles explicit %value/do maps') {
       @include assert-equal(
-        parse.normalize-token((
-          '%value': 3,
-          'do': 'something',
-          'and': 'another',
-        )),
+        parse.normalize-token(
+          (
+            '%value': 3,
+            'do': 'something',
+            'and': 'another',
+          )
+        ),
         (
           'value': 3,
           'do': (
             'do': 'something',
             'and': 'another',
-          )
+          ),
         )
       );
     }
@@ -40,10 +41,12 @@ $scale: function.get('color.scale');
 
     @include it('Handles map values') {
       @include assert-equal(
-        parse.normalize-token((
-          'just': 'a',
-          'normal': 'map',
-        )),
+        parse.normalize-token(
+          (
+            'just': 'a',
+            'normal': 'map',
+          )
+        ),
         (
           'value': (
             'just': 'a',
@@ -66,30 +69,31 @@ $scale: function.get('color.scale');
   }
 
   @include describe('has-alias [function]') {
-    @include it('Returns `null` if the given string contains no hash references') {
-      @include assert-equal(
-        parse.has-alias('not a single hash in here'),
-        null
-      );
+    @include it(
+      'Returns `null` if the given string contains no hash references'
+    ) {
+      @include assert-equal(parse.has-alias('not a single hash in here'), null);
     }
 
     @include it('Returns a hash reference in a string') {
       @include assert-equal(
-        parse.has-alias('there\'s a hash in this string: #hash'),
+        parse.has-alias("there's a hash in this string: #hash"),
         'hash'
       );
     }
 
     @include it('Returns the first hash reference encountered in a string') {
       @include assert-equal(
-        parse.has-alias('there\'s a number of hashes in this string: #hash #hash2 #hash3'),
+        parse.has-alias(
+          "there's a number of hashes in this string: #hash #hash2 #hash3"
+        ),
         'hash'
       );
     }
 
     @include it('Terminates the retrieved hash on a space character') {
       @include assert-equal(
-        parse.has-alias('there\'s a #hash here too'),
+        parse.has-alias("there's a #hash here too"),
         'hash'
       );
     }
@@ -101,7 +105,9 @@ $scale: function.get('color.scale');
       );
     }
 
-    @include it('Returns the first hash reference of two concatenated references') {
+    @include it(
+      'Returns the first hash reference of two concatenated references'
+    ) {
       @include assert-equal(
         parse.has-alias('#hashes#glued#together'),
         'hashes'
@@ -136,31 +142,28 @@ $scale: function.get('color.scale');
     @include it('Does simple key lookup') {
       @include assert-equal(
         parse.lookup-alias($map, b),
-        ('token': 'hello')
+        (
+          'token': 'hello',
+        )
       );
     }
 
     @include it('Does nested key->key lookup') {
       @include assert-equal(
         parse.lookup-alias($map, 'a->b->c'),
-        ('token': 'world')
+        (
+          'token': 'world',
+        )
       );
     }
 
     @include it('Returns null if the lookup fails') {
-      @include assert-equal(
-        parse.lookup-alias($map, 'a->b->d'),
-        null
-      );
+      @include assert-equal(parse.lookup-alias($map, 'a->b->d'), null);
     }
 
     @include it('Accepts non-string alias values') {
-      @include assert-equal(
-        parse.lookup-alias($map, red),
-        null
-      );
+      @include assert-equal(parse.lookup-alias($map, red), null);
     }
-
 
     @include it('Optionally warn if the lookup fails') {
       @include assert-equal(
@@ -208,9 +211,13 @@ $scale: function.get('color.scale');
         ),
       ),
       string: 'hello #a->b->c\\!',
-      map: ('print': '#string'),
+      map: (
+        'print': '#string',
+      ),
       brand: mediumvioletred,
-      alpha: ('alpha': 50%),
+      alpha: (
+        'alpha': 50%,
+      ),
       bad: '#worse',
       worse: '#bad',
       h: 'hello',
@@ -237,8 +244,15 @@ $scale: function.get('color.scale');
       );
 
       @include assert-equal(
-        parse.compile-token($map, ('hello': 'world')),
-        ('hello': 'world'),
+        parse.compile-token(
+          $map,
+          (
+            'hello': 'world',
+          )
+        ),
+        (
+          'hello': 'world',
+        ),
         'when the token is a map'
       );
     }
@@ -258,7 +272,9 @@ $scale: function.get('color.scale');
 
       @include assert-equal(
         parse.compile-token($map, '#map'),
-        ('print': 'hello world!'),
+        (
+          'print': 'hello world!',
+        ),
         'recursive alias'
       );
     }
@@ -297,27 +313,33 @@ $scale: function.get('color.scale');
     }
 
     @include it('Can perform functional adjustments') {
-      $shadow: rgba(black, 0.5);
+      $shadow: rgb(black 0.5);
 
       @include assert-equal(
         parse.compile-token(
           $map,
-          '#brand' (
-            'color.mix': $shadow 20%,
-            'color.scale': ('alpha': 50%),
-          )
+          '#brand'
+            (
+              'color.mix': $shadow 20%,
+              'color.scale': (
+                'alpha': 50%,
+              )
+            )
         ),
         color.scale(color.mix(mediumvioletred, $shadow, 20%), $alpha: 50%)
-      )
+      );
     }
 
     @include it('Allows alias references inside functional arguments') {
-      $shadow: rgba(black, 0.5);
+      $shadow: rgb(black 0.5);
 
       @include assert-equal(
-        parse.compile-token($map, '#brand' ('color.mix': $shadow 20%, 'color.scale': '#alpha')),
+        parse.compile-token(
+          $map,
+          '#brand' ('color.mix': $shadow 20%, 'color.scale': '#alpha')
+        ),
         color.scale(color.mix(mediumvioletred, $shadow, 20%), $alpha: 50%)
-      )
+      );
     }
 
     @include it('Handles common calc use-case') {

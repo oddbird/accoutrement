@@ -5,7 +5,6 @@
 /// # Easing » CSS Variables
 /// @group animate-ease-vars
 
-
 // Easing Var Prefix
 // -----------------
 /// Since CSS variables are often defined in a global space,
@@ -29,7 +28,6 @@
 ///
 /// @type string
 $easing-var-prefix: 'ease-' !default;
-
 
 // easing--
 // --------
@@ -61,13 +59,10 @@ $easing-var-prefix: 'ease-' !default;
 ///   map of easing tokens to set as css variables
 /// @output
 ///   Custom properties for all public easing in the map
-@mixin easing--(
-  $source: easing.$easing
-) {
+@mixin easing--($source: easing.$easing) {
   $source: map.merge(easing.$EASING, $source);
   @include tokens.tokens--($source, $easing-var-prefix);
 }
-
 
 // ease--
 // -------
@@ -103,16 +98,16 @@ $easing-var-prefix: 'ease-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$easing] -
 ///   Optional map of easing to use as a palette source
-@mixin ease--(
-  $ease,
-  $value: null,
-  $fallback: true,
-  $source: easing.$easing
-) {
+@mixin ease--($ease, $value: null, $fallback: true, $source: easing.$easing) {
   $source: map.merge(easing.$EASING, $source);
-  @include tokens.token--($source, $ease, $value, $fallback, $easing-var-prefix);
+  @include tokens.token--(
+    $source,
+    $ease,
+    $value,
+    $fallback,
+    $easing-var-prefix
+  );
 }
-
 
 // Var Ease
 // --------
@@ -148,11 +143,7 @@ $easing-var-prefix: 'ease-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-ease(
-  $ease,
-  $fallback: true,
-  $source: easing.$easing
-) {
+@function var-ease($ease, $fallback: true, $source: easing.$easing) {
   $source: map.merge(easing.$EASING, $source);
   @return tokens.var-token($source, $ease, $fallback, $easing-var-prefix);
 }

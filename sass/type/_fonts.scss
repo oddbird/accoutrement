@@ -7,7 +7,6 @@
 ///
 /// @group type-fonts
 
-
 // Font [function]
 // ---------------
 /// Retrieve and normalize font data from the `$fonts` map
@@ -30,15 +29,11 @@
 ///   to use as the origin palette
 /// @return {map} -
 ///   A parsed and normalized map of font-data
-@function font(
-  $font,
-  $source: $fonts
-) {
+@function font($font, $source: $fonts) {
   $data: get-token($source, $font);
   $normal: _a_normalize-font($data, $font, $source);
   @return $normal;
 }
-
 
 // Font-URL [function]
 // -------------------
@@ -58,16 +53,13 @@
 ///   A path relative to the fonts directory.
 /// @return {string} -
 ///   The full path to a font file, in CSS `url('my/path')` format.
-@function font-url(
-  $path
-) {
+@function font-url($path) {
   @if not str-index($path, 'data:') {
     $path: $font-path + $path;
   }
 
   @return url(quote($path)); // stylelint-disable-line function-url-quotes
 }
-
 
 // Font Family [function]
 // ----------------------
@@ -101,14 +93,10 @@
 /// @return {String} -
 ///   The full font-stack for the given font,
 ///   ready for output with the `font-family` property.
-@function font-family(
-  $key,
-  $source: $fonts
-) {
+@function font-family($key, $source: $fonts) {
   $font: font($key, $source);
   @return map-get($font, 'stack');
 }
-
 
 // Font Family [mixin]
 // -------------------
@@ -136,13 +124,9 @@
 /// @param {map} $source [$fonts] -
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
-@mixin font-family(
-  $key,
-  $source: $fonts
-) {
+@mixin font-family($key, $source: $fonts) {
   font-family: font-family($key, $source);
 }
-
 
 // Font Face [mixin]
 // -----------------
@@ -176,10 +160,7 @@
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output `@font-face` import blocks for any defined font-variants.
-@mixin font-face(
-  $key,
-  $source: $fonts
-) {
+@mixin font-face($key, $source: $fonts) {
   $font: font($key, $source);
   $variants: _a_font-get-variants($font);
   $name: map-get($font, 'name');
@@ -191,11 +172,17 @@
     @each $variant, $data in $variants {
       $weight: nth($variant, 1);
       $style: nth($variant, 2);
-      @include _a_import-font-face($name, $weight, $style, $data, $unicode, $display);
+      @include _a_import-font-face(
+        $name,
+        $weight,
+        $style,
+        $data,
+        $unicode,
+        $display
+      );
     }
   }
 }
-
 
 // Import WebFonts [mixin]
 // -----------------------
@@ -234,9 +221,7 @@
 ///   Optional accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output Any number of `@font-face` blocks.
-@mixin import-webfonts(
-  $source: $fonts
-) {
+@mixin import-webfonts($source: $fonts) {
   @each $key, $font in $source {
     @if not is-alias-for($source, $key) and not is-private-token($key) {
       @include font-face($key);

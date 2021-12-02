@@ -9,7 +9,6 @@
 /// # Color Themes
 /// @group color-themes
 
-
 // Shades Of
 // ---------
 /// Generates an accoutrement map of light/dark color variations
@@ -41,10 +40,7 @@
 /// @param {integer} $range [3] -
 ///   number of dark and light variations desired,
 ///   in addition to the midpoint
-@function shades-of(
-  $origin,
-  $range: 3
-) {
+@function shades-of($origin, $range: 3) {
   $adjust: (
     'light': 'tint',
     'dark': 'shade',
@@ -64,23 +60,34 @@
     @for $i from (0 - $range) through $range {
       $diff: $i - $pos;
       $do: if($diff > 0, 'light', if($diff < 0, 'dark', null));
-      $is: if($i > 0, 'light-#{math.abs($i)}', if($i < 0, 'dark-#{math.abs($i)}', '0'));
+      $is: if(
+        $i > 0,
+        'light-#{math.abs($i)}',
+        if($i < 0, 'dark-#{math.abs($i)}', '0')
+      );
       $value: '##{$name}';
 
       @if ($do) {
         $distance: math.abs(if(($do == 'dark'), (0 - $range), $range) - $pos);
         $interval: math.percentage(math.div(1, ($distance + 0.25)));
         $amount: (math.abs($diff) - 0.5) * $interval;
-        $value: $value (map.get($adjust, $do): $amount);
+        $value: $value
+          (
+            map.get($adjust, $do): $amount,
+          );
       }
 
-      $theme: map.merge($theme, ('#{$name}-#{$is}': $value));
+      $theme: map.merge(
+        $theme,
+        (
+          '#{$name}-#{$is}': $value,
+        )
+      );
     }
   }
 
   @return $theme;
 }
-
 
 // Stripe Colors
 // -------------
@@ -103,9 +110,7 @@
 ///   ArgList of colors
 /// @return {color} -
 ///   A calculated css-ready color-value based on your global color palette.
-@function stripe-colors(
-  $colors...
-) {
+@function stripe-colors($colors...) {
   $gradient: ();
   $width: math.div(100%, list.length($colors));
 
@@ -117,7 +122,6 @@
 
   @return $gradient;
 }
-
 
 // Stripe Colors
 // -------------
@@ -139,9 +143,6 @@
 ///   e.g. `to right` or `35deg`
 /// @param {string | color} $colors... -
 ///   ArgList of colors
-@mixin stripe-colors(
-  $angle,
-  $colors...
-) {
+@mixin stripe-colors($angle, $colors...) {
   background-image: linear-gradient($angle, stripe-colors($colors...));
 }

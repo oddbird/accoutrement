@@ -25,7 +25,6 @@ $_memo: ();
 ///
 /// @group token-api
 
-
 /// ## Internal Reference
 /// The core module provides a generic map-parsing syntax,
 /// for internal reference & adjustments --
@@ -54,7 +53,6 @@ $_memo: ();
 /// ```
 ///
 /// @group token-api
-
 
 /// ## Nested References
 /// You can define nested tokens in accoutrement maps,
@@ -88,7 +86,6 @@ $_memo: ();
 ///
 /// @since 2.0.0
 /// @group token-api
-
 
 /// ## Functional Adjustments
 /// In many cases, we'll want to reference a value
@@ -133,7 +130,6 @@ $_memo: ();
 ///
 /// @group token-api
 
-
 /// ## Adjustment Shorthand
 /// We also provide a shorthand syntax
 /// to simplify adjustments in most cases.
@@ -149,7 +145,6 @@ $_memo: ();
 /// ```
 ///
 /// @group token-api
-
 
 /// ## Adjustments with References
 /// Adjustment-function arguments
@@ -167,7 +162,6 @@ $_memo: ();
 /// ```
 ///
 /// @group token-api
-
 
 /// ## String Interpolation
 /// For CSS features like `calc()`
@@ -190,7 +184,6 @@ $_memo: ();
 ///
 /// @see interpolate
 /// @group token-api
-
 
 /// ## Nested Adjustments
 /// Since adjustment formats and values
@@ -223,7 +216,6 @@ $_memo: ();
 /// @since 2.2.0 -
 ///   - NEW: Added to help manage more complex missing-key options
 /// @group token-api
-
 
 // Get Token
 // ---------
@@ -279,14 +271,12 @@ $_memo: ();
 ///   A map of functional adjustments to run on the returned value
 /// @return {*} -
 ///   The parsed value of any key in a given map
-@function get(
-  $map,
-  $key,
-  $do: null,
-) {
+@function get($map, $key, $do: null) {
   // check the memo
   $resolved: map.get($_memo, $map, $key);
-  @if $resolved { @return $resolved; }
+  @if $resolved {
+    @return $resolved;
+  }
 
   // lookup the key in the map
   $lookup: parse.lookup-alias($map, $key);
@@ -300,7 +290,16 @@ $_memo: ();
 
   // handle any final adjustments
   @if $do {
-    @return parse.compile-token($map, map.merge(('%value': $resolved), $do), $key);
+    @return parse.compile-token(
+      $map,
+      map.merge(
+        (
+          '%value': $resolved,
+        ),
+        $do
+      ),
+      $key
+    );
   }
 
   // return the result
@@ -333,10 +332,6 @@ $_memo: ();
 ///   The original key to get from the map
 /// @return {*} -
 ///   The parsed value of any key in a given map
-@function compile(
-  $map,
-  $token,
-) {
+@function compile($map, $token) {
   @return parse.compile-token($map, $token);
 }
-

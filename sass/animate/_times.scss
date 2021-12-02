@@ -1,4 +1,4 @@
-@use "sass:string";
+@use 'sass:string';
 @use 'sass:meta';
 @use 'sass:map';
 @use '../tokens';
@@ -9,7 +9,6 @@
 /// in a single place -
 /// with explicitly documented relationships.
 /// @group animate-times
-
 
 // Timing Map
 // ----------
@@ -39,7 +38,6 @@
 /// @group animate-times
 $times: () !default;
 
-
 // Time [function]
 // ---------------
 /// Access a named time in your `$times` map.
@@ -60,16 +58,11 @@ $times: () !default;
 ///   Optional accoutrement-format map of times to use as the origin palette
 /// @return {length} -
 ///   The calculated length of time
-@function time(
-  $time,
-  $do: null,
-  $source: $times
-) {
+@function time($time, $do: null, $source: $times) {
   $time: tokens.get($source, $time, $do);
   @return if((meta.type-of($time) == 'string'), string.unquote($time), $time);
 }
 @include function.internal(meta.get-function('time'), 'time');
-
 
 // Add Times
 // ---------
@@ -85,8 +78,6 @@ $times: () !default;
 /// @output -
 ///   An updated global `$times` variable,
 ///   with new maps merged in.
-@mixin add-times(
-  $maps...
-) {
+@mixin add-times($maps...) {
   $times: utils.multi-merge($times, $maps...) !global;
 }

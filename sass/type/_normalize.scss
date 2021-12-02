@@ -24,23 +24,39 @@
 ///   to use as the origin palette
 /// @return {map} -
 ///   A map of font data in consistent longhand format
-@function _a_normalize-font(
-  $font,
-  $key: null,
-  $source: $fonts
-) {
+@function _a_normalize-font($font, $key: null, $source: $fonts) {
   // make it a map…
   @if (type-of($font) != 'map') {
-    $font: ('stack': $font);
+    $font: (
+      'stack': $font,
+    );
   }
 
   // Normalize name…
   $name: _a_normalize-font-name($font, $key, $source);
-  $font: if($name, map-merge($font, ('name': $name)), $font);
+  $font: if(
+    $name,
+    map-merge(
+      $font,
+      (
+        'name': $name,
+      )
+    ),
+    $font
+  );
 
   // Normalize the font stack…
   $stack: _a_normalize-font-stack($font);
-  $font: if($stack, map-merge($font, ('stack': $stack)), $font);
+  $font: if(
+    $stack,
+    map-merge(
+      $font,
+      (
+        'stack': $stack,
+      )
+    ),
+    $font
+  );
 
   // Normalize variants
   $variants: _a_font-get-variants($font);
@@ -51,14 +67,15 @@
       $font: map-remove($font, $name);
       $name: _a_normalize-variant-name($name);
       $data: _a_normalize-variant-data($data, $formats);
-      $variant: ($name: $data);
+      $variant: (
+        $name: $data,
+      );
       $font: map-merge($font, $variant);
     }
   }
 
   @return $font;
 }
-
 
 // Normalize Font Name
 // -------------------
@@ -83,11 +100,7 @@
 ///   to use as the origin palette
 /// @return {string} -
 ///   The font-name associated with the given font map
-@function _a_normalize-font-name(
-  $font,
-  $key: null,
-  $source: $fonts
-) {
+@function _a_normalize-font-name($font, $key: null, $source: $fonts) {
   $name: map-get($font, 'name') or null;
 
   // Try reverse lookup
@@ -98,8 +111,7 @@
     }
   }
 
-  @if ($key and is-private-token($key))
-    or ($name and is-private-token($name)) {
+  @if ($key and is-private-token($key)) or ($name and is-private-token($name)) {
     @return null;
   }
 
@@ -111,7 +123,6 @@
 
   @return $name;
 }
-
 
 // Normalize Font Stack
 // --------------------
@@ -125,9 +136,7 @@
 ///   The font map
 /// @return {string} -
 ///   The font-stack associated with the given font map
-@function _a_normalize-font-stack(
-  $font
-) {
+@function _a_normalize-font-stack($font) {
   $return: null;
   $stack: map-get($font, 'stack');
   $name: map-get($font, 'name');
@@ -152,7 +161,6 @@
   @return $return;
 }
 
-
 // Normalize Variant Name
 // ----------------------
 /// Parse a list of font variants into a map of `style` and `weight` settings.
@@ -171,9 +179,7 @@
 ///   A list of font variants, such as `('bold', 'italic')`.
 /// @return {$list} -
 ///   A list of `($weight, $style)`
-@function _a_normalize-variant-name(
-  $variant
-) {
+@function _a_normalize-variant-name($variant) {
   $style: 'normal';
   $weight: 'normal';
 
@@ -191,7 +197,6 @@
 
   @return ($weight, $style);
 }
-
 
 // Normalize Variant Data
 // ----------------------
@@ -220,14 +225,10 @@
 ///   merging interpolated and explicit format/paths
 ///   into a single map.
 /// @throws Font-path interpolation of `path` requires a list of formats
-@function _a_normalize-variant-data(
-  $data,
-  $formats: ()
-) {
-
+@function _a_normalize-variant-data($data, $formats: ()) {
   @if (type-of($data) == 'string') {
     $data: (
-      'path': $data
+      'path': $data,
     );
   }
 
@@ -240,7 +241,12 @@
     @if (length($formats) > 0) {
       @each $format in $formats {
         $url: _a_font-url($path, $format, $svgid);
-        $implicit: map-merge($implicit, ($format: $url));
+        $implicit: map-merge(
+          $implicit,
+          (
+            $format: $url,
+          )
+        );
       }
     } @else {
       @return _a_error(
@@ -256,7 +262,12 @@
   @each $key, $value in $data {
     @if map-has-key($_a_FONT-FORMATS, $key) {
       $url: _a_font-url($value, $key, $svgid);
-      $explicit: map-merge($explicit, ($key: $url));
+      $explicit: map-merge(
+        $explicit,
+        (
+          $key: $url,
+        )
+      );
     }
   }
 

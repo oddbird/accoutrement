@@ -7,7 +7,6 @@
 ///   and pseudo-elements.
 /// @group type
 
-
 @import 'config';
 @import 'helpers';
 @import 'normalize';
@@ -15,7 +14,6 @@
 @import 'fonts';
 @import 'font-vars';
 @import 'pseudo-elements';
-
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
@@ -35,7 +33,6 @@
 ///   @import 'accoutrement/plugin/type';
 /// ```
 /// @group scale
-
 
 /// ## Webfont Configuration
 ///
@@ -64,7 +61,6 @@
 /// );
 /// ```
 /// @group type
-
 
 /// ## Import WebFonts
 /// Import one font at a time with `font-face()`

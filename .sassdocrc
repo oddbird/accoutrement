@@ -1,6 +1,5 @@
 theme: herman
 dest: docs/
-src: sass/
 
 display:
   access:
