@@ -103,7 +103,7 @@
 // Modulo
 // ------
 @include describe('Modulo [function]') {
-  @include it('Finds the remaineder of numbers') {
+  @include it('Finds the remainder of numbers') {
     @include assert-equal(
       math.modulo(3, 2),
       1

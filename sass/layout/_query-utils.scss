@@ -1,5 +1,7 @@
-// Query Utils
-// ===========
+@use 'sass:math';
+
+/// # Query Utils
+/// @group layout-queries
 
 
 // Adjust Query Overlap
@@ -47,14 +49,14 @@ $adjust-query-overlap: 'max' !default;
 /// @return {length} -
 ///   The adjusted value, if `$is` and `$nudge` match,
 ///   otherwise the original value is returned
-@function _a_nudge-query(
+@function nudge-query(
   $value,
   $is,
   $nudge: $adjust-query-overlap
 ) {
   @if ($nudge) and ($nudge == $is) {
     $to: if(($is == 'min'), 1, -1);
-    $amount: if(comparable($value, 1px), 1px, 0.01);
+    $amount: if(math.compatible($value, 1px), 1px, 0.01);
     $value: $value + ($amount * $to);
   }
 
