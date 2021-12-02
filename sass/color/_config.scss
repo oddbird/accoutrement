@@ -29,7 +29,7 @@ $contrast-dark: black !default;
   $contrast-dark: $contrast-dark
 ) {
   @return (
-    "_contrast-light": $contrast-light,
-    "_contrast-dark": $contrast-dark
+    '_contrast-light': $contrast-light,
+    '_contrast-dark': $contrast-dark
   );
 }

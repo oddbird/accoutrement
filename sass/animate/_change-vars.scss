@@ -1,7 +1,6 @@
 /// # Changes » CSS Variables
 /// @group animate-change-vars
 
-
 // Change Var Prefix
 // ----------------
 /// Since CSS variables are often defined in a global space,
@@ -25,7 +24,6 @@
 ///
 /// @type string
 $change-var-prefix: 'change-' !default;
-
 
 // Changes--
 // --------
@@ -57,12 +55,9 @@ $change-var-prefix: 'change-' !default;
 ///   map of changes to set as css variables
 /// @output
 ///   Custom properties for all public changes in the map
-@mixin changes--(
-  $source: $changes
-) {
+@mixin changes--($source: $changes) {
   @include tokens--($source, $change-var-prefix);
 }
-
 
 // Change--
 // -------
@@ -98,15 +93,9 @@ $change-var-prefix: 'change-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$changes] -
 ///   Optional map of changes to use as a palette source
-@mixin change--(
-  $change,
-  $value: null,
-  $fallback: true,
-  $source: $changes
-) {
+@mixin change--($change, $value: null, $fallback: true, $source: $changes) {
   @include token--($source, $change, $value, $fallback, $change-var-prefix);
 }
-
 
 // Var Change
 // ---------
@@ -141,10 +130,6 @@ $change-var-prefix: 'change-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-change(
-  $change,
-  $fallback: true,
-  $source: $changes
-) {
+@function var-change($change, $fallback: true, $source: $changes) {
   @return var-token($source, $change, $fallback, $change-var-prefix);
 }

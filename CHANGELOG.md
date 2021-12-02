@@ -14,16 +14,19 @@
   and "ratios" (for typographic scales and layout aspect ratios)
 
 - [Sass Utilities][utils]:
+
   - NEW: These functions are now available directly,
     as well as being registered in the map syntax
 
 - [Variables][vars]:
+
   - NEW: `ident()` function adds `--` and an optional prefix to any string,
     in order to generate a custom property identifier.
   - NEW: `custom-props()` mixin generates custom properties
     for every key/value pair in a map.
 
 - [Tokens][token]:
+
   - NEW: A module just for the custom map syntax parser & function registration
   - BREAKING: The `$functions` map no longer accepts alias references
     or any other aspects of the token syntax

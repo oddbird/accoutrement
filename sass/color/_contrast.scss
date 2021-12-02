@@ -17,7 +17,6 @@
 /// # Contrast & Accessibility
 /// @group color-contrast
 
-
 // WCAG Contrast
 // -------------
 /// These named contrast-ratios are defined by the [WCAG][WCAG].
@@ -31,12 +30,11 @@ $WCAG-CONTRAST: (
   'aaa': 7,
 );
 
-
 // Contrast
 // --------
 /// For any color, select the best contrast among a set of options.
 /// For best results, pass in a combination of light and dark colors
-/// to contrast against – 
+/// to contrast against –
 /// or define default `contrast-light` and `contrast-dark` values
 /// (with or without a private `_` prefix)
 /// in your global `$colors` map.
@@ -84,14 +82,10 @@ $WCAG-CONTRAST: (
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`,
 ///   or the minimum needed contrast to meet a given accessibility ratio.
-@function contrast(
-  $color,
-  $options...
-) {
+@function contrast($color, $options...) {
   @return best-contrast($color, $options, 'color');
 }
 @include function.internal(meta.get-function('contrast'), 'contrast');
-
 
 // Var-Contrast
 // ------------
@@ -145,15 +139,12 @@ $WCAG-CONTRAST: (
 ///   CSS Variable for the color-option
 ///   that has the highest contrast-ratio to `$color`,
 ///   or the color if no variable exists.
-@function var-contrast(
-  $color,
-  $options...
-  ) {
+@function var-contrast($color, $options...) {
   $contrast: best-contrast($color, $options);
   $name: map.get($contrast, 'name');
   $color: map.get($contrast, 'color');
 
-  @if ($name != $color) and not api.is-private-token($name) {
+  @if  $name != $color) and not api.is-private-token($name {
     $name: vars.ident($name, cv.$color-var-prefix);
     @return var($name, $color);
   }
@@ -161,7 +152,6 @@ $WCAG-CONTRAST: (
   @return $color;
 }
 @include function.internal(meta.get-function('var-contrast'), 'var-contrast');
-
 
 // Contrasted
 // ----------
@@ -216,16 +206,12 @@ $WCAG-CONTRAST: (
 ///   and `color` to the option with
 ///   highest contrast against that background,
 ///   or minimum contrast that still meets a given accessibility ratio.
-@mixin contrasted(
-  $background,
-  $options...
-) {
+@mixin contrasted($background, $options...) {
   $background: tokens.color($background);
 
   background-color: $background;
   color: contrast($background, $options...);
 }
-
 
 // Var Contrasted
 // --------------
@@ -281,14 +267,10 @@ $WCAG-CONTRAST: (
 ///   Sets the `background-color` to `$background`
 ///   and the foreground `color` to
 ///   whichever option has better contrast against the given background.
-@mixin var-contrasted(
-  $background,
-  $options...
-) {
+@mixin var-contrasted($background, $options...) {
   background-color: cv.var-color($background);
   color: var-contrast($background, $options...);
 }
-
 
 // Contrast Ratio
 // --------------
@@ -320,34 +302,36 @@ $WCAG-CONTRAST: (
 ///   The function will return `false` if the required ratio is not met.
 /// @return {number} -
 ///   The WCAG-defined contrast-ratio of two colors.
-@function contrast-ratio(
-  $base,
-  $contrast,
-  $require: false
-) {
+@function contrast-ratio($base, $contrast, $require: false) {
   $base-lumin: if((meta.type-of($base) == 'number'), $base, luminance($base));
-  $contrast-lumin: if((meta.type-of($contrast) == 'number'), $contrast, luminance($contrast));
-
+  $contrast-lumin: if(
+    (meta.type-of($contrast) == 'number'),
+    $contrast,
+    luminance($contrast)
+  );
   $darker: math.min($base-lumin, $contrast-lumin);
   $lighter: math.max($base-lumin, $contrast-lumin);
-
   $ratio: math.div(($lighter + 0.05), ($darker + 0.05));
 
   @if $require {
     $require: valid-contrast($require);
 
     @if not type.check($require, 'number') {
-      @return type.error($require, 'number', 'color.contrast-ratio', '$require');
+      @return type.error(
+        $require,
+        'number',
+        'color.contrast-ratio',
+        '$require'
+      );
     }
 
-    @if ($ratio < $require) {
+    @if  $ratio < $require {
       @return false;
     }
   }
 
   @return $ratio;
 }
-
 
 // Luminance
 // ---------
@@ -360,13 +344,10 @@ $WCAG-CONTRAST: (
 ///   A color value or color token name.
 /// @return {number} -
 ///   WCAG-defined numeric luminance value.
-@function luminance(
-  $color
-) {
+@function luminance($color) {
   $color: tokens.color($color);
   $check: type.check($color, 'color', true, 'color.luminance', '$color');
   $luminance: 0;
-
   $rgb: (
     'r': math.div(color.red($color), 255),
     'g': math.div(color.green($color), 255),
@@ -376,16 +357,16 @@ $WCAG-CONTRAST: (
   @each $channel, $value in $rgb {
     $function: $channel;
 
-    @if ($value < 0.03928) {
+    @if  $value < 0.03928 {
       $value: math.div($value, 12.92);
     } @else {
       $base: math.div(($value + 0.055), 1.055);
       $value: math.pow($base, 2.4);
     }
 
-    @if ($channel == 'r') {
+    @if  $channel == 'r' {
       $value: $value * 0.2126;
-    } @else if ($channel == 'g') {
+    } @else if $channel == 'g' {
       $value: $value * 0.7152;
     } @else {
       $value: $value * 0.0722;
@@ -396,7 +377,6 @@ $WCAG-CONTRAST: (
 
   @return $luminance;
 }
-
 
 // Default Contrast
 // ----------------
@@ -411,9 +391,7 @@ $WCAG-CONTRAST: (
 /// @return {color-name | map} -
 ///   Light or dark color-name string,
 ///   or map with `light` and `dark` keys.
-@function default-contrast(
-  $return: 'map'
-) {
+@function default-contrast($return: 'map') {
   $both: (
     'light': config.$contrast-light,
     'dark': config.$contrast-dark,
@@ -423,17 +401,17 @@ $WCAG-CONTRAST: (
     $public: 'contrast-#{$color}';
     $private: '_#{$public}';
     $token: if(api.has-token(tokens.$colors, $public), $public, null);
-    $token: $token or if(api.has-token(tokens.$colors, $private), $private, null);
+    $token: $token or
+      if(api.has-token(tokens.$colors, $private), $private, null);
     $both: if($token, map.set($both, $color, $token), $both);
   }
 
-  @if ($return == 'values') {
+  @if  $return == 'values' {
     @return map.values($both);
   }
 
   @return map.get($both, $return) or $both;
 }
-
 
 // Best Contrast
 // -------------
@@ -461,11 +439,7 @@ $WCAG-CONTRAST: (
 ///   or all three together in a map.
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
-@function best-contrast(
-  $color,
-  $options: null,
-  $return: 'map'
-) {
+@function best-contrast($color, $options: null, $return: 'map') {
   $options: if(list.length($options) > 0, $options, null);
   $min-ratio: list.nth($options, -1);
 
@@ -476,9 +450,9 @@ $WCAG-CONTRAST: (
   }
 
   // Establish default options if they are missing
-  @if (list.length($options) == 0) or (not $options) {
+  @if  list.length($options) == 0) or (not $options {
     $options: default-contrast('values');
-  } @else if (list.length($options) == 1){
+  } @else if list.length($options) == 1 {
     $use: best-contrast(nth($options, 1), $return: 'name');
     $options: list.append($options, $use);
   }
@@ -515,13 +489,12 @@ $WCAG-CONTRAST: (
     }
   }
 
-  @if (map.get($best, 'name')) {
+  @if  map.get($best, 'name') {
     @return map.get($best, $return) or $best;
   }
 
   @return false;
 }
-
 
 // Valid Contrast
 // --------------
@@ -531,11 +504,8 @@ $WCAG-CONTRAST: (
 /// @param {'AA' | 'AA-large' | 'AAA' | 0-21} $ratio -
 ///   WCAG or 0-21 contrast ratios will pass validation,
 ///   all other values will return false
-@function valid-contrast(
-  $ratio,
-  $throw: true
-) {
-  @if (meta.type-of($ratio) == 'string') {
+@function valid-contrast($ratio, $throw: true) {
+  @if  meta.type-of($ratio) == 'string' {
     $ratio: map.get($WCAG-CONTRAST, string.to-lower-case($ratio)) or $ratio;
   }
 
@@ -547,7 +517,7 @@ $WCAG-CONTRAST: (
     @return false;
   }
 
-  @if ($ratio >= 0) and ($ratio <= 21) {
+  @if  $ratio >= 0) and ($ratio <= 21 {
     @return $ratio;
   }
 

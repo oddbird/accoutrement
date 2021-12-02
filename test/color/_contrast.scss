@@ -1,58 +1,58 @@
-@use "../../node_modules/sass-true/sass/true" as *;
-@use "../../sass/color/contrast";
-@use "../../sass/color/tokens";
-@use "../../sass/color/css-vars" as vars;
-@use "test-data" as data;
-@use "sass:map";
-@use "sass:list";
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/color/contrast';
+@use '../../sass/color/tokens';
+@use '../../sass/color/css-vars' as vars;
+@use 'test-data' as data;
+@use 'sass:map';
+@use 'sass:list';
 
 $_old: tokens.$colors;
 tokens.$colors: data.$colors;
 
-@include test-module("color/contrast") {
+@include test-module('color/contrast') {
   // Luminance [function]
   // --------------------
-  @include describe("Luminance [function]") {
-    @include it("Returns proper luminance of a color") {
+  @include describe('Luminance [function]') {
+    @include it('Returns proper luminance of a color') {
       @include assert-equal(
         contrast.luminance(#fff),
         1,
-        "white",
+        'white',
         $inspect: true
       );
 
       @include assert-equal(
         contrast.luminance(#000),
         0,
-        "black",
+        'black',
         $inspect: true
       );
 
       @include assert-equal(
         contrast.luminance(#ff0),
         0.9278,
-        "yellow",
+        'yellow',
         $inspect: true
       );
 
       @include assert-equal(
         contrast.luminance(#0f0),
         0.7152,
-        "green",
+        'green',
         $inspect: true
       );
 
       @include assert-equal(
         contrast.luminance(#3492a1),
         0.2386104205,
-        "blue",
+        'blue',
         $inspect: true
       );
     }
 
-    @include it("Handles tokens") {
+    @include it('Handles tokens') {
       @include assert-equal(
-        contrast.luminance("simple"),
+        contrast.luminance('simple'),
         contrast.luminance(#969)
       );
     }
@@ -60,42 +60,42 @@ tokens.$colors: data.$colors;
 
   // Valid Contrast [function]
   // -------------------------
-  @include describe("Valid Contrast [function]") {
-    @include it("Accepts a number between 0-21") {
+  @include describe('Valid Contrast [function]') {
+    @include it('Accepts a number between 0-21') {
       @include assert-equal(contrast.valid-contrast(0), 0);
       @include assert-equal(contrast.valid-contrast(12.345), 12.345);
       @include assert-equal(contrast.valid-contrast(21), 21);
     }
 
-    @include it("Accepts a valid CSSWG contrast level") {
-      @include assert-equal(contrast.valid-contrast("aa"), 4.5);
-      @include assert-equal(contrast.valid-contrast("aa-large"), 3);
-      @include assert-equal(contrast.valid-contrast("aaa"), 7);
+    @include it('Accepts a valid CSSWG contrast level') {
+      @include assert-equal(contrast.valid-contrast('aa'), 4.5);
+      @include assert-equal(contrast.valid-contrast('aa-large'), 3);
+      @include assert-equal(contrast.valid-contrast('aaa'), 7);
     }
 
-    @include it("Throws on invalid type") {
+    @include it('Throws on invalid type') {
       @include assert-equal(
-        contrast.valid-contrast("nope"),
-        "ERROR [color.valid-contrast] Argument `$ratio` must be a number; got (string) `nope`"
+        contrast.valid-contrast('nope'),
+        'ERROR [color.valid-contrast] Argument `$ratio` must be a number; got (string) `nope`'
       );
       @include assert-equal(
         contrast.valid-contrast(#fff),
-        "ERROR [color.valid-contrast] Argument `$ratio` must be a number; got (color) `#fff`"
+        'ERROR [color.valid-contrast] Argument `$ratio` must be a number; got (color) `#fff`'
       );
     }
 
-    @include it("Optionally return false on invalid type") {
-      @include assert-equal(contrast.valid-contrast("nope", false), false);
+    @include it('Optionally return false on invalid type') {
+      @include assert-equal(contrast.valid-contrast('nope', false), false);
       @include assert-equal(contrast.valid-contrast(#fff, false), false);
     }
 
-    @include it("Throws on out-of-range number") {
-      $error: "ERROR [color.valid-contrast] Contrast ratio must be a number between 0 and 21";
+    @include it('Throws on out-of-range number') {
+      $error: 'ERROR [color.valid-contrast] Contrast ratio must be a number between 0 and 21';
       @include assert-equal(contrast.valid-contrast(-3), $error);
       @include assert-equal(contrast.valid-contrast(24), $error);
     }
 
-    @include it("Optionally return false on out-of-range number") {
+    @include it('Optionally return false on out-of-range number') {
       @include assert-equal(contrast.valid-contrast(-3, false), false);
       @include assert-equal(contrast.valid-contrast(24, false), false);
     }
@@ -103,69 +103,69 @@ tokens.$colors: data.$colors;
 
   // Contrast Ratio [function]
   // -------------------------
-  @include describe("Contrast Ratio [function]") {
-    @include it("Returns contrast ratio between two colors") {
+  @include describe('Contrast Ratio [function]') {
+    @include it('Returns contrast ratio between two colors') {
       @include assert-equal(contrast.contrast-ratio(#fff, #fff), 1);
 
       @include assert-equal(contrast.contrast-ratio(#000, #fff), 21);
     }
 
-    @include it("Returns contrast ratio if test is met") {
+    @include it('Returns contrast ratio if test is met') {
       @include assert-equal(
-        contrast.contrast-ratio(#333, #999, "aa-large"),
+        contrast.contrast-ratio(#333, #999, 'aa-large'),
         4.4347249061,
         $inspect: true
       );
     }
 
-    @include it("Returns false if test is not met") {
-      @include assert-equal(contrast.contrast-ratio(#333, #999, "AAA"), false);
+    @include it('Returns false if test is not met') {
+      @include assert-equal(contrast.contrast-ratio(#333, #999, 'AAA'), false);
     }
   }
 
   // Default Contrast [function]
   // ---------------------------
-  @include describe("Default Contrast [function]") {
-    @include it("Returns the user default values when defined") {
+  @include describe('Default Contrast [function]') {
+    @include it('Returns the user default values when defined') {
       @include assert-equal(
         contrast.default-contrast(),
         (
-          "light": "contrast-light",
-          "dark": "contrast-dark",
+          'light': 'contrast-light',
+          'dark': 'contrast-dark',
         )
       );
     }
 
-    @include it("Returns the user light value") {
+    @include it('Returns the user light value') {
       @include assert-equal(
-        contrast.default-contrast("light"),
-        "contrast-light"
+        contrast.default-contrast('light'),
+        'contrast-light'
       );
     }
 
-    @include it("Returns the user dark value") {
-      @include assert-equal(contrast.default-contrast("dark"), "contrast-dark");
+    @include it('Returns the user dark value') {
+      @include assert-equal(contrast.default-contrast('dark'), 'contrast-dark');
     }
 
-    @include it("Returns the user dark value") {
-      @include assert-equal(contrast.default-contrast("dark"), "contrast-dark");
+    @include it('Returns the user dark value') {
+      @include assert-equal(contrast.default-contrast('dark'), 'contrast-dark');
     }
 
-    @include it("Returns a list of values") {
+    @include it('Returns a list of values') {
       @include assert-equal(
-        contrast.default-contrast("values"),
-        ("contrast-light", "contrast-dark")
+        contrast.default-contrast('values'),
+        ('contrast-light', 'contrast-dark')
       );
     }
 
     tokens.$colors: ();
 
-    @include it("Returns the factory keys by default") {
+    @include it('Returns the factory keys by default') {
       @include assert-equal(
         contrast.default-contrast(),
         (
-          "light": white,
-          "dark": black,
+          'light': white,
+          'dark': black,
         )
       );
     }
@@ -175,122 +175,122 @@ tokens.$colors: data.$colors;
 
   // Best Contrast [function]
   // -----------------------
-  @include describe("Best Contrast [function]") {
-    @include it("Dark on light") {
+  @include describe('Best Contrast [function]') {
+    @include it('Dark on light') {
       @include assert-equal(
         contrast.best-contrast(#eee),
         (
-          "name": "contrast-dark",
-          "color": tokens.color("contrast-dark"),
-          "ratio": contrast.contrast-ratio(#eee, "contrast-dark"),
+          'name': 'contrast-dark',
+          'color': tokens.color('contrast-dark'),
+          'ratio': contrast.contrast-ratio(#eee, 'contrast-dark'),
         ),
-        "Returns a dark color to contrast a light one."
+        'Returns a dark color to contrast a light one.'
       );
     }
 
-    @include it("Light on dark") {
+    @include it('Light on dark') {
       @include assert-equal(
-        contrast.best-contrast("dark"),
+        contrast.best-contrast('dark'),
         (
-          "name": "contrast-light",
-          "color": tokens.color("contrast-light"),
-          "ratio": contrast.contrast-ratio("dark", "contrast-light"),
+          'name': 'contrast-light',
+          'color': tokens.color('contrast-light'),
+          'ratio': contrast.contrast-ratio('dark', 'contrast-light'),
         ),
-        "Returns a light color to contrast a dark one."
+        'Returns a light color to contrast a dark one.'
       );
     }
 
-    @include it("Accepts either null or empty list of options") {
+    @include it('Accepts either null or empty list of options') {
       @include assert-equal(
-        contrast.best-contrast("dark", null),
-        contrast.best-contrast("dark", ())
+        contrast.best-contrast('dark', null),
+        contrast.best-contrast('dark', ())
       );
     }
 
     tokens.$colors: ();
 
-    @include it("Default light fallback") {
+    @include it('Default light fallback') {
       @include assert-equal(
-        contrast.best-contrast(#000, $return: "color"),
+        contrast.best-contrast(#000, $return: 'color'),
         #fff,
-        "Returns white for light contrast when none is given."
+        'Returns white for light contrast when none is given.'
       );
     }
 
-    @include it("Default dark fallback") {
+    @include it('Default dark fallback') {
       @include assert-equal(
-        contrast.best-contrast(#fff, $return: "color"),
+        contrast.best-contrast(#fff, $return: 'color'),
         #000,
-        "Returns black for dark contrast when none is given."
+        'Returns black for dark contrast when none is given.'
       );
     }
 
     tokens.$colors: data.$colors;
 
-    @include it("Multiple contrast options") {
+    @include it('Multiple contrast options') {
       @include assert-equal(
         contrast.best-contrast(
-          $color: "primary",
+          $color: 'primary',
           $options: (
             #ff0,
             #fcc,
             #0f0,
-            "light",
+            'light',
             #003,
           ),
-          $return: "name"
+          $return: 'name'
         ),
         #003,
-        "Returns the best option from the list."
+        'Returns the best option from the list.'
       );
     }
 
-    @include it("Return name of a token") {
+    @include it('Return name of a token') {
       @include assert-equal(
-        contrast.best-contrast("primary", $return: "name"),
-        "contrast-dark",
-        "Returns the name of a selected token."
+        contrast.best-contrast('primary', $return: 'name'),
+        'contrast-dark',
+        'Returns the name of a selected token.'
       );
     }
 
-    @include it("Picks a smart default when only one option is given") {
+    @include it('Picks a smart default when only one option is given') {
       @include assert-equal(
-        contrast.best-contrast(#eee, #ff0, $return: "name"),
-        "contrast-dark"
+        contrast.best-contrast(#eee, #ff0, $return: 'name'),
+        'contrast-dark'
       );
     }
 
     tokens.$colors: data.$grays;
 
-    @include it("Can selects the minimum-best for a given ratio") {
+    @include it('Can selects the minimum-best for a given ratio') {
       @include assert-equal(
         contrast.best-contrast(
           black,
-          list.append(map.keys(tokens.$colors), "aa-large"),
-          "ratio"
+          list.append(map.keys(tokens.$colors), 'aa-large'),
+          'ratio'
         ),
-        contrast.contrast-ratio(black, "gray-dark-3"),
-        "aa-large"
+        contrast.contrast-ratio(black, 'gray-dark-3'),
+        'aa-large'
       );
 
       @include assert-equal(
         contrast.best-contrast(
           black,
-          list.append(map.keys(tokens.$colors), "aa"),
-          "name"
+          list.append(map.keys(tokens.$colors), 'aa'),
+          'name'
         ),
-        "gray",
-        "aa"
+        'gray',
+        'aa'
       );
 
       @include assert-equal(
         contrast.best-contrast(
           black,
-          list.append(map.keys(tokens.$colors), "aaa"),
-          "ratio"
+          list.append(map.keys(tokens.$colors), 'aaa'),
+          'ratio'
         ),
-        contrast.contrast-ratio(black, "gray-0"),
-        "aaa"
+        contrast.contrast-ratio(black, 'gray-0'),
+        'aaa'
       );
     }
 
@@ -299,68 +299,68 @@ tokens.$colors: data.$colors;
 
   // Contrast [function]
   // -------------------
-  @include describe("Contrast [function]") {
-    @include it("Dark on light") {
+  @include describe('Contrast [function]') {
+    @include it('Dark on light') {
       @include assert-equal(
         contrast.contrast(#eee),
-        tokens.color("contrast-dark"),
-        "Returns a dark color to contrast a light one."
+        tokens.color('contrast-dark'),
+        'Returns a dark color to contrast a light one.'
       );
     }
 
-    @include it("Light on dark") {
+    @include it('Light on dark') {
       @include assert-equal(
-        contrast.contrast("dark"),
-        tokens.color("contrast-light"),
-        "Returns a light color to contrast a dark one."
+        contrast.contrast('dark'),
+        tokens.color('contrast-light'),
+        'Returns a light color to contrast a dark one.'
       );
     }
 
     tokens.$colors: ();
 
-    @include it("Default light fallback") {
+    @include it('Default light fallback') {
       @include assert-equal(
         contrast.contrast(#000),
         #fff,
-        "Returns white for light contrast when none is given."
+        'Returns white for light contrast when none is given.'
       );
     }
 
-    @include it("Default dark fallback") {
+    @include it('Default dark fallback') {
       @include assert-equal(
         contrast.contrast(#fff),
         #000,
-        "Returns black for dark contrast when none is given."
+        'Returns black for dark contrast when none is given.'
       );
     }
 
     tokens.$colors: data.$colors;
 
-    @include it("Multiple contrast options") {
+    @include it('Multiple contrast options') {
       @include assert-equal(
-        contrast.contrast("primary", #ff0, #fcc, #0f0, "light", #003),
+        contrast.contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
         #003,
-        "Returns the best option from the list."
+        'Returns the best option from the list.'
       );
     }
 
-    @include it("Picks a smart default when given a single option") {
+    @include it('Picks a smart default when given a single option') {
       @include assert-equal(
-        contrast.contrast("primary", #ff0),
-        tokens.color("contrast-dark")
+        contrast.contrast('primary', #ff0),
+        tokens.color('contrast-dark')
       );
     }
 
-    @include it("Returns the minimum contrast for a given ratio") {
+    @include it('Returns the minimum contrast for a given ratio') {
       @include assert-equal(
         contrast.contrast(
-          "primary",
+          'primary',
           #ff0,
           #fcc,
           #0f0,
-          "light",
+          'light',
           #003,
-          "AA-large"
+          'AA-large'
         ),
         #eee
       );
@@ -369,48 +369,48 @@ tokens.$colors: data.$colors;
 
   // Contrasted [mixin]
   // ------------------
-  @include describe("contrasted [mixin]") {
-    @include it("Dark on light") {
-      @include assert("Use a dark color on a light background.") {
+  @include describe('contrasted [mixin]') {
+    @include it('Dark on light') {
+      @include assert('Use a dark color on a light background.') {
         @include output {
           @include contrast.contrasted(#eee);
         }
 
         @include expect {
           background-color: #eee;
-          color: tokens.color("contrast-dark");
+          color: tokens.color('contrast-dark');
         }
       }
     }
 
-    @include it("Light on dark") {
-      @include assert("Use a light color on a dark background.") {
+    @include it('Light on dark') {
+      @include assert('Use a light color on a dark background.') {
         @include output {
-          @include contrast.contrasted("dark");
+          @include contrast.contrasted('dark');
         }
 
         @include expect {
-          background-color: tokens.color("dark");
-          color: tokens.color("contrast-light");
+          background-color: tokens.color('dark');
+          color: tokens.color('contrast-light');
         }
       }
     }
 
-    @include it("Returns the minimum contrast for a given ratio") {
+    @include it('Returns the minimum contrast for a given ratio') {
       @include assert {
         @include output {
           @include contrast.contrasted(
-            "primary",
+            'primary',
             #ff0,
             #fcc,
             #0f0,
-            "light",
+            'light',
             #003,
-            "AA-large"
+            'AA-large'
           );
         }
         @include expect {
-          background-color: tokens.color("primary");
+          background-color: tokens.color('primary');
           color: #eee;
         }
       }
@@ -419,33 +419,33 @@ tokens.$colors: data.$colors;
 
   // var-contrast [function]
   // -----------------------
-  @include describe("var-contrast [function]") {
-    @include it("Returns a contrasting CSS variable when available") {
+  @include describe('var-contrast [function]') {
+    @include it('Returns a contrasting CSS variable when available') {
       @include assert-equal(
-        contrast.var-contrast("blue", "dark", "light"),
+        contrast.var-contrast('blue', 'dark', 'light'),
         var(--color-dark, #111)
       );
     }
 
-    @include it("Returns a contrasting color when no variable") {
-      @include assert-equal(contrast.var-contrast("blue", #111, #eee), #111);
+    @include it('Returns a contrasting color when no variable') {
+      @include assert-equal(contrast.var-contrast('blue', #111, #eee), #111);
     }
   }
 
   // var-contrasted [function]
   // -------------------------
-  @include describe("var-contrasted [function]") {
+  @include describe('var-contrasted [function]') {
     @include it(
-      "Creates a background and contrasting color with CSS variables"
+      'Creates a background and contrasting color with CSS variables'
     ) {
       @include assert {
         @include output {
-          @include contrast.var-contrasted("blue", "light", "dark");
+          @include contrast.var-contrasted('blue', 'light', 'dark');
         }
 
         @include expect {
-          background-color: vars.var-color("blue");
-          color: vars.var-color("dark");
+          background-color: vars.var-color('blue');
+          color: vars.var-color('dark');
         }
       }
     }

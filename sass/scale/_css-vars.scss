@@ -1,7 +1,6 @@
 /// # Sizes » CSS Variables
 /// @group scale-vars
 
-
 // Size Var Prefix
 // ---------------
 /// Since CSS variables are often defined in a global space,
@@ -25,7 +24,6 @@
 ///
 /// @type string
 $size-var-prefix: 'size-' !default;
-
 
 // Sizes--
 // -------
@@ -57,12 +55,9 @@ $size-var-prefix: 'size-' !default;
 ///   map of sizes to set as css variables
 /// @output
 ///   Custom properties for all public sizes in the map
-@mixin sizes--(
-  $source: $sizes
-) {
+@mixin sizes--($source: $sizes) {
   @include tokens--($source, $size-var-prefix);
 }
-
 
 // Size--
 // ------
@@ -98,15 +93,9 @@ $size-var-prefix: 'size-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$sizes] -
 ///   Optional map of sizes to use as a palette source
-@mixin size--(
-  $size,
-  $value: null,
-  $fallback: true,
-  $source: $sizes
-) {
+@mixin size--($size, $value: null, $fallback: true, $source: $sizes) {
   @include token--($source, $size, $value, $fallback, $size-var-prefix);
 }
-
 
 // Var Size
 // --------
@@ -141,10 +130,6 @@ $size-var-prefix: 'size-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-size(
-  $size,
-  $fallback: true,
-  $source: $sizes
-) {
+@function var-size($size, $fallback: true, $source: $sizes) {
   @return var-token($source, $size, $fallback, $size-var-prefix);
 }

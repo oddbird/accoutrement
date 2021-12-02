@@ -1,13 +1,11 @@
 // Pseudo Elements
 // ===============
 
-
 /// # Pseudo-Elements
 ///
 /// Some shortcuts for creating `::before` and `::after` pseudo-elements.
 ///
 /// @group type-pseudo
-
 
 // Before
 // ------
@@ -15,15 +13,12 @@
 /// @group type-pseudo
 /// @param {String} $content -
 ///   A value for the `content` property.
-@mixin before(
-  $content
-) {
+@mixin before($content) {
   &::before {
     content: $content;
     @content;
   }
 }
-
 
 // After
 // -----
@@ -31,15 +26,12 @@
 /// @group type-pseudo
 /// @param {String} $content -
 ///   A value for the `content` property.
-@mixin after(
-  $content
-) {
+@mixin after($content) {
   &::after {
     content: $content;
     @content;
   }
 }
-
 
 // Wrap Content
 // ------------
@@ -48,9 +40,7 @@
 /// @param {List} $content -
 ///   One or two values to be used for the `content` property.
 ///   A single string will be used `:before` and `:after`.
-@mixin wrap-content(
-  $content: '“' '”'
-) {
+@mixin wrap-content($content: '“' '”') {
   $_before: nth($content, 1);
 
   &::before,
@@ -60,6 +50,8 @@
   }
 
   @if length($content) > 1 {
-    &::after { content: nth($content, 2); }
+    &::after {
+      content: nth($content, 2);
+    }
   }
 }

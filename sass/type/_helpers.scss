@@ -6,18 +6,13 @@
 /// @access private
 /// @group type-helpers
 
-
 // Font Style Options
 // ------------------
 /// A constant list of valid font-style settings
 /// (not including `normal`, which is also a valid weight).
 /// @access private
 /// @group type-helpers
-$_a_FONT-STYLES: (
-  'italic',
-  'oblique',
-);
-
+$_a_FONT-STYLES: ('italic', 'oblique');
 
 // Font Weight Options
 // -------------------
@@ -37,9 +32,8 @@ $_a_FONT-WEIGHTS: (
   '900',
   'bold',
   'bolder',
-  'lighter',
+  'lighter'
 );
-
 
 // Font Weight Options
 // -------------------
@@ -58,7 +52,6 @@ $_a_FONT-FORMATS: (
   'svg': 'svg',
   'svgz': 'svg',
 );
-
 
 // stylelint-disable function-url-quotes
 // Font URL
@@ -92,16 +85,11 @@ $_a_FONT-FORMATS: (
 ///   Optionally append an `?#iefix` suffix to `eot` fonts.
 /// @return {string} -
 ///   Font-format URL for importing.
-@function _a_font-url(
-  $path,
-  $format,
-  $svgid: null,
-  $iefix: false
-) {
+@function _a_font-url($path, $format, $svgid: null, $iefix: false) {
   $suffix: '';
 
   // some formats need no adjustments
-  @if ($format == 'local') or str-index($path, 'data:') {
+  @if  $format == 'local') or str-index($path, 'data:' {
     @return $path;
   }
 
@@ -115,7 +103,7 @@ $_a_FONT-FORMATS: (
   }
 
   // add iefix when needed
-  @if str-index($format, 'eot') and ($iefix) and  (not str-index($path, '?')) {
+  @if str-index($format, 'eot') and ($iefix) and (not str-index($path, '?')) {
     $suffix: '?#iefix';
   }
 
@@ -123,7 +111,6 @@ $_a_FONT-FORMATS: (
   @return $path + $ext + $suffix;
 }
 // stylelint-enable
-
 
 // Font Src
 // --------
@@ -147,10 +134,7 @@ $_a_FONT-FORMATS: (
 ///   SVG or EOT-iefix suffix to be added to font url.
 /// @return {list} -
 ///   CSS-ready `url() format()` combination for font-face `src` output.
-@function _a_font-src(
-  $path,
-  $format
-) {
+@function _a_font-src($path, $format) {
   $format-name: map-get($_a_FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
@@ -158,7 +142,6 @@ $_a_FONT-FORMATS: (
   $path: _a_font-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
-
 
 // Font Src List
 // -------------
@@ -177,9 +160,7 @@ $_a_FONT-FORMATS: (
 /// @return {list} -
 ///   Compiled list of `url() format()` pairs,
 ///   ready to apply in the `src` property.
-@function _a_font-src-list(
-  $data
-) {
+@function _a_font-src-list($data) {
   $src: ();
 
   // Use best-practice format order
@@ -189,7 +170,7 @@ $_a_FONT-FORMATS: (
     @if $url {
       $item: ();
 
-      @if ($format == 'local') {
+      @if  $format == 'local' {
         @each $name in $url {
           $li: local($name);
           $item: append($item, $li, 'comma');
@@ -203,10 +184,8 @@ $_a_FONT-FORMATS: (
     }
   }
 
-
   @return $src;
 }
-
 
 // Font Get Variants
 // -----------------
@@ -226,9 +205,7 @@ $_a_FONT-FORMATS: (
 ///   A map of all the data for a single font.
 /// @return {map} -
 ///   Only the variants provided in the given font-map.
-@function _a_font-get-variants(
-  $font
-) {
+@function _a_font-get-variants($font) {
   $var-options: join($_a_FONT-STYLES, $_a_FONT-WEIGHTS);
   $var-options: append($var-options, 'normal');
   $variants: ();
@@ -240,13 +217,17 @@ $_a_FONT-FORMATS: (
 
     // if it's a variant, add it to the list…
     @if index($var-options, $first) {
-      $variants: map-merge($variants, ($key: $value));
+      $variants: map-merge(
+        $variants,
+        (
+          $key: $value,
+        )
+      );
     }
   }
 
   @return $variants;
 }
-
 
 // Import Font-Face [mixin]
 // ------------------------
@@ -305,7 +286,7 @@ $_a_FONT-FORMATS: (
     $eot: _a_font-url($eot, 'eot');
     $eot: font-url($eot);
 
-    @if (not str-index($eot, 'data:')) {
+    @if  not str-index($eot, 'data:') {
       @each $format, $url in $data {
         $has-data: (($format != 'local') and str-index($url, 'data:'));
 

@@ -1,7 +1,6 @@
 // Z-Index
 // =======
 
-
 // Z-Index
 // -------
 /// A list of named z-index layers, from lowest to highest index.
@@ -23,7 +22,6 @@
 /// @type list
 $z-index: ();
 
-
 // Z-Index [function]
 // ------------------
 /// Return the numeric index of a named layer in your `$z-index` variable.
@@ -39,9 +37,7 @@ $z-index: ();
 /// @require {variable} $z-index
 /// @return {number} -
 ///   The z-index value associated with the given layer in your configuration.
-@function z-index(
-  $layer
-) {
+@function z-index($layer) {
   $index: index($z-index, $layer);
   $nested: null;
 
@@ -66,7 +62,6 @@ $z-index: ();
   @return $layer;
 }
 
-
 // Z-Index [mixin]
 // ---------------
 /// Output the `z-index` property and value of a given layer
@@ -76,8 +71,6 @@ $z-index: ();
 ///   The name of a z-index layer in your configuration.
 /// @output -
 ///   The z-index property with a value based on your configuration.
-@mixin z-index(
-  $layer
-) {
+@mixin z-index($layer) {
   z-index: z-index($layer);
 }

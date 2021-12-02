@@ -4,14 +4,12 @@
 /// - Document relationships directly in the code
 /// @group animate
 
-
 @import 'easing';
 @import 'easing-vars';
 @import 'times';
 @import 'time-vars';
 @import 'change';
 @import 'change-vars';
-
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
@@ -31,7 +29,6 @@
 ///   @import 'accoutrement/plugin/animate';
 /// ```
 /// @group animate
-
 
 /// ## Timing & Easing
 /// Establish your timing and easing palettes,
@@ -64,7 +61,6 @@
 /// @see $easing
 /// @see ease
 /// @group animate
-
 
 /// ## Transitions & Animations
 /// Use your timing and easing patterns

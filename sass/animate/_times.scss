@@ -4,7 +4,6 @@
 /// with explicitly documented relationships.
 /// @group animate-times
 
-
 // Timing Map
 // ----------
 /// A variable storing the map of
@@ -33,7 +32,6 @@
 /// @group animate-times
 $times: () !default;
 
-
 // Time [function]
 // ---------------
 /// Access a named time in your `$times` map.
@@ -54,16 +52,11 @@ $times: () !default;
 ///   Optional accoutrement-format map of times to use as the origin palette
 /// @return {length} -
 ///   The calculated length of time
-@function time(
-  $time,
-  $do: null,
-  $source: $times
-) {
+@function time($time, $do: null, $source: $times) {
   $time: get-token($source, $time, $do);
   @return if((type-of($time) == 'string'), unquote($time), $time);
 }
 @include register-internal('time');
-
 
 // Add Times
 // ---------
@@ -79,8 +72,6 @@ $times: () !default;
 /// @output -
 ///   An updated global `$times` variable,
 ///   with new maps merged in.
-@mixin add-times(
-  $maps...
-) {
+@mixin add-times($maps...) {
   $times: _a_map-multimerge($times, $maps...) !global;
 }

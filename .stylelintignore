@@ -1,0 +1,7 @@
+!.*
+.git/
+.vscode/
+.yarn/
+.yarnrc
+docs/
+node_modules/

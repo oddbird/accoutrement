@@ -1,7 +1,6 @@
 // Font Configuration
 // ==================
 
-
 /// # WebFonts
 ///
 /// Webfont configuration is most useful
@@ -23,7 +22,6 @@
 ///
 /// @group type-fonts
 
-
 // Font Path
 // ---------
 /// The path to your fonts directory,
@@ -44,7 +42,6 @@
 ///
 /// @type string
 $font-path: '' !default;
-
 
 // Fonts
 // -----
@@ -195,7 +192,6 @@ $font-path: '' !default;
 ///   or base64 data-URIs for specific formats.
 $fonts: () !default;
 
-
 // Add Font
 // --------
 /// In order to keep our `$fonts` map more manageable,
@@ -228,18 +224,16 @@ $fonts: () !default;
 /// @output An updated global `$fonts` variable,
 ///   with new maps merged in.
 /// @throws Font key already exists. Rename or `$force` to continue
-@mixin add-font(
-  $key,
-  $map,
-  $force: false
-) {
+@mixin add-font($key, $map, $force: false) {
   @if map-get($fonts, $key) and not $force {
     @include _a_error(
       'Font key `#{$key}` already exists. Rename or `$force` to continue',
       'add-font'
     );
   } @else {
-    $new: ($key: $map);
+    $new: (
+      $key: $map,
+    );
     $fonts: map-merge($fonts, $new) !global;
   }
 }

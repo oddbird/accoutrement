@@ -2,11 +2,11 @@
 // ==========
 
 $font-path: '../fonts/';
-
 $fonts: (
   '_shared-stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-  '_normal-stack': ('stack': '#_shared-stack'),
-
+  '_normal-stack': (
+    'stack': '#_shared-stack',
+  ),
   'body-font': (
     'name': 'Source Sans Pro',
     'stack': '#_shared-stack',
@@ -21,25 +21,29 @@ $fonts: (
       'svgid': 'boldID',
     ),
   ),
-
   'TestFont': (
-    'stack': ('Georgia', 'serif'),
+    'stack': (
+      'Georgia',
+      'serif',
+    ),
   ),
-
   'UniFont': (
     'name': 'Unicode Test',
     'normal': 'path/to/normal',
     'formats': 'woff2',
-    'unicode-range': (U+0000-00FF, U+0131, 'U+0152-0153', 'U+02C6'),
+    'unicode-range': (
+      U+0000-00FF,
+      U+0131,
+      'U+0152-0153',
+      'U+02C6',
+    ),
     'display': 'swap',
   ),
-
   'alias': '#body-font',
   'kevin bacon': '#alias',
   'tf-alias': '#TestFont',
   'tf': '#tf-alias',
 );
-
 
 @import 'type/config';
 @import 'type/helpers';
