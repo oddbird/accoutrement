@@ -40,7 +40,8 @@ config.$sizes: data.$test-sizes;
       @include assert-equal(units.get-px(100), 100px);
     }
     @include it('Adds length to 0px') {
-      @include assert-equal(units.get-px(4), 4px);
+      $length: 4;
+      @include assert-equal(units.get-px($length), $length + 0px);
     }
   }
 
