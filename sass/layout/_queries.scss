@@ -92,17 +92,17 @@ $breakpoints: () !default;
   }
 
   // get breakpoint
-  $break: tokens.get($source, $break, $do);
+  $return: tokens.get($source, $break, $do);
 
   // validate
-  @if (meta.type-of($break) != 'number') or (math.is-unitless($break)) {
+  @if (meta.type-of($return) != 'number') or (math.is-unitless($return)) {
     @return throw.error(
       '`#{$break}` is not a valid length or keyword for $break',
       'break'
     );
   }
 
-  @return $break;
+  @return $return;
 }
 
 
