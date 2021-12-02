@@ -12,9 +12,7 @@ const paths = {
   SASS_DIR: 'sass/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   // @@@ remove these as they are migrated
-  IGNORE_SASS: [
-    '!sass/type/**/*.scss',
-  ],
+  IGNORE_SASS: [],
   init: function () {
     this.SASS = [this.SASS_DIR + '**/*.scss']
       .concat(this.IGNORE)
@@ -42,7 +40,7 @@ const sasslintTask = (src, failOnError, shouldLog) => {
     sasslint({
       reporters: [{ formatter: 'string', console: true }],
       failAfterError: failOnError,
-    }),
+    })
   );
   if (!failOnError) {
     stream.on('error', onError);

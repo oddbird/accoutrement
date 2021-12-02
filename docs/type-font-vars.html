@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Changes » CSS Variables | Accoutrement Documentation</title>
+  <title>Fonts » CSS Variables | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -197,7 +197,7 @@
   
   
     <li class="nav-item">
-      <a href="animate-change-vars.html" data-nav="is-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="animate-change-vars.html" data-nav="is-not-active">Changes » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   </ul>
             </li>
@@ -303,7 +303,7 @@
   
   
     <li class="nav-item">
-      <a href="type-font-vars.html" data-nav="is-not-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
+      <a href="type-font-vars.html" data-nav="is-active">Fonts » CSS<span class="widont">&nbsp;</span>Variables</a>
     </li>
   
   
@@ -375,11 +375,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Changes » CSS Variables</strong>
+    <strong>Fonts » CSS Variables</strong>
   </nav>
 
 
-        <div data-page="animate-change-vars">
+        <div data-page="type-font-vars">
           
   
     
@@ -404,7 +404,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="changes-css-variables">Changes » CSS<span class="widont">&nbsp;</span>Variables</h1>
+      <h1 id="fonts-css-variables">Fonts » CSS<span class="widont">&nbsp;</span>Variables</h1>
 
       
   
@@ -469,7 +469,7 @@
 
 
 
-<section class="item" id="variable--change-var-prefix">
+<section class="item" id="variable--font-var-prefix">
   
     
   
@@ -487,7 +487,7 @@
       
 
       
-        <a href="#variable--change-var-prefix" class="item-name">$change-var-prefix</a>
+        <a href="#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
 
       
@@ -518,7 +518,7 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$change-var-prefix: &#39;change-&#39; !default;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$font-var-prefix: &#39;font-&#39; !default;</code></pre>
     </div>
   
 
@@ -534,9 +534,9 @@
 it can be useful to prefix different variable types.
 Accoutrement maps help solve that problem in Sass,
 so we wanted to carry that over into our CSS variable support.
-Set a prefix for all change-tokens,
-and we’ll apply it when setting or calling css variables
-based on your change maps.
+Set a prefix for all font-tokens,
+and we’ll apply it when setting or calling CSS variables
+based on your font maps.
 Set to <code>null</code> or <code>''</code> (empty string) for no<span class="widont">&nbsp;</span>prefix.</p>
 
       
@@ -617,9 +617,13 @@ Set to <code>null</code> or <code>''</code> (empty string) for no<span class="wi
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$changes: (&#39;my-change&#39;: pink);
-tools.$change-var-prefix: &#39;prefix_&#39;;
-html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$fonts: (
+  &#39;my-font&#39;: (
+    &#39;stack&#39;: (arial, helvetica, sans-serif),
+   )
+);
+$font-var-prefix: &#39;prefix_&#39;;
+html { @include tools.font--(&#39;my-font&#39;) }</code></pre>
     </div>
   
 
@@ -642,7 +646,7 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
       
       
       <pre class="hljs-pre"><code class="lang-css">html {
-  --prefix_my-change: pink;
+  --font-my-font: my-font, arial, helvetica, sans-serif;
 }</code></pre>
     </div>
   
@@ -694,7 +698,7 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
       <span class="item-type">@mixin</span>
       
         <a href="
-  animate-change-vars.html#mixin--changes--" class="item-name">changes--()</a>
+  type-font-vars.html#mixin--fonts--" class="item-name">fonts--()</a>
       
       
       
@@ -725,7 +729,7 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
       <span class="item-type">@mixin</span>
       
         <a href="
-  animate-change-vars.html#mixin--change--" class="item-name">change--()</a>
+  type-font-vars.html#mixin--font--" class="item-name">font--()</a>
       
       
       
@@ -756,7 +760,7 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
       <span class="item-type">@function</span>
       
         <a href="
-  animate-change-vars.html#function--var-change" class="item-name">var-change()</a>
+  type-font-vars.html#function--var-font" class="item-name">var-font()</a>
       
       
       
@@ -801,7 +805,7 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
 
 
 
-<section class="item" id="mixin--changes--">
+<section class="item" id="mixin--fonts--">
   
     
   
@@ -819,7 +823,7 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
       
 
       
-        <a href="#mixin--changes--" class="item-name">changes--()</a>
+        <a href="#mixin--fonts--" class="item-name">fonts--()</a>
       
 
       
@@ -840,12 +844,12 @@ html { @include tools.change--(&#39;my-change&#39;) }</code></pre>
 
   
     <div class="text-block">
-      <p>Convert any change-map into CSS variables,
-using the global <code>$change-var-prefix</code>.</p>
+      <p>Convert any font-map into CSS variables,
+using the global <code>$font-var-prefix</code>.</p>
 <ul>
-<li>Change names that start with <code>_</code> or <code>-</code> are considered “private”
+<li>Font names that start with <code>_</code> or <code>-</code> are considered “private”
 and will not be output as<span class="widont">&nbsp;</span>variables</li>
-<li>Changes that contain a simple alias with no adjustments
+<li>Fonts that contain a simple alias with no adjustments
 will be output with a <code>var()</code> value,
 keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
 </ul>
@@ -906,7 +910,7 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
       
         <span class="item-name">$source:</span>
       
-      <span class="item-value">$changes</span>
+      <span class="item-value">$fonts</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -915,7 +919,35 @@ keeping the alias relationship<span class="widont">&nbsp;</span>intact</li>
       
       <div class="param-details text-block">
         <p>Optionally use a custom
-map of changes to set as css<span class="widont">&nbsp;</span>variables</p>
+map of fonts to set as css<span class="widont">&nbsp;</span>variables</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$use:</span>
+      
+      <span class="item-value">&#39;stack&#39;</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Font-map value (such as ‘name’ or ‘stack’)
+to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       </div>
     
@@ -947,7 +979,7 @@ map of changes to set as css<span class="widont">&nbsp;</span>variables</p>
     
       
       <div class="param-details text-block">
-        <p>Custom properties for all public changes in the<span class="widont">&nbsp;</span>map</p>
+        <p>Custom properties for all public fonts in the<span class="widont">&nbsp;</span>map</p>
 
       </div>
     
@@ -1006,38 +1038,16 @@ map of changes to set as css<span class="widont">&nbsp;</span>variables</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$changes: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
-  &#39;border&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">$fonts: (
+  &#39;_TestFont&#39;: (
+    &#39;name&#39;: &#39;My Test Font&#39;,
+    &#39;stack&#39;: (&#39;Georgia&#39;, &#39;serif&#39;),
+   ),
+  &#39;text&#39;: &#39;#_TestFont&#39;,
+  &#39;sans&#39;: &#39;#text&#39;,
 );
 html {
-  @include tools.changes--;
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">html {
-  --change-text: #206020;
-  --change-border: var(--change-text, #206020);
+  @include tools.fonts--;
 }</code></pre>
     </div>
   
@@ -1088,10 +1098,44 @@ html {
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">font-values()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
       
         <a href="
-  animate-change-vars.html#variable--change-var-prefix" class="item-name">$change-var-prefix</a>
+  type-font-vars.html#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1138,7 +1182,7 @@ html {
 
 
 
-<section class="item" id="mixin--change--">
+<section class="item" id="mixin--font--">
   
     
   
@@ -1156,7 +1200,7 @@ html {
       
 
       
-        <a href="#mixin--change--" class="item-name">change--()</a>
+        <a href="#mixin--font--" class="item-name">font--()</a>
       
 
       
@@ -1177,7 +1221,7 @@ html {
 
   
     <div class="text-block">
-      <p>Set a single custom property based on a map-change,
+      <p>Set a single custom property based on a map-font,
 with optional alias and<span class="widont">&nbsp;</span>fallback</p>
 
       
@@ -1234,7 +1278,7 @@ with optional alias and<span class="widont">&nbsp;</span>fallback</p>
     <h4 class="param-title">
       
       
-        <span class="item-name">$change:</span>
+        <span class="item-name">$font:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1244,7 +1288,7 @@ with optional alias and<span class="widont">&nbsp;</span>fallback</p>
     
       
       <div class="param-details text-block">
-        <p>Change name available in the <code>$source</code> map,
+        <p>Font name available in the <code>$source</code> map,
 or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
 
       </div>
@@ -1273,7 +1317,7 @@ or alias to use in naming the CSS<span class="widont">&nbsp;</span>variable</p>
       
       <div class="param-details text-block">
         <p>Optional value for the variable,
-if different from the given <code>$change</code></p>
+if different from the given <code>$font</code></p>
 
       </div>
     
@@ -1304,7 +1348,7 @@ if different from the given <code>$change</code></p>
 <ul>
 <li><code>true</code> will generate a fallback based on the token<span class="widont">&nbsp;</span>value</li>
 <li>A token name will fallback to the value of that
-css-variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
+CSS variable and then to the token’s calculated<span class="widont">&nbsp;</span>value</li>
 <li>Any other fallback will be passed through<span class="widont">&nbsp;</span>unchanged</li>
 </ul>
 
@@ -1323,9 +1367,37 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     <h4 class="param-title">
       
       
+        <span class="item-name">$use:</span>
+      
+      <span class="item-value">&#39;stack&#39;</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Font-map value (such as ‘name’ or ‘stack’)
+to use as custom-property<span class="widont">&nbsp;</span>values</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
         <span class="item-name">$source:</span>
       
-      <span class="item-value">$changes</span>
+      <span class="item-value">$fonts</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1333,7 +1405,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     
       
       <div class="param-details text-block">
-        <p>Optional map of changes to use as a palette<span class="widont">&nbsp;</span>source</p>
+        <p>Optional map of fonts to use as a palette<span class="widont">&nbsp;</span>source</p>
 
       </div>
     
@@ -1402,14 +1474,17 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$changes: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
-  &#39;border&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">tools.$fonts: (
+  &#39;_TestFont&#39;: (
+    &#39;name&#39;: &#39;My Test Font&#39;,
+    &#39;stack&#39;: (&#39;Georgia&#39;, &#39;serif&#39;),
+   ),
+  &#39;text&#39;: &#39;#_TestFont&#39;,
+  &#39;sans&#39;: &#39;#text&#39;,
 );
 .example {
-  @include tools.change--(&#39;border&#39;);
-  @include tools.change--(&#39;outline&#39;, &#39;border&#39;, red);
+  @include tools.font--(&#39;text&#39;);
+  @include tools.font--(&#39;headline&#39;, &#39;sans&#39;, sans-serif);
 }</code></pre>
     </div>
   
@@ -1433,8 +1508,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  --change-border: var(--change-text, #206020);
-  --change-outline: var(--change-border, red);
+  --font-text: &quot;My Test Font&quot;, Georgia, serif;
+  --font-headline: var(--font-sans, sans-serif);
 }</code></pre>
     </div>
   
@@ -1485,10 +1560,44 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
   
   <div class="param-list">
     <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">font-values()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
       
         <a href="
-  animate-change-vars.html#variable--change-var-prefix" class="item-name">$change-var-prefix</a>
+  type-font-vars.html#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
       
       <span class="value-type">(string)</span>
@@ -1535,7 +1644,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
 
 
-<section class="item" id="function--var-change">
+<section class="item" id="function--var-font">
   
     
   
@@ -1553,7 +1662,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
 
       
-        <a href="#function--var-change" class="item-name">var-change()</a>
+        <a href="#function--var-font" class="item-name">var-font()</a>
       
 
       
@@ -1631,7 +1740,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     <h4 class="param-title">
       
       
-        <span class="item-name">$change:</span>
+        <span class="item-name">$font:</span>
       
       
       <span class="value-type">(*)</span>
@@ -1641,7 +1750,7 @@ along with a fallback value based on the token<span class="widont">&nbsp;</span>
     
       
       <div class="param-details text-block">
-        <p>Change name available in the <code>$source</code> map</p>
+        <p>Font name available in the <code>$source</code> map</p>
 
       </div>
     
@@ -1693,7 +1802,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
         <span class="item-name">$source:</span>
       
-      
+      <span class="item-value">$fonts</span>
       <span class="value-type">(map)</span>
       
     </h4>
@@ -1701,7 +1810,35 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
     
       
       <div class="param-details text-block">
-        <p>Optional Accoutrement map of changes to use as<span class="widont">&nbsp;</span>source</p>
+        <p>Optional Accoutrement map of fonts to use as<span class="widont">&nbsp;</span>source</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$use:</span>
+      
+      <span class="item-value">&#39;stack&#39;</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>Font-map value (such as ‘name’ or ‘stack’)
+to use as custom-property<span class="widont">&nbsp;</span>values</p>
 
       </div>
     
@@ -1793,14 +1930,16 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">tools.$changes: (
-  &#39;_brand&#39;: hsl(120, 50%, 50%),
-  &#39;text&#39;: &#39;#_brand&#39; (&#39;shade&#39;: 50%),
-  &#39;border&#39;: &#39;#text&#39;,
+      <pre class="hljs-pre"><code class="lang-scss">$fonts: (
+  &#39;_TestFont&#39;: (
+    &#39;name&#39;: &#39;My Test Font&#39;,
+    &#39;stack&#39;: (&#39;Georgia&#39;, &#39;serif&#39;),
+   ),
+  &#39;text&#39;: &#39;#_TestFont&#39;,
+  &#39;sans&#39;: &#39;#text&#39;,
 );
 .example {
-  border-change: tools.var-change(&#39;border&#39;);
-  change: tools.var-change(&#39;text&#39;, black);
+  font-family: tools.var-font(&#39;sans&#39;, sans-serif);
 }</code></pre>
     </div>
   
@@ -1824,8 +1963,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
       <pre class="hljs-pre"><code class="lang-css">.example {
-  border-change: var(--change-border, #206020);
-  change: var(--change-text, black);
+  font-family: var(--font-sans, sans-serif);
 }</code></pre>
     </div>
   
@@ -1856,6 +1994,40 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
     
       
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">font-values()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
       
         
         
@@ -1914,7 +2086,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
         <a href="
-  animate-change-vars.html#variable--change-var-prefix" class="item-name">$change-var-prefix</a>
+  type-font-vars.html#variable--font-var-prefix" class="item-name">$font-var-prefix</a>
       
       
       <span class="value-type">(string)</span>

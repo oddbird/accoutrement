@@ -1,3 +1,9 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use '../utils/string' as str;
+@use './config';
+
 /// # Internal WebFont Helpers
 /// These internal tools are not safe for public use --
 /// but we've documented the logic for transparency,
@@ -6,18 +12,13 @@
 /// @access private
 /// @group type-helpers
 
-
 // Font Style Options
 // ------------------
 /// A constant list of valid font-style settings
 /// (not including `normal`, which is also a valid weight).
 /// @access private
 /// @group type-helpers
-$_a_FONT-STYLES: (
-  'italic',
-  'oblique',
-);
-
+$FONT-STYLES: ('italic', 'oblique');
 
 // Font Weight Options
 // -------------------
@@ -25,7 +26,7 @@ $_a_FONT-STYLES: (
 /// (not including `normal`, which is also a valid style).
 /// @access private
 /// @group type-helpers
-$_a_FONT-WEIGHTS: (
+$FONT-WEIGHTS: (
   '100',
   '200',
   '300',
@@ -37,9 +38,8 @@ $_a_FONT-WEIGHTS: (
   '900',
   'bold',
   'bolder',
-  'lighter',
+  'lighter'
 );
-
 
 // Font Weight Options
 // -------------------
@@ -48,7 +48,7 @@ $_a_FONT-WEIGHTS: (
 /// The order given here will also be used in defining font-face src order.
 /// @access private
 /// @group type-helpers
-$_a_FONT-FORMATS: (
+$FONT-FORMATS: (
   'local': null,
   'eot': 'embedded-opentype',
   'woff2': 'woff2',
@@ -59,9 +59,8 @@ $_a_FONT-FORMATS: (
   'svgz': 'svg',
 );
 
-
 // stylelint-disable function-url-quotes
-// Font URL
+// Format URL
 // --------
 /// Interpolate a font path and format-type
 /// to create the proper font-src import URL.
@@ -71,6 +70,7 @@ $_a_FONT-FORMATS: (
 /// [font-url]: fonts.html#function--font-url
 ///
 /// @since type-4.0.0 -
+/// - BREAKING: Name changed from `font-url` to `format-url`
 /// - NEW: Added to format font-paths correctly,
 ///   with file extension and suffix.
 ///
@@ -92,30 +92,31 @@ $_a_FONT-FORMATS: (
 ///   Optionally append an `?#iefix` suffix to `eot` fonts.
 /// @return {string} -
 ///   Font-format URL for importing.
-@function _a_font-url(
-  $path,
-  $format,
-  $svgid: null,
-  $iefix: false
-) {
+@function format-url($path, $format, $svgid: null, $iefix: false) {
   $suffix: '';
 
   // some formats need no adjustments
-  @if ($format == 'local') or str-index($path, 'data:') {
+  @if ($format == 'local') or string.index($path, 'data:') {
     @return $path;
   }
 
   // add file format when needed
   $ext: '.' + $format;
-  $ext: if(str-index($path, $ext), '', $ext);
+  $ext: if(string.index($path, $ext), '', $ext);
 
   // add svgid when needed
-  @if str-index($format, 'svg') and ($svgid) and (not str-index($path, '#')) {
-    $suffix: if(str-index($svgid, '#'), $svgid, '#' + $svgid);
+  @if string.index($format, 'svg') and
+    ($svgid) and
+    (not string.index($path, '#'))
+  {
+    $suffix: if(string.index($svgid, '#'), $svgid, '#' + $svgid);
   }
 
   // add iefix when needed
-  @if str-index($format, 'eot') and ($iefix) and  (not str-index($path, '?')) {
+  @if string.index($format, 'eot') and
+    ($iefix) and
+    (not string.index($path, '?'))
+  {
     $suffix: '?#iefix';
   }
 
@@ -124,13 +125,12 @@ $_a_FONT-FORMATS: (
 }
 // stylelint-enable
 
-
 // Font Src
 // --------
 /// Get the font `src` value for a given font path and format,
 /// including both `url()` and `format()`.
 /// This also sorts formats,
-/// organizing them into the proper output order for browser-compatability.
+/// organizing them into the proper output order for browser-compatibility.
 ///
 /// @since type-4.0.0 -
 /// - BREAKING: No longer accepts the `$format` parameter.
@@ -147,18 +147,14 @@ $_a_FONT-FORMATS: (
 ///   SVG or EOT-iefix suffix to be added to font url.
 /// @return {list} -
 ///   CSS-ready `url() format()` combination for font-face `src` output.
-@function _a_font-src(
-  $path,
-  $format
-) {
-  $format-name: map-get($_a_FONT-FORMATS, $format);
+@function font-src($path, $format) {
+  $format-name: map.get($FONT-FORMATS, $format);
   $format-name: if($format-name, format($format-name), '');
 
   // stylelint-disable-next-line function-url-quotes
-  $path: _a_font-url($path, $format, $iefix: true);
+  $path: format-url($path, $format, $iefix: true);
   @return font-url($path) $format-name;
 }
-
 
 // Font Src List
 // -------------
@@ -177,14 +173,12 @@ $_a_FONT-FORMATS: (
 /// @return {list} -
 ///   Compiled list of `url() format()` pairs,
 ///   ready to apply in the `src` property.
-@function _a_font-src-list(
-  $data
-) {
+@function font-src-list($data) {
   $src: ();
 
   // Use best-practice format order
-  @each $format in map-keys($_a_FONT-FORMATS) {
-    $url: map-get($data, $format);
+  @each $format in map.keys($FONT-FORMATS) {
+    $url: map.get($data, $format);
 
     @if $url {
       $item: ();
@@ -192,21 +186,19 @@ $_a_FONT-FORMATS: (
       @if ($format == 'local') {
         @each $name in $url {
           $li: local($name);
-          $item: append($item, $li, 'comma');
+          $item: list.append($item, $li, 'comma');
         }
       } @else {
-        $li: _a_font-src($url, $format);
-        $item: append($item, $li, 'comma');
+        $li: font-src($url, $format);
+        $item: list.append($item, $li, 'comma');
       }
 
-      $src: join($src, $item, 'comma');
+      $src: list.join($src, $item, 'comma');
     }
   }
 
-
   @return $src;
 }
-
 
 // Font Get Variants
 // -----------------
@@ -226,27 +218,33 @@ $_a_FONT-FORMATS: (
 ///   A map of all the data for a single font.
 /// @return {map} -
 ///   Only the variants provided in the given font-map.
-@function _a_font-get-variants(
-  $font
-) {
-  $var-options: join($_a_FONT-STYLES, $_a_FONT-WEIGHTS);
-  $var-options: append($var-options, 'normal');
+@function font-get-variants($font) {
+  $var-options: list.join($FONT-STYLES, $FONT-WEIGHTS);
+  $var-options: list.append($var-options, 'normal');
   $variants: ();
 
   @each $key, $value in $font {
     // get the first setting, and make sure it's a string…
-    $first: '#{nth($key, 1)}';
-    $first: if(str-index($first, ' '), nth(_a_split($first, ' '), 1), $first);
+    $first: '#{list.nth($key, 1)}';
+    $first: if(
+      string.index($first, ' '),
+      list.nth(str.split($first, ' '), 1),
+      $first
+    );
 
     // if it's a variant, add it to the list…
-    @if index($var-options, $first) {
-      $variants: map-merge($variants, ($key: $value));
+    @if list.index($var-options, $first) {
+      $variants: map.merge(
+        $variants,
+        (
+          $key: $value,
+        )
+      );
     }
   }
 
   @return $variants;
 }
-
 
 // Import Font-Face [mixin]
 // ------------------------
@@ -259,7 +257,7 @@ $_a_FONT-FORMATS: (
 /// @access private
 /// @group type-helpers
 /// @example scss
-///   @include _a_import-font-face(
+///   @include tools.import-font-face(
 ///     $name: 'Franklin Gothic',
 ///     $weight: 'normal',
 ///     $style: 'normal',
@@ -288,7 +286,7 @@ $_a_FONT-FORMATS: (
 /// @output `@font-face` CSS-block for importing a given font variant.
 /// @throws When a generic variant-path is provided
 ///   without formats for interpolation.
-@mixin _a_import-font-face(
+@mixin import-font-face(
   $name,
   $weight,
   $style,
@@ -297,17 +295,17 @@ $_a_FONT-FORMATS: (
   $display: null
 ) {
   // Special handling of eot with local or data
-  $eot: map-get($data, 'eot');
-  $local: map-get($data, 'local');
+  $eot: map.get($data, 'eot');
+  $local: map.get($data, 'local');
   $double: false;
 
   @if $eot {
-    $eot: _a_font-url($eot, 'eot');
+    $eot: format-url($eot, 'eot');
     $eot: font-url($eot);
 
-    @if (not str-index($eot, 'data:')) {
+    @if (not string.index($eot, 'data:')) {
       @each $format, $url in $data {
-        $has-data: (($format != 'local') and str-index($url, 'data:'));
+        $has-data: (($format != 'local') and string.index($url, 'data:'));
 
         @if ($format == 'local') or $has-data {
           $double: true;
@@ -317,16 +315,16 @@ $_a_FONT-FORMATS: (
   }
 
   // Format values for CSS
-  $name: quote($name);
-  $style: unquote($style);
-  $weight: unquote($weight);
-  $display: if($display, unquote($display), null);
+  $name: string.quote($name);
+  $style: string.unquote($style);
+  $weight: string.unquote($weight);
+  $display: if($display, string.unquote($display), null);
 
   @if $unicode {
     $new: ();
 
     @each $code in $unicode {
-      $new: append($new, unquote($code), 'comma');
+      $new: list.append($new, string.unquote($code), 'comma');
     }
 
     $unicode: $new;
@@ -334,7 +332,7 @@ $_a_FONT-FORMATS: (
 
   // Output…
   @if $double {
-    $data: map-remove($data, 'eot');
+    $data: map.remove($data, 'eot');
 
     // ie-only
     @font-face {
@@ -352,7 +350,7 @@ $_a_FONT-FORMATS: (
       font-style: $style;
       font-weight: $weight;
       font-display: $display;
-      src: _a_font-src-list($data);
+      src: font-src-list($data);
       unicode-range: $unicode;
     }
   } @else {
@@ -363,8 +361,33 @@ $_a_FONT-FORMATS: (
       font-weight: $weight;
       font-display: $display;
       src: $eot;
-      src: _a_font-src-list($data);
+      src: font-src-list($data);
       unicode-range: $unicode;
     }
   }
+}
+
+// Font-URL [function]
+// -------------------
+/// This is a wrapper for the CSS `url()` function,
+/// which simply prepends the global `$font-path` when appropriate.
+///
+/// @since type-4.0.0 -
+/// - BUGFIX: Supports Base64 data URI's, without prepending font-path
+///
+/// @group type-helpers
+/// @example scss
+///   tools.$font-path: '../fonts/';
+///   $src: tools.font-url('sans/my-sans-font.woff2');
+///   /* #{$src} */
+///
+/// @param {string} $path -
+///   A path relative to the fonts directory.
+/// @return {string} -
+///   The full path to a font file, in CSS `url('my/path')` format.
+@function font-url($path) {
+  @if not string.index($path, 'data:') {
+    $path: config.$font-path + $path;
+  }
+  @return url(string.quote( $path )); // stylelint-disable-line function-url-quotes
 }

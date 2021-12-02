@@ -7,8 +7,9 @@
 @use 'vars';
 @use 'tokens';
 @use 'ratio';
+
 @use 'animate';
 @use 'color';
 @use 'layout';
 @use 'scale';
-// @import 'plugin/type';
+@use 'type';

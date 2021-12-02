@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Built-In Ratios | Accoutrement Documentation</title>
+  <title>type-helpers | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -147,7 +147,7 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-active">Built-In Ratios</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -319,7 +319,7 @@
             </li>
   
     <li class="nav-item">
-      <a href="type-helpers.html" data-nav="is-not-active">type-helpers</a>
+      <a href="type-helpers.html" data-nav="is-active">type-helpers</a>
     </li>
   </ul>
     </div>
@@ -375,11 +375,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Built-In Ratios</strong>
+    <strong>type-helpers</strong>
   </nav>
 
 
-        <div data-page="ratios">
+        <div data-page="type-helpers">
           
   
     
@@ -394,8 +394,37 @@
 
 
 
-<section class="item" >
+<section class="item" id="function--font-url">
   
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--font-url" class="item-name">font-url()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
     
   
   
@@ -403,19 +432,17 @@
   
 
   
-    <div data-item-section="prose" class="text-block">
-      <h1 id="built-in-ratios">Built-In Ratios</h1>
-<p>Some built-in named ratios you can use,
-either directly or through the token syntax
-(where these values are provided with a <code>_</code> prefix).</p>
+    <div class="text-block">
+      <p>This is a wrapper for the CSS <code>url()</code> function,
+which simply prepends the global <code>$font-path</code> when appropriate.</p>
 
       
   
     
       <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <h3 class="summary-subtitle">Since <code>type-4.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Now available as individual variables (without the <code>_</code> prefix)</li>
+<li>BUGFIX: Supports Base64 data URI’s, without prepending<span class="widont">&nbsp;</span>font-path</li>
 </ul>
 </div>
       </section>
@@ -431,6 +458,8 @@ either directly or through the token syntax
     </div>
   
 
+  </div>
+
   
 
   
@@ -439,6 +468,83 @@ either directly or through the token syntax
   
   
   
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$path:</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A path relative to the fonts<span class="widont">&nbsp;</span>directory.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The full path to a font file, in CSS <code>url('my/path')</code> format.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
 
   
 
@@ -485,10 +591,9 @@ either directly or through the token syntax
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@use &#39;ratio/named&#39;;
-@each $name, $value in meta.module-variables(&#39;named&#39;) {
-/*! $#{$name}: #{$value}; */
-}</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$font-path: &#39;../fonts/&#39;;
+$src: tools.font-url(&#39;sans/my-sans-font.woff2&#39;);
+/* #{$src} */</code></pre>
     </div>
   
 
@@ -510,23 +615,7 @@ either directly or through the token syntax
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! $octave: 2; */
-/*! $major-seventh: 1.875; */
-/*! $minor-seventh: 1.7777777778; */
-/*! $major-sixth: 1.6666666667; */
-/*! $minor-sixth: 1.6; */
-/*! $fifth: 1.5; */
-/*! $augmented-fourth: 1.40625; */
-/*! $fourth: 1.3333333333; */
-/*! $major-third: 1.25; */
-/*! $minor-third: 1.2; */
-/*! $major-second: 1.125; */
-/*! $minor-second: 1.0666666667; */
-/*! $photo: 1.5; */
-/*! $classic: 1.3333333333; */
-/*! $widescreen: 1.7777777778; */
-/*! $cinema: 2.39; */
-/*! $golden: 1.61803399; */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* url(&quot;../fonts/sans/my-sans-font.woff2&quot;) */</code></pre>
     </div>
   
 
@@ -544,8 +633,60 @@ either directly or through the token syntax
   
   
   
+    <div class="requires-wrapper">
+      
     
+  <div data-item-section="requires">
     
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  type-fonts.html#variable--font-path" class="item-name">$font-path</a>
+      
+      
+      <span class="value-type">(string)</span>
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+      
   
     
   <div data-item-section="used-by">
@@ -576,12 +717,11 @@ either directly or through the token syntax
     <h4 class="param-title">
       <span class="item-type">@function</span>
       
-        <a href="
-  ratio-tokens.html#function--ratio" class="item-name">ratio()</a>
+        <span class="item-name">font-src()</span>
       
       
       
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -607,74 +747,11 @@ either directly or through the token syntax
     <h4 class="param-title">
       <span class="item-type">@mixin</span>
       
-        <a href="
-  ratio-vars.html#mixin--ratios--" class="item-name">ratios--()</a>
+        <span class="item-name">import-font-face()</span>
       
       
       
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  ratio-vars.html#mixin--ratio--" class="item-name">ratio--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  ratio-vars.html#function--var-ratio" class="item-name">var-ratio()</a>
-      
-      
-      
-      
+      <span class="item-note">[private]</span>
     </h4>
 
     
@@ -688,6 +765,7 @@ either directly or through the token syntax
 
   
 
+    </div>
   
 
   
