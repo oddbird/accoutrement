@@ -1,3 +1,5 @@
+// stylelint-disable scss/operator-no-unspaced
+
 @use 'sass:list';
 @use 'sass:map';
 @use '../../../node_modules/sass-true/sass/true' as *;
@@ -236,7 +238,6 @@ config.$fonts: data.$fonts;
         ),
         $formats: 'woff' 'svg',
       );
-
       $expect: (
         'local': 'hello',
         'woff': 'my/path.woff',

@@ -1,3 +1,5 @@
+// stylelint-disable prettier/prettier
+
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/color/themes';
 @use '../../sass/color/tokens';
@@ -8,7 +10,6 @@ $_old: tokens.$colors;
 tokens.$colors: data.$colors;
 
 @include test-module('color/themes') {
-
   // Shades Of [function]
   // --------------------
   @include describe('Shades Of [function]') {
@@ -49,7 +50,6 @@ tokens.$colors: data.$colors;
     }
   }
 
-
   // Stripe Colors [function]
   // ------------------------
   @include describe('Stripe Colors [function]') {
@@ -60,12 +60,11 @@ tokens.$colors: data.$colors;
           red 0% 25%,
           orange 25% 50%,
           yellow 50% 75%,
-          tokens.color('primary') 75% 100%,
+          tokens.color('primary') 75% 100%
         )
       );
     }
   }
-
 
   // Stripe Colors [mixin]
   // ---------------------
@@ -84,8 +83,6 @@ tokens.$colors: data.$colors;
       }
     }
   }
-
-
 } // end module
 
 tokens.$colors: $_old;

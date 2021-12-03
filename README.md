@@ -47,18 +47,18 @@ Use what you need:
 
 ```scss
 // all the modules (these are functionally the same)
-@use "<path-to>/accoutrement";
-@use "<path-to>/accoutrement/sass/tools";
+@use '<path-to>/accoutrement';
+@use '<path-to>/accoutrement/sass/tools';
 
 // individual modules (at `/accoutrement/sass/<name>`)
-@use "<path-to>/accoutrement/sass/color";
+@use '<path-to>/accoutrement/sass/color';
 ```
 
 If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
 you can use the default "tools" (core + plugins) using only:
 
 ```scss
-@use "accoutrement";
+@use 'accoutrement';
 ```
 
 ## Modules for common data types
@@ -104,8 +104,11 @@ $map: (
   // internal reference & adjustments
   'gutter': '#root'
     (
-      "scale": ('_major-third', 1),
-      "convert-units": "rem",
+      'scale': (
+        '_major-third',
+        1,
+      ),
+      'convert-units': 'rem',
     ),
 );
 ```

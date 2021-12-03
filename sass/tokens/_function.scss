@@ -40,7 +40,6 @@
 ///   should refer to a captured function
 $functions: () !default;
 
-
 // Get Function
 // ------------
 /// Get a function from registration.
@@ -57,18 +56,15 @@ $functions: () !default;
 /// @return {function | null} -
 ///   Returns a first-class function, if found in registration
 /// @throws `#{$function}` is not a valid function for performing token adjustments
-@function get(
-  $name,
-  $source: (),
-  $throw: false,
-) {
-  $function: map.get($source, $name) or map.get($functions, $name) or map.get(function.$internal, $name);
+@function get($name, $source: (), $throw: false) {
+  $function: map.get($source, $name) or map.get($functions, $name) or
+    map.get(function.$internal, $name);
 
   // optional error handling
   @if $throw and (meta.type-of($function) != 'function') {
     $message: '`#{$name}` is not a registered function';
 
-    @if ($function != null) {
+    @if $function {
       $message: '`#{$name}` (`#{$function}`) is not a valid function for performing token adjustments';
     }
 
@@ -77,7 +73,6 @@ $functions: () !default;
 
   @return $function;
 }
-
 
 // Register Function
 // -----------------
@@ -93,9 +88,6 @@ $functions: () !default;
 /// @output {map} $_ACCOUTREMENT_APP -
 ///   Functions are registered in a map
 ///   under any number of aliases
-@mixin register(
-  $function,
-  $names...
-) {
+@mixin register($function, $names...) {
   $functions: function.set($functions, $function, $names...) !global;
 }

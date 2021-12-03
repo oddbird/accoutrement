@@ -3,36 +3,22 @@
 @use '../../sass/ratio/tokens';
 
 $_old: tokens.$ratios;
-tokens.$ratios: (
-  'new': '#_octave',
-  'token': 'linear',
-  'bad': red,
-);
+tokens.$ratios: ('new': '#_octave', 'token': 'linear', 'bad': red);
 
 @include test-module('scale/scale') {
-
   // Scale [function]
   // ----------------
   @include describe('Scale [function]') {
     @include it('Scales linear ratio') {
-      @include assert-equal(
-        scale.scale(2, 'linear', 4),
-        8
-      );
+      @include assert-equal(scale.scale(2, 'linear', 4), 8);
     }
 
     @include it('Scales exponential ratios') {
-      @include assert-equal(
-        scale.scale(16, 1.5, 2),
-        36
-      );
+      @include assert-equal(scale.scale(16, 1.5, 2), 36);
     }
 
     @include it('Scales token lookup') {
-      @include assert-equal(
-        scale.scale(2, 'new', 2),
-        8
-      );
+      @include assert-equal(scale.scale(2, 'new', 2), 8);
     }
 
     @include it('Error on bad token-lookup') {

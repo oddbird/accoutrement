@@ -16,7 +16,6 @@
 /// @type map
 $internal: ();
 
-
 // Registration
 // ------------
 /// This function provides the shared logic used by
@@ -36,11 +35,7 @@ $internal: ();
 /// @return {map} -
 ///   Updated registration map
 /// @throws `$function` is not available to register with Accoutrement
-@function set(
-  $source,
-  $function,
-  $names...
-) {
+@function set($source, $function, $names...) {
   $origin: 'function-register';
 
   @if not type.check($function, 'function') {
@@ -59,12 +54,16 @@ $internal: ();
       @return throw.error($error, $origin);
     }
 
-    $source: map.merge($source, ($name: $function));
+    $source: map.merge(
+      $source,
+      (
+        $name: $function,
+      )
+    );
   }
 
   @return $source;
 }
-
 
 // Internal [mixin]
 // ----------------
@@ -77,9 +76,6 @@ $internal: ();
 /// @param {string | arglist} $names... -
 ///   One or more alias names (strings)
 ///   to use for map-access to the function
-@mixin internal(
-  $function,
-  $names...
-) {
+@mixin internal($function, $names...) {
   $internal: set($internal, $function, $names...) !global;
 }

@@ -4,79 +4,44 @@
 // Query Util Tests
 // ================
 @include test-module('Layout: Query Utils') {
-
-    
   // Nudge Query
   // -----------
   @include describe('Nudge Query [function]') {
     @include it('Removes 1px from max px values') {
-      @include assert-equal(
-        utils.nudge-query(20px, 'max'),
-        19px
-      );
+      @include assert-equal(utils.nudge-query(20px, 'max'), 19px);
     }
 
     @include it('Removes 0.01 from non-px max values') {
-      @include assert-equal(
-        utils.nudge-query(20em, 'max'),
-        19.99em
-      );
+      @include assert-equal(utils.nudge-query(20em, 'max'), 19.99em);
 
-      @include assert-equal(
-        utils.nudge-query(20ch, 'max'),
-        19.99ch
-      );
+      @include assert-equal(utils.nudge-query(20ch, 'max'), 19.99ch);
     }
 
     @include it('Ignores non-adjusted values') {
-      @include assert-equal(
-        utils.nudge-query(20px, 'min', 'max'),
-        20px
-      );
+      @include assert-equal(utils.nudge-query(20px, 'min', 'max'), 20px);
 
-      @include assert-equal(
-        utils.nudge-query(20em, 'max', 'min'),
-        20em
-      );
+      @include assert-equal(utils.nudge-query(20em, 'max', 'min'), 20em);
 
-      @include assert-equal(
-        utils.nudge-query(20ch, 'min'),
-        20ch
-      );
+      @include assert-equal(utils.nudge-query(20ch, 'min'), 20ch);
 
-      @include assert-equal(
-        utils.nudge-query(20ch, 'min', false),
-        20ch
-      );
+      @include assert-equal(utils.nudge-query(20ch, 'min', false), 20ch);
 
-      @include assert-equal(
-        utils.nudge-query(20ch, 'max', false),
-        20ch
-      );
+      @include assert-equal(utils.nudge-query(20ch, 'max', false), 20ch);
     }
 
-  $_old: utils.$adjust-query-overlap;
-  utils.$adjust-query-overlap: 'min';
+    $_old: utils.$adjust-query-overlap;
+    utils.$adjust-query-overlap: 'min';
 
     @include it('Adds 1px to min px values') {
-      @include assert-equal(
-        utils.nudge-query(20px, 'min'),
-        21px
-      );
+      @include assert-equal(utils.nudge-query(20px, 'min'), 21px);
     }
 
     @include it('Adds 0.01 to non-px min values') {
-      @include assert-equal(
-        utils.nudge-query(20em, 'min'),
-        20.01em
-      );
+      @include assert-equal(utils.nudge-query(20em, 'min'), 20.01em);
 
-      @include assert-equal(
-        utils.nudge-query(20ch, 'min'),
-        20.01ch
-      );
-    }  
+      @include assert-equal(utils.nudge-query(20ch, 'min'), 20.01ch);
+    }
 
     utils.$adjust-query-overlap: $_old;
-  } 
+  }
 } // end module

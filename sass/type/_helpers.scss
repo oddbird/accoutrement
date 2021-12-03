@@ -1,3 +1,5 @@
+// stylelint-disable scss/dollar-variable-pattern
+
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:string';
@@ -123,7 +125,7 @@ $FONT-FORMATS: (
   // compile and return
   @return $path + $ext + $suffix;
 }
-// stylelint-enable
+// stylelint-enable function-url-quotes
 
 // Font Src
 // --------
@@ -389,5 +391,6 @@ $FONT-FORMATS: (
   @if not string.index($path, 'data:') {
     $path: config.$font-path + $path;
   }
-  @return url(string.quote( $path )); // stylelint-disable-line function-url-quotes
+  // stylelint-disable-next-line function-url-quotes
+  @return url(string.quote($path));
 }

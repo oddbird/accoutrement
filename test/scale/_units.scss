@@ -14,6 +14,7 @@ config.$sizes: data.$test-sizes;
   // ----------
   @include describe('get-number [function]') {
     @include it('Absolute') {
+      // stylelint-disable-next-line length-zero-no-unit
       @include assert-equal(units.get-number('px'), 0px);
     }
 
@@ -22,6 +23,7 @@ config.$sizes: data.$test-sizes;
     }
 
     @include it('Relative') {
+      // stylelint-disable-next-line length-zero-no-unit
       @include assert-equal(units.get-number('ch', 'relative'), 0ch);
     }
 
@@ -41,10 +43,10 @@ config.$sizes: data.$test-sizes;
     }
     @include it('Adds length to 0px') {
       $length: 4;
+      // stylelint-disable-next-line length-zero-no-unit
       @include assert-equal(units.get-px($length), $length + 0px);
     }
   }
-
 
   // Convert Units
   // -------------
@@ -67,7 +69,10 @@ config.$sizes: data.$test-sizes;
     }
 
     @include it('Convert px to %') {
-      @include assert-equal(units.convert-units(16px, '%', $to-context: 1600px), 1%);
+      @include assert-equal(
+        units.convert-units(16px, '%', $to-context: 1600px),
+        1%
+      );
     }
 
     @include it('Convert em to %') {
@@ -119,7 +124,7 @@ config.$sizes: data.$test-sizes;
       );
     }
 
-     @include it('Errors on non-px/falsey context values') {
+    @include it('Errors on non-px/falsey context values') {
       @include assert-equal(
         units.convert-units('rhythm', 'em', 10%),
         'ERROR [convert-units] Context parameters must resolve to a value in pixel units'
@@ -129,4 +134,3 @@ config.$sizes: data.$test-sizes;
 } // end module
 
 config.$sizes: $_global;
-

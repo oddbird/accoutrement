@@ -51,7 +51,6 @@
 ///   and supports the `outer->inner` nested token syntax.
 /// @group tokens
 
-
 // function registration
 // ---------------------
 @use 'register';
@@ -79,7 +78,6 @@
 ///   @import 'accoutrement/tokens';
 /// ```
 /// @group tokens
-
 
 /// ## [Token Maps](token-api.html)
 /// Using the map syntax,
@@ -119,35 +117,33 @@
 ///
 /// @group tokens
 
-
-// ## [Tokens » CSS Variables](core-vars.html)
-// CSS Variables provide a DOM-aware alternative
-// to the pre-processed Sass variables
-// we use to store tokens.
-// Rather than using one or the other,
-// we recommend defining tokens in Sass
-// (where relationships can be stored in an abstract format),
-// and then generating CSS Variables as-necessary.
-//
-// See [CSS Variables](core-vars.html) documentation
-// for more detail.
-//
-// @example scss
-//   $colors: (
-//     '_brand': hsl(120, 50%, 50%),
-//     'text': '#_brand' ('shade': 50%),
-//     'border': '#text',
-//   );
-//   html {
-//     // generate CSS Variables based on the map above…
-//     @include tokens--($colors);
-//     // access CSS Variables with smart fallbacks…
-//     border-color: var-token($colors, 'border');
-//     color: var-token($colors, 'text');
-//   }
-//
-// @group tokens
-
+/// ## [Tokens » CSS Variables](core-vars.html)
+/// CSS Variables provide a DOM-aware alternative
+/// to the pre-processed Sass variables
+/// we use to store tokens.
+/// Rather than using one or the other,
+/// we recommend defining tokens in Sass
+/// (where relationships can be stored in an abstract format),
+/// and then generating CSS Variables as-necessary.
+///
+/// See [CSS Variables](core-vars.html) documentation
+/// for more detail.
+///
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   html {
+///     // generate CSS Variables based on the map above…
+///     @include tools.tokens--($colors);
+///     // access CSS Variables with smart fallbacks…
+///     border-color: tools.var-token($colors, 'border');
+///     color: tools.var-token($colors, 'text');
+///   }
+///
+/// @group tokens
 
 /// ## [Utility Functions](token-register.html)
 /// We provide a set of built-in

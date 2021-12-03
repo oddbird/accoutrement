@@ -36,12 +36,7 @@
 ///   The scaled value.
 /// @throw -
 ///   Ratio must be either a number or "linear"
-@function scale(
-  $value,
-  $ratio,
-  $steps: 1,
-  $source: ratio.$ratios
-) {
+@function scale($value, $ratio, $steps: 1, $source: ratio.$ratios) {
   $value: if(type.check($value, 'number'), $value, size.size($value));
 
   @if not type.check($value, 'number') {
@@ -68,7 +63,4 @@
   );
 }
 
-@include function.internal(
-  meta.get-function('scale'),
-  'scale',
-);
+@include function.internal(meta.get-function('scale'), 'scale');

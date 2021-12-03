@@ -4,12 +4,10 @@
 @use 'sass:meta';
 
 $fun: meta.get-function('get', $module: 'function');
-
 $reg: function.$functions;
 function.$functions: ('user': 'got-user');
 
 @include test-module('tokens/function') {
-
   @include describe('get [function]') {
     @include it('Returns an internal function') {
       @include assert-true(function.get('plus'));
@@ -17,23 +15,30 @@ function.$functions: ('user': 'got-user');
 
     @include it('Returns a user function') {
       @include assert-equal(
-        function.get('user', ('source': 'got-source')),
+        function.get(
+          'user',
+          (
+            'source': 'got-source',
+          )
+        ),
         'got-user'
       );
     }
 
     @include it('Returns a function from any map') {
       @include assert-equal(
-        function.get('source', ('source': 'got-source')),
+        function.get(
+          'source',
+          (
+            'source': 'got-source',
+          )
+        ),
         'got-source'
       );
     }
 
     @include it('Returns null if no function is found') {
-      @include assert-equal(
-        function.get('nothing'),
-        null
-      );
+      @include assert-equal(function.get('nothing'), null);
     }
 
     @include it('Optionally throws when the function is not registered') {
@@ -43,7 +48,9 @@ function.$functions: ('user': 'got-user');
       );
     }
 
-    @include it('Optionally throws when the registered item is not a function') {
+    @include it(
+      'Optionally throws when the registered item is not a function'
+    ) {
       @include assert-equal(
         function.get('user', $throw: true),
         'ERROR [function.get] `user` (`got-user`) is not a valid function for performing token adjustments'
@@ -62,10 +69,9 @@ function.$functions: ('user': 'got-user');
           'user-fun': $fun,
           'user-fun2': $fun,
         )
-      )
+      );
     }
   }
-
 }
 
 function.$functions: $reg;

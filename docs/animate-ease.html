@@ -404,6 +404,337 @@
 
   
     <div data-item-section="prose" class="text-block">
+      <p>A classic set of built-in easing functions,
+if you don’t want to define your own.
+These can be used either as variables (with the <code>ease-</code> prefix),
+or in token maps (with the <code>_</code> prefix)</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Now available as individual<span class="widont">&nbsp;</span>variables</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;animate/easing-named&#39; as named;
+@each $name, $value in meta.module-variables(&#39;named&#39;) {
+  /*! $#{$name}: #{$value}; */
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! $in: ease-in; */
+/*! $out: ease-out; */
+/*! $in-out: ease-in-out; */
+/*! $in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53); */
+/*! $in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19); */
+/*! $in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22); */
+/*! $in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06); */
+/*! $in-sine: cubic-bezier(0.47, 0, 0.745, 0.715); */
+/*! $in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035); */
+/*! $in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335); */
+/*! $in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045); */
+/*! $out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94); */
+/*! $out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1); */
+/*! $out-quart: cubic-bezier(0.165, 0.84, 0.44, 1); */
+/*! $out-quint: cubic-bezier(0.23, 1, 0.32, 1); */
+/*! $out-sine: cubic-bezier(0.39, 0.575, 0.565, 1); */
+/*! $out-expo: cubic-bezier(0.19, 1, 0.22, 1); */
+/*! $out-circ: cubic-bezier(0.075, 0.82, 0.165, 1); */
+/*! $out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+/*! $in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955); */
+/*! $in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1); */
+/*! $in-out-quart: cubic-bezier(0.77, 0, 0.175, 1); */
+/*! $in-out-quint: cubic-bezier(0.86, 0, 0.07, 1); */
+/*! $in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
+/*! $in-out-expo: cubic-bezier(1, 0, 0, 1); */
+/*! $in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86); */
+/*! $in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55); */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+    
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Used By</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease.html#function--ease" class="item-name">ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--easing--" class="item-name">easing--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  animate-ease-vars.html#mixin--ease--" class="item-name">ease--()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  animate-ease-vars.html#function--var-ease" class="item-name">var-ease()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
       <h1 id="easing-maps-curves-steps">Easing Maps: Curves &amp;<span class="widont">&nbsp;</span>Steps</h1>
 <p>Whether you are using CSS-named easing,
 like <code>ease-in-out</code> and <code>linear</code>,
@@ -637,304 +968,6 @@ or references other easings in the<span class="widont">&nbsp;</span>map.</li>
         
       
         
-
-        
-      
-    
-  </div>
-
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--EASING">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--EASING" class="item-name">$EASING</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$EASING: (
-  &#39;_in&#39;: ease-in,
-  &#39;_out&#39;: ease-out,
-  &#39;_in-out&#39;: ease-in-out,
-  &#39;_in-quad&#39;: cubic-bezier(0.55, 0.085, 0.68, 0.53),
-  &#39;_in-cubic&#39;: cubic-bezier(0.55, 0.055, 0.675, 0.19),
-  &#39;_in-quart&#39;: cubic-bezier(0.895, 0.03, 0.685, 0.22),
-  &#39;_in-quint&#39;: cubic-bezier(0.755, 0.05, 0.855, 0.06),
-  &#39;_in-sine&#39;: cubic-bezier(0.47, 0, 0.745, 0.715),
-  &#39;_in-expo&#39;: cubic-bezier(0.95, 0.05, 0.795, 0.035),
-  &#39;_in-circ&#39;: cubic-bezier(0.6, 0.04, 0.98, 0.335),
-  &#39;_in-back&#39;: cubic-bezier(0.6, -0.28, 0.735, 0.045),
-  &#39;_out-quad&#39;: cubic-bezier(0.25, 0.46, 0.45, 0.94),
-  &#39;_out-cubic&#39;: cubic-bezier(0.215, 0.61, 0.355, 1),
-  &#39;_out-quart&#39;: cubic-bezier(0.165, 0.84, 0.44, 1),
-  &#39;_out-quint&#39;: cubic-bezier(0.23, 1, 0.32, 1),
-  &#39;_out-sine&#39;: cubic-bezier(0.39, 0.575, 0.565, 1),
-  &#39;_out-expo&#39;: cubic-bezier(0.19, 1, 0.22, 1),
-  &#39;_out-circ&#39;: cubic-bezier(0.075, 0.82, 0.165, 1),
-  &#39;_out-back&#39;: cubic-bezier(0.175, 0.885, 0.32, 1.275),
-  &#39;_in-out-quad&#39;: cubic-bezier(0.455, 0.03, 0.515, 0.955),
-  &#39;_in-out-cubic&#39;: cubic-bezier(0.645, 0.045, 0.355, 1),
-  &#39;_in-out-quart&#39;: cubic-bezier(0.77, 0, 0.175, 1),
-  &#39;_in-out-quint&#39;: cubic-bezier(0.86, 0, 0.07, 1),
-  &#39;_in-out-sine&#39;: cubic-bezier(0.445, 0.05, 0.55, 0.95),
-  &#39;_in-out-expo&#39;: cubic-bezier(1, 0, 0, 1),
-  &#39;_in-out-circ&#39;: cubic-bezier(0.785, 0.135, 0.15, 0.86),
-  &#39;_in-out-back&#39;: cubic-bezier(0.68, -0.55, 0.265, 1.55),
-);</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>A classic set of built-in easing functions,
-if you don’t want to define your own.
-This map is not available to be edited directly,
-but feel free to reference these values
-from the user-defined <code>$easing</code> map.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease.html#function--ease" class="item-name">ease()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-ease-vars.html#mixin--easing--" class="item-name">easing--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  animate-ease-vars.html#mixin--ease--" class="item-name">ease--()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease-vars.html#function--var-ease" class="item-name">var-ease()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
 
         
       
@@ -1259,7 +1292,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
       
       
         <a href="
-  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
+  animate-ease.html#variable--named-easing" class="item-name">$named-easing</a>
       
       
       

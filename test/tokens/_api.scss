@@ -14,22 +14,22 @@
     );
 
     @include it('Can start with a simple map key') {
-      @include assert-equal(
-        tokens.get($haystack, 'delay'),
-        0.5s
-      );
+      @include assert-equal(tokens.get($haystack, 'delay'), 0.5s);
     }
 
     @include it('Handles recursion with accoutrement-get') {
-      @include assert-equal(
-        tokens.get($haystack, 'key'),
-        3s
-      );
+      @include assert-equal(tokens.get($haystack, 'key'), 3s);
     }
 
     @include it('Handles on-the-fly adjustments with $do') {
       @include assert-equal(
-        tokens.get($haystack, 'key', ('minus': '#delay')),
+        tokens.get(
+          $haystack,
+          'key',
+          (
+            'minus': '#delay',
+          )
+        ),
         2.5s
       );
     }
@@ -41,49 +41,43 @@
         'baz': 2,
         'three': (
           'abc': '#foo->baz',
-          'def': '#this'
+          'def': '#this',
         ),
       ),
       'ofo': (
-        'zab': 4
+        'zab': 4,
       ),
       'fop': '#foo->baz',
       'fta': '#foo->three->abc',
       'ftb': '#foo->three->def',
-
       // These two tests illustrate the tolerance for `->` in keys/values
-      'bar': '#this->that', // 1 [-> used in valid key]
-      'bip': 'this->that', // this->that [not a hashtag]
-
+      // 1 [-> used in valid key]
+      'bar': '#this->that',
+      // this->that [not a hashtag]
+      'bip': 'this->that',
       'dop': '#ofo->nope',
       'dip': '#that->baz',
     );
 
     @include it('Can start with a simple parent->child lookup') {
-      @include assert-equal(
-        tokens.get($map, 'foo->baz'),
-        2
-      );
+      @include assert-equal(tokens.get($map, 'foo->baz'), 2);
     }
 
     @include it('Handles parent->child hashes in values') {
-      @include assert-equal(
-        tokens.get($map, 'fop'),
-        2
-      );
+      @include assert-equal(tokens.get($map, 'fop'), 2);
     }
 
     @include it('Handles multi-level hashes and references') {
       @include assert-equal(
         (tokens.get($map, 'fta'), tokens.get($map, 'ftb')),
-        (2,0)
+        (2, 0)
       );
     }
 
     @include it('Tolerates `->` in keys and values') {
       @include assert-equal(
         (tokens.get($map, 'bar'), tokens.get($map, 'bip')),
-        (1,'this->that')
+        (1, 'this->that')
       );
     }
 
@@ -96,37 +90,15 @@
 
     @include it('Can return submaps') {
       @include assert-equal(
-        (
-          tokens.get($map, 'ofo'),
-          tokens.get($map, 'foo->three')
-        ),
-        (
-          (
-            'zab': 4
-          ),
-          (
-            'abc': 2,
-            'def': 0
-          )
-        )
+        (tokens.get($map, 'ofo'), tokens.get($map, 'foo->three')),
+        (('zab': 4), ('abc': 2, 'def': 0))
       );
     }
 
     @include it('Can return submaps when null mode is enabled') {
       @include assert-equal(
-        (
-          tokens.get($map, 'ofo'),
-          tokens.get($map, 'foo->three')
-        ),
-        (
-          (
-            'zab': 4
-          ),
-          (
-            'abc': 2,
-            'def': 0
-          )
-        )
+        (tokens.get($map, 'ofo'), tokens.get($map, 'foo->three')),
+        (('zab': 4), ('abc': 2, 'def': 0))
       );
     }
 
@@ -134,20 +106,19 @@
       @include assert-equal(
         (tokens.get($map, 'dop'), tokens.get($map, 'dip')),
         (null, null)
-        );
+      );
     }
 
-    @include it('Returns null when a single key from a string of keys is not found') {
+    @include it(
+      'Returns null when a single key from a string of keys is not found'
+    ) {
       $map2: (
         'a': 'one',
         'b': 'two',
-        'c': 'three'
+        'c': 'three',
       );
 
-      @include assert-equal(
-        (tokens.get($map2, '#a #b#c #d')),
-        (null)
-      );
+      @include assert-equal((tokens.get($map2, '#a #b#c #d')), (null));
     }
 
     @include it('Fails when keys are not found if error mode is enabled') {
@@ -157,11 +128,11 @@
         (tokens.get($map, 'dop'), tokens.get($map, 'dip')),
         (
           'ERROR [lookup-alias] Alias "ofo->nope" not found in map',
-          'ERROR [lookup-alias] Alias "that->baz" not found in map')
-        );
+          'ERROR [lookup-alias] Alias "that->baz" not found in map'
+        )
+      );
     }
   }
-
 }
 
 config.$handle-missing-keys: null;

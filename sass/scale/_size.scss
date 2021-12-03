@@ -55,7 +55,11 @@
     $return: api.get($source, $size, $do);
   }
 
-  @return if((meta.type-of($return) == 'string'), string.unquote($return), $return);
+  @return if(
+    (meta.type-of($return) == 'string'),
+    string.unquote($return),
+    $return
+  );
 }
 
 // Negative [function]

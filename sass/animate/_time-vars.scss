@@ -5,7 +5,6 @@
 /// # Times » CSS Variables
 /// @group animate-time-vars
 
-
 // Time Var Prefix
 // ----------------
 /// Since CSS variables are often defined in a global space,
@@ -29,7 +28,6 @@
 ///
 /// @type string
 $time-var-prefix: 'time-' !default;
-
 
 // Times--
 // --------
@@ -61,12 +59,9 @@ $time-var-prefix: 'time-' !default;
 ///   map of times to set as css variables
 /// @output
 ///   Custom properties for all public times in the map
-@mixin times--(
-  $source: times.$times
-) {
+@mixin times--($source: times.$times) {
   @include tokens.tokens--($source, $time-var-prefix);
 }
-
 
 // Time--
 // -------
@@ -102,15 +97,9 @@ $time-var-prefix: 'time-' !default;
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$times] -
 ///   Optional map of times to use as a palette source
-@mixin time--(
-  $time,
-  $value: null,
-  $fallback: true,
-  $source: times.$times
-) {
+@mixin time--($time, $value: null, $fallback: true, $source: times.$times) {
   @include tokens.token--($source, $time, $value, $fallback, $time-var-prefix);
 }
-
 
 // Var Time
 // ---------
@@ -144,10 +133,6 @@ $time-var-prefix: 'time-' !default;
 /// @return {string} -
 ///   CSS variable call, in the format:
 ///   `var(--<token>, <fallback>)`
-@function var-time(
-  $time,
-  $fallback: true,
-  $source: times.$times
-) {
+@function var-time($time, $fallback: true, $source: times.$times) {
   @return tokens.var-token($source, $time, $fallback, $time-var-prefix);
 }

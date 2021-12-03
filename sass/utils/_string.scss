@@ -24,9 +24,7 @@
 ///   Any Sass value that can be reliably converted to a string
 /// @return {string} -
 ///   The stringified value
-@function force(
-  $value
-) {
+@function force($value) {
   $value: $value or '';
   $type: meta.type-of($value);
 
@@ -41,15 +39,11 @@
   }
 
   @if ($type == 'map') {
-    @return throw.error(
-      'Maps cannot be converted to strings',
-      'string-force'
-    );
+    @return throw.error('Maps cannot be converted to strings', 'string-force');
   }
 
   @return if(($type == 'string'), $value, '#{$value}');
 }
-
 
 // String Replace
 // --------------
@@ -86,17 +80,15 @@
 ///   If true, replace all instances of $old in $string
 /// @return {string} -
 ///   Original string, with substring replaced
-@function replace(
-  $string,
-  $old,
-  $new: '',
-  $all: false
-) {
+@function replace($string, $old, $new: '', $all: false) {
   $return: $string;
   $type: meta.type-of($string);
 
   @if (type-of($string) == 'map') {
-    @return throw.error('`$string` parameter cannot be a map', 'string-replace');
+    @return throw.error(
+      '`$string` parameter cannot be a map',
+      'string-replace'
+    );
   }
 
   // Loops lists
@@ -139,8 +131,11 @@
 
   @return $return;
 }
-@include function.internal(meta.get-function('replace'), 'replace', 'str-replace');
-
+@include function.internal(
+  meta.get-function('replace'),
+  'replace',
+  'str-replace'
+);
 
 // Interpolate
 // -----------
@@ -170,10 +165,7 @@
 /// @return {string} -
 ///   Original string, with `%s` format strings replaced
 /// @throws Too many interpolation values given for the string
-@function interpolate(
-  $string,
-  $values...
-) {
+@function interpolate($string, $values...) {
   @if not type.check($string, 'string') {
     @return type.error($string, 'string', 'interpolate', '$string');
   }
@@ -194,8 +186,12 @@
 
   @return $return;
 }
-@include function.internal(meta.get-function('interpolate'), 'interpolate', '%s', 'str-interpolate');
-
+@include function.internal(
+  meta.get-function('interpolate'),
+  'interpolate',
+  '%s',
+  'str-interpolate'
+);
 
 // Split
 // -----
@@ -233,11 +229,7 @@
 ///   Maximum length of the returned list
 /// @return {list} -
 ///   Space-delimited list of string-slices from the original string
-@function split(
-  $string,
-  $separator: null,
-  $limit: null
-) {
+@function split($string, $separator: null, $limit: null) {
   $list: ();
 
   @if (not $separator) or ($string == '') {
@@ -271,14 +263,13 @@
         $slice: if($string and not $index, $slice $string, $slice);
       }
 
-      $list: if($slice, join($list, $slice), $list);
+      $list: if($slice, list.join($list, $slice), $list);
     }
   }
 
   @return $list;
 }
 @include function.internal(meta.get-function('split'), 'split', 'str-split');
-
 
 // Trim
 // ----
@@ -306,9 +297,7 @@
 ///   The original string to be trimmed
 /// @return {string} -
 ///   Trimmed string
-@function trim(
-  $string
-) {
+@function trim($string) {
   @if not type.check($string, 'string') {
     @return type.error($string, 'string', 'trim', '$string');
   }

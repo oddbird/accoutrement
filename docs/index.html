@@ -424,15 +424,15 @@ yarn add accoutrement [--dev]
 </code></pre>
 <p>Use what you<span class="widont">&nbsp;</span>need:</p>
 <pre><code class="lang-scss">// all the modules (these are functionally the same)
-@use &quot;&lt;path-to&gt;/accoutrement&quot;;
-@use &quot;&lt;path-to&gt;/accoutrement/sass/tools&quot;;
+@use '&lt;path-to&gt;/accoutrement';
+@use '&lt;path-to&gt;/accoutrement/sass/tools';
 
 // individual modules (at `/accoutrement/sass/&lt;name&gt;`)
-@use &quot;&lt;path-to&gt;/accoutrement/sass/color&quot;;
+@use '&lt;path-to&gt;/accoutrement/sass/color';
 </code></pre>
 <p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
 you can use the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
-<pre><code class="lang-scss">@use &quot;accoutrement&quot;;
+<pre><code class="lang-scss">@use 'accoutrement';
 </code></pre>
 <h2 id="modules-for-common-data-types">Modules for common data<span class="widont">&nbsp;</span>types</h2>
 <ul>
@@ -471,8 +471,11 @@ between design<span class="widont">&nbsp;</span>tokens:</p>
   // internal reference &amp; adjustments
   'gutter': '#root'
     (
-      &quot;scale&quot;: ('_major-third', 1),
-      &quot;convert-units&quot;: &quot;rem&quot;,
+      'scale': (
+        '_major-third',
+        1,
+      ),
+      'convert-units': 'rem',
     ),
 );
 </code></pre>

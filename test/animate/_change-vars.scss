@@ -1,3 +1,5 @@
+// stylelint-disable prettier/prettier
+
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/animate/times';
 @use '../../sass/animate/easing';
@@ -8,6 +10,7 @@
 
 $_old-times: times.$times;
 times.$times: data.$times;
+
 $_old-easing: easing.$easing;
 easing.$easing: data.$easing;
 
@@ -17,7 +20,10 @@ $changes: (
   'thread': '#alias',
   'fade': opacity times.time('fade') easing.ease('_out-quad'),
   'slide-in': '#_slide' easing.ease('_out-back'),
-  'sidebar-in': ('#slide-in', '#fade' times.time('delay')),
+  'sidebar-in': (
+    '#slide-in',
+    '#fade' times.time('delay'),
+  ),
   'animation': slide-frames 1 times.time('fast') easing.ease('_out-back'),
   'animation-ref': '#animation' both,
 );
@@ -27,8 +33,6 @@ change.$changes: $changes;
 // Change Var Tests
 // ================
 @include test-module('animate/change-vars') {
-
-
   // Changes-- [mixin]
   // ------------------
   @include describe('Changes-- [mixin]') {
@@ -63,7 +67,6 @@ change.$changes: $changes;
     }
   }
 
-
   // Change-- [mixin]
   // -----------------
   @include describe('Change-- [mixin]') {
@@ -91,7 +94,6 @@ change.$changes: $changes;
       }
     }
 
-
     @include it('Generate reference to default easing') {
       @include assert {
         @include output {
@@ -116,7 +118,6 @@ change.$changes: $changes;
       }
     }
   }
-
 
   // Var-Change [function]
   // -------------------
@@ -154,7 +155,6 @@ change.$changes: $changes;
       );
     }
   }
-
 } // end module
 
 times.$times: $_old-times;

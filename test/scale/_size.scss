@@ -23,8 +23,7 @@ config.$sizes: data.$test-sizes;
       @include assert-equal(size.size('text'), 1rem);
     }
 
-
-     @include it('Get size from linear adjustment') {
+    @include it('Get size from linear adjustment') {
       @include assert-equal(size.size('h3'), 2rem);
     }
 

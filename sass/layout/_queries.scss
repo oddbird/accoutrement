@@ -9,7 +9,6 @@
 /// # Media Queries
 /// @group layout-queries
 
-
 // Breakpoints
 // -----------
 /// Establish a map of named breakpoints.
@@ -41,7 +40,6 @@
 /// @type map
 $breakpoints: () !default;
 
-
 // Break [function]
 // ----------------
 /// Return a breakpoint from the `$breakpoint` map,
@@ -71,12 +69,7 @@ $breakpoints: () !default;
 /// @return {length} -
 ///   The retrieved value of a named breakpoint
 /// @throws `$break` is not a valid length or keyword
-@function break(
-  $break,
-  $do: null,
-  $source: $breakpoints,
-  $scale: true
-) {
+@function break($break, $do: null, $source: $breakpoints, $scale: true) {
   @if ($scale) {
     $source: map.merge(scale.$sizes, $source);
   }
@@ -104,7 +97,6 @@ $breakpoints: () !default;
 
   @return $return;
 }
-
 
 // Below [mixin]
 // -------------
@@ -140,10 +132,7 @@ $breakpoints: () !default;
 /// @param {'width' | 'height'} $prop ['width'] -
 ///   The property (width or height) to test against,
 ///   for a result of e.g. `(max-width: 30em)`.
-@mixin below(
-  $max,
-  $prop: 'width'
-) {
+@mixin below($max, $prop: 'width') {
   $value: break($max);
   $value: utils.nudge-query($value, 'max');
 
@@ -151,7 +140,6 @@ $breakpoints: () !default;
     @content;
   }
 }
-
 
 // Above [mixin]
 // -------------
@@ -187,10 +175,7 @@ $breakpoints: () !default;
 /// @param {'width' | 'height'} $prop ['width'] -
 ///   The property (width or height) to test against,
 ///   for a result of e.g. `(min-width: 30em)`.
-@mixin above(
-  $min,
-  $prop: 'width'
-) {
+@mixin above($min, $prop: 'width') {
   $value: break($min);
   $value: utils.nudge-query($value, 'min');
 
@@ -198,7 +183,6 @@ $breakpoints: () !default;
     @content;
   }
 }
-
 
 // Between [mixin]
 // ---------------
@@ -240,11 +224,7 @@ $breakpoints: () !default;
 /// @param {'width' | 'height'} $prop ['width'] -
 ///   The property (width or height) to test against,
 ///   for a result of e.g. `(min-width: 30em)`.
-@mixin between(
-  $min,
-  $max,
-  $prop: 'width'
-) {
+@mixin between($min, $max, $prop: 'width') {
   $value-min: break($min);
   $value-max: utils.nudge-query($value-min, 'min');
   $value-max: break($max);

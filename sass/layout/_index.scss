@@ -5,11 +5,9 @@
 ///   and access with media-query helpers
 /// @group layout
 
-
 @forward 'query-utils' hide nudge-query;
 @forward 'queries';
 @forward 'z-index';
-
 
 /// ## Import
 ///
@@ -20,7 +18,6 @@
 ///   @use '<path-to>/accoutrement/sass/layout';
 /// ```
 /// @group layout
-
 
 /// ## Media Queries
 /// Establish your media-query breakpoints,

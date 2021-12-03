@@ -4,34 +4,28 @@
 @use 'sass:math';
 
 $_old: tokens.$ratios;
-tokens.$ratios: (
-  'new': '#_octave',
-  'token': 'linear',
-  'bad': red,
-);
+tokens.$ratios: ('new': '#_octave', 'token': 'linear', 'bad': red);
 
 @include test-module('ratio/tokens') {
-
   // Ratio [function]
   // ----------------
   @include describe('Ratio [function]') {
     @include it('Returns a named ratio with _ prefix') {
-      @include assert-equal(
-        tokens.ratio('_fifth'),
-        math.div(3, 2)
-      );
+      @include assert-equal(tokens.ratio('_fifth'), math.div(3, 2));
     }
 
     @include it('Returns a recursive ratio') {
-      @include assert-equal(
-        tokens.ratio('new'),
-        tokens.ratio('_octave')
-      );
+      @include assert-equal(tokens.ratio('new'), tokens.ratio('_octave'));
     }
 
     @include it('Accepts $do adjustments') {
       @include assert-equal(
-        tokens.ratio('new', ('plus': 1)),
+        tokens.ratio(
+          'new',
+          (
+            'plus': 1,
+          )
+        ),
         tokens.ratio('_octave') + 1
       );
     }
@@ -49,7 +43,6 @@ tokens.$ratios: (
     }
   }
 
-
   @include describe('Add Ratios [mixin]') {
     $outer: tokens.$ratios;
     $new1: (
@@ -57,7 +50,7 @@ tokens.$ratios: (
       'other': calc(1 / 2),
     );
     $new2: (
-      'test': calc(16 / 9)
+      'test': calc(16 / 9),
     );
     @include tokens.add-ratios($new1, $new2);
     @include it('Adds maps to the $ratios global') {
@@ -73,50 +66,26 @@ tokens.$ratios: (
   // --------------------
   @include describe('Is-Ratio [function]') {
     @include it('Returns linear') {
-      @include assert-equal(
-        tokens.is-ratio('linear'),
-        'linear'
-      );
+      @include assert-equal(tokens.is-ratio('linear'), 'linear');
     }
 
     @include it('Returns numbers') {
-      @include assert-equal(
-        tokens.is-ratio(0.3),
-        0.3
-      );
+      @include assert-equal(tokens.is-ratio(0.3), 0.3);
     }
 
     @include it('Returns valid token-lookup') {
-      @include assert-equal(
-        tokens.is-ratio('new'),
-        2
-      );
-      @include assert-equal(
-        tokens.is-ratio('token'),
-        'linear'
-      );
+      @include assert-equal(tokens.is-ratio('new'), 2);
+      @include assert-equal(tokens.is-ratio('token'), 'linear');
     }
 
     @include it('False on bad token-lookup') {
-      @include assert-equal(
-        tokens.is-ratio('bad'),
-        false
-      );
-      @include assert-equal(
-        tokens.is-ratio('missing'),
-        false
-      );
+      @include assert-equal(tokens.is-ratio('bad'), false);
+      @include assert-equal(tokens.is-ratio('missing'), false);
     }
 
     @include it('False on bad values') {
-      @include assert-equal(
-        tokens.is-ratio(green),
-        false
-      );
-      @include assert-equal(
-        tokens.is-ratio(false),
-        false
-      );
+      @include assert-equal(tokens.is-ratio(green), false);
+      @include assert-equal(tokens.is-ratio(false), false);
     }
   }
 } // end module

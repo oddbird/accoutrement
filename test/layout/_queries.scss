@@ -3,93 +3,79 @@
 @use '../../sass/layout/query-utils' as utils;
 @use '../../sass/scale/config' as size;
 
-
 // Media Query Tests
 // =================
 @include test-module('Layout: Queries') {
-
   $test-sizes: (
     'off-canvas': 30em,
     'page': 50em,
   );
-    
   $test-breakpoints: (
     'off-canvas': 45em,
     'recursive': '#off-canvas',
     'meta': '#recursive',
     'useful': '#meta',
     'p-break': '#page',
-    'adjust': 20em ('times': 2),
+    'adjust': 20em
+      (
+        'times': 2,
+      ),
   );
-
   $_old-b: q.$breakpoints;
   $_old-s: size.$sizes;
   q.$breakpoints: $test-breakpoints;
   size.$sizes: $test-sizes;
 
-
   // Break
   // -----
   @include describe('Break [function]') {
     @include it('Returns an explicit length directly') {
-      @include assert-equal(
-        q.break(30em),
-        30em
-      );
+      @include assert-equal(q.break(30em), 30em);
     }
 
     @include it('Returns a named breakpoint from the proper map') {
-      @include assert-equal(
-        q.break('off-canvas'),
-        45em
-      );
+      @include assert-equal(q.break('off-canvas'), 45em);
     }
 
     @include it('Returns a recursively named breakpoint') {
-      @include assert-equal(
-        q.break('useful'),
-        45em
-      );
+      @include assert-equal(q.break('useful'), 45em);
     }
 
     @include it('Returns a named size from accoutrement-scale') {
-      @include assert-equal(
-        q.break('page'),
-        50em
-      );
+      @include assert-equal(q.break('page'), 50em);
     }
 
     @include it('Returns a named size from both maps cross-referenced') {
-      @include assert-equal(
-        q.break('p-break'),
-        50em
-      );
+      @include assert-equal(q.break('p-break'), 50em);
     }
 
     @include it('Allows adjustment functions') {
-      @include assert-equal(
-        q.break('adjust'),
-        40em
-      );
+      @include assert-equal(q.break('adjust'), 40em);
     }
 
     @include it('Allows on-the-fly adjustments') {
       @include assert-equal(
-        q.break('adjust', ('times': 2)),
+        q.break(
+          'adjust',
+          (
+            'times': 2,
+          )
+        ),
         80em
       );
     }
 
     @include it('Get breakpoint from local source') {
-      $local: ('new': 40em);
-      @include assert-equal(
-        q.break('new', $source: $local),
-        40em
+      $local: (
+        'new': 40em,
       );
+      @include assert-equal(q.break('new', $source: $local), 40em);
     }
 
     @include it('Can turn off access to $sizes') {
-      $local: ('new': '#adjust');
+      $local: (
+        'new': '#adjust',
+      );
 
       @include assert-equal(
         q.break('new', $source: $local, $scale: false),
@@ -98,7 +84,6 @@
     }
   }
 
-
   // Below
   // -----
   @include describe('Below [mixin]') {
@@ -106,13 +91,13 @@
       @include assert {
         @include output {
           @include q.below(30em) {
-            test: content;
+            color: green;
           }
         }
 
         @include expect {
           @media (max-width: 29.99em) {
-            test: content;
+            color: green;
           }
         }
       }
@@ -126,19 +111,18 @@
       @include assert {
         @include output {
           @include q.above(30em) {
-            test: content;
+            color: green;
           }
         }
 
         @include expect {
           @media (min-width: 30em) {
-            test: content;
+            color: green;
           }
         }
       }
     }
   }
-
 
   // Between
   // -------
@@ -147,13 +131,13 @@
       @include assert {
         @include output {
           @include q.between(30em, 40em) {
-            test: content;
+            color: green;
           }
         }
 
         @include expect {
           @media (min-width: 30em) and (max-width: 39.99em) {
-            test: content;
+            color: green;
           }
         }
       }

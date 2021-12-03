@@ -33,15 +33,11 @@
 ///   The name of the token to be used as a variable
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix added to the token name
-@function ident(
-  $name,
-  $prefix: null,
-) {
+@function ident($name, $prefix: null) {
   $string: string.unquote('--#{$prefix}#{$name}');
   $string: s.replace($string, ' ', '-', 'all');
   @return $string;
 }
-
 
 // Custom Props
 // ------------
@@ -84,10 +80,7 @@
 ///   Optional prefix added to each property name
 /// @output -
 ///   Custom properties for every key/value pair in a map.
-@mixin custom-props(
-  $map,
-  $prefix: null,
-) {
+@mixin custom-props($map, $prefix: null) {
   @each $name, $value in $map {
     #{ident($name, $prefix)}: #{$value};
   }

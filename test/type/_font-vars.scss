@@ -1,3 +1,5 @@
+// stylelint-disable prettier/prettier, value-keyword-case, scss/operator-no-unspaced
+
 @use '../../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/type/font-vars';
 @use '../../sass/tokens/api';
@@ -7,6 +9,7 @@
 @use '../../sass/type/fonts';
 @use '../../../sass/type/config';
 @use 'test-data' as data;
+@use 'sass:meta';
 
 $_global: config.$fonts;
 config.$fonts: data.$fonts;
@@ -78,6 +81,7 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.fonts--;
         }
+
         @include expect {
           --font-body-font: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           --font-TestFont: TestFont, Georgia, serif;
@@ -156,6 +160,7 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.font--('alias');
         }
+
         @include expect {
           --font-alias: var(--font-body-font, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
         }
@@ -167,6 +172,7 @@ config.$fonts: data.$fonts;
         @include output {
           @include font-vars.font--('alias-2', 'alias');
         }
+
         @include expect {
           --font-alias-2: var(--font-alias, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif);
         }
@@ -214,7 +220,7 @@ config.$fonts: data.$fonts;
         ),
         'my-adjustment': '#my-base'
           (
-            get-function('append'): 'monospace',
+            meta.get-function('append'): 'monospace',
           ),
       );
 

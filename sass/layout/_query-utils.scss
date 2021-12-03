@@ -3,7 +3,6 @@
 /// # Query Utils
 /// @group layout-queries
 
-
 // Adjust Query Overlap
 // --------------------
 /// When using both `min-` and `max-` media-queries,
@@ -21,7 +20,6 @@
 /// @type 'min' | 'max' | false
 /// @link https://tzi.fr/css/prevent-double-breakpoint/ Prevent Double Breakpoints
 $adjust-query-overlap: 'max' !default;
-
 
 // Nudge Query [function]
 // ----------------------
@@ -49,11 +47,7 @@ $adjust-query-overlap: 'max' !default;
 /// @return {length} -
 ///   The adjusted value, if `$is` and `$nudge` match,
 ///   otherwise the original value is returned
-@function nudge-query(
-  $value,
-  $is,
-  $nudge: $adjust-query-overlap
-) {
+@function nudge-query($value, $is, $nudge: $adjust-query-overlap) {
   @if ($nudge) and ($nudge == $is) {
     $to: if(($is == 'min'), 1, -1);
     $amount: if(math.compatible($value, 1px), 1px, 0.01);

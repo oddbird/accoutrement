@@ -14,16 +14,19 @@
   and "ratios" (for typographic scales and layout aspect ratios)
 
 - [Sass Utilities][utils]:
+
   - NEW: These functions are now available directly,
     as well as being registered in the map syntax
 
 - [Variables][vars]:
+
   - NEW: `ident()` function adds `--` and an optional prefix to any string,
     in order to generate a custom property identifier.
   - NEW: `custom-props()` mixin generates custom properties
     for every key/value pair in a map.
 
 - [Tokens][token]:
+
   - NEW: A module just for the custom map syntax parser & function registration
   - BREAKING: The `$functions` map no longer accepts alias references
     or any other aspects of the token syntax
@@ -45,12 +48,14 @@
     and supports the `outer->inner` nested token syntax.
 
 - [Ratios][ratio]:
+
   - NEW: Built-in named ratios are now available as individual variables,
     (without the `_` prefix that is applied in token maps)
   - NEW: `is-ratio()` function can be used to type-check ratios,
     including ratio tokens.
 
 - [Scale][scale]:
+
   - NEW: `scale()` function applies a modular scale to any value,
     allowing you to move up or down the scale any number of steps.
 
@@ -58,9 +63,8 @@
   - BREAKING: Removed `global-box-sizing`
   - BREAKING: Removed `clearfix`
   - BREAKING: Removed `fluid-ratio`
-  - BREAKING: Removed `position`. Can achieve the majority of functionality in CSS using 
+  - BREAKING: Removed `position`. Can achieve the majority of functionality in CSS using
     [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
- 
 
 ## 3.0.1 - 03/01/21
 

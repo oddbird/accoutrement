@@ -10,7 +10,6 @@ $_old: tokens.$colors;
 tokens.$colors: data.$colors;
 
 @include test-module('color/contrast') {
-
   // Luminance [function]
   // --------------------
   @include describe('Luminance [function]') {
@@ -54,8 +53,8 @@ tokens.$colors: data.$colors;
     @include it('Handles tokens') {
       @include assert-equal(
         contrast.luminance('simple'),
-        contrast.luminance(#969),
-      )
+        contrast.luminance(#969)
+      );
     }
   }
 
@@ -86,14 +85,8 @@ tokens.$colors: data.$colors;
     }
 
     @include it('Optionally return false on invalid type') {
-      @include assert-equal(
-        contrast.valid-contrast('nope', false),
-        false
-      );
-      @include assert-equal(
-        contrast.valid-contrast(#fff, false),
-        false
-      );
+      @include assert-equal(contrast.valid-contrast('nope', false), false);
+      @include assert-equal(contrast.valid-contrast(#fff, false), false);
     }
 
     @include it('Throws on out-of-range number') {
@@ -108,20 +101,13 @@ tokens.$colors: data.$colors;
     }
   }
 
-
   // Contrast Ratio [function]
   // -------------------------
   @include describe('Contrast Ratio [function]') {
     @include it('Returns contrast ratio between two colors') {
-      @include assert-equal(
-        contrast.contrast-ratio(#fff, #fff),
-        1
-      );
+      @include assert-equal(contrast.contrast-ratio(#fff, #fff), 1);
 
-      @include assert-equal(
-        contrast.contrast-ratio(#000, #fff),
-        21
-      );
+      @include assert-equal(contrast.contrast-ratio(#000, #fff), 21);
     }
 
     @include it('Returns contrast ratio if test is met') {
@@ -133,13 +119,9 @@ tokens.$colors: data.$colors;
     }
 
     @include it('Returns false if test is not met') {
-      @include assert-equal(
-        contrast.contrast-ratio(#333, #999, 'AAA'),
-        false
-      );
+      @include assert-equal(contrast.contrast-ratio(#333, #999, 'AAA'), false);
     }
   }
-
 
   // Default Contrast [function]
   // ---------------------------
@@ -162,17 +144,11 @@ tokens.$colors: data.$colors;
     }
 
     @include it('Returns the user dark value') {
-      @include assert-equal(
-        contrast.default-contrast('dark'),
-        'contrast-dark'
-      );
+      @include assert-equal(contrast.default-contrast('dark'), 'contrast-dark');
     }
 
     @include it('Returns the user dark value') {
-      @include assert-equal(
-        contrast.default-contrast('dark'),
-        'contrast-dark'
-      );
+      @include assert-equal(contrast.default-contrast('dark'), 'contrast-dark');
     }
 
     @include it('Returns a list of values') {
@@ -196,7 +172,6 @@ tokens.$colors: data.$colors;
 
     tokens.$colors: data.$colors;
   }
-
 
   // Best Contrast [function]
   // -----------------------
@@ -256,7 +231,13 @@ tokens.$colors: data.$colors;
       @include assert-equal(
         contrast.best-contrast(
           $color: 'primary',
-          $options: (#ff0, #fcc, #0f0, 'light', #003),
+          $options: (
+            #ff0,
+            #fcc,
+            #0f0,
+            'light',
+            #003,
+          ),
           $return: 'name'
         ),
         #003,
@@ -316,7 +297,6 @@ tokens.$colors: data.$colors;
     tokens.$colors: data.$colors;
   }
 
-
   // Contrast [function]
   // -------------------
   @include describe('Contrast [function]') {
@@ -375,14 +355,17 @@ tokens.$colors: data.$colors;
       @include assert-equal(
         contrast.contrast(
           'primary',
-          #ff0, #fcc, #0f0, 'light', #003,
+          #ff0,
+          #fcc,
+          #0f0,
+          'light',
+          #003,
           'AA-large'
         ),
         #eee
       );
     }
   }
-
 
   // Contrasted [mixin]
   // ------------------
@@ -418,7 +401,11 @@ tokens.$colors: data.$colors;
         @include output {
           @include contrast.contrasted(
             'primary',
-            #ff0, #fcc, #0f0, 'light', #003,
+            #ff0,
+            #fcc,
+            #0f0,
+            'light',
+            #003,
             'AA-large'
           );
         }
@@ -429,7 +416,6 @@ tokens.$colors: data.$colors;
       }
     }
   }
-
 
   // var-contrast [function]
   // -----------------------
@@ -442,17 +428,16 @@ tokens.$colors: data.$colors;
     }
 
     @include it('Returns a contrasting color when no variable') {
-      @include assert-equal(
-        contrast.var-contrast('blue', #111, #eee),
-        #111
-      );
+      @include assert-equal(contrast.var-contrast('blue', #111, #eee), #111);
     }
   }
 
   // var-contrasted [function]
   // -------------------------
   @include describe('var-contrasted [function]') {
-    @include it('Creates a background and contrasting color with CSS variables') {
+    @include it(
+      'Creates a background and contrasting color with CSS variables'
+    ) {
       @include assert {
         @include output {
           @include contrast.var-contrasted('blue', 'light', 'dark');
@@ -465,7 +450,6 @@ tokens.$colors: data.$colors;
       }
     }
   }
-
 } // end module
 
 tokens.$colors: $_old;

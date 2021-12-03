@@ -5,7 +5,6 @@
 /// @access private
 $catch-errors: false !default;
 
-
 // Error [function]
 // ----------------
 /// Optionally return error messages without failing,
@@ -21,18 +20,13 @@ $catch-errors: false !default;
 /// @return {string} -
 ///   Combined error with source and message
 /// @throws When `$catch == true`
-@function error(
-  $message,
-  $source,
-  $catch: $catch-errors
-) {
+@function error($message, $source, $catch: $catch-errors) {
   @if $catch {
     @return 'ERROR [#{$source}] #{$message}';
   }
 
   @error '[#{$source}] #{$message}';
 }
-
 
 // Error [mixin]
 // -------------
@@ -48,11 +42,7 @@ $catch-errors: false !default;
 ///   Optionally return the error rather than failing
 /// @output -
 ///   `--accoutrement-error` property with error message
-@mixin error(
-  $message,
-  $source,
-  $catch: $catch-errors
-) {
+@mixin error($message, $source, $catch: $catch-errors) {
   --accoutrement-error: '#{error($message, $source, $catch)}';
 }
 
@@ -71,11 +61,7 @@ $catch-errors: false !default;
 /// @return {string} -
 ///   Combined warning with source and message
 /// @throws When `$catch == true`
-@function warn(
-  $message,
-  $source,
-  $catch: $catch-errors
-) {
+@function warn($message, $source, $catch: $catch-errors) {
   @if $catch {
     @return 'WARNING [#{$source}] #{$message}';
   }

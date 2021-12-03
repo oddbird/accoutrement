@@ -6,5 +6,10 @@ $_source-ratios: meta.module-variables('named');
 $named-ratios: ();
 
 @each $name, $value in $_source-ratios {
-  $named-ratios: map.merge($named-ratios, ('_#{$name}': $value));
+  $named-ratios: map.merge(
+    $named-ratios,
+    (
+      '_#{$name}': $value,
+    )
+  );
 }
