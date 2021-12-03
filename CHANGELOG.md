@@ -2,7 +2,7 @@
 
 ## 4.0.0 - UNRELEASED
 
-### 4.0.0-beta.0 - 12/03/21
+### 4.0.0-beta.1 - 12/03/21
 
 This is a major update, moving over to Sass modules,
 and removing some features that no longer seem necessary.
