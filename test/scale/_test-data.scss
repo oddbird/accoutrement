@@ -9,103 +9,35 @@
 // ===========
 
 // Config
+// prettier-ignore
 $test-sizes: (
   'root': 20px,
-  'text': '#root'
-    (
-      'convert-units': 'rem',
-    ),
-  'rhythm': '#text'
-    (
-      scale: '_fifth' 1,
-    ),
-  'h1': '#text'
-    (
-      scale: 'linear' 4,
-    ),
-  'h2': '#text'
-    (
-      scale: 'linear' 3,
-    ),
-  'h3': '#text'
-    (
-      scale: 'linear' 2,
-    ),
-  'big': '#text'
-    (
-      scale: '_fifth' 5,
-    ),
-  'small': '#text'
-    (
-      scale: '_octave' -1,
-    ),
+  'text': '#root' ( 'convert-units': 'rem' ),
+  'rhythm': '#text' ( scale: '_fifth' 1 ),
+  'h1': '#text' ( scale: 'linear' 4 ),
+  'h2': '#text' ( scale: 'linear' 3 ),
+  'h3': '#text' ( scale: 'linear' 2 ),
+  'big': '#text' ( scale: '_fifth' 5 ),
+  'small': '#text' ( scale: '_octave' -1 ),
   'viewport': 10vw,
   'percent': 20%,
-  'medium-page': 30em
-    (
-      'convert-units': 'browser-ems' 40px,
-    ),
-  'add-number': 3em
-    (
-      'add': 4,
-    ),
-  'plus-number': 30px
-    (
-      'plus': 4in,
-    ),
-  'minus-number': 3em
-    (
-      'minus': 1,
-    ),
-  'subtract-number': 30px
-    (
-      'subtract': 0.25in,
-    ),
-  'times-number': 3em
-    (
-      'times': 1,
-    ),
-  'multiply-number': 30px
-    (
-      'multiply': 1.25,
-    ),
-  'divide-number': 3em
-    (
-      'divide': 2,
-    ),
+  'medium-page': 30em ( 'convert-units': 'browser-ems' 40px ),
+  'add-number': 3em ( 'add': 4 ),
+  'plus-number': 30px ( 'plus': 4in ),
+  'minus-number': 3em ( 'minus': 1 ),
+  'subtract-number': 30px ( 'subtract': 0.25in ),
+  'times-number': 3em ( 'times': 1 ),
+  'multiply-number': 30px ( 'multiply': 1.25 ),
+  'divide-number': 3em ( 'divide': 2 ),
   '#test-value': 2,
-  'add-name': '#root'
-    (
-      'add': '#test-value',
-    ),
-  'plus-name': '#root'
-    (
-      'plus': '#test-value',
-    ),
-  'minus-name': '#root'
-    (
-      'minus': '#test-value',
-    ),
-  'subtract-name': '#root'
-    (
-      'subtract': '#test-value',
-    ),
-  'times-name': '#root'
-    (
-      'times': '#test-value',
-    ),
-  'multiply-name': '#root'
-    (
-      'multiply': '#test-value',
-    ),
-  'divide-name': '#root'
-    (
-      'divide': '#test-value',
-    ),
-  'round': math.div(10rem, 3)
-    (
-      'round': null,
-    ),
+  'add-name': '#root' ( 'add': '#test-value' ),
+  'plus-name': '#root' ( 'plus': '#test-value' ),
+  'minus-name': '#root' ( 'minus': '#test-value' ),
+  'subtract-name': '#root' ( 'subtract': '#test-value' ),
+  'times-name': '#root' ( 'times': '#test-value' ),
+  'multiply-name': '#root' ( 'multiply': '#test-value' ),
+  'divide-name': '#root' ( 'divide': '#test-value' ),
+  'round': math.div(10rem, 3) ( 'round': null ),
   'calc-simple': calc(1em + 2vw),
   'calc': (
     '%value': 'calc(%s + (%s / %s))',
