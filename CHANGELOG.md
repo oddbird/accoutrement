@@ -2,6 +2,11 @@
 
 ## 4.0.0 - UNRELEASED
 
+### 4.0.0-beta.0 - 12/03/21
+
+This is a major update, moving over to Sass modules,
+and removing some features that no longer seem necessary.
+
 - BREAKING: Requires Sass modules, and other recent features of Dart Sass.
   Legacy versions of Sass (Node & Ruby) are no longer supported
 - BREAKING: The old "init" module, which provided light-weight
