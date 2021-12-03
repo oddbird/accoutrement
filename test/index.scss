@@ -1,7 +1,30 @@
 @use '../sass/internal/throw' with (
   $catch-errors: true
 );
-@use '../sass/tools';
+@use '../sass/tools' with (
+  $contrast-light: white,
+  $contrast-dark: black,
+  $colors: (),
+  $ratios: (),
+  $sizes: (),
+  $functions: (),
+  $easing: (),
+  $times: (),
+  $changes: (),
+  $breakpoints: (),
+  $z-index: (),
+  $fonts: (),
+  $font-path: '',
+  $size-var-prefix: 'size-',
+  $ratio-var-prefix: 'ratio-',
+  $color-var-prefix: 'color-',
+  $easing-var-prefix: 'ease-',
+  $time-var-prefix: 'time-',
+  $change-var-prefix: 'change-',
+  $font-var-prefix: 'font-',
+  $adjust-query-overlap: 'max',
+  $handle-missing-keys: null
+);
 
 // tests…
 @use 'internal';

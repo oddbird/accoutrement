@@ -8,10 +8,10 @@
 /// @group scale
 
 @forward 'config';
-@forward 'units' show convert-units;
 @forward 'size';
 @forward 'scale';
 @forward 'css-vars';
+@forward 'units' show convert-units;
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.

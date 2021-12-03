@@ -1,7 +1,6 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/color/contrast';
 @use '../../sass/color/tokens';
-@use '../../sass/color/css-vars' as vars;
 @use 'test-data' as data;
 @use 'sass:map';
 @use 'sass:list';
@@ -412,40 +411,6 @@ tokens.$colors: data.$colors;
         @include expect {
           background-color: tokens.color('primary');
           color: #eee;
-        }
-      }
-    }
-  }
-
-  // var-contrast [function]
-  // -----------------------
-  @include describe('var-contrast [function]') {
-    @include it('Returns a contrasting CSS variable when available') {
-      @include assert-equal(
-        contrast.var-contrast('blue', 'dark', 'light'),
-        var(--color-dark, #111)
-      );
-    }
-
-    @include it('Returns a contrasting color when no variable') {
-      @include assert-equal(contrast.var-contrast('blue', #111, #eee), #111);
-    }
-  }
-
-  // var-contrasted [function]
-  // -------------------------
-  @include describe('var-contrasted [function]') {
-    @include it(
-      'Creates a background and contrasting color with CSS variables'
-    ) {
-      @include assert {
-        @include output {
-          @include contrast.var-contrasted('blue', 'light', 'dark');
-        }
-
-        @include expect {
-          background-color: vars.var-color('blue');
-          color: vars.var-color('dark');
         }
       }
     }
