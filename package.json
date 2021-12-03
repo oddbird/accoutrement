@@ -33,7 +33,7 @@
     "docs": "sassdoc 'sass/**/*.scss'",
     "commit": "run-s lint test docs",
     "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:nofix'",
-    "watch:tests": "chokidar 'test/**' -c 'yarn test'",
+    "watch:tests": "chokidar 'test/**' 'sass/**/*.scss' -c 'yarn test'",
     "watch:docs": "chokidar 'sass/**/*.scss' './.sassdocrc' -c 'yarn docs'",
     "watch": "run-p watch:sass watch:tests watch:docs"
   },
