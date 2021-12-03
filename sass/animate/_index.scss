@@ -4,7 +4,8 @@
 /// - Document relationships directly in the code
 /// @group animate
 
-@forward 'easing' hide $EASING;
+@forward 'easing-named' as ease-*;
+@forward 'easing';
 @forward 'easing-vars';
 @forward 'times';
 @forward 'time-vars';

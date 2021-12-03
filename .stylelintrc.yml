@@ -26,20 +26,21 @@ rules:
   selector-class-pattern: null
 
   # @@@ Override failing default rules
-  block-no-empty: null
+  # block-no-empty: null
   color-function-notation: null
-  font-family-name-quotes: null
-  font-family-no-missing-generic-family-keyword: null
-  no-invalid-position-at-import-rule: null
+  # font-family-name-quotes: null
+  # font-family-no-missing-generic-family-keyword: null
+  # no-invalid-position-at-import-rule: null
   number-max-precision: null
-  property-no-unknown: null
-  scss/at-function-pattern: null
-  scss/at-if-no-null: null
-  scss/at-mixin-pattern: null
+  # scss/at-function-pattern: null
+  # scss/at-if-no-null: null
+  # scss/at-mixin-pattern: null
   scss/at-rule-conditional-no-parentheses: null
-  scss/comment-no-empty: null
-  scss/dollar-variable-pattern: null
-  scss/function-quote-no-quoted-strings-inside: null
-  scss/function-unquote-no-unquoted-strings-inside: null
-  scss/no-global-function-names: null
-  scss/operator-no-unspaced: null
+  # scss/comment-no-empty: null
+  scss/dollar-variable-pattern:
+    - '^([_|-]?[a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+    - message: 'Expected variable to be kebab-case'
+  # scss/function-quote-no-quoted-strings-inside: null
+  # scss/function-unquote-no-unquoted-strings-inside: null
+  # scss/no-global-function-names: null
+  # scss/operator-no-unspaced: null
