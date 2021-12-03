@@ -487,7 +487,7 @@ or in token maps (with the <code>_</code> prefix)</p>
       
       <pre class="hljs-pre"><code class="lang-scss">@use &#39;animate/easing-named&#39; as named;
 @each $name, $value in meta.module-variables(&#39;named&#39;) {
-/*! $#{$name}: #{$value}; */
+  /*! $#{$name}: #{$value}; */
 }</code></pre>
     </div>
   
@@ -510,8 +510,7 @@ or in token maps (with the <code>_</code> prefix)</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable scss/dollar-variable-pattern */
-/*! $in: ease-in; */
+      <pre class="hljs-pre"><code class="lang-css">/*! $in: ease-in; */
 /*! $out: ease-out; */
 /*! $in-out: ease-in-out; */
 /*! $in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53); */

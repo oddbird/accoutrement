@@ -1,4 +1,4 @@
-// Deafalt Easings
+// Default Easings
 // ---------------
 /// A classic set of built-in easing functions,
 /// if you don't want to define your own.
@@ -11,7 +11,7 @@
 /// @example scss
 ///   @use 'animate/easing-named' as named;
 ///   @each $name, $value in meta.module-variables('named') {
-///   /*! $#{$name}: #{$value}; */
+///     /*! $#{$name}: #{$value}; */
 ///   }
 /// @name named-easing
 /// @group animate-ease
