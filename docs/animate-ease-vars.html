@@ -641,7 +641,8 @@ html { @include tools.ease--(&#39;my-ease&#39;) }</code></pre>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable scss/dollar-variable-pattern */
+html {
   --prefix_my-ease: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }</code></pre>
     </div>
@@ -1035,7 +1036,8 @@ html {
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">html {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable scss/dollar-variable-pattern */
+html {
   --ease-modal: cubic-bezier(0.5, -0.4, 0.5, 1.4);
   --ease-error-message: var(--ease-modal, cubic-bezier(0.5, -0.4, 0.5, 1.4));
 }</code></pre>
@@ -1091,7 +1093,7 @@ html {
       
       
         <a href="
-  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
+  animate-ease.html#variable--named-easing" class="item-name">$named-easing</a>
       
       
       
@@ -1467,7 +1469,8 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable scss/dollar-variable-pattern */
+.example {
   --ease-modal: cubic-bezier(0.5, -0.4, 0.5, 1.4);
   --ease-toast: var(--ease-modal, ease-in);
 }</code></pre>
@@ -1523,7 +1526,7 @@ css-variable and then to the token’s calculated<span class="widont">&nbsp;</sp
       
       
         <a href="
-  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
+  animate-ease.html#variable--named-easing" class="item-name">$named-easing</a>
       
       
       
@@ -1894,7 +1897,8 @@ to use as<span class="widont">&nbsp;</span>source</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">.example {
+      <pre class="hljs-pre"><code class="lang-css">/* stylelint-disable scss/dollar-variable-pattern */
+.example {
   animation: fade 1s var(--ease-error-message, ease-in);
   transition: translate var-ease(&quot;modal&quot;);
 }</code></pre>
@@ -1985,7 +1989,7 @@ to use as<span class="widont">&nbsp;</span>source</p>
       
       
         <a href="
-  animate-ease.html#variable--EASING" class="item-name">$EASING</a>
+  animate-ease.html#variable--named-easing" class="item-name">$named-easing</a>
       
       
       

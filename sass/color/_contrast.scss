@@ -24,7 +24,7 @@
 /// [WCAG]: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 ///
 /// @access private
-$WCAG-CONTRAST: (
+$_wcag-contrast: (
   'aa-large': 3,
   'aa': 4.5,
   'aaa': 7,
@@ -453,7 +453,7 @@ $WCAG-CONTRAST: (
   @if (list.length($options) == 0) or (not $options) {
     $options: default-contrast('values');
   } @else if (list.length($options) == 1) {
-    $use: best-contrast(nth($options, 1), $return: 'name');
+    $use: best-contrast(list.nth($options, 1), $return: 'name');
     $options: list.append($options, $use);
   }
 
@@ -506,7 +506,7 @@ $WCAG-CONTRAST: (
 ///   all other values will return false
 @function valid-contrast($ratio, $throw: true) {
   @if (meta.type-of($ratio) == 'string') {
-    $ratio: map.get($WCAG-CONTRAST, string.to-lower-case($ratio)) or $ratio;
+    $ratio: map.get($_wcag-contrast, string.to-lower-case($ratio)) or $ratio;
   }
 
   @if not type.check($ratio, 'number') {

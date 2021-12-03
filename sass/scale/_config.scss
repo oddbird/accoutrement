@@ -9,7 +9,7 @@
 // -------------------------
 /// The default font-size used by most browsers.
 /// @access private
-$BROWSER-DEFAULT-FONT-SIZE: 16px;
+$accoutrement-browser-default-font-size: 16px;
 
 // Sizes
 // -----
@@ -49,7 +49,7 @@ $BROWSER-DEFAULT-FONT-SIZE: 16px;
 ///   used for calculating relative sizes.
 ///   This should match the size applied to your html element.
 $sizes: (
-  'root': $BROWSER-DEFAULT-FONT-SIZE,
+  'root': $accoutrement-browser-default-font-size,
 ) !default;
 
 // Add Sizes

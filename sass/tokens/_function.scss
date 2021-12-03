@@ -64,7 +64,7 @@ $functions: () !default;
   @if $throw and (meta.type-of($function) != 'function') {
     $message: '`#{$name}` is not a registered function';
 
-    @if ($function != null) {
+    @if $function {
       $message: '`#{$name}` (`#{$function}`) is not a valid function for performing token adjustments';
     }
 

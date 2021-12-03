@@ -263,7 +263,7 @@
         $slice: if($string and not $index, $slice $string, $slice);
       }
 
-      $list: if($slice, join($list, $slice), $list);
+      $list: if($slice, list.join($list, $slice), $list);
     }
   }
 

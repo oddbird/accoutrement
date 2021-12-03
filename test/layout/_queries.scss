@@ -91,13 +91,13 @@
       @include assert {
         @include output {
           @include q.below(30em) {
-            test: content;
+            color: green;
           }
         }
 
         @include expect {
           @media (max-width: 29.99em) {
-            test: content;
+            color: green;
           }
         }
       }
@@ -111,13 +111,13 @@
       @include assert {
         @include output {
           @include q.above(30em) {
-            test: content;
+            color: green;
           }
         }
 
         @include expect {
           @media (min-width: 30em) {
-            test: content;
+            color: green;
           }
         }
       }
@@ -131,13 +131,13 @@
       @include assert {
         @include output {
           @include q.between(30em, 40em) {
-            test: content;
+            color: green;
           }
         }
 
         @include expect {
           @media (min-width: 30em) and (max-width: 39.99em) {
-            test: content;
+            color: green;
           }
         }
       }

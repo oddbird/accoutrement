@@ -149,7 +149,7 @@
 
   // Establish root size
   $root-size: map.get(config.$sizes, 'root') or
-    config.$BROWSER-DEFAULT-FONT-SIZE;
+    config.$accoutrement-browser-default-font-size;
   $root-size: size.size($root-size);
   $root-size: get-px($root-size);
 
@@ -170,7 +170,8 @@
   // Special conversion for browser-default ems (needed in media-queries)
   @if ($to-unit == 'browser-ems') {
     $size: convert-units($length, 'px', $from-context);
-    @return math.div($size, config.$BROWSER-DEFAULT-FONT-SIZE) * 1em;
+    $size: math.div($size, config.$accoutrement-browser-default-font-size);
+    @return $size * 1em;
   }
 
   // Convert relative length to pixels

@@ -205,7 +205,7 @@ $_stack: ();
 
     // handle each item in the list…
     @each $bit in $value {
-      $new: append($new, _resolve-value($map, $bit));
+      $new: list.append($new, _resolve-value($map, $bit));
     }
 
     @return $new;
