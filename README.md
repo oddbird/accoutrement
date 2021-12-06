@@ -1,6 +1,6 @@
 # Sass Accoutrement
 
-[![Build Status](https://travis-ci.com/oddbird/accoutrement.svg?branch=main)](https://travis-ci.com/oddbird/accoutrement)
+[![Build Status](https://app.travis-ci.com/oddbird/accoutrement.svg?branch=main)](https://app.travis-ci.com/oddbird/accoutrement)
 
 **Robust design systems** require
 _meaningful_, _readable_, _reusable_ code.
