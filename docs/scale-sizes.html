@@ -532,13 +532,13 @@
 
   
     <div class="text-block">
-      <p>Defined a palette of common sizes to be used across your project,
+      <p>Define a palette of common sizes to be used across your project,
 in the format “name: size” or “name: basis (ratio/function: value)”.
 If your map includes a <code>px</code>-comparable value for <code>root</code>,
 it will be used in relative-size unit<span class="widont">&nbsp;</span>conversions.</p>
 <p>Named sizes can contain length values (<code>24px</code>),
-reference to previously-defined sizes (<code>'root'</code>),
-a map of relative-adjustments using ratios (<code>('_golden': 2)</code>)
+references to previously-defined sizes (<code>'root'</code>),
+a map of relative-adjustments using ratios (<code>(scale: '_golden' 2)</code>)
 and math functions (<code>('plus': 2)</code>),
 or a format-string &amp; list for interpolating <code>calc()</code> values
 (<code>'calc(%s + %s)' ('#root', 2vw)</code>).</p>
@@ -1876,7 +1876,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
         <p>The name of a size in your configuration (e.g. <code>line-height</code>),
 or a length to be converted into different units (e.g. <code>24px</code>),
 or a base-size and adjustments to be made
-(e.g. <code>24px ('_minor-third': 2)</code>).
+(e.g. <code>24px (scale: '_minor-third' 2)</code>).
 For the sake of consistent documentation,
 I recommend keeping adjustments in the configuration
 whenever<span class="widont">&nbsp;</span>possible.</p>

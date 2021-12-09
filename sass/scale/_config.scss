@@ -13,14 +13,14 @@ $accoutrement-browser-default-font-size: 16px;
 
 // Sizes
 // -----
-/// Defined a palette of common sizes to be used across your project,
+/// Define a palette of common sizes to be used across your project,
 /// in the format "name: size" or "name: basis (ratio/function: value)".
 /// If your map includes a `px`-comparable value for `root`,
 /// it will be used in relative-size unit conversions.
 ///
 /// Named sizes can contain length values (`24px`),
-/// reference to previously-defined sizes (`'root'`),
-/// a map of relative-adjustments using ratios (`('_golden': 2)`)
+/// references to previously-defined sizes (`'root'`),
+/// a map of relative-adjustments using ratios (`(scale: '_golden' 2)`)
 /// and math functions (`('plus': 2)`),
 /// or a format-string & list for interpolating `calc()` values
 /// (`'calc(%s + %s)' ('#root', 2vw)`).

@@ -408,7 +408,7 @@
 <p>Sass size &amp; scale management<span class="widont">&nbsp;</span>tools:</p>
 <ul>
 <li>Gather all your sizes into a single<span class="widont">&nbsp;</span>map</li>
-<li>Generate new sizes based on <a href="core-ratio.html">modular scales</a>
+<li>Generate new sizes based on modular scales
 or arbitrary<span class="widont">&nbsp;</span>functions</li>
 <li>Convert between relative<span class="widont">&nbsp;</span>units</li>
 <li>Access sizes on the<span class="widont">&nbsp;</span>fly</li>
@@ -567,7 +567,7 @@ You can also import the scale module on its<span class="widont">&nbsp;</span>own
   
     <div data-item-section="prose" class="text-block">
       <h2 id="sizes-ratios">Sizes &amp; Ratios</h2>
-<p>Establish your palette of ratios [modular scales] and<span class="widont">&nbsp;</span>sizes:</p>
+<p>Establish your palette of ratios (modular scales) and<span class="widont">&nbsp;</span>sizes:</p>
 <pre><code class="lang-scss">$ratios: (
   'my-ratio': 1.25,
 );
@@ -583,18 +583,18 @@ $sizes: (
 
   // apply adjustments and conversions
   // using named-ratios or arbitrary functions
-  'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
+  'rhythm': '#root' ( scale: '_fifth' 1, 'convert-units': 'rem'),
 
-  'h1': '#root' ('my-ratio': 3),
-  'h2': '#root' ('my-ratio': 2),
-  'h3': '#root' ('my-ratio': 1),
+  'h1': '#root' ( scale: 'my-ratio' 3 ),
+  'h2': '#root' ( scale: 'my-ratio' 2 ),
+  'h3': '#root' ( scale: 'my-ratio' 1 ),
 
   // define calc() output based on existing sizes
   'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
 );
 </code></pre>
 <p>Access your named sizes using the <code>size()</code> function,
-and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
+and even convert units<span class="widont">&nbsp;</span>on-the-fly:</p>
 <pre><code class="lang-scss">.example {
   font-size('text');
   width: size('page', 'px');
@@ -705,7 +705,7 @@ and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
     <div class="text-block">
       <p>Apply a modular or linear scale to any value,
 moving up or down the scale by a given number of steps.
-(linear scaling is simple multiplication,
+(Linear scaling is simple multiplication
 and may not be particularly useful where the scale is<span class="widont">&nbsp;</span>known).</p>
 
       
@@ -800,7 +800,7 @@ without needing to use the token<span class="widont">&nbsp;</span>map.</li>
     
       
       <div class="param-details text-block">
-        <p>The key-name or value of a<span class="widont">&nbsp;</span>ratio</p>
+        <p>The key name or value of a<span class="widont">&nbsp;</span>ratio</p>
 
       </div>
     
@@ -884,7 +884,7 @@ without needing to use the token<span class="widont">&nbsp;</span>map.</li>
     
       
       <div class="param-details text-block">
-        <p>The scaled value.</p>
+        <p>The scaled value</p>
 
       </div>
     
