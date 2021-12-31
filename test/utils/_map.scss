@@ -38,5 +38,28 @@
     @include it('Accepts empty maps') {
       @include assert-equal(map.multi-merge($a, ()), $a);
     }
+
+    @include it('Deep merges maps') {
+      $first: (
+        'link': (
+          'height': 3px,
+          'offset': 0
+        )
+      );
+      $second: (
+        'link': (
+          'offset': '#link->height' ('*': -1)
+        )
+      );
+      $result: (
+        'link': (
+          'height': 3px,
+          'offset': '#link->height' ('*': -1)
+        )
+      );
+
+      @include assert-equal(map.multi-merge($first, $second), $result);
+    }
+
   }
 }

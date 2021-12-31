@@ -29,7 +29,7 @@
 
   @each $map in $maps {
     @if type.check($map, 'map') {
-      $return: map.merge($return, $map);
+      $return: map.deep-merge($return, $map);
     } @else {
       $type: meta.type-of($map);
       @return throw.error(
