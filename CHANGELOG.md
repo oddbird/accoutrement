@@ -2,6 +2,12 @@
 
 ## 4.0.0 - UNRELEASED
 
+- BREAKING: Map `multi-merge` utility and all `add-*` functions 
+  for adding one or more token maps (eg `add-sizes`, `add-colors`, etc)
+  now perform a deep merge of the token maps. 
+  Previously a shallow merge was performed, 
+  [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
+
 ### 4.0.0-beta.2 - 12/03/21
 
 This is a major update, moving over to Sass modules,

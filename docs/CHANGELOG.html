@@ -384,6 +384,11 @@
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
 <h2 id="4-0-0-unreleased">4.0.0 - UNRELEASED</h2>
+<ul>
+<li>BREAKING: All <code>add-*</code> functions for adding one or more token maps (eg <code>add-sizes</code>, <code>add-colors</code>, etc)
+now perform a deep merge of the token maps. Previously a shallow merge was performed, <a href="https://github.com/oddbird/accoutrement/issues/50">which could
+result in removing nested values from previous<span class="widont">&nbsp;</span>maps</a>.</li>
+</ul>
 <h3 id="4-0-0-beta-2-12-03-21">4.0.0-beta.2 - 12/03/21</h3>
 <p>This is a major update, moving over to Sass modules,
 and removing some features that no longer seem<span class="widont">&nbsp;</span>necessary.</p>
