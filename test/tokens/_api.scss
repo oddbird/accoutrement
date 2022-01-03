@@ -131,8 +131,23 @@
           'ERROR [lookup-alias] Alias "that->baz" not found in map'
         )
       );
+
+      config.$handle-missing-keys: null;
+    }
+
+    @include it('Allows CSS values containing hashes') {
+      $gradients: (
+        'accent': linear-gradient(#f88812 10%, #9f29fa 80%),
+      );
+
+      @include assert {
+        @include output {
+          background-image: tokens.get($gradients, 'accent');
+        }
+        @include expect {
+          background-image: linear-gradient(#f88812 10%, #9f29fa 80%);
+        }
+      }
     }
   }
 }
-
-config.$handle-missing-keys: null;
