@@ -46,27 +46,42 @@ $_stack: ();
   @return ('value': $value, 'do': $do);
 }
 
-// Has Alias
+// Next Alias
 // ---------
-/// Returns the next available alias
-/// for parsing/replacing from the given string.
+/// Returns the next possible alias for parsing/replacing from the given string.
+/// An alias is simply a string prefixed with '#', and which isn't escaped with `\\`.
+/// The returned alias may not match a defined value, and may be a color or other CSS.
 ///
 /// @access private
 ///
 /// @param {string} $string -
 ///   A string to extract an #alias from
-/// @return {string | null} -
-///   The first alias referenced,
-///   or `null` if no references exist
-@function has-alias($string) {
+/// @param {number} $index -
+///   The start index to search from; default is 1.
+/// @return {map | null} -
+///   A map with 'alias' holding the next alias string referenced and `start` and `end` holding
+///   the span of the alias (end is exclusive); or `null` if no possible aliases exist.
+@function next-alias($string, $index: 1) {
+  @if $index > 1 {
+    // Find the alias within a sub-string
+    $substring-alias: next-alias(string.slice($string, $index), 1);
+    @if not $substring-alias {
+      @return null;
+    }
+    @return (
+      'alias': map.get($substring-alias, 'alias'),
+      'start': $index - 1 + map.get($substring-alias, 'start'),
+      'end': $index - 1 + map.get($substring-alias, 'end')
+    );
+  }
+
   $terminators: ('#', ' ', ')', '\\');
   $hash-index: string.index($string, '#');
 
-  // If escaped # symbols exist, update $hash-index to exclude them.
+  // If $hash-index is escaped, skip to the next alias
   $escape-index: string.index($string, '\\#');
-  @while $escape-index and ($escape-index + 1 == $hash-index) {
-    $remainder: string.slice($string, $escape-index + 2);
-    $hash-index: string.index($remainder, '#');
+  @if $escape-index and ($escape-index + 1 == $hash-index) {
+    @return next-alias($string, $escape-index + 2);
   }
 
   // no alias found
@@ -86,7 +101,11 @@ $_stack: ();
     }
   }
 
-  @return string.slice($string, $alias-start, $hash-index + $alias-length);
+  @return (
+    'alias': string.slice($string, $alias-start, $hash-index + $alias-length),
+    'start': $hash-index,
+    'end': $hash-index + $alias-length + 1
+  );
 }
 
 // Lookup
@@ -232,28 +251,39 @@ $_stack: ();
 
   // replace alias values in a string
   @else if ($type == 'string') {
-    $alias: has-alias($value);
+    $alias: next-alias($value);
 
     @while $alias {
-      $lookup: lookup-alias($map, $alias);
+      $alias-key: map.get($alias, 'alias');
+      $lookup: lookup-alias($map, $alias-key);
 
-      // fail on missing keys
+      // If lookup fails, it could be a missing full alias, or a color, or a missing
+      // sub-alias. We don't distinguish between the last 2, but return null for missing
+      // full alias (eg value is '#foo->not-here').
       @if (meta.type-of($lookup) != 'map') {
-        @return $lookup;
+
+        @if (1 == map.get($alias, 'start')) and
+            (string.length($alias-key) + 2 == map.get($alias, 'end')) {
+              @return $lookup;
+        }
       }
 
-      // this is a recursive dependency
-      $new: compile-token($map, map.get($lookup, 'token'), $alias);
+      // Replace #alias when lookup succeeds. Otherwise leave it in the string (eg #aaa)
+      @if (meta.type-of($lookup) == 'map') {
+        // this is a recursive dependency
+        $new: compile-token($map, map.get($lookup, 'token'), $alias-key);
 
-      // Handle explicitly terminated keys (#key\).
-      $old: '##{$alias}\\';
-      $old: if(string.index($value, $old), $old, '##{$alias}');
+        // Handle explicitly terminated keys (#key\).
+        $old: '##{$alias-key}\\';
+        $old: if(string.index($value, $old), $old, '##{$alias-key}');
 
-      // replace the
-      $value: str.replace($value, $old, $new);
+        // replace $old -> $new
+        $value: str.replace($value, $old, $new);
+      }
 
       // If we still have a string, check for more alias references
-      $alias: if((meta.type-of($value) == 'string'), has-alias($value), false);
+      $search-from: map.get($alias, 'end');
+      $alias: if((meta.type-of($value) == 'string'), next-alias($value, $search-from), false);
     }
 
     // Correct escaped # symbols now that parsing is complete.

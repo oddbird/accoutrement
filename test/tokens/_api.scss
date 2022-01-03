@@ -3,6 +3,8 @@
 @use '../../sass/tokens/register';
 @use '../../sass/tokens/api' as tokens;
 
+@use 'sass:map';
+
 @include test-module('tokens/api') {
   // Token Get
   // ---------
@@ -131,8 +133,24 @@
           'ERROR [lookup-alias] Alias "that->baz" not found in map'
         )
       );
+
+      config.$handle-missing-keys: null;
     }
+
+    @include it('Handles CSS values in maps') {
+      $gradients: (
+        'accent': linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%)
+      );
+
+      @include assert() {
+        @include output() {
+          background-image: tokens.get($gradients, 'accent');
+        }
+        @include expect() {
+          background-image: linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%);
+        }
+      }
+    }
+
   }
 }
-
-config.$handle-missing-keys: null;
