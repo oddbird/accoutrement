@@ -3,8 +3,6 @@
 @use '../../sass/tokens/register';
 @use '../../sass/tokens/api' as tokens;
 
-@use 'sass:map';
-
 @include test-module('tokens/api') {
   // Token Get
   // ---------
