@@ -257,17 +257,6 @@ $_stack: ();
       $alias-key: map.get($alias, 'alias');
       $lookup: lookup-alias($map, $alias-key);
 
-      // If lookup fails, it could be a missing full alias, or a color, or a missing
-      // sub-alias. We don't distinguish between the last 2, but return null for missing
-      // full alias (eg value is '#foo->not-here').
-      @if (meta.type-of($lookup) != 'map') {
-        @if (1 == map.get($alias, 'start')) and
-          (string.length($alias-key) + 2 == map.get($alias, 'end'))
-        {
-          @return $lookup;
-        }
-      }
-
       // Replace #alias when lookup succeeds. Otherwise leave it in the string (eg #aaa)
       @if (meta.type-of($lookup) == 'map') {
         // this is a recursive dependency
@@ -279,6 +268,18 @@ $_stack: ();
 
         // replace $old -> $new
         $value: str.replace($value, $old, $new);
+      }
+      // If alias lookup fails, $lookup is not a map (it is null or an error).
+      // We handle alias lookup misses differently for a missing full alias (eg value is '#foo->not-here'),
+      // or a missing sub-string alias (eg value is 'foo #bar baz'). Missing sub-string aliases are left
+      // in the string unmodified, because a hash ('#') does not guarantee that the subsequent text is an
+      // alias reference - eg it could be an #rrggbb color or other valid text. Full alias misses should
+      // result in a `null` value, or whatever the configured behavior is for missing values.
+      @else {
+        @if $value == '##{$alias-key}' {
+          // $value is an alias and nothing more, so return the value of the alias
+          @return $lookup;
+        }
       }
 
       // If we still have a string, check for more alias references
