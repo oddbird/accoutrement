@@ -137,7 +137,7 @@
 
     @include it('Allows CSS values containing hashes') {
       $gradients: (
-        'accent': linear-gradient(#f88812 10%, #9f29fa 80%)
+        'accent': linear-gradient(#f88812 10%, #9f29fa 80%),
       );
 
       @include assert {

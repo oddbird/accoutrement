@@ -269,6 +269,7 @@ $_stack: ();
         // replace $old -> $new
         $value: str.replace($value, $old, $new);
       }
+
       // If alias lookup fails, $lookup is not a map (it is null or an error).
       // We handle alias lookup misses differently for a missing full alias (eg value is '#foo->not-here'),
       // or a missing sub-string alias (eg value is 'foo #bar baz'). Missing sub-string aliases are left
