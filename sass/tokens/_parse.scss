@@ -59,8 +59,9 @@ $_stack: ();
 /// @param {number} $index -
 ///   The start index to search from; default is 1.
 /// @return {map | null} -
-///   A map with 'alias' holding the next alias string referenced and `start` and `end` holding
-///   the span of the alias (end is exclusive); or `null` if no possible aliases exist.
+///   A map with 'alias' holding the next potential alias string and `end` holding
+///   the end location (end is exclusive - the next char after the alias); or `null`
+///   if no possible aliases exist.
 @function next-alias($string, $index: 1) {
   @if $index > 1 {
     // Find the alias within a sub-string
@@ -70,7 +71,6 @@ $_stack: ();
     }
     @return (
       'alias': map.get($substring-alias, 'alias'),
-      'start': $index - 1 + map.get($substring-alias, 'start'),
       'end': $index - 1 + map.get($substring-alias, 'end')
     );
   }
@@ -103,7 +103,6 @@ $_stack: ();
 
   @return (
     'alias': string.slice($string, $alias-start, $hash-index + $alias-length),
-    'start': $hash-index,
     'end': $hash-index + $alias-length + 1
   );
 }
@@ -275,12 +274,10 @@ $_stack: ();
       // or a missing sub-string alias (eg value is 'foo #bar baz'). Missing sub-string aliases are left
       // in the string unmodified, because a hash ('#') does not guarantee that the subsequent text is an
       // alias reference - eg it could be an #rrggbb color or other valid text. Full alias misses should
-      // result in a `null` value, or whatever the configured behavior is for missing values.
-      @else {
-        @if $value == '##{$alias-key}' {
-          // $value is an alias and nothing more, so return the value of the alias
-          @return $lookup;
-        }
+      // result in a `null` return, or whatever the configured behavior is for missing values.
+      @else if $value == '##{$alias-key}' {
+        // $value is an alias and nothing more; return the value of the alias
+        @return $lookup;
       }
 
       // If we still have a string, check for more alias references
