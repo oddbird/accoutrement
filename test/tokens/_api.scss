@@ -137,18 +137,21 @@
 
     @include it('Handles CSS values in maps') {
       $gradients: (
-        'accent': linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%)
+        'accent':
+          linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%),
       );
 
-      @include assert() {
-        @include output() {
+      @include assert {
+        @include output {
           background-image: tokens.get($gradients, 'accent');
         }
-        @include expect() {
-          background-image: linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%);
+        @include expect {
+          background-image: linear-gradient(
+            hsl(31deg 94% 52%) 10%,
+            hsl(274deg 95% 57%) 80%
+          );
         }
       }
     }
-
   }
 }

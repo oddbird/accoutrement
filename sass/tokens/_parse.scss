@@ -261,10 +261,10 @@ $_stack: ();
       // sub-alias. We don't distinguish between the last 2, but return null for missing
       // full alias (eg value is '#foo->not-here').
       @if (meta.type-of($lookup) != 'map') {
-
         @if (1 == map.get($alias, 'start')) and
-            (string.length($alias-key) + 2 == map.get($alias, 'end')) {
-              @return $lookup;
+          (string.length($alias-key) + 2 == map.get($alias, 'end'))
+        {
+          @return $lookup;
         }
       }
 
@@ -283,7 +283,11 @@ $_stack: ();
 
       // If we still have a string, check for more alias references
       $search-from: map.get($alias, 'end');
-      $alias: if((meta.type-of($value) == 'string'), next-alias($value, $search-from), false);
+      $alias: if(
+        (meta.type-of($value) == 'string'),
+        next-alias($value, $search-from),
+        false
+      );
     }
 
     // Correct escaped # symbols now that parsing is complete.
