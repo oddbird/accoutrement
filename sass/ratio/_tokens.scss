@@ -56,7 +56,7 @@ $ratios: () !default;
 /// @return {number} -
 ///   The numeric value of a ratio
 @function ratio($ratio, $do: null, $source: $ratios) {
-  $source: map.merge(utils.$named-ratios, $source);
+  $source: map.deep-merge(utils.$named-ratios, $source);
   @return tokens.get($source, $ratio, $do);
 }
 @include function.internal(meta.get-function('ratio'), 'ratio');
@@ -81,6 +81,42 @@ $ratios: () !default;
 ///   with new maps merged in.
 @mixin add-ratios($maps...) {
   $ratios: utils-map.multi-merge($ratios, $maps...) !global;
+}
+
+// Compile Ratios
+// --------------
+/// Compile all the tokens in a ratio map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for ratio token maps
+///
+/// @group ratio-tokens
+///
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source [$ratios] -
+///   A map of reference tokens that can be used
+///   for resolving ratios.
+///   (defaults to the global `$ratios` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-ratios(
+  $map: $ratios,
+  $source: $ratios,
+) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('ratio'),
+    null,
+    $source
+  );
 }
 
 // Is Ratio [function]

@@ -12,6 +12,7 @@ $times: (
   'alias': '#_private',
   'thread': '#alias',
   'fast': 150ms,
+  'fade': 500ms,
   'math-tests': 2,
   'plus-name': '#fast' ( 'plus': '#math-tests' ),
 );

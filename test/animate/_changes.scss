@@ -17,7 +17,7 @@ $changes: (
   'slide-in': '#slide' easing.ease('_out-back'),
   'sidebar-in': (
     '#slide-in',
-    '#fade' times.time('delay'),
+    '#fade' times.time('fade'),
   ),
   'modal-in': '#sidebar-in',
   'animation': slide-frames 1 times.time('fast') easing.ease('_out-back'),
@@ -38,7 +38,7 @@ change.$changes: $changes;
         (
           (transform times.time('fast')) easing.ease('_out-back'),
           (opacity times.time('fade') easing.ease('_out-quad'))
-            times.time('delay')
+            times.time('fade')
         )
       );
     }
@@ -62,6 +62,43 @@ change.$changes: $changes;
       @include assert-equal(
         change.change('new', $source: $local),
         opacity 34ms
+      );
+    }
+  }
+
+  @include describe('Compile Changes [function]') {
+    @include it('Compiles the global map of changes by default') {
+      @include assert-equal(
+        change.compile-changes(),
+        (
+          'slide': transform 150ms,
+          'fade': opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          'slide-in': (transform 150ms) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          'sidebar-in': (
+            (transform 150ms) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            (opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)) 500ms,
+          ),
+          'modal-in': (
+            (transform 150ms) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            (opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)) 500ms,
+          ),
+          'animation': slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          'animation-ref': (slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275)) both,
+        )
+      );
+    }
+
+    @include it ('Compiles a local map with a global reference') {
+      @include assert-equal(
+        change.compile-changes(('new': '#slide')),
+        ('new': transform 150ms)
+      );
+    }
+
+    @include it ('Compiles a local map with a local reference') {
+      @include assert-equal(
+        change.compile-changes(('new': '#slide'), ('slide': margin 300ms)),
+        ('new': margin 300ms)
       );
     }
   }
@@ -161,7 +198,7 @@ change.$changes: $changes;
         @include expect {
           transition: transform times.time('fast') easing.ease('_out-back'),
             opacity times.time('fade') easing.ease('_out-quad')
-              times.time('delay'),
+              times.time('fade'),
             opacity times.time('fade') easing.ease('_out-quad');
         }
       }

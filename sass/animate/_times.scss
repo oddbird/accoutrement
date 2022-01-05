@@ -82,3 +82,39 @@ $times: () !default;
 @mixin add-times($maps...) {
   $times: utils.multi-merge($times, $maps...) !global;
 }
+
+// Compile Times
+// ---------------
+/// Compile all the tokens in a time map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for time token maps
+///
+/// @group animate-times
+///
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source [$times] -
+///   A map of reference tokens that can be used
+///   for resolving times.
+///   (defaults to the global `$times` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-times(
+  $map: $times,
+  $source: $times,
+) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('time'),
+    null,
+    $source
+  );
+}

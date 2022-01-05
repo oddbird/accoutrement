@@ -4,7 +4,7 @@
 @use 'config';
 @use '../utils/map';
 @use '../tokens';
-@use 'sass:map' as sass-map;
+@use 'sass:map' as m;
 @use 'sass:meta';
 
 // Color Map
@@ -100,6 +100,25 @@ $colors: () !default;
   $colors: map.multi-merge($colors, $maps...) !global;
 }
 
+// With Colors
+// -----------
+/// Override the global color palette
+/// for a section of contents.
+/// This can be useful when working with alternate themes.
+///
+/// @group color-tokens
+///
+/// @param {map} $source -
+///   The new color palette to use for contents
+@mixin with-colors($source) {
+  $_global: $colors;
+  $colors: $source !global;
+
+  @content;
+
+  $colors: $_global !global;
+}
+
 // Color
 // -----
 /// The primary function for
@@ -146,7 +165,10 @@ $colors: () !default;
 ///   A calculated css-ready color,
 ///   based on your global color palette and adjustments.
 @function color($color, $do: null, $source: $colors) {
-  $source: sass-map.merge(config.contrast-settings(), $source);
+  $source: m.deep-merge(config.contrast-settings(), $source);
+
+  $_global: $colors;
+  $colors: $source !global;
 
   @if (meta.type-of($color) == 'color') {
     // apply adjustments
@@ -158,5 +180,44 @@ $colors: () !default;
     @return $color;
   }
 
-  @return tokens.get($source, $color, $do);
+  $resolved: tokens.get($source, $color, $do);
+  $colors: $_global !global;
+
+  @return $resolved;
+}
+
+// Compile Colors
+// --------------
+/// Compile all the tokens in a color map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for color token maps
+///
+/// @group color-tokens
+///
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source [$colors] -
+///   A map of reference tokens that can be used
+///   for resolving colors.
+///   (defaults to the global `$colors` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-colors(
+  $map: $colors,
+  $source: $colors,
+) {
+  $source: m.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('color'),
+    null,
+    $source
+  );
 }

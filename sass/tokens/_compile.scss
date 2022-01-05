@@ -1,0 +1,37 @@
+@use 'api';
+@use 'sass:map';
+@use 'sass:meta';
+
+@function map-compile(
+  $map,
+  $source: (),
+) {
+  $source: map.deep-merge($source, $map);
+  $output: ();
+
+  @each $key, $value in $map {
+    $output: map.merge(
+      $output,
+      (
+        $key: api.get($source, $key),
+      )
+    );
+  }
+
+  @return $output;
+}
+
+@function map-compile-with(
+  $map,
+  $function,
+  $args...
+) {
+  $output: ();
+
+  @each $key, $value in $map {
+    $resolved: meta.call($function, $key, $args...);
+    $output: map.set($output, $key, $resolved);
+  }
+
+  @return $output;
+}

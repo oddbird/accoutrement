@@ -44,6 +44,42 @@
   @return $normal;
 }
 
+// Compile Fonts
+// -------------
+/// Compile all the tokens in a font map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for font token maps
+///
+/// @group scale-fonts
+///
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source [$fonts] -
+///   A map of reference tokens that can be used
+///   for resolving fonts.
+///   (defaults to the global `$fonts` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-fonts(
+  $map: config.$fonts,
+  $source: config.$fonts,
+) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('font'),
+    null,
+    $source
+  );
+}
+
 // Font Family [function]
 // ----------------------
 /// Access a font-family from your `$fonts` map,

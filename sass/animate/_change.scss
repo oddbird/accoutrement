@@ -1,6 +1,7 @@
 @use '../internal/function';
 @use '../tokens';
 @use '../utils/map' as utils;
+@use 'sass:map' as m;
 @use 'sass:meta';
 @use 'sass:list';
 
@@ -94,6 +95,42 @@ $changes: () !default;
 ///   with new maps merged in.
 @mixin add-changes($maps...) {
   $changes: utils.multi-merge($changes, $maps...) !global;
+}
+
+// Compile Changes
+// ---------------
+/// Compile all the tokens in a change map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for change token maps
+///
+/// @group animate-change
+///
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source [$changes] -
+///   A map of reference tokens that can be used
+///   for resolving changes.
+///   (defaults to the global `$changes` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-changes(
+  $map: $changes,
+  $source: $changes,
+) {
+  $source: m.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('change'),
+    null,
+    $source
+  );
 }
 
 // Animate [mixin]

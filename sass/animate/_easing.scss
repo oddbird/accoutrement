@@ -66,7 +66,7 @@ $easing: () !default;
 /// @return {length} -
 ///   The pre-defined easing
 @function ease($name: 'ease', $do: null, $source: $easing) {
-  $source: map.merge(named.$named-easing, $source);
+  $source: map.deep-merge(named.$named-easing, $source);
   $name: tokens.get($source, $name, $do);
   @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
 }
@@ -88,4 +88,40 @@ $easing: () !default;
 ///   with new maps merged in.
 @mixin add-easing($maps...) {
   $easing: utils.multi-merge($easing, $maps...) !global;
+}
+
+// Compile Easing
+// ---------------
+/// Compile all the tokens in an easing map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for easing token maps
+///
+/// @group animate-ease
+///
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source [$easing] -
+///   A map of reference tokens that can be used
+///   for resolving easing.
+///   (defaults to the global `$easing` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-easing(
+  $map: $easing,
+  $source: $easing,
+) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('ease'),
+    null,
+    $source
+  );
 }
