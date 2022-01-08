@@ -66,6 +66,8 @@ change.$changes: $changes;
     }
   }
 
+  // Compile Changes [function]
+  // -----------------
   @include describe('Compile Changes [function]') {
     @include it('Compiles the global map of changes by default') {
       @include assert-equal(
