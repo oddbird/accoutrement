@@ -52,7 +52,42 @@ easing.$easing: data.$easing;
       @include assert-equal(easing.ease('name', $source: $local), ease-in-out);
     }
   }
+  // Compile Easing [function]
+  // -----------------
+  @include describe('Compile Easing [function]') {
+    @include it('Compiles the global map of easings by default') {
+      @include assert-equal(
+        easing.compile-easing(), (
+        '_private': ease,
+        'alias': ease,
+        'thread': ease,
+        'sidebar-in': cubic-bezier(0.455, 0.03, 0.515, 0.955),
+        'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+        )
+      );
+    }
 
+     @include it('References global easings') {
+      @include assert-equal(
+        easing.compile-easing((a: '#thread')), 
+        (a: easing.ease('thread'))
+      );
+    }
+
+    @include it ('Compiles a local map with a global reference') {
+      @include assert-equal(
+        easing.compile-easing(('new': '#elastic')),
+        ('new': cubic-bezier(0.5, -0.4, 0.5, 1.4))
+      );
+    }
+
+    @include it ('Compiles a local map with a local reference') {
+      @include assert-equal(
+        easing.compile-easing(('new': '#alias'), ('alias': ease-in-out)),
+        ('new': ease-in-out)
+      );
+    }
+  }
   // Add Ease [mixin]
   // ----------------
   @include describe('Add Ease [mixin]') {
