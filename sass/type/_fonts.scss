@@ -1,6 +1,8 @@
 @use 'sass:list';
 @use 'sass:string';
 @use 'sass:map';
+@use 'sass:meta';
+@use '../tokens';
 @use '../tokens/api';
 @use './config';
 @use './normalize';
@@ -72,10 +74,8 @@
 ) {
   $source: map.merge($source or (), $map);
 
-  @return tokens.map-compile-with(
+  @return tokens.map-compile(
     $map,
-    meta.get-function('font'),
-    null,
     $source
   );
 }
