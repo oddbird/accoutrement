@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use 'sass:string';
 @use './config';
+@use '../tokens';
 @use '../tokens/api';
 
 /// # Accessing Sizes

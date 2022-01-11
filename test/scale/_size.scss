@@ -96,6 +96,29 @@ config.$sizes: data.$test-sizes;
     }
   }
 
+  // Compile Sizes [function]
+  // --------------
+  @include describe('Compile Sizes [function]') {
+    @include it('Compiles a local map with a global reference') {
+      @include assert-equal(
+        size.compile-sizes(('new': '#root')), ('new': 20px) )
+    }
+
+    @include it('Compiles a local map with a local reference') {
+      @include assert-equal(
+        size.compile-sizes(('new': '#viewport'), ('viewport': 15vw)),
+        ('new': 15vw)
+      );
+    }
+
+    @include it('References global sizes') {
+      @include assert-equal(
+        size.compile-sizes((a: '#h1')),
+        (a: size.size('h1'))
+      );
+    }
+  }
+
   // Negative [function]
   // -------------------
   @include describe('negative [function]') {
