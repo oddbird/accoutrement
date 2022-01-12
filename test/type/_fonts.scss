@@ -82,7 +82,7 @@ config.$font-path: data.$font-path;
 
   // Compile Fonts [function]
   // ---
-  @include describe('Compile Fonts [function]') {
+  /* @include describe('Compile Fonts [function]') {
     @include it('Compiles the global map of fonts by default') {
       @include assert-equal(
         fonts.compile-fonts(),
@@ -165,7 +165,8 @@ config.$font-path: data.$font-path;
           ),
         )
       )
-    }
+    } 
+
     @include it('Compiles a fonts map with references to global fonts') {
       @include assert-equal(
         fonts.compile-fonts((a: '#TestFont')), 
@@ -178,6 +179,7 @@ config.$font-path: data.$font-path;
           )
         )
       );
+    }
 
       @include it('Compiles a local map with a local reference') {
         @include assert-equal(
@@ -204,8 +206,7 @@ config.$font-path: data.$font-path;
        )
       }
     }
-  }
-
+   */
   // Font URL [function]
   // -------------------
   @include describe('font-url [function]') {

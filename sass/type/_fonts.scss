@@ -74,8 +74,10 @@
 ) {
   $source: map.merge($source or (), $map);
 
-  @return tokens.map-compile(
+@return tokens.map-compile-with(
     $map,
+    meta.get-function('font'),
+    null,
     $source
   );
 }
