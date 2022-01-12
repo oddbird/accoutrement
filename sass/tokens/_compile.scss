@@ -2,6 +2,31 @@
 @use 'sass:map';
 @use 'sass:meta';
 
+
+/// # Compiling Maps
+/// Tools for compiling Accoutrement map tokens, 
+/// useful for exporting versions of 
+/// token maps with all of the Accoutrement syntax removed.
+/// @group token-compile
+
+// Map-Compile [function]
+// ---------------
+/// Allows for the compilation of each token in a map,
+/// or a map and an additional source. 
+///
+/// @since 4.0.0 -
+/// - NEW: Provides for compilation and exporting of 
+/// static version of Accoutrement maps. 
+///
+/// @access public
+/// @name map-compile
+/// @group token-compile
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source -
+///   A map of reference tokens
+/// @return {map} -
+///   The parsed value of keys in the original map 
 @function map-compile(
   $map,
   $source: (),
@@ -21,6 +46,29 @@
   @return $output;
 }
 
+// Map-Compile-With [function]
+// ---------------
+/// Allows for the compilation of each token in a map,
+/// with token values resolved based on the data type.
+/// 
+/// @since 4.0.0 -
+/// - NEW: Provides for compilation and exporting of
+/// static version of Accoutrement maps with tokens
+/// resolved based on data type. 
+///
+/// @access public
+/// @name map-compile-with
+/// @group token-compile
+///
+/// @param {map} $map -
+///   The map to be compiled
+///
+/// @param {function} $function 
+///   The function to apply on each key-value pair in the map 
+/// @param {arglist} $args... -
+///   Any arguments required for the function call
+/// @return {map} -
+///   The parsed value of keys in the original map
 @function map-compile-with(
   $map,
   $function,
