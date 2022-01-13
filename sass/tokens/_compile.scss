@@ -63,7 +63,7 @@
 /// @param {map} $map -
 ///   The map to be compiled
 ///
-/// @param {function} $function 
+/// @param {string | function} $function 
 ///   The function to apply on each key-value pair in the map 
 /// @param {arglist} $args... -
 ///   Any arguments required for the function call

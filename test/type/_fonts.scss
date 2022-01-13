@@ -82,100 +82,25 @@ config.$font-path: data.$font-path;
 
   // Compile Fonts [function]
   // ---
-  /* @include describe('Compile Fonts [function]') {
-    @include it('Compiles the global map of fonts by default') {
+   @include describe('Compile Fonts [function]') {
+    @include it('References global fonts') {
       @include assert-equal(
-        fonts.compile-fonts(),
-        (
-          '_shared-stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-          '_normal-stack': (
-            'stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-          ),
-          'body-font': (
-            'name': 'Source Sans Pro',
-            'stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-            'formats': 'woff' 'svg' 'eot',
-            'normal': 'sans/sourcesanspro-regular-webfont',
-            'italic': 'sans/sourcesanspro-italic-webfont',
-            'bold': (
-              'path': 'sans/sourcesanspro-bold-webfont',
-              'local': 'source-sans-pro-bold' 'Source Sans Pro bold',
-              'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
-              'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
-              'svgid': 'boldID',
-            ),
-          ),
-          'TestFont': (
-            'stack': (
-              'Georgia',
-              'serif',
-            ),
-          ),
-          'UniFont': (
-            'name': 'Unicode Test',
-            'normal': 'path/to/normal',
-            'formats': 'woff2',
-            'unicode-range': (
-              U+0000-00FF,
-              U+0131,
-              'U+0152-0153',
-              'U+02C6',
-            ),
-            'display': 'swap',
-          ),
-          'alias': (
-            'name': 'Source Sans Pro',
-            'stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-            'formats': 'woff' 'svg' 'eot',
-            'normal': 'sans/sourcesanspro-regular-webfont',
-            'italic': 'sans/sourcesanspro-italic-webfont',
-            'bold': (
-              'path': 'sans/sourcesanspro-bold-webfont',
-              'local': 'source-sans-pro-bold' 'Source Sans Pro bold',
-              'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
-              'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
-              'svgid': 'boldID',
-            ),
-          ),
-          'kevin bacon': (
-            'name': 'Source Sans Pro',
-            'stack': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-            'formats': 'woff' 'svg' 'eot',
-            'normal': 'sans/sourcesanspro-regular-webfont',
-            'italic': 'sans/sourcesanspro-italic-webfont',
-            'bold': (
-              'path': 'sans/sourcesanspro-bold-webfont',
-              'local': 'source-sans-pro-bold' 'Source Sans Pro bold',
-              'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
-              'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
-              'svgid': 'boldID',
-            ),
-          ),
-          'tf-alias': (
-            'stack': (
-              'Georgia',
-              'serif',
-            ),
-          ),
-          'tf': (
-            'stack': (
-              'Georgia',
-              'serif',
-            ),
-          ),
-        )
-      )
-    } 
+        fonts.compile-fonts((a: '#UniFont')), 
+        (a: fonts.font('UniFont'))
+      );
+    }
 
-    @include it('Compiles a fonts map with references to global fonts') {
+    @include it('Compiles a local map with a global reference') {
       @include assert-equal(
-        fonts.compile-fonts((a: '#TestFont')), 
+        fonts.compile-fonts(('new': '#TestFont')), 
         (
-          a: (
+          'new': (
             'stack': (
-              'Georgia',
-              'serif',
+              TestFont,
+              Georgia,
+              serif
             ),
+            'name': TestFont
           )
         )
       );
@@ -187,7 +112,7 @@ config.$font-path: data.$font-path;
           (
             'TestFont': (
               'stack': (
-                'FranklinGothic', 
+                'Franklin Gothic', 
                 'Arial', 
                 'sans-serif',
               ),
@@ -197,16 +122,18 @@ config.$font-path: data.$font-path;
           (
           'new': (
             'stack': (
-              'FranklinGothic',
-              'Arial',
-              'sans-serif'
-            )
+              TestFont,
+              'Franklin Gothic',
+              Arial,
+              sans-serif
+            ),
+            'name': TestFont
            )
          )
        )
-      }
+     }
     }
-   */
+
   // Font URL [function]
   // -------------------
   @include describe('font-url [function]') {

@@ -77,7 +77,6 @@
 @return tokens.map-compile-with(
     $map,
     meta.get-function('font'),
-    null,
     $source
   );
 }
