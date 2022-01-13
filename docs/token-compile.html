@@ -473,6 +473,101 @@ token maps with all of the Accoutrement syntax<span class="widont">&nbsp;</span>
 
 
 
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <p>Compile each token in a<span class="widont">&nbsp;</span>map</p>
+<pre><code>  $sizes: (
+    'root': 16px,
+    'text-size': '#root',  
+  );
+
+  tokens.map-compile($sizes)
+</code></pre>
+<p>Compile a map based on an additional<span class="widont">&nbsp;</span>source</p>
+<pre><code>  $sizes: (
+    'root': 16px,
+    'text-size': '#root',  
+  );
+
+  $spacing-sizes: (
+    'gutter': 1rem,
+    'newline': '#gutter',
+  );
+
+ tokens.map-compile($sizes, $spacing-sizes)
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="function--map-compile">
   
     
@@ -785,7 +880,8 @@ static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
   
     <div class="text-block">
       <p>Allows for the compilation of each token in a map,
-with token values resolved based on the data<span class="widont">&nbsp;</span>type.</p>
+with token values resolved based on a function applied
+on each key-value<span class="widont">&nbsp;</span>pair.</p>
 
       
   
