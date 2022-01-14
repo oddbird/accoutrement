@@ -16,7 +16,7 @@
 ///     'text-size': '#root',  
 ///   );
 ///
-///   tokens.map-compile($sizes)
+///   tokens.map-compile($sizes);
 /// ```
 /// Compile a map based on an additional source
 /// ```
@@ -30,7 +30,23 @@
 ///     'newline': '#gutter',
 ///   );
 ///
-///  tokens.map-compile($sizes, $spacing-sizes)
+///  tokens.map-compile($sizes, $spacing-sizes);
+/// ```
+/// Compile a map using a particular function
+/// ```
+///   $sizes: (
+///     'root': 16px,
+///     'text-size': '#root',  
+///   );
+///
+///   $spacing-sizes: (
+///     'gutter': 1rem,
+///     'newline': '#gutter',
+///   );
+///   
+///   $fn: meta.get-function('size', $module: 'scale');
+///
+///   tokens.map-compile-with($sizes, $fn);
 /// ```
 /// @group token-compile
 
