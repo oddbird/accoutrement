@@ -107,6 +107,14 @@ $colors: () !default;
 /// This can be useful when working with alternate themes.
 ///
 /// @group color-tokens
+/// @example scss
+///   $colors: (
+///     'background-dark': #222,
+///     'accent': hsl(330, 85%, 62%),
+///   );
+///
+///   @include tools.with-colors(('background-dark': #2c05bc));
+///   .component { background: color('background-dark'); }
 ///
 /// @param {map} $source -
 ///   The new color palette to use for contents

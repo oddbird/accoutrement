@@ -1497,6 +1497,88 @@ This can be useful when working with alternate<span class="widont">&nbsp;</span>
 
   
   
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$colors: (
+  &#39;background-dark&#39;: #222,
+  &#39;accent&#39;: hsl(330, 85%, 62%),
+);
+
+@include tools.with-colors((&#39;background-dark&#39;: #2c05bc));
+.component { background: color(&#39;background-dark&#39;); }</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.component {
+  background: color(&quot;background-dark&quot;);
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
 
 
   
