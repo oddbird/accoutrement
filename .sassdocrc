@@ -13,7 +13,7 @@ groups:
     tokens: 'QuickStart: Tokens'
     token-config: 'Tokens Configuration'
     token-api: 'Accessing Tokens'
-    token-compile: 'Compiling Tokens'
+    token-compile: 'Compiling Token Maps'
     token-inspect: 'Inspecting Tokens'
     token-register: 'Function Registration'
     token-internal: 'Pre-Registered Functions'
