@@ -110,7 +110,7 @@ $changes: () !default;
 ///
 /// @group animate-change
 ///
-/// @param {map} $map -
+/// @param {map} $map [$changes] -
 ///   The map to be compiled
 /// @param {map | null} $source [$changes] -
 ///   A map of reference tokens that can be used

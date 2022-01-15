@@ -96,7 +96,7 @@ $times: () !default;
 ///
 /// @group animate-times
 ///
-/// @param {map} $map -
+/// @param {map} $map [$times] -
 ///   The map to be compiled
 /// @param {map | null} $source [$times] -
 ///   A map of reference tokens that can be used

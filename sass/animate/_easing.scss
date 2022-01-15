@@ -103,7 +103,7 @@ $easing: () !default;
 ///
 /// @group animate-ease
 ///
-/// @param {map} $map -
+/// @param {map} $map [$easing] -
 ///   The map to be compiled
 /// @param {map | null} $source [$easing] -
 ///   A map of reference tokens that can be used

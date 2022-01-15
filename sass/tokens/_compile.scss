@@ -9,47 +9,6 @@
 /// token maps with all of the Accoutrement syntax removed.
 /// @group token-compile
 
-/// Compile each token in a map
-/// ```
-///   $sizes: (
-///     'root': 16px,
-///     'text-size': '#root',  
-///   );
-///
-///   tokens.map-compile($sizes);
-/// ```
-/// Compile a map based on an additional source
-/// ```
-///   $sizes: (
-///     'root': 16px,
-///     'text-size': '#root',  
-///   );
-///
-///   $spacing-sizes: (
-///     'gutter': 1rem,
-///     'newline': '#gutter',
-///   );
-///
-///  tokens.map-compile($sizes, $spacing-sizes);
-/// ```
-/// Compile a map using a particular function
-/// ```
-///   $sizes: (
-///     'root': 16px,
-///     'text-size': '#root',  
-///   );
-///
-///   $spacing-sizes: (
-///     'gutter': 1rem,
-///     'newline': '#gutter',
-///   );
-///   
-///   $fn: meta.get-function('size', $module: 'scale');
-///
-///   tokens.map-compile-with($sizes, $fn);
-/// ```
-/// @group token-compile
-
 // Map-Compile [function]
 // ---------------
 /// Allows for the compilation of each token in a map,
@@ -59,9 +18,30 @@
 /// - NEW: Provides for compilation and exporting of 
 /// static version of Accoutrement maps. 
 ///
+/// @group token-compile
+/// @example scss - Compile each token in a map
+///   $sizes: (
+///     'root': 16px,
+///     'text-size': '#root',  
+///   );
+///
+///   /*! #{inspect(tools.map-compile($sizes))} */
+///
+/// @example scss - Compile a map based on an additional source
+///   $sizes: (
+///     'root': 16px,
+///     'text-size': '#root',
+///     'display-text': '#spacer'  
+///   );
+///
+///   $spacing-sizes: (
+///     'spacer': 2rem,
+///   );
+///   
+///   /*! #{inspect(tools.map-compile($sizes, $spacing-sizes))} */
+/// 
 /// @access public
 /// @name map-compile
-/// @group token-compile
 /// @param {map} $map -
 ///   The map to be compiled
 /// @param {map | null} $source -
@@ -98,9 +78,20 @@
 /// static version of Accoutrement maps with tokens
 /// resolved based on data type. 
 ///
+/// @group token-compile
+/// @example scss - Compile a map using a particular function
+///   @use 'color';
+///
+///   $brand-colors: (
+///     'brand-blue': hsl(234, 85%, 35%),
+///     'dark-blue': '#brand-blue' ('shade': 30%),  
+///   );
+///
+///   $fn: meta.get-function('color', $module: 'color');
+///   /*! #{inspect(tools.map-compile-with($brand-colors, $fn))} */
+///
 /// @access public
 /// @name map-compile-with
-/// @group token-compile
 ///
 /// @param {map} $map -
 ///   The map to be compiled

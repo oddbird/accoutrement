@@ -207,7 +207,7 @@ $colors: () !default;
 ///
 /// @group color-tokens
 ///
-/// @param {map} $map -
+/// @param {map} $map [$colors] -
 ///   The map to be compiled
 /// @param {map | null} $source [$colors] -
 ///   A map of reference tokens that can be used

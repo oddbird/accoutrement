@@ -96,7 +96,7 @@ $ratios: () !default;
 ///
 /// @group ratio-tokens
 ///
-/// @param {map} $map -
+/// @param {map} $map [$ratios] -
 ///   The map to be compiled
 /// @param {map | null} $source [$ratios] -
 ///   A map of reference tokens that can be used
