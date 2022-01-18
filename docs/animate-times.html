@@ -122,6 +122,11 @@
   
   
     <li class="nav-item">
+      <a href="token-compile.html" data-nav="is-not-active">Compiling Token<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
       <a href="token-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
     </li>
   
@@ -130,10 +135,6 @@
       <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   
-  
-    <li class="nav-item">
-      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
-    </li>
   
   
     <li class="nav-item">
@@ -1212,6 +1213,284 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
         
         
         
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--compile-times">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--compile-times" class="item-name">compile-times()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Compile all the tokens in a time map.
+This is particularly useful for exporting
+a static version of the token map
+with all the accoutrement syntax removed –
+e.g. for use in javascript or<span class="widont">&nbsp;</span>documentation.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>NEW: Provides an export option for time token<span class="widont">&nbsp;</span>maps</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$map:</span>
+      
+      <span class="item-value">$times</span>
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The map to be<span class="widont">&nbsp;</span>compiled</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$source:</span>
+      
+      <span class="item-value">$times</span>
+      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A map of reference tokens that can be used
+for resolving times.
+(defaults to the global <code>$times</code> map)</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(map)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A copy of the original map,
+with all token values<span class="widont">&nbsp;</span>resolved</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  token-compile.html#function--map-compile-with" class="item-name">map-compile-with()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
       

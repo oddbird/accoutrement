@@ -23,6 +23,7 @@ times.$times: data.$times;
           --time-alias: 5s;
           --time-thread: var(--time-alias, 5s);
           --time-fast: 150ms;
+          --time-fade: 500ms;
           --time-math-tests: 2;
           --time-plus-name: 152ms;
         }

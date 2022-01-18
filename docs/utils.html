@@ -122,6 +122,11 @@
   
   
     <li class="nav-item">
+      <a href="token-compile.html" data-nav="is-not-active">Compiling Token<span class="widont">&nbsp;</span>Maps</a>
+    </li>
+  
+  
+    <li class="nav-item">
       <a href="token-inspect.html" data-nav="is-not-active">Inspecting Tokens</a>
     </li>
   
@@ -130,10 +135,6 @@
       <a href="token-register.html" data-nav="is-not-active">Function Registration</a>
     </li>
   
-  
-    <li class="nav-item">
-      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
-    </li>
   
   
     <li class="nav-item">
@@ -1100,6 +1101,9 @@ as <code>'remove-nth'</code>.</p>
       <h2 id="sass-maps">Sass Maps</h2>
 <p>Utility function(s) that extend the Sass core modules,
 to help with advanced map<span class="widont">&nbsp;</span>manipulation.</p>
+<p>These functions have a <code>map-</code> prefix added by default
+(eg <code>map-multi-merge()</code>)
+unless they are imported<span class="widont">&nbsp;</span>directly.</p>
 
       
   
@@ -1207,9 +1211,6 @@ to help with advanced map<span class="widont">&nbsp;</span>manipulation.</p>
 in case you want to define tokens in smaller groups –
 such as <code>brand-colors</code>, <code>text-colors</code>, etc. –
 before merging them into a single<span class="widont">&nbsp;</span>map.</p>
-<p>This function has a <code>map-</code> prefix added by default
-(eg <code>map-multi-merge()</code>)
-unless it’s imported<span class="widont">&nbsp;</span>directly.</p>
 
       
   
