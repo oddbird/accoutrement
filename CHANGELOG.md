@@ -17,6 +17,7 @@
 
   - NEW: `compile-*` functions provide an export option for respective token maps
     (see: `compile-changes`, `compile-easing`, `compile-times`).
+  - NEW: Default easing functions are now available as individual variables.
 
 - [Color][color]:
 

@@ -14,7 +14,7 @@
 
 /// ## Import
 /// If you already imported `accoutrement/sass/tools` you are ready to go.
-/// You can also import the color module on its own:
+/// You can also import the animate module on its own:
 ///
 /// ```scss
 ///   @use '<path-to>/accoutrement/sass/animate';
@@ -23,7 +23,7 @@
 
 /// ## Timing & Easing
 /// Establish your timing and easing palettes,
-/// with the standard [Accoutrement syntax](core.html):
+/// with the standard [Accoutrement syntax](tokens.html):
 ///
 /// ```scss
 /// $times: (
