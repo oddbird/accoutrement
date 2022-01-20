@@ -68,62 +68,112 @@ $scale: function.get('color.scale');
     }
   }
 
-  @include describe('has-alias [function]') {
+  @include describe('next-alias [function]') {
     @include it(
       'Returns `null` if the given string contains no hash references'
     ) {
-      @include assert-equal(parse.has-alias('not a single hash in here'), null);
+      @include assert-equal(
+        parse.next-alias('not a single hash in here'),
+        null
+      );
+    }
+
+    @include it('Returns `null` given empty string') {
+      @include assert-equal(parse.next-alias(''), null);
     }
 
     @include it('Returns a hash reference in a string') {
       @include assert-equal(
-        parse.has-alias("there's a hash in this string: #hash"),
-        'hash'
+        parse.next-alias("there's a hash in this string: #hash"),
+        (
+          'alias': 'hash',
+          'end': 37,
+        )
       );
     }
 
     @include it('Returns the first hash reference encountered in a string') {
       @include assert-equal(
-        parse.has-alias(
+        parse.next-alias(
           "there's a number of hashes in this string: #hash #hash2 #hash3"
         ),
-        'hash'
+        (
+          'alias': 'hash',
+          'end': 49,
+        )
+      );
+    }
+
+    @include it(
+      'Returns the next hash reference in a string from index param'
+    ) {
+      @include assert-equal(
+        parse.next-alias(
+          "there's a number of hashes in this string: #hash #hash2 #hash3",
+          49
+        ),
+        (
+          'alias': 'hash2',
+          'end': 56,
+        )
       );
     }
 
     @include it('Terminates the retrieved hash on a space character') {
       @include assert-equal(
-        parse.has-alias("there's a #hash here too"),
-        'hash'
+        parse.next-alias("there's a #hash here too"),
+        (
+          'alias': 'hash',
+          'end': 16,
+        )
       );
     }
 
     @include it('Terminates the retrieved hash on a `)` character') {
       @include assert-equal(
-        parse.has-alias('one (#hash) reference, please'),
-        'hash'
+        parse.next-alias('one (#hash) reference, please'),
+        (
+          'alias': 'hash',
+          'end': 11,
+        )
+      );
+    }
+
+    @include it('Returns the first hash reference of concatenated references') {
+      @include assert-equal(
+        parse.next-alias('#hashes#glued#together'),
+        (
+          'alias': 'hashes',
+          'end': 8,
+        )
       );
     }
 
     @include it(
-      'Returns the first hash reference of two concatenated references'
+      'Returns the second hash reference of concatenated references when index is provided'
     ) {
       @include assert-equal(
-        parse.has-alias('#hashes#glued#together'),
-        'hashes'
+        parse.next-alias('#hashes#glued#together', 8),
+        (
+          'alias': 'glued',
+          'end': 14,
+        )
       );
     }
 
     @include it('Recognizes an explicitly terminated hash reference') {
       @include assert-equal(
-        parse.has-alias('terminate this#hash\\here'),
-        'hash'
+        parse.next-alias('terminate this#hash\\here'),
+        (
+          'alias': 'hash',
+          'end': 20,
+        )
       );
     }
 
     @include it('Ignores escaped hashes') {
       @include assert-equal(
-        parse.has-alias('this hash is not a actually a reference: \\#no'),
+        parse.next-alias('this hash is not a actually a reference: \\#no'),
         null
       );
     }
@@ -254,6 +304,21 @@ $scale: function.get('color.scale');
           'hello': 'world',
         ),
         'when the token is a map'
+      );
+
+      @include assert-equal(
+        parse.compile-token($map, linear-gradient(#888, #eee)),
+        linear-gradient(#888, #eee),
+        'when the token is an unquoted CSS value containing #rrggbb colors'
+      );
+
+      @include assert-equal(
+        parse.compile-token(
+          $map,
+          linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%)
+        ),
+        linear-gradient(hsl(31deg 94% 52%) 10%, hsl(274deg 95% 57%) 80%),
+        'when the token is an unquoted CSS value containing hsl colors'
       );
     }
 

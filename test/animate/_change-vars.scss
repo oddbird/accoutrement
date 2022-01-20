@@ -45,9 +45,9 @@ change.$changes: $changes;
         @include expect {
           --change-alias: transform 150ms;
           --change-thread: var(--change-alias, transform 150ms);
-          --change-fade: opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-fade: opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
           --change-slide-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
           --change-animation: slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
           --change-animation-ref: slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
@@ -77,7 +77,7 @@ change.$changes: $changes;
         }
 
         @include expect {
-          --change-fade: opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-fade: opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
       }
     }
@@ -101,7 +101,7 @@ change.$changes: $changes;
         }
 
         @include expect {
-          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
       }
     }

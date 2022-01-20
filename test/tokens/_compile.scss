@@ -1,0 +1,103 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/tokens/register';
+@use '../../sass/tokens/compile';
+@use '../../sass/color';
+@use 'sass:color' as c;
+@use 'sass:meta';
+
+@include test-module('tokens/compile') {
+  // Map Compile
+  // -----------
+  @include describe('map-compile [function]') {
+    $test: (
+      a: 'hello %s' ('%s': 'world'),
+      b: (
+        'nested': '#a',
+      ),
+      c: 'not #b->nested',
+    );
+
+    $new: (
+      external: 'totally #c',
+      internal: '#external' ('str-replace': 'not' 'new'),
+      a: 'world',
+    );
+
+    @include it('Compiles each token in a map') {
+      @include assert-equal(
+        compile.map-compile($test),
+        (
+          a: 'hello world',
+          b: (
+            'nested': 'hello world',
+          ),
+          c: 'not hello world',
+        )
+      );
+    }
+
+    @include it('Compiles a map based on additional source') {
+
+      @include assert-equal(
+        compile.map-compile($new, $test),
+        (
+          external: 'totally not world',
+          internal: 'totally new world',
+          a: 'world',
+        )
+      );
+    }
+
+    @include it('Target map takes priority') {
+      @include assert-equal(
+        compile.map-compile($new, (a: 'no', c: 'not peanuts')),
+        (
+          external: 'totally not peanuts',
+          internal: 'totally new peanuts',
+          a: 'world',
+        )
+      );
+    }
+  }
+
+  @include describe('map-compile-with [function]') {
+    color.$colors: (
+      'brand-blue': hsl(195, 85%, 35%),
+      'contrast-dark': maroon,
+      'dark-blue': '#brand-blue' ('shade': 25%),
+      'light-blue': '#brand-blue' ('tint': 25%),
+    );
+
+    $colors-compiled: (
+      'brand-blue': #0d7fa5,
+      'contrast-dark': maroon,
+      'dark-blue': c.mix(maroon, #0d7fa5, 25%),
+      'light-blue': c.mix(white, #0d7fa5, 25%),
+    );
+
+    $fn: meta.get-function('color', $module: 'color');
+
+    @include it('Compiles a map using the color function') {
+      @include assert-equal(
+        compile.map-compile-with(color.$colors, $fn),
+        $colors-compiled
+      );
+    }
+
+    @include it('Accepts additional arguments') {
+      @include assert-equal(
+        compile.map-compile-with(
+          $colors-compiled,
+          $fn,
+          $do: ('color.adjust': ('hue': 180deg))
+        ),
+        (
+          'brand-blue': #a5330d,
+          'contrast-dark': teal,
+          'dark-blue': #7c472a,
+          'light-blue': #bc674a,
+        )
+      );
+    }
+  }
+}

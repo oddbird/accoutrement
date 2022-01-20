@@ -2,6 +2,40 @@
 
 ## 4.0.0 - UNRELEASED
 
+- BREAKING: Map `multi-merge` utility and all `add-*` functions
+  for adding one or more token maps (eg `add-sizes`, `add-colors`, etc)
+  now perform a deep merge of the token maps.
+  Previously a shallow merge was performed,
+  [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
+
+- [Tokens][token]:
+
+  - NEW: `map-compile` and `map-compile-with` functions for compiling
+    tokens in Accoutrement maps and formatting them for static exports.
+
+- [Animate][animate]:
+
+  - NEW: `compile-*` functions provide an export option for respective token maps
+    (see: `compile-changes`, `compile-easing`, `compile-times`).
+
+- [Color][color]:
+
+  - NEW: `compile-colors` function provides an export option for color token maps.
+  - NEW: `with-colors` mixin allows the overriding of the global color palette for
+    a section of contents.
+
+- [Ratio][ratio]:
+
+  - NEW: `compile-ratios` function provides an export option for ratio token maps.
+
+- [Scale][scale]:
+
+  - NEW: `compile-sizes` function provides an export option for size token maps.
+
+- [Type][type]:
+
+  - NEW: `compile-fonts` function provides an export option for font token maps.
+
 ### 4.0.0-beta.2 - 12/03/21
 
 This is a major update, moving over to Sass modules,

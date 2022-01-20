@@ -1,7 +1,7 @@
 {
   "name": "accoutrement",
   "title": "Accoutrement",
-  "version": "4.0.0-beta.2",
+  "version": "4.0.0-beta.3",
   "description": "Sass design-systems management and utilities.",
   "homepage": "https://www.oddbird.net/accoutrement/",
   "type": "module",
@@ -27,10 +27,10 @@
   "scripts": {
     "test": "mocha",
     "lint:sass": "yarn lint:nofix --fix",
-    "lint:nofix": "stylelint '**/*.scss'",
-    "lint:other": "prettier --write '**/*.{json,md,yml}'",
+    "lint:nofix": "stylelint **/*.scss",
+    "lint:other": "prettier --write **/*.{json,md,yml}",
     "lint": "run-p lint:sass lint:other",
-    "docs": "sassdoc 'sass/**/*.scss'",
+    "docs": "sassdoc sass/**/*.scss",
     "commit": "run-s lint test docs",
     "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:nofix'",
     "watch:tests": "chokidar 'test/**' 'sass/**/*.scss' -c 'yarn test'",
