@@ -89,6 +89,16 @@ and removing some features that no longer seem necessary.
     to see if the given token is defined,
     and supports the `outer->inner` nested token syntax.
 
+- [Type][type]:
+
+  - Breaking: The `font-url()` function for interpolating a font path is now named `format-url()`.
+  - BREAKING: `_a_normalize-font()` renamed `font()`.
+  - BREAKING: `_a_normalize-font-name()` renamed `font-name()`.
+  - BREAKING: `_a_normalize-font-stack()` renamed `font-stack()`.
+  - BREAKING: `_a_normalize-get-variants()` renamed `font-get-variants()`.
+  - BREAKING: `_a_normalize-variant-name()` renamed `variant-name()`.
+  - BREAKING: `_a_normalize-variant-data()` renamed `variant-data()`.
+
 - [Ratios][ratio]:
 
   - NEW: Built-in named ratios are now available as individual variables,

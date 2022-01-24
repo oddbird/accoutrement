@@ -15,6 +15,7 @@
 /// while providing reliable data formats to the internal functions.
 ///
 /// @since 2.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font` to `font`
 /// - BREAKING: Non-map fonts are interpreted as font-stacks,
 ///   and converted to an explicit map
 /// - BREAKING: Missing names & stacks are ignored, previously set to `null`
@@ -93,6 +94,7 @@
 /// implicit or explicit cues.
 ///
 /// @since 2.0.0 -
+/// - BREAKING: Named changed to ,
 /// - BREAKING: Ignores private tokens when tracking an alias origin,
 ///   or determining name based on key
 /// - BREAKING: Quotes or unquotes names, based on CSS output requirements
