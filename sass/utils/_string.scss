@@ -51,9 +51,9 @@
 /// or replace the entirety of the string.
 ///
 /// This function has a `str-` prefix added by default
-/// (eg `str-replace()`)
+/// (e.g. `str-replace()`)
 /// unless it's imported directly.
-/// However, it's available in all accoutrement maps
+/// However, it's available in all Accoutrement maps
 /// as either `'replace'` or `'str-replace'`.
 ///
 /// @since 1.0.0 -
@@ -143,9 +143,9 @@
 /// replacing `%s` placeholders in a format string.
 ///
 /// This function has a `str-` prefix added by default
-/// (eg `str-interpolate()`)
+/// (e.g. `str-interpolate()`)
 /// unless it's imported directly.
-/// However, it's available in all accoutrement maps
+/// However, it's available in all Accoutrement maps
 /// as either `'interpolate'`, `'str-interpolate'`, or `'%s'`.
 ///
 /// @group utils
@@ -199,9 +199,9 @@
 /// using the same logic as JavaScript's `split()` method.
 ///
 /// This function has a `str-` prefix added by default
-/// (eg `str-split()`)
+/// (e.g. `str-split()`)
 /// unless it's imported directly.
-/// However, it's available in all accoutrement maps
+/// However, it's available in all Accoutrement maps
 /// as either `'str-split'` or `'split'`.
 ///
 /// @since 1.0.0 -
@@ -276,9 +276,9 @@
 /// Trims whitespace from the start and end of a string.
 ///
 /// This function has a `str-` prefix added by default
-/// (eg `str-trim()`)
+/// (e.g. `str-trim()`)
 /// unless it's imported directly.
-/// However, it's available in all accoutrement maps
+/// However, it's available in all Accoutrement maps
 /// as either `'str-trim'` or `'trim'`.
 ///
 /// @since 1.0.0 -

@@ -31,7 +31,7 @@
 ///   'slide': transform time('fast'),
 ///   'fade': opacity time('fade') ease('out-quad'),
 ///
-///   // interolate using '#name' (quotes optional)
+///   // interpolate using '#name' (quotes optional)
 ///   // to build on existing "changes"
 ///   'slide-in': #slide ease('out-back'),
 ///   'slide-out': '#slide' ease('in'),
@@ -71,7 +71,7 @@ $changes: () !default;
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
 /// @param {map} $source [$changes] -
-///   Optional accoutrement-format map of changes to use as the origin palette
+///   Optional Accoutrement-format map of changes to use as the origin palette
 /// @return {length} -
 ///   The change value requested
 @function change($name, $do: null, $source: $changes) {
@@ -102,7 +102,7 @@ $changes: () !default;
 /// Compile all the tokens in a change map.
 /// This is particularly useful for exporting
 /// a static version of the token map
-/// with all the accoutrement syntax removed --
+/// with all the Accoutrement syntax removed --
 /// e.g. for use in javascript or documentation.
 ///
 /// @since 4.0.0 -

@@ -148,12 +148,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -408,6 +408,11 @@
       <h1 id="ratio-tokens">Ratio Tokens</h1>
 <p>All the tools you need to define and access ratios
 using the token<span class="widont">&nbsp;</span>syntax.</p>
+<h2 id="import">Import</h2>
+<p>If you’ve already imported <code>accoutrement/sass/tools</code> you are ready to go.
+You can also import the ratio module on its<span class="widont">&nbsp;</span>own:</p>
+<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/ratio';
+</code></pre>
 
       
   
@@ -534,7 +539,7 @@ using the token<span class="widont">&nbsp;</span>syntax.</p>
   
     <div class="text-block">
       <p>Define your own ratios,
-or alias built-in named ratios
+or alias built-in <a href="ratios.html#variable--named-ratios">named ratios</a>
 (all provided names are prefixed with <code>_</code> in token<span class="widont">&nbsp;</span>maps).</p>
 
       
@@ -622,49 +627,6 @@ or alias built-in named ratios
     </div>
   
 
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-
-      
-        
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">prose</span>
-      
-        <a href="
-  ratios.html#prose--" class="item-name"></a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-      
-    
-  </div>
 
   
   
@@ -792,7 +754,7 @@ or alias built-in named ratios
   
     <div class="text-block">
       <p>Retrieve a scale ratio by name
-from either the <code>$_DEFAULT-RATIOS</code>
+from either the <code>$named-ratios</code>
 or user <code>$ratios</code> configurations.</p>
 
       
@@ -916,7 +878,7 @@ for custom<span class="widont">&nbsp;</span>source-palette</li>
     
       
       <div class="param-details text-block">
-        <p>Optional accoutrement-format map of ratios to use as the origin palette
+        <p>Optional Accoutrement-format map of ratios to use as the origin palette
 (in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
 
       </div>
@@ -1539,7 +1501,7 @@ with new maps merged<span class="widont">&nbsp;</span>in.</li>
       <p>Compile all the tokens in a ratio map.
 This is particularly useful for exporting
 a static version of the token map
-with all the accoutrement syntax removed –
+with all the Accoutrement syntax removed –
 e.g. for use in javascript or<span class="widont">&nbsp;</span>documentation.</p>
 
       
@@ -1909,7 +1871,7 @@ in addition to converting ratio<span class="widont">&nbsp;</span>tokens.</li>
     
       
       <div class="param-details text-block">
-        <p>Optional accoutrement-format map of ratios to use as the origin palette
+        <p>Optional Accoutrement-format map of ratios to use as the origin palette
 (in addition to the provided<span class="widont">&nbsp;</span>defaults)</p>
 
       </div>

@@ -55,7 +55,7 @@ Use what you need:
 ```
 
 If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-you can use the default "tools" (core + plugins) using only:
+you can use the default "tools" using only:
 
 ```scss
 @use 'accoutrement';
@@ -69,9 +69,9 @@ you can use the default "tools" (core + plugins) using only:
   For managing CSS colors and contrast-ratios
 - **[Scale](https://www.oddbird.net/accoutrement/docs/scale.html)** --
   For managing CSS sizes: typographic scales, spacing, etc.
-- **[Type](https://www.oddbird.net/accoutrement/docs/ratios.html)** --
+- **[Type](https://www.oddbird.net/accoutrement/docs/type.html)** --
   For managing webfonts, generated content, and other text needs
-- **[Ratios](https://www.oddbird.net/accoutrement/docs/type.html)** --
+- **[Ratios](https://www.oddbird.net/accoutrement/docs/ratios.html)** --
   For managing aspect and typography ratios
   (several common ratios are provided)
 - **[Variables](https://www.oddbird.net/accoutrement/docs/vars.html)** --
@@ -104,10 +104,7 @@ $map: (
   // internal reference & adjustments
   'gutter': '#root'
     (
-      'scale': (
-        '_major-third',
-        1,
-      ),
+      scale: '_major-third' 1,
       'convert-units': 'rem',
     ),
 );

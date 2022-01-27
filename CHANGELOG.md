@@ -2,40 +2,40 @@
 
 ## 4.0.0 - UNRELEASED
 
-- BREAKING: Map `multi-merge` utility and all `add-*` functions
-  for adding one or more token maps (eg `add-sizes`, `add-colors`, etc)
+- BREAKING: Map `multi-merge()` utility and all `add-*` functions
+  for adding one or more token maps (e.g. `add-sizes()`, `add-colors()`, etc)
   now perform a deep merge of the token maps.
   Previously a shallow merge was performed,
   [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
 
 - [Tokens][token]:
 
-  - NEW: `map-compile` and `map-compile-with` functions for compiling
+  - NEW: `map-compile()` and `map-compile-with()` functions for compiling
     tokens in Accoutrement maps and formatting them for static exports.
 
 - [Animate][animate]:
 
   - NEW: `compile-*` functions provide an export option for respective token maps
-    (see: `compile-changes`, `compile-easing`, `compile-times`).
+    (see: `compile-changes()`, `compile-easing()`, `compile-times()`).
   - NEW: Default easing functions are now available as individual variables.
 
 - [Color][color]:
 
-  - NEW: `compile-colors` function provides an export option for color token maps.
-  - NEW: `with-colors` mixin allows the overriding of the global color palette for
+  - NEW: `compile-colors()` function provides an export option for color token maps.
+  - NEW: `with-colors()` mixin allows the overriding of the global color palette for
     a section of contents.
 
 - [Ratio][ratio]:
 
-  - NEW: `compile-ratios` function provides an export option for ratio token maps.
+  - NEW: `compile-ratios()` function provides an export option for ratio token maps.
 
 - [Scale][scale]:
 
-  - NEW: `compile-sizes` function provides an export option for size token maps.
+  - NEW: `compile-sizes()` function provides an export option for size token maps.
 
 - [Type][type]:
 
-  - NEW: `compile-fonts` function provides an export option for font token maps.
+  - NEW: `compile-fonts()` function provides an export option for font token maps.
 
 ### 4.0.0-beta.2 - 12/03/21
 
@@ -50,10 +50,10 @@ and removing some features that no longer seem necessary.
   browser normalization, is no longer included. We now recommend
   using [CSS Remedy](https://github.com/jensimmons/cssremedy).
 - BREAKING: The old "core" module has been broken into individual modules
-  for "utilities" (extending several Sass modules),
-  "tokens" (the map syntax parser),
-  "variables" (converting Sass variables & maps to CSS custom properties),
-  and "ratios" (for typographic scales and layout aspect ratios)
+  for [utilities][utils] (extending several Sass modules),
+  [tokens][tokens] (the map syntax parser),
+  [variables][vars] (converting Sass variables & maps to CSS custom properties),
+  and [ratios][ratio] (for typographic scales and layout aspect ratios)
 
 - [Sass Utilities][utils]:
 

@@ -56,7 +56,7 @@ $times: () !default;
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
 /// @param {map} $source [$times] -
-///   Optional accoutrement-format map of times to use as the origin palette
+///   Optional Accoutrement-format map of times to use as the origin palette
 /// @return {length} -
 ///   The calculated length of time
 @function time($time, $do: null, $source: $times) {
@@ -88,7 +88,7 @@ $times: () !default;
 /// Compile all the tokens in a time map.
 /// This is particularly useful for exporting
 /// a static version of the token map
-/// with all the accoutrement syntax removed --
+/// with all the Accoutrement syntax removed --
 /// e.g. for use in javascript or documentation.
 ///
 /// @since 4.0.0 -

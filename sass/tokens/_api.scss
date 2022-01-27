@@ -5,9 +5,9 @@ $_memo: ();
 
 /// # Token Maps
 /// We use "token" as a generic term
-/// for named values inside accoutrement maps.
+/// for named values inside Accoutrement maps.
 /// In the following map,
-/// `root` and `gutter` are considered accoutrement-tokens:
+/// `root` and `gutter` are considered Accoutrement-tokens:
 ///
 /// ```scss
 /// $map: (
@@ -17,7 +17,7 @@ $_memo: ();
 /// ```
 ///
 /// Our core API provides token-map syntax parsing,
-/// and general token access with `get-token()` (below).
+/// and general token access with `get()` (below).
 /// Additional plugins provide shortcuts and utilities
 /// for managing and accessing common token-types,
 /// like colors, fonts, sizes, and animations.
@@ -54,7 +54,7 @@ $_memo: ();
 /// @group token-api
 
 /// ## Nested References
-/// You can define nested tokens in accoutrement maps,
+/// You can define nested tokens in Accoutrement maps,
 /// and access them using a `#first->second->third` syntax:
 ///
 /// ```scss
@@ -219,11 +219,11 @@ $_memo: ();
 // Get Token
 // ---------
 /// The primary function for accessing and parsing
-/// accoutrement map-syntax values.
-/// Each accoutrement plugin provides a shortcut function
+/// Accoutrement map-syntax values.
+/// Each Accoutrement plugin provides a shortcut function
 /// for the specific map associated with that data-type.
 /// You can do the same, or use it directly
-/// to turn any arbitrary map into an accoutrement map.
+/// to turn any arbitrary map into an Accoutrement map.
 ///
 /// @since 4.0.0 -
 /// - BREAKING: Name changed from `get-token` to `get`

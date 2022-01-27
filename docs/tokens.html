@@ -148,12 +148,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -714,7 +714,7 @@ for more<span class="widont">&nbsp;</span>detail.</p>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="tokens-css-variables"><a href="core-vars.html">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a></h2>
+      <h2 id="tokens-css-variables"><a href="token-vars.html">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a></h2>
 <p>CSS Variables provide a DOM-aware alternative
 to the pre-processed Sass variables
 we use to store tokens.
@@ -722,7 +722,7 @@ Rather than using one or the other,
 we recommend defining tokens in Sass
 (where relationships can be stored in an abstract format),
 and then generating CSS Variables<span class="widont">&nbsp;</span>as-necessary.</p>
-<p>See <a href="core-vars.html">CSS Variables</a> documentation
+<p>See <a href="token-vars.html">CSS Variables</a> documentation
 for more<span class="widont">&nbsp;</span>detail.</p>
 
       
@@ -906,7 +906,7 @@ giving them any alias you<span class="widont">&nbsp;</span>like.</p>
   // Or add functions &amp; aliases using the provided mixin:
   @include token.register('my-function', 'alias');
 </code></pre>
-<p>Once a function has been registered with accoutrement,
+<p>Once a function has been registered with Accoutrement,
 it is available to call by name or alias in all token adjustment<span class="widont">&nbsp;</span>maps:</p>
 <pre><code class="lang-scss">  @include token.register('rgba', 'fade');
   $colors: (

@@ -9,12 +9,19 @@
 /// # Ratio Tokens
 /// All the tools you need to define and access ratios
 /// using the token syntax.
+/// ## Import
+/// If you've already imported `accoutrement/sass/tools` you are ready to go.
+/// You can also import the ratio module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/ratio';
+/// ```
 /// @group ratio-tokens
 
 // Ratios
 // ------
 /// Define your own ratios,
-/// or alias built-in named ratios
+/// or alias built-in [named ratios](ratios.html#variable--named-ratios)
 /// (all provided names are prefixed with `_` in token maps).
 ///
 /// @group ratio-tokens
@@ -26,13 +33,12 @@
 ///   );
 ///
 /// @type map
-/// @see named-ratios
 $ratios: () !default;
 
 // Ratio [function]
 // ----------------
 /// Retrieve a scale ratio by name
-/// from either the `$_DEFAULT-RATIOS`
+/// from either the `$named-ratios`
 /// or user `$ratios` configurations.
 ///
 /// @since 1.0.0 -
@@ -51,7 +57,7 @@ $ratios: () !default;
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
 /// @param {map} $source [$ratios] -
-///   Optional accoutrement-format map of ratios to use as the origin palette
+///   Optional Accoutrement-format map of ratios to use as the origin palette
 ///   (in addition to the provided defaults)
 /// @return {number} -
 ///   The numeric value of a ratio
@@ -88,7 +94,7 @@ $ratios: () !default;
 /// Compile all the tokens in a ratio map.
 /// This is particularly useful for exporting
 /// a static version of the token map
-/// with all the accoutrement syntax removed --
+/// with all the Accoutrement syntax removed --
 /// e.g. for use in javascript or documentation.
 ///
 /// @since 4.0.0 -
@@ -138,7 +144,7 @@ $ratios: () !default;
 /// @param {string | number} $ratio -
 ///   The key-name or value of a ratio
 /// @param {map} $source [$ratios] -
-///   Optional accoutrement-format map of ratios to use as the origin palette
+///   Optional Accoutrement-format map of ratios to use as the origin palette
 ///   (in addition to the provided defaults)
 /// @param {bool} $allow-tokens [true] -
 ///   Optionally turn off token-parsing.

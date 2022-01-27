@@ -111,7 +111,7 @@
 ///
 /// @group tokens
 
-/// ## [Tokens » CSS Variables](core-vars.html)
+/// ## [Tokens » CSS Variables](token-vars.html)
 /// CSS Variables provide a DOM-aware alternative
 /// to the pre-processed Sass variables
 /// we use to store tokens.
@@ -120,7 +120,7 @@
 /// (where relationships can be stored in an abstract format),
 /// and then generating CSS Variables as-necessary.
 ///
-/// See [CSS Variables](core-vars.html) documentation
+/// See [CSS Variables](token-vars.html) documentation
 /// for more detail.
 ///
 /// @example scss
@@ -161,7 +161,7 @@
 ///   @include token.register('my-function', 'alias');
 /// ```
 ///
-/// Once a function has been registered with accoutrement,
+/// Once a function has been registered with Accoutrement,
 /// it is available to call by name or alias in all token adjustment maps:
 ///
 /// ```scss

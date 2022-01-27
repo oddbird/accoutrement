@@ -36,7 +36,7 @@
 /// @param {*} $font -
 ///   A key for accessing the desired font in `$fonts`
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @return {map} -
 ///   A parsed and normalized map of font-data
@@ -51,7 +51,7 @@
 /// Compile all the tokens in a font map.
 /// This is particularly useful for exporting
 /// a static version of the token map
-/// with all the accoutrement syntax removed --
+/// with all the Accoutrement syntax removed --
 /// e.g. for use in javascript or documentation.
 ///
 /// @since 4.0.0 -
@@ -108,7 +108,7 @@
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @return {String} -
 ///   The full font-stack for the given font,
@@ -142,7 +142,7 @@
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map.
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 @mixin font-family($key, $source: config.$fonts) {
   font-family: font-family($key, $source);
@@ -177,7 +177,7 @@
 /// @param {string} $key -
 ///   The key-name of a font in your `$fonts` map
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output `@font-face` import blocks for any defined font-variants.
 @mixin font-face($key, $source: config.$fonts) {
@@ -238,7 +238,7 @@
 ///   @include tools.import-webfonts;
 ///
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @output Any number of `@font-face` blocks.
 @mixin import-webfonts($source: config.$fonts) {
