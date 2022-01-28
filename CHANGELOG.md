@@ -51,9 +51,13 @@ and removing some features that no longer seem necessary.
   using [CSS Remedy](https://github.com/jensimmons/cssremedy).
 - BREAKING: The old "core" module has been broken into individual modules
   for [utilities][utils] (extending several Sass modules),
-  [tokens][tokens] (the map syntax parser),
+  [tokens][token] (the map syntax parser),
   [variables][vars] (converting Sass variables & maps to CSS custom properties),
   and [ratios][ratio] (for typographic scales and layout aspect ratios)
+
+- [Animate][animate]:
+  - NEW: Named default easings are now available as individual variables,
+      (without the `_` prefix that is applied in token maps)
 
 - [Sass Utilities][utils]:
 
@@ -91,7 +95,7 @@ and removing some features that no longer seem necessary.
 
 - [Type][type]:
 
-  - Breaking: The `font-url()` function for interpolating a font path is now named `format-url()`.
+  - BREAKING: The `font-url()` function for interpolating a font path is now named `format-url()`.
   - BREAKING: `_a_normalize-font()` renamed `font()`.
   - BREAKING: `_a_normalize-font-name()` renamed `font-name()`.
   - BREAKING: `_a_normalize-font-stack()` renamed `font-stack()`.

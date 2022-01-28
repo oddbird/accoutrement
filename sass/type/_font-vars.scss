@@ -66,7 +66,7 @@ $font-var-prefix: 'font-' !default;
 ///
 /// @param {map} $source [$fonts] -
 ///   Optionally use a custom
-///   map of fonts to set as css variables
+///   map of fonts to set as CSS variables
 /// @param {string | list} $use ['stack'] -
 ///   Font-map value (such as 'name' or 'stack')
 ///   to use as custom-property values
@@ -156,7 +156,7 @@ $font-var-prefix: 'font-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$fonts] -
 ///   Optional Accoutrement map of fonts to use as source

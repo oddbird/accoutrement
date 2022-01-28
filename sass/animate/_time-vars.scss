@@ -12,7 +12,7 @@
 /// Accoutrement maps help solve that problem in Sass,
 /// so we wanted to carry that over into our CSS variable support.
 /// Set a prefix for all time-tokens,
-/// and we'll apply it when setting or calling css variables
+/// and we'll apply it when setting or calling CSS variables
 /// based on your time maps.
 /// Set to `null` or `''` (empty string) for no prefix.
 ///
@@ -56,7 +56,7 @@ $time-var-prefix: 'time-' !default;
 ///
 /// @param {map} $source [$times] -
 ///   Optionally use a custom
-///   map of times to set as css variables
+///   map of times to set as CSS variables
 /// @output
 ///   Custom properties for all public times in the map
 @mixin times--($source: times.$times) {
@@ -93,7 +93,7 @@ $time-var-prefix: 'time-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$times] -
 ///   Optional map of times to use as a palette source
@@ -126,7 +126,7 @@ $time-var-prefix: 'time-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS-variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source -
 ///   Optional Accoutrement map of times to use as source

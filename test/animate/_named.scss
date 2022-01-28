@@ -1,0 +1,15 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/animate/easing-named';
+@use '../../sass/animate/named' as named-easing;
+@use 'sass:map';
+@use 'sass:meta';
+
+$named: meta.module-variables('easing-named');
+
+@include test-module('animate/named') {
+  @include it('provides named easings with a prefix') {
+    @each $name in map.keys($named) {
+      @include assert-true(map.has-key(named-easing.$named-easing, '_#{$name}'));
+    }
+  }
+}

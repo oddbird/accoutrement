@@ -108,7 +108,7 @@
 /// @param {string | color} $colors... -
 ///   ArgList of colors
 /// @return {color} -
-///   A calculated css-ready color-value based on your global color palette.
+///   A calculated CSS-ready color-value based on your global color palette.
 @function stripe-colors($colors...) {
   $gradient: ();
   $width: math.div(100%, list.length($colors));

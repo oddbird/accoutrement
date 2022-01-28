@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 
+// Provides named ratios with a prefix
 $_source-ratios: meta.module-variables('named');
 $named-ratios: ();
 

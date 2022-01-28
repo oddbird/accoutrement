@@ -8,7 +8,7 @@
 
 // Var-Contrast
 // ------------
-/// An extension of the `contrast` function,
+/// An extension of the `contrast()` function,
 /// designed to output CSS variables
 /// rather than simple color values.
 ///
@@ -76,7 +76,7 @@
 // --------------
 /// Apply any background color as a CSS variable,
 /// along with the highest-contrast text color from a set of options.
-/// This works the same as the `var-contrast` function,
+/// This works the same as the `var-contrast()` function,
 /// but applies the resulting values to `background-color`
 /// and text `color` properties.
 ///
@@ -115,7 +115,7 @@
 ///   List of colors to contrast against.
 ///   This function will choose the best contrast
 ///   of all the options provided,
-///   or the `contrast-light` and `contrast-dark` defaults
+///   or the `$contrast-light` and `$contrast-dark` defaults
 ///   defined in your color palette or the factory settings.
 ///
 ///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values

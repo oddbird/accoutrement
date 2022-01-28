@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 
+// Provides named easings with a prefix
 $_source-easing: meta.module-variables('named');
 $named-easing: ();
 

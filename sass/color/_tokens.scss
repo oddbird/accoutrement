@@ -162,7 +162,7 @@ $colors: () !default;
 /// @param {string | list} $color -
 ///   The name of a color in your palette,
 ///   or a color description in the
-///   [map configuration format](color-api.html#color-configuration).
+///   [map configuration format](color-tokens.html#variable--colors).
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
 /// @param {map} $source [$colors] -
@@ -170,7 +170,7 @@ $colors: () !default;
 ///   Defaults to the global `$colors` map.
 ///
 /// @return {color} -
-///   A calculated css-ready color,
+///   A calculated CSS-ready color,
 ///   based on your global color palette and adjustments.
 @function color($color, $do: null, $source: $colors) {
   $source: m.deep-merge(config.contrast-settings(), $source);
