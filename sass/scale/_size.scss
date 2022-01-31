@@ -86,10 +86,7 @@
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-sizes(
-  $map: config.$sizes,
-  $source: config.$sizes,
-) {
+@function compile-sizes($map: config.$sizes, $source: config.$sizes) {
   $source: map.merge($source or (), $map);
 
   @return tokens.map-compile-with(

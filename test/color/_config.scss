@@ -2,29 +2,27 @@
 @use '../../sass/color/config';
 @use 'test-data' as data;
 
-
-
 @include test-module('color/config') {
   // Contrast-Settings [function]
   // --------------------
   @include describe('Contrast-settings [function]') {
     @include it('Returns default contrast colors') {
-      @include assert-equal(config.contrast-settings(), 
-      (
-        '_contrast-light': white, 
-        '_contrast-dark': black
+      @include assert-equal(
+        config.contrast-settings(),
+        (
+          '_contrast-light': white,
+          '_contrast-dark': black,
         )
       );
     }
     @include it('Allows for resetting of default colors') {
-      @include assert-equal(config.contrast-settings(#fceeeef8), 
-      (
-        '_contrast-light': #fceeeef8, 
-        '_contrast-dark': black
+      @include assert-equal(
+        config.contrast-settings(#fceeeef8),
+        (
+          '_contrast-light': #fceeeef8,
+          '_contrast-dark': black,
         )
       );
     }
   }
- }
-
-
+}

@@ -68,17 +68,10 @@
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-fonts(
-  $map: config.$fonts,
-  $source: config.$fonts,
-) {
+@function compile-fonts($map: config.$fonts, $source: config.$fonts) {
   $source: map.merge($source or (), $map);
 
-@return tokens.map-compile-with(
-    $map,
-    meta.get-function('font'),
-    $source
-  );
+  @return tokens.map-compile-with($map, meta.get-function('font'), $source);
 }
 
 // Font Family [function]

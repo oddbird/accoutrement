@@ -105,10 +105,7 @@ $times: () !default;
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-times(
-  $map: $times,
-  $source: $times,
-) {
+@function compile-times($map: $times, $source: $times) {
   $source: map.merge($source or (), $map);
 
   @return tokens.map-compile-with(

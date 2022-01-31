@@ -111,10 +111,7 @@ $ratios: () !default;
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-ratios(
-  $map: $ratios,
-  $source: $ratios,
-) {
+@function compile-ratios($map: $ratios, $source: $ratios) {
   $source: map.merge($source or (), $map);
 
   @return tokens.map-compile-with(

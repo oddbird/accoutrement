@@ -119,10 +119,7 @@ $changes: () !default;
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-changes(
-  $map: $changes,
-  $source: $changes,
-) {
+@function compile-changes($map: $changes, $source: $changes) {
   $source: m.merge($source or (), $map);
 
   @return tokens.map-compile-with(

@@ -174,7 +174,6 @@ $colors: () !default;
 ///   based on your global color palette and adjustments.
 @function color($color, $do: null, $source: $colors) {
   $source: m.deep-merge(config.contrast-settings(), $source);
-
   $_global: $colors;
   $colors: $source !global;
 
@@ -216,10 +215,7 @@ $colors: () !default;
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-colors(
-  $map: $colors,
-  $source: $colors,
-) {
+@function compile-colors($map: $colors, $source: $colors) {
   $source: m.merge($source or (), $map);
 
   @return tokens.map-compile-with(

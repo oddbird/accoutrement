@@ -1,3 +1,5 @@
+// stylelint-disable prettier/prettier
+
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/animate/times';
 @use '../../sass/animate/easing';
@@ -90,17 +92,32 @@ change.$changes: $changes;
       );
     }
 
-    @include it ('Compiles a local map with a global reference') {
+    @include it('Compiles a local map with a global reference') {
       @include assert-equal(
-        change.compile-changes(('new': '#slide')),
-        ('new': transform 150ms)
+        change.compile-changes(
+          (
+            'new': '#slide',
+          )
+        ),
+        (
+          'new': transform 150ms,
+        )
       );
     }
 
-    @include it ('Compiles a local map with a local reference') {
+    @include it('Compiles a local map with a local reference') {
       @include assert-equal(
-        change.compile-changes(('new': '#slide'), ('slide': margin 300ms)),
-        ('new': margin 300ms)
+        change.compile-changes(
+          (
+            'new': '#slide',
+          ),
+          (
+            'slide': margin 300ms,
+          )
+        ),
+        (
+          'new': margin 300ms,
+        )
       );
     }
   }

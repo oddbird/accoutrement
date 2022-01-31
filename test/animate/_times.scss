@@ -44,30 +44,46 @@ times.$times: data.$times;
   // --------------
   @include describe('Compile Times [function]') {
     @include it('Compiles the global map of times by default') {
-      @include assert-equal(times.compile-times(),
-      (
-        '_private': 5s,
-        'alias': 5s,
-        'thread': 5s,
-        'fast': 150ms,
-        'fade': 500ms,
-        'math-tests': 2,
-        'plus-name': 152ms,
-      )
-     )
-    }
-
-     @include it ('Compiles a local map with a global reference') {
       @include assert-equal(
-        times.compile-times(('new': '#fade')),
-        ('new': 500ms)
+        times.compile-times(),
+        (
+          '_private': 5s,
+          'alias': 5s,
+          'thread': 5s,
+          'fast': 150ms,
+          'fade': 500ms,
+          'math-tests': 2,
+          'plus-name': 152ms,
+        )
       );
     }
 
-     @include it ('Compiles a local map with a local reference') {
+    @include it('Compiles a local map with a global reference') {
       @include assert-equal(
-        times.compile-times(('new': '#fade'), ('fade': 800ms)),
-        ('new': 800ms)
+        times.compile-times(
+          (
+            'new': '#fade',
+          )
+        ),
+        (
+          'new': 500ms,
+        )
+      );
+    }
+
+    @include it('Compiles a local map with a local reference') {
+      @include assert-equal(
+        times.compile-times(
+          (
+            'new': '#fade',
+          ),
+          (
+            'fade': 800ms,
+          )
+        ),
+        (
+          'new': 800ms,
+        )
       );
     }
   }
@@ -91,8 +107,6 @@ times.$times: data.$times;
 
     data.$times: $old;
   }
-
-
 } // end module
 
 times.$times: $_old;

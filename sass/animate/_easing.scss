@@ -112,10 +112,7 @@ $easing: () !default;
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-easing(
-  $map: $easing,
-  $source: $easing,
-) {
+@function compile-easing($map: $easing, $source: $easing) {
   $source: map.merge($source or (), $map);
 
   @return tokens.map-compile-with(
