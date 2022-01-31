@@ -19,6 +19,9 @@
 /// such as `brand-colors`, `text-colors`, etc. --
 /// before merging them into a single map.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_map-multimerge` to `multi-merge`
+///
 /// @group utils
 /// @param {maps...} $maps -
 ///   Pass any number of maps to be merged.

@@ -19,6 +19,9 @@
 /// However, it's available in all Accoutrement maps
 /// as `'remove-nth'`.
 ///
+/// @since 4.0.0 -
+/// - NEW: Now also available to use directly, without private prefix
+///
 /// @group utils
 /// @example scss
 ///   $map: (
@@ -74,6 +77,8 @@
 /// Return a new (empty) list using the same delimiter
 /// and bracket settings as the template list.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_list-template` to `template`
 /// @access private
 ///
 /// @param {list} $template [()] -

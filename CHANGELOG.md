@@ -56,13 +56,20 @@ and removing some features that no longer seem necessary.
   and [ratios][ratio] (for typographic scales and layout aspect ratios)
 
 - [Animate][animate]:
+
   - NEW: Named default easings are now available as individual variables,
-      (without the `_` prefix that is applied in token maps)
+    (without the `_` prefix that is applied in token maps)
 
 - [Sass Utilities][utils]:
 
   - NEW: These functions are now available directly,
     as well as being registered in the map syntax
+  - BREAKING: `_a_list-template()` renamed `template()`
+  - BREAKING: `_a_map-multimerge` renamed `multi-merge()`
+  - BREAKING: `_a_str-replace` renamed `replace()`
+  - BREAKING: `_a_interpolate` renamed `interpolate()`
+  - BREAKING: `_a_split` renamed `split()`
+  - BREAKING: `_a_trim` renamed `trim()`
 
 - [Variables][vars]:
 
@@ -92,6 +99,11 @@ and removing some features that no longer seem necessary.
   - NEW: `has-token()` function checks a map
     to see if the given token is defined,
     and supports the `outer->inner` nested token syntax.
+  - BREAKING: `_a_plus()` renamed `plus()`
+  - BREAKING: `_a_minus()` renamed `minus()`
+  - BREAKING: `_a_times()` renamed `times()`
+  - BREAKING: `_a_divide()` renamed `divide()`
+  - BREAKING: `_a_modulo()` renamed `modulo()`
 
 - [Type][type]:
 

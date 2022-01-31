@@ -56,6 +56,9 @@
 /// However, it's available in all Accoutrement maps
 /// as either `'replace'` or `'str-replace'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_str-replace` to `replace`
+/// - NEW: Available for direct usage
 /// @since 1.0.0 -
 /// - NEW: Improved handling of non-string values,
 ///   allows you to replace a number within a string, for example
@@ -148,6 +151,9 @@
 /// However, it's available in all Accoutrement maps
 /// as either `'interpolate'`, `'str-interpolate'`, or `'%s'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_interpolate` to `interpolate`
+/// - NEW: Available for direct usage
 /// @group utils
 /// @example scss
 ///   // sass treats calc() as a string,
@@ -204,6 +210,9 @@
 /// However, it's available in all Accoutrement maps
 /// as either `'str-split'` or `'split'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_split` to `split`
+/// - NEW: Available for direct usage
 /// @since 1.0.0 -
 /// - NEW: Aliased as `str-split`
 ///
@@ -281,6 +290,9 @@
 /// However, it's available in all Accoutrement maps
 /// as either `'str-trim'` or `'trim'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_trim` to `trim`
+/// - NEW: Available for direct usage
 /// @since 1.0.0 -
 /// - NEW: Strips whitespace
 /// - NEW: Aliased as `str-trim`

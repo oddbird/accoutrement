@@ -6,9 +6,12 @@
 // ----
 /// Add two values together in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all Accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'plus'`, `'add'`, or `'+'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_plus` to `plus`
+/// - NEW: Available for direct usage
 ///
 /// @access public
 /// @name plus
@@ -36,9 +39,12 @@
 // -----
 /// Subtract one value from another in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all Accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'minus'`, `'subtract'`, or `'-'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_minus` to `minus`
+/// - NEW: Available for direct usage
 ///
 /// @access public
 /// @name minus
@@ -71,9 +77,12 @@
 // -----
 /// Multiply two values in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all Accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'times'`, `'multiply'`, or `'*'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_times` to `times`
+/// - NEW: Available for direct usage
 ///
 /// @access public
 /// @name times
@@ -105,10 +114,12 @@
 // ------
 /// Divide two values in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all Accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'divide'`, or `'/'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_divide` to `divide`
+/// - NEW: Available for direct usage
 /// @access public
 /// @name divide
 /// @group token-internal
@@ -135,10 +146,12 @@
 /// Divide two values in Accoutrement maps,
 /// and return the remainder.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all Accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'modulo'`, `'remainder'`, `'mod'`, or `'%'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_modulo` to `modulo`
+/// - NEW: Available for direct usage
 /// @access public
 /// @name modulo
 /// @group token-internal
