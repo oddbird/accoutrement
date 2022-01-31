@@ -1170,13 +1170,13 @@ resolved based on data<span class="widont">&nbsp;</span>type.</li>
       
       <pre class="hljs-pre"><code class="lang-scss">@use &#39;color&#39;;
 
-$brand-colors: (
+tools.$colors: (
   &#39;brand-blue&#39;: hsl(234, 85%, 35%),
   &#39;dark-blue&#39;: &#39;#brand-blue&#39; (&#39;shade&#39;: 30%),
 );
 
 $fn: meta.get-function(&#39;color&#39;, $module: &#39;color&#39;);
-/*! #{inspect(tools.map-compile-with($brand-colors, $fn))} */</code></pre>
+/*! #{inspect(tools.map-compile-with(tools.$colors, $fn))} */</code></pre>
     </div>
   
 
@@ -1198,7 +1198,7 @@ $fn: meta.get-function(&#39;color&#39;, $module: &#39;color&#39;);
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! (&quot;brand-blue&quot;: null, &quot;dark-blue&quot;: null) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/*! (&quot;brand-blue&quot;: #0d1da5, &quot;dark-blue&quot;: #091474) */</code></pre>
     </div>
   
 

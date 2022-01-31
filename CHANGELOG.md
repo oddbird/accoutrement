@@ -16,7 +16,7 @@
 - [Animate][animate]:
 
   - NEW: `compile-*` functions provide an export option for respective token maps
-    (see: `compile-changes()`, `compile-easing()`, `compile-times()`).
+    (see: [`compile-changes()`](animate-change.html#function--compile-changes), [`compile-easing()`](animate-ease.html#function--compile-easing), and [`compile-times()`](animate-times.html#function--compile-times)).
   - NEW: Default easing functions are now available as individual variables.
 
 - [Color][color]:

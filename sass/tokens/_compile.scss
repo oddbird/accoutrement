@@ -78,13 +78,13 @@
 /// @example scss - Compile a map using a particular function
 ///   @use 'color';
 ///
-///   $brand-colors: (
+///   tools.$colors: (
 ///     'brand-blue': hsl(234, 85%, 35%),
 ///     'dark-blue': '#brand-blue' ('shade': 30%),
 ///   );
 ///
 ///   $fn: meta.get-function('color', $module: 'color');
-///   /*! #{inspect(tools.map-compile-with($brand-colors, $fn))} */
+///   /*! #{inspect(tools.map-compile-with(tools.$colors, $fn))} */
 ///
 /// @access public
 /// @name map-compile-with
