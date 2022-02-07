@@ -28,6 +28,9 @@
 /// but function maps are not able to use
 /// the alias syntax.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: No longer accepts alias references or any other aspects
+///   of the token syntax
 /// @since 0.1.0 -
 /// - NEW: Supports the [Accoutrement](tokens.html) map-reference syntax,
 ///   for creating function aliases
