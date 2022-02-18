@@ -28,7 +28,9 @@ $contrast-dark: black !default;
 
 // Contrast Settings
 // --------------
-///
+/// Access the configurable contrast variables as an
+/// Accoutrement token map.
+/// @access private
 /// @group color-config
 ///
 /// @param {string} $color [$contrast-light] -

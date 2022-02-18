@@ -2,58 +2,11 @@
 
 ## 4.0.0 - UNRELEASED
 
-- BREAKING: Map [`multi-merge()`](utils.html#function--multi-merge)
-  utility and all `add-*` functions for adding one or more token maps
-  (e.g. [`add-sizes()`](scale-sizes.html#mixin--add-sizes),
-  [`add-colors()`](color-tokens.html#mixin--add-colors), etc)
-  now perform a deep merge of the token maps. Previously a shallow
-  merge was performed,
-  [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
-
-- [Tokens][token]:
-
-  - NEW: [`map-compile()`](token-compile.html#function--map-compile) and
-    [`map-compile-with()`](token-compile.html#function--map-compile-with)
-    functions for compiling tokens in Accoutrement maps and formatting
-    them for static exports.
-
-- [Animate][animate]:
-
-  - NEW: `compile-*` functions provide an export option for respective token maps
-    (see: [`compile-changes()`](animate-change.html#function--compile-changes),
-    [`compile-easing()`](animate-ease.html#function--compile-easing), and [`compile-times()`](animate-times.html#function--compile-times)).
-
-- [Color][color]:
-
-  - NEW: [`compile-colors()`](color-tokens.html#function--compile-colors)
-    function provides an export option for color token maps.
-  - NEW: [`with-colors()`](color-tokens.html#mixin--with-colors) mixin allows
-    the overriding of the global color palette for a section of contents.
-
-- [Ratio][ratio]:
-
-  - NEW: [`compile-ratios()`](ratio-tokens.html#function--compile-ratios) function
-    provides an export option for ratio token maps.
-
-- [Scale][scale]:
-
-  - NEW: [`compile-sizes()`](scale-sizes.html#function--compile-sizes) function
-    provides an export option for size token maps.
-
-- [Type][type]:
-
-  - NEW: [`compile-fonts()`](type-fonts.html#function--compile-fonts) function
-    provides an export option for font token maps.
-
-### 4.0.0-beta.2 - 12/03/21
-
 This is a major update, moving over to Sass modules,
 and removing some features that no longer seem necessary.
 
-(previous betas had major breaking issues)
-
 - BREAKING: Requires Sass modules, and other recent features of Dart Sass.
-  Legacy versions of Sass (Node & Ruby) are no longer supported
+  Legacy versions of Sass (Node & Ruby) are no longer supported.
 - BREAKING: The old "init" module, which provided light-weight
   browser normalization, is no longer included. We now recommend
   using [CSS Remedy](https://github.com/jensimmons/cssremedy). (_Note: If
@@ -63,23 +16,47 @@ and removing some features that no longer seem necessary.
   for [utilities][utils] (extending several Sass modules),
   [tokens][token] (the map syntax parser),
   [variables][vars] (converting Sass variables & maps to CSS custom properties),
-  and [ratios][ratio] (for typographic scales and layout aspect ratios)
+  and [ratios][ratio] (for typographic scales and layout aspect ratios).
+- BREAKING: Map [`multi-merge()`](utils.html#function--multi-merge)
+  utility and all `add-*` functions for adding one or more token maps
+  (e.g. [`add-sizes()`](scale-sizes.html#mixin--add-sizes),
+  [`add-colors()`](color-tokens.html#mixin--add-colors), etc)
+  now perform a deep merge of the token maps. Previously a shallow
+  merge was performed,
+  [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
 
 - [Animate][animate]:
 
+  - NEW: `compile-*` functions provide an export option for respective token maps
+    (see: [`compile-changes()`](animate-change.html#function--compile-changes),
+    [`compile-easing()`](animate-ease.html#function--compile-easing), and [`compile-times()`](animate-times.html#function--compile-times)).
   - NEW: Named default easings are now available as [individual variables](animate-ease.html),
-    (without the `_` prefix that is applied in token maps)
+    (without the `_` prefix that is applied in token maps).
+
+- [Color][color]:
+
+  - NEW: [`compile-colors()`](color-tokens.html#function--compile-colors)
+    function provides an export option for color token maps.
+  - NEW: [`with-colors()`](color-tokens.html#mixin--with-colors) mixin allows
+    the overriding of the global color palette for a section of contents.
 
 - [Sass Utilities][utils]:
 
   - NEW: These functions are now available directly,
-    as well as being registered in the map syntax
-  - BREAKING: Private function `_a_list-template()` renamed `template()`
-  - BREAKING: `_a_map-multimerge` renamed [`multi-merge()`](utils.html#function--multi-merge)
-  - BREAKING: `_a_str-replace` renamed [`replace()`](utils.html#function--replace)
-  - BREAKING: `_a_interpolate` renamed [`interpolate()`](utils.html#function--interpolate)
-  - BREAKING: `_a_split` renamed [`split()`](utils.html#function--split)
-  - BREAKING: `_a_trim` renamed [`trim()`](utils.html#function--trim)
+    as well as being registered in the map syntax.
+  - NEW: [`multi-merge()`](utils.html#function--multi-merge) function for
+    merging multiple maps into a single map.
+  - NEW: [`replace()`](utils.html#function--replace) function for
+    replacing a substring inside a larger string, or replacing the
+    entirety of a string.
+  - NEW: [`interpolate()`](utils.html#function--interpolate) function
+    returns a string with interpolated values
+    replacing `%s` placeholders in a format string.
+  - NEW: [`split()`](utils.html#function--split) function for splitting a
+    string into a list of strings, using the same logic as JavaScript's
+    `split()` method.
+  - NEW: [`trim()`](utils.html#function--trim) function trims whitespace
+    from the start and end of a string.
 
 - [Variables][vars]:
 
@@ -92,12 +69,16 @@ and removing some features that no longer seem necessary.
 
 - [Tokens][token]:
 
-  - NEW: A module just for the custom map syntax parser & function registration
+  - NEW: A module just for the custom map syntax parser & function registration.
+  - NEW: [`map-compile()`](token-compile.html#function--map-compile) and
+    [`map-compile-with()`](token-compile.html#function--map-compile-with)
+    functions for compiling tokens in Accoutrement maps and formatting
+    them for static exports.
   - BREAKING: The [`$functions`](token-register.html#variable--functions) map no
     longer accepts alias references
-    or any other aspects of the token syntax
+    or any other aspects of the token syntax.
   - BREAKING: Ratios are no longer first-class adjustments
-    (like functions) in the token syntax
+    (like functions) in the token syntax.
   - BREAKING: [`tokens.$handle-missing-keys`](token-config.html#variable--handle-missing-keys)
     defaults to `null`,
     and no longer supports the legacy `silent` option.
@@ -109,48 +90,50 @@ and removing some features that no longer seem necessary.
     (including aliases with `#` prefix),
     rather than calling a specific token by name.
   - NEW: All the built-in Sass module functions are registered by default,
-    as `<module-name>.<function-name>`
+    as `<module-name>.<function-name>`.
   - NEW: [`has-token()`](token-inspect.html#function--has-token) function checks a map
     to see if the given token is defined,
     and supports the `outer->inner` nested token syntax.
-  - BREAKING: `_a_plus()` renamed [`plus()`](token-internal.html#function--plus)
-  - BREAKING: `_a_minus()` renamed [`minus()`](token-internal.html#function--minus)
-  - BREAKING: `_a_times()` renamed [`times()`](token-internal.html#function--times)
-  - BREAKING: `_a_divide()` renamed [`divide()`](token-internal.html#function--divide)
-  - BREAKING: `_a_modulo()` renamed [`modulo()`](token-internal.html#function--modulo)
+  - NEW: [`plus()`](token-internal.html#function--plus) function adds two values
+    together in Accoutrement maps.
+  - NEW: [`minus()`](token-internal.html#function--minus) function subtracts one
+    value from another in Accoutrement maps.
+  - NEW: [`times()`](token-internal.html#function--times) function multiplies two
+    values together in Accoutrement maps.
+  - NEW: [`divide()`](token-internal.html#function--divide) function divides two
+    values in Accoutrement maps.
+  - NEW: [`modulo()`](token-internal.html#function--modulo) function divides two
+    values in Accoutrement maps and returns the remainder.
 
 - [Type][type]:
 
-  - BREAKING: The private `font-url()` function for interpolating a font
-    path is now named `format-url()`.
-  - BREAKING: The private `_a_normalize-font()` function for retrieving
-    and normalizing font data from the `$fonts` map renamed `font()`.
-  - BREAKING: The private `_a_normalize-font-name()` function renamed `font-name()`.
-  - BREAKING: The private `_a_normalize-font-stack()` function renamed `font-stack()`.
-  - BREAKING: The private `_a_normalize-get-variants()` function renamed `font-get-variants()`.
-  - BREAKING: The private `_a_normalize-variant-name()` function renamed `variant-name()`.
-  - BREAKING: The private `_a_normalize-variant-data()` function renamed `variant-data()`.
+  - NEW: [`compile-fonts()`](type-fonts.html#function--compile-fonts) function
+    provides an export option for font token maps.
 
 - [Ratios][ratio]:
 
+  - NEW: [`compile-ratios()`](ratio-tokens.html#function--compile-ratios) function
+    provides an export option for ratio token maps.
   - NEW: Built-in [named ratios](ratios.html) are now available as
-    individual variables, (without the `_` prefix that is applied in token maps)
+    individual variables, (without the `_` prefix that is applied in token maps).
   - NEW: [`is-ratio()`](ratio-tokens.html#function--is-ratio) function can
     be used to type-check ratios, including ratio tokens.
 
 - [Scale][scale]:
 
+  - NEW: [`compile-sizes()`](scale-sizes.html#function--compile-sizes) function
+    provides an export option for size token maps.
   - NEW: [`scale()`](scale.html#function--scale) function applies a
     modular scale to any value, allowing you to move up or down
     the scale any number of steps.
 
 - [Layout][layout]:
-  - BREAKING: Removed `global-box-sizing`
-  - BREAKING: Removed `clearfix`
-  - BREAKING: Removed `fluid-ratio`
+  - BREAKING: Removed `global-box-sizing`.
+  - BREAKING: Removed `clearfix`.
+  - BREAKING: Removed `fluid-ratio`.
   - BREAKING: Removed `position`. Can achieve the majority
     of functionality in CSS using
-    [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
+    [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset).
 
 ## 3.0.1 - 03/01/21
 
