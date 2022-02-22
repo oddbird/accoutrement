@@ -5,9 +5,15 @@
 This is a major update, moving over to Sass modules,
 and removing some features that no longer seem necessary.
 
+In addition to fixing a bug with the handling of
+non-alias `#` symbols, and implementing deep map merges
+where appropriate, we also added some functionality around
+compiling maps for export, and working with different
+color palettes.
+
 - BREAKING: Requires Sass modules, and other recent features of Dart Sass.
   Legacy versions of Sass (Node & Ruby) are no longer supported.
-- BREAKING: The old "init" module, which provided light-weight
+- BREAKING: The old "init" module, which provided lightweight
   browser normalization, is no longer included. We now recommend
   using [CSS Remedy](https://github.com/jensimmons/cssremedy). (_Note: If
   making the switch from Accoutrement/Init to CSS Remedy, you may notice changes
