@@ -20,7 +20,7 @@
 /// Otherwise, the map should contain only valid CSS length values.
 ///
 /// @since 0.1.0 -
-/// - BREAKING: Uses the new [shared](core.html) map syntax,
+/// - BREAKING: Uses the new [shared](tokens.html) map syntax,
 ///   for internal references and adjustments
 ///
 /// @group layout-queries
@@ -31,7 +31,7 @@
 ///     'small': 30em,
 ///     'medium': 45em,
 ///   );
-/// @example scss - using accoutrement-scale
+/// @example scss - using Accoutrement-scale
 ///   tools.$breakpoints: (
 ///     'small': 30em ('convert-units': 'browser-ems'),
 ///     'medium': '#small' ('times': 1.5),
@@ -43,7 +43,7 @@ $breakpoints: () !default;
 // Break [function]
 // ----------------
 /// Return a breakpoint from the `$breakpoint` map,
-/// or the accoutrement-scale `$sizes` map if it's available.
+/// or the Accoutrement-scale `$sizes` map if it's available.
 ///
 /// @since 1.0.0 -
 /// - NEW: Accepts `$do` map argument,
@@ -60,7 +60,7 @@ $breakpoints: () !default;
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
 /// @param {map} $source [$breakpoints] -
-///   Optional accoutrement-format map of breakpoints
+///   Optional Accoutrement-format map of breakpoints
 ///   to use as the origin palette
 /// @param {boolean} $scale [true] -
 ///   By default, we merge in any `$sizes` available

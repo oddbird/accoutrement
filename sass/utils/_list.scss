@@ -5,7 +5,7 @@
 @use '../internal/function';
 
 /// ## Sass Lists
-/// Utility function(s) that extend the Sass core modules,
+/// Utility functions that extend the Sass core modules,
 /// to help with advanced list manipulation.
 /// @group utils
 
@@ -14,10 +14,13 @@
 /// Remove any item (1-indexed) from a list.
 ///
 /// This function has a `list-` prefix added by default
-/// (eg `list-remove-nth()`)
+/// (e.g. `list-remove-nth()`)
 /// unless it's imported directly.
-/// However, it's available in all accoutrement maps
+/// However, it's available in all Accoutrement maps
 /// as `'remove-nth'`.
+///
+/// @since 4.0.0 -
+/// - NEW: Now also available to use directly, without private prefix
 ///
 /// @group utils
 /// @example scss
@@ -74,6 +77,8 @@
 /// Return a new (empty) list using the same delimiter
 /// and bracket settings as the template list.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_list-template` to `template`
 /// @access private
 ///
 /// @param {list} $template [()] -

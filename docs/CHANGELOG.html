@@ -136,6 +136,10 @@
     </li>
   
   
+    <li class="nav-item">
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+    </li>
+  
   
     <li class="nav-item">
       <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
@@ -148,12 +152,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -385,140 +389,179 @@
   <div class="text-block">
     <h1 id="accoutrement-changelog">Accoutrement Changelog</h1>
 <h2 id="4-0-0-unreleased">4.0.0 - UNRELEASED</h2>
+<p>This is a major update, moving over to Sass modules,
+and removing some features that no longer seem<span class="widont">&nbsp;</span>necessary.</p>
+<p>In addition to fixing a bug with the handling of
+non-alias <code>#</code> symbols, and implementing deep map merges
+where appropriate, we also added some functionality around
+compiling maps for export, and working with different
+color<span class="widont">&nbsp;</span>palettes.</p>
 <ul>
 <li>
-<p>BREAKING: Map <code>multi-merge</code> utility and all <code>add-*</code> functions
-for adding one or more token maps (eg <code>add-sizes</code>, <code>add-colors</code>, etc)
-now perform a deep merge of the token maps.
-Previously a shallow merge was performed,
+<p>BREAKING: Requires Sass modules, and other recent features of Dart Sass.
+Legacy versions of Sass (Node &amp; Ruby) are no longer<span class="widont">&nbsp;</span>supported.</p>
+</li>
+<li>
+<p>BREAKING: The old “init” module, which provided lightweight
+browser normalization, is no longer included. We now recommend
+using <a href="https://github.com/jensimmons/cssremedy">CSS Remedy</a>. (<em>Note: If
+making the switch from Accoutrement/Init to CSS Remedy, you may need to
+reset the <code>margin</code> and <code>padding</code> of block elements to remove unwanted
+vertical space. And SVGs and other media may stack instead of displaying
+inline since CSS Remedy sets these to <a href="https://github.com/jensimmons/cssremedy/blob/468e31a7eda599eea2003ed7983c190828ffb5fd/css/remedy.css#L129"><code>display: block</code></a> by default.</em>)</p>
+</li>
+<li>
+<p>BREAKING: The old “core” module has been broken into individual modules
+for <a href="https://www.oddbird.net/accoutrement/docs/utils.html">utilities</a> (extending several Sass modules),
+<a href="https://www.oddbird.net/accoutrement/docs/tokens.html">tokens</a> (the map syntax parser),
+<a href="https://www.oddbird.net/accoutrement/docs/vars.html">variables</a> (converting Sass variables &amp; maps to CSS custom properties),
+and <a href="https://www.oddbird.net/accoutrement/docs/ratio.html">ratios</a> (for typographic scales and layout aspect<span class="widont">&nbsp;</span>ratios).</p>
+</li>
+<li>
+<p>BREAKING: Map <a href="https://www.oddbird.net/accoutrement/docs/utils.html#function--multi-merge"><code>multi-merge()</code></a>
+utility and all <code>add-*</code> functions for adding one or more token maps
+(e.g. <a href="https://www.oddbird.net/accoutrement/docs/scale-sizes.html#mixin--add-sizes"><code>add-sizes()</code></a>,
+<a href="https://www.oddbird.net/accoutrement/docs/color-tokens.html#mixin--add-colors"><code>add-colors()</code></a>, etc)
+now perform a deep merge of the token maps. Previously a shallow
+merge was performed,
 <a href="https://github.com/oddbird/accoutrement/issues/50">which could result in removing nested values from<span class="widont">&nbsp;</span>maps</a>.</p>
 </li>
 <li>
-<p><a href="https://www.oddbird.net/accoutrement/docs/tokens.html">Tokens</a>:</p>
-<ul>
-<li>NEW: <code>map-compile</code> and <code>map-compile-with</code> functions for compiling
-tokens in Accoutrement maps and formatting them for static<span class="widont">&nbsp;</span>exports.</li>
-</ul>
+<p>INTERNAL: Upgrade dev<span class="widont">&nbsp;</span>dependencies.</p>
+</li>
+<li>
+<p>INTERNAL: Limit files included in npm<span class="widont">&nbsp;</span>package.</p>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/animate.html">Animate</a>:</p>
 <ul>
-<li>NEW: <code>compile-*</code> functions provide an export option for respective token maps
-(see: <code>compile-changes</code>, <code>compile-easing</code>, <code>compile-times</code>).</li>
+<li>NEW: <code>compile-*</code> functions provide an export option for respective token maps (see:
+<a href="https://www.oddbird.net/accoutrement/docs/animate-change.html#function--compile-changes"><code>compile-changes()</code></a>,
+<a href="https://www.oddbird.net/accoutrement/docs/animate-ease.html#function--compile-easing"><code>compile-easing()</code></a>, and <a href="https://www.oddbird.net/accoutrement/docs/animate-times.html#function--compile-times"><code>compile-times()</code></a>).</li>
+<li>NEW: Named default easings are now available as
+<a href="https://www.oddbird.net/accoutrement/docs/animate-ease.html">individual variables</a>,
+(without the <code>_</code> prefix that is applied in token<span class="widont">&nbsp;</span>maps).</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/color.html">Color</a>:</p>
 <ul>
-<li>NEW: <code>compile-colors</code> function provides an export option for color token<span class="widont">&nbsp;</span>maps.</li>
-<li>NEW: <code>with-colors</code> mixin allows the overriding of the global color palette for
-a section of<span class="widont">&nbsp;</span>contents.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/color-tokens.html#function--compile-colors"><code>compile-colors()</code></a>
+function provides an export option for color token<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/color-tokens.html#mixin--with-colors"><code>with-colors()</code></a>
+mixin allows the overriding of the global color palette for a section of<span class="widont">&nbsp;</span>contents.</li>
 </ul>
-</li>
-<li>
-<p><a href="https://www.oddbird.net/accoutrement/docs/ratio.html">Ratio</a>:</p>
-<ul>
-<li>NEW: <code>compile-ratios</code> function provides an export option for ratio token<span class="widont">&nbsp;</span>maps.</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a>:</p>
-<ul>
-<li>NEW: <code>compile-sizes</code> function provides an export option for size token<span class="widont">&nbsp;</span>maps.</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.oddbird.net/accoutrement/docs/type.html">Type</a>:</p>
-<ul>
-<li>NEW: <code>compile-fonts</code> function provides an export option for font token<span class="widont">&nbsp;</span>maps.</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-0-0-beta-2-12-03-21">4.0.0-beta.2 - 12/03/21</h3>
-<p>This is a major update, moving over to Sass modules,
-and removing some features that no longer seem<span class="widont">&nbsp;</span>necessary.</p>
-<p>(previous betas had major breaking<span class="widont">&nbsp;</span>issues)</p>
-<ul>
-<li>
-<p>BREAKING: Requires Sass modules, and other recent features of Dart Sass.
-Legacy versions of Sass (Node &amp; Ruby) are no longer<span class="widont">&nbsp;</span>supported</p>
-</li>
-<li>
-<p>BREAKING: The old “init” module, which provided light-weight
-browser normalization, is no longer included. We now recommend
-using <a href="https://github.com/jensimmons/cssremedy">CSS<span class="widont">&nbsp;</span>Remedy</a>.</p>
-</li>
-<li>
-<p>BREAKING: The old “core” module has been broken into individual modules
-for “utilities” (extending several Sass modules),
-“tokens” (the map syntax parser),
-“variables” (converting Sass variables &amp; maps to CSS custom properties),
-and “ratios” (for typographic scales and layout aspect<span class="widont">&nbsp;</span>ratios)</p>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/utils.html">Sass Utilities</a>:</p>
 <ul>
 <li>NEW: These functions are now available directly,
-as well as being registered in the map<span class="widont">&nbsp;</span>syntax</li>
+as well as being registered in the map<span class="widont">&nbsp;</span>syntax.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/utils.html#function--multi-merge"><code>multi-merge()</code></a>
+function for merging multiple maps into a single<span class="widont">&nbsp;</span>map.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/utils.html#function--replace"><code>replace()</code></a>
+function for replacing a substring inside a larger string,
+or replacing the entirety of a<span class="widont">&nbsp;</span>string.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/utils.html#function--interpolate"><code>interpolate()</code></a>
+function returns a string with interpolated values
+replacing <code>%s</code> placeholders in a format<span class="widont">&nbsp;</span>string.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/utils.html#function--split"><code>split()</code></a>
+function for splitting a string into a list of strings, using the
+same logic as JavaScript’s <code>split()</code> method.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/utils.html#function--trim"><code>trim()</code></a>
+function trims whitespace from the start and end of a<span class="widont">&nbsp;</span>string.</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/vars.html">Variables</a>:</p>
 <ul>
-<li>NEW: <code>ident()</code> function adds <code>--</code> and an optional prefix to any string,
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/vars.html#function--ident"><code>ident()</code></a>
+function adds <code>--</code> and an optional prefix to any string,
 in order to generate a custom property<span class="widont">&nbsp;</span>identifier.</li>
-<li>NEW: <code>custom-props()</code> mixin generates custom properties
-for every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/vars.html#mixin--custom-props"><code>custom-props()</code></a>
+mixin generates custom properties for every key/value pair in a<span class="widont">&nbsp;</span>map.</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/tokens.html">Tokens</a>:</p>
 <ul>
-<li>NEW: A module just for the custom map syntax parser &amp; function<span class="widont">&nbsp;</span>registration</li>
-<li>BREAKING: The <code>$functions</code> map no longer accepts alias references
-or any other aspects of the token<span class="widont">&nbsp;</span>syntax</li>
+<li>NEW: A module just for the custom map syntax parser &amp; function<span class="widont">&nbsp;</span>registration.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-compile.html#function--map-compile"><code>map-compile()</code></a>
+and <a href="https://www.oddbird.net/accoutrement/docs/token-compile.html#function--map-compile-with"><code>map-compile-with()</code></a>
+functions for compiling tokens in Accoutrement maps and formatting
+them for static<span class="widont">&nbsp;</span>exports.</li>
+<li>BREAKING: The <a href="https://www.oddbird.net/accoutrement/docs/token-register.html#variable--functions"><code>$functions</code></a>
+map no longer accepts alias references
+or any other aspects of the token<span class="widont">&nbsp;</span>syntax.</li>
 <li>BREAKING: Ratios are no longer first-class adjustments
-(like functions) in the token<span class="widont">&nbsp;</span>syntax</li>
-<li>BREAKING: <code>tokens.$handle-missing-keys</code> defaults to <code>null</code>,
+(like functions) in the token<span class="widont">&nbsp;</span>syntax.</li>
+<li>BREAKING:
+<a href="https://www.oddbird.net/accoutrement/docs/token-config.html#variable--handle-missing-keys"><code>tokens.$handle-missing-keys</code></a>
+defaults to <code>null</code>,
 and no longer supports the legacy <code>silent</code> option.</li>
-<li>BREAKING: <code>get-token()</code> is renamed <code>get()</code>,
+<li>BREAKING: <code>get-token()</code> is renamed
+<a href="https://www.oddbird.net/accoutrement/docs/token-api.html#function--get"><code>get()</code></a>,
 and only accepts bare token names (no <code>#</code> prefix),
 including the <code>outer-&gt;inner</code> nested token<span class="widont">&nbsp;</span>syntax.</li>
-<li>NEW: The new <code>compile()</code> function provides direct access to
-parse &amp; resolve an arbitrary token value
-(including aliases with <code>#</code> prefix),
-rather than calling a specific token by<span class="widont">&nbsp;</span>name.</li>
+<li>NEW: The new <a href="https://www.oddbird.net/accoutrement/docs/token-api.html#function--compile"><code>compile()</code></a>
+function provides direct access to parse &amp; resolve an arbitrary token value
+(including aliases with <code>#</code> prefix), rather than calling a specific token by<span class="widont">&nbsp;</span>name.</li>
 <li>NEW: All the built-in Sass module functions are registered by default,
-as <code>&lt;module-name&gt;.&lt;function-name&gt;</code></li>
-<li>NEW: <code>has-token()</code> function checks a map
-to see if the given token is defined,
+as <code>&lt;module-name&gt;.&lt;function-name&gt;</code>.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-inspect.html#function--has-token"><code>has-token()</code></a>
+function checks a map to see if the given token is defined,
 and supports the <code>outer-&gt;inner</code> nested token<span class="widont">&nbsp;</span>syntax.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html#function--plus"><code>plus()</code></a>
+function adds two values
+together in Accoutrement<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html#function--minus"><code>minus()</code></a>
+function subtracts one value from another in Accoutrement<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html#function--times"><code>times()</code></a>
+function multiplies two values together in Accoutrement<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html#function--divide"><code>divide()</code></a>
+function divides two values in Accoutrement<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/token-internal.html#function--modulo"><code>modulo()</code></a>
+function divides two values in Accoutrement maps and returns the<span class="widont">&nbsp;</span>remainder.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.oddbird.net/accoutrement/docs/type.html">Type</a>:</p>
+<ul>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/type-fonts.html#function--compile-fonts"><code>compile-fonts()</code></a>
+function provides an export option for font token<span class="widont">&nbsp;</span>maps.</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/ratio.html">Ratios</a>:</p>
 <ul>
-<li>NEW: Built-in named ratios are now available as individual variables,
-(without the <code>_</code> prefix that is applied in token<span class="widont">&nbsp;</span>maps)</li>
-<li>NEW: <code>is-ratio()</code> function can be used to type-check ratios,
-including ratio<span class="widont">&nbsp;</span>tokens.</li>
+<li>NEW:
+<a href="https://www.oddbird.net/accoutrement/docs/ratio-tokens.html#function--compile-ratios"><code>compile-ratios()</code></a> function provides an export option for ratio token<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: Built-in <a href="https://www.oddbird.net/accoutrement/docs/ratios.html">named ratios</a> are now available as
+individual variables, (without the <code>_</code> prefix that is applied in token<span class="widont">&nbsp;</span>maps).</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/ratio-tokens.html#function--is-ratio"><code>is-ratio()</code></a>
+function can be used to type-check ratios, including ratio<span class="widont">&nbsp;</span>tokens.</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a>:</p>
 <ul>
-<li>NEW: <code>scale()</code> function applies a modular scale to any value,
-allowing you to move up or down the scale any number of<span class="widont">&nbsp;</span>steps.</li>
+<li>NEW:
+<a href="https://www.oddbird.net/accoutrement/docs/scale-sizes.html#function--compile-sizes"><code>compile-sizes()</code></a>
+function provides an export option for size token<span class="widont">&nbsp;</span>maps.</li>
+<li>NEW: <a href="https://www.oddbird.net/accoutrement/docs/scale.html#function--scale"><code>scale()</code></a>
+function applies a modular scale to any value, allowing you to move up or down
+the scale any number of<span class="widont">&nbsp;</span>steps.</li>
 </ul>
 </li>
 <li>
 <p><a href="https://www.oddbird.net/accoutrement/docs/layout.html">Layout</a>:</p>
 <ul>
-<li>BREAKING: Removed <code>global-box-sizing</code></li>
-<li>BREAKING: Removed <code>clearfix</code></li>
-<li>BREAKING: Removed <code>fluid-ratio</code></li>
-<li>BREAKING: Removed <code>position</code>. Can achieve the majority of functionality in CSS using
-<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inset">Inset</a></li>
+<li>BREAKING: Removed <code>global-box-sizing</code>.</li>
+<li>BREAKING: Removed <code>clearfix</code>.</li>
+<li>BREAKING: Removed <code>fluid-ratio</code>.</li>
+<li>BREAKING: Removed <code>position</code>. Can achieve the majority
+of functionality in CSS using
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inset">Inset</a>.</li>
 </ul>
 </li>
 </ul>
@@ -577,7 +620,7 @@ or end (<code>#alias\\not-part-of-alias</code>) a <code>#</code> reference</li>
 </ul>
 <h2 id="2-1-3-01-06-20">2.1.3 - 01/06/20</h2>
 <ul>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>BUGFIX (#46): Fixes <code>register-function()</code> usage with Sass module<span class="widont">&nbsp;</span>syntax</li>
 </ul>
@@ -586,7 +629,7 @@ or end (<code>#alias\\not-part-of-alias</code>) a <code>#</code> reference</li>
 <h2 id="2-1-2-08-26-19">2.1.2 - 08/26/19</h2>
 <ul>
 <li>Upgrade dev dependencies.</li>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>BUGFIX (#36): Fixes an issue with <code>quote()</code> in dart-sass.</li>
 <li>BUGFIX (#38): Fixes an issue with <code>false</code> values in<span class="widont">&nbsp;</span>maps.</li>
@@ -595,7 +638,7 @@ or end (<code>#alias\\not-part-of-alias</code>) a <code>#</code> reference</li>
 </ul>
 <h2 id="2-1-1-01-04-19">2.1.1 - 01/04/19</h2>
 <ul>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>BUGFIX (#31): Fixes an issue with longhand map<span class="widont">&nbsp;</span>memoization</li>
 </ul>
@@ -650,7 +693,7 @@ See the full details<span class="widont">&nbsp;</span>below.</p>
 <p>Thanks to Joel Schou (@joelschou) for extensive contributions,
 designing and testing several of these<span class="widont">&nbsp;</span>features.</p>
 <ul>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>BREAKING: Explicit value/adjustments maps require a <code>'%value'</code> key
 (used to be named <code>'value'</code>),
@@ -666,7 +709,7 @@ when parsing <code>-&gt;</code> syntax</li>
 </ul>
 <h3 id="2-0-0-alpha-1-10-29-18">2.0.0-alpha.1 - 10/29/18</h3>
 <ul>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>NEW: <code>$adjust-query-overlap</code> (<code>max</code> | <code>min</code> | <code>false</code>)
 allows you to control if and how media-queries are adjusted
@@ -745,7 +788,7 @@ but will import a direct alias of the private<span class="widont">&nbsp;</span>f
 </ul>
 <h2 id="1-0-1-09-08-18">1.0.1 - 09/08/18</h2>
 <ul>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>BUGFIX: Typos, including the <code>cinema</code> ratio spelling
 (thanks to<span class="widont">&nbsp;</span>@joelschou)</li>
@@ -769,7 +812,7 @@ see change details<span class="widont">&nbsp;</span>below</li>
 </ul>
 <h3 id="1-0-0-beta-2-07-27-18">1.0.0-beta.2 - 07/27/18</h3>
 <ul>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>NEW: <code>ratio()</code> function accepts <code>$source</code> argument,
 for passing in a custom source<span class="widont">&nbsp;</span>map</li>
@@ -823,7 +866,7 @@ for passing in a custom font-source<span class="widont">&nbsp;</span>map</li>
 <ul>
 <li>NEW: Add <code>_index.scss</code> to simplify default “tools” import (core + plugins)
 in Eyeglass: <code>@import 'accoutrement';</code></li>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>NEW: <code>get-token()</code> and <code>ratio()</code> functions accept <code>$do</code> argument,
 for on-the-fly<span class="widont">&nbsp;</span>adjustments</li>
@@ -885,10 +928,9 @@ e.g. <code>'Helvetica Neue, Helvetica, Arial'</code> or
 <ul>
 <li>BREAKING: All modules now use a shared map syntax,
 with explicit <code>#tag</code> references
-and the option for explicit value/adjustment maps.
-<a href="https://www.oddbird.net/accoutrement/docs/core.html">Learn the new<span class="widont">&nbsp;</span>syntax</a>.</li>
+and the option for explicit value/adjustment<span class="widont">&nbsp;</span>maps.</li>
 <li>NEW: Merges all existing Accoutrement<span class="widont">&nbsp;</span>plugins</li>
-<li><a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>:
+<li>Core:
 <ul>
 <li>BREAKING: Internal map-reference now uses <code>#tag</code> syntax</li>
 <li>NEW: Generic map-syntax, access, and parsing tools
@@ -906,14 +948,14 @@ combined from the individual<span class="widont">&nbsp;</span>plugins</li>
 </li>
 <li><a href="https://www.oddbird.net/accoutrement/docs/color.html">Plugin: Color</a>:
 <ul>
-<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/tokens.html">tokens</a> syntax<span class="widont">&nbsp;</span>changes</li>
 <li>BREAKING: Removed <code>merge-colors()</code> function</li>
 </ul>
 </li>
 <li><a href="https://www.oddbird.net/accoutrement/docs/layout.html">Plugin: Layout</a>:
 <ul>
-<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
-<li>BREAKING: Ratio functionality merged into <a href="https://www.oddbird.net/accoutrement/docs/core.html">Core</a>,
+<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/tokens.html">tokens</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: Ratio functionality merged into Core,
 using the shared <code>$ratios</code> map,
 and <code>ratio()</code> function.
 The old <code>$aspect-ratios</code> and <code>aspect-ratio()</code> have been<span class="widont">&nbsp;</span>removed.</li>
@@ -921,8 +963,8 @@ The old <code>$aspect-ratios</code> and <code>aspect-ratio()</code> have been<sp
 </li>
 <li><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Plugin: Scale</a>:
 <ul>
-<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
-<li>BREAKING: String interpolation has moved into the <a href="https://www.oddbird.net/accoutrement/docs/core.html">core</a>
+<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/tokens.html">tokens</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: String interpolation has moved into the Core
 using function syntax <code>'%s and %s' ('%s': 'new1' 'new2')</code>
 rather than list syntax <code>'%s and %s' ('new1', 'new2')</code></li>
 <li>BREAKING: Math functions have moved into the core.
@@ -935,7 +977,7 @@ with additional<span class="widont">&nbsp;</span>defaults</li>
 </li>
 <li><a href="https://www.oddbird.net/accoutrement/docs/type.html">Plugin: Type</a>:
 <ul>
-<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/core.html">core module</a> syntax<span class="widont">&nbsp;</span>changes</li>
+<li>BREAKING: See <a href="https://www.oddbird.net/accoutrement/docs/tokens.html">tokens</a> syntax<span class="widont">&nbsp;</span>changes</li>
 <li>NEW: Allow space-separated string variants (<code>'500 italic'</code>)
 for weight and style, in addition to lists (<code>500 'italic'</code>)</li>
 <li>NEW: Automatically formats font-family stacks

@@ -88,27 +88,47 @@ tokens.$ratios: ('new': '#_octave', 'token': 'linear', 'bad': red);
       @include assert-equal(tokens.is-ratio(false), false);
     }
   }
+
   // Compile Ratios [function]
   // --------------
   @include describe('Compile Ratios [function]') {
     @include it('Compiles the global map of ratios by default') {
-      @include assert-equal(tokens.compile-ratios(), (
-        'new': 2, 'token': 'linear', 'bad': red
-      )
-     );
+      @include assert-equal(
+        tokens.compile-ratios(),
+        (
+          'new': 2,
+          'token': 'linear',
+          'bad': red,
+        )
+      );
     }
 
     @include it('Compiles a local map with a global reference') {
       @include assert-equal(
-        tokens.compile-ratios(('new': '#_octave')),
-        ('new': 2)
+        tokens.compile-ratios(
+          (
+            'new': '#_octave',
+          )
+        ),
+        (
+          'new': 2,
+        )
       );
     }
-    
+
     @include it('Compiles a local map with a local reference') {
       @include assert-equal(
-        tokens.compile-ratios(('new': '#_octave'), ('_octave': 4)),
-        ('new': 4)
+        tokens.compile-ratios(
+          (
+            'new': '#_octave',
+          ),
+          (
+            '_octave': 4,
+          )
+        ),
+        (
+          'new': 4,
+        )
       );
     }
   }

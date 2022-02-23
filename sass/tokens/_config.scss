@@ -13,7 +13,7 @@
 ///
 /// @since 4.0.0 -
 /// - BREAKING: Removed the `silent` option,
-///   to match built-in Sass map access behavior
+///   to match built-in Sass map access behavior. Defaults to `null`.
 /// @since 2.2.0 -
 /// - NEW: Provides authors with more Sass-like behavior,
 ///   and more options for managing or testing when a key lookup fails

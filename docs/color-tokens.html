@@ -136,6 +136,10 @@
     </li>
   
   
+    <li class="nav-item">
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+    </li>
+  
   
     <li class="nav-item">
       <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
@@ -148,12 +152,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -563,7 +567,7 @@ They default to <code>white</code> and <code>black</code> respectively.</p>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>0.1.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>BREAKING: Uses the new <a href="core.html">shared</a> map syntax,
+<li>BREAKING: Uses the new <a href="tokens.html">shared</a> map syntax,
 for internal references and<span class="widont">&nbsp;</span>adjustments</li>
 </ul>
 </div>
@@ -1804,7 +1808,7 @@ between <code>$color</code> and <code>$source</code></li>
       <div class="param-details text-block">
         <p>The name of a color in your palette,
 or a color description in the
-<a href="color-api.html#color-configuration">map configuration<span class="widont">&nbsp;</span>format</a>.</p>
+<a href="color-tokens.html#variable--colors">map configuration<span class="widont">&nbsp;</span>format</a>.</p>
 
       </div>
     
@@ -1888,7 +1892,7 @@ Defaults to the global <code>$colors</code> map.</p>
     
       
       <div class="param-details text-block">
-        <p>A calculated css-ready color,
+        <p>A calculated CSS-ready color,
 based on your global color palette and<span class="widont">&nbsp;</span>adjustments.</p>
 
       </div>
@@ -2015,6 +2019,40 @@ html {
 
     
       
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <span class="item-name">contrast-settings()</span>
+      
+      
+      
+      <span class="item-note">[private]</span>
+    </h4>
+
+    
+  </div>
+
+
+        
       
         
         
@@ -2453,7 +2491,7 @@ html {
       <p>Compile all the tokens in a color map.
 This is particularly useful for exporting
 a static version of the token map
-with all the accoutrement syntax removed –
+with all the Accoutrement syntax removed –
 e.g. for use in javascript or<span class="widont">&nbsp;</span>documentation.</p>
 
       

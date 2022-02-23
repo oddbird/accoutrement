@@ -7,6 +7,8 @@
 /// light & dark contrast colors to work with
 /// in place of true white or black.
 /// @group color-config
+/// @see tint
+/// @see shade
 
 // Contrast Light
 // --------------
@@ -24,6 +26,19 @@ $contrast-light: white !default;
 /// @group color-config
 $contrast-dark: black !default;
 
+// Contrast Settings
+// --------------
+/// Access the configurable contrast variables as an
+/// Accoutrement token map.
+/// @access private
+/// @group color-config
+///
+/// @param {string} $color [$contrast-light] -
+///   The default light contrast color
+/// @param {string} $color [$contrast-dark] -
+///   The default dark contrast color
+/// @return {map} -
+///   A map of the default contrast colors
 @function contrast-settings(
   $contrast-light: $contrast-light,
   $contrast-dark: $contrast-dark

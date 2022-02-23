@@ -11,6 +11,9 @@
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oddbird/accoutrement/issues"
+  },
   "keywords": [
     "sass",
     "accoutrement",
@@ -18,41 +21,46 @@
     "design systems",
     "eyeglass-module"
   ],
-  "eyeglass": {
-    "sassDir": "sass",
-    "exports": false,
-    "name": "accoutrement",
-    "needs": "^1.0.0"
-  },
+  "files": [
+    "sass/**/*",
+    "_index.scss",
+    "docs/",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "test": "mocha",
     "lint:sass": "yarn lint:nofix --fix",
-    "lint:nofix": "stylelint **/*.scss",
-    "lint:other": "prettier --write **/*.{json,md,yml}",
+    "lint:nofix": "stylelint '**/*.scss'",
+    "lint:other": "prettier --write '**/*.{js,json,md,yml}'",
     "lint": "run-p lint:sass lint:other",
-    "docs": "sassdoc sass/**/*.scss",
+    "docs": "sassdoc 'sass/**/*.scss'",
     "commit": "run-s lint test docs",
     "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:nofix'",
     "watch:tests": "chokidar 'test/**' 'sass/**/*.scss' -c 'yarn test'",
     "watch:docs": "chokidar 'sass/**/*.scss' './.sassdocrc' -c 'yarn docs'",
     "watch": "run-p watch:sass watch:tests watch:docs"
   },
-  "bugs": {
-    "url": "https://github.com/oddbird/accoutrement/issues"
-  },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
-    "mocha": "^9.1.3",
+    "mocha": "^9.2.1",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.4",
+    "postcss": "^8.4.6",
     "prettier": "^2.5.1",
-    "sass": "^1.44.0",
+    "sass": "^1.49.8",
     "sass-true": "^6.0.1",
     "sassdoc": "^2.7.3",
     "sassdoc-theme-herman": "^4.0.2",
-    "stylelint": "^14.1.0",
+    "stylelint": "^14.5.3",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-prettier": "^2.0.0"
+  },
+  "eyeglass": {
+    "sassDir": "sass",
+    "exports": false,
+    "name": "accoutrement",
+    "needs": "^1.0.0"
   }
 }

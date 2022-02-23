@@ -30,7 +30,7 @@
 /// @param {color | String} $light [null] -
 ///   The lighter color to be mixed in for tinting.
 /// @return {color} -
-///   A calculated css-ready color-value based on your global color palette.
+///   A calculated CSS-ready color value based on your global color palette.
 @function tint($color, $percentage, $light: null) {
   $light: $light or contrast.default-contrast('light');
   @return color.mix(tokens.color($light), tokens.color($color), $percentage);
@@ -46,7 +46,7 @@
 /// to define the value of `contrast-dark`
 ///
 /// @since 2.0.0 -
-/// - BREAKING: Use `contrast-dark` for mix, rather than `black`
+/// - BREAKING: Use `contrast-dark` for default mix, rather than `black`
 /// - NEW: Accept `$dark` color to use in place of `contrast-dark` default
 ///
 /// @group color-utils
@@ -60,7 +60,7 @@
 /// @param {color | String} $dark [null] -
 ///   The darker color to be mixed in for shading.
 /// @return {color} -
-///   A calculated css-ready color-value based on your global color palette.
+///   A calculated CSS-ready color value based on your global color palette.
 @function shade($color, $percentage, $dark: null) {
   $dark: $dark or contrast.default-contrast('dark');
   @return color.mix(tokens.color($dark), tokens.color($color), $percentage);

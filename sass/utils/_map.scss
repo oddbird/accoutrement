@@ -4,11 +4,11 @@
 @use '../internal/throw';
 
 /// ## Sass Maps
-/// Utility function(s) that extend the Sass core modules,
+/// Utility functions that extend the Sass core modules,
 /// to help with advanced map manipulation.
 ///
 /// These functions have a `map-` prefix added by default
-/// (eg `map-multi-merge()`)
+/// (e.g. `map-multi-merge()`)
 /// unless they are imported directly.
 /// @group utils
 
@@ -18,6 +18,9 @@
 /// in case you want to define tokens in smaller groups --
 /// such as `brand-colors`, `text-colors`, etc. --
 /// before merging them into a single map.
+///
+/// @since 4.0.0 -
+/// - NEW: Initial release
 ///
 /// @group utils
 /// @param {maps...} $maps -

@@ -136,6 +136,10 @@
     </li>
   
   
+    <li class="nav-item">
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+    </li>
+  
   
     <li class="nav-item">
       <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
@@ -148,12 +152,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -536,13 +540,9 @@ and supports the <code>outer-&gt;inner</code> nested token<span class="widont">&
   
     <div data-item-section="prose" class="text-block">
       <h2 id="import">Import</h2>
-<p>If you already imported <code>accoutrement/sass/tools</code> you are ready to go.
+<p>If you’ve already imported <code>accoutrement</code> you are ready to go.
 If you want to import the tokens<span class="widont">&nbsp;</span>alone:</p>
-<pre><code class="lang-scss">  @import '&lt;path-to&gt;/accoutrement/sass/tokens';
-</code></pre>
-<p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
-you can leave off most of the<span class="widont">&nbsp;</span>path:</p>
-<pre><code class="lang-scss">  @import 'accoutrement/tokens';
+<pre><code class="lang-scss">  @use '&lt;path-to&gt;/accoutrement/sass/tokens';
 </code></pre>
 
       
@@ -718,7 +718,7 @@ for more<span class="widont">&nbsp;</span>detail.</p>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="tokens-css-variables"><a href="core-vars.html">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a></h2>
+      <h2 id="tokens-css-variables"><a href="token-vars.html">Tokens » CSS<span class="widont">&nbsp;</span>Variables</a></h2>
 <p>CSS Variables provide a DOM-aware alternative
 to the pre-processed Sass variables
 we use to store tokens.
@@ -726,7 +726,7 @@ Rather than using one or the other,
 we recommend defining tokens in Sass
 (where relationships can be stored in an abstract format),
 and then generating CSS Variables<span class="widont">&nbsp;</span>as-necessary.</p>
-<p>See <a href="core-vars.html">CSS Variables</a> documentation
+<p>See <a href="token-vars.html">CSS Variables</a> documentation
 for more<span class="widont">&nbsp;</span>detail.</p>
 
       
@@ -894,9 +894,7 @@ html {
     <div data-item-section="prose" class="text-block">
       <h2 id="utility-functions"><a href="token-register.html">Utility Functions</a></h2>
 <p>We provide a set of built-in
-<a href="token-math.html">math</a>,
-<a href="utils-list.html">list</a>,
-and <a href="utils-string.html">string</a> helpers –
+<a href="utils.html">list and string</a> helpers –
 in addition to the functions defined in each<span class="widont">&nbsp;</span>module.</p>
 <p>You can also use the Sass core functions
 (with appropriate module prefixing),
@@ -910,7 +908,7 @@ giving them any alias you<span class="widont">&nbsp;</span>like.</p>
   // Or add functions &amp; aliases using the provided mixin:
   @include token.register('my-function', 'alias');
 </code></pre>
-<p>Once a function has been registered with accoutrement,
+<p>Once a function has been registered with Accoutrement,
 it is available to call by name or alias in all token adjustment<span class="widont">&nbsp;</span>maps:</p>
 <pre><code class="lang-scss">  @include token.register('rgba', 'fade');
   $colors: (

@@ -9,7 +9,7 @@
 // Ratio Var Prefix
 // ----------------
 /// Set a prefix for all ratio-tokens,
-/// and we'll apply it when setting or calling css variables
+/// and we'll apply it when setting or calling CSS variables
 /// based on your ratio maps.
 /// Set to `null` or `''` (empty string) for no prefix.
 ///
@@ -52,7 +52,7 @@ $ratio-var-prefix: 'ratio-' !default;
 ///
 /// @param {map} $source [$ratios] -
 ///   Optionally use a custom
-///   map of ratios to set as css variables
+///   map of ratios to set as CSS variables
 /// @output
 ///   Custom properties for all public ratios in the map
 @mixin ratios--($source: tokens.$ratios) {
@@ -89,7 +89,7 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$ratios] -
 ///   Optional map of ratios to use as a palette source
@@ -123,7 +123,7 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source -
 ///   Optional Accoutrement map of ratios to use as source

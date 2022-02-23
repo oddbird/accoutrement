@@ -35,7 +35,7 @@
 ///   or a unit followed by any necessary arguments
 ///   for conversion
 /// @param {map} $source [$sizes] -
-///   Optional accoutrement-format map of sizes to use as the origin palette
+///   Optional Accoutrement-format map of sizes to use as the origin palette
 /// @return {length} -
 ///   The calculated length, in the requested units.
 @function size($size, $do: null, $source: config.$sizes) {
@@ -69,7 +69,7 @@
 /// Compile all the tokens in a size map.
 /// This is particularly useful for exporting
 /// a static version of the token map
-/// with all the accoutrement syntax removed --
+/// with all the Accoutrement syntax removed --
 /// e.g. for use in javascript or documentation.
 ///
 /// @since 4.0.0 -
@@ -86,10 +86,7 @@
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-sizes(
-  $map: config.$sizes,
-  $source: config.$sizes,
-) {
+@function compile-sizes($map: config.$sizes, $source: config.$sizes) {
   $source: map.merge($source or (), $map);
 
   @return tokens.map-compile-with(
@@ -124,7 +121,7 @@
 ///   The name of a size in your configuration (e.g. `line-height`),
 ///   or a length to be converted into different units (e.g. `24px`),
 ///   or a base-size and adjustments to be made
-///   (e.g. `24px ('_minor-third': 2)`).
+///   (e.g. `24px (scale: '_minor-third' 2)`).
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
@@ -133,7 +130,7 @@
 ///   or a unit followed by any necessary arguments
 ///   for conversion
 /// @param {map} $source [$sizes] -
-///   Optional accoutrement-format map of sizes to use as the origin palette
+///   Optional Accoutrement-format map of sizes to use as the origin palette
 /// @return {length} -
 ///   The calculated negative length, in the requested units.
 @function negative($size, $do: null, $source: config.$sizes) {
@@ -183,7 +180,7 @@
 ///   or a unit followed by any necessary arguments
 ///   for conversion
 /// @param {map} $source [$sizes] -
-///   Optional accoutrement-format map of sizes to use as the origin palette
+///   Optional Accoutrement-format map of sizes to use as the origin palette
 /// @output -
 ///   Equal CSS height and width properties,
 ///   set to the given size and units.

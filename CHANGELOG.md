@@ -2,110 +2,151 @@
 
 ## 4.0.0 - UNRELEASED
 
-- BREAKING: Map `multi-merge` utility and all `add-*` functions
-  for adding one or more token maps (eg `add-sizes`, `add-colors`, etc)
-  now perform a deep merge of the token maps.
-  Previously a shallow merge was performed,
-  [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
-
-- [Tokens][token]:
-
-  - NEW: `map-compile` and `map-compile-with` functions for compiling
-    tokens in Accoutrement maps and formatting them for static exports.
-
-- [Animate][animate]:
-
-  - NEW: `compile-*` functions provide an export option for respective token maps
-    (see: `compile-changes`, `compile-easing`, `compile-times`).
-
-- [Color][color]:
-
-  - NEW: `compile-colors` function provides an export option for color token maps.
-  - NEW: `with-colors` mixin allows the overriding of the global color palette for
-    a section of contents.
-
-- [Ratio][ratio]:
-
-  - NEW: `compile-ratios` function provides an export option for ratio token maps.
-
-- [Scale][scale]:
-
-  - NEW: `compile-sizes` function provides an export option for size token maps.
-
-- [Type][type]:
-
-  - NEW: `compile-fonts` function provides an export option for font token maps.
-
-### 4.0.0-beta.2 - 12/03/21
-
 This is a major update, moving over to Sass modules,
 and removing some features that no longer seem necessary.
 
-(previous betas had major breaking issues)
+In addition to fixing a bug with the handling of
+non-alias `#` symbols, and implementing deep map merges
+where appropriate, we also added some functionality around
+compiling maps for export, and working with different
+color palettes.
 
 - BREAKING: Requires Sass modules, and other recent features of Dart Sass.
-  Legacy versions of Sass (Node & Ruby) are no longer supported
-- BREAKING: The old "init" module, which provided light-weight
+  Legacy versions of Sass (Node & Ruby) are no longer supported.
+- BREAKING: The old "init" module, which provided lightweight
   browser normalization, is no longer included. We now recommend
-  using [CSS Remedy](https://github.com/jensimmons/cssremedy).
+  using [CSS Remedy](https://github.com/jensimmons/cssremedy). (_Note: If
+  making the switch from Accoutrement/Init to CSS Remedy, you may need to
+  reset the `margin` and `padding` of block elements to remove unwanted
+  vertical space. And SVGs and other media may stack instead of displaying
+  inline since CSS Remedy sets these to [`display: block`](https://github.com/jensimmons/cssremedy/blob/468e31a7eda599eea2003ed7983c190828ffb5fd/css/remedy.css#L129) by default._)
 - BREAKING: The old "core" module has been broken into individual modules
-  for "utilities" (extending several Sass modules),
-  "tokens" (the map syntax parser),
-  "variables" (converting Sass variables & maps to CSS custom properties),
-  and "ratios" (for typographic scales and layout aspect ratios)
+  for [utilities][utils] (extending several Sass modules),
+  [tokens][token] (the map syntax parser),
+  [variables][vars] (converting Sass variables & maps to CSS custom properties),
+  and [ratios][ratio] (for typographic scales and layout aspect ratios).
+- BREAKING: Map [`multi-merge()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--multi-merge)
+  utility and all `add-*` functions for adding one or more token maps
+  (e.g. [`add-sizes()`](https://www.oddbird.net/accoutrement/docs/scale-sizes.html#mixin--add-sizes),
+  [`add-colors()`](https://www.oddbird.net/accoutrement/docs/color-tokens.html#mixin--add-colors), etc)
+  now perform a deep merge of the token maps. Previously a shallow
+  merge was performed,
+  [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
+- INTERNAL: Upgrade dev dependencies.
+- INTERNAL: Limit files included in npm package.
+
+- [Animate][animate]:
+
+  - NEW: `compile-*` functions provide an export option for respective token maps (see:
+    [`compile-changes()`](https://www.oddbird.net/accoutrement/docs/animate-change.html#function--compile-changes),
+    [`compile-easing()`](https://www.oddbird.net/accoutrement/docs/animate-ease.html#function--compile-easing), and [`compile-times()`](https://www.oddbird.net/accoutrement/docs/animate-times.html#function--compile-times)).
+  - NEW: Named default easings are now available as
+    [individual variables](https://www.oddbird.net/accoutrement/docs/animate-ease.html),
+    (without the `_` prefix that is applied in token maps).
+
+- [Color][color]:
+
+  - NEW: [`compile-colors()`](https://www.oddbird.net/accoutrement/docs/color-tokens.html#function--compile-colors)
+    function provides an export option for color token maps.
+  - NEW: [`with-colors()`](https://www.oddbird.net/accoutrement/docs/color-tokens.html#mixin--with-colors)
+    mixin allows the overriding of the global color palette for a section of contents.
 
 - [Sass Utilities][utils]:
 
   - NEW: These functions are now available directly,
-    as well as being registered in the map syntax
+    as well as being registered in the map syntax.
+  - NEW: [`multi-merge()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--multi-merge)
+    function for merging multiple maps into a single map.
+  - NEW: [`replace()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--replace)
+    function for replacing a substring inside a larger string,
+    or replacing the entirety of a string.
+  - NEW: [`interpolate()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--interpolate)
+    function returns a string with interpolated values
+    replacing `%s` placeholders in a format string.
+  - NEW: [`split()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--split)
+    function for splitting a string into a list of strings, using the
+    same logic as JavaScript's `split()` method.
+  - NEW: [`trim()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--trim)
+    function trims whitespace from the start and end of a string.
 
 - [Variables][vars]:
 
-  - NEW: `ident()` function adds `--` and an optional prefix to any string,
+  - NEW: [`ident()`](https://www.oddbird.net/accoutrement/docs/vars.html#function--ident)
+    function adds `--` and an optional prefix to any string,
     in order to generate a custom property identifier.
-  - NEW: `custom-props()` mixin generates custom properties
-    for every key/value pair in a map.
+  - NEW: [`custom-props()`](https://www.oddbird.net/accoutrement/docs/vars.html#mixin--custom-props)
+    mixin generates custom properties for every key/value pair in a map.
 
 - [Tokens][token]:
 
-  - NEW: A module just for the custom map syntax parser & function registration
-  - BREAKING: The `$functions` map no longer accepts alias references
-    or any other aspects of the token syntax
+  - NEW: A module just for the custom map syntax parser & function registration.
+  - NEW: [`map-compile()`](https://www.oddbird.net/accoutrement/docs/token-compile.html#function--map-compile)
+    and [`map-compile-with()`](https://www.oddbird.net/accoutrement/docs/token-compile.html#function--map-compile-with)
+    functions for compiling tokens in Accoutrement maps and formatting
+    them for static exports.
+  - BREAKING: The [`$functions`](https://www.oddbird.net/accoutrement/docs/token-register.html#variable--functions)
+    map no longer accepts alias references
+    or any other aspects of the token syntax.
   - BREAKING: Ratios are no longer first-class adjustments
-    (like functions) in the token syntax
-  - BREAKING: `tokens.$handle-missing-keys` defaults to `null`,
+    (like functions) in the token syntax.
+  - BREAKING:
+    [`tokens.$handle-missing-keys`](https://www.oddbird.net/accoutrement/docs/token-config.html#variable--handle-missing-keys)
+    defaults to `null`,
     and no longer supports the legacy `silent` option.
-  - BREAKING: `get-token()` is renamed `get()`,
+  - BREAKING: `get-token()` is renamed
+    [`get()`](https://www.oddbird.net/accoutrement/docs/token-api.html#function--get),
     and only accepts bare token names (no `#` prefix),
     including the `outer->inner` nested token syntax.
-  - NEW: The new `compile()` function provides direct access to
-    parse & resolve an arbitrary token value
-    (including aliases with `#` prefix),
-    rather than calling a specific token by name.
+  - NEW: The new [`compile()`](https://www.oddbird.net/accoutrement/docs/token-api.html#function--compile)
+    function provides direct access to parse & resolve an arbitrary token value
+    (including aliases with `#` prefix), rather than calling a specific token by name.
   - NEW: All the built-in Sass module functions are registered by default,
-    as `<module-name>.<function-name>`
-  - NEW: `has-token()` function checks a map
-    to see if the given token is defined,
+    as `<module-name>.<function-name>`.
+  - NEW: [`has-token()`](https://www.oddbird.net/accoutrement/docs/token-inspect.html#function--has-token)
+    function checks a map to see if the given token is defined,
     and supports the `outer->inner` nested token syntax.
+  - NEW: [`plus()`](https://www.oddbird.net/accoutrement/docs/token-internal.html#function--plus)
+    function adds two values
+    together in Accoutrement maps.
+  - NEW: [`minus()`](https://www.oddbird.net/accoutrement/docs/token-internal.html#function--minus)
+    function subtracts one value from another in Accoutrement maps.
+  - NEW: [`times()`](https://www.oddbird.net/accoutrement/docs/token-internal.html#function--times)
+    function multiplies two values together in Accoutrement maps.
+  - NEW: [`divide()`](https://www.oddbird.net/accoutrement/docs/token-internal.html#function--divide)
+    function divides two values in Accoutrement maps.
+  - NEW: [`modulo()`](https://www.oddbird.net/accoutrement/docs/token-internal.html#function--modulo)
+    function divides two values in Accoutrement maps and returns the remainder.
+
+- [Type][type]:
+
+  - NEW: [`compile-fonts()`](https://www.oddbird.net/accoutrement/docs/type-fonts.html#function--compile-fonts)
+    function provides an export option for font token maps.
 
 - [Ratios][ratio]:
 
-  - NEW: Built-in named ratios are now available as individual variables,
-    (without the `_` prefix that is applied in token maps)
-  - NEW: `is-ratio()` function can be used to type-check ratios,
-    including ratio tokens.
+  - NEW:
+    [`compile-ratios()`](https://www.oddbird.net/accoutrement/docs/ratio-tokens.html#function--compile-ratios) function provides an export option for ratio token maps.
+  - NEW: Built-in [named ratios](https://www.oddbird.net/accoutrement/docs/ratios.html) are now available as
+    individual variables, (without the `_` prefix that is applied in token maps).
+  - NEW: [`is-ratio()`](https://www.oddbird.net/accoutrement/docs/ratio-tokens.html#function--is-ratio)
+    function can be used to type-check ratios, including ratio tokens.
 
 - [Scale][scale]:
 
-  - NEW: `scale()` function applies a modular scale to any value,
-    allowing you to move up or down the scale any number of steps.
+  - NEW:
+    [`compile-sizes()`](https://www.oddbird.net/accoutrement/docs/scale-sizes.html#function--compile-sizes)
+    function provides an export option for size token maps.
+  - NEW: [`scale()`](https://www.oddbird.net/accoutrement/docs/scale.html#function--scale)
+    function applies a modular scale to any value, allowing you to move up or down
+    the scale any number of steps.
 
 - [Layout][layout]:
-  - BREAKING: Removed `global-box-sizing`
-  - BREAKING: Removed `clearfix`
-  - BREAKING: Removed `fluid-ratio`
-  - BREAKING: Removed `position`. Can achieve the majority of functionality in CSS using
-    [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
+  - BREAKING: Removed `global-box-sizing`.
+  - BREAKING: Removed `clearfix`.
+  - BREAKING: Removed `fluid-ratio`.
+  - BREAKING: Removed `position`. Can achieve the majority
+    of functionality in CSS using
+    [Inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset).
 
 ## 3.0.1 - 03/01/21
 
@@ -160,19 +201,19 @@ Huge thanks to James Camilleri (@jcamilleri13) for all the improvements here.
 
 ## 2.1.3 - 01/06/20
 
-- [Core][core]:
+- Core:
   - BUGFIX (#46): Fixes `register-function()` usage with Sass module syntax
 
 ## 2.1.2 - 08/26/19
 
 - Upgrade dev dependencies.
-- [Core][core]:
+- Core:
   - BUGFIX (#36): Fixes an issue with `quote()` in dart-sass.
   - BUGFIX (#38): Fixes an issue with `false` values in maps.
 
 ## 2.1.1 - 01/04/19
 
-- [Core][core]:
+- Core:
   - BUGFIX (#31): Fixes an issue with longhand map memoization
 
 ## 2.1.0 - 12/20/18
@@ -220,7 +261,7 @@ See the full details below.
 Thanks to Joel Schou (@joelschou) for extensive contributions,
 designing and testing several of these features.
 
-- [Core][core]:
+- Core:
   - BREAKING: Explicit value/adjustments maps require a `'%value'` key
     (used to be named `'value'`),
     in order to avoid possible conflicts or false-positives
@@ -233,7 +274,7 @@ designing and testing several of these features.
 
 ### 2.0.0-alpha.1 - 10/29/18
 
-- [Core][core]:
+- Core:
   - NEW: `$adjust-query-overlap` (`max` | `min` | `false`)
     allows you to control if and how media-queries are adjusted
     to avoid overlap between min/max queries
@@ -294,7 +335,7 @@ designing and testing several of these features.
 
 ## 1.0.1 - 09/08/18
 
-- [Core][core]:
+- Core:
   - BUGFIX: Typos, including the `cinema` ratio spelling
     (thanks to @joelschou)
   - BUGFIX: Improved consistency of nested-map parser
@@ -312,7 +353,7 @@ designing and testing several of these features.
 
 ### 1.0.0-beta.2 - 07/27/18
 
-- [Core][core]:
+- Core:
   - NEW: `ratio()` function accepts `$source` argument,
     for passing in a custom source map
   - NEW: Improved error-handling and messages
@@ -351,7 +392,7 @@ designing and testing several of these features.
 
 - NEW: Add `_index.scss` to simplify default "tools" import (core + plugins)
   in Eyeglass: `@import 'accoutrement';`
-- [Core][core]:
+- Core:
   - NEW: `get-token()` and `ratio()` functions accept `$do` argument,
     for on-the-fly adjustments
   - NEW: `trim($string)` utility now available in map-syntax,
@@ -396,9 +437,8 @@ designing and testing several of these features.
 - BREAKING: All modules now use a shared map syntax,
   with explicit `#tag` references
   and the option for explicit value/adjustment maps.
-  [Learn the new syntax][core].
 - NEW: Merges all existing Accoutrement plugins
-- [Core][core]:
+- Core:
   - BREAKING: Internal map-reference now uses `#tag` syntax
   - NEW: Generic map-syntax, access, and parsing tools
     are shared by all plugins,
@@ -409,17 +449,17 @@ designing and testing several of these features.
 - [Plugin: Animate][animate]:
   - A totally new plugin!
 - [Plugin: Color][color]:
-  - BREAKING: See [core module][core] syntax changes
+  - BREAKING: See [tokens][token] syntax changes
   - BREAKING: Removed `merge-colors()` function
 - [Plugin: Layout][layout]:
-  - BREAKING: See [core module][core] syntax changes
-  - BREAKING: Ratio functionality merged into [Core][core],
+  - BREAKING: See [tokens][token] syntax changes
+  - BREAKING: Ratio functionality merged into Core,
     using the shared `$ratios` map,
     and `ratio()` function.
     The old `$aspect-ratios` and `aspect-ratio()` have been removed.
 - [Plugin: Scale][scale]:
-  - BREAKING: See [core module][core] syntax changes
-  - BREAKING: String interpolation has moved into the [core][core]
+  - BREAKING: See [tokens][token] syntax changes
+  - BREAKING: String interpolation has moved into the Core
     using function syntax `'%s and %s' ('%s': 'new1' 'new2')`
     rather than list syntax `'%s and %s' ('new1', 'new2')`
   - BREAKING: Math functions have moved into the core.
@@ -429,7 +469,7 @@ designing and testing several of these features.
   - New: Ratios have moved into the core,
     with additional defaults
 - [Plugin: Type][type]:
-  - BREAKING: See [core module][core] syntax changes
+  - BREAKING: See [tokens][token] syntax changes
   - NEW: Allow space-separated string variants (`'500 italic'`)
     for weight and style, in addition to lists (`500 'italic'`)
   - NEW: Automatically formats font-family stacks
@@ -439,7 +479,6 @@ designing and testing several of these features.
 [utils]: https://www.oddbird.net/accoutrement/docs/utils.html
 [vars]: https://www.oddbird.net/accoutrement/docs/vars.html
 [ratio]: https://www.oddbird.net/accoutrement/docs/ratio.html
-[core]: https://www.oddbird.net/accoutrement/docs/core.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html
 [color]: https://www.oddbird.net/accoutrement/docs/color.html
 [layout]: https://www.oddbird.net/accoutrement/docs/layout.html

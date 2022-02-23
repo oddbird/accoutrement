@@ -85,22 +85,32 @@ config.$font-path: data.$font-path;
   @include describe('Compile Fonts [function]') {
     @include it('References global fonts') {
       @include assert-equal(
-        fonts.compile-fonts((a: '#UniFont')), 
-        (a: fonts.font('UniFont'))
+        fonts.compile-fonts(
+          (
+            a: '#UniFont',
+          )
+        ),
+        (
+          a: fonts.font('UniFont'),
+        )
       );
     }
 
     @include it('Compiles a local map with a global reference') {
       @include assert-equal(
-        fonts.compile-fonts(('new': '#TestFont')), 
+        fonts.compile-fonts(
+          (
+            'new': '#TestFont',
+          )
+        ),
         (
           'new': (
             'stack': (
               TestFont,
               Georgia,
-              serif
+              serif,
             ),
-            'name': TestFont
+            'name': TestFont,
           ),
         )
       );
@@ -108,13 +118,16 @@ config.$font-path: data.$font-path;
 
     @include it('Compiles a local map with a local reference') {
       @include assert-equal(
-          fonts.compile-fonts(('new': '#TestFont'), 
+        fonts.compile-fonts(
+          (
+            'new': '#TestFont',
+          ),
           (
             'TestFont': (
               'stack': (
                 'Franklin Gothic',
                 'Arial',
-                'sans-serif'
+                'sans-serif',
               ),
             ),
           )
@@ -125,9 +138,9 @@ config.$font-path: data.$font-path;
               TestFont,
               'Franklin Gothic',
               Arial,
-              sans-serif
+              sans-serif,
             ),
-            'name': TestFont
+            'name': TestFont,
           ),
         )
       );

@@ -12,8 +12,8 @@
 /// it can be useful to prefix different variable types.
 /// Accoutrement maps help solve that problem in Sass,
 /// so we wanted to carry that over into our CSS variable support.
-/// Set a prefix for all color-tokens,
-/// and we'll apply it when setting or calling css variables
+/// Set a prefix for all color tokens,
+/// and we'll apply it when setting or calling CSS variables
 /// based on your color maps.
 /// Set to `null` or `''` (empty string) for no prefix.
 ///
@@ -32,7 +32,7 @@ $color-var-prefix: 'color-' !default;
 
 // Colors--
 // --------
-/// Convert any color-map into CSS variables,
+/// Convert any color map into CSS variables,
 /// using the global `$color-var-prefix`.
 ///
 /// - Color names that start with `_` or `-` are considered "private"
@@ -57,7 +57,7 @@ $color-var-prefix: 'color-' !default;
 ///
 /// @param {map} $source [$colors] -
 ///   Optionally use a custom
-///   map of colors to set as css variables
+///   map of colors to set as CSS variables
 /// @output
 ///   Custom properties for all public colors in the map
 @mixin colors--($source: tokens.$colors) {
@@ -67,7 +67,7 @@ $color-var-prefix: 'color-' !default;
 
 // Color--
 // -------
-/// Set a single custom property based on a map-color,
+/// Set a single custom property based on a map color,
 /// with optional alias and fallback
 ///
 /// @since 2.0.0 -
@@ -95,7 +95,7 @@ $color-var-prefix: 'color-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$colors] -
 ///   Optional map of colors to use as a palette source
@@ -130,7 +130,7 @@ $color-var-prefix: 'color-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source -
 ///   Optional Accoutrement map of colors to use as source

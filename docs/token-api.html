@@ -136,6 +136,10 @@
     </li>
   
   
+    <li class="nav-item">
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+    </li>
+  
   
     <li class="nav-item">
       <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
@@ -148,12 +152,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -407,16 +411,16 @@
     <div data-item-section="prose" class="text-block">
       <h1 id="token-maps">Token Maps</h1>
 <p>We use “token” as a generic term
-for named values inside accoutrement maps.
+for named values inside Accoutrement maps.
 In the following map,
-<code>root</code> and <code>gutter</code> are considered<span class="widont">&nbsp;</span>accoutrement-tokens:</p>
+<code>root</code> and <code>gutter</code> are considered<span class="widont">&nbsp;</span>Accoutrement-tokens:</p>
 <pre><code class="lang-scss">$map: (
   'root': 16px,
   'gutter': 1em,
 );
 </code></pre>
 <p>Our core API provides token-map syntax parsing,
-and general token access with <code>get-token()</code> (below).
+and general token access with <code>get()</code> (below).
 Additional plugins provide shortcuts and utilities
 for managing and accessing common token-types,
 like colors, fonts, sizes, and<span class="widont">&nbsp;</span>animations.</p>
@@ -590,7 +594,7 @@ $map: (
   
     <div data-item-section="prose" class="text-block">
       <h2 id="nested-references">Nested References</h2>
-<p>You can define nested tokens in accoutrement maps,
+<p>You can define nested tokens in Accoutrement maps,
 and access them using a <code>#first-&gt;second-&gt;third</code> syntax:</p>
 <pre><code class="lang-scss">// 'large-screen-&gt;h2' == 24px
 $sizes: (
@@ -1318,11 +1322,11 @@ the same double-escape can be used: <code>'#alias\\not-part-of--alias'</code></l
   
     <div class="text-block">
       <p>The primary function for accessing and parsing
-accoutrement map-syntax values.
-Each accoutrement plugin provides a shortcut function
+Accoutrement map-syntax values.
+Each Accoutrement plugin provides a shortcut function
 for the specific map associated with that data-type.
 You can do the same, or use it directly
-to turn any arbitrary map into an accoutrement<span class="widont">&nbsp;</span>map.</p>
+to turn any arbitrary map into an Accoutrement<span class="widont">&nbsp;</span>map.</p>
 
       
   

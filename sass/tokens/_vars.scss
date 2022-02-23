@@ -39,7 +39,7 @@
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix used for naming token variables
@@ -83,7 +83,7 @@
 ///   }
 ///
 /// @param {map} $map -
-///   Accoutrement map of tokens to set as css variables
+///   Accoutrement map of tokens to set as CSS variables
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix for naming token variables
 /// @output
@@ -124,7 +124,7 @@
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will try to generate a fallback based on the color value
 ///   - A color name will fallback to the value of that
-///     css-variable and then to the color's calculated value
+///     CSS variable and then to the color's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {string | null} $prefix [null] -
 ///   Optional prefix used for naming token variables

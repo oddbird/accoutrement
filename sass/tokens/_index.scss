@@ -65,18 +65,11 @@
 @forward 'vars';
 
 /// ## Import
-/// If you already imported `accoutrement/sass/tools` you are ready to go.
+/// If you've already imported `accoutrement` you are ready to go.
 /// If you want to import the tokens alone:
 ///
 /// ```scss
-///   @import '<path-to>/accoutrement/sass/tokens';
-/// ```
-///
-/// If you're using [Eyeglass](https://github.com/linkedin/eyeglass),
-/// you can leave off most of the path:
-///
-/// ```scss
-///   @import 'accoutrement/tokens';
+///   @use '<path-to>/accoutrement/sass/tokens';
 /// ```
 /// @group tokens
 
@@ -118,7 +111,7 @@
 ///
 /// @group tokens
 
-/// ## [Tokens » CSS Variables](core-vars.html)
+/// ## [Tokens » CSS Variables](token-vars.html)
 /// CSS Variables provide a DOM-aware alternative
 /// to the pre-processed Sass variables
 /// we use to store tokens.
@@ -127,7 +120,7 @@
 /// (where relationships can be stored in an abstract format),
 /// and then generating CSS Variables as-necessary.
 ///
-/// See [CSS Variables](core-vars.html) documentation
+/// See [CSS Variables](token-vars.html) documentation
 /// for more detail.
 ///
 /// @example scss
@@ -148,9 +141,7 @@
 
 /// ## [Utility Functions](token-register.html)
 /// We provide a set of built-in
-/// [math](token-math.html),
-/// [list](utils-list.html),
-/// and [string](utils-string.html) helpers --
+/// [list and string](utils.html) helpers --
 /// in addition to the functions defined in each module.
 ///
 /// You can also use the Sass core functions
@@ -168,7 +159,7 @@
 ///   @include token.register('my-function', 'alias');
 /// ```
 ///
-/// Once a function has been registered with accoutrement,
+/// Once a function has been registered with Accoutrement,
 /// it is available to call by name or alias in all token adjustment maps:
 ///
 /// ```scss

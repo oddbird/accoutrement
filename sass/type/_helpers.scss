@@ -71,8 +71,9 @@ $FONT-FORMATS: (
 ///
 /// [font-url]: fonts.html#function--font-url
 ///
-/// @since type-4.0.0 -
+/// @since 4.0.0 -
 /// - BREAKING: Name changed from `font-url` to `format-url`
+/// @since type-4.0.0 -
 /// - NEW: Added to format font-paths correctly,
 ///   with file extension and suffix.
 ///
@@ -207,6 +208,9 @@ $FONT-FORMATS: (
 /// Extract all the variant key/data pairs,
 /// and return a filtered font-map including only font-variants.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-get-variants`
+///   to `font-get-variants`
 /// @since 0.1.0 -
 /// - NEW: Supports `'bold italic'` weight/style syntax
 ///   in addition to `('bold', 'italic')`

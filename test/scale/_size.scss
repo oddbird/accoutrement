@@ -101,15 +101,30 @@ config.$sizes: data.$test-sizes;
   @include describe('Compile Sizes [function]') {
     @include it('Compiles a local map with a global reference') {
       @include assert-equal(
-        size.compile-sizes(('new': '#root')), 
-        ('new': 20px) 
+        size.compile-sizes(
+          (
+            'new': '#root',
+          )
+        ),
+        (
+          'new': 20px,
+        )
       );
     }
 
     @include it('Compiles a local map with a local reference') {
       @include assert-equal(
-        size.compile-sizes(('new': '#viewport'), ('viewport': 15vw)),
-        ('new': 15vw)
+        size.compile-sizes(
+          (
+            'new': '#viewport',
+          ),
+          (
+            'viewport': 15vw,
+          )
+        ),
+        (
+          'new': 15vw,
+        )
       );
     }
   }

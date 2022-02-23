@@ -10,7 +10,7 @@
 /// it can be useful to prefix different variable types.
 /// Accoutrement maps help solve that problem in Sass,
 /// so we wanted to carry that over into our CSS variable support.
-/// Set a prefix for all size-tokens,
+/// Set a prefix for all size tokens,
 /// and we'll apply it when setting or calling CSS variables
 /// based on your size maps.
 /// Set to `null` or `''` (empty string) for no prefix.
@@ -55,7 +55,7 @@ $size-var-prefix: 'size-' !default;
 ///
 /// @param {map} $source [$sizes] -
 ///   Optionally use a custom
-///   map of sizes to set as css variables
+///   map of sizes to set as CSS variables
 /// @output
 ///   Custom properties for all public sizes in the map
 @mixin sizes--($source: config.$sizes) {
@@ -92,7 +92,7 @@ $size-var-prefix: 'size-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$sizes] -
 ///   Optional map of sizes to use as a palette source
@@ -126,7 +126,7 @@ $size-var-prefix: 'size-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source -
 ///   Optional Accoutrement map of sizes to use as source

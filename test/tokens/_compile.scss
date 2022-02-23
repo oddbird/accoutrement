@@ -10,16 +10,21 @@
   // -----------
   @include describe('map-compile [function]') {
     $test: (
-      a: 'hello %s' ('%s': 'world'),
+      a: 'hello %s'
+        (
+          '%s': 'world',
+        ),
       b: (
         'nested': '#a',
       ),
       c: 'not #b->nested',
     );
-
     $new: (
       external: 'totally #c',
-      internal: '#external' ('str-replace': 'not' 'new'),
+      internal: '#external'
+        (
+          'str-replace': 'not' 'new',
+        ),
       a: 'world',
     );
 
@@ -37,7 +42,6 @@
     }
 
     @include it('Compiles a map based on additional source') {
-
       @include assert-equal(
         compile.map-compile($new, $test),
         (
@@ -50,7 +54,13 @@
 
     @include it('Target map takes priority') {
       @include assert-equal(
-        compile.map-compile($new, (a: 'no', c: 'not peanuts')),
+        compile.map-compile(
+          $new,
+          (
+            a: 'no',
+            c: 'not peanuts',
+          )
+        ),
         (
           external: 'totally not peanuts',
           internal: 'totally new peanuts',
@@ -62,10 +72,16 @@
 
   @include describe('map-compile-with [function]') {
     color.$colors: (
-      'brand-blue': hsl(195, 85%, 35%),
+      'brand-blue': hsl(195deg, 85%, 35%),
       'contrast-dark': maroon,
-      'dark-blue': '#brand-blue' ('shade': 25%),
-      'light-blue': '#brand-blue' ('tint': 25%),
+      'dark-blue': '#brand-blue'
+        (
+          'shade': 25%,
+        ),
+      'light-blue': '#brand-blue'
+        (
+          'tint': 25%,
+        )
     );
 
     $colors-compiled: (
@@ -74,7 +90,6 @@
       'dark-blue': c.mix(maroon, #0d7fa5, 25%),
       'light-blue': c.mix(white, #0d7fa5, 25%),
     );
-
     $fn: meta.get-function('color', $module: 'color');
 
     @include it('Compiles a map using the color function') {
@@ -89,7 +104,11 @@
         compile.map-compile-with(
           $colors-compiled,
           $fn,
-          $do: ('color.adjust': ('hue': 180deg))
+          $do: (
+            'color.adjust': (
+              'hue': 180deg,
+            )
+          )
         ),
         (
           'brand-blue': #a5330d,

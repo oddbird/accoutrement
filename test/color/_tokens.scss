@@ -116,9 +116,17 @@ $_old: tokens.$colors;
 
     @include it('Uses the custom palette for all adjustments') {
       @include assert-equal(
-        tokens.color(white, ('shade': 80%), ('contrast-dark': maroon)),
+        tokens.color(
+          white,
+          (
+            'shade': 80%,
+          ),
+          (
+            'contrast-dark': maroon,
+          )
+        ),
         color.mix(maroon, white, 80%)
-      )
+      );
     }
 
     @include it('Has a default _contrast-light') {
@@ -141,15 +149,30 @@ $_old: tokens.$colors;
 
     @include it('Compiles a color map, with reference to global colors') {
       @include assert-equal(
-        tokens.compile-colors((a: '#contrast-dark')),
-        (a: tokens.color(contrast-dark))
+        tokens.compile-colors(
+          (
+            a: '#contrast-dark',
+          )
+        ),
+        (
+          a: tokens.color(contrast-dark),
+        )
       );
     }
 
     @include it('Allows overriding the source') {
       @include assert-equal(
-        tokens.compile-colors((a: '#contrast-dark'), (contrast-dark: maroon)),
-        (a: maroon)
+        tokens.compile-colors(
+          (
+            a: '#contrast-dark',
+          ),
+          (
+            contrast-dark: maroon,
+          )
+        ),
+        (
+          a: maroon,
+        )
       );
     }
 
@@ -157,14 +180,35 @@ $_old: tokens.$colors;
       tokens.$colors: ('contrast-dark': green);
 
       @include assert-equal(
-        tokens.compile-colors((a: red ('shade': 80%))),
-        (a: color.mix(green, red, 80%)),
+        tokens.compile-colors(
+          (
+            a: red
+              (
+                'shade': 80%,
+              ),
+          )
+        ),
+        (
+          a: color.mix(green, red, 80%),
+        ),
         'the default with global source'
       );
 
       @include assert-equal(
-        tokens.compile-colors((a: red ('shade': 80%)), ('contrast-dark': black)),
-        (a: color.mix(black, red, 80%)),
+        tokens.compile-colors(
+          (
+            a: red
+              (
+                'shade': 80%,
+              ),
+          ),
+          (
+            'contrast-dark': black,
+          )
+        ),
+        (
+          a: color.mix(black, red, 80%),
+        ),
         'global source is ignored'
       );
 
@@ -182,7 +226,11 @@ $_old: tokens.$colors;
         'Global setting is maroon'
       );
 
-      @include tokens.with-colors(('contrast-dark': green)) {
+      @include tokens.with-colors(
+        (
+          'contrast-dark': green,
+        )
+      ) {
         @include assert-equal(
           tokens.color('contrast-dark'),
           green,

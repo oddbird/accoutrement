@@ -4,11 +4,14 @@
 
 // Plus
 // ----
-/// Add two values together in accoutrement maps.
+/// Add two values together in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'plus'`, `'add'`, or `'+'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_plus` to `plus`
+/// - NEW: Available for direct usage
 ///
 /// @access public
 /// @name plus
@@ -34,11 +37,14 @@
 
 // Minus
 // -----
-/// Subtract one value from another in accoutrement maps.
+/// Subtract one value from another in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'minus'`, `'subtract'`, or `'-'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_minus` to `minus`
+/// - NEW: Available for direct usage
 ///
 /// @access public
 /// @name minus
@@ -69,11 +75,14 @@
 
 // Times
 // -----
-/// Multiplty two values in accoutrement maps.
+/// Multiply two values in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'times'`, `'multiply'`, or `'*'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_times` to `times`
+/// - NEW: Available for direct usage
 ///
 /// @access public
 /// @name times
@@ -103,12 +112,14 @@
 
 // Divide
 // ------
-/// Divide two values in accoutrement maps.
+/// Divide two values in Accoutrement maps.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'divide'`, or `'/'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_divide` to `divide`
+/// - NEW: Available for direct usage
 /// @access public
 /// @name divide
 /// @group token-internal
@@ -132,13 +143,15 @@
 
 // Modulo
 // ------
-/// Divide two values in accoutrement maps,
+/// Divide two values in Accoutrement maps,
 /// and return the remainder.
 ///
-/// Direct access to this function is prefixed,
-/// but it is available in all accoutrement maps as
+/// Available in all Accoutrement maps as
 /// `'modulo'`, `'remainder'`, `'mod'`, or `'%'`.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_modulo` to `modulo`
+/// - NEW: Available for direct usage
 /// @access public
 /// @name modulo
 /// @group token-internal

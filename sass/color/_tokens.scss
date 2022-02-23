@@ -39,7 +39,7 @@
 /// They default to `white` and `black` respectively.
 ///
 /// @since 0.1.0 -
-/// - BREAKING: Uses the new [shared](core.html) map syntax,
+/// - BREAKING: Uses the new [shared](tokens.html) map syntax,
 ///   for internal references and adjustments
 ///
 /// @group color-tokens
@@ -162,7 +162,7 @@ $colors: () !default;
 /// @param {string | list} $color -
 ///   The name of a color in your palette,
 ///   or a color description in the
-///   [map configuration format](color-api.html#color-configuration).
+///   [map configuration format](color-tokens.html#variable--colors).
 /// @param {map | null} $do [null] -
 ///   A map of function/ratio adjustments to run on the returned value
 /// @param {map} $source [$colors] -
@@ -170,11 +170,10 @@ $colors: () !default;
 ///   Defaults to the global `$colors` map.
 ///
 /// @return {color} -
-///   A calculated css-ready color,
+///   A calculated CSS-ready color,
 ///   based on your global color palette and adjustments.
 @function color($color, $do: null, $source: $colors) {
   $source: m.deep-merge(config.contrast-settings(), $source);
-
   $_global: $colors;
   $colors: $source !global;
 
@@ -199,7 +198,7 @@ $colors: () !default;
 /// Compile all the tokens in a color map.
 /// This is particularly useful for exporting
 /// a static version of the token map
-/// with all the accoutrement syntax removed --
+/// with all the Accoutrement syntax removed --
 /// e.g. for use in javascript or documentation.
 ///
 /// @since 4.0.0 -
@@ -216,10 +215,7 @@ $colors: () !default;
 /// @return {map} -
 ///   A copy of the original map,
 ///   with all token values resolved
-@function compile-colors(
-  $map: $colors,
-  $source: $colors,
-) {
+@function compile-colors($map: $colors, $source: $colors) {
   $source: m.merge($source or (), $map);
 
   @return tokens.map-compile-with(

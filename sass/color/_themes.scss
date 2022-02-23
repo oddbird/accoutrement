@@ -11,7 +11,7 @@
 
 // Shades Of
 // ---------
-/// Generates an accoutrement map of light/dark color variations
+/// Generates an Accoutrement map of light/dark color variations
 /// from a map of user-defined colors,
 /// based on luminosity.
 /// The origin color will be included in the appropriate spot,
@@ -108,7 +108,7 @@
 /// @param {string | color} $colors... -
 ///   ArgList of colors
 /// @return {color} -
-///   A calculated css-ready color-value based on your global color palette.
+///   A calculated CSS-ready color-value based on your global color palette.
 @function stripe-colors($colors...) {
   $gradient: ();
   $width: math.div(100%, list.length($colors));

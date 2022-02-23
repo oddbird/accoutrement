@@ -136,6 +136,10 @@
     </li>
   
   
+    <li class="nav-item">
+      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+    </li>
+  
   
     <li class="nav-item">
       <a href="token-vars.html" data-nav="is-not-active">Tokens » Custom<span class="widont">&nbsp;</span>Properties</a>
@@ -148,12 +152,12 @@
                 
   
     <li class="nav-item">
-      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
+      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
     </li>
   
   
     <li class="nav-item">
-      <a href="ratio-tokens.html" data-nav="is-not-active">Ratio Tokens</a>
+      <a href="ratios.html" data-nav="is-not-active">Built-In Ratios</a>
     </li>
   
   
@@ -432,7 +436,7 @@ yarn add accoutrement [--dev]
 @use '&lt;path-to&gt;/accoutrement/sass/color';
 </code></pre>
 <p>If you’re using <a href="https://github.com/linkedin/eyeglass">Eyeglass</a>,
-you can use the default “tools” (core + plugins) using<span class="widont">&nbsp;</span>only:</p>
+you can use the default “tools” using<span class="widont">&nbsp;</span>only:</p>
 <pre><code class="lang-scss">@use 'accoutrement';
 </code></pre>
 <h2 id="modules-for-common-data-types">Modules for common data<span class="widont">&nbsp;</span>types</h2>
@@ -443,9 +447,9 @@ For managing CSS transitions and<span class="widont">&nbsp;</span>animations</li
 For managing CSS colors and<span class="widont">&nbsp;</span>contrast-ratios</li>
 <li><strong><a href="https://www.oddbird.net/accoutrement/docs/scale.html">Scale</a></strong> –
 For managing CSS sizes: typographic scales, spacing,<span class="widont">&nbsp;</span>etc.</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/ratios.html">Type</a></strong> –
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/type.html">Type</a></strong> –
 For managing webfonts, generated content, and other text<span class="widont">&nbsp;</span>needs</li>
-<li><strong><a href="https://www.oddbird.net/accoutrement/docs/type.html">Ratios</a></strong> –
+<li><strong><a href="https://www.oddbird.net/accoutrement/docs/ratios.html">Ratios</a></strong> –
 For managing aspect and typography ratios
 (several common ratios are<span class="widont">&nbsp;</span>provided)</li>
 <li><strong><a href="https://www.oddbird.net/accoutrement/docs/vars.html">Variables</a></strong> –
@@ -472,10 +476,7 @@ between design<span class="widont">&nbsp;</span>tokens:</p>
   // internal reference &amp; adjustments
   'gutter': '#root'
     (
-      'scale': (
-        '_major-third',
-        1,
-      ),
+      scale: '_major-third' 1,
       'convert-units': 'rem',
     ),
 );

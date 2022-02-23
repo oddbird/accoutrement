@@ -19,8 +19,8 @@ groups:
     token-internal: 'Pre-Registered Functions'
     token-vars: 'Tokens » Custom Properties'
   'Ratios':
-    ratios: Built-In Ratios
     ratio-tokens: Ratio Tokens
+    ratios: Built-In Ratios
     ratio-vars: Ratio Tokens » CSS Variables
   'Animate':
     animate: 'QuickStart: Animate'

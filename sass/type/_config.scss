@@ -70,7 +70,7 @@ $font-path: '' !default;
 /// @since 0.1.0 -
 /// - NEW: Supports `'bold italic'` weight/style syntax
 ///   in addition to `('bold', 'italic')`
-/// - BREAKING: Full support for the [core](core.html) map-reference syntax,
+/// - BREAKING: Full support for the [token](tokens.html) map-reference syntax,
 ///   not just font-name alias reference
 /// @since type-4.0.0 -
 /// - BREAKING: Remove the `$font-formats` variable,

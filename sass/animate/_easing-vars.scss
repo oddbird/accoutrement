@@ -95,7 +95,7 @@ $easing-var-prefix: 'ease-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source [$easing] -
 ///   Optional map of easing to use as a palette source
@@ -136,7 +136,7 @@ $easing-var-prefix: 'ease-' !default;
 ///   The optional fallback value for a `var()` function:
 ///   - `true` will generate a fallback based on the token value
 ///   - A token name will fallback to the value of that
-///     css-variable and then to the token's calculated value
+///     CSS variable and then to the token's calculated value
 ///   - Any other fallback will be passed through unchanged
 /// @param {map} $source -
 ///   Optional Accoutrement map of easing tokens

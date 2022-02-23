@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Compiling Token Maps | Accoutrement Documentation</title>
+  <title>Pre-Registered Functions | Accoutrement Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -122,7 +122,7 @@
   
   
     <li class="nav-item">
-      <a href="token-compile.html" data-nav="is-active">Compiling Token<span class="widont">&nbsp;</span>Maps</a>
+      <a href="token-compile.html" data-nav="is-not-active">Compiling Token<span class="widont">&nbsp;</span>Maps</a>
     </li>
   
   
@@ -137,7 +137,7 @@
   
   
     <li class="nav-item">
-      <a href="token-internal.html" data-nav="is-not-active">Pre-Registered Functions</a>
+      <a href="token-internal.html" data-nav="is-active">Pre-Registered Functions</a>
     </li>
   
   
@@ -380,11 +380,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Accoutrement</a> »
-    <strong>Compiling Token Maps</strong>
+    <strong>Pre-Registered Functions</strong>
   </nav>
 
 
-        <div data-page="token-compile">
+        <div data-page="token-internal">
           
   
     
@@ -409,128 +409,18 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="compiling-token-maps">Compiling Token Maps</h1>
-<p>Tools for compiling Accoutrement map tokens,
-useful for exporting versions of
-token maps with all of the Accoutrement syntax<span class="widont">&nbsp;</span>removed.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="function--map-compile">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type">@function</span>
-      
-
-      
-        <a href="#function--map-compile" class="item-name">map-compile()</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Allows for the compilation of each token in a map,
-or a map and an additional<span class="widont">&nbsp;</span>source.</p>
-
-      
-  
-    
-      <section class="summary-subsection">
-        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
-        <div class="subsection-details"><ul>
-<li>NEW: Provides for compilation and exporting of
-static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
+      <h1 id="pre-registered-functions">Pre-Registered Functions</h1>
+<p>We provide a number of pre-registered functions
+to help with token management,<span class="widont">&nbsp;</span>including:</p>
+<ul>
+<li>All the <a href="https://sass-lang.com/documentation/modules">built-in Sass modules</a>,
+prefixed with the module name in a dot notation (e.g. <code>'list.index'</code>)</li>
+<li>All the <a href="https://www.oddbird.net/accoutrement/docs/utils.html">Accoutrement utilities</a>
+and individual module<span class="widont">&nbsp;</span>functions.</li>
+<li>A number of math helpers listed<span class="widont">&nbsp;</span>below…</li>
 </ul>
-</div>
-      </section>
-    
+
+      
   
 
       
@@ -542,8 +432,6 @@ static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
     </div>
   
 
-  </div>
-
   
 
   
@@ -552,110 +440,6 @@ static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
   
   
   
-
-  
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$map:</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The map to be<span class="widont">&nbsp;</span>compiled</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$source:</span>
-      
-      
-      <span class="value-type">(map |<span class="widont">&nbsp;</span>null)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>A map of reference<span class="widont">&nbsp;</span>tokens</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@return</span>
-      
-      
-      <span class="value-type">(map)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The parsed value of keys in the original<span class="widont">&nbsp;</span>map</p>
-
-      </div>
-    
-  </div>
-
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -666,7 +450,7 @@ static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Examples</span>
+        <span class="item-subtitle-main">Example</span>
       </h3>
 
       
@@ -697,21 +481,18 @@ static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
           </span>
 
           
-            <span class='code-description'>
-              Compile each token in a map
-            </span>
-          
         </div>
       
 
       
       
       <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;root&#39;: 16px,
-  &#39;text-size&#39;: &#39;#root&#39;,
+  &#39;text&#39;: 14px 16px 24px,
+  &#39;small&#39;: &#39;#text&#39; (&#39;list.nth&#39;: 1),
+  &#39;medium&#39;: &#39;#text&#39; (&#39;list.nth&#39;: 2),
 );
-
-/*! #{inspect(tools.map-compile($sizes))} */</code></pre>
+/*! small: #{tools.get($sizes, &#39;small&#39;)} */
+/*! medium: #{tools.get($sizes, &#39;medium&#39;)} */</code></pre>
     </div>
   
 
@@ -733,85 +514,8 @@ static version of Accoutrement<span class="widont">&nbsp;</span>maps.</li>
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! (&quot;root&quot;: 16px, &quot;text-size&quot;: 16px) */</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-            <span class='code-description'>
-              Compile a map based on an additional source
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
-  &#39;root&#39;: 16px,
-  &#39;text-size&#39;: &#39;#root&#39;,
-  &#39;display-text&#39;: &#39;#spacer&#39;
-);
-
-$spacing-sizes: (
-  &#39;spacer&#39;: 2rem,
-);
-
-/*! #{inspect(tools.map-compile($sizes, $spacing-sizes))} */</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! (&quot;root&quot;: 16px, &quot;text-size&quot;: 16px, &quot;display-text&quot;: 2rem) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/*! small: 14px */
+/*! medium: 16px */</code></pre>
     </div>
   
 
@@ -830,56 +534,6 @@ $spacing-sizes: (
   
   
     
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">get()</span>
-      
-      
-      
-      <span class="item-note">[private]</span>
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
     
   
 
@@ -910,7 +564,7 @@ $spacing-sizes: (
 
 
 
-<section class="item" id="function--map-compile-with">
+<section class="item" id="function--plus">
   
     
   
@@ -928,7 +582,7 @@ $spacing-sizes: (
       
 
       
-        <a href="#function--map-compile-with" class="item-name">map-compile-with()</a>
+        <a href="#function--plus" class="item-name">plus()</a>
       
 
       
@@ -949,9 +603,9 @@ $spacing-sizes: (
 
   
     <div class="text-block">
-      <p>Allows for the compilation of each token in a map,
-with token values resolved based on a function applied
-on each key-value<span class="widont">&nbsp;</span>pair.</p>
+      <p>Add two values together in Accoutrement<span class="widont">&nbsp;</span>maps.</p>
+<p>Available in all Accoutrement maps as
+<code>'plus'</code>, <code>'add'</code>, or <code>'+'</code>.</p>
 
       
   
@@ -959,9 +613,8 @@ on each key-value<span class="widont">&nbsp;</span>pair.</p>
       <section class="summary-subsection">
         <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
         <div class="subsection-details"><ul>
-<li>NEW: Provides for compilation and exporting of
-static version of Accoutrement maps with tokens
-resolved based on data<span class="widont">&nbsp;</span>type.</li>
+<li>BREAKING: Renamed from <code>_a_plus</code> to <code>plus</code></li>
+<li>NEW: Available for direct<span class="widont">&nbsp;</span>usage</li>
 </ul>
 </div>
       </section>
@@ -1009,17 +662,17 @@ resolved based on data<span class="widont">&nbsp;</span>type.</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$map:</span>
+        <span class="item-name">$num1:</span>
       
       
-      <span class="value-type">(map)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The map to be<span class="widont">&nbsp;</span>compiled</p>
+        <p>The name or length of the size you are adding<span class="widont">&nbsp;</span>to</p>
 
       </div>
     
@@ -1036,44 +689,17 @@ resolved based on data<span class="widont">&nbsp;</span>type.</li>
     <h4 class="param-title">
       
       
-        <span class="item-name">$function:</span>
+        <span class="item-name">$num2:</span>
       
       
-      <span class="value-type">(string |<span class="widont">&nbsp;</span>function)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The function to apply on each key-value pair in the<span class="widont">&nbsp;</span>map</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$args...:</span>
-      
-      
-      <span class="value-type">(arglist)</span>
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Any arguments required for the function<span class="widont">&nbsp;</span>call</p>
+        <p>The name or length of the size being<span class="widont">&nbsp;</span>added</p>
 
       </div>
     
@@ -1095,14 +721,15 @@ resolved based on data<span class="widont">&nbsp;</span>type.</li>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(map)</span>
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>The parsed value of keys in the original<span class="widont">&nbsp;</span>map</p>
+        <p>The calculated results of adding
+<code>$num1</code> and <code>$num2</code></p>
 
       </div>
     
@@ -1159,24 +786,17 @@ resolved based on data<span class="widont">&nbsp;</span>type.</li>
           </span>
 
           
-            <span class='code-description'>
-              Compile a map using a particular function
-            </span>
-          
         </div>
       
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@use &#39;color&#39;;
-
-tools.$colors: (
-  &#39;brand-blue&#39;: hsl(234, 85%, 35%),
-  &#39;dark-blue&#39;: &#39;#brand-blue&#39; (&#39;shade&#39;: 30%),
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;text&#39;: 16px,
+  &#39;margin&#39;: 14px,
+  &#39;spacer&#39;: &#39;#text&#39; (&#39;plus&#39;: &#39;#margin&#39;),
 );
-
-$fn: meta.get-function(&#39;color&#39;, $module: &#39;color&#39;);
-/*! #{inspect(tools.map-compile-with(tools.$colors, $fn))} */</code></pre>
+/*! spacer: #{tools.get($sizes, &#39;spacer&#39;)} */</code></pre>
     </div>
   
 
@@ -1198,7 +818,7 @@ $fn: meta.get-function(&#39;color&#39;, $module: &#39;color&#39;);
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/*! (&quot;brand-blue&quot;: #0d1da5, &quot;dark-blue&quot;: #091474) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/*! spacer: 30px */</code></pre>
     </div>
   
 
@@ -1216,295 +836,1219 @@ $fn: meta.get-function(&#39;color&#39;, $module: &#39;color&#39;);
   
   
   
-    <div class="requires-wrapper">
-      
     
-  <div data-item-section="requires">
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--minus">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--minus" class="item-name">minus()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Subtract one value from another in Accoutrement<span class="widont">&nbsp;</span>maps.</p>
+<p>Available in all Accoutrement maps as
+<code>'minus'</code>, <code>'subtract'</code>, or <code>'-'</code>.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: Renamed from <code>_a_minus</code> to <code>minus</code></li>
+<li>NEW: Available for direct<span class="widont">&nbsp;</span>usage</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
 
     
       
-      
         
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <span class="item-name">set()</span>
       
       
+        <span class="item-name">$num1:</span>
       
-      <span class="item-note">[private]</span>
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size you are subtracting<span class="widont">&nbsp;</span>from</p>
+
+      </div>
+    
   </div>
 
 
+      
         
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
       
+      
+        <span class="item-name">$num2:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size to<span class="widont">&nbsp;</span>subtract</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The calculated results of subtracting
+<code>$num2</code> from <code>$num1</code></p>
+
+      </div>
     
   </div>
 
   
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;text&#39;: 16px,
+  &#39;margin&#39;: 14px,
+  &#39;shim&#39;: &#39;#text&#39; (&#39;minus&#39;: &#39;#margin&#39;),
+);
+/*! shim: #{tools.get($sizes, &#39;shim&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! shim: 2px */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--times">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--times" class="item-name">times()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Multiply two values in Accoutrement<span class="widont">&nbsp;</span>maps.</p>
+<p>Available in all Accoutrement maps as
+<code>'times'</code>, <code>'multiply'</code>, or <code>'*'</code>.</p>
+
       
   
     
-  <div data-item-section="used-by">
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: Renamed from <code>_a_times</code> to <code>times</code></li>
+<li>NEW: Available for direct<span class="widont">&nbsp;</span>usage</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
 
     
       
-      
         
-
-        
-          
-          
-  
-  
-  
-  
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-change.html#function--compile-changes" class="item-name">compile-changes()</a>
       
       
+        <span class="item-name">$num1:</span>
       
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
       
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size you are<span class="widont">&nbsp;</span>multiplying</p>
+
+      </div>
+    
   </div>
 
 
-        
       
         
-
-        
-          
-          
-  
-  
-  
-  
   
   
 
   
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-ease.html#function--compile-easing" class="item-name">compile-easing()</a>
       
       
+        <span class="item-name">$num2:</span>
       
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
       
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>multiple</p>
+
+      </div>
+    
   </div>
 
 
-        
       
-        
 
-        
-          
-          
-  
-  
-  
-  
-  
+      
   
 
+      
   
+    
   <div class="param-list">
     <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  animate-times.html#function--compile-times" class="item-name">compile-times()</a>
       
       
+        <span class="item-name">@return</span>
       
       
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  color-tokens.html#function--compile-colors" class="item-name">compile-colors()</a>
-      
-      
-      
+      <span class="value-type">(number)</span>
       
     </h4>
 
     
+      
+      <div class="param-details text-block">
+        <p>The calculated results of multiplying
+<code>$num1</code> by <code>$num2</code></p>
+
+      </div>
+    
   </div>
 
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
   
 
+      
   
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
+
       
-        <a href="
-  ratio-tokens.html#function--compile-ratios" class="item-name">compile-ratios()</a>
-      
-      
-      
-      
-    </h4>
+  
 
     
   </div>
 
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
   
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  scale-sizes.html#function--compile-sizes" class="item-name">compile-sizes()</a>
-      
-      
-      
-      
-    </h4>
 
+  
+  
     
-  </div>
 
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
 
-        
       
         
+  
+  
 
-        
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
           
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;text&#39;: 16px,
+  &#39;double&#39;: &#39;#text&#39; (&#39;times&#39;: 2),
+);
+/*! double: #{tools.get($sizes, &#39;double&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
           
-  
-  
-  
-  
-  
-  
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  type-fonts.html#function--compile-fonts" class="item-name">compile-fonts()</a>
       
       
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
+      <pre class="hljs-pre"><code class="lang-css">/*! double: 32px */</code></pre>
+    </div>
   
 
     </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--divide">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--divide" class="item-name">divide()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Divide two values in Accoutrement<span class="widont">&nbsp;</span>maps.</p>
+<p>Available in all Accoutrement maps as
+<code>'divide'</code>, or <code>'/'</code>.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: Renamed from <code>_a_divide</code> to <code>divide</code></li>
+<li>NEW: Available for direct<span class="widont">&nbsp;</span>usage</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$num1:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size you are<span class="widont">&nbsp;</span>dividing</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$num2:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>division</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The calculated results of dividing
+<code>$num1</code> by <code>$num2</code></p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;text&#39;: 16px,
+  &#39;half&#39;: &#39;#text&#39; (&#39;divide&#39;: 2),
+);
+/*! half: #{tools.get($sizes, &#39;half&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! half: 8px */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--modulo">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--modulo" class="item-name">modulo()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Divide two values in Accoutrement maps,
+and return the<span class="widont">&nbsp;</span>remainder.</p>
+<p>Available in all Accoutrement maps as
+<code>'modulo'</code>, <code>'remainder'</code>, <code>'mod'</code>, or <code>'%'</code>.</p>
+
+      
+  
+    
+      <section class="summary-subsection">
+        <h3 class="summary-subtitle">Since <code>4.0.0</code>:</h3>
+        <div class="subsection-details"><ul>
+<li>BREAKING: Renamed from <code>_a_modulo</code> to <code>modulo</code></li>
+<li>NEW: Available for direct<span class="widont">&nbsp;</span>usage</li>
+</ul>
+</div>
+      </section>
+    
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$num1:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size you are<span class="widont">&nbsp;</span>dividing</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$num2:</span>
+      
+      
+      <span class="value-type">(string |<span class="widont">&nbsp;</span>length)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name or length of the size to use as a<span class="widont">&nbsp;</span>division</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(number)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The modulo of two<span class="widont">&nbsp;</span>numbers</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">$sizes: (
+  &#39;text&#39;: 16px,
+  &#39;mod&#39;: &#39;#text&#39; (&#39;modulo&#39;: 3),
+);
+/*! mod: #{tools.get($sizes, &#39;mod&#39;)} */</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">/*! mod: 1px */</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
   
 
   

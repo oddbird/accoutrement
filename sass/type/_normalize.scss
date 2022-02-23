@@ -14,6 +14,8 @@
 /// to allow shorthand APIs,
 /// while providing reliable data formats to the internal functions.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font` to `font`
 /// @since 2.0.0 -
 /// - BREAKING: Non-map fonts are interpreted as font-stacks,
 ///   and converted to an explicit map
@@ -30,7 +32,7 @@
 ///   The map key used to access the font,
 ///   if available…
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @return {map} -
 ///   A map of font data in consistent longhand format
@@ -92,6 +94,8 @@
 /// Normalize a font-name based on
 /// implicit or explicit cues.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font-name` to `font-name`
 /// @since 2.0.0 -
 /// - BREAKING: Ignores private tokens when tracking an alias origin,
 ///   or determining name based on key
@@ -106,7 +110,7 @@
 ///   The map key used to access the font,
 ///   if available…
 /// @param {map} $source [$fonts] -
-///   Optional accoutrement-format map of fonts
+///   Optional Accoutrement-format map of fonts
 ///   to use as the origin palette
 /// @return {string} -
 ///   The font-name associated with the given font map
@@ -145,6 +149,8 @@
 /// Normalize a font-stack based on
 /// given name and stack.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font-stack` to `font-stack`
 /// @access private
 /// @group type-normalize
 ///
@@ -185,6 +191,8 @@
 // ----------------------
 /// Parse a list of font variants into a map of `style` and `weight` settings.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-variant-name` to `variant-name`
 /// @since 0.1.0 -
 /// - NEW: Supports `'bold italic'` weight/style syntax
 ///   in addition to `('bold', 'italic')`
@@ -227,6 +235,8 @@
 /// and format-paths are interpolated
 /// to create a self-contained map of variant data.
 ///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-variant-data` to `variant-data`
 /// @access private
 /// @group type-normalize
 ///

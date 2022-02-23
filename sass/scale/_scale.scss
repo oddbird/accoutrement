@@ -10,7 +10,7 @@
 // ----------------
 /// Apply a modular or linear scale to any value,
 /// moving up or down the scale by a given number of steps.
-/// (linear scaling is simple multiplication,
+/// (Linear scaling is simple multiplication
 /// and may not be particularly useful where the scale is known).
 ///
 /// @since 4.0.0 -
@@ -26,14 +26,14 @@
 /// @param {token | number} $value -
 ///   The original value to be scaled
 /// @param {token | number | 'linear'} $ratio -
-///   The key-name or value of a ratio
+///   The key name or value of a ratio
 /// @param {number} $steps -
 ///   The number of steps to move along a scale
 /// @param {map} $source [ratio.$ratios] -
-///   Optional accoutrement-format map of ratios to use as the origin palette
+///   Optional Accoutrement-format map of ratios to use as the origin palette
 ///   (in addition to the provided defaults)
 /// @return {number} -
-///   The scaled value.
+///   The scaled value
 /// @throw -
 ///   Ratio must be either a number or "linear"
 @function scale($value, $ratio, $steps: 1, $source: ratio.$ratios) {
