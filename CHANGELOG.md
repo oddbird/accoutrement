@@ -32,8 +32,9 @@ color palettes.
   now perform a deep merge of the token maps. Previously a shallow
   merge was performed,
   [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
-- INTERNAL: Upgrade dev dependencies.
 - INTERNAL: Limit files included in npm package.
+- INTERNAL: Switch from Travis CI to GitHub Actions for CI.
+- INTERNAL: Upgrade dev dependencies.
 
 - [Animate][animate]:
 
