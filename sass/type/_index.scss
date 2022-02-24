@@ -1,0 +1,78 @@
+/// # QuickStart: Type
+/// Sass typography and webfont helpers.
+/// - Gather all your fonts into a single map
+/// - Access fonts by name
+/// - Automate webfont imports from a CDN, or relative font files
+/// - Also includes helpers for accessibility
+///   and pseudo-elements.
+/// @group type
+
+@forward 'config';
+@forward 'helpers' show font-url, import-font-face;
+@forward 'a11y';
+@forward 'fonts';
+@forward 'font-vars';
+@forward 'pseudo-elements';
+
+/// ## Import
+/// If you've already imported `accoutrement` you are ready to go.
+/// You can also import the type module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/type';
+/// ```
+/// @group type
+
+/// ## Webfont Configuration
+///
+/// ```scss
+/// // Set the a path to your fonts directory
+/// $font-path: '../fonts/';
+///
+/// $fonts: (
+///   // describe locally-hosted font files for import and access
+///   'heading': (
+///     'name': 'maven',
+///     'stack': ('helvetica', 'arial', sans-serif),
+///     'formats': 'woff' 'ttf',
+///     'normal': 'maven/maven_pro_regular-webfont',
+///     'bold': 'maven/maven_pro_bold-webfont',
+///   ),
+///
+///   // describe CDN fonts for access
+///   'body': (
+///     'name': 'Source Sans Pro',
+///     'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+///   ),
+///
+///   // provide aliases when useful
+///   'alias': '#body',
+/// );
+/// ```
+/// @group type
+
+/// ## Import WebFonts
+/// Import one font at a time with `font-face()`
+/// or all your local webfonts with `import-webfonts()`:
+///
+/// ```scss
+///  // Import one font by configuration key
+///  @include font-face('body');
+///
+///  // Import all local fonts
+///  @include import-webfonts;
+/// ```
+///
+/// Set your font-family anywhere,
+/// using the semantic names you defined earlier:
+///
+/// ```scss
+/// html {
+///   @include font-family('body');
+/// }
+///
+/// h1, h2, h3 {
+///   @include font-family('heading');
+/// }
+/// ```
+/// @group type

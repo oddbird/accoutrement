@@ -1,0 +1,236 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use '../scale';
+@use '../../sass/tokens';
+@use '../internal/throw';
+@use 'query-utils' as utils;
+
+/// # Media Queries
+/// @group layout-queries
+
+// Breakpoints
+// -----------
+/// Establish a map of named breakpoints.
+///
+/// If using [Accoutrement Scale](https://www.oddbird.net/accoutrement/docs/scale.html),
+/// you can use the scale syntax
+/// for describing size-relationships and adjustments –
+/// and even reference `$sizes` as though they are `$breakpoints`.
+/// Otherwise, the map should contain only valid CSS length values.
+///
+/// @since 0.1.0 -
+/// - BREAKING: Uses the new [shared](tokens.html) map syntax,
+///   for internal references and adjustments
+///
+/// @group layout-queries
+/// @link https://zellwk.com/blog/media-query-units/
+///   PX, EM, or REM Media Queries?
+/// @example scss - defining breakpoints
+///   tools.$breakpoints: (
+///     'small': 30em,
+///     'medium': 45em,
+///   );
+/// @example scss - using Accoutrement-scale
+///   tools.$breakpoints: (
+///     'small': 30em ('convert-units': 'browser-ems'),
+///     'medium': '#small' ('times': 1.5),
+///   );
+///
+/// @type map
+$breakpoints: () !default;
+
+// Break [function]
+// ----------------
+/// Return a breakpoint from the `$breakpoint` map,
+/// or the Accoutrement-scale `$sizes` map if it's available.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom breakpoint source-palette
+/// - NEW: Accepts `$scale` boolean argument,
+///   to turn off access to [scale](scale.html) plugin `$sizes` map
+///
+/// @group layout-queries
+///
+/// @param {string} $break -
+///   The name or value of a breakpoint
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$breakpoints] -
+///   Optional Accoutrement-format map of breakpoints
+///   to use as the origin palette
+/// @param {boolean} $scale [true] -
+///   By default, we merge in any `$sizes` available
+///   from the [scale](scale.html) plugin --
+///   making both `$breakpoints` and `$sizes` keys available
+/// @return {length} -
+///   The retrieved value of a named breakpoint
+/// @throws `$break` is not a valid length or keyword
+@function break($break, $do: null, $source: $breakpoints, $scale: true) {
+  @if ($scale) {
+    $source: map.merge(scale.$sizes, $source);
+  }
+
+  @if (meta.type-of($break) == 'number') and (math.unit($break)) {
+    // apply adjustments
+    @if $do {
+      @return tokens.compile($source, $break $do);
+    }
+
+    // return color without changes
+    @return $break;
+  }
+
+  // get breakpoint
+  $return: tokens.get($source, $break, $do);
+
+  // validate
+  @if (meta.type-of($return) != 'number') or (math.is-unitless($return)) {
+    @return throw.error(
+      '`#{$break}` is not a valid length or keyword for $break',
+      'break'
+    );
+  }
+
+  @return $return;
+}
+
+// Below [mixin]
+// -------------
+/// Generate a max–<`width`/`height`> query,
+/// for styling elements below the given viewport width.
+///
+/// To help with overlapping min/max queries,
+/// we remove `1px` (or `0.01em`) from every max value by default.
+/// You can adjust that setting
+/// to adjust min values
+/// or avoid adjustments
+/// using the global `$adjust-query-overlap` setting.
+///
+/// @since 2.0.0 -
+/// - BREAKING: min/max adjustments applied to all units (not only px/em/rem)
+/// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
+///
+/// @group layout-queries
+/// @example scss
+///   @include tools.below(30em) {
+///     html { background: red; }
+///   }
+/// @example scss
+///   tools.$breakpoints: ('red': 30em);
+///
+///   @include tools.below('red') {
+///     html { background: red; }
+///   }
+///
+/// @param {length | string} $max -
+///   The name of a documented breakpoint/size,
+///   or an arbitarty length to use in the query.
+/// @param {'width' | 'height'} $prop ['width'] -
+///   The property (width or height) to test against,
+///   for a result of e.g. `(max-width: 30em)`.
+@mixin below($max, $prop: 'width') {
+  $value: break($max);
+  $value: utils.nudge-query($value, 'max');
+
+  @media (max-#{$prop}: #{$value}) {
+    @content;
+  }
+}
+
+// Above [mixin]
+// -------------
+/// Generate a min-<`width`/`height`> query,
+/// for styling elements above the given viewport width.
+///
+/// To help with overlapping min/max queries,
+/// we remove `1px` (or `0.01em`) from max values by default.
+/// You can adjust that setting
+/// to adjust min values
+/// or avoid adjustments
+/// using the global `$adjust-query-overlap` setting.
+///
+/// @since 2.0.0 -
+/// - BREAKING: min/max adjustments applied to all units (not only px/em/rem)
+/// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
+///
+/// @group layout-queries
+/// @example scss
+///   @include tools.above(50em) {
+///     html { background: green; }
+///   }
+/// @example scss
+///   tools.$breakpoints: ('green': 50em);
+///
+///   @include tools.above('green') {
+///     html { background: green; }
+///   }
+///
+/// @param {length | string} $min -
+///   The name of a documented breakpoint/size,
+///   or an arbitrary length to use in the query.
+/// @param {'width' | 'height'} $prop ['width'] -
+///   The property (width or height) to test against,
+///   for a result of e.g. `(min-width: 30em)`.
+@mixin above($min, $prop: 'width') {
+  $value: break($min);
+  $value: utils.nudge-query($value, 'min');
+
+  @media (min-#{$prop}: #{$value}) {
+    @content;
+  }
+}
+
+// Between [mixin]
+// ---------------
+/// Generate a min-and-max-<`width`/`height`> query,
+/// for styling elements between given viewport widths.
+///
+/// To help with overlapping min/max queries,
+/// we remove `1px` (or `0.01em`) from every max value by default.
+/// You can adjust that setting
+/// to adjust min values
+/// or avoid adjustments
+/// using the global `$adjust-query-overlap` setting.
+///
+/// @since 2.0.0 -
+/// - BREAKING: min/max adjustments applied to all units (not only px/em/rem)
+/// - NEW: min/max adjustments respect `$adjust-query-overlap` global setting
+///
+/// @group layout-queries
+/// @example scss
+///   @include tools.between(30em, 50em) {
+///     html { background: yellow; }
+///   }
+/// @example scss
+///   tools.$breakpoints: (
+///     'red': 30em,
+///     'green': 50em,
+///   );
+///
+///   @include tools.between('red', 'green') {
+///     html { background: yellow; }
+///   }
+///
+/// @param {length | string} $min -
+///   The name of a documented breakpoint/size,
+///   or an arbitarty length to use as a minimum in the query.
+/// @param {length | string} $max -
+///   The name of a documented breakpoint/size,
+///   or an arbitarty length to use as a maximum in the query.
+/// @param {'width' | 'height'} $prop ['width'] -
+///   The property (width or height) to test against,
+///   for a result of e.g. `(min-width: 30em)`.
+@mixin between($min, $max, $prop: 'width') {
+  $value-min: break($min);
+  $value-max: utils.nudge-query($value-min, 'min');
+  $value-max: break($max);
+  $value-max: utils.nudge-query($value-max, 'max');
+
+  @media (min-#{$prop}: #{$value-min}) and (max-#{$prop}: #{$value-max}) {
+    @content;
+  }
+}

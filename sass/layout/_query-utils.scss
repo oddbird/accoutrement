@@ -1,0 +1,58 @@
+@use 'sass:math';
+
+/// # Query Utils
+/// @group layout-queries
+
+// Adjust Query Overlap
+// --------------------
+/// When using both `min-` and `max-` media-queries,
+/// you will often get a `1px` or `1em` overlap
+/// where neither or both queries are applied.
+/// In order to avoid that,
+/// we nudge the `max-` value down by default.
+/// Set this variable to `min` to nudge `min-` values up,
+/// or `false` to keep both min and max values un-adjusted,
+///
+/// @since 2.0.0 -
+/// - NEW: Allows you to override global max-adjustment default
+///
+/// @group layout-queries
+/// @type 'min' | 'max' | false
+/// @link https://tzi.fr/css/prevent-double-breakpoint/ Prevent Double Breakpoints
+$adjust-query-overlap: 'max' !default;
+
+// Nudge Query [function]
+// ----------------------
+/// Nudge value by `1px` when comparable,
+/// or `0.01` for other units —
+/// to avoid media-query overlap
+/// between min and max values
+///
+/// @since 2.0.0 -
+/// - BREAKING: Adjusts all units (not only px/em/rem)
+/// - BREAKING: Requires `$is` argument, either `min` or `max`
+/// - NEW: Optionally override `max` adjustment with `min` or `false`
+///
+/// @access private
+/// @link https://tzi.fr/css/prevent-double-breakpoint/ Prevent Double Breakpoints
+///
+/// @param {length} $value -
+///   The query value to adjust
+/// @param {'max' | 'min'} $is -
+///   The type of value we're looking at,
+///   either `min` or `max`
+/// @param {'max' | 'min' | false} $nudge [$adjust-query-overlap] -
+///   The type of values that should be adjusted,
+///   either `min` or `max` or `false`
+/// @return {length} -
+///   The adjusted value, if `$is` and `$nudge` match,
+///   otherwise the original value is returned
+@function nudge-query($value, $is, $nudge: $adjust-query-overlap) {
+  @if ($nudge) and ($nudge == $is) {
+    $to: if(($is == 'min'), 1, -1);
+    $amount: if(math.compatible($value, 1px), 1px, 0.01);
+    $value: $value + ($amount * $to);
+  }
+
+  @return $value;
+}

@@ -1,0 +1,125 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/animate/times';
+@use '../../sass/animate/time-vars' as vars;
+@use 'test-data' as data;
+@use 'sass:map';
+
+$_old: times.$times;
+times.$times: data.$times;
+
+// Time Tests
+// ============
+@include test-module('animate/time-vars') {
+  // Times-- [mixin]
+  // ------------------
+  @include describe('Times-- [mixin]') {
+    @include it('Generates CSS variables from the default time map') {
+      @include assert {
+        @include output {
+          @include vars.times--;
+        }
+
+        @include expect {
+          --time-alias: 5s;
+          --time-thread: var(--time-alias, 5s);
+          --time-fast: 150ms;
+          --time-fade: 500ms;
+          --time-math-tests: 2;
+          --time-plus-name: 152ms;
+        }
+      }
+    }
+
+    @include it('Generates CSS variables for any time map') {
+      @include assert {
+        @include output {
+          @include vars.times--(
+            (
+              'mine': 300ms,
+            )
+          );
+        }
+
+        @include expect {
+          --time-mine: 300ms;
+        }
+      }
+    }
+  }
+
+  // Time-- [mixin]
+  // -----------------
+  @include describe('Time-- [mixin]') {
+    @include it('Generates a single variable from a token') {
+      @include assert {
+        @include output {
+          @include vars.time--('fast');
+        }
+
+        @include expect {
+          --time-fast: 150ms;
+        }
+      }
+    }
+
+    @include it('Generates a reference variable from a token') {
+      @include assert {
+        @include output {
+          @include vars.time--('thread');
+        }
+
+        @include expect {
+          --time-thread: var(--time-alias, 5s);
+        }
+      }
+    }
+
+    @include it('Generates a new variable alias') {
+      @include assert {
+        @include output {
+          @include vars.time--('new', 'thread');
+        }
+
+        @include expect {
+          --time-new: var(--time-thread, 5s);
+        }
+      }
+    }
+  }
+
+  // Var-Time [function]
+  // -------------------
+  @include describe('Var-Time [function]') {
+    @include it('Accesses a time variable with default fallback') {
+      @include assert-equal(
+        vars.var-time('alias'),
+        var(--time-alias, times.time('alias'))
+      );
+    }
+
+    @include it('Allows custom fallback') {
+      @include assert-equal(vars.var-time('alias', 2s), var(--time-alias, 2s));
+    }
+
+    @include it('Allows false fallback') {
+      @include assert-equal(vars.var-time('alias', false), var(--time-alias));
+    }
+
+    @include it('Accepts custom palette') {
+      $my-palette: (
+        'my-base': 3s,
+        'my-adjustment': '#my-base'
+          (
+            'times': 2,
+          ),
+      );
+
+      @include assert-equal(
+        vars.var-time('my-adjustment', $source: $my-palette),
+        var(--time-my-adjustment, 6s)
+      );
+    }
+  }
+} // end module
+
+times.$times: $_old;

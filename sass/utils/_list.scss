@@ -1,0 +1,91 @@
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:meta';
+@use '../internal/throw';
+@use '../internal/function';
+
+/// ## Sass Lists
+/// Utility functions that extend the Sass core modules,
+/// to help with advanced list manipulation.
+/// @group utils
+
+// Remove Nth
+// ----------
+/// Remove any item (1-indexed) from a list.
+///
+/// This function has a `list-` prefix added by default
+/// (e.g. `list-remove-nth()`)
+/// unless it's imported directly.
+/// However, it's available in all Accoutrement maps
+/// as `'remove-nth'`.
+///
+/// @since 4.0.0 -
+/// - NEW: Now also available to use directly, without private prefix
+///
+/// @group utils
+/// @example scss
+///   $map: (
+///     'main-start': ['nav-end' 'main-start' 'footer-start'],
+///     'small-start': '#main-start' ('remove-nth': 1),
+///   );
+///   /*! #{inspect(tools.get($map, 'small-start'))} */
+///
+/// @param {list} $list -
+///   The original list to be edited
+/// @param {number} $index -
+///   The 1-indexed item to remove from the list
+/// @return {list} -
+///   The original list, with item removed
+/// @throws `$index` must be a non-zero integer
+/// @throws `$index` is too large for the list length
+@function remove-nth($list, $index) {
+  $result: template($list);
+  $type: meta.type-of($index);
+  $length: list.length($list);
+
+  @if ($type != 'number') or ($index == 0) or (math.round($index) != $index) {
+    $got: 'got (#{$type}) `#{if(($type == "null"), "null", $index)}`';
+    @return throw.error(
+      '$index must be a non-zero integer, #{$got}',
+      'remove-nth'
+    );
+  } @else if (math.abs($index) > $length) {
+    @return throw.error(
+      '$index is `#{$index}` but list is only #{$length} items long',
+      'remove-nth'
+    );
+  }
+
+  $index: if(($index < 0), $length + $index + 1, $index);
+
+  @for $i from 1 through $length {
+    @if ($i != $index) {
+      $result: list.append($result, list.nth($list, $i));
+    }
+  }
+
+  @return $result;
+}
+@include function.internal(
+  meta.get-function('remove-nth'),
+  'remove-nth',
+  'list-remove-nth'
+);
+
+// List From Template
+// ------------------
+/// Return a new (empty) list using the same delimiter
+/// and bracket settings as the template list.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_list-template` to `template`
+/// @access private
+///
+/// @param {list} $template [()] -
+///   The original list to be matched
+/// @return {list} -
+///   An empty list that matches the template
+@function template($template: ()) {
+  // return the same type of list we were given…
+  @return join((), (), list.separator($template), list.is-bracketed($template));
+}

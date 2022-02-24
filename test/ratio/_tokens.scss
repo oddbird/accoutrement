@@ -1,0 +1,137 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/ratio/tokens';
+@use '../../sass/utils/map';
+@use 'sass:math';
+
+$_old: tokens.$ratios;
+tokens.$ratios: ('new': '#_octave', 'token': 'linear', 'bad': red);
+
+@include test-module('ratio/tokens') {
+  // Ratio [function]
+  // ----------------
+  @include describe('Ratio [function]') {
+    @include it('Returns a named ratio with _ prefix') {
+      @include assert-equal(tokens.ratio('_fifth'), math.div(3, 2));
+    }
+
+    @include it('Returns a recursive ratio') {
+      @include assert-equal(tokens.ratio('new'), tokens.ratio('_octave'));
+    }
+
+    @include it('Accepts $do adjustments') {
+      @include assert-equal(
+        tokens.ratio(
+          'new',
+          (
+            'plus': 1,
+          )
+        ),
+        tokens.ratio('_octave') + 1
+      );
+    }
+
+    @include it('Accepts custom source') {
+      $custom: (
+        'special': calc(16 / 9),
+        'custom-source': '#special',
+      );
+
+      @include assert-equal(
+        tokens.ratio('custom-source', $source: $custom),
+        calc(16 / 9)
+      );
+    }
+  }
+
+  @include describe('Add Ratios [mixin]') {
+    $outer: tokens.$ratios;
+    $new1: (
+      'test': calc(1 / 3),
+      'other': calc(1 / 2),
+    );
+    $new2: (
+      'test': calc(16 / 9),
+    );
+    @include tokens.add-ratios($new1, $new2);
+    @include it('Adds maps to the $ratios global') {
+      @include assert-equal(
+        tokens.$ratios,
+        map.multi-merge($outer, $new1, $new2)
+      );
+    }
+    tokens.$ratios: $outer;
+  }
+
+  // Is-Ratio [function]
+  // --------------------
+  @include describe('Is-Ratio [function]') {
+    @include it('Returns linear') {
+      @include assert-equal(tokens.is-ratio('linear'), 'linear');
+    }
+
+    @include it('Returns numbers') {
+      @include assert-equal(tokens.is-ratio(0.3), 0.3);
+    }
+
+    @include it('Returns valid token-lookup') {
+      @include assert-equal(tokens.is-ratio('new'), 2);
+      @include assert-equal(tokens.is-ratio('token'), 'linear');
+    }
+
+    @include it('False on bad token-lookup') {
+      @include assert-equal(tokens.is-ratio('bad'), false);
+      @include assert-equal(tokens.is-ratio('missing'), false);
+    }
+
+    @include it('False on bad values') {
+      @include assert-equal(tokens.is-ratio(green), false);
+      @include assert-equal(tokens.is-ratio(false), false);
+    }
+  }
+
+  // Compile Ratios [function]
+  // --------------
+  @include describe('Compile Ratios [function]') {
+    @include it('Compiles the global map of ratios by default') {
+      @include assert-equal(
+        tokens.compile-ratios(),
+        (
+          'new': 2,
+          'token': 'linear',
+          'bad': red,
+        )
+      );
+    }
+
+    @include it('Compiles a local map with a global reference') {
+      @include assert-equal(
+        tokens.compile-ratios(
+          (
+            'new': '#_octave',
+          )
+        ),
+        (
+          'new': 2,
+        )
+      );
+    }
+
+    @include it('Compiles a local map with a local reference') {
+      @include assert-equal(
+        tokens.compile-ratios(
+          (
+            'new': '#_octave',
+          ),
+          (
+            '_octave': 4,
+          )
+        ),
+        (
+          'new': 4,
+        )
+      );
+    }
+  }
+} // end module
+
+tokens.$ratios: $_old;

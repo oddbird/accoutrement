@@ -1,0 +1,173 @@
+/// # QuickStart: Tokens
+/// Accoutrement tokens provide a custom syntax,
+/// using Sass Maps to define "tokens" of various types:
+///
+/// ```scss
+/// $sizes: (
+///   'root': 16px,
+///   'gutter': 1em,
+/// );
+/// ```
+///
+/// Tokens provide design abstractions,
+/// that can be easily reused across a product or design system.
+/// There are several reasons for this approach:
+/// - Sass Maps provide a format that is readable by both humans & machines
+/// - All related values are stored in a single variable,
+///   with explicit relationships intact
+/// - We can build automation tools around meaningful token-groups,
+///   from [font-imports](type-fonts.html)
+///   to [generated style guides](https://www.oddbird.net/herman)
+/// - Unlike `YAML`, `JSON`, and other object languages,
+///   Sass is a *style language* that understands the values involved,
+///   and provides specific tools for maintaining those values
+///
+/// **Note:** We no longer use token maps
+/// internally at [OddBird](https://oddbird.net),
+/// since Sass "modules" now provide a way
+/// to group & namespace normal Sass variables in a meaningful way,
+/// and [access module variables as a map](https://sass-lang.com/documentation/modules/meta#module-variables).
+/// By relying on core Sass features,
+/// we avoid any confusion around the custom token syntax.
+///
+/// @since 4.0.0 -
+/// - BREAKING: The `$functions` map no longer accepts alias references
+///   or any other aspects of the token syntax
+/// - BREAKING: Ratios are no longer first-class adjustments
+///   (like functions) in the token syntax
+/// - BREAKING: `tokens.$handle-missing-keys` defaults to `null`,
+///   and no longer supports the legacy `silent` option.
+/// - BREAKING: `get-token()` is renamed `get()`,
+///   and only accepts bare token names (no `#` prefix),
+///   including the `outer->inner` nested token syntax.
+/// - NEW: The new `compile()` function provides direct access to
+///   parse & resolve an arbitrary token value
+///   (including aliases with `#` prefix),
+///   rather than calling a specific token by name.
+/// - NEW: All the built-in Sass module functions are registered by default,
+///   as `<module-name>.<function-name>`
+/// - NEW: `has-token()` function checks a map
+///   to see if the given token is defined,
+///   and supports the `outer->inner` nested token syntax.
+/// @group tokens
+
+// function registration
+// ---------------------
+@use 'register';
+@forward 'function' show register, $functions;
+
+// token api
+// --------
+@forward 'config';
+@forward 'inspect';
+@forward 'api';
+@forward 'compile';
+@forward 'vars';
+
+/// ## Import
+/// If you've already imported `accoutrement` you are ready to go.
+/// If you want to import the tokens alone:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/tokens';
+/// ```
+/// @group tokens
+
+/// ## [Token Maps](token-api.html)
+/// Using the map syntax,
+/// we can create named tokens for any related values:
+///
+/// ```scss
+/// $colors: (
+///   'brand': rgb(13, 127, 165),
+///   'text': black,
+/// );
+/// ```
+///
+/// We can also create alias tokens
+/// and explicit relationships,
+/// using a `#token` hashtag syntax:
+///
+/// ```scss
+/// $colors: (
+///   'brand': rgb(13, 127, 165),
+///   'accent': '#brand',
+///   'text': '#accent' ('shade': 75%),
+/// );
+/// ```
+///
+/// Those relationships will be calculated at compile-time,
+/// using the `token.get()` function
+/// (or shortcut functions provided by plugins):
+///
+/// ```scss
+/// html {
+///   color: token.get($colors, 'text');
+/// }
+/// ```
+///
+/// See [Token Maps](token-api.html) documentation
+/// for more detail.
+///
+/// @group tokens
+
+/// ## [Tokens » CSS Variables](token-vars.html)
+/// CSS Variables provide a DOM-aware alternative
+/// to the pre-processed Sass variables
+/// we use to store tokens.
+/// Rather than using one or the other,
+/// we recommend defining tokens in Sass
+/// (where relationships can be stored in an abstract format),
+/// and then generating CSS Variables as-necessary.
+///
+/// See [CSS Variables](token-vars.html) documentation
+/// for more detail.
+///
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('shade': 50%),
+///     'border': '#text',
+///   );
+///   html {
+///     // generate CSS Variables based on the map above…
+///     @include tools.tokens--($colors);
+///     // access CSS Variables with smart fallbacks…
+///     border-color: tools.var-token($colors, 'border');
+///     color: tools.var-token($colors, 'text');
+///   }
+///
+/// @group tokens
+
+/// ## [Utility Functions](token-register.html)
+/// We provide a set of built-in
+/// [list and string](utils.html) helpers --
+/// in addition to the functions defined in each module.
+///
+/// You can also use the Sass core functions
+/// (with appropriate module prefixing),
+/// or [register your own functions](token-register.html) --
+/// giving them any alias you like.
+///
+/// ```scss
+///   // Create a map of captured functions
+///   $functions: (
+///     'my-function': meta.get-function('my-function'),
+///     'rgba': meta.get-function('rgba'),
+///   );
+///   // Or add functions & aliases using the provided mixin:
+///   @include token.register('my-function', 'alias');
+/// ```
+///
+/// Once a function has been registered with Accoutrement,
+/// it is available to call by name or alias in all token adjustment maps:
+///
+/// ```scss
+///   @include token.register('rgba', 'fade');
+///   $colors: (
+///     'brand': hsl(120, 50%, 50%),
+///     'background': '#brand' ('fade': 50%),
+///   );
+/// ```
+///
+/// @group tokens

@@ -1,5 +1,6 @@
 **/.DS_Store
+*.log
 .sass-cache
 .vscode
+docs
 node_modules
-.nvmrc

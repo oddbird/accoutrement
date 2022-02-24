@@ -1,0 +1,17 @@
+@use '../../internal/function';
+@use 'sass:meta';
+
+// to register
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:selector';
+@use 'sass:string';
+
+@each $module in ('color', 'list', 'map', 'math', 'meta', 'selector', 'string')
+{
+  @each $name, $function in meta.module-functions($module) {
+    @include function.internal($function, '#{$module}.#{$name}');
+  }
+}

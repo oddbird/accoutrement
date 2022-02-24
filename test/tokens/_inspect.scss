@@ -1,0 +1,163 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/tokens/inspect';
+
+@include test-module('tokens/inspect') {
+  // Is-Private Token [function]
+  // ---------------------------
+  @include describe('Is Private Token [function]') {
+    @include it('Returns true for string tokens starting with _') {
+      @include assert-true(inspect.is-private-token('_hello'));
+
+      @include assert-true(inspect.is-private-token('_'));
+    }
+
+    @include it('Returns true for string tokens starting with -') {
+      @include assert-true(inspect.is-private-token('-hello'));
+
+      @include assert-true(inspect.is-private-token('-'));
+    }
+
+    @include it('Returns true for list tokens starting with private string') {
+      @include assert-true(inspect.is-private-token('_hello' 'world'));
+
+      @include assert-true(inspect.is-private-token('_' 32));
+    }
+
+    @include it('Returns false for un-prefixed tokens') {
+      @include assert-false(inspect.is-private-token('hello'));
+
+      @include assert-false(inspect.is-private-token(32));
+    }
+
+    @include it('Returns false for un-prefixed lists') {
+      @include assert-false(inspect.is-private-token('hello' 'world'));
+
+      @include assert-false(inspect.is-private-token(32 'world'));
+    }
+  }
+
+  // Is Alias For [function]
+  // -----------------------
+  @include describe('Is Alias For [function]') {
+    // tracking an alias for a single step
+    $test: (
+      '_brand': red,
+      'private': '#_brand',
+      'immediate': '#private',
+      'thread': '#immediate',
+      'altered': '#immediate break',
+      'pause': '#altered',
+    );
+
+    @include it('Returns false for a simple non-alias') {
+      @include assert-false(inspect.is-alias-for($test, '_brand'));
+    }
+
+    @include it('Returns false for a private alias-source') {
+      @include assert-false(inspect.is-alias-for($test, 'private'));
+    }
+
+    @include it('Returns the reference token for an alias thread') {
+      @include assert-equal(inspect.is-alias-for($test, 'thread'), 'immediate');
+    }
+
+    @include it('Returns the source token for an altered thread') {
+      @include assert-equal(inspect.is-alias-for($test, 'pause'), 'altered');
+    }
+
+    @include it('Optionally returns the origin reference following a thread') {
+      @include assert-equal(
+        inspect.is-alias-for($test, 'thread', 'origin'),
+        'private'
+      );
+    }
+
+    // tracking an alias to it's origin
+    $map: (
+      'one': 'hello world',
+      'two': '#one'
+        (
+          'str-replace': 'o' '0',
+        ),
+      'three': '#one three',
+      'four': '#two',
+      'five': '#four',
+      'six': '#five',
+      'kevin': '#one',
+      'bacon': '#kevin',
+    );
+
+    @include it('Returns a direct key as false') {
+      @include assert-false(inspect.is-alias-for($map, 'one'));
+    }
+
+    @include it('Returns false for a non-alias') {
+      @include assert-false(
+        inspect.is-alias-for($map, 'two'),
+        'with adjustments map'
+      );
+
+      @include assert-false(
+        inspect.is-alias-for($map, 'three'),
+        'with additional string'
+      );
+    }
+
+    @include it('Returns the origin key of an alias path') {
+      @include assert-equal(
+        inspect.is-alias-for($map, 'six', 'origin'),
+        'two',
+        'with adjustments map'
+      );
+
+      @include assert-equal(
+        inspect.is-alias-for($map, 'bacon', 'origin'),
+        'one',
+        'with dead-end string'
+      );
+    }
+  }
+
+  // Has-Token [function]
+  // --------------------
+  @include describe('Has Token [function]') {
+    $map: (
+      a: hello,
+      // there is no b
+      c:
+        (
+          d: (
+            e: hello world,
+            // there is no f
+          ),
+        ),
+    );
+
+    @include it('Returns true if a simple token is found') {
+      @include assert-true(inspect.has-token($map, a));
+      @include assert-true(inspect.has-token($map, 'a'));
+    }
+
+    @include it('Returns true if a nested token-alias is found') {
+      @include assert-true(inspect.has-token($map, 'c->d->e'));
+    }
+
+    @include it('Returns true if a nested token series is found') {
+      @include assert-true(inspect.has-token($map, c, d, e));
+    }
+
+    @include it('Returns false if a simple token is not found') {
+      @include assert-false(inspect.has-token($map, b));
+      @include assert-false(inspect.has-token($map, 'b'));
+    }
+
+    @include it('Returns false if a nested token-alias is not found') {
+      @include assert-false(inspect.has-token($map, 'b->d->f'));
+      @include assert-false(inspect.has-token($map, 'c->d->f'));
+    }
+
+    @include it('Returns false if a nested token series is not found') {
+      @include assert-false(inspect.has-token($map, b, d, f));
+    }
+  }
+}

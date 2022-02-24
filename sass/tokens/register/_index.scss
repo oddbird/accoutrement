@@ -1,0 +1,23 @@
+/// # Pre-Registered Functions
+/// We provide a number of pre-registered functions
+/// to help with token management,
+/// including:
+///
+/// - All the [built-in Sass modules](https://sass-lang.com/documentation/modules),
+///   prefixed with the module name in a dot notation (e.g. `'list.index'`)
+/// - All the [Accoutrement utilities](https://www.oddbird.net/accoutrement/docs/utils.html)
+///   and individual module functions.
+/// - A number of math helpers listed below...
+///
+/// @example scss
+///   $sizes: (
+///     'text': 14px 16px 24px,
+///     'small': '#text' ('list.nth': 1),
+///     'medium': '#text' ('list.nth': 2),
+///   );
+///   /*! small: #{tools.get($sizes, 'small')} */
+///   /*! medium: #{tools.get($sizes, 'medium')} */
+/// @group token-internal
+
+@use 'math';
+@use 'sass';

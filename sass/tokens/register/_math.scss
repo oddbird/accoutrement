@@ -1,0 +1,179 @@
+@use '../../internal/function';
+@use 'sass:math';
+@use 'sass:meta';
+
+// Plus
+// ----
+/// Add two values together in Accoutrement maps.
+///
+/// Available in all Accoutrement maps as
+/// `'plus'`, `'add'`, or `'+'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_plus` to `plus`
+/// - NEW: Available for direct usage
+///
+/// @access public
+/// @name plus
+/// @group token-internal
+/// @example scss
+///   $sizes: (
+///     'text': 16px,
+///     'margin': 14px,
+///     'spacer': '#text' ('plus': '#margin'),
+///   );
+///   /*! spacer: #{tools.get($sizes, 'spacer')} */
+/// @param {string | length} $num1 -
+///   The name or length of the size you are adding to
+/// @param {string | length} $num2 -
+///   The name or length of the size being added
+/// @return {number} -
+///   The calculated results of adding
+///   `$num1` and `$num2`
+@function plus($num1, $num2) {
+  @return $num1 + $num2;
+}
+@include function.internal(meta.get-function('plus'), 'plus', 'add', '+');
+
+// Minus
+// -----
+/// Subtract one value from another in Accoutrement maps.
+///
+/// Available in all Accoutrement maps as
+/// `'minus'`, `'subtract'`, or `'-'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_minus` to `minus`
+/// - NEW: Available for direct usage
+///
+/// @access public
+/// @name minus
+/// @group token-internal
+/// @example scss
+///   $sizes: (
+///     'text': 16px,
+///     'margin': 14px,
+///     'shim': '#text' ('minus': '#margin'),
+///   );
+///   /*! shim: #{tools.get($sizes, 'shim')} */
+/// @param {string | length} $num1 -
+///   The name or length of the size you are subtracting from
+/// @param {string | length} $num2 -
+///   The name or length of the size to subtract
+/// @return {number} -
+///   The calculated results of subtracting
+///   `$num2` from `$num1`
+@function minus($num1, $num2) {
+  @return $num1 - $num2;
+}
+@include function.internal(
+  meta.get-function('minus'),
+  'minus',
+  'subtract',
+  '-'
+);
+
+// Times
+// -----
+/// Multiply two values in Accoutrement maps.
+///
+/// Available in all Accoutrement maps as
+/// `'times'`, `'multiply'`, or `'*'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_times` to `times`
+/// - NEW: Available for direct usage
+///
+/// @access public
+/// @name times
+/// @group token-internal
+/// @example scss
+///   $sizes: (
+///     'text': 16px,
+///     'double': '#text' ('times': 2),
+///   );
+///   /*! double: #{tools.get($sizes, 'double')} */
+/// @param {string | length} $num1 -
+///   The name or length of the size you are multiplying
+/// @param {string | length} $num2 -
+///   The name or length of the size to use as a multiple
+/// @return {number} -
+///   The calculated results of multiplying
+///   `$num1` by `$num2`
+@function times($num1, $num2) {
+  @return $num1 * $num2;
+}
+@include function.internal(
+  meta.get-function('times'),
+  'times',
+  'multiply',
+  '*'
+);
+
+// Divide
+// ------
+/// Divide two values in Accoutrement maps.
+///
+/// Available in all Accoutrement maps as
+/// `'divide'`, or `'/'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_divide` to `divide`
+/// - NEW: Available for direct usage
+/// @access public
+/// @name divide
+/// @group token-internal
+/// @example scss
+///   $sizes: (
+///     'text': 16px,
+///     'half': '#text' ('divide': 2),
+///   );
+///   /*! half: #{tools.get($sizes, 'half')} */
+/// @param {string | length} $num1 -
+///   The name or length of the size you are dividing
+/// @param {string | length} $num2 -
+///   The name or length of the size to use as a division
+/// @return {number} -
+///   The calculated results of dividing
+///   `$num1` by `$num2`
+@function divide($num1, $num2) {
+  @return math.div($num1, $num2);
+}
+@include function.internal(meta.get-function('divide'), 'divide', '/');
+
+// Modulo
+// ------
+/// Divide two values in Accoutrement maps,
+/// and return the remainder.
+///
+/// Available in all Accoutrement maps as
+/// `'modulo'`, `'remainder'`, `'mod'`, or `'%'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_modulo` to `modulo`
+/// - NEW: Available for direct usage
+/// @access public
+/// @name modulo
+/// @group token-internal
+/// @example scss
+///   $sizes: (
+///     'text': 16px,
+///     'mod': '#text' ('modulo': 3),
+///   );
+///   /*! mod: #{tools.get($sizes, 'mod')} */
+/// @param {string | length} $num1 -
+///   The name or length of the size you are dividing
+/// @param {string | length} $num2 -
+///   The name or length of the size to use as a division
+/// @return {number} -
+///   The modulo of two numbers
+@function modulo($num1, $num2) {
+  @return $num1 % $num2;
+}
+@include function.internal(
+  meta.get-function('modulo'),
+  'modulo',
+  'remainder',
+  'mod',
+  '%'
+);

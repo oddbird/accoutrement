@@ -1,0 +1,16 @@
+@use 'easing-named' as named;
+@use 'sass:map';
+@use 'sass:meta';
+
+// Provides named easings with a prefix
+$_source-easing: meta.module-variables('named');
+$named-easing: ();
+
+@each $name, $value in $_source-easing {
+  $named-easing: map.merge(
+    $named-easing,
+    (
+      '_#{$name}': $value,
+    )
+  );
+}

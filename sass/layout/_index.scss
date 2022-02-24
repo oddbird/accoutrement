@@ -1,0 +1,58 @@
+/// # QuickStart: Layout
+/// Tools for managing CSS layout:
+/// - Organize named z-index values in a list
+/// - Manage all breakpoints in a map,
+///   and access with media-query helpers
+/// @group layout
+
+@forward 'query-utils' hide nudge-query;
+@forward 'queries';
+@forward 'z-index';
+
+/// ## Import
+///
+/// If you've already imported `accoutrement` you are ready to go.
+/// You can also import the layout module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/layout';
+/// ```
+/// @group layout
+
+/// ## Media Queries
+/// Establish your media-query breakpoints,
+/// or use sizes from [Accoutrement Scale](scale.html) directly:
+///
+/// ```scss
+/// $sizes: (
+///   'page': 36rem,
+/// );
+///
+/// $breakpoints: (
+///   'banner-text': 24em,
+/// );
+/// ```
+///
+/// Access your breakpoints with
+/// `above()`, `below()`, and `between()` mixins:
+///
+/// ```
+/// .banner-text {
+///   display: none;
+///
+///   @include above('banner-text') {
+///     display: block;
+///   }
+/// }
+///
+/// .container {
+///   @include below('page') {
+///     padding: .5em;
+///   }
+/// }
+/// ```
+///
+/// We remove `.09em` or `1px`
+/// from `max-width` queries,
+/// to account for media-query overlap issues.
+/// @group layout

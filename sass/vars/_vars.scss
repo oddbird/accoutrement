@@ -1,0 +1,87 @@
+@use 'sass:string';
+@use '../utils/string' as s;
+
+// Ident
+// -----
+/// Formats any string
+/// (like a Sass variable or token name)
+/// as a CSS "dashed-ident"
+/// that can be used for CSS custom properties.
+/// Spaces are replaced with a dash,
+/// and an optional prefix can be added,
+/// in the format `--<prefix><string>`.
+///
+/// @since 4.0.0 -
+/// - NEW: Provided publicly as `ident()`
+/// @since 2.0.0 -
+/// - NEW: Initial private release as `_a_var-name()`
+///
+/// @group vars
+/// @example scss
+///   $colors: (
+///     'brand': mediumvioletred,
+///     'action': teal,
+///   );
+///
+///   html {
+///     @each $name, $value in $colors {
+///       #{tools.ident($name, 'colors-')}: #{$value};
+///     }
+///   }
+///
+/// @param {string} $name -
+///   The name of the token to be used as a variable
+/// @param {string | null} $prefix [null] -
+///   Optional prefix added to the token name
+@function ident($name, $prefix: null) {
+  $string: string.unquote('--#{$prefix}#{$name}');
+  $string: s.replace($string, ' ', '-', 'all');
+  @return $string;
+}
+
+// Custom Props
+// ------------
+/// Converts a map of variable names and values
+/// into CSS custom properties,
+/// in the format `--<prefix><map-key>: <map-value>`.
+///
+/// This can be used with manually-generated maps,
+/// but we can also use the Sass `module-variables` function
+/// to generate a map of all the variables in a given module:
+///
+/// ```scss
+///   @use 'accoutrement/tools';
+///   @use 'sass:meta';
+///   @use '_my-colors';
+///
+///   $my-colors: meta.module-variables('_my-colors');
+///   html {
+///     @include tools.custom-props($my-colors, 'colors-');
+///   }
+/// ```
+///
+/// @since 4.0.0 -
+/// - NEW: Initial release
+///
+/// @group vars
+/// @example scss
+///   $colors: (
+///     'brand': mediumvioletred,
+///     'action': teal,
+///   );
+///
+///   html {
+///     @include tools.custom-props($colors, 'colors-');
+///   }
+///
+/// @param {string} $map -
+///   A map of keys and values to be converted into custom properties
+/// @param {string | null} $prefix [null] -
+///   Optional prefix added to each property name
+/// @output -
+///   Custom properties for every key/value pair in a map.
+@mixin custom-props($map, $prefix: null) {
+  @each $name, $value in $map {
+    #{ident($name, $prefix)}: #{$value};
+  }
+}

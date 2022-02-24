@@ -1,0 +1,187 @@
+@use '../internal/function';
+@use '../tokens';
+@use '../utils/map' as utils;
+@use 'sass:map' as m;
+@use 'sass:meta';
+@use 'sass:list';
+
+/// # Combined "Change" Maps: Animations & Transitions
+/// Combine your `$times` and `$easing` values
+/// to create entire transitions and animations --
+/// all stored in one place and easy to access
+/// for consistent "changes" across your project.
+/// @group animate-change
+
+// Changes Map
+// -----------
+/// A variable storing the map of
+/// all your standardized changes (transitions and animations).
+/// Any changes added to the `$changes` map will be accesible
+/// to the `change()` function by default.
+///
+/// Define each change with a `name` and `value`,
+/// or use interpolation to compose more complex changes.
+///
+/// ```
+/// $changes: (
+///   // single animation
+///   'glow': glow time('slow') ease('in-out-quad') infinite alternate,
+///
+///   // single transitions
+///   'slide': transform time('fast'),
+///   'fade': opacity time('fade') ease('out-quad'),
+///
+///   // interpolate using '#name' (quotes optional)
+///   // to build on existing "changes"
+///   'slide-in': #slide ease('out-back'),
+///   'slide-out': '#slide' ease('in'),
+///
+///   // or string together multiple "changes"
+///   'sidebar-in': ('#slide-in', '#fade' time('delay')),
+///
+///   // or create a 1-to-1 alias
+///   'modal-in': #sidebar-in,
+/// );
+/// ```
+///
+/// - Name your changes anything –
+///   from abstractions like `fade`,
+///   to concrete patterns like `sidebar-in`.
+/// - Values can be CSS-ready values,
+///   references other changes in the map,
+///   or format strings to interpolate.
+///
+/// @group animate-change
+$changes: () !default;
+
+// Change [function]
+// -----------------
+/// Access a named change in your `$changes` map.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group animate-change
+///
+/// @param {string} $name -
+///   The name of a change in your configuration (e.g. `fade-in`)
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$changes] -
+///   Optional Accoutrement-format map of changes to use as the origin palette
+/// @return {length} -
+///   The change value requested
+@function change($name, $do: null, $source: $changes) {
+  @return tokens.get($source, $name, $do);
+}
+@include function.internal(meta.get-function('change'), 'change');
+
+// Add Changes
+// -----------
+/// Merge individual change maps into the global `$changes` variable,
+/// in case you want to define changes in smaller groups --
+/// such as `button-changes`, `page-changes`, etc --
+/// before merging them into a single global changes-palette.
+///
+/// @group animate-change
+///
+/// @param {map...} $maps -
+///   Pass any number of maps to be merged and added
+/// @output -
+///   An updated global `$changes` variable,
+///   with new maps merged in.
+@mixin add-changes($maps...) {
+  $changes: utils.multi-merge($changes, $maps...) !global;
+}
+
+// Compile Changes
+// ---------------
+/// Compile all the tokens in a change map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for change token maps
+///
+/// @group animate-change
+///
+/// @param {map} $map [$changes] -
+///   The map to be compiled
+/// @param {map | null} $source [$changes] -
+///   A map of reference tokens that can be used
+///   for resolving changes.
+///   (defaults to the global `$changes` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-changes($map: $changes, $source: $changes) {
+  $source: m.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('change'),
+    null,
+    $source
+  );
+}
+
+// Animate [mixin]
+// ---------------
+/// Access named animations in your `$changes` map,
+/// and apply them to the `animation` property.
+///
+/// @group animate-change
+/// @example scss
+///   tools.$changes: (
+///     'fade-in': fade-in 300ms ease-out both,
+///   );
+///   .example {
+///     @include tools.animate('fade-in');
+///   }
+///
+/// @param {string} $names -
+///   Named animations to apply
+/// @output -
+///   The requested animations, applied in CSS
+@mixin animate($names...) {
+  $animation: list.join((), (), 'comma');
+
+  @each $name in $names {
+    $animation: list.append($animation, change($name));
+  }
+
+  animation: $animation;
+}
+
+// Transition [mixin]
+// ------------------
+/// Access named transitions in your `$changes` map,
+/// and apply them to the `transition` property.
+///
+/// @group animate-change
+/// @example scss
+///   tools.$changes: (
+///     'fade': opacity 300ms ease-out,
+///   );
+///   .example {
+///     @include tools.transition('fade');
+///   }
+///
+/// @param {string} $names -
+///   Named transitions to apply
+/// @output -
+///   The requested transitions, applied in CSS
+@mixin transition($names...) {
+  $transition: list.join((), (), 'comma');
+
+  @each $name in $names {
+    $transition: list.append($transition, change($name));
+  }
+
+  transition: $transition;
+}

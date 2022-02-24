@@ -1,0 +1,15 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/ratio/named';
+@use '../../sass/ratio/utils';
+@use 'sass:map';
+@use 'sass:meta';
+
+$named: meta.module-variables('named');
+
+@include test-module('ratio/utils') {
+  @include it('provides named ratios with a prefix') {
+    @each $name in map.keys($named) {
+      @include assert-true(map.has-key(utils.$named-ratios, '_#{$name}'));
+    }
+  }
+}

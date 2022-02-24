@@ -1,0 +1,116 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'throw';
+
+// Error [function]
+// ----------------
+/// @access private
+/// @param {*} $value -
+///   The value to check
+/// @param {string | list} $valid -
+///   A list of valid types to check against
+/// @param {string} $origin [null] -
+///   The origin of this value, for error reporting
+/// @param {string} $arg [null] -
+///   The origin arg-name, for error reporting
+/// @return {string} -
+///   The error message as a string, if errors are being caught
+/// @throws A compiled error message with all the details
+@function error($value, $valid, $origin: null, $arg: null) {
+  $type: meta.type-of($value);
+  $in: if((list.length($valid) > 1), 'in types:', 'a');
+  $arg: if($arg, ' `#{$arg}`', '');
+  $start: 'Argument#{$arg} must be #{$in} #{$valid};';
+  $value: if($value == null, '`null`', '(#{$type}) `#{$value}`');
+
+  @return throw.error('#{$start} got #{$value}', $origin);
+}
+
+// Check [function]
+// ----------------
+/// Check that the value is an acceptable type
+/// @access private
+/// @param {*} $value -
+///   The value to check
+/// @param {string | list} $valid -
+///   A list of valid types to check against
+/// @param {boolean} $throw [false] -
+///   Returns `null` on failure, rather than throwing an error
+/// @param {string} $origin [null] -
+///   The origin of this value, for error reporting
+/// @param {string} $arg [null] -
+///   The origin arg-name, for error reporting
+/// @return {*} -
+///   The value type, if it passes the type check
+/// @throws `$valid` is not a string or list
+/// @throws Type-of `$value` is not considered valid
+@function check(
+  $value,
+  $valid,
+  $throw: false,
+  $origin: 'type.check',
+  $arg: '$valid'
+) {
+  // validate types
+  @if not list.index('list' 'string', meta.type-of($valid)) {
+    @return throw.error(
+      '`$valid` argument must be a string or list of Sass data types',
+      'type.check'
+    );
+  }
+
+  // type check
+  $type: meta.type-of($value);
+  $empty-map: ($value == ()) and list.index($valid, 'map');
+
+  @if list.index($valid, $type) or $empty-map {
+    @return $type;
+  }
+
+  // error
+  @if ($throw) {
+    @return error($value, $valid, $origin, $arg);
+  }
+
+  // silent fail
+  @return null;
+}
+
+// Exclude [function]
+// -------------------
+/// Check that the value is not an invalid type
+/// @access private
+/// @param {*} $value -
+///   The value to check
+/// @param {string | list} $invalid -
+///   A list of invalid types to check against
+/// @param {boolean} $throw [false] -
+///   Returns `null` on failure, rather than throwing an error
+/// @return {*} -
+///   The value type, if it passes the type check
+/// @throws `$invalid` is not a string or list
+/// @throws Type-of `$value` is considered invalid
+@function exclude($value, $invalid, $throw: false) {
+  // validate types
+  @if not list.index('list' 'string', meta.type-of($invalid)) {
+    @return throw.error(
+      '`$invalid` argument must be a string or list of Sass data types',
+      'check'
+    );
+  }
+
+  // type check
+  $type: meta.type-of($value);
+
+  @if list.index($invalid, $type) {
+    // error
+    @if ($throw) {
+      @return error($value, $invalid);
+    }
+
+    // silent fail
+    @return null;
+  }
+
+  @return $type;
+}

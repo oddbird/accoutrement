@@ -1,0 +1,162 @@
+// stylelint-disable prettier/prettier
+
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/animate/times';
+@use '../../sass/animate/easing';
+@use '../../sass/animate/change';
+@use '../../sass/animate/change-vars' as vars;
+@use 'test-data' as data;
+@use 'sass:map';
+
+$_old-times: times.$times;
+times.$times: data.$times;
+
+$_old-easing: easing.$easing;
+easing.$easing: data.$easing;
+
+$changes: (
+  '_slide': transform times.time('fast'),
+  'alias': '#_slide',
+  'thread': '#alias',
+  'fade': opacity times.time('fade') easing.ease('_out-quad'),
+  'slide-in': '#_slide' easing.ease('_out-back'),
+  'sidebar-in': (
+    '#slide-in',
+    '#fade' times.time('delay'),
+  ),
+  'animation': slide-frames 1 times.time('fast') easing.ease('_out-back'),
+  'animation-ref': '#animation' both,
+);
+$_old-changes: change.$changes;
+change.$changes: $changes;
+
+// Change Var Tests
+// ================
+@include test-module('animate/change-vars') {
+  // Changes-- [mixin]
+  // ------------------
+  @include describe('Changes-- [mixin]') {
+    @include it('Generates CSS variables from the default changes map') {
+      @include assert {
+        @include output {
+          @include vars.changes--;
+        }
+
+        @include expect {
+          --change-alias: transform 150ms;
+          --change-thread: var(--change-alias, transform 150ms);
+          --change-fade: opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-slide-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          --change-animation: slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          --change-animation-ref: slide-frames 1 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+      }
+    }
+
+    @include it('Generates CSS variables for any changes map') {
+      @include assert {
+        @include output {
+          @include vars.changes--(('mine': all 150ms ease));
+        }
+
+        @include expect {
+          --change-mine: all 150ms ease;
+        }
+      }
+    }
+  }
+
+  // Change-- [mixin]
+  // -----------------
+  @include describe('Change-- [mixin]') {
+    @include it('Generates a single variable from a token') {
+      @include assert {
+        @include output {
+          @include vars.change--('fade');
+        }
+
+        @include expect {
+          --change-fade: opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+      }
+    }
+
+    @include it('Generates a reference variable from a token') {
+      @include assert {
+        @include output {
+          @include vars.change--('thread');
+        }
+
+        @include expect {
+          --change-thread: var(--change-alias, transform 150ms);
+        }
+      }
+    }
+
+    @include it('Generate reference to default easing') {
+      @include assert {
+        @include output {
+          @include vars.change--('sidebar-in');
+        }
+
+        @include expect {
+          --change-sidebar-in: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+      }
+    }
+
+    @include it('Generates a new variable alias') {
+      @include assert {
+        @include output {
+          @include vars.change--('new', 'thread');
+        }
+
+        @include expect {
+          --change-new: var(--change-thread, transform 150ms);
+        }
+      }
+    }
+  }
+
+  // Var-Change [function]
+  // -------------------
+  @include describe('Var-Change [function]') {
+    @include it('Accesses an easing variable with default fallback') {
+      @include assert-equal(
+        vars.var-change('alias'),
+        var(--change-alias, transform 150ms)
+      );
+    }
+
+    @include it('Allows custom fallback') {
+      @include assert-equal(
+        vars.var-change('alias', ease-out),
+        var(--change-alias, ease-out)
+      );
+    }
+
+    @include it('Allows false fallback') {
+      @include assert-equal(
+        vars.var-change('alias', false),
+        var(--change-alias)
+      );
+    }
+
+    @include it('Accepts custom palette') {
+      $my-palette: (
+        'my-base': ease-in,
+        'my-adjustment': '#my-base' ('str-replace': '-in' ''),
+      );
+
+      @include assert-equal(
+        vars.var-change('my-adjustment', $source: $my-palette),
+        var(--change-my-adjustment, ease)
+      );
+    }
+  }
+} // end module
+
+times.$times: $_old-times;
+easing.$easing: $_old-easing;
+change.$changes: $_old-changes;

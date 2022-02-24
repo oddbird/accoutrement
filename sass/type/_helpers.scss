@@ -1,0 +1,400 @@
+// stylelint-disable scss/dollar-variable-pattern
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use '../utils/string' as str;
+@use './config';
+
+/// # Internal WebFont Helpers
+/// These internal tools are not safe for public use --
+/// but we've documented the logic for transparency,
+/// and to encourage contributions.
+///
+/// @access private
+/// @group type-helpers
+
+// Font Style Options
+// ------------------
+/// A constant list of valid font-style settings
+/// (not including `normal`, which is also a valid weight).
+/// @access private
+/// @group type-helpers
+$FONT-STYLES: ('italic', 'oblique');
+
+// Font Weight Options
+// -------------------
+/// A constant list of valid font-weight settings
+/// (not including `normal`, which is also a valid style).
+/// @access private
+/// @group type-helpers
+$FONT-WEIGHTS: (
+  '100',
+  '200',
+  '300',
+  '400',
+  '500',
+  '600',
+  '700',
+  '800',
+  '900',
+  'bold',
+  'bolder',
+  'lighter'
+);
+
+// Font Weight Options
+// -------------------
+/// A constant map of valid font formats,
+/// with their file extension and full `format()` name.
+/// The order given here will also be used in defining font-face src order.
+/// @access private
+/// @group type-helpers
+$FONT-FORMATS: (
+  'local': null,
+  'eot': 'embedded-opentype',
+  'woff2': 'woff2',
+  'woff': 'woff',
+  'ttf': 'truetype',
+  'otf': 'opentype',
+  'svg': 'svg',
+  'svgz': 'svg',
+);
+
+// stylelint-disable function-url-quotes
+// Format URL
+// --------
+/// Interpolate a font path and format-type
+/// to create the proper font-src import URL.
+/// This private function does not prepend any global `$font-path`,
+/// leaving that to the public [`font-url()`][font-url] function.
+///
+/// [font-url]: fonts.html#function--font-url
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `font-url` to `format-url`
+/// @since type-4.0.0 -
+/// - NEW: Added to format font-paths correctly,
+///   with file extension and suffix.
+///
+/// @access private
+/// @group type-helpers
+///
+/// @param {string} $path -
+///   The base path for this font and format.
+///   If no file extension is included,
+///   we add one based on the format desired.
+///   Local and base64 font names & URI's are returned without any change.
+/// @param {string} $format -
+///   Short-form of the format to import, e.g. `woff` or `eot`.
+/// @param {string} $svgid -
+///   SVG fragment-identifier to append on svg fonts.
+///   The initial `#` character is optional,
+///   and will be added when missing.
+/// @param {boolean} $iefix -
+///   Optionally append an `?#iefix` suffix to `eot` fonts.
+/// @return {string} -
+///   Font-format URL for importing.
+@function format-url($path, $format, $svgid: null, $iefix: false) {
+  $suffix: '';
+
+  // some formats need no adjustments
+  @if ($format == 'local') or string.index($path, 'data:') {
+    @return $path;
+  }
+
+  // add file format when needed
+  $ext: '.' + $format;
+  $ext: if(string.index($path, $ext), '', $ext);
+
+  // add svgid when needed
+  @if string.index($format, 'svg') and
+    ($svgid) and
+    (not string.index($path, '#'))
+  {
+    $suffix: if(string.index($svgid, '#'), $svgid, '#' + $svgid);
+  }
+
+  // add iefix when needed
+  @if string.index($format, 'eot') and
+    ($iefix) and
+    (not string.index($path, '?'))
+  {
+    $suffix: '?#iefix';
+  }
+
+  // compile and return
+  @return $path + $ext + $suffix;
+}
+// stylelint-enable function-url-quotes
+
+// Font Src
+// --------
+/// Get the font `src` value for a given font path and format,
+/// including both `url()` and `format()`.
+/// This also sorts formats,
+/// organizing them into the proper output order for browser-compatibility.
+///
+/// @since type-4.0.0 -
+/// - BREAKING: No longer accepts the `$format` parameter.
+///
+/// @access private
+/// @group type-helpers
+///
+/// @param {string | map} $path -
+///   Path to the font files (leaving off the file format indicator),
+///   or data-uri for font-src.
+/// @param {string} $format -
+///   Short-form (e.g. 'eot' or 'otf') font-format to import.
+/// @param {string} $suffix [null] -
+///   SVG or EOT-iefix suffix to be added to font url.
+/// @return {list} -
+///   CSS-ready `url() format()` combination for font-face `src` output.
+@function font-src($path, $format) {
+  $format-name: map.get($FONT-FORMATS, $format);
+  $format-name: if($format-name, format($format-name), '');
+
+  // stylelint-disable-next-line function-url-quotes
+  $path: format-url($path, $format, $iefix: true);
+  @return font-url($path) $format-name;
+}
+
+// Font Src List
+// -------------
+/// Build a `src` list
+/// for one `@font-face` declaration block.
+///
+/// @since type-4.0.0 -
+/// - NEW: Added to sort and compile src lists,
+///   with local() options and proper format order.
+///
+/// @access private
+/// @group type-helpers
+///
+/// @param {map} $data -
+///   Normalized map of format/url pairs to import.
+/// @return {list} -
+///   Compiled list of `url() format()` pairs,
+///   ready to apply in the `src` property.
+@function font-src-list($data) {
+  $src: ();
+
+  // Use best-practice format order
+  @each $format in map.keys($FONT-FORMATS) {
+    $url: map.get($data, $format);
+
+    @if $url {
+      $item: ();
+
+      @if ($format == 'local') {
+        @each $name in $url {
+          $li: local($name);
+          $item: list.append($item, $li, 'comma');
+        }
+      } @else {
+        $li: font-src($url, $format);
+        $item: list.append($item, $li, 'comma');
+      }
+
+      $src: list.join($src, $item, 'comma');
+    }
+  }
+
+  @return $src;
+}
+
+// Font Get Variants
+// -----------------
+/// Extract all the variant key/data pairs,
+/// and return a filtered font-map including only font-variants.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-get-variants`
+///   to `font-get-variants`
+/// @since 0.1.0 -
+/// - NEW: Supports `'bold italic'` weight/style syntax
+///   in addition to `('bold', 'italic')`
+/// @since type-4.0.0 -
+/// - NEW: Added to extract variant-data from a font-map
+///
+/// @access private
+/// @group type-helpers
+///
+/// @param {map} $font -
+///   A map of all the data for a single font.
+/// @return {map} -
+///   Only the variants provided in the given font-map.
+@function font-get-variants($font) {
+  $var-options: list.join($FONT-STYLES, $FONT-WEIGHTS);
+  $var-options: list.append($var-options, 'normal');
+  $variants: ();
+
+  @each $key, $value in $font {
+    // get the first setting, and make sure it's a string…
+    $first: '#{list.nth($key, 1)}';
+    $first: if(
+      string.index($first, ' '),
+      list.nth(str.split($first, ' '), 1),
+      $first
+    );
+
+    // if it's a variant, add it to the list…
+    @if list.index($var-options, $first) {
+      $variants: map.merge(
+        $variants,
+        (
+          $key: $value,
+        )
+      );
+    }
+  }
+
+  @return $variants;
+}
+
+// Import Font-Face [mixin]
+// ------------------------
+/// Compile provided font-variant data into a
+/// CSS `@font-face` import.
+///
+/// @since 3.0.0 -
+/// - NEW: Supports `display` setting in font-maps
+///
+/// @access private
+/// @group type-helpers
+/// @example scss
+///   @include tools.import-font-face(
+///     $name: 'Franklin Gothic',
+///     $weight: 'normal',
+///     $style: 'normal',
+///     $data: (
+///       'local': 'Franklin Gothic' ('franklin-gothic'),
+///       'woff2': 'path/to/franklin-bolditalic-font.woff2',
+///       'ttf': 'path/to/franklin-bolditalic-font.ttf',
+///     )
+///   );
+///
+/// @param {string} $name -
+///   The font name.
+/// @param {string} $weight -
+///   The font-weight property,
+///   e.g. `bold` or `300`.
+/// @param {string} $style -
+///   The font-style property,
+///   e.g. `normal` or `italic`.
+/// @param {map} $data -
+///   Path to the font files (leaving off the file-format extension),
+///   or map of format/path pairs.
+/// @param {list | null} $unicode [null] -
+///   Optionally import only specific unicode ranges.
+/// @param {string | null} $display [null] -
+///   Optionally set the font-display property.
+/// @output `@font-face` CSS-block for importing a given font variant.
+/// @throws When a generic variant-path is provided
+///   without formats for interpolation.
+@mixin import-font-face(
+  $name,
+  $weight,
+  $style,
+  $data,
+  $unicode: null,
+  $display: null
+) {
+  // Special handling of eot with local or data
+  $eot: map.get($data, 'eot');
+  $local: map.get($data, 'local');
+  $double: false;
+
+  @if $eot {
+    $eot: format-url($eot, 'eot');
+    $eot: font-url($eot);
+
+    @if (not string.index($eot, 'data:')) {
+      @each $format, $url in $data {
+        $has-data: (($format != 'local') and string.index($url, 'data:'));
+
+        @if ($format == 'local') or $has-data {
+          $double: true;
+        }
+      }
+    }
+  }
+
+  // Format values for CSS
+  $name: string.quote($name);
+  $style: string.unquote($style);
+  $weight: string.unquote($weight);
+  $display: if($display, string.unquote($display), null);
+
+  @if $unicode {
+    $new: ();
+
+    @each $code in $unicode {
+      $new: list.append($new, string.unquote($code), 'comma');
+    }
+
+    $unicode: $new;
+  }
+
+  // Output…
+  @if $double {
+    $data: map.remove($data, 'eot');
+
+    // ie-only
+    @font-face {
+      font-family: $name;
+      font-style: $style;
+      font-weight: $weight;
+      font-display: $display;
+      src: $eot;
+      unicode-range: $unicode;
+    }
+
+    // everything else
+    @font-face {
+      font-family: $name;
+      font-style: $style;
+      font-weight: $weight;
+      font-display: $display;
+      src: font-src-list($data);
+      unicode-range: $unicode;
+    }
+  } @else {
+    // combined output
+    @font-face {
+      font-family: $name;
+      font-style: $style;
+      font-weight: $weight;
+      font-display: $display;
+      src: $eot;
+      src: font-src-list($data);
+      unicode-range: $unicode;
+    }
+  }
+}
+
+// Font-URL [function]
+// -------------------
+/// This is a wrapper for the CSS `url()` function,
+/// which simply prepends the global `$font-path` when appropriate.
+///
+/// @since type-4.0.0 -
+/// - BUGFIX: Supports Base64 data URI's, without prepending font-path
+///
+/// @group type-helpers
+/// @example scss
+///   tools.$font-path: '../fonts/';
+///   $src: tools.font-url('sans/my-sans-font.woff2');
+///   /* #{$src} */
+///
+/// @param {string} $path -
+///   A path relative to the fonts directory.
+/// @return {string} -
+///   The full path to a font file, in CSS `url('my/path')` format.
+@function font-url($path) {
+  @if not string.index($path, 'data:') {
+    $path: config.$font-path + $path;
+  }
+  // stylelint-disable-next-line function-url-quotes
+  @return url(string.quote($path));
+}

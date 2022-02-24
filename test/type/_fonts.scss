@@ -1,0 +1,401 @@
+@use '../../../node_modules/sass-true/sass/true' as *;
+@use '../../../sass/type/config';
+@use '../../../sass/type/fonts';
+@use '../../../sass/type/helpers';
+@use 'test-data' as data;
+
+$_global: config.$fonts;
+config.$fonts: data.$fonts;
+config.$font-path: data.$font-path;
+
+// Test Font API
+// =============
+@include test-module('Type: Fonts') {
+  // Font [function]
+  // ---------------
+  @include describe('Font [function]') {
+    @include it('Accesses normalized font-data by key-name') {
+      @include assert-equal(
+        fonts.font('TestFont'),
+        (
+          'stack': (
+            TestFont,
+            Georgia,
+            serif,
+          ),
+          'name': TestFont,
+        ),
+        $inspect: true
+      );
+    }
+
+    @include it('Accesses normalized font-data by key alias') {
+      @include assert-equal(
+        fonts.font('tf-alias'),
+        (
+          'stack': (
+            TestFont,
+            Georgia,
+            serif,
+          ),
+          'name': TestFont,
+        ),
+        $inspect: true
+      );
+    }
+
+    @include it('Accesses incomplete font-data') {
+      @include assert-equal(
+        fonts.font('_normal-stack'),
+        (
+          'stack': (
+            'Helvetica Neue',
+            Helvetica,
+            Arial,
+            sans-serif,
+          ),
+        ),
+        $inspect: true
+      );
+    }
+
+    @include it('Gets font from local source') {
+      $local: (
+        'new': (
+          'stack': 'hello' 'world',
+        ),
+      );
+      @include assert-equal(
+        fonts.font('new', $source: $local),
+        (
+          'stack': (
+            new,
+            hello,
+            world,
+          ),
+          'name': new,
+        ),
+        $inspect: true
+      );
+    }
+  }
+
+  // Compile Fonts [function]
+  // ---
+  @include describe('Compile Fonts [function]') {
+    @include it('References global fonts') {
+      @include assert-equal(
+        fonts.compile-fonts(
+          (
+            a: '#UniFont',
+          )
+        ),
+        (
+          a: fonts.font('UniFont'),
+        )
+      );
+    }
+
+    @include it('Compiles a local map with a global reference') {
+      @include assert-equal(
+        fonts.compile-fonts(
+          (
+            'new': '#TestFont',
+          )
+        ),
+        (
+          'new': (
+            'stack': (
+              TestFont,
+              Georgia,
+              serif,
+            ),
+            'name': TestFont,
+          ),
+        )
+      );
+    }
+
+    @include it('Compiles a local map with a local reference') {
+      @include assert-equal(
+        fonts.compile-fonts(
+          (
+            'new': '#TestFont',
+          ),
+          (
+            'TestFont': (
+              'stack': (
+                'Franklin Gothic',
+                'Arial',
+                'sans-serif',
+              ),
+            ),
+          )
+        ),
+        (
+          'new': (
+            'stack': (
+              TestFont,
+              'Franklin Gothic',
+              Arial,
+              sans-serif,
+            ),
+            'name': TestFont,
+          ),
+        )
+      );
+    }
+  }
+
+  // Font URL [function]
+  // -------------------
+  @include describe('font-url [function]') {
+    @include it('Prepend font folder to font path') {
+      @include assert-equal(
+        helpers.font-url('myfont.woff'),
+        url('../fonts/myfont.woff')
+      );
+    }
+
+    @include it('Leaves data-fonts without additional path info') {
+      @include assert-equal(
+        helpers.font-url('data:something'),
+        url('data:something')
+      );
+    }
+  }
+
+  // Font Family [function]
+  // ----------------------
+  @include describe('Font Family [function]') {
+    @include it('Explicit name') {
+      @include assert-equal(
+        fonts.font-family('body-font'),
+        (
+          'Source Sans Pro',
+          'Helvetica Neue',
+          'Helvetica',
+          'Arial',
+          'sans-serif'
+        )
+      );
+    }
+
+    @include it('Implicit name') {
+      @include assert-equal(
+        fonts.font-family('TestFont'),
+        ('TestFont', 'Georgia', 'serif')
+      );
+    }
+
+    @include it('Get font-family from local source') {
+      $local: (
+        'new': (
+          'stack': 'hello' 'world',
+        ),
+      );
+      @include assert-equal(
+        fonts.font-family('new', $local),
+        (new, hello, world)
+      );
+    }
+  }
+
+  // Font Family [mixin]
+  // -------------------
+  @include describe('Font Family [mixin]') {
+    @include it('Generates font-family property and value') {
+      @include assert {
+        @include output {
+          @include fonts.font-family('body-font');
+        }
+
+        @include expect {
+          font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial,
+            sans-serif;
+        }
+      }
+    }
+
+    @include it('Get font-family from local source') {
+      $local: (
+        'new': (
+          'stack': 'hello' 'world' 'serif',
+        ),
+      );
+      @include assert {
+        @include output {
+          @include fonts.font-family('new', $local);
+        }
+
+        @include expect {
+          font-family: new, hello, world, serif;
+        }
+      }
+    }
+  }
+
+  // Font Face [mixin]
+  // -----------------
+  @include describe('Font Face [mixin]') {
+    @include it('Font-face imports for each variant') {
+      @include assert {
+        @include output(false) {
+          @include fonts.font-face('kevin bacon');
+        }
+
+        @include expect(false) {
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: normal;
+            src: url('../fonts/sans/sourcesanspro-regular-webfont.eot');
+            src: (
+              url('../fonts/sans/sourcesanspro-regular-webfont.eot?#iefix')
+                format('embedded-opentype'),
+              url('../fonts/sans/sourcesanspro-regular-webfont.woff')
+                format('woff'),
+              url('../fonts/sans/sourcesanspro-regular-webfont.svg')
+                format('svg')
+            );
+          }
+
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: italic;
+            font-weight: normal;
+            src: url('../fonts/sans/sourcesanspro-italic-webfont.eot');
+            src: (
+              url('../fonts/sans/sourcesanspro-italic-webfont.eot?#iefix')
+                format('embedded-opentype'),
+              url('../fonts/sans/sourcesanspro-italic-webfont.woff')
+                format('woff'),
+              url('../fonts/sans/sourcesanspro-italic-webfont.svg')
+                format('svg')
+            );
+          }
+
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: bold;
+            src: url('../fonts/sans/sourcesanspro-bold-webfont.eot');
+          }
+
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: bold;
+            src: (
+              local('source-sans-pro-bold'),
+              local('Source Sans Pro bold'),
+              url('data:application/x-font-woff;charset=utf-8;base64...')
+                format('woff'),
+              url('../fonts/sans-ttf/sourcesanspro-bold-webfont.ttf')
+                format('truetype'),
+              url('../fonts/sans/sourcesanspro-bold-webfont.svg#boldID')
+                format('svg')
+            );
+          }
+        }
+      }
+    }
+
+    @include it('Supports unicode-range & display settings') {
+      @include assert {
+        @include output(false) {
+          @include fonts.font-face('UniFont');
+        }
+
+        @include expect(false) {
+          @font-face {
+            font-family: 'Unicode Test';
+            font-style: normal;
+            font-weight: normal;
+            font-display: swap;
+            src: url('../fonts/path/to/normal.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6;
+          }
+        }
+      }
+    }
+  }
+
+  // Import Webfonts [mixin]
+  // -----------------------
+  @include describe('Import Webfonts [mixin]') {
+    @include it('Font-face imports for all local fonts & variants') {
+      @include assert {
+        @include output(false) {
+          @include fonts.import-webfonts;
+        }
+
+        @include expect(false) {
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: normal;
+            src: url('../fonts/sans/sourcesanspro-regular-webfont.eot');
+            src: (
+              url('../fonts/sans/sourcesanspro-regular-webfont.eot?#iefix')
+                format('embedded-opentype'),
+              url('../fonts/sans/sourcesanspro-regular-webfont.woff')
+                format('woff'),
+              url('../fonts/sans/sourcesanspro-regular-webfont.svg')
+                format('svg')
+            );
+          }
+
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: italic;
+            font-weight: normal;
+            src: url('../fonts/sans/sourcesanspro-italic-webfont.eot');
+            src: (
+              url('../fonts/sans/sourcesanspro-italic-webfont.eot?#iefix')
+                format('embedded-opentype'),
+              url('../fonts/sans/sourcesanspro-italic-webfont.woff')
+                format('woff'),
+              url('../fonts/sans/sourcesanspro-italic-webfont.svg')
+                format('svg')
+            );
+          }
+
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: bold;
+            src: url('../fonts/sans/sourcesanspro-bold-webfont.eot');
+          }
+
+          @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: bold;
+            src: (
+              local('source-sans-pro-bold'),
+              local('Source Sans Pro bold'),
+              url('data:application/x-font-woff;charset=utf-8;base64...')
+                format('woff'),
+              url('../fonts/sans-ttf/sourcesanspro-bold-webfont.ttf')
+                format('truetype'),
+              url('../fonts/sans/sourcesanspro-bold-webfont.svg#boldID')
+                format('svg')
+            );
+          }
+
+          @font-face {
+            font-family: 'Unicode Test';
+            font-style: normal;
+            font-weight: normal;
+            font-display: swap;
+            src: url('../fonts/path/to/normal.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6;
+          }
+        }
+      }
+    }
+  }
+} // end module
+
+config.$fonts: $_global;

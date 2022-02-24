@@ -1,0 +1,111 @@
+/// # QuickStart: Color
+/// Tools for managing colors and palettes.
+/// - Organize all your colors into a single map, or set of maps
+/// - Document color relationships directly in the code
+/// - Automate [WCAG-appropriate][wcag] contrast checking
+/// - Generate color-palette documentation with [Herman][Herman]
+///
+/// [wcag]: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+/// [Herman]: https://www.oddbird.net/herman/
+/// @group color
+
+@forward 'config';
+@forward 'tokens';
+@forward 'contrast';
+@forward 'utils';
+@forward 'themes';
+@forward 'css-vars';
+@forward 'contrast-vars';
+
+/// ## Import
+///
+/// If you've already imported `accoutrement` you are ready to go.
+/// You can also import the color module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/color';
+/// ```
+/// @group color
+
+/// ## Color Tokens
+/// If you are using the token syntax,
+/// establish your color palette,
+/// with the standard [Token syntax](tokens.html):
+///
+/// ```scss
+/// $colors: (
+///   // set explicit colors
+///   'brand-pink': hsl(330, 85%, 62%),
+///   'brand-light': #ddf,
+///   'brand-dark': #224,
+///
+///   // reference existing colors
+///   'background': '#brand-light',
+///   'border': '#brand-dark',
+///
+///   // make adjustments as needed, using color functions
+///   'link': '#brand-pink' ('shade': 25%),
+/// );
+/// ```
+///
+/// Then access your colors from anywhere:
+///
+/// ```scss
+/// .example {
+///   border-color: color('border');
+/// }
+/// ```
+/// @see $colors
+/// @see color
+/// @group color
+
+/// ## Multiple Palettes
+/// You can also define your colors in smaller maps,
+/// and then add them to the global `$colors` variable
+/// using the `add-colors()` mixin.
+/// Map references using the `#tag` format
+/// will work across maps,
+/// *once they are both added to the global setting*.
+///
+/// ```scss
+///  $brand: (
+///    'brand-pink': hsl(330, 85%, 62%),
+///    'brand-light': #ddf,
+///    'brand-dark': #224,
+///  );
+///
+///  $patterns: (
+///    'background': '#brand-light',
+///    'border': '#brand-dark',
+///    'link': '#brand-pink' ('shade': 25%),
+///  );
+///
+///  // merge everything into the main $colors map…
+///  @include add-colors($brand, $patterns);
+/// ```
+/// @see add-colors
+/// @group color
+
+/// ## WCAG Contrast
+/// We'll also help you calculate WCAG-appropriate color contrasts.
+/// You can set the `$contrast-light` & `$contrast-dark` configuration variables
+/// (`white` and `black` by default)
+/// or add `'contrast-light'` and `'contrast-dark'`
+/// tokens in your palette (with or without a private `_` prefix).
+/// These tools can be used with color values,
+/// or token names.
+///
+/// ```scss
+/// a:hover {
+///   // set a background, and get well-contrasted text
+///   @include contrasted('link');
+///   @include contrasted(rebeccapurple);
+///
+///   // or return a contrasting color from a set of options
+///   border-color: contrast('background', white, rebeccapurple);
+///   border-color: contrast(maroon, white, rebeccapurple);
+/// }
+/// ```
+/// @see contrast
+/// @see contrasted
+/// @group color

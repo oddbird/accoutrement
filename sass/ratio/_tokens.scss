@@ -1,0 +1,162 @@
+@use 'utils';
+@use '../tokens';
+@use '../internal/function';
+@use '../internal/type';
+@use '../utils/map' as utils-map;
+@use 'sass:map';
+@use 'sass:meta';
+
+/// # Ratio Tokens
+/// All the tools you need to define and access ratios
+/// using the token syntax.
+/// ## Import
+/// If you've already imported `accoutrement` you are ready to go.
+/// You can also import the ratio module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/ratio';
+/// ```
+/// @group ratio-tokens
+
+// Ratios
+// ------
+/// Define your own ratios,
+/// or alias built-in [named ratios](ratios.html#variable--named-ratios)
+/// (all provided names are prefixed with `_` in token maps).
+///
+/// @group ratio-tokens
+/// @example scss
+///   tools.$ratios: (
+///     'line-height': calc(1 / 3),
+///     'hero': 1.778,
+///     'card': '#_golden',
+///   );
+///
+/// @type map
+$ratios: () !default;
+
+// Ratio [function]
+// ----------------
+/// Retrieve a scale ratio by name
+/// from either the `$named-ratios`
+/// or user `$ratios` configurations.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group ratio-tokens
+/// @example scss
+///   /* _octave: #{tools.ratio('_octave')} */
+///   /* _fifth: #{tools.ratio('_fifth')} */
+///
+/// @param {string | number} $ratio -
+///   The key-name or value of a ratio
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$ratios] -
+///   Optional Accoutrement-format map of ratios to use as the origin palette
+///   (in addition to the provided defaults)
+/// @return {number} -
+///   The numeric value of a ratio
+@function ratio($ratio, $do: null, $source: $ratios) {
+  $source: map.deep-merge(utils.$named-ratios, $source);
+  @return tokens.get($source, $ratio, $do);
+}
+@include function.internal(meta.get-function('ratio'), 'ratio');
+
+// Add Ratios
+// ----------
+/// Merge individual ratio maps into the global `$ratio` variable.
+/// This can be useful for internal organization,
+/// documentation with [SassDoc][SassDoc],
+/// or integration with our pattern-library generator:
+/// [Herman][Herman].
+///
+/// [SassDoc]: http://sassdoc.com/
+/// [Herman]: https://www.oddbird.net/herman/
+///
+/// @group ratio-tokens
+///
+/// @param {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$ratios` variable,
+///   with new maps merged in.
+@mixin add-ratios($maps...) {
+  $ratios: utils-map.multi-merge($ratios, $maps...) !global;
+}
+
+// Compile Ratios
+// --------------
+/// Compile all the tokens in a ratio map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for ratio token maps
+///
+/// @group ratio-tokens
+///
+/// @param {map} $map [$ratios] -
+///   The map to be compiled
+/// @param {map | null} $source [$ratios] -
+///   A map of reference tokens that can be used
+///   for resolving ratios.
+///   (defaults to the global `$ratios` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-ratios($map: $ratios, $source: $ratios) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('ratio'),
+    null,
+    $source
+  );
+}
+
+// Is Ratio [function]
+// -------------------
+/// Check to see if a ratio is valid,
+/// converting tokens in the process.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides type-checking of ratios
+///   in addition to converting ratio tokens.
+///
+/// @group ratio-tokens
+/// @example scss
+///   /* _octave: #{tools.is-ratio('_octave')} */
+///   /* 1.4: #{tools.is-ratio(1.4)} */
+///   /* linear: #{tools.is-ratio('linear')} */
+///   /* blue: #{tools.is-ratio(blue)} */
+///
+/// @param {string | number} $ratio -
+///   The key-name or value of a ratio
+/// @param {map} $source [$ratios] -
+///   Optional Accoutrement-format map of ratios to use as the origin palette
+///   (in addition to the provided defaults)
+/// @param {bool} $allow-tokens [true] -
+///   Optionally turn off token-parsing.
+/// @return {number | 'linear' | false} -
+///   The numeric value of a ratio, the 'linear' keyword,
+///   or `false` if the value is not a valid ratio.
+@function is-ratio($ratio, $source: $ratios, $allow-tokens: true) {
+  @if ($ratio == 'linear') or type.check($ratio, 'number') {
+    @return $ratio;
+  }
+
+  @if ($allow-tokens) {
+    $token: ratio($ratio, $source: $source);
+    @return is-ratio($token, $allow-tokens: false);
+  }
+
+  @return false;
+}

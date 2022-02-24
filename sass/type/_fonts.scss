@@ -1,0 +1,246 @@
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../tokens';
+@use '../tokens/api';
+@use './config';
+@use './normalize';
+@use './helpers';
+@use '../tokens/inspect';
+
+/// ### Using WebFonts
+///
+/// Once you've configured your webfont data into a map,
+/// these tools will help you access the data in various ways:
+/// from creating `@font-face` imports,
+/// to calling font-families by any given alias.
+///
+/// @group type-fonts
+
+// Font [function]
+// ---------------
+/// Retrieve and normalize font data from the `$fonts` map
+///
+/// @since 2.0.0 -
+/// - BREAKING: Non-map fonts are interpreted as font-stacks
+/// - BREAKING: Normalized font-data uses proper name-quotation,
+///   and ignores missing or private names/stacks
+/// @since 1.0.0 -
+/// - NEW: Provided to access and normalize a map of font data
+///   for any key in your global `$fonts` map
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group type-fonts
+/// @param {*} $font -
+///   A key for accessing the desired font in `$fonts`
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+/// @return {map} -
+///   A parsed and normalized map of font-data
+@function font($font, $source: config.$fonts) {
+  $data: api.get($source, $font);
+  $normal: normalize.font($data, $font, $source);
+  @return $normal;
+}
+
+// Compile Fonts
+// -------------
+/// Compile all the tokens in a font map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for font token maps
+///
+/// @group type-fonts
+///
+/// @param {map} $map [$fonts] -
+///   The map to be compiled
+/// @param {map | null} $source [$fonts] -
+///   A map of reference tokens that can be used
+///   for resolving fonts.
+///   (defaults to the global `$fonts` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-fonts($map: config.$fonts, $source: config.$fonts) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with($map, meta.get-function('font'), $source);
+}
+
+// Font Family [function]
+// ----------------------
+/// Access a font-family from your `$fonts` map,
+/// with name and font-stack.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+/// @since type-4.0.0 -
+/// - BUGFIX: Provides the correct name for fonts when an alias is given
+///
+/// @group type-fonts
+/// @example scss
+///   $fonts: (
+///     'sans': (
+///       'name': 'FranklinGothic',
+///       'stack': (Helvetica, Arial, sans-serif),
+///     ),
+///   );
+///
+///   html {
+///     font-family: tools.font-family('sans');
+///   }
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+/// @return {String} -
+///   The full font-stack for the given font,
+///   ready for output with the `font-family` property.
+@function font-family($key, $source: config.$fonts) {
+  $font: font($key, $source);
+  @return map.get($font, 'stack');
+}
+
+// Font Family [mixin]
+// -------------------
+/// Output a font-stack to font-family based on your `$fonts` configuration.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group type-fonts
+/// @example scss
+///   $fonts: (
+///     'FranklinGothic': (
+///       'stack': (Helvetica, Arial, sans-serif),
+///     ),
+///     'sans': '#FranklinGothic',
+///   );
+///
+///   html {
+///     @include tools.font-family('sans');
+///   }
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map.
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+@mixin font-family($key, $source: config.$fonts) {
+  font-family: font-family($key, $source);
+}
+
+// Font Face [mixin]
+// -----------------
+/// Import any local webfont defined in your `$fonts` configuration
+/// (variants without a path will not be imported).
+///
+/// @since 3.0.0 -
+/// - NEW: Supports `display` setting in font-maps
+/// @since 1.0.0 -
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+/// @since type-4.0.0 -
+/// - BREAKING: No longer accepts the `$formats` parameter
+///
+/// @group type-fonts
+/// @example scss
+///   $fonts: (
+///     'body-font': (
+///       'name': 'Source Sans Pro',
+///       'formats': 'woff2' 'woff' 'eot',
+///       'normal': 'sans/sourcesanspro-regular-webfont',
+///       'italic': 'sans/sourcesanspro-italic-webfont',
+///       'bold': 'sans/sourcesanspro-bold-webfont',
+///     ),
+///   );
+///   @include tools.font-face('body-font');
+///
+/// @param {string} $key -
+///   The key-name of a font in your `$fonts` map
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+/// @output `@font-face` import blocks for any defined font-variants.
+@mixin font-face($key, $source: config.$fonts) {
+  $font: font($key, $source);
+  $variants: helpers.font-get-variants($font);
+  $name: map.get($font, 'name');
+
+  @if (list.length($variants) > 0) {
+    $unicode: map.get($font, 'unicode-range');
+    $display: map.get($font, 'display');
+
+    @each $variant, $data in $variants {
+      $weight: list.nth($variant, 1);
+      $style: list.nth($variant, 2);
+      @include helpers.import-font-face(
+        $name,
+        $weight,
+        $style,
+        $data,
+        $unicode,
+        $display
+      );
+    }
+  }
+}
+
+// Import WebFonts [mixin]
+// -----------------------
+/// Find all the fonts that include data for imports,
+/// and generate `@font-face` blocks for each individual font and variant.
+///
+/// @since 2.0.0 -
+/// - NEW: Accepts `$source` parameter,
+///   which uses global `$fonts` by default
+/// - BREAKING: No longer imports private fonts,
+///   but will import a direct alias of the private font
+/// @since 1.0.0 -
+/// - BREAKING: No longer accepts the `$fonts` parameter
+/// @since type-4.0.0 -
+/// - BREAKING: No longer accepts the `$formats` parameter
+///
+/// @group type-fonts
+/// @example scss
+///   $fonts: (
+///     'body-font': (
+///       'name': 'Source Sans Pro',
+///       'formats': 'woff2' 'woff' 'eot',
+///       'normal': 'sans/sourcesanspro-regular-webfont',
+///       'italic': 'sans/sourcesanspro-italic-webfont',
+///       'bold': 'sans/sourcesanspro-bold-webfont',
+///     ),
+///     // alias keys, and fonts without path data will be ignored…
+///     'alias': '#body-font',
+///     'google-font': (
+///       'source': 'https://fonts.google.com/',
+///     ),
+///   );
+///   @include tools.import-webfonts;
+///
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+/// @output Any number of `@font-face` blocks.
+@mixin import-webfonts($source: config.$fonts) {
+  @each $key, $font in $source {
+    @if not
+      inspect.is-alias-for($source, $key) and not
+      inspect.is-private-token($key)
+    {
+      @include font-face($key);
+    }
+  }
+}

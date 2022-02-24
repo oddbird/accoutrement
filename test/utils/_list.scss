@@ -1,0 +1,89 @@
+@use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/utils/list';
+@use 'sass:meta';
+@use 'sass:list' as l;
+
+@include test-module('utils/list') {
+  // Remove Nth
+  // ----------
+  @include describe('Remove Nth [function]') {
+    @include it('Returns a list with item removed') {
+      @include assert-equal(list.remove-nth('one' 'two' 3, 2), 'one' 3);
+    }
+
+    @include it('Returns a list with negative-indexed item removed') {
+      @include assert-equal(
+        list.remove-nth('one' 'two' 3 'four' 5, -2),
+        'one' 'two' 3 5
+      );
+    }
+
+    @include it('Errors on non-number index') {
+      @include assert-equal(
+        list.remove-nth('one' 'two' 3, null),
+        'ERROR [remove-nth] $index must be a non-zero integer, got (null) `null`'
+      );
+    }
+
+    @include it('Errors on non-integer number') {
+      @include assert-equal(
+        list.remove-nth('one' 'two' 3, 2.5),
+        'ERROR [remove-nth] $index must be a non-zero integer, got (number) `2.5`'
+      );
+    }
+
+    @include it('Errors on zero') {
+      @include assert-equal(
+        list.remove-nth('one' 'two' 3, 0),
+        'ERROR [remove-nth] $index must be a non-zero integer, got (number) `0`'
+      );
+    }
+
+    @include it('Errors on too-large index') {
+      @include assert-equal(
+        list.remove-nth('one' 'two' 3, 6),
+        'ERROR [remove-nth] $index is `6` but list is only 3 items long'
+      );
+    }
+  }
+
+  // List Template
+  // -------------
+  @include describe('List Template [function]') {
+    $space: 'one' 'two';
+    $comma: ('one', 'two');
+    $b-space: [ 'one' 'two' ];
+    $b-comma: [ 'one', 'two' ];
+
+    @include it('Returns an empty list') {
+      @include assert-equal(
+        meta.type-of(list.template($space)),
+        'list',
+        'should be a list'
+      );
+      @include assert-equal(
+        l.length(list.template($b-comma)),
+        0,
+        'should be empty'
+      );
+    }
+
+    @include it('Keeps the original space list-separator') {
+      @include assert-equal(l.separator(list.template($space)), 'space');
+
+      @include assert-equal(l.separator(list.template($b-space)), 'space');
+    }
+
+    @include it('Keeps the original comma list-separator') {
+      @include assert-equal(l.separator(list.template($b-comma)), 'comma');
+
+      @include assert-equal(l.separator(list.template($comma)), 'comma');
+    }
+
+    @include it('Keeps the original brackets or lack-of') {
+      @include assert-false(l.is-bracketed(list.template($comma)));
+
+      @include assert-true(l.is-bracketed(list.template($b-space)));
+    }
+  }
+}

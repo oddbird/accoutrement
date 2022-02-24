@@ -1,0 +1,132 @@
+@use '../internal/function';
+@use '../tokens' as api;
+@use '../vars';
+@use 'contrast';
+@use 'css-vars' as cv;
+@use 'sass:map';
+@use 'sass:meta';
+
+// Var-Contrast
+// ------------
+/// An extension of the `contrast()` function,
+/// designed to output CSS variables
+/// rather than simple color values.
+///
+/// @group color-contrast
+/// @since 2.1.0 -
+/// - NEW: Provides access to contrast colors as CSS-variables, when defined
+/// @example scss - max contrast / no variable names
+///   tools.$colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     color: tools.var-contrast(
+///       'background',
+///       'light', 'dark', black, white
+///     );
+///   }
+/// @example scss - min contrast / variable names
+///   tools.$colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     color: tools.var-contrast(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
+///     );
+///   }
+///
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {colors | min-contrast} $options... -
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
+///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
+///     will be treated as a minimum color-contrast ratio –
+///     and will return the minimum accessible option,
+///     rather than the maximum contrast.
+/// @return {color | var()} -
+///   CSS Variable for the color-option
+///   that has the highest contrast-ratio to `$color`,
+///   or the color if no variable exists.
+@function var-contrast($color, $options...) {
+  $contrast: contrast.best-contrast($color, $options);
+  $name: map.get($contrast, 'name');
+  $color: map.get($contrast, 'color');
+
+  @if ($name != $color) and not api.is-private-token($name) {
+    $name: vars.ident($name, cv.$color-var-prefix);
+    @return var($name, $color);
+  }
+
+  @return $color;
+}
+@include function.internal(meta.get-function('var-contrast'), 'var-contrast');
+
+// Var Contrasted
+// --------------
+/// Apply any background color as a CSS variable,
+/// along with the highest-contrast text color from a set of options.
+/// This works the same as the `var-contrast()` function,
+/// but applies the resulting values to `background-color`
+/// and text `color` properties.
+///
+/// @group color-contrast
+/// @since 2.1.0 -
+/// - NEW: Applies contrasting colors as CSS-variables, when defined
+/// @example scss - max contrast
+///   tools.$colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     @include tools.var-contrasted(
+///       'background',
+///       'light', 'dark', black, white
+///     );
+///   }
+/// @example scss - min contrast
+///   tools.$colors: (
+///     'background': blue,
+///     'light': #eee,
+///     'dark': #111,
+///   );
+///   html {
+///     @include tools.var-contrasted(
+///       'background',
+///       'light', 'dark', black, white,
+///       'AAA'
+///     );
+///   }
+///
+/// @param {string | list} $background -
+///   The name or value of your desired background color.
+/// @param {colors | min-contrast} $options... -
+///   List of colors to contrast against.
+///   This function will choose the best contrast
+///   of all the options provided,
+///   or the `$contrast-light` and `$contrast-dark` defaults
+///   defined in your color palette or the factory settings.
+///
+///   - Any  `{'AA' | 'AA-large' | 'AAA' | 0-21 }` values
+///     will be treated as a minimum color-contrast ratio –
+///     and will return the minimum accessible option,
+///     rather than the maximum contrast.
+/// @output -
+///   Sets the `background-color` to `$background`
+///   and the foreground `color` to
+///   whichever option has better contrast against the given background.
+@mixin var-contrasted($background, $options...) {
+  background-color: cv.var-color($background);
+  color: var-contrast($background, $options...);
+}

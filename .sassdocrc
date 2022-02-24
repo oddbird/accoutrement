@@ -1,32 +1,28 @@
 theme: herman
 dest: docs/
-src: sass/
 
 display:
   access:
     - public
 
 groups:
-  'Core (API)':
-    core: 'QuickStart: Core'
-    core-get: 'Token Maps'
-    core-vars: 'Tokens » CSS Variables'
-    core-ratio: 'Ratios & Modular Scales'
-    core-ratio-vars: 'Ratios » CSS Variables'
-  'Core (Utilities)':
-    core-register: 'Function Registration'
-    core-math: 'Math Functions'
-    core-lists: 'List Functions'
-    core-strings: 'String Functions'
-    core-inspect: 'Inspecting Tokens'
-  'Init (Normalization)':
-    init: 'QuickStart: Init'
-    init-root: 'General'
-    init-a11y: 'Accessibility'
-    init-forms: 'Forms'
-    init-media: 'Media'
-    init-type: 'Type'
-  'Plugin/Animate':
+  'Utilities':
+    utils: 'Sass Maps, Lists, & Strings'
+    vars: 'CSS Custom Properties'
+  'Tokens':
+    tokens: 'QuickStart: Tokens'
+    token-config: 'Tokens Configuration'
+    token-api: 'Accessing Tokens'
+    token-compile: 'Compiling Token Maps'
+    token-inspect: 'Inspecting Tokens'
+    token-register: 'Function Registration'
+    token-internal: 'Pre-Registered Functions'
+    token-vars: 'Tokens » Custom Properties'
+  'Ratios':
+    ratio-tokens: Ratio Tokens
+    ratios: Built-In Ratios
+    ratio-vars: Ratio Tokens » CSS Variables
+  'Animate':
     animate: 'QuickStart: Animate'
     animate-times: 'Timing Maps'
     animate-time-vars: 'Times » CSS Variables'
@@ -34,39 +30,36 @@ groups:
     animate-ease-vars: 'Easing » CSS Variables'
     animate-change: 'Combined "Change" Maps'
     animate-change-vars: 'Changes » CSS Variables'
-  'Plugin/Color':
+  'Color':
     color: 'QuickStart: Color'
-    color-api: 'Color Maps'
-    color-vars: 'Colors » CSS Variables'
+    color-config: 'Color Configuration'
     color-contrast: 'Contrast & Accessibility'
     color-utils: 'Adjustments'
     color-themes: 'Themes'
-  'Plugin/Layout':
+    color-tokens: 'Color Tokens'
+    color-vars: 'Color Tokens » CSS Variables'
+  'Layout':
     layout: 'QuickStart: Layout'
     layout-queries: 'Media Breakpoint Maps'
     layout-query-vars: 'Breakpoints » CSS Variables'
-    layout-box: 'Box-Sizing'
-    layout-clearfix: 'Clearfix'
-    layout-position: 'Positioning'
-    layout-ratios: 'Fluid Ratios'
     layout-z-index: 'Z-Index'
-  'Plugin/Scale':
+  'Scale':
     scale: 'QuickStart: Scale'
     scale-sizes: 'Size Maps'
     scale-vars: 'Sizes » CSS Variables'
     scale-units: 'Unit Conversion'
-  'Plugin/Type':
+  'Type':
     type: 'QuickStart: Type'
     type-fonts: 'Font Maps'
     type-font-vars: 'Fonts » CSS Variables'
     type-a11y: 'Accessibility'
     type-pseudo: 'Pseudo Elements'
-
+    type-helpers: 'Type Helpers'
 
 herman:
   sass:
     includePaths: ['sass']
-    includes: ['tools']
+    use: ['tools', 'sass:meta']
   extraDocs:
     - name: 'Changelog'
       path: CHANGELOG.md

@@ -1,0 +1,91 @@
+/// # QuickStart: Animate
+/// Tools for managing animations & transitions.
+/// - Organize all your timing, easing, and transitions into maps
+/// - Document relationships directly in the code
+/// @group animate
+
+@forward 'easing-named' as ease-*;
+@forward 'easing';
+@forward 'easing-vars';
+@forward 'times';
+@forward 'time-vars';
+@forward 'change';
+@forward 'change-vars';
+
+/// ## Import
+/// If you've already imported `accoutrement` you are ready to go.
+/// You can also import the animate module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/animate';
+/// ```
+/// @group animate
+
+/// ## Timing & Easing
+/// Establish your timing and easing palettes,
+/// with the standard [Accoutrement syntax](tokens.html):
+///
+/// ```scss
+/// $times: (
+///   'fast': 150ms,
+///   'medium': '#fast' ('times': 2),
+/// );
+///
+/// $easing: (
+///   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///   'fade-in': '#in-out-quad',
+/// );
+/// ```
+///
+/// Access them anywhere:
+///
+/// ```scss
+/// .example {
+///   animation: slide-in time('fast') ease('in-out-quad') 1 both;
+///   transition-delay: time('fast');
+///   transition-duration: time('medium');
+///   transition-timing-function: ease('elastic');
+/// }
+/// ```
+/// @see $times
+/// @see time
+/// @see $easing
+/// @see ease
+/// @group animate
+
+/// ## Transitions & Animations
+/// Use your timing and easing patterns
+/// to compose reusable "changes" --
+/// including transitions and animations:
+///
+/// ```scss
+/// $changes: (
+///   'slide-in': slide-in time('fast') ease('in-out-quad') 1 both,
+///   'delay-in': '#slide-in' time('medium'),
+///   'fade-ease': time('medium') ease(in),
+///   'fade-colors': color '#fade-ease', background-color '#fade-ease',
+/// );
+/// ```
+///
+/// Access them anywhere:
+///
+/// ```scss
+/// .example {
+///   animation: change('slide-in');
+///   transition: change('fade-colors');
+/// }
+/// ```
+///
+/// Or use the mixin shortcuts:
+///
+/// ```scss
+/// .example {
+///   @include animate('slide-in');
+///   @include transition('fade-colors');
+/// }
+/// ```
+/// @see $changes
+/// @see change
+/// @see animate
+/// @see transition
+/// @group animate

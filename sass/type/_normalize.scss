@@ -1,0 +1,306 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:meta';
+@use '../tokens/inspect';
+@use './config';
+@use './helpers';
+@use '../utils/string' as str;
+@use '../internal/throw';
+
+// Normalize Font
+// --------------
+/// Convert font maps into a consistent format -
+/// to allow shorthand APIs,
+/// while providing reliable data formats to the internal functions.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font` to `font`
+/// @since 2.0.0 -
+/// - BREAKING: Non-map fonts are interpreted as font-stacks,
+///   and converted to an explicit map
+/// - BREAKING: Missing names & stacks are ignored, previously set to `null`
+///
+/// @access private
+/// @group type-normalize
+///
+/// @param {map | list} $font -
+///   A map of font-data using any of the acceptable
+///   [font-map](type-fonts.html#variable--fonts) syntax options,
+///   or a simple string/list font-stack
+/// @param {string} $key [null] -
+///   The map key used to access the font,
+///   if available…
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+/// @return {map} -
+///   A map of font data in consistent longhand format
+@function font($font, $key: null, $source: config.$fonts) {
+  // make it a map…
+  @if (meta.type-of($font) != 'map') {
+    $font: (
+      'stack': $font,
+    );
+  }
+
+  // Normalize name…
+  $name: font-name($font, $key, $source);
+  $font: if(
+    $name,
+    map.merge(
+      $font,
+      (
+        'name': $name,
+      )
+    ),
+    $font
+  );
+
+  // Normalize the font stack…
+  $stack: font-stack($font);
+  $font: if(
+    $stack,
+    map.merge(
+      $font,
+      (
+        'stack': $stack,
+      )
+    ),
+    $font
+  );
+
+  // Normalize variants
+  $variants: helpers.font-get-variants($font);
+  @if (list.length($variants) > 0) {
+    $formats: map.get($font, 'formats') or ();
+
+    @each $name, $data in $variants {
+      $font: map.remove($font, $name);
+      $name: variant-name($name);
+      $data: variant-data($data, $formats);
+      $variant: (
+        $name: $data,
+      );
+      $font: map.merge($font, $variant);
+    }
+  }
+
+  @return $font;
+}
+
+// Normalize Font Name
+// -------------------
+/// Normalize a font-name based on
+/// implicit or explicit cues.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font-name` to `font-name`
+/// @since 2.0.0 -
+/// - BREAKING: Ignores private tokens when tracking an alias origin,
+///   or determining name based on key
+/// - BREAKING: Quotes or unquotes names, based on CSS output requirements
+///
+/// @access private
+/// @group type-normalize
+///
+/// @param $font -
+///   The font map
+/// @param {string} $key [null] -
+///   The map key used to access the font,
+///   if available…
+/// @param {map} $source [$fonts] -
+///   Optional Accoutrement-format map of fonts
+///   to use as the origin palette
+/// @return {string} -
+///   The font-name associated with the given font map
+@function font-name($font, $key: null, $source: config.$fonts) {
+  $name: map.get($font, 'name') or null;
+
+  // Try reverse lookup
+  @if (not $name) {
+    $index: list.index(map.values($source), $font);
+    @if ($index) {
+      $name: list.nth(map.keys($source), $index);
+    }
+  }
+
+  @if ($key and inspect.is-private-token($key)) or
+    ($name and inspect.is-private-token($name))
+  {
+    @return null;
+  }
+
+  $name: $name or inspect.is-alias-for($source, $key, 'origin') or $key;
+
+  @if (meta.type-of($name) == 'string') {
+    $name: if(
+      string.index($name, ' '),
+      string.quote($name),
+      string.unquote($name)
+    );
+  }
+
+  @return $name;
+}
+
+// Normalize Font Stack
+// --------------------
+/// Normalize a font-stack based on
+/// given name and stack.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-font-stack` to `font-stack`
+/// @access private
+/// @group type-normalize
+///
+/// @param $font -
+///   The font map
+/// @return {string} -
+///   The font-stack associated with the given font map
+@function font-stack($font) {
+  $return: null;
+  $stack: map.get($font, 'stack');
+  $name: map.get($font, 'name');
+
+  @if (meta.type-of($stack) == 'string') and string.index($stack, ',') {
+    $stack: str.split($stack, ',');
+  }
+
+  @if ($stack or $name) {
+    $return: list.join((), (), 'comma');
+    $stack: $stack or ();
+    $name: if($name, list.join((), $name), ());
+    $stack: list.join($name, $stack);
+
+    @each $item in $stack {
+      $item: str.trim($item);
+      $item: if(
+        string.index($item, ' '),
+        string.quote($item),
+        string.unquote($item)
+      );
+      $return: list.append($return, $item);
+    }
+  }
+
+  @return $return;
+}
+
+// Normalize Variant Name
+// ----------------------
+/// Parse a list of font variants into a map of `style` and `weight` settings.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-variant-name` to `variant-name`
+/// @since 0.1.0 -
+/// - NEW: Supports `'bold italic'` weight/style syntax
+///   in addition to `('bold', 'italic')`
+/// @since type-4.0.0 -
+/// - BREAKING: Name changed from `_parse-font-variant` for clarity.
+/// - NEW: Supports both string and number values for font-weight.
+///
+/// @access private
+/// @group type-normalize
+///
+/// @param {List} $variant -
+///   A list of font variants, such as `('bold', 'italic')`.
+/// @return {$list} -
+///   A list of `($weight, $style)`
+@function variant-name($variant) {
+  $style: 'normal';
+  $weight: 'normal';
+
+  @if (meta.type-of($variant) == 'string') and string.index($variant, ' ') {
+    $variant: str.split($variant, ' ');
+  }
+
+  @each $item in $variant {
+    @if list.index(helpers.$FONT-STYLES, $item) {
+      $style: $item;
+    } @else if list.index(helpers.$FONT-WEIGHTS, '' + $item) {
+      $weight: $item;
+    }
+  }
+
+  @return ($weight, $style);
+}
+
+// Normalize Variant Data
+// ----------------------
+/// Convert variant values into a consistent format -
+/// to allow shorthand APIs,
+/// while providing consistent data formats to the internal functions.
+/// Strings are converted to maps,
+/// and format-paths are interpolated
+/// to create a self-contained map of variant data.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `_a_normalize-variant-data` to `variant-data`
+/// @access private
+/// @group type-normalize
+///
+/// @param {string | map} $data -
+///   A string path for interpolation,
+///   or a map of explicit format/path pairs for one font-variant.
+/// @param {list} $formats [()] -
+///   A list of formats to interpolate with generic paths,
+///   to create format/path values.
+///   If a path is provided without formats,
+///   we'll return `format-error` -
+///   allowing the function-call origin to provide
+///   a more detailed error message.
+/// @return {map} -
+///   A map of formats and urls for the given font-variant,
+///   merging interpolated and explicit format/paths
+///   into a single map.
+/// @throws Font-path interpolation of `path` requires a list of formats
+@function variant-data($data, $formats: ()) {
+  @if (meta.type-of($data) == 'string') {
+    $data: (
+      'path': $data,
+    );
+  }
+
+  // Interpolate implicit paths
+  $path: map.get($data, 'path');
+  $svgid: map.get($data, 'svgid');
+  $implicit: ();
+
+  @if $path {
+    @if (list.length($formats) > 0) {
+      @each $format in $formats {
+        $url: helpers.format-url($path, $format, $svgid);
+        $implicit: map.merge(
+          $implicit,
+          (
+            $format: $url,
+          )
+        );
+      }
+    } @else {
+      @return throw.error(
+        'Font-path interpolation of `#{$path}` requires a list of formats',
+        'normalize-font'
+      );
+    }
+  }
+
+  // Extract explicit paths
+  $explicit: ();
+
+  @each $key, $value in $data {
+    @if map.has-key(helpers.$FONT-FORMATS, $key) {
+      $url: helpers.format-url($value, $key, $svgid);
+      $explicit: map.merge(
+        $explicit,
+        (
+          $key: $url,
+        )
+      );
+    }
+  }
+
+  // Merge and return…
+  @return map.merge($implicit, $explicit);
+}

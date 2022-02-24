@@ -1,0 +1,148 @@
+@use 'api';
+@use 'inspect';
+@use '../vars';
+@use 'sass:map';
+
+/// # Tokens » Custom Properties
+/// There are many cases where it can be useful
+/// to convert a Sass token map into CSS custom properties.
+/// Here are some tools to help.
+/// @group token-vars
+
+// Token--
+// -------
+/// Set a single custom property based on a map-token,
+/// with optional alias, fallback, and prefixing
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group token-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('color.scale': ('lightness': -50%)),
+///     'border': '#text',
+///   );
+///   .example {
+///     @include tools.token--($colors, 'border');
+///     @include tools.token--($colors, 'outline', 'border', red);
+///   }
+///
+/// @param {map} $map -
+///   Accoutrement map of tokens to use as source
+/// @param {*} $token -
+///   Token name available in the source `$map`
+/// @param {string | null} $value [null] -
+///   Optional new value for the given token
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will generate a fallback based on the token value
+///   - A token name will fallback to the value of that
+///     CSS variable and then to the token's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {string | null} $prefix [null] -
+///   Optional prefix used for naming token variables
+@mixin token--($map, $token, $value: null, $fallback: true, $prefix: null) {
+  $prop: vars.ident($token, $prefix);
+  $val: $value or $token;
+  $ref: $value or inspect.is-alias-for($map, $val);
+
+  @if ($ref) {
+    $val: var-token($map, $ref, $fallback, $prefix);
+  } @else {
+    $val: api.get($map, $val);
+  }
+
+  #{$prop}: $val;
+}
+
+// Tokens--
+// --------
+/// Convert any Accoutrement Tokens map
+/// into CSS custom properties (aka variables).
+///
+/// - Token names that start with `_` or `-` are considered "private"
+///   and will not be output as variables
+/// - Tokens that contain a simple alias with no adjustments
+///   will be output with a `var()` value,
+///   keeping the alias relationship intact
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group token-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('color.scale': ('lightness': -50%)),
+///     'border': '#text',
+///   );
+///   html {
+///     @include tools.tokens--($colors, 'color-');
+///   }
+///
+/// @param {map} $map -
+///   Accoutrement map of tokens to set as CSS variables
+/// @param {string | null} $prefix [null] -
+///   Optional prefix for naming token variables
+/// @output
+///   Custom properties for all public tokens in the map
+@mixin tokens--($map, $prefix: null) {
+  @each $token in map.keys($map) {
+    @if not inspect.is-private-token($token) {
+      @include token--($map, $token, $prefix: $prefix);
+    }
+  }
+}
+
+// As-Var
+// ------
+/// Access the CSS variable associated with a given token,
+/// along with a fallback value based on the token itself
+///
+/// @since 2.0.0 -
+///   - NEW: Initial release
+///
+/// @group token-vars
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand' ('color.scale': ('lightness': -50%)),
+///     'border': '#text',
+///   );
+///   .example {
+///     border-color: tools.var-token($colors, 'border');
+///     color: tools.var-token($colors, 'text', black);
+///   }
+///
+/// @param {map} $map -
+///   Accoutrement map of tokens to use as source
+/// @param {*} $token -
+///   Token name available in the source `$map`
+/// @param {*} $fallback [true] -
+///   The optional fallback value for a `var()` function:
+///   - `true` will try to generate a fallback based on the color value
+///   - A color name will fallback to the value of that
+///     CSS variable and then to the color's calculated value
+///   - Any other fallback will be passed through unchanged
+/// @param {string | null} $prefix [null] -
+///   Optional prefix used for naming token variables
+/// @return {string} -
+///   CSS variable call, in the format:
+///   `var(--<color>, <fallback>)`
+@function var-token($map, $token, $fallback: true, $prefix: null) {
+  $var: vars.ident($token, $prefix);
+
+  @if ($fallback == true) {
+    @if map.has-key($map, $token) {
+      @return var($var, api.get($map, $token));
+    }
+  } @else if map.has-key($map, $fallback) {
+    @return var($var, var-token($map, $fallback, true, $prefix));
+  } @else if $fallback {
+    @return var($var, $fallback);
+  }
+
+  @return var($var);
+}

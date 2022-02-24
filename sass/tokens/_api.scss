@@ -1,0 +1,336 @@
+@use 'sass:map';
+@use 'parse';
+
+$_memo: ();
+
+/// # Token Maps
+/// We use "token" as a generic term
+/// for named values inside Accoutrement maps.
+/// In the following map,
+/// `root` and `gutter` are considered Accoutrement-tokens:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'gutter': 1em,
+/// );
+/// ```
+///
+/// Our core API provides token-map syntax parsing,
+/// and general token access with `get()` (below).
+/// Additional plugins provide shortcuts and utilities
+/// for managing and accessing common token-types,
+/// like colors, fonts, sizes, and animations.
+///
+/// @group token-api
+
+/// ## Internal Reference
+/// The core module provides a generic map-parsing syntax,
+/// for internal reference & adjustments --
+/// establishing dynamic relationships between map values.
+/// To reference another key in the same map,
+/// use the `#tag` hashtag format:
+///
+/// ```scss
+/// // 'gutter' == 16px
+/// $map: (
+///   'root': 16px,
+///   'gutter': '#root',
+/// );
+/// ```
+///
+/// Reference hashtags don't have to stand alone,
+/// but can be embedded inside a longer string:
+///
+/// ```scss
+/// // 'responsive' == calc(16px + 1vw)
+/// $map: (
+///   'root': 16px,
+///   'scale': 1vw,
+///   'responsive': 'calc(#root + #scale)',
+/// );
+/// ```
+///
+/// @group token-api
+
+/// ## Nested References
+/// You can define nested tokens in Accoutrement maps,
+/// and access them using a `#first->second->third` syntax:
+///
+/// ```scss
+/// // 'large-screen->h2' == 24px
+/// $sizes: (
+///   'root': 16px,
+///   'headings': (
+///     'h1': '#root' ('times': 2),
+///     'h2': '#root' ('times': 1.5),
+///   ),
+///   'pull-quote': '#headings->h2',
+/// );
+/// ```
+///
+/// All `->` nested references
+/// are resolved relative to the outermost map:
+///
+/// ```scss
+/// // 'large-screen->text' == 24px
+/// $map: (
+///   'root': 16px,
+///   'large-screen': (
+///     'root': 24px,
+///     'text': '#large-screen->root'
+///   ),
+/// );
+/// ```
+///
+/// @since 2.0.0
+/// @group token-api
+
+/// ## Functional Adjustments
+/// In many cases, we'll want to reference a value
+/// and then make adjustments to it.
+/// The explicit long-hand syntax uses a map
+/// with `'%value'` as the first key.
+/// Each additional key provides a function name
+/// along with arguments for that function:
+///
+/// ```scss
+/// // convert-units(16px, 'rem')
+/// $map: (
+///   'root': 16px,
+///   'gutter': (
+///     '%value': '#root',
+///     'times': 1.5,
+///     'convert-units': 'rem',
+///   ),
+/// );
+/// ```
+///
+/// You can also string together multiple functions,
+/// to create more complex relationships:
+///
+/// ```scss
+/// // convert-units(times(16px, 1.5), 'rem')
+/// $map: (
+///   'root': 16px,
+///   'gutter': (
+///     '%value': '#root',
+///     'times': 1.5,
+///     'convert-units': 'rem',
+///   ),
+/// );
+/// ```
+///
+/// Each function in the function map
+/// (e.g. `times` & `convert-units` above)
+/// will be run in order --
+/// with any associated arguments included.
+/// The `value` is always passed as the first argument.
+///
+/// @group token-api
+
+/// ## Adjustment Shorthand
+/// We also provide a shorthand syntax
+/// to simplify adjustments in most cases.
+/// Here, the value is written first (any data type),
+/// and a map of adjustments can be provided
+/// at the end of the definition:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'gutter': '#root' ('times': 1.5, 'convert-units': 'rem'),
+/// );
+/// ```
+///
+/// @group token-api
+
+/// ## Adjustments with References
+/// Adjustment-function arguments
+/// can also reference keys in the map.
+/// In this example,
+/// we're multiplying the `root` & `line-height` values
+/// to generate a `rhythm` token.
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'line-height': 1.4,
+///   'rhythm': '#root' ('times': '#line-height'),
+/// );
+/// ```
+///
+/// @group token-api
+
+/// ## String Interpolation
+/// For CSS features like `calc()`
+/// you can create format-strings
+/// and interpolate values into the string.
+/// Use `%s` as a placeholder,
+/// and call the `interpolate` (or `%s`) adjustment function
+/// with replacement values for each placeholder:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'scale': 1vw,
+///   'responsive': (
+///     '%value': 'calc(%s + %s)',
+///     '%s': '#root' '#scale',
+///   ),
+/// );
+/// ```
+///
+/// @see interpolate
+/// @group token-api
+
+/// ## Nested Adjustments
+/// Since adjustment formats and values
+/// are parsed the same as any other value,
+/// it's possible to build quite complex adjustments:
+///
+/// ```scss
+/// $map: (
+///   'root': 16px,
+///   'scale': 1vw,
+///   'responsive': (
+///     '%value': 'calc(%s + %s)',
+///     '%s': (
+///       '#root' ('convert-units': 'rem'),
+///       '#scale' ('times': 2),
+///     ),
+///   ),
+/// );
+/// ```
+///
+/// @group token-api
+
+/// ## Escaping References
+/// - If you need to use the `#` character without creating an alias reference,
+///   you can prefix it with an (also-escaped) back-slash:
+///   `'this is \\#not-an-alias'`
+/// - If you need to end an alias without using punctuation or spaces,
+///   the same double-escape can be used: `'#alias\\not-part-of--alias'`
+///
+/// @since 2.2.0 -
+///   - NEW: Added to help manage more complex missing-key options
+/// @group token-api
+
+// Get Token
+// ---------
+/// The primary function for accessing and parsing
+/// Accoutrement map-syntax values.
+/// Each Accoutrement plugin provides a shortcut function
+/// for the specific map associated with that data-type.
+/// You can do the same, or use it directly
+/// to turn any arbitrary map into an Accoutrement map.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Name changed from `get-token` to `get`
+/// - BREAKING: The `$key` value must be a token name for lookup,
+///   not a raw token value to be compiled
+///   (see the `compile()` function)
+/// @since 2.0.0 -
+/// - NEW: Handles access to nested-map tokens
+///   using the `get-token($map, 'first->second->third')` syntax
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+///
+/// @group token-api
+/// @example scss - Access a map directly
+///   $map: (
+///     'original-value': 3em,
+///     'new-value': '#original-value' (
+///       'times': 2,
+///       'minus': 0.5
+///     ),
+///   );
+///   /*! New Value: #{tools.get($map, 'new-value')} */
+/// @example scss - Access nested-map tokens
+///   $map: (
+///     'outer': (
+///       'inner': 2,
+///     ),
+///   );
+///   /*! Inner: #{tools.get($map, 'outer->inner')} */
+/// @example scss - Write your own shortcut plugin for specific maps
+///   @function get($key) {
+///     @return tools.get($my-map, $key);
+///   }
+///
+///   $my-map: ('main': 32em);
+///   /*! Main: #{get('main')} */
+///
+/// @param {map} $map -
+///   A map of token definitions to reference against
+/// @param {*} $key -
+///   A key to get from the map (can use nested `key->subkey` syntax)
+/// @param {map | null} $do -
+///   A map of functional adjustments to run on the returned value
+/// @return {*} -
+///   The parsed value of any key in a given map
+@function get($map, $key, $do: null) {
+  // check the memo
+  $resolved: map.get($_memo, $map, $key);
+  @if $resolved {
+    @return $resolved;
+  }
+
+  // lookup the key in the map
+  $lookup: parse.lookup-alias($map, $key);
+
+  @if $lookup {
+    $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
+  }
+
+  // update the memo
+  $_memo: map.set($_memo, $map, $key, $resolved);
+
+  // handle any final adjustments
+  @if $do {
+    @return parse.compile-token(
+      $map,
+      map.merge(
+        (
+          '%value': $resolved,
+        ),
+        $do
+      ),
+      $key
+    );
+  }
+
+  // return the result
+  @return $resolved;
+}
+
+// Compile Token
+// -------------
+/// Allows you to compile arbitrary token values
+/// in reference to a map,
+/// without the initial step of referencing a single key.
+///
+/// @since 4.0.0 -
+/// - NEW: Added to handle direct token parsing, without map-key lookup
+///
+/// @group token-api
+/// @example scss - Access a map directly
+///   $map: (
+///     'original-value': 3em,
+///   );
+///   $token: '#original-value' (
+///     'times': 2,
+///     'minus': 0.5
+///   );
+///   /*! New Value: #{tools.compile($map, $token)} */
+///
+/// @param {map} $map -
+///   A map of token definitions to reference against
+/// @param {*} $token -
+///   The original key to get from the map
+/// @return {*} -
+///   The parsed value of any key in a given map
+@function compile($map, $token) {
+  @return parse.compile-token($map, $token);
+}

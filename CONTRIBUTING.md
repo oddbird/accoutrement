@@ -15,8 +15,8 @@ In either case,
 please provide:
 
 - A minimum code sample that demonstrates the issue,
-  and steps to reporoduce
-- Excpected behavior and actual results
+  and steps to reproduce
+- Expected behavior and actual results
 - How you've attempted to solve the problem
 
 [issues]: https://github.com/oddbird/accoutrement/issues
@@ -38,15 +38,15 @@ As you work...
   and make sure all tests are passing with `yarn test`
 - Add your changes to the [changelog][]
 - Update or add inline documentation
-  using [SassDoc][sassdoc] as appropriate,
-  and compile the docs with `yarn docs`
+  using [SassDoc][sassdoc] as appropriate
+  (compile to view the docs as-needed with `yarn docs`)
 
 [changelog]: https://github.com/oddbird/accoutrement/blob/main/CHANGELOG.md
 [sassdoc]: http://sassdoc.com/
 
 ## Committing
 
-Linting, testing, and documentation
+Linting and testing
 should be done before every commit:
 
 ```
@@ -58,7 +58,6 @@ They can also be triggered individually:
 ```
 yarn lint
 yarn test
-yarn docs
 ```
 
 Once you've fixed any final errors or typos,

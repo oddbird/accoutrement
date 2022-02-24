@@ -1,9 +1,14 @@
-// Core Partials
-// =============
+// general tools
+@forward 'utils';
+@forward 'vars';
+@forward 'tokens';
+@forward 'ratio';
 
-@import 'core';
-@import 'plugin/animate';
-@import 'plugin/color';
-@import 'plugin/layout';
-@import 'plugin/scale';
-@import 'plugin/type';
+// data modules
+@forward 'animate';
+@forward 'color';
+@forward 'scale';
+@forward 'type';
+
+// relies on scale
+@forward 'layout';

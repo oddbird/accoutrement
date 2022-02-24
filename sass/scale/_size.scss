@@ -1,0 +1,192 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:string';
+@use './config';
+@use '../tokens';
+@use '../tokens/api';
+
+/// # Accessing Sizes
+/// @group scale-sizes
+
+// Size [function]
+// ---------------
+/// Access a named size in your `$sizes` map,
+/// using any comparable units.
+///
+/// @since 1.0.0 -
+/// - BREAKING: The previous `$units…` vararg
+///   has been replaced with `$do` map argument,
+///   for flexible on-the-fly adjustments.
+///   Non-map `$do` values are converted to
+///   `('convert-units': $do)` before processing,
+///   to provide a shortcut for unit-conversions.
+///   `size('root', 'cm')` will continue to work,
+///   but `size('root', 'em', 10px)` should be changed to
+///   `size('root', 'em' 10px)` (with all unit args in a single list)
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group scale-sizes
+///
+/// @param {string} $size -
+///   The name of any size in your configuration
+/// @param {map | unit-args | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value,
+///   or a unit followed by any necessary arguments
+///   for conversion
+/// @param {map} $source [$sizes] -
+///   Optional Accoutrement-format map of sizes to use as the origin palette
+/// @return {length} -
+///   The calculated length, in the requested units.
+@function size($size, $do: null, $source: config.$sizes) {
+  @if ($do) and (meta.type-of($do) != 'map') {
+    $do: (
+      'to': $do,
+    );
+  }
+
+  $return: $size;
+
+  @if (meta.type-of($size) == 'number') {
+    // apply adjustments
+    @if $do {
+      $return: api.compile($source, $size $do);
+    }
+  } @else {
+    // get the desired token
+    $return: api.get($source, $size, $do);
+  }
+
+  @return if(
+    (meta.type-of($return) == 'string'),
+    string.unquote($return),
+    $return
+  );
+}
+
+// Compile Sizes
+// -------------
+/// Compile all the tokens in a size map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for size token maps
+///
+/// @group scale-sizes
+///
+/// @param {map} $map [$sizes] -
+///   The map to be compiled
+/// @param {map | null} $source [$sizes] -
+///   A map of reference tokens that can be used
+///   for resolving sizes.
+///   (defaults to the global `$sizes` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-sizes($map: config.$sizes, $source: config.$sizes) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('size'),
+    null,
+    $source
+  );
+}
+
+// Negative [function]
+// -------------------
+/// Return the inverse value of any length,
+/// in comparable units.
+///
+/// @since 1.0.0 -
+/// - BREAKING: The previous `$units…` vararg
+///   has been replaced with `$do` map argument,
+///   for flexible on-the-fly adjustments.
+///   Non-map `$do` values are converted to
+///   `('convert-units': $do)` before processing,
+///   to provide a shortcut for unit-conversions.
+///   `size('root', 'cm')` will continue to work,
+///   but `size('root', 'em', 10px)` should be changed to
+///   `size('root', 'em' 10px)` (with all unit args in a single list)
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group scale-sizes
+///
+/// @param {string | length | list} $size -
+///   The name of a size in your configuration (e.g. `line-height`),
+///   or a length to be converted into different units (e.g. `24px`),
+///   or a base-size and adjustments to be made
+///   (e.g. `24px (scale: '_minor-third' 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @param {map | unit-args | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value,
+///   or a unit followed by any necessary arguments
+///   for conversion
+/// @param {map} $source [$sizes] -
+///   Optional Accoutrement-format map of sizes to use as the origin palette
+/// @return {length} -
+///   The calculated negative length, in the requested units.
+@function negative($size, $do: null, $source: config.$sizes) {
+  $size: size($size, $do, $source);
+
+  @if (meta.type-of($size) == 'string') {
+    @if (string.index($size, 'calc(') == 1) {
+      $size: string.slice($size, 6, -2);
+    }
+
+    @return 'calc(-1 * (#{$size}))';
+  }
+
+  @return -1 * $size;
+}
+
+// Square [mixin]
+// --------------
+/// Create a square by setting equal CSS `height` and `width` properties
+/// with the given size & unit value.
+///
+/// @since 1.0.0 -
+/// - BREAKING: The previous `$units…` vararg
+///   has been replaced with `$do` map argument,
+///   for flexible on-the-fly adjustments.
+///   Non-map `$do` values are converted to
+///   `('convert-units': $do)` before processing,
+///   to provide a shortcut for unit-conversions.
+///   `size('root', 'cm')` will continue to work,
+///   but `size('root', 'em', 10px)` should be changed to
+///   `size('root', 'em' 10px)` (with all unit args in a single list)
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group scale-sizes
+///
+/// @param {string | length | list} $size -
+///   The name of a size in your configuration (e.g. `line-height`),
+///   or a length to be converted into different units (e.g. `24px`),
+///   or a base-size and adjustments to be made
+///   (e.g. `24px ('_minor-third': 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @param {map | unit-args | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value,
+///   or a unit followed by any necessary arguments
+///   for conversion
+/// @param {map} $source [$sizes] -
+///   Optional Accoutrement-format map of sizes to use as the origin palette
+/// @output -
+///   Equal CSS height and width properties,
+///   set to the given size and units.
+@mixin square($size, $do: null, $source: config.$sizes) {
+  $size: size($size, $do, $source);
+
+  height: $size;
+  width: $size;
+}

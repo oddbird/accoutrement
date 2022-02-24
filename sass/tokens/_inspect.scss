@@ -1,0 +1,130 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
+@use 'parse';
+
+/// # Inspecting Tokens
+/// Tools for inspecting Accoutrement map token meta-data,
+/// useful for building more complicated logic for
+/// automation and integrations.
+/// @group token-inspect
+
+// Is Private Token
+// ----------------
+/// Check if a token key is marked as private
+/// with `_` or `-` as the starting character
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group token-inspect
+/// @example scss
+///   /*! #{tools.is-private-token('_private-token')} */
+///   /*! #{tools.is-private-token('public-token')} */
+///
+/// @param {*} $key -
+///   The token key to check for private prefix
+///   (only string and list keys can be marked as private)
+/// @return {boolean} -
+///   True if the key is private, otherwise false
+@function is-private-token($key) {
+  $pre: '_' '-';
+
+  @if (meta.type-of($key) == 'list') {
+    $key: list.nth($key, 1);
+  }
+
+  @if (meta.type-of($key) == 'string') and
+    (list.index($pre, string.slice($key, 1, 1)))
+  {
+    @return true;
+  }
+
+  @return false;
+}
+
+// Is Alias For
+// ------------
+/// Find if a token is simply an alias,
+/// and (if so) what token it represents –
+/// either directly,
+/// or following the thread to it's origin.
+///
+/// @since 2.0.0 -
+/// - NEW: Initial release
+///
+/// @group token-inspect
+/// @example scss
+///   $colors: (
+///     '_brand': hsl(120, 50%, 50%),
+///     'text': '#_brand',
+///     'border': '#text',
+///     'outline': '#border',
+///   );
+///   /*! _brand: #{tools.is-alias-for($colors, '_brand')} */
+///   /*! text: #{tools.is-alias-for($colors, 'text')} (_brand is private) */
+///   /*! border: #{tools.is-alias-for($colors, 'border')} */
+///   /*! outline: #{tools.is-alias-for($colors, 'outline', $origin: true)} */
+///
+/// @param {map} $map -
+///   A map of terms to reference against
+/// @param {*} $token -
+///   The token name to be traced
+/// @param {*} $origin [false] -
+///   False to trace the alias one step back,
+///   or `true` to trace an alias thread back to the original source token
+/// @return {*} -
+///   `false` for non-alias tokens,
+///   or the name of an alias source
+///   (either one step back, or the full origin of multiple aliases)
+@function is-alias-for($map, $token, $origin: false) {
+  $ref: false;
+  $val: map.get($map, $token);
+
+  @if (meta.type-of($val) == 'string') and (string.index($val, '#') == 1) {
+    $try: string.slice($val, 2);
+
+    @if map.has-key($map, $try) and not is-private-token($try) {
+      $ref: if($origin, is-alias-for($map, $try, $origin) or $try, $try);
+    }
+  }
+
+  @return $ref;
+}
+
+// Has Token
+// ---------
+/// Find if a token exists in a given map.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides a token-syntax-aware alternative to
+///   the Sass internal `map.has-key()` function.
+///
+/// @group token-inspect
+/// @example scss
+///   $colors: (
+///     'brand': hsl(120, 50%, 50%),
+///     'button': (
+///       'background': '#brand',
+///     )
+///   );
+///   /*! brand: #{tools.has-token($colors, 'brand')} */
+///   /*! text: #{tools.has-token($colors, 'text')} */
+///   /*! button->background: #{tools.has-token($colors, 'button->background')} */
+///   /*! (button, background): #{tools.has-token($colors, 'button', 'background')} */
+///
+/// @param {map} $map -
+///   A map of terms to reference against
+/// @param {*} $token -
+///   The token name or path (using `->`) to lookup
+/// @param {*} $nested... -
+///   Optionally provide a nested token path as an arglist,
+///   rather than using the `->` syntax.
+/// @return {boolean} -
+///   Returns `true` if the requested token exists,
+///   or `false` if there is no token at the given path.
+@function has-token($map, $token, $nested...) {
+  $found: parse.lookup-alias($map, $token, $nested, $handle-missing-keys: null);
+  @return if($found, true, false);
+}

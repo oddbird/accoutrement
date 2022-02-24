@@ -1,0 +1,64 @@
+/// # QuickStart: Scale
+/// Sass size & scale management tools:
+/// - Gather all your sizes into a single map
+/// - Generate new sizes based on [modular scales](ratio-tokens.html)
+///   or arbitrary functions
+/// - Convert between relative units
+/// - Access sizes on the fly
+/// @group scale
+
+@forward 'config';
+@forward 'size';
+@forward 'scale';
+@forward 'css-vars';
+@forward 'units' show convert-units;
+
+/// ## Import
+/// If you've already imported `accoutrement` you are ready to go.
+/// You can also import the scale module on its own:
+///
+/// ```scss
+///   @use '<path-to>/accoutrement/sass/scale';
+/// ```
+/// @group scale
+
+/// ## Sizes & Ratios
+/// Establish your palette of ratios (modular scales) and sizes:
+///
+/// ```scss
+/// $ratios: (
+///   'my-ratio': 1.25,
+/// );
+///
+/// $sizes: (
+///   // define explicit values
+///   'root': 24px,
+///   'icons': 1em,
+///   'page': 8in,
+///
+///   // reference existing sizes
+///   'text': '#root'
+///
+///   // apply adjustments and conversions
+///   // using named-ratios or arbitrary functions
+///   'rhythm': '#root' ( scale: '_fifth' 1, 'convert-units': 'rem'),
+///
+///   'h1': '#root' ( scale: 'my-ratio' 3 ),
+///   'h2': '#root' ( scale: 'my-ratio' 2 ),
+///   'h3': '#root' ( scale: 'my-ratio' 1 ),
+///
+///   // define calc() output based on existing sizes
+///   'viewport-relative': 'calc(%s + %s)' ('%s': '#root' 2vw),
+/// );
+/// ```
+///
+/// Access your named sizes using the `size()` function,
+/// and even convert units on-the-fly:
+///
+/// ```scss
+/// .example {
+///   font-size('text');
+///   width: size('page', 'px');
+/// }
+/// ```
+/// @group scale

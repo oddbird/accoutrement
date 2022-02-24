@@ -1,0 +1,124 @@
+@use 'named';
+@use '../internal/function';
+@use '../tokens';
+@use '../utils/map' as utils;
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+
+/// # Easing Maps: Curves & Steps
+/// Whether you are using CSS-named easing,
+/// like `ease-in-out` and `linear`,
+/// or defining your own easing
+/// with `cubic-bezier()` and `steps()`/`frames()` --
+/// we'll help you organize and standardize your values
+/// in a single location.
+/// We also provide a classic set of built-in easing functions,
+/// which you can rename, access, or override as desired.
+/// @group animate-ease
+
+// Easing Map
+// ----------
+/// A variable storing the map of
+/// all easing globally-available on your project.
+/// Any easing added to the `$easing` map will be accessible
+/// to the `ease()` function by default.
+///
+/// Define each easing with a `name` and `value`…
+///
+/// ```
+/// $easing: (
+///   'elastic': cubic-bezier(0.5, -0.4, 0.5, 1.4),
+///   'sidebar-in': ease-out,
+///   'sidebar-out': '#_in-back',
+///   'modal-in': '#sidebar-in',
+/// );
+/// ```
+///
+/// - Name your easing anything –
+///   from abstractions like `elastic`,
+///   to concrete patterns like `sidebar-in`.
+/// - Values can be CSS-ready easing functions,
+///   or references other easings in the map.
+///
+/// @group animate-ease
+$easing: () !default;
+
+// Ease [function]
+// ---------------
+/// Access a named easing function in your `$easing` map.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group animate-ease
+///
+/// @param {string} $name ['ease'] -
+///   The name of an easing in your configuration
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$easing] -
+///   Optional Accoutrement-format map of easings to use as the origin palette
+///   (in additional to the provided defaults)
+/// @return {length} -
+///   The pre-defined easing
+@function ease($name: 'ease', $do: null, $source: $easing) {
+  $source: map.deep-merge(named.$named-easing, $source);
+  $name: tokens.get($source, $name, $do);
+  @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
+}
+@include function.internal(meta.get-function('ease'), 'ease');
+
+// Add Easing
+// ----------
+/// Merge individual easing maps into the global `$easing` variable,
+/// in case you want to define easings in smaller groups
+/// such as `fade-easing`, `slide-easing`, etc
+/// before merging them into a single global easing-palette.
+///
+/// @group animate-ease
+///
+/// @param {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$easing` variable,
+///   with new maps merged in.
+@mixin add-easing($maps...) {
+  $easing: utils.multi-merge($easing, $maps...) !global;
+}
+
+// Compile Easing
+// ---------------
+/// Compile all the tokens in an easing map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for easing token maps
+///
+/// @group animate-ease
+///
+/// @param {map} $map [$easing] -
+///   The map to be compiled
+/// @param {map | null} $source [$easing] -
+///   A map of reference tokens that can be used
+///   for resolving easing.
+///   (defaults to the global `$easing` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-easing($map: $easing, $source: $easing) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('ease'),
+    null,
+    $source
+  );
+}

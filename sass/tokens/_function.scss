@@ -1,0 +1,96 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:list';
+@use '../internal/type';
+@use '../internal/throw';
+@use '../internal/function';
+
+/// # Function Registration
+/// Because Sass 3.5+ requires first-class functions,
+/// we provide tools for capturing functions
+/// and making them available to the Accoutrement map parser.
+/// This also provides the ability to alias functions as you like.
+/// @group token-register
+
+// Functions
+// ---------
+/// We provide a single map to store & manage functions
+/// that you would like to use inside Accoutrement maps.
+///
+/// ```scss
+/// $functions: (
+///   'inspect': meta.get-function('inspect', $module: 'meta'),
+/// );
+/// ```
+///
+/// Functions can be registered multiple times,
+/// under any aliases,
+/// but function maps are not able to use
+/// the alias syntax.
+///
+/// @since 4.0.0 -
+/// - BREAKING: No longer accepts alias references or any other aspects
+///   of the token syntax
+/// @since 0.1.0 -
+/// - NEW: Supports the [Accoutrement](tokens.html) map-reference syntax,
+///   for creating function aliases
+///
+/// @group token-register
+/// @type map
+///
+/// @prop {function} <alias> -
+///   Each alias key in the map
+///   should refer to a captured function
+$functions: () !default;
+
+// Get Function
+// ------------
+/// Get a function from registration.
+///
+/// @access private
+/// @group function-register
+///
+/// @param {string} $name -
+///   The name (string) of a registered function
+/// @param {map} $source ['()'] -
+///   Optionally pass an additional function-map
+/// @param {map} $throw [false] -
+///   Optionally error when functions are missing or improperly registered
+/// @return {function | null} -
+///   Returns a first-class function, if found in registration
+/// @throws `#{$function}` is not a valid function for performing token adjustments
+@function get($name, $source: (), $throw: false) {
+  $function: map.get($source, $name) or map.get($functions, $name) or
+    map.get(function.$internal, $name);
+
+  // optional error handling
+  @if $throw and (meta.type-of($function) != 'function') {
+    $message: '`#{$name}` is not a registered function';
+
+    @if $function {
+      $message: '`#{$name}` (`#{$function}`) is not a valid function for performing token adjustments';
+    }
+
+    @return throw.error($message, 'function.get');
+  }
+
+  @return $function;
+}
+
+// Register Function
+// -----------------
+/// Register functions with Accoutrement.
+///
+/// @group token-register
+///
+/// @param {function} $function -
+///   The first-class function to be registered
+/// @param {strings} $names... [$function] -
+///   One or more alias names (strings)
+///   to use for map-access to the function
+/// @output {map} $_ACCOUTREMENT_APP -
+///   Functions are registered in a map
+///   under any number of aliases
+@mixin register($function, $names...) {
+  $functions: function.set($functions, $function, $names...) !global;
+}

@@ -1,0 +1,147 @@
+@use 'tokens';
+@use 'contrast';
+@use 'utils';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:map';
+
+/// # Color Themes
+/// @group color-themes
+
+// Shades Of
+// ---------
+/// Generates an Accoutrement map of light/dark color variations
+/// from a map of user-defined colors,
+/// based on luminosity.
+/// The origin color will be included in the appropriate spot,
+/// based on it's own luminosity.
+///
+/// @since 2.1.0 -
+/// - NEW: Generate consistent tint/shade themes from arbitrary colors
+///
+/// @group color-themes
+/// @example scss
+///   $user-colors: (
+///     'primary': blue,
+///     'accent': red,
+///   );
+///   @include tools.add-colors($user-colors);
+///
+///   $theme-colors: tools.shades-of($user-colors, 2);
+///   @include tools.add-colors($theme-colors);
+///
+///   @each $name, $value in $theme-colors {
+///   /* #{$name}: #{inspect($value)} */
+///   }
+///
+/// @param {map} $origin -
+///   user-color map to use as a basis for generating the theme
+/// @param {integer} $range [3] -
+///   number of dark and light variations desired,
+///   in addition to the midpoint
+@function shades-of($origin, $range: 3) {
+  $adjust: (
+    'light': 'tint',
+    'dark': 'shade',
+  );
+  $theme: ();
+  $count: (2 * $range + 1);
+
+  @each $name, $color in $origin {
+    $color: tokens.color($name);
+    $light: color.lightness($color);
+    $light: if($light == 0, 0.00000001%, $light);
+    $lum: contrast.luminance($color);
+    $avg: math.div((math.div($light, 100%) + $lum), 2);
+    $pos: (math.ceil($avg * $count) - ($range + 1));
+
+    @for $i from (0 - $range) through $range {
+      $diff: $i - $pos;
+      $do: if($diff > 0, 'light', if($diff < 0, 'dark', null));
+      $is: if(
+        $i > 0,
+        'light-#{math.abs($i)}',
+        if($i < 0, 'dark-#{math.abs($i)}', '0')
+      );
+      $value: '##{$name}';
+
+      @if ($do) {
+        $distance: math.abs(if(($do == 'dark'), (0 - $range), $range) - $pos);
+        $interval: math.percentage(math.div(1, ($distance + 0.25)));
+        $amount: (math.abs($diff) - 0.5) * $interval;
+        $value: $value
+          (
+            map.get($adjust, $do): $amount,
+          );
+      }
+
+      $theme: map.merge(
+        $theme,
+        (
+          '#{$name}-#{$is}': $value,
+        )
+      );
+    }
+  }
+
+  @return $theme;
+}
+
+// Stripe Colors
+// -------------
+/// Create color-stops for a striped gradient background,
+/// from any number of colors
+///
+/// @since 2.1.0 -
+/// - NEW: Especially useful for viewing generated color palettes
+///
+/// @group color-themes
+/// @example scss
+///   [data-theme='rainbow'] {
+///     background: linear-gradient(
+///       to right,
+///       tools.stripe-colors(red, orange, yellow, green, blue, indigo, violet)
+///     );
+///   }
+///
+/// @param {string | color} $colors... -
+///   ArgList of colors
+/// @return {color} -
+///   A calculated CSS-ready color-value based on your global color palette.
+@function stripe-colors($colors...) {
+  $gradient: ();
+  $width: math.div(100%, list.length($colors));
+
+  @for $i from 1 through list.length($colors) {
+    $pop: tokens.color(list.nth($colors, $i));
+    $new: $pop ($width * ($i - 1)) ($width * $i);
+    $gradient: list.append($gradient, $new, comma);
+  }
+
+  @return $gradient;
+}
+
+// Stripe Colors
+// -------------
+/// Create a striped gradient background from any number of colors
+///
+/// @since 2.1.0 -
+/// - NEW: Especially useful for viewing generated color palettes
+///
+/// @group color-themes
+/// @example scss
+///   [data-theme='rainbow'] {
+///     @include tools.stripe-colors(
+///       to right,
+///       red, orange, yellow, green, blue, indigo, violet
+///     );
+///   }
+///
+/// @param {gradient angle} $angle... -
+///   e.g. `to right` or `35deg`
+/// @param {string | color} $colors... -
+///   ArgList of colors
+@mixin stripe-colors($angle, $colors...) {
+  background-image: linear-gradient($angle, stripe-colors($colors...));
+}

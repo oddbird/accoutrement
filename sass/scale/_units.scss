@@ -1,0 +1,215 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use './config';
+@use './size';
+@use '../internal/function';
+@use '../internal/throw';
+
+/// # Converting Units
+/// @group scale-units
+
+// Get PX [function]
+// -----------------
+/// If a value can be converted to px by Sass, do it.
+///
+/// @access private
+///
+/// @param {number} $length -
+///   The number to be converted to px if comparable.
+/// @return {number | false} -
+///   Either the `px` value of the converted `$length` or `false`.
+@function get-px($length) {
+  // stylelint-disable-next-line length-zero-no-unit
+  @return if(math.compatible($length, 1px), 0px + $length, false);
+}
+
+// Get Number [function]
+// ---------------------
+/// Get a `0`-value for any absolute unit.
+///
+/// @access private
+///
+/// @param {string} $unit -
+///   The unit to return as a number.
+/// @return {number | false} -
+///   Either the `0` value of a unit or `false`.
+@function get-number($unit, $relative: false) {
+  // stylelint-disable length-zero-no-unit
+  $_absolute: (
+    'in': 0in,
+    'mm': 0mm,
+    'cm': 0cm,
+    'pt': 0pt,
+    'pc': 0pc,
+    'px': 0px,
+  );
+  $_relative: (
+    'em': 0em,
+    'rem': 0rem,
+    '%': 0%,
+    'ex': 0ex,
+    'ch': 0ch,
+    'vw': 0vw,
+    'vh': 0vh,
+    'vmin': 0vmin,
+    'vmax': 0vmax,
+    'fr': 0fr,
+  );
+  // stylelint-enable length-zero-no-unit
+
+  @if $relative {
+    @return map.get($_absolute, $unit) or map.get($_relative, $unit);
+  }
+
+  @return map.get($_absolute, $unit);
+}
+
+// Convert Units [function]
+// ------------------------
+/// Convert lengths between comparable units.
+/// You can also convert to `browser-ems`,
+/// relative to the browser default rather than the site root –
+/// useful for media queries.
+/// Aliased as `convert-units`, `convert`, `units`, and `to`
+/// in all Accoutrement maps.
+///
+/// @since 1.0.0 -
+/// - NEW: Aliased as `to` in Accoutrement-maps
+///
+/// @group scale-units
+///
+/// @param {length | string} $length -
+///   The length or named size to be converted.
+/// @param {string} $to-unit -
+///   The desired units to convert to.
+///   Some units (`ch`, `vw`, `vh`, `vmin`, `vmax`) cannot be converted.
+/// @param {length | string} $from-context [false] -
+///   When converting from relative units,
+///   the absolute length (in px) to which $length refers -
+///   e.g. for `$lengths` in em units, would normally be the
+///   font-size of the current element.
+///   `false` and `null` will resolve to your 'root' setting or 16px
+/// @param {length | string} $to-context [$from-context] -
+///   For converting *to* relative units,
+///   the absolute length in px to which the output value will refer.
+///   Defaults to the same as `$from-context`, since it is rarely needed.
+/// @throws Context parameters must resolve to a value in pixel units
+@function convert-units(
+  $length,
+  $to-unit,
+  $from-context: false,
+  $to-context: $from-context
+) {
+  $_convertable: (
+    'in',
+    'mm',
+    'cm',
+    'pt',
+    'pc',
+    'px',
+    'em',
+    'rem',
+    'browser-ems',
+    '%',
+    'ex'
+  );
+  $length: if(meta.type-of($length) == 'number', $length, size.size($length));
+  $from-unit: math.unit($length);
+
+  // No conversion needed
+  @if ($from-unit == $to-unit) {
+    @return $length;
+  }
+
+  // No units
+  @if ($from-unit == '') {
+    @return get-number($to-unit, 'allow-relative') + $length;
+  } @else if ($to-unit == '') {
+    @return math.div($length, ($length * 0 + 1));
+  }
+
+  // Easily comparable units
+  $to-zero: get-number($to-unit);
+
+  @if $to-zero and math.compatible($length, $to-zero) {
+    @return $to-zero + $length;
+  }
+
+  // Warn and escape when units are not convertable
+  @each $units in ($from-unit, $to-unit) {
+    @if not list.index($_convertable, $units) {
+      $warning: '`#{$units}` units can not be reliably converted,';
+      $warning: '#{$warning} returning original value';
+      @warn $warning;
+      @return $length;
+    }
+  }
+
+  // Establish root size
+  $root-size: map.get(config.$sizes, 'root') or
+    config.$accoutrement-browser-default-font-size;
+  $root-size: size.size($root-size);
+  $root-size: get-px($root-size);
+
+  // Establish relative context
+  $from-context: size.size($from-context);
+  $to-context: size.size($to-context);
+  $from-context: if($from-context, get-px($from-context), $root-size);
+  $to-context: if($to-context, get-px($to-context), $root-size);
+
+  // Context values must be in px
+  @if (not $from-context) or (not $to-context) {
+    @return throw.error(
+      'Context parameters must resolve to a value in pixel units',
+      'convert-units'
+    );
+  }
+
+  // Special conversion for browser-default ems (needed in media-queries)
+  @if ($to-unit == 'browser-ems') {
+    $size: convert-units($length, 'px', $from-context);
+    $size: math.div($size, config.$accoutrement-browser-default-font-size);
+    @return $size * 1em;
+  }
+
+  // Convert relative length to pixels
+  $px-length: get-px($length) or $length;
+  $from-unit: math.unit($px-length);
+
+  // Convert relative units using the from-context parameter.
+  @if $from-unit == 'em' {
+    $px-length: $length * math.div($from-context, 1em);
+  } @else if $from-unit == 'rem' {
+    $px-length: $length * math.div($root-size, 1rem);
+  } @else if $from-unit == '%' {
+    $px-length: $length * math.div($from-context, 100%);
+  } @else if $from-unit == 'ex' {
+    $px-length: $length * math.div($from-context, 2ex);
+  }
+
+  // Convert length in pixels to the output unit
+  @if $to-zero {
+    @return $to-zero + $px-length;
+  } @else if $to-unit == 'em' {
+    @return $px-length * math.div(1em, $to-context);
+  } @else if $to-unit == 'rem' {
+    @return $px-length * math.div(1rem, $root-size);
+  } @else if $to-unit == '%' {
+    @return $px-length * math.div(100%, $to-context);
+  } @else if $to-unit == 'ex' {
+    @return $px-length * math.div(2ex, $to-context);
+  }
+
+  $warn: 'Failed to convert `#{$length}` into `#{$to-units}` units';
+  @warn '#{$warn} returning original value';
+  @return $length;
+}
+@include function.internal(
+  meta.get-function('convert-units'),
+  'convert-units',
+  'convert',
+  'units',
+  'to'
+);

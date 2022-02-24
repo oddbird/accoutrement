@@ -1,0 +1,66 @@
+@use './size';
+@use '../ratio/tokens' as ratio;
+@use '../internal/throw';
+@use '../internal/type';
+@use '../internal/function';
+@use 'sass:math';
+@use 'sass:meta';
+
+// Scale [function]
+// ----------------
+/// Apply a modular or linear scale to any value,
+/// moving up or down the scale by a given number of steps.
+/// (Linear scaling is simple multiplication
+/// and may not be particularly useful where the scale is known).
+///
+/// @since 4.0.0 -
+/// - NEW: Provides direct access to scales,
+///   without needing to use the token map.
+///
+/// @group scale
+/// @example scss
+///   /* _widescreen: #{tools.scale(700px, '_widescreen')} */
+///   /* 1.4: #{tools.scale(24px, 1.4, -1)} */
+///   /* linear: #{tools.scale(16px, 'linear', 2)} */
+///
+/// @param {token | number} $value -
+///   The original value to be scaled
+/// @param {token | number | 'linear'} $ratio -
+///   The key name or value of a ratio
+/// @param {number} $steps -
+///   The number of steps to move along a scale
+/// @param {map} $source [ratio.$ratios] -
+///   Optional Accoutrement-format map of ratios to use as the origin palette
+///   (in addition to the provided defaults)
+/// @return {number} -
+///   The scaled value
+/// @throw -
+///   Ratio must be either a number or "linear"
+@function scale($value, $ratio, $steps: 1, $source: ratio.$ratios) {
+  $value: if(type.check($value, 'number'), $value, size.size($value));
+
+  @if not type.check($value, 'number') {
+    @return type.error($value, 'number', 'scale', '$value');
+  }
+
+  @if not type.check($steps, 'number') {
+    @return type.error($steps, 'number', 'scale', '$steps');
+  }
+
+  $normal: ratio.is-ratio($ratio, $source);
+
+  @if ($normal == 'linear') {
+    @return $value * $steps;
+  } @else if (type.check($normal, 'number')) {
+    $multiplier: math.pow($normal, $steps);
+    @return $value * $multiplier;
+  }
+
+  // should only happen on pass-through errors
+  @return throw.error(
+    '$ratio must be either a number or "linear", got [#{meta.type-of($ratio)}] `#{$ratio}`',
+    'scale'
+  );
+}
+
+@include function.internal(meta.get-function('scale'), 'scale');

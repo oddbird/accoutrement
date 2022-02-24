@@ -1,0 +1,110 @@
+@use 'api';
+@use 'sass:map';
+@use 'sass:meta';
+
+/// # Compiling Token Maps
+/// Tools for compiling Accoutrement map tokens,
+/// useful for exporting versions of
+/// token maps with all of the Accoutrement syntax removed.
+/// @group token-compile
+
+// Map-Compile [function]
+// ---------------
+/// Allows for the compilation of each token in a map,
+/// or a map and an additional source.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides for compilation and exporting of
+/// static version of Accoutrement maps.
+///
+/// @group token-compile
+/// @example scss - Compile each token in a map
+///   $sizes: (
+///     'root': 16px,
+///     'text-size': '#root',
+///   );
+///
+///   /*! #{inspect(tools.map-compile($sizes))} */
+///
+/// @example scss - Compile a map based on an additional source
+///   $sizes: (
+///     'root': 16px,
+///     'text-size': '#root',
+///     'display-text': '#spacer'
+///   );
+///
+///   $spacing-sizes: (
+///     'spacer': 2rem,
+///   );
+///
+///   /*! #{inspect(tools.map-compile($sizes, $spacing-sizes))} */
+///
+/// @access public
+/// @name map-compile
+/// @param {map} $map -
+///   The map to be compiled
+/// @param {map | null} $source -
+///   A map of reference tokens
+/// @return {map} -
+///   The parsed value of keys in the original map
+@function map-compile($map, $source: ()) {
+  $source: map.deep-merge($source, $map);
+  $output: ();
+
+  @each $key, $value in $map {
+    $output: map.merge(
+      $output,
+      (
+        $key: api.get($source, $key),
+      )
+    );
+  }
+
+  @return $output;
+}
+
+// Map-Compile-With [function]
+// ---------------
+/// Allows for the compilation of each token in a map,
+/// with token values resolved based on a function applied
+/// on each key-value pair.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides for compilation and exporting of
+/// static version of Accoutrement maps with tokens
+/// resolved based on data type.
+///
+/// @group token-compile
+/// @example scss - Compile a map using a particular function
+///   @use 'color';
+///
+///   tools.$colors: (
+///     'brand-blue': hsl(234, 85%, 35%),
+///     'dark-blue': '#brand-blue' ('shade': 30%),
+///   );
+///
+///   $fn: meta.get-function('color', $module: 'color');
+///   /*! #{inspect(tools.map-compile-with(tools.$colors, $fn))} */
+///
+/// @access public
+/// @name map-compile-with
+///
+/// @param {map} $map -
+///   The map to be compiled
+///
+/// @param {string | function} $function
+///   The function to apply on each key-value pair in the map
+/// @param {arglist} $args... -
+///   Any arguments required for the function call
+/// @return {map} -
+///   The parsed value of keys in the original map
+@function map-compile-with($map, $function, $args...) {
+  $output: ();
+
+  @each $key, $value in $map {
+    $resolved: meta.call($function, $key, $args...);
+    $output: map.set($output, $key, $resolved);
+  }
+
+  @return $output;
+}

@@ -1,0 +1,117 @@
+@use 'sass:string';
+@use 'sass:meta';
+@use 'sass:map';
+@use '../tokens';
+@use '../internal/function';
+@use '../utils/map' as utils;
+
+/// # Timing Maps: Durations & Delays
+/// Manage all your duration & delay patterns
+/// in a single place -
+/// with explicitly documented relationships.
+/// @group animate-times
+
+// Timing Map
+// ----------
+/// A variable storing the map of
+/// all times globally available on your project.
+/// Any times added to the `$times` map will be accessible
+/// to the `time()` function by default.
+///
+/// Define each time with a `name`, `base-value`,
+/// and optional `adjustments`…
+///
+/// ```
+/// $times: (
+///   'fast': <base-value>,
+///   'slow': <base-value> ('<function-name>': '<arguments>'),
+///   // will return: function-name($base-value, $arguments...)
+/// );
+/// ```
+///
+/// - Name your times anything – from abstractions like `fast`,
+///   to concrete patterns like `button-background-hover`.
+/// - Base-values can be CSS-ready times,
+///   or references other times in the map.
+/// - Adjustments are a nested map of functions and arguments,
+///   for adjusting times directly in your palette.
+///
+/// @group animate-times
+$times: () !default;
+
+// Time [function]
+// ---------------
+/// Access a named time in your `$times` map.
+///
+/// @since 1.0.0 -
+/// - NEW: Accepts `$do` map argument,
+///   for on-the-fly adjustments
+/// - NEW: Accepts `$source` map argument,
+///   for custom source-palette
+///
+/// @group animate-times
+///
+/// @param {string} $time -
+///   The name of a time in your configuration
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$times] -
+///   Optional Accoutrement-format map of times to use as the origin palette
+/// @return {length} -
+///   The calculated length of time
+@function time($time, $do: null, $source: $times) {
+  $time: tokens.get($source, $time, $do);
+  @return if((meta.type-of($time) == 'string'), string.unquote($time), $time);
+}
+@include function.internal(meta.get-function('time'), 'time');
+
+// Add Times
+// ---------
+/// Merge individual time maps into the global `$times` variable,
+/// in case you want to define times in smaller groups
+/// such as `duration-times`, `delay-times`, etc
+/// before merging them into a single global times-palette.
+///
+/// @group animate-times
+///
+/// @param {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$times` variable,
+///   with new maps merged in.
+@mixin add-times($maps...) {
+  $times: utils.multi-merge($times, $maps...) !global;
+}
+
+// Compile Times
+// ---------------
+/// Compile all the tokens in a time map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for time token maps
+///
+/// @group animate-times
+///
+/// @param {map} $map [$times] -
+///   The map to be compiled
+/// @param {map | null} $source [$times] -
+///   A map of reference tokens that can be used
+///   for resolving times.
+///   (defaults to the global `$times` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-times($map: $times, $source: $times) {
+  $source: map.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('time'),
+    null,
+    $source
+  );
+}

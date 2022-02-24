@@ -1,0 +1,31 @@
+@use 'sass:list';
+@use '../internal/throw';
+
+// Error on Missing Keys
+// ---------------------
+/// A configuration option to optionally trigger warnings or errors
+/// when a token is not found:
+///
+/// - `null` [default]: Will silently return `null`
+///   (mimicking the built-in Sass `map.get()` function)
+/// - `warn`: Will also throw a warning
+/// - `error`: Will throw an error, and stop compilation
+///
+/// @since 4.0.0 -
+/// - BREAKING: Removed the `silent` option,
+///   to match built-in Sass map access behavior. Defaults to `null`.
+/// @since 2.2.0 -
+/// - NEW: Provides authors with more Sass-like behavior,
+///   and more options for managing or testing when a key lookup fails
+/// @author James Camilleri
+/// @group token-config
+/// @type string | null
+$handle-missing-keys: null !default;
+
+// Throw an error if the missing key flag is not configured correctly.
+@if not list.index(('error', 'warn', 'null', null), $handle-missing-keys) {
+  @include throw.error(
+    '`$handle-missing-keys` configuration should be one of: `error`, `warn`, or `null`',
+    'settings'
+  );
+}

@@ -1,0 +1,365 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../internal/throw';
+@use '../utils/string' as str;
+@use '../utils/list' as li;
+@use 'config';
+@use 'function';
+
+/// # Core Parser
+/// @access private
+
+$_memo: ();
+$_stack: ();
+
+// Normalize
+// ---------
+/// Normalize value and adjustment syntax
+///
+/// @access private
+///
+/// @param {*} $token -
+///   A string to extract an #alias from
+/// @return {map} -
+///   A map with `value` and `do` keys
+@function normalize-token($token) {
+  $type: meta.type-of($token);
+  $value: $token;
+  $do: null;
+
+  @if ($type == 'map') and (list.nth(map.keys($token), 1) == '%value') {
+    $value: map.get($token, '%value');
+    $do: map.remove($token, '%value');
+  } @else if list.index('list' 'arglist', $type) {
+    $final: list.nth($token, -1);
+
+    @if (list.length($token) > 1) and (meta.type-of($final) == 'map') {
+      $do: $final;
+      $value: li.remove-nth($token, -1);
+      $value: if(list.length($value) == 1, list.nth($value, 1), $value);
+    }
+  }
+
+  @return ('value': $value, 'do': $do);
+}
+
+// Next Alias
+// ---------
+/// Returns the next possible alias for parsing/replacing from the given string.
+/// An alias is simply a string prefixed with '#', and which isn't escaped with `\\`.
+/// The returned alias may not match a defined value, and may be a color or other CSS.
+///
+/// @access private
+///
+/// @param {string} $string -
+///   A string to extract an #alias from
+/// @param {number} $index -
+///   The start index to search from; default is 1.
+/// @return {map | null} -
+///   A map with 'alias' holding the next potential alias string and `end` holding
+///   the end location (end is exclusive - the next char after the alias); or `null`
+///   if no possible aliases exist.
+@function next-alias($string, $index: 1) {
+  @if $index > 1 {
+    // Find the alias within a sub-string
+    $substring-alias: next-alias(string.slice($string, $index), 1);
+    @if not $substring-alias {
+      @return null;
+    }
+    @return (
+      'alias': map.get($substring-alias, 'alias'),
+      'end': $index - 1 + map.get($substring-alias, 'end')
+    );
+  }
+
+  $terminators: ('#', ' ', ')', '\\');
+  $hash-index: string.index($string, '#');
+
+  // If $hash-index is escaped, skip to the next alias
+  $escape-index: string.index($string, '\\#');
+  @if $escape-index and ($escape-index + 1 == $hash-index) {
+    @return next-alias($string, $escape-index + 2);
+  }
+
+  // no alias found
+  @if not $hash-index {
+    @return null;
+  }
+
+  // get full alias
+  $alias-start: $hash-index + 1;
+  $sliced: string.slice($string, $alias-start);
+  $alias-length: string.length($sliced);
+
+  @each $terminator in $terminators {
+    $index: string.index($sliced, $terminator);
+    @if $index and ($index <= $alias-length) {
+      $alias-length: $index - 1;
+    }
+  }
+
+  @return (
+    'alias': string.slice($string, $alias-start, $hash-index + $alias-length),
+    'end': $hash-index + $alias-length + 1
+  );
+}
+
+// Lookup
+// ------
+/// Break apart nested alias,
+/// and lookup keys in the map.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   The reference map for alias lookup
+/// @param {string} $alias -
+///   The alias to find in the map
+/// @param {list} $nested [()] -
+///   List of nested aliases to find in the map
+/// @param {null | 'error' | 'warn'} $handle-missing-keys [config.$handle-missing-keys] -
+///   List of nested aliases to find in the map
+/// @return {map | null} -
+///   A map with 'token' holding the value of the requested alias,
+///   or null if the alias is not found
+@function lookup-alias(
+  $map,
+  $alias,
+  $nested: (),
+  $handle-missing-keys: config.$handle-missing-keys
+) {
+  // check for keys and return
+  @if map.has-key($map, $alias, $nested...) {
+    @return ('token': map.get($map, $alias, $nested...));
+  }
+
+  // parse the component keys of a deep alias
+  @if (meta.type-of($alias) == 'string') and string.index($alias, '->') {
+    $parts: str.split($alias, '->');
+    $deep: lookup-alias(
+      $map,
+      list.nth($parts, 1),
+      li.remove-nth($parts, 1),
+      null
+    );
+    @if $deep {
+      @return $deep;
+    }
+  }
+
+  // alias missing from map
+  $error: 'Alias "#{$alias}" not found in map', 'lookup-alias';
+
+  @if ($handle-missing-keys == 'warn') {
+    @return throw.warn($error...);
+  } @else if ($handle-missing-keys == 'error') {
+    @return throw.error($error...);
+  }
+
+  @return null;
+}
+
+// Do
+// --
+/// Applies any ratio or function adjustments
+/// to Accoutrement map values
+///
+/// @access private
+///
+/// @param {string | function} $function -
+///   The ratio or function to use in manipulation
+/// @param {*} $value -
+///   The value to be manipulated
+/// @param {arglist} $args... -
+///   Any arguments required for a function call
+/// @return {*} -
+///   Manipulated value
+/// @throws No ratio or function found with the given name
+@function do($function, $value, $args...) {
+  // resolve functions
+  @if (meta.type-of($function) != 'function') {
+    $function: function.get($function, $throw: true);
+  }
+
+  // Handle null args…
+  @if (list.length($args) == 1) {
+    $args: list.nth($args, 1);
+  }
+
+  @if ($args) {
+    @return meta.call($function, $value, $args...);
+  }
+
+  @return meta.call($function, $value);
+}
+
+// Resolve Value
+// -------------
+/// Handles the recursive parsing for list/map values,
+/// and alias replacement for strings.
+/// This is an integral (and inter-dependant)
+/// part of the compile-token functionality,
+/// and has no stand-alone use.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   A map of terms to reference tags against
+/// @param {*} $value -
+///   The original value to be parsed for `#alias` tags
+/// @return {*} -
+///   Updated `$value` value
+///   in the same format as the original,
+///   but with all `#alias` tags replaced
+@function _resolve-value($map, $value) {
+  $type: meta.type-of($value);
+
+  // handle list values…
+  @if list.index('list' 'arglist', $type) {
+    $new: li.template($value);
+
+    // handle each item in the list…
+    @each $bit in $value {
+      $new: list.append($new, _resolve-value($map, $bit));
+    }
+
+    @return $new;
+  }
+
+  // handle map values…
+  @else if ($type == 'map') {
+    $new: ();
+
+    // handle each value in the map…
+    @each $key, $part in $value {
+      $new-key: _resolve-value($map, $key);
+      $new-part: _resolve-value($map, $part);
+      $new: map.merge(
+        $new,
+        (
+          $new-key: $new-part,
+        )
+      );
+    }
+
+    @return $new;
+  }
+
+  // replace alias values in a string
+  @else if ($type == 'string') {
+    $alias: next-alias($value);
+
+    @while $alias {
+      $alias-key: map.get($alias, 'alias');
+      $lookup: lookup-alias($map, $alias-key);
+
+      // Replace `#alias` when lookup succeeds. Otherwise leave it in the string (e.g. `#aaa`).
+      @if (meta.type-of($lookup) == 'map') {
+        // this is a recursive dependency
+        $new: compile-token($map, map.get($lookup, 'token'), $alias-key);
+
+        // Handle explicitly terminated keys (#key\).
+        $old: '##{$alias-key}\\';
+        $old: if(string.index($value, $old), $old, '##{$alias-key}');
+
+        // replace $old -> $new
+        $value: str.replace($value, $old, $new);
+      }
+
+      // If alias lookup fails, $lookup is not a map (it is null or an error).
+      // We handle alias lookup misses differently for a missing full alias (e.g. value is '#foo->not-here'),
+      // or a missing sub-string alias (e.g. value is 'foo #bar baz'). Missing sub-string aliases are left
+      // in the string unmodified, because a hash ('#') does not guarantee that the subsequent text is an
+      // alias reference - e.g. it could be an #rrggbb color or other valid text. Full alias misses should
+      // result in a `null` return, or whatever the configured behavior is for missing values.
+      @else if $value == '##{$alias-key}' {
+        // $value is an alias and nothing more; return the value of the alias
+        @return $lookup;
+      }
+
+      // If we still have a string, check for more alias references
+      $search-from: map.get($alias, 'end');
+      $alias: if(
+        (meta.type-of($value) == 'string'),
+        next-alias($value, $search-from),
+        false
+      );
+    }
+
+    // Correct escaped # symbols now that parsing is complete.
+    @if (meta.type-of($value) == 'string') {
+      $value: str.replace($value, '\\#', '#', 'all');
+    }
+  }
+
+  // other types are returned directly
+  @return $value;
+}
+
+// Compile Token
+// -------------
+/// Given a token map,
+/// and a single token value,
+/// compile the token to resolve any internal references
+/// or functional adjustments.
+///
+/// @access private
+///
+/// @param {map} $map -
+///   A map of terms to reference tags against
+/// @param {*} $token -
+///   The original value to be parsed for `#alias` tags
+/// @return {*} -
+///   Updated `$value` value
+///   in the same format as the original,
+///   but with all `#alias` tags replaced
+@function compile-token($map, $token, $stack: null) {
+  // use memo if available
+  $memo: map.get($_memo, $map, $token);
+  @if $memo {
+    @return $memo;
+  }
+
+  // make sure we're not in a recursive loop
+  @if $stack {
+    $new-stack: list.append($_stack, $stack, 'comma');
+
+    @if list.index($_stack, $stack) {
+      $_stack: null !global;
+      @return throw.error(
+        'Recursive lookup loop: `#{$new-stack}`',
+        'compile-token'
+      );
+    }
+
+    $_stack: $new-stack !global;
+  } @else {
+    $_stack: null !global;
+  }
+
+  // parse the value/do parts of the token
+  $token: normalize-token($token);
+  $value: map.get($token, 'value');
+  $do: map.get($token, 'do');
+
+  // recursively resolve any references
+  @if ($value) {
+    $value: _resolve-value($map, $value);
+  }
+
+  // apply any adjustments to the value
+  @if ($do) {
+    @each $name, $args in $do {
+      $args: _resolve-value($map, $args);
+      $value: do($name, $value, $args...);
+    }
+  }
+
+  // memorize, reset the stack, and return the value
+  $_memo: map.set($_memo, $map, $token, $value) !global;
+  $_stack: null !global;
+  @return $value;
+}

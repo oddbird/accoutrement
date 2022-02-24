@@ -1,0 +1,227 @@
+/// # Accessing Colors
+/// @group color-tokens
+
+@use 'config';
+@use '../utils/map';
+@use '../tokens';
+@use 'sass:map' as m;
+@use 'sass:meta';
+
+// Color Map
+// ---------
+/// A variable storing the map of
+/// all colors globally-available on your project.
+/// Any colors added to the `$colors` map will be accessible
+/// to the `color()` function by default.
+///
+/// Define each color with a `name`, `base-value`,
+/// and optional `adjustments`…
+///
+/// ```
+/// $colors: (
+///   'color-name': <base-value>,
+///   'color-two': <base-value> ('<color-function>': '<arguments>'),
+///   // will return: function-name($base-value, $arguments...)
+/// );
+/// ```
+///
+/// - Name your colors anything – from abstractions like `brand-pink`,
+///   to concrete patterns like `button` or `widget-background`.
+/// - Base-values can be CSS-ready colors (hex, rgb, hsla),
+///   or references other colors in the map.
+/// - Adjustments are a nested map of color functions and arguments,
+///   for adjusting colors directly in your palette.
+///
+/// The color-names `contrast-light` and `contrast-dark` are special
+/// (with or without a private `_` prefix).
+/// Use those names to define the default light-and-dark options
+/// for our color-contrast tools.
+/// They default to `white` and `black` respectively.
+///
+/// @since 0.1.0 -
+/// - BREAKING: Uses the new [shared](tokens.html) map syntax,
+///   for internal references and adjustments
+///
+/// @group color-tokens
+/// @example scss - simple color definitions
+///   $colors: (
+///     'brand-pink': hsl(330, 85%, 62%),
+///     'brand-light': #fff,
+///     'brand-dark': #222,
+///   );
+/// @example scss - reference other colors
+///   $colors: (
+///     'background': '#brand-light',
+///     'text': '#brand-dark',
+///     'link': '#brand-pink',
+///   );
+/// @example scss - adjust referenced colors with any color function
+///   $colors: (
+///     'focus': '#link' ('darken': 15%, 'desaturate': 15%),
+///   );
+///
+/// @type map
+$colors: () !default;
+
+// Add Colors
+// ----------
+/// Merge individual color maps into the global `$colors` variable,
+/// in case you want to define colors in smaller groups
+/// such as `brand-colors`, `link-colors`, etc
+/// before merging them into a single global color-palette.
+/// This can be useful for internal organization,
+/// documentation with [SassDoc][SassDoc],
+/// or integration with our pattern-library generator:
+/// [Herman][Herman].
+///
+/// [SassDoc]: http://sassdoc.com/
+/// [Herman]: https://www.oddbird.net/herman/
+///
+/// @group color-tokens
+/// @example scss
+///   $brand-colors: (
+///     'brand-dark': #222,
+///     'brand-pink': hsl(330, 85%, 62%),
+///   );
+///
+///   $text-colors: (
+///     'text': '#brand-dark',
+///     'link': '#brand-pink',
+///   );
+///
+///   @include tools.add-colors($brand-colors, $text-colors);
+///
+/// @param {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$colors` variable,
+///   with new maps merged in.
+@mixin add-colors($maps...) {
+  $colors: map.multi-merge($colors, $maps...) !global;
+}
+
+// With Colors
+// -----------
+/// Override the global color palette
+/// for a section of contents.
+/// This can be useful when working with alternate themes.
+///
+/// @group color-tokens
+/// @example scss
+///   $colors: (
+///     'background-dark': #222,
+///     'accent': hsl(330, 85%, 62%),
+///   );
+///
+///   @include tools.with-colors(('background-dark': #2c05bc));
+///   .component { background: color('background-dark'); }
+///
+/// @param {map} $source -
+///   The new color palette to use for contents
+@mixin with-colors($source) {
+  $_global: $colors;
+  $colors: $source !global;
+
+  @content;
+
+  $colors: $_global !global;
+}
+
+// Color
+// -----
+/// The primary function for
+/// accessing colors in your palette,
+/// or making adjustments on the fly.
+///
+/// This is more than a wrapper for `map-get($colors, $x)`.
+/// It also handles internal color-references, recursion,
+/// and functional color-adjustments.
+/// It has access to the global `$colors` map by default,
+/// but you can also pass in arbitrary color-palette maps as well.
+///
+/// @since 2.0.0 -
+/// - BREAKING: Provides access to color-contrast defaults,
+///   if they haven't been re-set by the user
+/// @since 1.0.0 -
+/// - BREAKING: Renamed `$palette` arg to `$source`
+/// - BREAKING: Accepts `$do` argument
+///   between `$color` and `$source`
+///
+/// @group color-tokens
+/// @example scss
+///   $colors: (
+///     'background': #eee,
+///     'text': #222,
+///   );
+///
+///   html {
+///     background: color('background');
+///     color: color('text');
+///   }
+///
+/// @param {string | list} $color -
+///   The name of a color in your palette,
+///   or a color description in the
+///   [map configuration format](color-tokens.html#variable--colors).
+/// @param {map | null} $do [null] -
+///   A map of function/ratio adjustments to run on the returned value
+/// @param {map} $source [$colors] -
+///   Optional map containing the source color-palette.
+///   Defaults to the global `$colors` map.
+///
+/// @return {color} -
+///   A calculated CSS-ready color,
+///   based on your global color palette and adjustments.
+@function color($color, $do: null, $source: $colors) {
+  $source: m.deep-merge(config.contrast-settings(), $source);
+  $_global: $colors;
+  $colors: $source !global;
+
+  @if (meta.type-of($color) == 'color') {
+    // apply adjustments
+    @if $do {
+      @return tokens.compile($source, $color $do);
+    }
+
+    // return color without changes
+    @return $color;
+  }
+
+  $resolved: tokens.get($source, $color, $do);
+  $colors: $_global !global;
+
+  @return $resolved;
+}
+
+// Compile Colors
+// --------------
+/// Compile all the tokens in a color map.
+/// This is particularly useful for exporting
+/// a static version of the token map
+/// with all the Accoutrement syntax removed --
+/// e.g. for use in javascript or documentation.
+///
+/// @since 4.0.0 -
+/// - NEW: Provides an export option for color token maps
+///
+/// @group color-tokens
+///
+/// @param {map} $map [$colors] -
+///   The map to be compiled
+/// @param {map | null} $source [$colors] -
+///   A map of reference tokens that can be used
+///   for resolving colors.
+///   (defaults to the global `$colors` map)
+/// @return {map} -
+///   A copy of the original map,
+///   with all token values resolved
+@function compile-colors($map: $colors, $source: $colors) {
+  $source: m.merge($source or (), $map);
+
+  @return tokens.map-compile-with(
+    $map,
+    meta.get-function('color'),
+    null,
+    $source
+  );
+}

@@ -1,0 +1,84 @@
+@use '../utils/map';
+
+/// # Scale Configuration
+///
+/// @group scale-sizes
+/// @access public
+
+// Browser Default Font Size
+// -------------------------
+/// The default font-size used by most browsers.
+/// @access private
+$accoutrement-browser-default-font-size: 16px;
+
+// Sizes
+// -----
+/// Define a palette of common sizes to be used across your project,
+/// in the format "name: size" or "name: basis (ratio/function: value)".
+/// If your map includes a `px`-comparable value for `root`,
+/// it will be used in relative-size unit conversions.
+///
+/// Named sizes can contain length values (`24px`),
+/// references to previously-defined sizes (`'root'`),
+/// a map of relative-adjustments using ratios (`(scale: '_golden' 2)`)
+/// and math functions (`('plus': 2)`),
+/// or a format-string & list for interpolating `calc()` values
+/// (`'calc(%s + %s)' ('#root', 2vw)`).
+///
+/// Internal math functions are always available by name,
+/// but recent versions of Sass require you to capture 3rd-party functions
+/// using the `get-function($name)` syntax before calling them.
+/// To simplify your maps,
+/// we recommend using the `$functions` map
+/// to store captured functions in one place,
+/// where we can continue to retrieve them by name.
+///
+/// @group scale-sizes
+/// @example scss
+///   $sizes: (
+///     'root': 24px,
+///     'text': '#root' ('convert-units': 'em'),
+///     'h1': '#root' ('times': 2),
+///     'calc': 'calc(%s + %s)' ('%s': '#root' 2vw),
+///   );
+///
+/// @type map
+///
+/// @property 'root' [16px] -
+///   Include a root font-size for your document,
+///   used for calculating relative sizes.
+///   This should match the size applied to your html element.
+$sizes: (
+  'root': $accoutrement-browser-default-font-size,
+) !default;
+
+// Add Sizes
+// ---------
+/// Merge individual size maps into the global `$sizes` variable,
+/// in case you want to define sizes in smaller groups
+/// such as `text-sizes`, `spacing-sizes`, etc
+/// before merging them into a single global size-palette.
+/// This can be useful for internal organization,
+/// documentation with [SassDoc][SassDoc],
+/// or integration with our pattern-library generator:
+/// [Herman][Herman].
+///
+/// [SassDoc]: http://sassdoc.com/
+/// [Herman]: https://www.oddbird.net/herman/
+///
+/// @group scale-sizes
+/// @example scss
+///   $text-sizes: (
+///     'root': 24px,
+///     'h1': '#root' ('times': 2),
+///   );
+///   @include tools.add-sizes($text-sizes);
+///
+/// @param {map...} $maps -
+///   Pass any number of maps to be merged.
+/// @output -
+///   An updated global `$sizes` variable,
+///   with new maps merged in.
+@mixin add-sizes($maps...) {
+  $sizes: map.multi-merge($sizes, $maps...) !global;
+}

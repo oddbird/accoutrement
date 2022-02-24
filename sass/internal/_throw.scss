@@ -1,0 +1,71 @@
+// Error Output Override
+// ---------------------
+/// Optionally turn off error output for testing,
+/// with the 'catch-errors' setting
+/// @access private
+$catch-errors: false !default;
+
+// Error [function]
+// ----------------
+/// Optionally return error messages without failing,
+/// as a way to test error cases
+///
+/// @access private
+/// @param {string} $message -
+///   A useful error message, explaining the problem
+/// @param {string} $source -
+///   The original source of the error for debugging
+/// @param {bool} $catch [$catch-errors] -
+///   Optionally return the error rather than failing
+/// @return {string} -
+///   Combined error with source and message
+/// @throws When `$catch == true`
+@function error($message, $source, $catch: $catch-errors) {
+  @if $catch {
+    @return 'ERROR [#{$source}] #{$message}';
+  }
+
+  @error '[#{$source}] #{$message}';
+}
+
+// Error [mixin]
+// -------------
+/// Optionally output mixin error messages without failing,
+/// as a way to test error cases
+///
+/// @access private
+/// @param {string} $message -
+///   A useful error message, explaining the problem
+/// @param {string} $source -
+///   The original source of the error for debugging
+/// @param {bool} $catch [$catch-errors] -
+///   Optionally return the error rather than failing
+/// @output -
+///   `--accoutrement-error` property with error message
+@mixin error($message, $source, $catch: $catch-errors) {
+  --accoutrement-error: '#{error($message, $source, $catch)}';
+}
+
+// Warn [function]
+// ---------------
+/// Optionally return warning messages,
+/// as a way to test error cases
+///
+/// @access private
+/// @param {string} $message -
+///   A useful warning message, explaining the problem
+/// @param {string} $source -
+///   The original source of the warning for debugging
+/// @param {bool} $catch [$catch-errors] -
+///   Optionally return the warning message
+/// @return {string} -
+///   Combined warning with source and message
+/// @throws When `$catch == true`
+@function warn($message, $source, $catch: $catch-errors) {
+  @if $catch {
+    @return 'WARNING [#{$source}] #{$message}';
+  }
+
+  @warn '[#{$source}] #{$message}';
+  @return null;
+}

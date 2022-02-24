@@ -1,0 +1,328 @@
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+@use 'list' as l;
+@use '../internal/throw';
+@use '../internal/type';
+@use '../internal/function';
+
+/// ## Sass Strings
+/// Utility function(s) that extend the Sass core modules,
+/// to help with advanced string manipulation.
+/// @group utils
+
+/// Force
+/// ----
+/// Force most Sass values to their string equivalent.
+/// This does not work for maps.
+///
+/// @access private
+/// @group utils
+///
+/// @param {string | list | number} $value -
+///   Any Sass value that can be reliably converted to a string
+/// @return {string} -
+///   The stringified value
+@function force($value) {
+  $value: $value or '';
+  $type: meta.type-of($value);
+
+  @if ($type == 'list') {
+    $new: l.template($value);
+
+    @each $item in $value {
+      $new: list.append($new, force($item));
+    }
+
+    $value: $new;
+  }
+
+  @if ($type == 'map') {
+    @return throw.error('Maps cannot be converted to strings', 'string-force');
+  }
+
+  @return if(($type == 'string'), $value, '#{$value}');
+}
+
+// String Replace
+// --------------
+/// Replace a substring inside a larger string,
+/// or replace the entirety of the string.
+///
+/// This function has a `str-` prefix added by default
+/// (e.g. `str-replace()`)
+/// unless it's imported directly.
+/// However, it's available in all Accoutrement maps
+/// as either `'replace'` or `'str-replace'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_str-replace` to `replace`
+/// - NEW: Available for direct usage
+/// @since 1.0.0 -
+/// - NEW: Improved handling of non-string values,
+///   allows you to replace a number within a string, for example
+///
+/// @group utils
+/// @example scss
+///   // sass treats calc() as a string,
+///   // so we can use string-functions to manipulate calc values…
+///   $map: (
+///     'text-size': calc(1em + 1vw),
+///     'large-text': '#text-size' ('str-replace': '1vw' '3vw'),
+///   );
+///   /*! #{tools.get($map, 'large-text')} */
+///
+/// @param {string | list} $string -
+///   The original string (or list of strings) to edit
+/// @param {*} $old -
+///   A sub-string to replace
+/// @param {*} $new [''] -
+///   A new sub-string to replace the old
+/// @param {boolean} $all [false] -
+///   If true, replace all instances of $old in $string
+/// @return {string} -
+///   Original string, with substring replaced
+@function replace($string, $old, $new: '', $all: false) {
+  $return: $string;
+  $type: meta.type-of($string);
+
+  @if (type-of($string) == 'map') {
+    @return throw.error(
+      '`$string` parameter cannot be a map',
+      'string-replace'
+    );
+  }
+
+  // Loops lists
+  @if ($type == 'list') {
+    $return: l.template($string);
+    @each $item in $string {
+      $item: replace($item, $old, $new, $all);
+      $return: list.append($return, $item);
+    }
+    @return $return;
+  }
+
+  // Force $old, $string to type string
+  $old: force($old);
+  $string: force($string);
+
+  // get length and index
+  $i: string.index($string, $old);
+  $n: string.length($old);
+
+  // replace…
+  @if $string == $old {
+    @return $new;
+  } @else if $i {
+    // Force $new to type string
+    $new: force($new);
+
+    // before and after…
+    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $z: string.slice($string, $i + $n);
+
+    // recursion if needed…
+    @if $all {
+      $z: replace($z, $old, $new, true);
+    }
+
+    // re-compile…
+    @return $a + $new + $z;
+  }
+
+  @return $return;
+}
+@include function.internal(
+  meta.get-function('replace'),
+  'replace',
+  'str-replace'
+);
+
+// Interpolate
+// -----------
+/// Return a string with interpolated values
+/// replacing `%s` placeholders in a format string.
+///
+/// This function has a `str-` prefix added by default
+/// (e.g. `str-interpolate()`)
+/// unless it's imported directly.
+/// However, it's available in all Accoutrement maps
+/// as either `'interpolate'`, `'str-interpolate'`, or `'%s'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_interpolate` to `interpolate`
+/// - NEW: Available for direct usage
+/// @group utils
+/// @example scss
+///   // sass treats calc() as a string,
+///   // so we can use string-functions to manipulate calc values…
+///   $map: (
+///     'root': 16px,
+///     'responsive': 'calc(%s + %s)' ('%s': '#root' 0.5vw),
+///   );
+///   /*! #{tools.get($map, 'responsive')} */
+///
+/// @param {string} $string -
+///   The original string to be edited
+/// @param {*} $values... -
+///   New strings, to replace the `%s` format strings
+/// @return {string} -
+///   Original string, with `%s` format strings replaced
+/// @throws Too many interpolation values given for the string
+@function interpolate($string, $values...) {
+  @if not type.check($string, 'string') {
+    @return type.error($string, 'string', 'interpolate', '$string');
+  }
+
+  $return: $string;
+
+  @each $val in $values {
+    @if string.index($return, '%s') {
+      $return: replace($return, '%s', $val);
+    } @else {
+      $length: list.length($values);
+      @return throw.error(
+        'Too many interpolation values (#{$length}) given for `#{$string}`',
+        'interpolate'
+      );
+    }
+  }
+
+  @return $return;
+}
+@include function.internal(
+  meta.get-function('interpolate'),
+  'interpolate',
+  '%s',
+  'str-interpolate'
+);
+
+// Split
+// -----
+/// Splits a string into a list of strings,
+/// using the same logic as JavaScript's `split()` method.
+///
+/// This function has a `str-` prefix added by default
+/// (e.g. `str-split()`)
+/// unless it's imported directly.
+/// However, it's available in all Accoutrement maps
+/// as either `'str-split'` or `'split'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_split` to `split`
+/// - NEW: Available for direct usage
+/// @since 1.0.0 -
+/// - NEW: Aliased as `str-split`
+///
+/// @group utils
+/// @example scss
+///   $map: (
+///     'list': 'hello world' ('split': ' '),
+///   );
+///   /*! #{tools.get($map, 'list')} */
+///
+/// @param {string} $string -
+///   The original string to be split
+///   - Empty strings will be returned as a list of one empty string
+/// @param {*} $separator [null] -
+///   The string will be split on any instance of the separator,
+///   and the separators will be removed
+///   - Null or unfound separators will return a single-item list
+///     with the original string
+///   - Empty-string (`''`) separators will return a list of
+///     all characters in the original string
+///   - Non-string separators will be converted to strings before splitting
+/// @param {integer | null} $limit [null] -
+///   Maximum length of the returned list
+/// @return {list} -
+///   Space-delimited list of string-slices from the original string
+@function split($string, $separator: null, $limit: null) {
+  $list: ();
+
+  @if (not $separator) or ($string == '') {
+    @return list.append($list, $string);
+  }
+
+  $string: force($string);
+  $separator: force($separator);
+  $length: string.length($string);
+  $limit: if($limit, math.min($limit, $length), $length);
+  $index: string.index($string, $separator);
+
+  @for $i from 1 through $limit {
+    @if ($string) {
+      $slice: null;
+
+      @if ($separator == '') {
+        $length: string.length($string);
+
+        @if ($length > 1) {
+          $slice: string.slice($string, 1, 1);
+          $string: string.slice($string, 2);
+        } @else {
+          $slice: if(($length == 1), $string, '');
+          $string: null;
+        }
+      } @else if ($index) {
+        $slice: string.slice($string, 1, $index - 1);
+        $string: string.slice($string, $index + string.length($separator));
+        $index: string.index($string, $separator);
+        $slice: if($string and not $index, $slice $string, $slice);
+      }
+
+      $list: if($slice, list.join($list, $slice), $list);
+    }
+  }
+
+  @return $list;
+}
+@include function.internal(meta.get-function('split'), 'split', 'str-split');
+
+// Trim
+// ----
+/// Trims whitespace from the start and end of a string.
+///
+/// This function has a `str-` prefix added by default
+/// (e.g. `str-trim()`)
+/// unless it's imported directly.
+/// However, it's available in all Accoutrement maps
+/// as either `'str-trim'` or `'trim'`.
+///
+/// @since 4.0.0 -
+/// - BREAKING: Renamed from `_a_trim` to `trim`
+/// - NEW: Available for direct usage
+/// @since 1.0.0 -
+/// - NEW: Strips whitespace
+/// - NEW: Aliased as `str-trim`
+///
+/// @group utils
+/// @example scss
+///   $map: (
+///     // null value is needed for single-argument functions…
+///     'trim': '  hello world     ' ('trim': null),
+///   );
+///   /*! #{tools.get($map, 'trim')} */
+///
+/// @param {string} $string -
+///   The original string to be trimmed
+/// @return {string} -
+///   Trimmed string
+@function trim($string) {
+  @if not type.check($string, 'string') {
+    @return type.error($string, 'string', 'trim', '$string');
+  }
+
+  $first: (string.slice($string, 1, 1) == ' ');
+  $last: (string.slice($string, -1) == ' ');
+
+  @if ($first or $last) {
+    $string: if($first, string.slice($string, 2), $string);
+    $string: if($last, string.slice($string, 1, -2), $string);
+    $string: trim($string);
+  }
+
+  @return $string;
+}
+@include function.internal(meta.get-function('trim'), 'trim', 'str-trim');

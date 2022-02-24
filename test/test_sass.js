@@ -1,5 +1,8 @@
-var path = require('path');
-var sassTrue = require('sass-true');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import sassTrue from 'sass-true';
 
-var sassFile = path.join(__dirname, '.', 'test.scss');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const sassFile = path.join(__dirname, '.', 'index.scss');
+
 sassTrue.runSass({ file: sassFile }, { describe, it });
