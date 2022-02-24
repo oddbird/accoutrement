@@ -51,7 +51,7 @@
     "postcss": "^8.4.6",
     "prettier": "^2.5.1",
     "sass": "^1.49.8",
-    "sass-true": "^6.0.1",
+    "sass-true": "^6.1.0-beta.1",
     "sassdoc": "^2.7.3",
     "sassdoc-theme-herman": "^4.0.2",
     "stylelint": "^14.5.3",
