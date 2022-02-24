@@ -33,6 +33,7 @@ color palettes.
   merge was performed,
   [which could result in removing nested values from maps](https://github.com/oddbird/accoutrement/issues/50).
 - INTERNAL: Limit files included in npm package.
+- INTERNAL: Remove documentation static-site from Accoutrement repository.
 - INTERNAL: Switch from Travis CI to GitHub Actions for CI.
 - INTERNAL: Upgrade dev dependencies.
 
