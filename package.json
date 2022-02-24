@@ -31,13 +31,13 @@
   ],
   "scripts": {
     "test": "mocha",
-    "lint:sass": "yarn lint:nofix --fix",
-    "lint:nofix": "stylelint '**/*.scss'",
+    "lint:sass": "yarn lint:ci --fix",
+    "lint:ci": "stylelint '**/*.scss'",
     "lint:other": "prettier --write '**/*.{js,json,md,yml}'",
     "lint": "run-p lint:sass lint:other",
     "docs": "sassdoc 'sass/**/*.scss'",
     "commit": "run-s lint test docs",
-    "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:nofix'",
+    "watch:sass": "chokidar '**/*.scss' '**/.stylelintrc.yml' -c 'yarn lint:ci'",
     "watch:tests": "chokidar 'test/**' 'sass/**/*.scss' -c 'yarn test'",
     "watch:docs": "chokidar 'sass/**/*.scss' './.sassdocrc' -c 'yarn docs'",
     "watch": "run-p watch:sass watch:tests watch:docs"
