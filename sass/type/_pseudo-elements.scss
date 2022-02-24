@@ -12,10 +12,13 @@
 // Before
 // ------
 /// Add generated content `:before` an element.
+///
+/// @since 4.0.0 -
+/// - NEW: The default value for `$content` is an empty string
 /// @group type-pseudo
-/// @param {String} $content -
+/// @param {String} $content [''] -
 ///   A value for the `content` property.
-@mixin before($content) {
+@mixin before($content: '') {
   &::before {
     content: $content;
     @content;
@@ -25,10 +28,13 @@
 // After
 // -----
 /// Add generated content `:after` an element.
+///
+/// @since 4.0.0 -
+/// - NEW: The default value for `$content` is an empty string
 /// @group type-pseudo
-/// @param {String} $content -
+/// @param {String} $content [''] -
 ///   A value for the `content` property.
-@mixin after($content) {
+@mixin after($content: '') {
   &::after {
     content: $content;
     @content;

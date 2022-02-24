@@ -123,6 +123,8 @@ color palettes.
 
   - NEW: [`compile-fonts()`](https://www.oddbird.net/accoutrement/docs/type-fonts.html#function--compile-fonts)
     function provides an export option for font token maps.
+  - NEW: The default value for `$content` in pseudo element
+    mixins is an empty string.
 
 - [Ratios][ratio]:
 
