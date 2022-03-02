@@ -1363,9 +1363,9 @@ has-flag@^4.0.0:
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
 has-symbols@^1.0.1, has-symbols@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.2.tgz#165d3070c00309752a1236a479331e3ac56f1423"
-  integrity sha512-chXa79rL/UC2KlX17jo3vRGz0azaWEx5tGqZg5pO3NUyEJVB17dMruQlzCCOfUvElghKcm5194+BCRvi2Rv/Gw==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.3.tgz#bb7b2c4349251dce87b125f7bdf874aa7c8b39f8"
+  integrity sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==
 
 has-tostringtag@^1.0.0:
   version "1.0.0"
@@ -3043,10 +3043,10 @@ sass-convert@^0.5.0:
     through2 "^2.0.0"
     which "^1.0.5"
 
-sass-true@^6.1.0-beta.1:
-  version "6.1.0-beta.1"
-  resolved "https://registry.yarnpkg.com/sass-true/-/sass-true-6.1.0-beta.1.tgz#2d07d000b74a45e21073cae185459815a634adcc"
-  integrity sha512-UynO7RO5KOrlpnrHhRL+pVJzdmqASRkZWZMn+LOWKLfZC4fDX7nQVb6gmUAaXPSvRdnwebuCzkhl9HxQ8wAyYA==
+sass-true@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/sass-true/-/sass-true-6.1.0.tgz#cbcb78135071b1bae0882ea456a2b0dd9a6c8b3a"
+  integrity sha512-Qt6TpPe8Ogr8g9FvBSwXvzfrkbtHD7rej0X3lzyoiZ+I0kKV9NFeefcF560uMn5NFCA7g5rcVKxc9UHrrMcDrw==
   dependencies:
     "@types/css" "^0.0.33"
     css "^3.0.0"

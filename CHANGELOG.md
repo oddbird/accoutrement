@@ -1,6 +1,6 @@
 # Accoutrement Changelog
 
-## 4.0.0 - UNRELEASED
+## 4.0.0 - 03/02/22
 
 This is a major update, moving over to Sass modules,
 and removing some features that no longer seem necessary.
