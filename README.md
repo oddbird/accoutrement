@@ -61,26 +61,26 @@ you can use the default "tools" using only:
 
 ## Modules for common data types
 
+- **[Utilities](https://www.oddbird.net/accoutrement/docs/utils.html)** --
+  For helpers with Sass lists, strings, and maps
+- **[Ratios](https://www.oddbird.net/accoutrement/docs/ratios.html)** --
+  For managing aspect and typography ratios
+  (several common ratios are provided)
 - **[Animate](https://www.oddbird.net/accoutrement/docs/animate.html)** --
   For managing CSS transitions and animations
 - **[Color](https://www.oddbird.net/accoutrement/docs/color.html)** --
   For managing CSS colors and contrast-ratios
+- **[Layout](https://www.oddbird.net/accoutrement/docs/layout.html)** --
+  For managing CSS sizes: typographic scales, spacing, etc.
 - **[Scale](https://www.oddbird.net/accoutrement/docs/scale.html)** --
   For managing CSS sizes: typographic scales, spacing, etc.
 - **[Type](https://www.oddbird.net/accoutrement/docs/type.html)** --
   For managing webfonts, generated content, and other text needs
-- **[Ratios](https://www.oddbird.net/accoutrement/docs/ratios.html)** --
-  For managing aspect and typography ratios
-  (several common ratios are provided)
-- **[Variables](https://www.oddbird.net/accoutrement/docs/vars.html)** --
-  For converting Sass maps and variables into CSS custom properties
-- **[Utilities](https://www.oddbird.net/accoutrement/docs/utils.html)** --
-  For helpers with Sass lists, strings, and maps
 
 ## Tokens
 
-The **Token** module provides
-a special syntax for managing design tokens
+The [**Tokens**](https://www.oddbird.net/accoutrement/docs/tokens.html)
+module provides a special syntax for managing design tokens
 with Sass "map" objects:
 
 ```scss
