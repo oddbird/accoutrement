@@ -1,5 +1,11 @@
 # Accoutrement Changelog
 
+## 4.0.1 - 03/28/22
+
+- INTERNAL: Upgrade dev dependencies.
+- DOCS: Update modules list --
+  [#111](https://github.com/oddbird/accoutrement/pull/111)
+
 ## 4.0.0 - 03/02/22
 
 This is a major update, moving over to Sass modules,
