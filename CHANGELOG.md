@@ -2,6 +2,8 @@
 
 ## UNRELEASED
 
+- INTERNAL: Upgrade dev dependencies.
+
 - [Sass Utilities][utils]:
 
   - NEW: Removed unnecessary string length checks in the
