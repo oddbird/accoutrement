@@ -1,11 +1,12 @@
 # Accoutrement Changelog
 
-## 4.0.2 - ##/##/22
+## UNRELEASED
 
 - [Sass Utilities][utils]:
 
   - NEW: Removed unnecessary string length checks in the
-    [`split()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--split) function.
+    [`split()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--split)
+    function.
 
 ## 4.0.1 - 03/28/22
 
