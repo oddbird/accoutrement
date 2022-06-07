@@ -237,7 +237,7 @@
     @include it('Accepts private tokens') {
       @include assert-equal(
         vars.var-token($test, '_brand'),
-        var(--_brand, #40bf40)
+        var(--_brand, hsl(120deg 50% 50%))
       );
     }
   }
