@@ -166,6 +166,10 @@
       );
     }
 
+    @include it('Limits the number of splits with empty-string separator') {
+      @include assert-equal(string.split('hello world', '', 3), 'h' 'e' 'l');
+    }
+
     @include it('Forces $string to a string') {
       @include assert-equal(string.split(34.5, '.'), '34' '5');
     }

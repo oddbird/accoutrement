@@ -257,14 +257,8 @@
 
       @if ($separator == '') {
         $length: string.length($string);
-
-        @if ($length > 1) {
-          $slice: string.slice($string, 1, 1);
-          $string: string.slice($string, 2);
-        } @else {
-          $slice: if(($length == 1), $string, '');
-          $string: null;
-        }
+        $slice: string.slice($string, 1, 1);
+        $string: string.slice($string, 2);
       } @else if ($index) {
         $slice: string.slice($string, 1, $index - 1);
         $string: string.slice($string, $index + string.length($separator));
