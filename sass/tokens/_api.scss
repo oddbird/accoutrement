@@ -273,19 +273,19 @@ $_memo: ();
 @function get($map, $key, $do: null) {
   // check the memo
   $resolved: map.get($_memo, $map, $key);
-  @if $resolved {
-    @return $resolved;
+
+  // when resolved value isn't in the memo
+  @if not map.has-key($_memo, $map, $key) {
+    // lookup the key in the map
+    $lookup: parse.lookup-alias($map, $key);
+  
+    @if $lookup {
+      $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
+    }
+  
+    // update the memo
+    $_memo: map.set($_memo, $map, $key, $resolved) !global;
   }
-
-  // lookup the key in the map
-  $lookup: parse.lookup-alias($map, $key);
-
-  @if $lookup {
-    $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
-  }
-
-  // update the memo
-  $_memo: map.set($_memo, $map, $key, $resolved);
 
   // handle any final adjustments
   @if $do {
