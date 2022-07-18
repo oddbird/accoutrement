@@ -150,7 +150,10 @@
       config.$handle-missing-keys: 'error';
 
       @include assert-equal(
-        (tokens.get($map, 'dop'), tokens.get($map, 'dip')),
+        (
+          tokens.get($map, 'dop', $ignore-cache: true),
+          tokens.get($map, 'dip', $ignore-cache: true)
+        ),
         (
           'ERROR [lookup-alias] Alias "ofo->nope" not found in map',
           'ERROR [lookup-alias] Alias "that->baz" not found in map'

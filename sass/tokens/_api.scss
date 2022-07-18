@@ -225,6 +225,8 @@ $_memo: ();
 /// You can do the same, or use it directly
 /// to turn any arbitrary map into an Accoutrement map.
 ///
+/// @since 4.0.2 -
+/// - NEW: `$ignore-cache` argument allows overriding cached token values
 /// @since 4.0.0 -
 /// - BREAKING: Name changed from `get-token` to `get`
 /// - BREAKING: The `$key` value must be a token name for lookup,
@@ -268,14 +270,16 @@ $_memo: ();
 ///   A key to get from the map (can use nested `key->subkey` syntax)
 /// @param {map | null} $do -
 ///   A map of functional adjustments to run on the returned value
+/// @param {boolean} $ignore-cache [false] -
+///   Optionally ignore the cached value
 /// @return {*} -
 ///   The parsed value of any key in a given map
-@function get($map, $key, $do: null) {
+@function get($map, $key, $do: null, $ignore-cache: false) {
   // check the memo
   $resolved: map.get($_memo, $map, $key);
 
   // when resolved value isn't in the memo
-  @if not map.has-key($_memo, $map, $key) {
+  @if $ignore-cache or not map.has-key($_memo, $map, $key) {
     // lookup the key in the map
     $lookup: parse.lookup-alias($map, $key);
 
