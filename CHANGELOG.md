@@ -3,10 +3,11 @@
 ## UNRELEASED
 
 - INTERNAL:
+
   - fix bug
-  ([oddbird#112](https://github.com/oddbird/accoutrement/issues/112)) in
-  [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get)
-  memorization
+    ([oddbird#112](https://github.com/oddbird/accoutrement/issues/112)) in
+    [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get)
+    memorization
   - Upgrade dev dependencies.
 
 - [Tokens][token]:
