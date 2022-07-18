@@ -34,7 +34,9 @@
       );
     }
 
-    @include it('Memorize resolved value, and applies adjustments to memorized values') {
+    @include it(
+      'Memorize resolved value, and applies adjustments to memorized values'
+    ) {
       @include assert-equal(
         tokens.get(
           $haystack,

@@ -278,11 +278,11 @@ $_memo: ();
   @if not map.has-key($_memo, $map, $key) {
     // lookup the key in the map
     $lookup: parse.lookup-alias($map, $key);
-  
+
     @if $lookup {
       $resolved: parse.compile-token($map, map.get($lookup, 'token'), $key);
     }
-  
+
     // update the memo
     $_memo: map.set($_memo, $map, $key, $resolved) !global;
   }
