@@ -1,6 +1,6 @@
 # Accoutrement Changelog
 
-## UNRELEASED
+## 4.0.2 - 07/18/22
 
 - INTERNAL:
 
