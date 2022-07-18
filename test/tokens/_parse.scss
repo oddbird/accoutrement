@@ -1,4 +1,5 @@
 @use '../../node_modules/sass-true/sass/true' as *;
+@use '../../sass/tokens/config';
 @use '../../sass/tokens/parse';
 @use '../../sass/tokens/function';
 @use '../../sass/tokens/register';
@@ -221,10 +222,37 @@ $scale: function.get('color.scale');
         'WARNING [lookup-alias] Alias "a->b->d" not found in map'
       );
     }
-    @include it('Optionally warn if the lookup fails') {
+
+    @include it('Optionally error if the lookup fails') {
       @include assert-equal(
         parse.lookup-alias($map, 'a->b->d', $handle-missing-keys: 'error'),
         'ERROR [lookup-alias] Alias "a->b->d" not found in map'
+      );
+    }
+
+    @include it('Use global handling for missing keys') {
+      config.$handle-missing-keys: 'error';
+
+      @include assert-equal(
+        parse.lookup-alias($map, 'a->b->d'),
+        'ERROR [lookup-alias] Alias "a->b->d" not found in map',
+        'error on missing key'
+      );
+
+      config.$handle-missing-keys: 'warn';
+
+      @include assert-equal(
+        parse.lookup-alias($map, 'a->b->d'),
+        'WARNING [lookup-alias] Alias "a->b->d" not found in map',
+        'warn on missing keys'
+      );
+
+      config.$handle-missing-keys: null;
+
+      @include assert-equal(
+        parse.lookup-alias($map, 'a->b->d'),
+        null,
+        'null on missing key'
       );
     }
   }
