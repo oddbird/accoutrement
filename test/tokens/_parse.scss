@@ -431,8 +431,6 @@ $scale: function.get('color.scale');
     }
     
     @include it('Can perform multiple functional adjustments in one token') {
-      $shadow: rgba(black, 0.5);
-
       @include assert-equal(
         parse.compile-token(
           $map,
