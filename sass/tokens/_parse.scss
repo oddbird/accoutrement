@@ -223,7 +223,7 @@ $_stack: ();
 
     // handle each item in the list…
     @each $bit in $value {
-      $new: list.append($new, _resolve-value($map, $bit));
+      $new: list.append($new, compile-token($map, $bit));
     }
 
     @return $new;
