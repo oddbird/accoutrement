@@ -284,10 +284,19 @@ $scale: function.get('color.scale');
     $map: (
       simple: 'hello world',
       spacers: (
-        'sm': '#spacers->md' ('-': 1em),
+        'sm': '#spacers->md'
+          (
+            '-': 1em,
+          ),
         'md': 2em,
-        'lg': '#spacers->md' ('+': 1em),
-        'xl': '#spacers->lg' ('+': 1em),
+        'lg': '#spacers->md'
+          (
+            '+': 1em,
+          ),
+        'xl': '#spacers->lg'
+          (
+            '+': 1em,
+          ),
       ),
       a: (
         b: (
@@ -306,7 +315,30 @@ $scale: function.get('color.scale');
       worse: '#bad',
       h: 'hello',
       w: 'world',
-      margin: (1em ('+': '#spacers->sm')) (1em ('+': '#spacers->md')) (1em ('+': '#spacers->lg')) (1em ('+': '#spacers->xl'))
+      margin: (
+        1em
+          (
+            '+': '#spacers->sm',
+          ),
+      )
+      (
+        1em
+          (
+            '+': '#spacers->md',
+          ),
+      )
+      (
+        1em
+          (
+            '+': '#spacers->lg',
+          ),
+      )
+      (
+        1em
+          (
+            '+': '#spacers->xl',
+          ),
+      ),
     );
 
     @include it('Has no impact on a token without references') {
@@ -429,15 +461,13 @@ $scale: function.get('color.scale');
         color.scale(color.mix(mediumvioletred, $shadow, 20%), $alpha: 50%)
       );
     }
-    
+
     @include it('Can perform multiple functional adjustments in one token') {
       @include assert-equal(
         parse.compile-token(
           $map,
-          (1em ('+': '#spacers->sm')) 
-          (1em ('+': '#spacers->md')) 
-          (1em ('+': '#spacers->lg')) 
-          (1em ('+': '#spacers->xl'))
+          (1em ('+': '#spacers->sm')) (1em ('+': '#spacers->md'))
+            (1em ('+': '#spacers->lg')) (1em ('+': '#spacers->xl'))
         ),
         2em 3em 4em 5em
       );
