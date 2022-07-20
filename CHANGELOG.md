@@ -1,5 +1,11 @@
 # Accoutrement Changelog
 
+## UNRELEASED
+
+- INTERNAL:
+
+  - Fixed a bug with [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get) that didn't allow per-property inline functional adjustments ([#117](https://github.com/oddbird/accoutrement/issues/117))
+
 ## 4.0.2 - 07/18/22
 
 - INTERNAL:
