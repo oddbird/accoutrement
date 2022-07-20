@@ -1,28 +1,22 @@
 # Accoutrement Changelog
 
-## UNRELEASED
+## 4.0.3 - 07/20/22
 
-- INTERNAL:
-
-  - Fixed a bug with [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get) that didn't allow per-property inline functional adjustments ([#117](https://github.com/oddbird/accoutrement/issues/117))
+- BUGFIX: Fixed a bug with
+  [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get)
+  that didn't allow per-property inline functional adjustments --
+  [#117](https://github.com/oddbird/accoutrement/issues/117)
 
 ## 4.0.2 - 07/18/22
 
-- INTERNAL:
-
-  - fix bug
-    ([oddbird#112](https://github.com/oddbird/accoutrement/issues/112)) in
-    [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get)
-    memorization
-  - Upgrade dev dependencies.
-
+- BUGFIX: Fixed a bug with
+  [`tokens.get()`](https://www.oddbird.net/accoutrement/docs/token-api#function--get)
+  memorization -- [#112](https://github.com/oddbird/accoutrement/issues/112)
+- INTERNAL: Upgrade dev dependencies.
 - [Tokens][token]:
-
   - NEW: Add `$ignore-cache` parameter to `tokens.get()` function,
     in order to override the cached value of a token.
-
 - [Sass Utilities][utils]:
-
   - NEW: Removed unnecessary string length checks in the
     [`split()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--split)
     function.
