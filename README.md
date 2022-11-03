@@ -28,8 +28,8 @@ and [Herman][herman]._
 
 [oddbird]: https://www.oddbird.net/
 [susy]: https://www.oddbird.net/susy/
-[true]: https://www.oddbird.net/true
-[herman]: https://www.oddbird.net/herman
+[true]: https://www.oddbird.net/true/
+[herman]: https://www.oddbird.net/herman/
 [fonts]: https://www.oddbird.net/accoutrement/docs/type.html
 
 ## Installation
@@ -138,7 +138,7 @@ setup and syntax parsing:
 [functions]: https://www.oddbird.net/accoutrement/docs/token-register.html
 
 **Note:** We no longer use token maps
-internally at [OddBird](https://oddbird.net)
+internally at [OddBird](https://www.oddbird.net/)
 since Sass "modules" now provide a way
 to group & namespace normal Sass variables meaningfully,
 and [access module variables as a map](https://sass-lang.com/documentation/modules/meta#module-variables).

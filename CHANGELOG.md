@@ -509,7 +509,7 @@ designing and testing several of these features.
 [token]: https://www.oddbird.net/accoutrement/docs/tokens.html
 [utils]: https://www.oddbird.net/accoutrement/docs/utils.html
 [vars]: https://www.oddbird.net/accoutrement/docs/vars.html
-[ratio]: https://www.oddbird.net/accoutrement/docs/ratio.html
+[ratio]: https://www.oddbird.net/accoutrement/docs/ratios.html
 [animate]: https://www.oddbird.net/accoutrement/docs/animate.html
 [color]: https://www.oddbird.net/accoutrement/docs/color.html
 [layout]: https://www.oddbird.net/accoutrement/docs/layout.html

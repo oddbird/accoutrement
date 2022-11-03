@@ -33,7 +33,7 @@ yarn
 As you work...
 
 - Add or update any appropriate unit tests --
-  using [True](https://www.oddbird.net/true) --
+  using [True](https://www.oddbird.net/true/) --
   in the `test` directory,
   and make sure all tests are passing with `yarn test`
 - Add your changes to the [changelog][]

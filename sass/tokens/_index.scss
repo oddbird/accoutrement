@@ -17,13 +17,13 @@
 ///   with explicit relationships intact
 /// - We can build automation tools around meaningful token-groups,
 ///   from [font-imports](type-fonts.html)
-///   to [generated style guides](https://www.oddbird.net/herman)
+///   to [generated style guides](https://www.oddbird.net/herman/)
 /// - Unlike `YAML`, `JSON`, and other object languages,
 ///   Sass is a *style language* that understands the values involved,
 ///   and provides specific tools for maintaining those values
 ///
 /// **Note:** We no longer use token maps
-/// internally at [OddBird](https://oddbird.net),
+/// internally at [OddBird](https://www.oddbird.net/),
 /// since Sass "modules" now provide a way
 /// to group & namespace normal Sass variables in a meaningful way,
 /// and [access module variables as a map](https://sass-lang.com/documentation/modules/meta#module-variables).
