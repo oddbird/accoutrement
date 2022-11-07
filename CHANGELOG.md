@@ -1,5 +1,9 @@
 # Accoutrement Changelog
 
+## UNRELEASED
+
+- 🏠 INTERNAL: Remove documentation from npm package
+
 ## 4.0.3 - 07/20/22
 
 - BUGFIX: Fixed a bug with

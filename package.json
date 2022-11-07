@@ -24,7 +24,6 @@
   "files": [
     "sass/**/*",
     "_index.scss",
-    "docs/",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
