@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Accoutrement</a>
         
-          <span class="project-version">4.0.3</span>
+          <span class="project-version">4.0.4</span>
         
       </div>
     </header>
@@ -409,7 +409,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="token-maps">Token Maps</h1>
+      <h1 id="token-maps" tabindex="-1">Token Maps</h1>
 <p>We use “token” as a generic term
 for named values inside Accoutrement maps.
 In the following map,
@@ -498,7 +498,7 @@ like colors, fonts, sizes, and<span class="widont">&nbsp;</span>animations.</p>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="internal-reference">Internal Reference</h2>
+      <h2 id="internal-reference" tabindex="-1">Internal Reference</h2>
 <p>The core module provides a generic map-parsing syntax,
 for internal reference &amp; adjustments –
 establishing dynamic relationships between map values.
@@ -593,7 +593,7 @@ $map: (
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="nested-references">Nested References</h2>
+      <h2 id="nested-references" tabindex="-1">Nested References</h2>
 <p>You can define nested tokens in Accoutrement maps,
 and access them using a <code>#first-&gt;second-&gt;third</code> syntax:</p>
 <pre><code class="lang-scss">// 'large-screen-&gt;h2' == 24px
@@ -698,7 +698,7 @@ $map: (
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="functional-adjustments">Functional Adjustments</h2>
+      <h2 id="functional-adjustments" tabindex="-1">Functional Adjustments</h2>
 <p>In many cases, we’ll want to reference a value
 and then make adjustments to it.
 The explicit long-hand syntax uses a map
@@ -806,7 +806,7 @@ The <code>value</code> is always passed as the first<span class="widont">&nbsp;<
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="adjustment-shorthand">Adjustment Shorthand</h2>
+      <h2 id="adjustment-shorthand" tabindex="-1">Adjustment Shorthand</h2>
 <p>We also provide a shorthand syntax
 to simplify adjustments in most cases.
 Here, the value is written first (any data type),
@@ -891,7 +891,7 @@ at the end of the<span class="widont">&nbsp;</span>definition:</p>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="adjustments-with-references">Adjustments with References</h2>
+      <h2 id="adjustments-with-references" tabindex="-1">Adjustments with References</h2>
 <p>Adjustment-function arguments
 can also reference keys in the map.
 In this example,
@@ -977,7 +977,7 @@ to generate a <code>rhythm</code> token.</p>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="string-interpolation">String Interpolation</h2>
+      <h2 id="string-interpolation" tabindex="-1">String Interpolation</h2>
 <p>For CSS features like <code>calc()</code>
 you can create format-strings
 and interpolate values into the string.
@@ -1110,7 +1110,7 @@ with replacement values for each<span class="widont">&nbsp;</span>placeholder:</
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="nested-adjustments">Nested Adjustments</h2>
+      <h2 id="nested-adjustments" tabindex="-1">Nested Adjustments</h2>
 <p>Since adjustment formats and values
 are parsed the same as any other value,
 it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustments:</p>
@@ -1200,7 +1200,7 @@ it’s possible to build quite complex<span class="widont">&nbsp;</span>adjustme
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="escaping-references">Escaping References</h2>
+      <h2 id="escaping-references" tabindex="-1">Escaping References</h2>
 <ul>
 <li>If you need to use the <code>#</code> character without creating an alias reference,
 you can prefix it with an (also-escaped) back-slash:
