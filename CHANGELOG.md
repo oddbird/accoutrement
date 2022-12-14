@@ -1,8 +1,9 @@
 # Accoutrement Changelog
 
-## UNRELEASED
+## 4.0.4 - 12/14/22
 
 - 🏠 INTERNAL: Remove documentation from npm package
+- 🏠 INTERNAL: Upgrade dev dependencies
 
 ## 4.0.3 - 07/20/22
 

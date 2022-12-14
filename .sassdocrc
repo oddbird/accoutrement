@@ -58,7 +58,8 @@ groups:
 
 herman:
   sass:
-    includePaths: ['sass']
+    sassOptions:
+      loadPaths: ['sass']
     use: ['tools', 'sass:meta']
   extraDocs:
     - name: 'Changelog'

@@ -5,4 +5,4 @@ import sassTrue from 'sass-true';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const sassFile = path.join(__dirname, '.', 'index.scss');
 
-sassTrue.runSass({ file: sassFile }, { describe, it });
+sassTrue.runSass({ describe, it }, sassFile);

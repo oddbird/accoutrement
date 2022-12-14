@@ -311,6 +311,7 @@ $FONT-FORMATS: (
 
     @if (not string.index($eot, 'data:')) {
       @each $format, $url in $data {
+        // stylelint-disable-next-line annotation-no-unknown
         $has-data: (($format != 'local') and string.index($url, 'data:'));
 
         @if ($format == 'local') or $has-data {
