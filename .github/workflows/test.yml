@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 'lts/*'
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - run: yarn test
 
   lint:
@@ -21,9 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: corepack enable
       - uses: actions/setup-node@v2
         with:
           node-version: 'lts/*'
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - run: yarn lint:ci
