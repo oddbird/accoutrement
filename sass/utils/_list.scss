@@ -45,6 +45,7 @@
 
   @if ($type != 'number') or ($index == 0) or (math.round($index) != $index) {
     $got: 'got (#{$type}) `#{if(($type == "null"), "null", $index)}`';
+
     @return throw.error(
       '$index must be a non-zero integer, #{$got}',
       'remove-nth'
@@ -66,6 +67,7 @@
 
   @return $result;
 }
+
 @include function.internal(
   meta.get-function('remove-nth'),
   'remove-nth',
@@ -87,5 +89,5 @@
 ///   An empty list that matches the template
 @function template($template: ()) {
   // return the same type of list we were given…
-  @return join((), (), list.separator($template), list.is-bracketed($template));
+  @return list.join((), (), list.separator($template), list.is-bracketed($template));
 }

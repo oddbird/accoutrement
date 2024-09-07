@@ -15,6 +15,7 @@ tokens.$colors: data.$colors;
   @include describe('Shades Of [function]') {
     $dint: math.percentage(math.div(1, 1.25));
     $lint: math.percentage(math.div(1, 3.25));
+
     @include it('Generates a range of shades based on the origin color') {
       @include assert-equal(
         themes.shades-of('simple', 2),
@@ -35,6 +36,7 @@ tokens.$colors: data.$colors;
         'one': red,
         'two': yellow,
       );
+
       @include tokens.add-colors($map);
       @include assert-equal(
         themes.shades-of($map, 1),
@@ -74,6 +76,7 @@ tokens.$colors: data.$colors;
         @include output {
           @include themes.stripe-colors(to right, red, orange, yellow, 'primary');
         }
+
         @include expect {
           background-image: linear-gradient(
             to right,

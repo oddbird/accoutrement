@@ -347,19 +347,16 @@ $scale: function.get('color.scale');
         'hello',
         'when the token is a string'
       );
-
       @include assert-equal(
         parse.compile-token($map, 30deg),
         30deg,
         'when the token is a number'
       );
-
       @include assert-equal(
         parse.compile-token($map, ('hello', 'world')),
         ('hello', 'world'),
         'when the token is a list'
       );
-
       @include assert-equal(
         parse.compile-token(
           $map,
@@ -372,13 +369,11 @@ $scale: function.get('color.scale');
         ),
         'when the token is a map'
       );
-
       @include assert-equal(
         parse.compile-token($map, linear-gradient(#888, #eee)),
         linear-gradient(#888, #eee),
         'when the token is an unquoted CSS value containing #rrggbb colors'
       );
-
       @include assert-equal(
         parse.compile-token(
           $map,
@@ -395,13 +390,11 @@ $scale: function.get('color.scale');
         'hello world',
         'list of aliases'
       );
-
       @include assert-equal(
         parse.compile-token($map, '#simple' '#string'),
         'hello world' 'hello world!',
         'list of aliases (with nesting)'
       );
-
       @include assert-equal(
         parse.compile-token($map, '#map'),
         (
@@ -417,19 +410,16 @@ $scale: function.get('color.scale');
         'helloworld',
         'The # terminator'
       );
-
       @include assert-equal(
         parse.compile-token($map, '#h #w'),
         'hello world',
         'The space (` `) terminator'
       );
-
       @include assert-equal(
         parse.compile-token($map, '(#h)#w'),
         '(hello)world',
         'The end-parenthesis `)` terminator'
       );
-
       @include assert-equal(
         parse.compile-token($map, '#h\\00#w'),
         'hello00world',

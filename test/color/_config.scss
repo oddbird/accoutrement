@@ -15,6 +15,7 @@
         )
       );
     }
+
     @include it('Allows for resetting of default colors') {
       @include assert-equal(
         config.contrast-settings(#fceeeef8),

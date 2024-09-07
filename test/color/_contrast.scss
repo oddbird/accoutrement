@@ -19,28 +19,24 @@ tokens.$colors: data.$colors;
         'white',
         $inspect: true
       );
-
       @include assert-equal(
         contrast.luminance(#000),
         0,
         'black',
         $inspect: true
       );
-
       @include assert-equal(
         contrast.luminance(#ff0),
         0.9278,
         'yellow',
         $inspect: true
       );
-
       @include assert-equal(
         contrast.luminance(#0f0),
         0.7152,
         'green',
         $inspect: true
       );
-
       @include assert-equal(
         contrast.luminance(#3492a1),
         0.2386104205,
@@ -90,6 +86,7 @@ tokens.$colors: data.$colors;
 
     @include it('Throws on out-of-range number') {
       $error: 'ERROR [color.valid-contrast] Contrast ratio must be a number between 0 and 21';
+
       @include assert-equal(contrast.valid-contrast(-3), $error);
       @include assert-equal(contrast.valid-contrast(24), $error);
     }
@@ -105,7 +102,6 @@ tokens.$colors: data.$colors;
   @include describe('Contrast Ratio [function]') {
     @include it('Returns contrast ratio between two colors') {
       @include assert-equal(contrast.contrast-ratio(#fff, #fff), 1);
-
       @include assert-equal(contrast.contrast-ratio(#000, #fff), 21);
     }
 
@@ -271,7 +267,6 @@ tokens.$colors: data.$colors;
         contrast.contrast-ratio(black, 'gray-dark-3'),
         'aa-large'
       );
-
       @include assert-equal(
         contrast.best-contrast(
           black,
@@ -281,7 +276,6 @@ tokens.$colors: data.$colors;
         'gray',
         'aa'
       );
-
       @include assert-equal(
         contrast.best-contrast(
           black,
@@ -408,6 +402,7 @@ tokens.$colors: data.$colors;
             'AA-large'
           );
         }
+
         @include expect {
           background-color: tokens.color('primary');
           color: #eee;

@@ -15,6 +15,7 @@
 
     @include it('is registered under the correct aliases') {
       $actual: meta.get-function('plus', $module: 'math');
+
       @each $alias in ('plus', 'add', '+') {
         @include assert-equal(function.get($alias), $actual, $alias);
       }
@@ -30,6 +31,7 @@
 
     @include it('is registered under the correct aliases') {
       $actual: meta.get-function('minus', $module: 'math');
+
       @each $alias in ('minus', 'subtract', '-') {
         @include assert-equal(function.get($alias), $actual, $alias);
       }
@@ -45,6 +47,7 @@
 
     @include it('is registered under the correct aliases') {
       $actual: meta.get-function('times', $module: 'math');
+
       @each $alias in ('times', 'multiply', '*') {
         @include assert-equal(function.get($alias), $actual, $alias);
       }
@@ -60,6 +63,7 @@
 
     @include it('is registered under the correct aliases') {
       $actual: meta.get-function('divide', $module: 'math');
+
       @each $alias in ('divide', '/') {
         @include assert-equal(function.get($alias), $actual, $alias);
       }
@@ -75,6 +79,7 @@
 
     @include it('is registered under the correct aliases') {
       $actual: meta.get-function('modulo', $module: 'math');
+
       @each $alias in ('modulo', 'mod', '%') {
         @include assert-equal(function.get($alias), $actual, $alias);
       }

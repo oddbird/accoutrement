@@ -172,6 +172,7 @@
         @include output {
           background-image: tokens.get($gradients, 'accent');
         }
+
         @include expect {
           background-image: linear-gradient(#f88812 10%, #9f29fa 80%);
         }

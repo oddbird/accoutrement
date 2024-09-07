@@ -1,5 +1,6 @@
 @use '../../node_modules/sass-true/sass/true' as *;
 @use '../../sass/utils/string';
+@use 'sass:list';
 
 @include test-module('utils/string') {
   // Force [function]
@@ -7,7 +8,6 @@
   @include describe('Force [function]') {
     @include it('Converts any value to a string') {
       @include assert-equal(string.force(2em), '2em');
-
       @include assert-equal(string.force([a 2 c]), '[a 2 c]');
     }
 
@@ -127,10 +127,9 @@
 
     @include it('Limits the number of splits') {
       @include assert-equal(string.split('he@llo@wor@ld', '@', 2), 'he' 'llo');
-
       @include assert-equal(
         string.split('he@llo@wor@ld', '@', 1),
-        join((), 'he')
+        list.join((), 'he')
       );
     }
 
@@ -142,13 +141,13 @@
     }
 
     @include it('Returns empty string as single-item list') {
-      @include assert-equal(string.split('', '@'), join((), ''));
+      @include assert-equal(string.split('', '@'), list.join((), ''));
     }
 
     @include it('Returns null-separator as single-item list') {
       @include assert-equal(
         string.split('hello world'),
-        join((), 'hello world')
+        list.join((), 'hello world')
       );
     }
 

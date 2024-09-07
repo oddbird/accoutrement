@@ -36,6 +36,7 @@ times.$times: data.$times;
       $local: (
         'new': 34ms,
       );
+
       @include assert-equal(times.time('new', $source: $local), 34ms);
     }
   }

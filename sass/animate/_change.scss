@@ -77,6 +77,7 @@ $changes: () !default;
 @function change($name, $do: null, $source: $changes) {
   @return tokens.get($source, $name, $do);
 }
+
 @include function.internal(meta.get-function('change'), 'change');
 
 // Add Changes

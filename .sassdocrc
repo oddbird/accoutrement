@@ -58,6 +58,7 @@ groups:
 
 herman:
   sass:
+    implementation: 'sass-embedded'
     sassOptions:
       loadPaths: ['sass']
     use: ['tools', 'sass:meta']

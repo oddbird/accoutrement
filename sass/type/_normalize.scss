@@ -72,6 +72,7 @@
 
   // Normalize variants
   $variants: helpers.font-get-variants($font);
+
   @if (list.length($variants) > 0) {
     $formats: map.get($font, 'formats') or ();
 
@@ -120,6 +121,7 @@
   // Try reverse lookup
   @if (not $name) {
     $index: list.index(map.values($source), $font);
+
     @if ($index) {
       $name: list.nth(map.keys($source), $index);
     }

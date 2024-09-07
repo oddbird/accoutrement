@@ -62,6 +62,7 @@ $easing-var-prefix: 'ease-' !default;
 ///   Custom properties for all public easing in the map
 @mixin easing--($source: easing.$easing) {
   $source: map.merge(named.$named-easing, $source);
+
   @include tokens.tokens--($source, $easing-var-prefix);
 }
 
@@ -101,6 +102,7 @@ $easing-var-prefix: 'ease-' !default;
 ///   Optional map of easing to use as a palette source
 @mixin ease--($ease, $value: null, $fallback: true, $source: easing.$easing) {
   $source: map.merge(named.$named-easing, $source);
+
   @include tokens.token--(
     $source,
     $ease,
@@ -146,5 +148,6 @@ $easing-var-prefix: 'ease-' !default;
 ///   `var(--<token>, <fallback>)`
 @function var-ease($ease, $fallback: true, $source: easing.$easing) {
   $source: map.merge(named.$named-easing, $source);
+
   @return tokens.var-token($source, $ease, $fallback, $easing-var-prefix);
 }

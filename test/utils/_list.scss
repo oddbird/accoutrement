@@ -70,19 +70,16 @@
 
     @include it('Keeps the original space list-separator') {
       @include assert-equal(l.separator(list.template($space)), 'space');
-
       @include assert-equal(l.separator(list.template($b-space)), 'space');
     }
 
     @include it('Keeps the original comma list-separator') {
       @include assert-equal(l.separator(list.template($b-comma)), 'comma');
-
       @include assert-equal(l.separator(list.template($comma)), 'comma');
     }
 
     @include it('Keeps the original brackets or lack-of') {
       @include assert-false(l.is-bracketed(list.template($comma)));
-
       @include assert-true(l.is-bracketed(list.template($b-space)));
     }
   }

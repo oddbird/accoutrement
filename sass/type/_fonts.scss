@@ -43,6 +43,7 @@
 @function font($font, $source: config.$fonts) {
   $data: api.get($source, $font);
   $normal: normalize.font($data, $font, $source);
+
   @return $normal;
 }
 
@@ -108,6 +109,7 @@
 ///   ready for output with the `font-family` property.
 @function font-family($key, $source: config.$fonts) {
   $font: font($key, $source);
+
   @return map.get($font, 'stack');
 }
 
@@ -185,6 +187,7 @@
     @each $variant, $data in $variants {
       $weight: list.nth($variant, 1);
       $style: list.nth($variant, 2);
+
       @include helpers.import-font-face(
         $name,
         $weight,

@@ -87,7 +87,7 @@
   $return: $string;
   $type: meta.type-of($string);
 
-  @if (type-of($string) == 'map') {
+  @if (meta.type-of($string) == 'map') {
     @return throw.error(
       '`$string` parameter cannot be a map',
       'string-replace'
@@ -97,10 +97,12 @@
   // Loops lists
   @if ($type == 'list') {
     $return: l.template($string);
+
     @each $item in $string {
       $item: replace($item, $old, $new, $all);
       $return: list.append($return, $item);
     }
+
     @return $return;
   }
 
@@ -134,6 +136,7 @@
 
   @return $return;
 }
+
 @include function.internal(
   meta.get-function('replace'),
   'replace',
@@ -183,6 +186,7 @@
       $return: replace($return, '%s', $val);
     } @else {
       $length: list.length($values);
+
       @return throw.error(
         'Too many interpolation values (#{$length}) given for `#{$string}`',
         'interpolate'
@@ -192,6 +196,7 @@
 
   @return $return;
 }
+
 @include function.internal(
   meta.get-function('interpolate'),
   'interpolate',
@@ -272,6 +277,7 @@
 
   @return $list;
 }
+
 @include function.internal(meta.get-function('split'), 'split', 'str-split');
 
 // Trim
@@ -319,4 +325,5 @@
 
   @return $string;
 }
+
 @include function.internal(meta.get-function('trim'), 'trim', 'str-trim');

@@ -83,6 +83,7 @@ $_wcag-contrast: (
 @function contrast($color, $options...) {
   @return best-contrast($color, $options, 'color');
 }
+
 @include function.internal(meta.get-function('contrast'), 'contrast');
 
 // Contrasted

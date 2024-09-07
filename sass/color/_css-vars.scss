@@ -62,6 +62,7 @@ $color-var-prefix: 'color-' !default;
 ///   Custom properties for all public colors in the map
 @mixin colors--($source: tokens.$colors) {
   $source: map.merge(config.contrast-settings(), $source);
+
   @include api.tokens--($source, $color-var-prefix);
 }
 
@@ -101,6 +102,7 @@ $color-var-prefix: 'color-' !default;
 ///   Optional map of colors to use as a palette source
 @mixin color--($color, $value: null, $fallback: true, $source: tokens.$colors) {
   $source: map.merge(config.contrast-settings(), $source);
+
   @include api.token--($source, $color, $value, $fallback, $color-var-prefix);
 }
 
@@ -139,5 +141,6 @@ $color-var-prefix: 'color-' !default;
 ///   `var(--<token>, <fallback>)`
 @function var-color($color, $fallback: true, $source: tokens.$colors) {
   $source: map.merge(config.contrast-settings(), $source);
+
   @return api.var-token($source, $color, $fallback, $color-var-prefix);
 }

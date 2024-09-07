@@ -16,11 +16,13 @@ config.$font-path: data.$font-path;
   @include describe('Font URL [function]') {
     @include it('Returns base64 data with no changes') {
       $data: 'data:application/x-font-woff;charset=utf-8;base64...';
+
       @include assert-equal(helpers.format-url($data, 'woff'), $data);
     }
 
     @include it('Returns local names with no changes') {
       $local: 'this' 'and that';
+
       @include assert-equal(helpers.format-url($local, 'local'), $local);
     }
 
@@ -29,7 +31,6 @@ config.$font-path: data.$font-path;
         helpers.format-url('this-file', 'ttf'),
         'this-file.ttf'
       );
-
       @include assert-equal(
         helpers.format-url('this-file.ttf', 'ttf'),
         'this-file.ttf',
@@ -42,18 +43,15 @@ config.$font-path: data.$font-path;
         helpers.format-url('this-file', 'svgz', 'myID'),
         'this-file.svgz#myID'
       );
-
       @include assert-equal(
         helpers.format-url('this-file.svg', 'svg', '#myID'),
         'this-file.svg#myID'
       );
-
       @include assert-equal(
         helpers.format-url('this-file', 'ttf', 'myID'),
         'this-file.ttf',
         'no change when wrong file type'
       );
-
       @include assert-equal(
         helpers.format-url('this-file.svg#myOtherID', 'svg', 'myID'),
         'this-file.svg#myOtherID',
@@ -67,13 +65,11 @@ config.$font-path: data.$font-path;
         'this-file.eot?#iefix',
         'adds hash if absent and requested'
       );
-
       @include assert-equal(
         helpers.format-url('this-file.eot?#iefix', 'eot', $iefix: true),
         'this-file.eot?#iefix',
         'hash remains when present and requested'
       );
-
       @include assert-equal(
         helpers.format-url('this-file', 'eot', $iefix: false),
         'this-file.eot',

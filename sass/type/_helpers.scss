@@ -156,6 +156,7 @@ $FONT-FORMATS: (
 
   // stylelint-disable-next-line function-url-quotes
   $path: format-url($path, $format, $iefix: true);
+
   @return font-url($path) $format-name;
 }
 

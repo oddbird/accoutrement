@@ -74,6 +74,7 @@ $font-var-prefix: 'font-' !default;
 ///   Custom properties for all public fonts in the map
 @mixin fonts--($source: config.$fonts, $use: 'stack') {
   $source: font-values($source, $use);
+
   @include vars.tokens--($source, $font-var-prefix);
 }
 
@@ -125,6 +126,7 @@ $font-var-prefix: 'font-' !default;
   $use: 'stack'
 ) {
   $source: font-values($source, $use);
+
   @include vars.token--($source, $font, $value, $fallback, $font-var-prefix);
 }
 
@@ -173,6 +175,7 @@ $font-var-prefix: 'font-' !default;
   $use: 'stack'
 ) {
   $source: font-values($source, $use);
+
   @return vars.var-token($source, $font, $fallback, $font-var-prefix);
 }
 

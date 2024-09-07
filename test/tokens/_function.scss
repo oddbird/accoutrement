@@ -61,7 +61,6 @@ function.$functions: ('user': 'got-user');
   @include describe('register [mixin]') {
     @include it('Registers a user function') {
       @include function.register($fun, 'user-fun', 'user-fun2');
-
       @include assert-equal(
         function.$functions,
         (

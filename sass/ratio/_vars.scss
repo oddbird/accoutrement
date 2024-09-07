@@ -57,6 +57,7 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   Custom properties for all public ratios in the map
 @mixin ratios--($source: tokens.$ratios) {
   $source: map.merge(utils.$named-ratios, $source);
+
   @include vars.tokens--($source, $ratio-var-prefix);
 }
 
@@ -95,6 +96,7 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   Optional map of ratios to use as a palette source
 @mixin ratio--($ratio, $value: null, $fallback: true, $source: tokens.$ratios) {
   $source: map.merge(utils.$named-ratios, $source);
+
   @include vars.token--($source, $ratio, $value, $fallback, $ratio-var-prefix);
 }
 
@@ -132,5 +134,6 @@ $ratio-var-prefix: 'ratio-' !default;
 ///   `var(--<token>, <fallback>)`
 @function var-ratio($ratio, $fallback: true, $source: tokens.$ratios) {
   $source: map.merge(utils.$named-ratios, $source);
+
   @return vars.var-token($source, $ratio, $fallback, $ratio-var-prefix);
 }

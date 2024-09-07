@@ -49,6 +49,7 @@ easing.$easing: data.$easing;
       $local: (
         'name': 'ease-in-out',
       );
+
       @include assert-equal(easing.ease('name', $source: $local), ease-in-out);
     }
   }

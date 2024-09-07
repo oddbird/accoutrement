@@ -81,7 +81,6 @@ $_old: tokens.$colors;
         color.adjust(red, $hue: 24deg),
         'adjusting a sass color directly'
       );
-
       @include assert-equal(
         tokens.color(
           'red',
@@ -193,7 +192,6 @@ $_old: tokens.$colors;
         ),
         'the default with global source'
       );
-
       @include assert-equal(
         tokens.compile-colors(
           (

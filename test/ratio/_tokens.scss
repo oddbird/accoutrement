@@ -52,7 +52,9 @@ tokens.$ratios: ('new': '#_octave', 'token': 'linear', 'bad': red);
     $new2: (
       'test': calc(16 / 9),
     );
+
     @include tokens.add-ratios($new1, $new2);
+
     @include it('Adds maps to the $ratios global') {
       @include assert-equal(
         tokens.$ratios,

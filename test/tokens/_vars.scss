@@ -227,7 +227,6 @@
         vars.var-token($test, 'text', 'border', 'color-'),
         var(--color-text, var(--color-border, token.get($test, 'border')))
       );
-
       @include assert-equal(
         vars.var-token($test, 'text', red, 'color-'),
         var(--color-text, red)

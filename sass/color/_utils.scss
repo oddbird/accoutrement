@@ -33,8 +33,10 @@
 ///   A calculated CSS-ready color value based on your global color palette.
 @function tint($color, $percentage, $light: null) {
   $light: $light or contrast.default-contrast('light');
+
   @return color.mix(tokens.color($light), tokens.color($color), $percentage);
 }
+
 @include function.internal(meta.get-function('tint'), 'tint');
 
 // Shade
@@ -63,6 +65,8 @@
 ///   A calculated CSS-ready color value based on your global color palette.
 @function shade($color, $percentage, $dark: null) {
   $dark: $dark or contrast.default-contrast('dark');
+
   @return color.mix(tokens.color($dark), tokens.color($color), $percentage);
 }
+
 @include function.internal(meta.get-function('shade'), 'shade');

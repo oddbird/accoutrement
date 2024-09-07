@@ -38,9 +38,11 @@ config.$sizes: data.$test-sizes;
     @include it('Returns false if units are incompatible') {
       @include assert-equal(units.get-px(2rem), false);
     }
+
     @include it('Returns px value') {
       @include assert-equal(units.get-px(100), 100px);
     }
+
     @include it('Adds length to 0px') {
       $length: 4;
       // stylelint-disable-next-line length-zero-no-unit

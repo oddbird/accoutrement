@@ -39,7 +39,6 @@
         type.check('hello world', 'string' 'list'),
         'string'
       );
-
       @include assert-equal(
         type.check('hello' 'world', 'string' 'list'),
         'list'

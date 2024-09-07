@@ -63,8 +63,10 @@ $ratios: () !default;
 ///   The numeric value of a ratio
 @function ratio($ratio, $do: null, $source: $ratios) {
   $source: map.deep-merge(utils.$named-ratios, $source);
+
   @return tokens.get($source, $ratio, $do);
 }
+
 @include function.internal(meta.get-function('ratio'), 'ratio');
 
 // Add Ratios
@@ -155,6 +157,7 @@ $ratios: () !default;
 
   @if ($allow-tokens) {
     $token: ratio($ratio, $source: $source);
+
     @return is-ratio($token, $allow-tokens: false);
   }
 

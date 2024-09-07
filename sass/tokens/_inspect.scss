@@ -126,5 +126,6 @@
 ///   or `false` if there is no token at the given path.
 @function has-token($map, $token, $nested...) {
   $found: parse.lookup-alias($map, $token, $nested, $handle-missing-keys: null);
+
   @return if($found, true, false);
 }

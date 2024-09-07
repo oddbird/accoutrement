@@ -36,6 +36,7 @@
 @function ident($name, $prefix: null) {
   $string: string.unquote('--#{$prefix}#{$name}');
   $string: s.replace($string, ' ', '-', 'all');
+
   @return $string;
 }
 

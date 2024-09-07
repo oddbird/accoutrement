@@ -33,6 +33,7 @@
 @function plus($num1, $num2) {
   @return $num1 + $num2;
 }
+
 @include function.internal(meta.get-function('plus'), 'plus', 'add', '+');
 
 // Minus
@@ -66,6 +67,7 @@
 @function minus($num1, $num2) {
   @return $num1 - $num2;
 }
+
 @include function.internal(
   meta.get-function('minus'),
   'minus',
@@ -103,6 +105,7 @@
 @function times($num1, $num2) {
   @return $num1 * $num2;
 }
+
 @include function.internal(
   meta.get-function('times'),
   'times',
@@ -139,6 +142,7 @@
 @function divide($num1, $num2) {
   @return math.div($num1, $num2);
 }
+
 @include function.internal(meta.get-function('divide'), 'divide', '/');
 
 // Modulo
@@ -170,6 +174,7 @@
 @function modulo($num1, $num2) {
   @return $num1 % $num2;
 }
+
 @include function.internal(
   meta.get-function('modulo'),
   'modulo',

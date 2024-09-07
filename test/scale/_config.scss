@@ -16,7 +16,9 @@ $_global: config.$sizes;
     $new2: (
       'test': 4em,
     );
+
     @include config.add-sizes($new1, $new2);
+
     @include it('Adds maps to the $sizes global') {
       @include assert-equal(config.$sizes, map.multi-merge($old, $new1, $new2));
     }

@@ -13,19 +13,14 @@
 
     @include it('Removes 0.01 from non-px max values') {
       @include assert-equal(utils.nudge-query(20em, 'max'), 19.99em);
-
       @include assert-equal(utils.nudge-query(20ch, 'max'), 19.99ch);
     }
 
     @include it('Ignores non-adjusted values') {
       @include assert-equal(utils.nudge-query(20px, 'min', 'max'), 20px);
-
       @include assert-equal(utils.nudge-query(20em, 'max', 'min'), 20em);
-
       @include assert-equal(utils.nudge-query(20ch, 'min'), 20ch);
-
       @include assert-equal(utils.nudge-query(20ch, 'min', false), 20ch);
-
       @include assert-equal(utils.nudge-query(20ch, 'max', false), 20ch);
     }
 
@@ -38,7 +33,6 @@
 
     @include it('Adds 0.01 to non-px min values') {
       @include assert-equal(utils.nudge-query(20em, 'min'), 20.01em);
-
       @include assert-equal(utils.nudge-query(20ch, 'min'), 20.01ch);
     }
 

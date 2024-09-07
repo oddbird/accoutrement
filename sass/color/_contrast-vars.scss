@@ -65,11 +65,13 @@
 
   @if ($name != $color) and not api.is-private-token($name) {
     $name: vars.ident($name, cv.$color-var-prefix);
+
     @return var($name, $color);
   }
 
   @return $color;
 }
+
 @include function.internal(meta.get-function('var-contrast'), 'var-contrast');
 
 // Var Contrasted

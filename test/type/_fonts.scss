@@ -65,6 +65,7 @@ config.$font-path: data.$font-path;
           'stack': 'hello' 'world',
         ),
       );
+
       @include assert-equal(
         fonts.font('new', $source: $local),
         (
@@ -194,6 +195,7 @@ config.$font-path: data.$font-path;
           'stack': 'hello' 'world',
         ),
       );
+
       @include assert-equal(
         fonts.font-family('new', $local),
         (new, hello, world)
@@ -223,6 +225,7 @@ config.$font-path: data.$font-path;
           'stack': 'hello' 'world' 'serif',
         ),
       );
+
       @include assert {
         @include output {
           @include fonts.font-family('new', $local);

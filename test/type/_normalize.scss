@@ -62,6 +62,7 @@ config.$fonts: data.$fonts;
       );
       $font: api.get($local, 'new');
       $normal: normalize.font($font, 'new', $local);
+
       @include assert-equal(map.get($normal, 'name'), 'new');
     }
 
@@ -106,6 +107,7 @@ config.$fonts: data.$fonts;
 
     @include it('Get implicit font name by alias') {
       $key: 'tf-alias';
+
       @include assert-equal(
         normalize.font-name(api.get(data.$fonts, $key), $key),
         'TestFont'
@@ -118,6 +120,7 @@ config.$fonts: data.$fonts;
           'stack': 'hello' 'world',
         ),
       );
+
       @include assert-equal(
         normalize.font-name(api.get($local, 'new'), 'new', $local),
         'new'

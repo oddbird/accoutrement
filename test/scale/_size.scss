@@ -92,6 +92,7 @@ config.$sizes: data.$test-sizes;
       $local: (
         'new': 35em,
       );
+
       @include assert-equal(size.size('new', $source: $local), 35em);
     }
   }
@@ -151,6 +152,7 @@ config.$sizes: data.$test-sizes;
       $local: (
         'new': 35em,
       );
+
       @include assert-equal(size.negative('new', $source: $local), -35em);
     }
   }
@@ -175,6 +177,7 @@ config.$sizes: data.$test-sizes;
       $local: (
         'new': 35em,
       );
+
       @include assert {
         @include output {
           @include size.square('new', $source: $local);

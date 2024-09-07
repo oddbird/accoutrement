@@ -59,7 +59,6 @@ function.$internal: ('internal': 'got-internal');
   @include describe('internal [mixin]') {
     @include it('Registers an internal function') {
       @include function.internal($fun, 'int-fun', 'int-fun2');
-
       @include assert-equal(
         function.$internal,
         (

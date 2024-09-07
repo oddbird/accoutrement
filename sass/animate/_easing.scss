@@ -68,8 +68,10 @@ $easing: () !default;
 @function ease($name: 'ease', $do: null, $source: $easing) {
   $source: map.deep-merge(named.$named-easing, $source);
   $name: tokens.get($source, $name, $do);
+
   @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
 }
+
 @include function.internal(meta.get-function('ease'), 'ease');
 
 // Add Easing

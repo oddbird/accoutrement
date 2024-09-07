@@ -7,31 +7,26 @@
   @include describe('Is Private Token [function]') {
     @include it('Returns true for string tokens starting with _') {
       @include assert-true(inspect.is-private-token('_hello'));
-
       @include assert-true(inspect.is-private-token('_'));
     }
 
     @include it('Returns true for string tokens starting with -') {
       @include assert-true(inspect.is-private-token('-hello'));
-
       @include assert-true(inspect.is-private-token('-'));
     }
 
     @include it('Returns true for list tokens starting with private string') {
       @include assert-true(inspect.is-private-token('_hello' 'world'));
-
       @include assert-true(inspect.is-private-token('_' 32));
     }
 
     @include it('Returns false for un-prefixed tokens') {
       @include assert-false(inspect.is-private-token('hello'));
-
       @include assert-false(inspect.is-private-token(32));
     }
 
     @include it('Returns false for un-prefixed lists') {
       @include assert-false(inspect.is-private-token('hello' 'world'));
-
       @include assert-false(inspect.is-private-token(32 'world'));
     }
   }
@@ -96,7 +91,6 @@
         inspect.is-alias-for($map, 'two'),
         'with adjustments map'
       );
-
       @include assert-false(
         inspect.is-alias-for($map, 'three'),
         'with additional string'
@@ -109,7 +103,6 @@
         'two',
         'with adjustments map'
       );
-
       @include assert-equal(
         inspect.is-alias-for($map, 'bacon', 'origin'),
         'one',

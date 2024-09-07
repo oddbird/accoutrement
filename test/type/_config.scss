@@ -32,22 +32,19 @@ config.$fonts: data.$fonts;
 
     @include it('Adds a font to the global variable') {
       @include assert-false(map.get(config.$fonts, 'sans'));
-
       @include config.add-font('sans', $partial);
-
       @include assert-equal(map.get(config.$fonts, 'sans'), $partial);
     }
 
     @include it('Allows you to override with a force argument') {
       @include assert-unequal(map.get(config.$fonts, 'sans'), $franklin);
-
       @include config.add-font('sans', $franklin, 'force');
-
       @include assert-equal(map.get(config.$fonts, 'sans'), $franklin);
     }
 
     @include it('Errors on existing font-key') {
       $has: map.get(config.$fonts, 'sans');
+
       @include assert-true($has);
 
       @include assert {

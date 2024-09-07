@@ -53,6 +53,7 @@
     @return $value * $steps;
   } @else if (type.check($normal, 'number')) {
     $multiplier: math.pow($normal, $steps);
+
     @return $value * $multiplier;
   }
 

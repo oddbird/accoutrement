@@ -69,6 +69,7 @@
       $local: (
         'new': 40em,
       );
+
       @include assert-equal(q.break('new', $source: $local), 40em);
     }
 

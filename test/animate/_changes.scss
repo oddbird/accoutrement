@@ -61,6 +61,7 @@ change.$changes: $changes;
       $local: (
         'new': opacity 34ms,
       );
+
       @include assert-equal(
         change.change('new', $source: $local),
         opacity 34ms
@@ -153,6 +154,7 @@ change.$changes: $changes;
         @include output {
           @include change.animate('animation');
         }
+
         @include expect {
           animation: slide-frames 1 times.time('fast') easing.ease('_out-back');
         }
@@ -164,6 +166,7 @@ change.$changes: $changes;
         @include output {
           @include change.animate('animation-ref');
         }
+
         @include expect {
           animation: slide-frames 1 times.time('fast') easing.ease('_out-back')
             both;
@@ -176,6 +179,7 @@ change.$changes: $changes;
         @include output {
           @include change.animate('animation', 'animation-ref');
         }
+
         @include expect {
           animation: slide-frames 1 times.time('fast') easing.ease('_out-back'),
             slide-frames 1 times.time('fast') easing.ease('_out-back') both;
@@ -192,6 +196,7 @@ change.$changes: $changes;
         @include output {
           @include change.transition('slide');
         }
+
         @include expect {
           transition: transform times.time('fast');
         }
@@ -203,6 +208,7 @@ change.$changes: $changes;
         @include output {
           @include change.transition('slide-in');
         }
+
         @include expect {
           transition: transform times.time('fast') easing.ease('_out-back');
         }
@@ -214,6 +220,7 @@ change.$changes: $changes;
         @include output {
           @include change.transition('modal-in', 'fade');
         }
+
         @include expect {
           transition: transform times.time('fast') easing.ease('_out-back'),
             opacity times.time('fade') easing.ease('_out-quad')

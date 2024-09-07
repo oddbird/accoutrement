@@ -27,7 +27,6 @@
 
     @include it('Nested list index') {
       @include assert-equal(z.z-index('active-nav'), 1);
-
       @include assert-equal(z.z-index('dropdown'), 2);
     }
   }

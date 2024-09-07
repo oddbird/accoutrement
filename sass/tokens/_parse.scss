@@ -66,9 +66,11 @@ $_stack: ();
   @if $index > 1 {
     // Find the alias within a sub-string
     $substring-alias: next-alias(string.slice($string, $index), 1);
+
     @if not $substring-alias {
       @return null;
     }
+
     @return (
       'alias': map.get($substring-alias, 'alias'),
       'end': $index - 1 + map.get($substring-alias, 'end')
@@ -80,6 +82,7 @@ $_stack: ();
 
   // If $hash-index is escaped, skip to the next alias
   $escape-index: string.index($string, '\\#');
+
   @if $escape-index and ($escape-index + 1 == $hash-index) {
     @return next-alias($string, $escape-index + 2);
   }
@@ -96,6 +99,7 @@ $_stack: ();
 
   @each $terminator in $terminators {
     $index: string.index($sliced, $terminator);
+
     @if $index and ($index <= $alias-length) {
       $alias-length: $index - 1;
     }
@@ -145,6 +149,7 @@ $_stack: ();
       li.remove-nth($parts, 1),
       null
     );
+
     @if $deep {
       @return $deep;
     }
@@ -319,6 +324,7 @@ $_stack: ();
 @function compile-token($map, $token, $stack: null) {
   // use memo if available
   $memo: map.get($_memo, $map, $token);
+
   @if $memo {
     @return $memo;
   }
@@ -329,6 +335,7 @@ $_stack: ();
 
     @if list.index($_stack, $stack) {
       $_stack: null !global;
+
       @return throw.error(
         'Recursive lookup loop: `#{$new-stack}`',
         'compile-token'
@@ -361,5 +368,6 @@ $_stack: ();
   // memorize, reset the stack, and return the value
   $_memo: map.set($_memo, $map, $token, $value) !global;
   $_stack: null !global;
+
   @return $value;
 }

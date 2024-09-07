@@ -44,6 +44,7 @@ $internal: ();
 
   @if (list.length($names) == 0) {
     $error: 'Provide at least one name for this function';
+
     @return throw.error($error, $origin);
   }
 
@@ -51,6 +52,7 @@ $internal: ();
   @each $name in $names {
     @if map.has-key($source, $name) {
       $error: 'A function has already been registered under the name `#{$name}`';
+
       @return throw.error($error, $origin);
     }
 
