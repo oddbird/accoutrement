@@ -85,10 +85,10 @@
     );
 
     $colors-compiled: (
-      'brand-blue': #0d7fa5,
+      'brand-blue': hsl(195, 85%, 35%),
       'contrast-dark': maroon,
-      'dark-blue': c.mix(maroon, #0d7fa5, 25%),
-      'light-blue': c.mix(white, #0d7fa5, 25%),
+      'dark-blue': rgb(42.040625, 95.3859375, 123.834375),
+      'light-blue': rgb(73.790625, 159.1359375, 187.584375),
     );
     $fn: meta.get-function('color', $module: 'color');
 
@@ -111,10 +111,10 @@
           )
         ),
         (
-          'brand-blue': #a5330d,
+          'brand-blue': hsl(15, 85%, 35%),
           'contrast-dark': teal,
-          'dark-blue': #7c472a,
-          'light-blue': #bc674a,
+          'dark-blue': rgb(123.834375, 70.4890625, 42.040625),
+          'light-blue': rgb(187.584375, 102.2390625, 73.790625),
         )
       );
     }
