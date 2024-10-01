@@ -274,8 +274,8 @@ $scale: function.get('color.scale');
 
     @include it('Removes null arguments') {
       @include assert-equal(
-        parse.do('color.alpha', black, null),
-        color.alpha(black)
+        parse.do('color.channel', black, 'alpha', null),
+        color.channel(black, 'alpha')
       );
     }
   }

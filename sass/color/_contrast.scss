@@ -223,9 +223,9 @@ $_wcag-contrast: (
   $check: type.check($color, 'color', true, 'color.luminance', '$color');
   $luminance: 0;
   $rgb: (
-    'r': math.div(color.red($color), 255),
-    'g': math.div(color.green($color), 255),
-    'b': math.div(color.blue($color), 255),
+    'r': math.div(color.channel($color, 'red', $space: rgb), 255),
+    'g': math.div(color.channel($color, 'green', $space: rgb), 255),
+    'b': math.div(color.channel($color, 'blue', $space: rgb), 255),
   );
 
   @each $channel, $value in $rgb {
