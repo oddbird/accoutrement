@@ -24,7 +24,7 @@
 ///     'text-size': '#root',
 ///   );
 ///
-///   /*! #{inspect(tools.map-compile($sizes))} */
+///   /*! #{meta.inspect(tools.map-compile($sizes))} */
 ///
 /// @example scss - Compile a map based on an additional source
 ///   $sizes: (
@@ -37,7 +37,7 @@
 ///     'spacer': 2rem,
 ///   );
 ///
-///   /*! #{inspect(tools.map-compile($sizes, $spacing-sizes))} */
+///   /*! #{meta.inspect(tools.map-compile($sizes, $spacing-sizes))} */
 ///
 /// @access public
 /// @name map-compile
@@ -84,7 +84,7 @@
 ///   );
 ///
 ///   $fn: meta.get-function('color', $module: 'color');
-///   /*! #{inspect(tools.map-compile-with(tools.$colors, $fn))} */
+///   /*! #{meta.inspect(tools.map-compile-with(tools.$colors, $fn))} */
 ///
 /// @access public
 /// @name map-compile-with

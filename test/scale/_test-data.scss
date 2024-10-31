@@ -50,4 +50,4 @@ $test-sizes: (
   'calc-ref': '#calc',
 );
 
-@include f.internal(meta.get-function('round'), 'round');
+@include f.internal(meta.get-function('round', $module: 'math'), 'round');

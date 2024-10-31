@@ -9,6 +9,7 @@
 @use '../../sass/type/fonts';
 @use '../../../sass/type/config';
 @use 'test-data' as data;
+@use 'sass:list';
 @use 'sass:meta';
 
 $_global: config.$fonts;
@@ -220,7 +221,7 @@ config.$fonts: data.$fonts;
         ),
         'my-adjustment': '#my-base'
           (
-            meta.get-function('append'): 'monospace',
+            meta.get-function('append', $module: 'list'): 'monospace',
           ),
       );
 
