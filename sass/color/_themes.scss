@@ -32,7 +32,7 @@
 ///   @include tools.add-colors($theme-colors);
 ///
 ///   @each $name, $value in $theme-colors {
-///   /* #{$name}: #{inspect($value)} */
+///   /* #{$name}: #{meta.inspect($value)} */
 ///   }
 ///
 /// @param {map} $origin -
@@ -50,7 +50,7 @@
 
   @each $name, $color in $origin {
     $color: tokens.color($name);
-    $light: color.lightness($color);
+    $light: color.channel($color, 'lightness', $space: hsl);
     $light: if($light == 0, 0.00000001%, $light);
     $lum: contrast.luminance($color);
     $avg: math.div((math.div($light, 100%) + $lum), 2);

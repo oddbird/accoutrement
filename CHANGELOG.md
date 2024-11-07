@@ -1,5 +1,10 @@
 # Accoutrement Changelog
 
+## 4.0.5 - 11/07/24
+
+- 🐛 BUGFIX: Address Sass deprecation warnings
+- 🏠 INTERNAL: Upgrade dev dependencies
+
 ## 4.0.4 - 12/14/22
 
 - 🏠 INTERNAL: Remove documentation from npm package
