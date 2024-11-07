@@ -57,7 +57,7 @@
 ///   );
 /// @example scss - adjust referenced colors with any color function
 ///   $colors: (
-///     'focus': '#link' ('darken': 15%, 'desaturate': 15%),
+///     'focus': '#link' ('color.scale': ('lightness': -15%, 'saturation': -15%)),
 ///   );
 ///
 /// @type map
