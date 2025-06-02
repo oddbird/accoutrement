@@ -435,7 +435,7 @@ $scale: function.get('color.scale');
     }
 
     @include it('Can perform functional adjustments') {
-      $shadow: rgba(black, 0.5);
+      $shadow: rgb(black, 0.5);
 
       @include assert-equal(
         parse.compile-token(
@@ -464,7 +464,7 @@ $scale: function.get('color.scale');
     }
 
     @include it('Allows alias references inside functional arguments') {
-      $shadow: rgba(black, 0.5);
+      $shadow: rgb(black, 0.5);
 
       @include assert-equal(
         parse.compile-token(
