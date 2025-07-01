@@ -50,7 +50,7 @@
     "postcss": "^8.5.4",
     "prettier": "^3.5.3",
     "sass-embedded": "^1.89.1",
-    "sass-true": "^8.1.0",
+    "sass-true": "^9.0.0",
     "sassdoc": "^2.7.4",
     "sassdoc-theme-herman": "^6.0.2",
     "stylelint": "^16.20.0",
