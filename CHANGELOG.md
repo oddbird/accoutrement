@@ -75,7 +75,6 @@ color palettes.
 - INTERNAL: Upgrade dev dependencies.
 
 - [Animate][animate]:
-
   - NEW: `compile-*` functions provide an export option for respective token maps (see:
     [`compile-changes()`](https://www.oddbird.net/accoutrement/docs/animate-change.html#function--compile-changes),
     [`compile-easing()`](https://www.oddbird.net/accoutrement/docs/animate-ease.html#function--compile-easing), and [`compile-times()`](https://www.oddbird.net/accoutrement/docs/animate-times.html#function--compile-times)).
@@ -84,14 +83,12 @@ color palettes.
     (without the `_` prefix that is applied in token maps).
 
 - [Color][color]:
-
   - NEW: [`compile-colors()`](https://www.oddbird.net/accoutrement/docs/color-tokens.html#function--compile-colors)
     function provides an export option for color token maps.
   - NEW: [`with-colors()`](https://www.oddbird.net/accoutrement/docs/color-tokens.html#mixin--with-colors)
     mixin allows the overriding of the global color palette for a section of contents.
 
 - [Sass Utilities][utils]:
-
   - NEW: These functions are now available directly,
     as well as being registered in the map syntax.
   - NEW: [`multi-merge()`](https://www.oddbird.net/accoutrement/docs/utils.html#function--multi-merge)
@@ -109,7 +106,6 @@ color palettes.
     function trims whitespace from the start and end of a string.
 
 - [Variables][vars]:
-
   - NEW: [`ident()`](https://www.oddbird.net/accoutrement/docs/vars.html#function--ident)
     function adds `--` and an optional prefix to any string,
     in order to generate a custom property identifier.
@@ -117,7 +113,6 @@ color palettes.
     mixin generates custom properties for every key/value pair in a map.
 
 - [Tokens][token]:
-
   - NEW: A module just for the custom map syntax parser & function registration.
   - NEW: [`map-compile()`](https://www.oddbird.net/accoutrement/docs/token-compile.html#function--map-compile)
     and [`map-compile-with()`](https://www.oddbird.net/accoutrement/docs/token-compile.html#function--map-compile-with)
@@ -157,14 +152,12 @@ color palettes.
     function divides two values in Accoutrement maps and returns the remainder.
 
 - [Type][type]:
-
   - NEW: [`compile-fonts()`](https://www.oddbird.net/accoutrement/docs/type-fonts.html#function--compile-fonts)
     function provides an export option for font token maps.
   - NEW: The default value for `$content` in pseudo element
     mixins is an empty string.
 
 - [Ratios][ratio]:
-
   - NEW:
     [`compile-ratios()`](https://www.oddbird.net/accoutrement/docs/ratio-tokens.html#function--compile-ratios) function provides an export option for ratio token maps.
   - NEW: Built-in [named ratios](https://www.oddbird.net/accoutrement/docs/ratios.html) are now available as
@@ -173,7 +166,6 @@ color palettes.
     function can be used to type-check ratios, including ratio tokens.
 
 - [Scale][scale]:
-
   - NEW:
     [`compile-sizes()`](https://www.oddbird.net/accoutrement/docs/scale-sizes.html#function--compile-sizes)
     function provides an export option for size token maps.

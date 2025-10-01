@@ -45,16 +45,16 @@
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
-    "mocha": "^11.7.1",
+    "mocha": "^11.7.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
-    "sass-embedded": "^1.89.2",
+    "sass-embedded": "1.90.0",
     "sass-true": "^9.0.0",
     "sassdoc": "^2.7.4",
     "sassdoc-theme-herman": "^6.0.2",
-    "stylelint": "^16.23.0",
-    "stylelint-config-standard-scss": "^15.0.1"
+    "stylelint": "^16.24.0",
+    "stylelint-config-standard-scss": "^16.0.0"
   },
   "eyeglass": {
     "sassDir": "sass",
@@ -62,5 +62,5 @@
     "name": "accoutrement",
     "needs": "^1.0.0"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.10.3"
 }
