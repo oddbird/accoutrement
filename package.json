@@ -54,7 +54,7 @@
     "sassdoc": "^2.7.4",
     "sassdoc-theme-herman": "^6.0.2",
     "stylelint": "^16.24.0",
-    "stylelint-config-standard-scss": "^15.0.1"
+    "stylelint-config-standard-scss": "^16.0.0"
   },
   "eyeglass": {
     "sassDir": "sass",
@@ -62,5 +62,5 @@
     "name": "accoutrement",
     "needs": "^1.0.0"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.10.3"
 }

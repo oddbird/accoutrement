@@ -42,6 +42,7 @@
 /// @group type-a11y
 /// @access private
 @mixin _is-hidden-clip {
+  /* stylelint-disable-next-line property-no-deprecated */
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(1px 1px 1px 1px);
   height: 1px;
