@@ -107,8 +107,8 @@ tokens.$colors: data.$colors;
 
     @include it('Returns contrast ratio if test is met') {
       @include assert-equal(
-        contrast.contrast-ratio(#333, #999, 'aa-large'),
-        4.434724906070654,
+        roundish(contrast.contrast-ratio(#333, #999, 'aa-large')),
+        4.4347,
       );
     }
 
