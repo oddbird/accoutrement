@@ -138,7 +138,7 @@ config.$fonts: data.$fonts;
         )
       );
 
-      @include assert-equal($stack, ('Helvetica Neue', Arial), $inspect: true);
+      @include assert-equal($stack, ('Helvetica Neue', Arial));
     }
 
     @include it('Prepends name if available') {
@@ -152,7 +152,6 @@ config.$fonts: data.$fonts;
       @include assert-equal(
         $stack,
         (hello, 'Helvetica Neue', Arial),
-        $inspect: true
       );
     }
 

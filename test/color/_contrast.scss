@@ -17,31 +17,26 @@ tokens.$colors: data.$colors;
         contrast.luminance(#fff),
         1,
         'white',
-        $inspect: true
       );
       @include assert-equal(
         contrast.luminance(#000),
         0,
         'black',
-        $inspect: true
       );
       @include assert-equal(
         contrast.luminance(#ff0),
         0.9278,
         'yellow',
-        $inspect: true
       );
       @include assert-equal(
         contrast.luminance(#0f0),
         0.7152,
         'green',
-        $inspect: true
       );
       @include assert-equal(
         contrast.luminance(#3492a1),
-        0.2386104205,
+        0.2386104204771543,
         'blue',
-        $inspect: true
       );
     }
 
@@ -108,8 +103,7 @@ tokens.$colors: data.$colors;
     @include it('Returns contrast ratio if test is met') {
       @include assert-equal(
         contrast.contrast-ratio(#333, #999, 'aa-large'),
-        4.4347249061,
-        $inspect: true
+        4.434724906070654,
       );
     }
 

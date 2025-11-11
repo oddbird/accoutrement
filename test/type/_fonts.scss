@@ -25,7 +25,6 @@ config.$font-path: data.$font-path;
           ),
           'name': TestFont,
         ),
-        $inspect: true
       );
     }
 
@@ -40,7 +39,6 @@ config.$font-path: data.$font-path;
           ),
           'name': TestFont,
         ),
-        $inspect: true
       );
     }
 
@@ -55,7 +53,6 @@ config.$font-path: data.$font-path;
             sans-serif,
           ),
         ),
-        $inspect: true
       );
     }
 
@@ -76,7 +73,6 @@ config.$font-path: data.$font-path;
           ),
           'name': new,
         ),
-        $inspect: true
       );
     }
   }
