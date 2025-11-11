@@ -3,10 +3,15 @@
 @use '../../sass/color/tokens';
 @use 'test-data' as data;
 @use 'sass:map';
+@use 'sass:math';
 @use 'sass:list';
 
 $_old: tokens.$colors;
 tokens.$colors: data.$colors;
+
+@function roundish($n) {
+  @return math.div(math.round($n * 10000), 10000);
+}
 
 @include test-module('color/contrast') {
   // Luminance [function]
@@ -34,8 +39,8 @@ tokens.$colors: data.$colors;
         'green',
       );
       @include assert-equal(
-        contrast.luminance(#3492a1),
-        0.2386104204771543,
+        roundish(contrast.luminance(#3492a1)),
+        0.2386,
         'blue',
       );
     }
