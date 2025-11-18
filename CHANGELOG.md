@@ -1,5 +1,9 @@
 # Accoutrement Changelog
 
+## 4.0.6 - 11/18/25
+
+- 🏠 INTERNAL: Upgrade dev dependencies
+
 ## 4.0.5 - 11/07/24
 
 - 🐛 BUGFIX: Address Sass deprecation warnings
