@@ -469,7 +469,7 @@ __metadata:
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.6.2"
     sass-embedded: "npm:^1.93.3"
-    sass-true: "npm:^10.0.0-alpha.0"
+    sass-true: "npm:^10.0.0-alpha.1"
     sassdoc: "npm:^2.7.4"
     sassdoc-theme-herman: "npm:^6.0.2"
     stylelint: "npm:^16.25.0"
@@ -5563,9 +5563,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-true@npm:^10.0.0-alpha.0":
-  version: 10.0.0-alpha.0
-  resolution: "sass-true@npm:10.0.0-alpha.0"
+"sass-true@npm:^10.0.0-alpha.1":
+  version: 10.0.0-alpha.1
+  resolution: "sass-true@npm:10.0.0-alpha.1"
   dependencies:
     "@prettier/sync": "npm:^0.6.1"
     jest-diff: "npm:^30.2.0"
@@ -5579,7 +5579,7 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 10c0/db61953d5db19d71fb7a339c6f22bdabd811f1e5209bb3f63ec4be45516e26b297ef0c30d8a5945bf878e7ccbe6eaa402d15380c2f712478d26cd8a32cf2f6cf
+  checksum: 10c0/6eeaf3fdb9da678d48e594a4d03372bfa0e0be70306b704f4914c32e9d9d52ccc5d63d498159bc3fa1abd2a0813f861483b1490559f0db17f5e6d514abaa27c4
   languageName: node
   linkType: hard
 
