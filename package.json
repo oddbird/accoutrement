@@ -52,7 +52,7 @@
     "sass-embedded": "^1.93.3",
     "sass-true": "^10.0.0",
     "sassdoc": "^2.7.4",
-    "sassdoc-theme-herman": "^6.0.2",
+    "sassdoc-theme-herman": "^7.0.0",
     "stylelint": "^16.26.1",
     "stylelint-config-standard-scss": "^16.0.0"
   },
@@ -62,5 +62,5 @@
     "name": "accoutrement",
     "needs": "^1.0.0"
   },
-  "packageManager": "yarn@4.11.0"
+  "packageManager": "yarn@4.12.0"
 }
