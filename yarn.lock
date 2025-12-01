@@ -480,7 +480,7 @@ __metadata:
     sass-embedded: "npm:^1.93.3"
     sass-true: "npm:^10.0.0"
     sassdoc: "npm:^2.7.4"
-    sassdoc-theme-herman: "npm:^6.0.2"
+    sassdoc-theme-herman: "npm:^7.0.0"
     stylelint: "npm:^16.25.0"
     stylelint-config-standard-scss: "npm:^16.0.0"
   languageName: unknown
@@ -1077,7 +1077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cheerio@npm:^1.0.0, cheerio@npm:^1.0.0-rc.2":
+"cheerio@npm:^1.0.0-rc.2, cheerio@npm:^1.1.2":
   version: 1.1.2
   resolution: "cheerio@npm:1.1.2"
   dependencies:
@@ -2623,7 +2623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-rename@npm:^2.0.0":
+"gulp-rename@npm:^2.1.0":
   version: 2.1.0
   resolution: "gulp-rename@npm:2.1.0"
   checksum: 10c0/282fe832115fb655250f3dc6226bb237a2fa7869eeb7c3579e53494b19963b26bc0a2758727d82c3546c119c3c8cadaaa2c1def3040029335b139aee2eccff09
@@ -5060,7 +5060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^4.5.2":
+"readable-stream@npm:^4.7.0":
   version: 4.7.0
   resolution: "readable-stream@npm:4.7.0"
   dependencies:
@@ -5702,29 +5702,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sassdoc-theme-herman@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "sassdoc-theme-herman@npm:6.0.2"
+"sassdoc-theme-herman@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "sassdoc-theme-herman@npm:7.0.0"
   dependencies:
-    cheerio: "npm:^1.0.0"
+    cheerio: "npm:^1.1.2"
     colorjs.io: "npm:^0.5.2"
-    css-tree: "npm:^3.0.1"
-    gulp-rename: "npm:^2.0.0"
+    css-tree: "npm:^3.1.0"
+    gulp-rename: "npm:^2.1.0"
     gulp-svg-symbols: "npm:^3.2.3"
     html: "npm:^1.0.0"
     lunr: "npm:^2.3.9"
     markdown-it: "npm:^14.1.0"
     markdown-it-anchor: "npm:^9.2.0"
     nunjucks: "npm:^3.2.4"
-    readable-stream: "npm:^4.5.2"
+    readable-stream: "npm:^4.7.0"
     sassdoc-extras: "npm:^3.0.0"
     strip-indent: "npm:^3.0.0"
     typogr: "npm:^0.6.8"
     unixify: "npm:^1.0.0"
-    vinyl-fs: "npm:^4.0.0"
+    vinyl-fs: "npm:^4.0.2"
   peerDependencies:
     sassdoc: ^2.5.0
-  checksum: 10c0/a64086e527ab63cc11b50d5780cba4d7aaccd85366d1d5c2f1ab2fe590b344a7416712be0c72bb14e157326e7ba79fa06339215f0b2a692e6bbca0882b80c47b
+  checksum: 10c0/92694cbbf1f9ee9d5217fed1f9ef19550c5317d2fb180076475c30f454a654b00baa193f685045bf629b3b542bebe00d20b1d88a7f78d5378679b3b39ae979c3
   languageName: node
   linkType: hard
 
@@ -6941,7 +6941,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vinyl-fs@npm:^4.0.0":
+"vinyl-fs@npm:^4.0.2":
   version: 4.0.2
   resolution: "vinyl-fs@npm:4.0.2"
   dependencies:
