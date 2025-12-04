@@ -30,7 +30,6 @@ and [Herman][herman]._
 [susy]: https://www.oddbird.net/susy/
 [true]: https://www.oddbird.net/true/
 [herman]: https://www.oddbird.net/herman/
-[fonts]: https://www.oddbird.net/accoutrement/docs/type.html
 
 ## Installation
 

@@ -1,6 +1,6 @@
 // stylelint-disable prettier/prettier, value-keyword-case, scss/operator-no-unspaced
 
-@use '../../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/type/font-vars';
 @use '../../sass/tokens/api';
 @use '../../sass/tokens/inspect';

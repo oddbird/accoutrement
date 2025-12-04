@@ -1,5 +1,5 @@
 @use '../../sass/scale/units';
-@use '../../node_modules/sass-true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/scale/size';
 @use '../../sass/scale/config';
 @use '../../sass/tokens';

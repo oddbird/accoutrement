@@ -1,5 +1,9 @@
 # Accoutrement Changelog
 
+## UNRELEASED
+
+- 🏠 INTERNAL: Use Sass NodePackageImporter
+
 ## 4.0.6 - 11/18/25
 
 - 🏠 INTERNAL: Upgrade dev dependencies

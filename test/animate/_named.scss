@@ -1,4 +1,4 @@
-@use '../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/animate/easing-named';
 @use '../../sass/animate/named' as named-easing;
 @use 'sass:map';

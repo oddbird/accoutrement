@@ -1,4 +1,4 @@
-@use '../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/tokens/config';
 @use '../../sass/tokens/parse';
 @use '../../sass/tokens/function';

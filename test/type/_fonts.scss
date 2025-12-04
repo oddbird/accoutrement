@@ -1,4 +1,4 @@
-@use '../../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../../sass/type/config';
 @use '../../../sass/type/fonts';
 @use '../../../sass/type/helpers';

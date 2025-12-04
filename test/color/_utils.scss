@@ -1,4 +1,4 @@
-@use '../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/color/utils';
 @use '../../sass/color/tokens';
 @use 'test-data' as data;

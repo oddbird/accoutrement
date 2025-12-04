@@ -1,6 +1,6 @@
 /* stylelint-disable no-invalid-position-declaration */
 
-@use '../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/layout/queries' as q;
 @use '../../sass/layout/query-utils' as utils;
 @use '../../sass/scale/config' as size;

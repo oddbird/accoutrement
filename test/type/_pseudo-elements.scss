@@ -1,6 +1,6 @@
 /* stylelint-disable nesting-selector-no-missing-scoping-root */
 
-@use '../../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../../sass/type/pseudo-elements' as pe;
 
 // Pseudo-Element Tests

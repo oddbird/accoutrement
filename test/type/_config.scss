@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use 'test-data' as data;
 @use '../../../sass/type/config';
 

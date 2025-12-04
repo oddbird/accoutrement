@@ -10,6 +10,11 @@
     "url": "https://github.com/oddbird/accoutrement.git"
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
+  "contributors": [
+    "Jonny Gerig Meyer <jonny@oddbird.net>",
+    "David Herron <david@oddbird.net>",
+    "Stacy Kvernmo <stacy@oddbird.net>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement/issues"

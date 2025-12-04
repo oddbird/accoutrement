@@ -1,6 +1,6 @@
 // stylelint-disable prettier/prettier
 
-@use '../../node_modules/sass-true/sass/true' as *;
+@use 'pkg:sass-true' as *;
 @use '../../sass/animate/times';
 @use '../../sass/animate/easing';
 @use '../../sass/animate/change';
