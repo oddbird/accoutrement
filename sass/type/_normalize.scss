@@ -47,27 +47,25 @@
   // Normalize name…
   $name: font-name($font, $key, $source);
   $font: if(
-    $name,
-    map.merge(
+    sass($name): map.merge(
       $font,
       (
         'name': $name,
       )
-    ),
-    $font
+    );
+    else: $font
   );
 
   // Normalize the font stack…
   $stack: font-stack($font);
   $font: if(
-    $stack,
-    map.merge(
+    sass($stack): map.merge(
       $font,
       (
         'stack': $stack,
       )
-    ),
-    $font
+    );
+    else: $font
   );
 
   // Normalize variants
@@ -137,9 +135,8 @@
 
   @if (meta.type-of($name) == 'string') {
     $name: if(
-      string.index($name, ' '),
-      string.quote($name),
-      string.unquote($name)
+      sass(string.index($name, ' ')): string.quote($name);
+      else: string.unquote($name)
     );
   }
 
@@ -172,15 +169,14 @@
   @if ($stack or $name) {
     $return: list.join((), (), 'comma');
     $stack: $stack or ();
-    $name: if($name, list.join((), $name), ());
+    $name: if(sass($name): list.join((), $name); else: ());
     $stack: list.join($name, $stack);
 
     @each $item in $stack {
       $item: str.trim($item);
       $item: if(
-        string.index($item, ' '),
-        string.quote($item),
-        string.unquote($item)
+        sass(string.index($item, ' ')): string.quote($item);
+        else: string.unquote($item)
       );
       $return: list.append($return, $item);
     }

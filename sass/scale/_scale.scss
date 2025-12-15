@@ -37,7 +37,7 @@
 /// @throw -
 ///   Ratio must be either a number or "linear"
 @function scale($value, $ratio, $steps: 1, $source: ratio.$ratios) {
-  $value: if(type.check($value, 'number'), $value, size.size($value));
+  $value: if(sass(type.check($value, 'number')): $value; else: size.size($value));
 
   @if not type.check($value, 'number') {
     @return type.error($value, 'number', 'scale', '$value');

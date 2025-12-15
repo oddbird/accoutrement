@@ -58,9 +58,8 @@
   }
 
   @return if(
-    (meta.type-of($return) == 'string'),
-    string.unquote($return),
-    $return
+    sass((meta.type-of($return) == 'string')): string.unquote($return);
+    else: $return
   );
 }
 

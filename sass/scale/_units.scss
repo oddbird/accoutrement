@@ -22,7 +22,7 @@
 ///   Either the `px` value of the converted `$length` or `false`.
 @function get-px($length) {
   // stylelint-disable-next-line length-zero-no-unit
-  @return if(math.compatible($length, 1px), 0px + $length, false);
+  @return if(sass(math.compatible($length, 1px)): 0px + $length; else: false);
 }
 
 // Get Number [function]
@@ -115,7 +115,7 @@
     '%',
     'ex'
   );
-  $length: if(meta.type-of($length) == 'number', $length, size.size($length));
+  $length: if(sass(meta.type-of($length) == 'number'): $length; else: size.size($length));
   $from-unit: math.unit($length);
 
   // No conversion needed
@@ -157,8 +157,8 @@
   // Establish relative context
   $from-context: size.size($from-context);
   $to-context: size.size($to-context);
-  $from-context: if($from-context, get-px($from-context), $root-size);
-  $to-context: if($to-context, get-px($to-context), $root-size);
+  $from-context: if(sass($from-context): get-px($from-context); else: $root-size);
+  $to-context: if(sass($to-context): get-px($to-context); else: $root-size);
 
   // Context values must be in px
   @if (not $from-context) or (not $to-context) {

@@ -177,11 +177,10 @@ $_wcag-contrast: (
 /// @return {number} -
 ///   The WCAG-defined contrast-ratio of two colors.
 @function contrast-ratio($base, $contrast, $require: false) {
-  $base-lumin: if((meta.type-of($base) == 'number'), $base, luminance($base));
+  $base-lumin: if(sass((meta.type-of($base) == 'number')): $base; else: luminance($base));
   $contrast-lumin: if(
-    (meta.type-of($contrast) == 'number'),
-    $contrast,
-    luminance($contrast)
+    sass((meta.type-of($contrast) == 'number')): $contrast;
+    else: luminance($contrast)
   );
   $darker: math.min($base-lumin, $contrast-lumin);
   $lighter: math.max($base-lumin, $contrast-lumin);
@@ -274,10 +273,10 @@ $_wcag-contrast: (
   @each $color in map.keys($both) {
     $public: 'contrast-#{$color}';
     $private: '_#{$public}';
-    $token: if(api.has-token(tokens.$colors, $public), $public, null);
+    $token: if(sass(api.has-token(tokens.$colors, $public)): $public; else: null);
     $token: $token or
-      if(api.has-token(tokens.$colors, $private), $private, null);
-    $both: if($token, map.set($both, $color, $token), $both);
+      if(sass(api.has-token(tokens.$colors, $private)): $private; else: null);
+    $both: if(sass($token): map.set($both, $color, $token); else: $both);
   }
 
   @if ($return == 'values') {
@@ -314,7 +313,7 @@ $_wcag-contrast: (
 /// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
 @function best-contrast($color, $options: null, $return: 'map') {
-  $options: if(list.length($options) > 0, $options, null);
+  $options: if(sass(list.length($options) > 0): $options; else: null);
   $min-ratio: list.nth($options, -1);
 
   @if valid-contrast($min-ratio, false) {
@@ -342,7 +341,7 @@ $_wcag-contrast: (
 
   @each $name in $options {
     // 22 is above the highest possible, 0 is below the lowest
-    $best-ratio: map.get($best, 'ratio') or if($min-ratio, 22, 0);
+    $best-ratio: map.get($best, 'ratio') or if(sass($min-ratio): 22; else: 0);
     $better: false;
     $value: tokens.color($name);
     $lum: luminance($value);

@@ -69,7 +69,7 @@ $easing: () !default;
   $source: map.deep-merge(named.$named-easing, $source);
   $name: tokens.get($source, $name, $do);
 
-  @return if((meta.type-of($name) == 'string'), string.unquote($name), $name);
+  @return if(sass((meta.type-of($name) == 'string')): string.unquote($name); else: $name);
 }
 
 @include function.internal(meta.get-function('ease'), 'ease');

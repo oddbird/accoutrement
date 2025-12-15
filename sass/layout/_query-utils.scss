@@ -49,8 +49,8 @@ $adjust-query-overlap: 'max' !default;
 ///   otherwise the original value is returned
 @function nudge-query($value, $is, $nudge: $adjust-query-overlap) {
   @if ($nudge) and ($nudge == $is) {
-    $to: if(($is == 'min'), 1, -1);
-    $amount: if(math.compatible($value, 1px), 1px, 0.01);
+    $to: if(sass(($is == 'min')): 1; else: -1);
+    $amount: if(sass(math.compatible($value, 1px)): 1px; else: 0.01);
     $value: $value + ($amount * $to);
   }
 
