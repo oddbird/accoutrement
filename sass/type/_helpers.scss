@@ -233,10 +233,10 @@ $FONT-FORMATS: (
   @each $key, $value in $font {
     // get the first setting, and make sure it's a string…
     $first: '#{list.nth($key, 1)}';
-    $first: if(
-      sass(string.index($first, ' ')): list.nth(str.split($first, ' '), 1);
-      else: $first
-    );
+
+    @if string.index($first, ' ') {
+      $first: list.nth(str.split($first, ' '), 1);
+    }
 
     // if it's a variant, add it to the list…
     @if list.index($var-options, $first) {
@@ -324,7 +324,10 @@ $FONT-FORMATS: (
   $name: string.quote($name);
   $style: string.unquote($style);
   $weight: string.unquote($weight);
-  $display: if(sass($display): string.unquote($display); else: null);
+
+  @if $display {
+    $display: string.unquote($display);
+  }
 
   @if $unicode {
     $new: ();

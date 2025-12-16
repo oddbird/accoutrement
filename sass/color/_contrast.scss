@@ -177,7 +177,12 @@ $_wcag-contrast: (
 /// @return {number} -
 ///   The WCAG-defined contrast-ratio of two colors.
 @function contrast-ratio($base, $contrast, $require: false) {
-  $base-lumin: if(sass((meta.type-of($base) == 'number')): $base; else: luminance($base));
+  $base-lumin: $base;
+
+  @if (meta.type-of($base) != 'number') {
+    $base-lumin: luminance($base);
+  }
+
   $contrast-lumin: if(
     sass((meta.type-of($contrast) == 'number')): $contrast;
     else: luminance($contrast)

@@ -253,7 +253,7 @@
   $string: force($string);
   $separator: force($separator);
   $length: string.length($string);
-  $limit: if(sass($limit): math.min($limit, $length); else: $length);
+  $limit: math.min($limit or $length, $length);
   $index: string.index($string, $separator);
 
   @for $i from 1 through $limit {

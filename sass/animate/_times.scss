@@ -62,7 +62,11 @@ $times: () !default;
 @function time($time, $do: null, $source: $times) {
   $time: tokens.get($source, $time, $do);
 
-  @return if(sass((meta.type-of($time) == 'string')): string.unquote($time); else: $time);
+  @if (meta.type-of($time) == 'string') {
+    @return string.unquote($time);
+  }
+
+  @return $time;
 }
 
 @include function.internal(meta.get-function('time'), 'time');
