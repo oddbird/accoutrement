@@ -293,6 +293,7 @@ $_stack: ();
 
       // If we still have a string, check for more alias references
       $search-from: map.get($alias, 'end');
+
       @if (meta.type-of($value) == 'string') {
         $alias: next-alias($value, $search-from);
       } @else {
