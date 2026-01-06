@@ -44,7 +44,7 @@
   $length: list.length($list);
 
   @if ($type != 'number') or ($index == 0) or (math.round($index) != $index) {
-    $got: 'got (#{$type}) `#{if(($type == "null"), "null", $index)}`';
+    $got: 'got (#{$type}) `#{if(sass(($type == "null")): "null"; else: $index)}`';
 
     @return throw.error(
       '$index must be a non-zero integer, #{$got}',
@@ -57,7 +57,7 @@
     );
   }
 
-  $index: if(($index < 0), $length + $index + 1, $index);
+  $index: if(sass(($index < 0)): $length + $index + 1; else: $index);
 
   @for $i from 1 through $length {
     @if ($i != $index) {

@@ -42,7 +42,7 @@
     @return throw.error('Maps cannot be converted to strings', 'string-force');
   }
 
-  @return if(($type == 'string'), $value, '#{$value}');
+  @return if(sass(($type == 'string')): $value; else: '#{$value}');
 }
 
 // String Replace
@@ -122,7 +122,7 @@
     $new: force($new);
 
     // before and after…
-    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $a: if(sass($i > 1): string.slice($string, 1, $i - 1); else: '');
     $z: string.slice($string, $i + $n);
 
     // recursion if needed…
@@ -253,7 +253,7 @@
   $string: force($string);
   $separator: force($separator);
   $length: string.length($string);
-  $limit: if($limit, math.min($limit, $length), $length);
+  $limit: math.min($limit or $length, $length);
   $index: string.index($string, $separator);
 
   @for $i from 1 through $limit {
@@ -268,10 +268,10 @@
         $slice: string.slice($string, 1, $index - 1);
         $string: string.slice($string, $index + string.length($separator));
         $index: string.index($string, $separator);
-        $slice: if($string and not $index, $slice $string, $slice);
+        $slice: if(sass($string and not $index): $slice $string; else: $slice);
       }
 
-      $list: if($slice, list.join($list, $slice), $list);
+      $list: if(sass($slice): list.join($list, $slice); else: $list);
     }
   }
 
@@ -318,8 +318,8 @@
   $last: (string.slice($string, -1) == ' ');
 
   @if ($first or $last) {
-    $string: if($first, string.slice($string, 2), $string);
-    $string: if($last, string.slice($string, 1, -2), $string);
+    $string: if(sass($first): string.slice($string, 2); else: $string);
+    $string: if(sass($last): string.slice($string, 1, -2); else: $string);
     $string: trim($string);
   }
 

@@ -105,14 +105,14 @@ $FONT-FORMATS: (
 
   // add file format when needed
   $ext: '.' + $format;
-  $ext: if(string.index($path, $ext), '', $ext);
+  $ext: if(sass(string.index($path, $ext)): ''; else: $ext);
 
   // add svgid when needed
   @if string.index($format, 'svg') and
     ($svgid) and
     (not string.index($path, '#'))
   {
-    $suffix: if(string.index($svgid, '#'), $svgid, '#' + $svgid);
+    $suffix: if(sass(string.index($svgid, '#')): $svgid; else: '#' + $svgid);
   }
 
   // add iefix when needed
@@ -152,7 +152,7 @@ $FONT-FORMATS: (
 ///   CSS-ready `url() format()` combination for font-face `src` output.
 @function font-src($path, $format) {
   $format-name: map.get($FONT-FORMATS, $format);
-  $format-name: if($format-name, format($format-name), '');
+  $format-name: if(sass($format-name): format($format-name); else: '');
 
   // stylelint-disable-next-line function-url-quotes
   $path: format-url($path, $format, $iefix: true);
@@ -233,11 +233,10 @@ $FONT-FORMATS: (
   @each $key, $value in $font {
     // get the first setting, and make sure it's a string…
     $first: '#{list.nth($key, 1)}';
-    $first: if(
-      string.index($first, ' '),
-      list.nth(str.split($first, ' '), 1),
-      $first
-    );
+
+    @if string.index($first, ' ') {
+      $first: list.nth(str.split($first, ' '), 1);
+    }
 
     // if it's a variant, add it to the list…
     @if list.index($var-options, $first) {
@@ -325,7 +324,10 @@ $FONT-FORMATS: (
   $name: string.quote($name);
   $style: string.unquote($style);
   $weight: string.unquote($weight);
-  $display: if($display, string.unquote($display), null);
+
+  @if $display {
+    $display: string.unquote($display);
+  }
 
   @if $unicode {
     $new: ();

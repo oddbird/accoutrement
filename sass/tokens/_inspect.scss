@@ -86,7 +86,7 @@
     $try: string.slice($val, 2);
 
     @if map.has-key($map, $try) and not is-private-token($try) {
-      $ref: if($origin, is-alias-for($map, $try, $origin) or $try, $try);
+      $ref: if(sass($origin): is-alias-for($map, $try, $origin) or $try; else: $try);
     }
   }
 
@@ -127,5 +127,5 @@
 @function has-token($map, $token, $nested...) {
   $found: parse.lookup-alias($map, $token, $nested, $handle-missing-keys: null);
 
-  @return if($found, true, false);
+  @return if(sass($found): true; else: false);
 }

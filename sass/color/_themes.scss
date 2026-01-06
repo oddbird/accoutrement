@@ -51,23 +51,22 @@
   @each $name, $color in $origin {
     $color: tokens.color($name);
     $light: color.channel($color, 'lightness', $space: hsl);
-    $light: if($light == 0, 0.00000001%, $light);
+    $light: if(sass($light == 0): 0.00000001%; else: $light);
     $lum: contrast.luminance($color);
     $avg: math.div((math.div($light, 100%) + $lum), 2);
     $pos: (math.ceil($avg * $count) - ($range + 1));
 
     @for $i from (0 - $range) through $range {
       $diff: $i - $pos;
-      $do: if($diff > 0, 'light', if($diff < 0, 'dark', null));
+      $do: if(sass($diff > 0): 'light'; else: if(sass($diff < 0): 'dark'; else: null));
       $is: if(
-        $i > 0,
-        'light-#{math.abs($i)}',
-        if($i < 0, 'dark-#{math.abs($i)}', '0')
+        sass($i > 0): 'light-#{math.abs($i)}';
+        else: if(sass($i < 0): 'dark-#{math.abs($i)}'; else: '0')
       );
       $value: '##{$name}';
 
       @if ($do) {
-        $distance: math.abs(if(($do == 'dark'), (0 - $range), $range) - $pos);
+        $distance: math.abs(if(sass(($do == 'dark')): (0 - $range); else: $range) - $pos);
         $interval: math.percentage(math.div(1, ($distance + 0.25)));
         $amount: (math.abs($diff) - 0.5) * $interval;
         $value: $value

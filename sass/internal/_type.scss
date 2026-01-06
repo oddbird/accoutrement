@@ -18,10 +18,10 @@
 /// @throws A compiled error message with all the details
 @function error($value, $valid, $origin: null, $arg: null) {
   $type: meta.type-of($value);
-  $in: if((list.length($valid) > 1), 'in types:', 'a');
-  $arg: if($arg, ' `#{$arg}`', '');
+  $in: if(sass((list.length($valid) > 1)): 'in types:'; else: 'a');
+  $arg: if(sass($arg): ' `#{$arg}`'; else: '');
   $start: 'Argument#{$arg} must be #{$in} #{$valid};';
-  $value: if($value == null, '`null`', '(#{$type}) `#{$value}`');
+  $value: if(sass($value == null): '`null`'; else: '(#{$type}) `#{$value}`');
 
   @return throw.error('#{$start} got #{$value}', $origin);
 }
