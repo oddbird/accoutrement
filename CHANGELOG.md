@@ -1,8 +1,10 @@
 # Accoutrement Changelog
 
-## UNRELEASED
+## 4.0.7 - 01/06/26
 
+- 🐛 BUGFIX: Address Sass deprecation warnings
 - 🏠 INTERNAL: Use Sass NodePackageImporter
+- 🏠 INTERNAL: Upgrade dev dependencies
 
 ## 4.0.6 - 11/18/25
 
