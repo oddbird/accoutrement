@@ -58,7 +58,7 @@
     "sass-true": "^10.1.0",
     "sassdoc": "^2.7.4",
     "sassdoc-theme-herman": "^7.0.1",
-    "stylelint": "^17.1.0",
+    "stylelint": "^17.4.0",
     "stylelint-config-standard-scss": "^17.0.0"
   },
   "eyeglass": {
